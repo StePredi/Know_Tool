@@ -83,14 +83,14 @@ export function TestoCard() {
     for (const p of testo.parafrasi) if (viva(p)) for (let i = p.span![0]; i <= p.span![1]; i++) parTok.add(i)
     const esTok = new Map<number, Esercizio>()
     for (const e of testo.esercizi) for (const p of e.passi) if (viva(p)) for (let i = p.span![0]; i <= p.span![1]; i++) esTok.set(i, e)
-    return { tokPaint, sepPaint, stile, parTok, esTok }
+    return { tokPaint, sepPaint, stile, parTok, esTok, cov }
   }, [d])
 
   if (!d || !calcolo) return null
   const { testo, tk } = d
   const toks = tk.token
   const sel = ed.sel
-  const { tokPaint, sepPaint, stile, parTok, esTok } = calcolo
+  const { tokPaint, sepPaint, stile, parTok, esTok, cov } = calcolo
   const zoomFs = +((19 * ed.zoom) / 100).toFixed(1)
   const numFs = +(12 * Math.max(0.9, ed.zoom / 100)).toFixed(1)
   const numW = ed.numeri ? 26 : 0
@@ -128,6 +128,13 @@ export function TestoCard() {
               useEditor.setState({ dragging: true })
             }
           }}
+          onClick={() => {
+            // un clic su una parola già annotata seleziona l'intero passo (il più stretto) e lo mostra nel pannello
+            const s = useEditor.getState()
+            if (s.anchor !== i || s.testa !== i) return
+            const l = cov[i]!.slice().sort((a, b) => a.span![1] - a.span![0] - (b.span![1] - b.span![0]))
+            if (l[0]) s.imposta({ sel: [l[0].span![0], l[0].span![1]], anchor: l[0].span![0], testa: l[0].span![1], tab: 'ann', rightOpen: true })
+          }}
           onMouseEnter={() => {
             const s = useEditor.getState()
             if (s.dragging && s.anchor != null) useEditor.setState({ sel: [Math.min(s.anchor, i), Math.max(s.anchor, i)], testa: i })
@@ -148,6 +155,7 @@ export function TestoCard() {
             backgroundRepeat: 'no-repeat',
             fontWeight: stile[i]!.wt,
             textDecoration: stile[i]!.dec,
+            boxShadow: inSel ? `${sel![0] === i ? '-2px' : '0'} 0 0 0 var(--focus), ${sel![1] === i ? '2px' : '0'} 0 0 0 var(--focus)` : undefined,
             textDecorationThickness: 2,
             textUnderlineOffset: 7
           }}
