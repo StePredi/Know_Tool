@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+:root {
+  --bg: #f4f6f9; --surface: #ffffff; --surface2: #eceff4; --ink: #121920; --mute: #4c5a69;
+  --line: #c6d0db; --line2: #dde3ea; --axis: #e6eaf0; --on: #ffffff; --focus: #1f5fb0;
+  --warn-bg: #fff6e0; --warn-ink: #53390a; --warn-line: #c99521;
+  --err-bg: #fde8e8; --err-ink: #6b1414; --err-line: #c0392b;
+  --ed: #7a2f8f; --ed-bg: #f7eefb;
+  --fs: 14px; --ls: 1.5; --ff: 'Atkinson Hyperlegible', system-ui, sans-serif;
+}
+:root[data-theme='dark'] {
+  --bg: #0d1218; --surface: #161e27; --surface2: #1e2832; --ink: #e9eef3; --mute: #a9b6c3;
+  --line: #35434f; --line2: #263240; --axis: #18212b; --on: #0d1218; --focus: #7db2f0;
+  --warn-bg: #3b2d10; --warn-ink: #f7dfa8; --warn-line: #8a6b1e;
+  --err-bg: #3a1616; --err-ink: #f6c9c9; --err-line: #b5483c;
+  --ed: #dba6ef; --ed-bg: #271430;
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--ff); font-size: var(--fs); line-height: var(--ls); -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--focus); text-decoration: underline; text-underline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--focus); color: var(--surface); }
+@keyframes dcUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes dcFade { from { opacity: 0; } to { opacity: 1; } }
+
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 7px 11px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.btn:hover { background: var(--surface2); }
+.btn.on { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.btn.ed { border-color: var(--ed); background: var(--ed); color: var(--surface); }
+.btn.ed:hover { opacity: 0.88; }
+.btn.ghost-ed { border: 1px dashed var(--ed); background: transparent; color: var(--ed); }
+.btn.lg { padding: 9px 14px; font-size: 13.5px; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; white-space: nowrap; cursor: pointer; }
+.chip.on { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.chip.soft { font-weight: 600; color: var(--mute); cursor: default; }
+.inp { width: 100%; border: 1px solid var(--line); background: var(--bg); border-radius: 7px; padding: 5px 8px; font-size: 12.5px; }
+.inp.big { background: var(--surface); border-radius: 8px; padding: 9px 11px; font-size: 15px; }
+.inp.warn { border-color: var(--warn-line); }
+.lbl { display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 700; color: var(--mute); }
+.h3 { margin: 0; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute); }
+.h3s { margin: 0 0 6px; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--mute); }
+.pop { position: absolute; z-index: 55; top: calc(100% + 6px); left: -1px; right: -1px; padding: 12px 13px 13px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: 0 16px 40px rgba(0,0,0,.2); max-height: min(58vh, 440px); overflow: auto; overscroll-behavior: contain; }
+.note { border: 1px solid var(--warn-line); background: var(--warn-bg); color: var(--warn-ink); border-radius: 12px; padding: 10px 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.overlay { position: fixed; inset: 0; background: rgba(8,12,18,.52); display: flex; justify-content: center; animation: dcFade .14s ease-out; }
+.card-mappa { position: absolute; z-index: 5; padding: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; overflow: hidden; display: flex; flex-direction: column; text-align: left; cursor: pointer; }
+.card-mappa:hover { box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+.card-mappa[aria-pressed='true'] { box-shadow: 0 0 0 3px var(--focus); z-index: 8; }
+.md b { font-weight: 700; }
+.tab { border-collapse: collapse; width: 100%; font-size: 14px; }
+.tab th, .tab td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+.tab th { background: var(--surface2); }
