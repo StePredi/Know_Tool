@@ -609,7 +609,26 @@ export function ImportaEsercizi() {
   )
 }
 
+/** Scelta (facoltativa) della scheda della mappa a cui il testo è collegato. */
+function ScegliScheda(props: { valore: string; onChange: (v: string) => void }) {
+  const m = useStore((s) => s.modello)!
+  const schede = m.schede.slice().sort((a, b) => a.titolo_breve.localeCompare(b.titolo_breve, 'it'))
+  return (
+    <label style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      <span style={lbl}>Scheda sulla mappa (facoltativa)</span>
+      <select aria-label="Scheda sulla mappa" value={props.valore} onChange={(e) => props.onChange(e.target.value)} style={{ width: '100%', border: '1px solid var(--line)', background: 'var(--bg)', borderRadius: 9, padding: '9px 11px', fontSize: 13, outlineOffset: -2 }}>
+        <option value="">— nessuna —</option>
+        {schede.map((x) => <option key={x.id} value={x.id}>{x.titolo_breve}{x.data ? ` · ${x.data}` : ''}</option>)}
+      </select>
+    </label>
+  )
+}
+
 // ------------------------------------------------------------------ modifica del testo
+
+function aggiornaTestoDati(id: string, patch: Parameters<typeof window.api.aggiornaTesto>[1]): void {
+  void window.api.aggiornaTesto(id, patch).then((m) => useStore.getState().applica(m)).catch((e: Error) => useStore.getState().mostraToast(e.message))
+}
 
 export function ModificaTesto() {
   const d = useTesto()!
@@ -656,6 +675,7 @@ export function ModificaTesto() {
         </>
       }
     >
+      <ScegliScheda valore={testo.scheda ?? ''} onChange={(v) => aggiornaTestoDati(testo.id, { scheda: v || null })} />
       <p style={{ margin: 0, fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.55, textWrap: 'pretty' }}>Correggi refusi o versi. All'uscita le annotazioni cercano da sole le proprie parole nel nuovo testo; quelle che non si ritrovano restano segnalate nel pannello.</p>
       <textarea aria-label="Corpo del testo" autoFocus spellCheck={false} value={ed.modBozza} onChange={(e) => ed.imposta({ modBozza: e.target.value })} style={{ flex: 1, minHeight: 280, resize: 'none', border: '1px solid var(--line)', background: 'var(--bg)', borderRadius: 11, padding: '13px 14px', fontSize: 14, lineHeight: 1.8, outlineOffset: -2 }} />
     </Modale>
@@ -667,7 +687,7 @@ export function ModificaTesto() {
 export function NuovoTesto() {
   const ed = useEditor()
   const m = useStore((s) => s.modello)!
-  const [f, setF] = useState({ titolo: '', anno: '', opera: '', layout: 'verso' as Layout, corpo: '' })
+  const [f, setF] = useState({ titolo: '', anno: '', opera: '', layout: 'verso' as Layout, corpo: '', scheda: '' })
   const [occ, setOcc] = useState(false)
   const chiudi = (): void => ed.imposta({ nuovoOpen: false })
   const pronto = !!f.titolo.trim() && !!f.corpo.trim()
@@ -701,7 +721,7 @@ export function NuovoTesto() {
             onClick={async () => {
               setOcc(true)
               try {
-                const r = await window.api.creaTesto({ titolo: f.titolo.trim(), anno: f.anno.trim(), opera: f.opera.trim(), layout: f.layout, corpo: f.corpo.trim() })
+                const r = await window.api.creaTesto({ titolo: f.titolo.trim(), anno: f.anno.trim(), opera: f.opera.trim(), layout: f.layout, corpo: f.corpo.trim(), scheda: f.scheda || null })
                 useStore.getState().applica(r.modello)
                 ed.imposta({ nuovoOpen: false, elencoTesti: false, selettoreOpen: false, testoId: r.id, sel: null, anchor: null, testa: null, tab: 'ann', annDet: null, esDet: null, riancoroInfo: null })
               } catch (e) {
@@ -726,6 +746,7 @@ export function NuovoTesto() {
         {campo('Anno', 'anno', '1819')}
         {campo('Opera o raccolta', 'opera', 'Canti · Idilli')}
       </div>
+      <ScegliScheda valore={f.scheda} onChange={(v) => setF({ ...f, scheda: v })} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={lbl}>Forma</span>
         <div role="group" aria-label="Forma del testo" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
