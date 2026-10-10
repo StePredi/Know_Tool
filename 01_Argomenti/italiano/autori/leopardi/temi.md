@@ -1,0 +1,13 @@
+---
+temi:
+  - { id: natura, nome: Natura }
+  - { id: piacere, nome: Piacere e noia }
+  - { id: amore, nome: Amore }
+  - { id: morte, nome: Morte e suicidio }
+  - { id: ricordo, nome: Ricordo e infanzia }
+  - { id: illusioni, nome: Illusioni e «vero» }
+  - { id: patria, nome: Patria e politica }
+  - { id: solid, nome: Solidarietà e lotta }
+  - { id: dolore, nome: Dolore e infelicità }
+  - { id: poesia, nome: Idea di poesia }
+---
