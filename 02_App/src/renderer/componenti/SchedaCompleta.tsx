@@ -164,7 +164,7 @@ export function SchedaCompleta({ id }: { id: string }) {
           <span style={{ fontSize: 13, color: 'var(--mute)', fontWeight: 600 }}>{pos + 1} di {seq.length} in ordine cronologico</span>
           <div style={{ flex: 1 }} />
           {testiScheda.map((t) => (
-            <button key={t.id} className="btn" onClick={() => { imposta({ apertaId: null, auto: false }); useEditor.getState().imposta({ testoId: t.id, sel: null, anchor: null, testa: null, esercizioAperto: null }) }}>
+            <button key={t.id} className="btn" onClick={() => { imposta({ apertaId: null, auto: false }); useEditor.getState().imposta({ testoId: t.id, sel: null, anchor: null, testa: null, tab: 'ann', annDet: null, esDet: null }) }}>
               Apri nell'editor{testiScheda.length > 1 ? ` · ${t.titolo}` : ''}
             </button>
           ))}

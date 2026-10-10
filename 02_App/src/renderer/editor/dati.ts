@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
-import { tokenizza, type Tokenizzato, daSistemare } from '@shared/testo'
-import type { Annotazione, Evidenzia, Modello, Raccolta, Span, Testo, VoceScritta } from '@shared/types'
+import { citaDa, tokenizza, type Tokenizzato, daSistemare } from '@shared/testo'
+import type { Annotazione, Esercizio, Evidenzia, Layout, Modello, Raccolta, Span, Testo, VoceScritta } from '@shared/types'
 import { useStore } from '../store'
-import { useEditor } from './stato'
+import { useEditor, type Bozza } from './stato'
 
 export function useTesto(): { testo: Testo; tk: Tokenizzato; modello: Modello } | null {
   const modello = useStore((s) => s.modello)
@@ -89,3 +89,73 @@ export async function scriviCampoAnnotazione(testo: Testo, sel: Span, citato: st
     if (!èVuota(nuova as Annotazione)) await salvaVoce(testo.id, 'annotazioni', nuova)
   }
 }
+
+// ------------------------------------------------------------------ aiuti per l'interfaccia
+
+
+/** Una voce con l'ancora scrivibile: se è rotta si riporta lo span scritto nel file, così non si perde. */
+export const scrivibile = <T extends { span: Span | null; spanScritto: Span | null }>(v: T): VoceScritta => ({ ...v, span: v.span ?? v.spanScritto }) as unknown as VoceScritta
+
+export type StatoEs = 'da_svolgere' | 'da_correggere' | 'corretta'
+export const statoEs = (e: Esercizio): StatoEs => (!e.risposta.trim() ? 'da_svolgere' : !e.correzione.trim() ? 'da_correggere' : 'corretta')
+
+/** «v. 2», «vv. 4–6», «¶ 2» */
+export function rigaDi(tk: Tokenizzato, layout: Layout, span: Span | null): string {
+  if (!span || !tk.token[span[0]] || !tk.token[span[1]]) return '—'
+  const i = tk.token[span[0]]!.blocco
+  const j = tk.token[span[1]]!.blocco
+  if (layout === 'prosa') return `¶ ${i + 1}`
+  return j > i ? `vv. ${i + 1}–${j + 1}` : `v. ${i + 1}`
+}
+
+/** Modifica una annotazione esistente; se resta vuota la toglie. */
+export async function modificaAnn(testo: Testo, id: string, campi: Partial<Annotazione>): Promise<void> {
+  const cur = testo.annotazioni.find((a) => a.id === id)
+  if (!cur) return
+  if (èVuota({ ...cur, ...campi })) await eliminaVoce(testo.id, 'annotazioni', id)
+  else await salvaVoce(testo.id, 'annotazioni', { id, ...campi })
+}
+
+/** Mette (o toglie, se è già quella) una figura sull'annotazione bersaglio o, in mancanza, sulla selezione. */
+export async function applicaFigura(testo: Testo, tk: Tokenizzato, sel: Span | null, targetId: string | null, figura: string | null): Promise<void> {
+  const target = (targetId ? testo.annotazioni.find((a) => a.id === targetId) : null) ?? correnteDi(testo, sel)
+  if (target) {
+    await modificaAnn(testo, target.id, { figura: target.figura === figura ? null : figura })
+  } else if (sel && figura) {
+    await scriviCampoAnnotazione(testo, sel, citaDa(testo.corpo, tk.token, sel), { figura })
+  }
+}
+
+/** Divide un blocco incollato in domande (numerate, a paragrafi o una per riga). */
+export function separaDomande(txt: string): Bozza[] {
+  const src = (txt || '').replace(/\r/g, '')
+  const righe = src.split('\n')
+  const prima = (righe.find((r) => r.trim()) || '').trim()
+  const numerata = righe.some((r) => /^\s*\d{1,2}\s*[).\]]\s+\S/.test(r)) || /^1\s+\S/.test(prima)
+  const out: string[] = []
+  if (numerata) {
+    let corrente: string | null = null
+    let atteso = 1
+    for (const r of righe.map((x) => x.trim()).filter(Boolean)) {
+      const m = r.match(/^(\d{1,2})\s*([).\]])?\s+(.*)$/)
+      const n = m ? parseInt(m[1]!, 10) : 0
+      const nuova = !!m && (m[2] ? n >= atteso : n === atteso)
+      if (nuova && m) {
+        if (corrente) out.push(corrente)
+        corrente = m[3]!
+        atteso = n + 1
+      } else if (corrente) corrente += ' ' + r
+      else corrente = r
+    }
+    if (corrente) out.push(corrente)
+  } else if (/\n[ \t]*\n/.test(src)) {
+    for (const b of src.split(/\n[ \t]*\n+/)) {
+      const t = b.split('\n').map((r) => r.trim()).filter(Boolean).join(' ').trim()
+      if (t) out.push(t)
+    }
+  } else {
+    for (const r of righe.map((x) => x.trim()).filter(Boolean)) out.push(r)
+  }
+  return out.map((t, i) => ({ id: 'b' + i, testo: t }))
+}
+

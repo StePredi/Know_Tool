@@ -68,6 +68,11 @@ export function App() {
       if (e.key !== 'Escape') return
       const s = useStore.getState()
       if (s.editId) return
+      if (!useEditor.getState().testoId) {
+        const e2 = useEditor.getState()
+        if (e2.nuovoOpen) { e2.imposta({ nuovoOpen: false }); return }
+        if (e2.elencoTesti && !s.apertaId) { e2.imposta({ elencoTesti: false }); return }
+      }
       if (s.applicazione) s.imposta({ applicazione: false })
       else if (s.popover) s.imposta({ popover: null })
       else if (s.apertaId) s.imposta({ apertaId: null, auto: false })

@@ -3,28 +3,57 @@ import type { Span } from '@shared/types'
 
 export type Pannello = 'ann' | 'par' | 'es'
 
+export interface Bozza {
+  id: string
+  testo: string
+}
+
 interface StatoEditor {
   /** testo aperto nell'editor; null = la Home */
   testoId: string | null
   sel: Span | null
   anchor: number | null
   testa: number | null
+  dragging: boolean
   zoom: number
   numeri: boolean
-  pannello: Pannello
-  sinistraAperta: boolean
-  destraAperta: boolean
-  larghezzaDestra: number
-  larghezza: number
+  tab: Pannello
+  leftPin: boolean
+  rightOpen: boolean
+  rightW: number
+  resizing: boolean
+  vw: number
+  annVar: 'A' | 'B'
+  figVar: 'A' | 'B'
+  // finestre e popover
+  helpOpen: boolean
+  settingsOpen: boolean
+  selettoreOpen: boolean
   annDet: string | null
-  modifica: boolean
+  detEdit: boolean
+  figOpen: boolean
+  figQ: string
+  figExp: string | null
+  figPrev: string
+  figTarget: string | null
+  modOpen: boolean
+  modBozza: string
+  nuovoOpen: boolean
   elencoTesti: boolean
-  modificaTesto: boolean
-  nuovoTesto: boolean
-  importa: boolean
-  aiuto: boolean
-  riepilogo: { riagganciate: number; daSistemare: number } | null
-  esercizioAperto: string | null
+  riancoroInfo: { ok: number; ko: number } | null
+  // testo vuoto
+  incollaAperto: boolean
+  bozza: string
+  // esercizi
+  esDet: string | null
+  esEdit: string | null
+  esTestoEdit: string | null
+  esFiltro: 'tutti' | 'da_svolgere' | 'da_correggere' | 'corretta'
+  esImportOpen: boolean
+  esImportFase: 'incolla' | 'separa'
+  esImportTesto: string
+  esBozza: Bozza[]
+  esCur: Record<string, number>
   imposta(p: Partial<StatoEditor>): void
   seleziona(a: number, b: number): void
 }
@@ -36,32 +65,55 @@ try {
   // nessuna memoria: valori predefiniti
 }
 
+const vw0 = typeof window === 'undefined' ? 1440 : window.innerWidth
+
 export const useEditor = create<StatoEditor>((set, get) => ({
   testoId: null,
   sel: null,
   anchor: null,
   testa: null,
+  dragging: false,
   zoom: preferenze.zoom ?? 100,
   numeri: preferenze.numeri ?? true,
-  pannello: 'ann',
-  sinistraAperta: false,
-  destraAperta: true,
-  larghezzaDestra: preferenze.larghezzaDestra ?? 420,
-  larghezza: typeof window === 'undefined' ? 1400 : window.innerWidth,
+  tab: 'ann',
+  leftPin: false,
+  rightOpen: vw0 >= 1180,
+  rightW: preferenze.rightW ?? 392,
+  resizing: false,
+  vw: vw0,
+  annVar: preferenze.annVar ?? 'A',
+  figVar: preferenze.figVar ?? 'A',
+  helpOpen: false,
+  settingsOpen: false,
+  selettoreOpen: false,
   annDet: null,
-  modifica: false,
+  detEdit: false,
+  figOpen: false,
+  figQ: '',
+  figExp: null,
+  figPrev: 'metafora',
+  figTarget: null,
+  modOpen: false,
+  modBozza: '',
+  nuovoOpen: false,
   elencoTesti: false,
-  modificaTesto: false,
-  nuovoTesto: false,
-  importa: false,
-  aiuto: false,
-  riepilogo: null,
-  esercizioAperto: null,
+  riancoroInfo: null,
+  incollaAperto: false,
+  bozza: '',
+  esDet: null,
+  esEdit: null,
+  esTestoEdit: null,
+  esFiltro: 'tutti',
+  esImportOpen: false,
+  esImportFase: 'incolla',
+  esImportTesto: '',
+  esBozza: [],
+  esCur: {},
   imposta(p) {
     set(p)
-    const { zoom, numeri, larghezzaDestra } = get()
+    const { zoom, numeri, rightW, annVar, figVar } = get()
     try {
-      localStorage.setItem('kt-editor', JSON.stringify({ zoom, numeri, larghezzaDestra }))
+      localStorage.setItem('kt-editor', JSON.stringify({ zoom, numeri, rightW, annVar, figVar }))
     } catch {
       // vedi sopra
     }
@@ -70,3 +122,6 @@ export const useEditor = create<StatoEditor>((set, get) => ({
     set({ sel: [Math.min(a, b), Math.max(a, b)], anchor: a, testa: b })
   }
 }))
+
+/** Larghezza massima del pannello destro: al testo restano sempre almeno 420 px. */
+export const maxRightW = (vw: number, leftPin: boolean): number => Math.max(300, vw - (leftPin ? 290 : 92) - 16 - 420)
