@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f9; --surface:#ffffff; --surface2:#eceff4; --ink:#121920; --mute:#4c5a69;
+  --line:#c6d0db; --line2:#dde3ea; --axis:#e6eaf0; --on:#ffffff; --focus:#1f5fb0;
+  --warn-bg:#fff6e0; --warn-ink:#53390a; --warn-line:#c99521;
+  --ed:#7a2f8f; --ed-bg:#f7eefb;
+  --hl-c:#fbe9a3; --hl-d:#cadffb; --hl-u:#f9cfc9;
+  --hl-c2:#c99000; --hl-d2:#2f6fc9; --hl-u2:#c24a3b;
+  --par:#0f6d57; --par-bg:#dff3ec;
+  --fs:14px; --ls:1.5; --ff:'Atkinson Hyperlegible',system-ui,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1218; --surface:#161e27; --surface2:#1e2832; --ink:#e9eef3; --mute:#a9b6c3;
+  --line:#35434f; --line2:#263240; --axis:#18212b; --on:#0d1218; --focus:#7db2f0;
+  --warn-bg:#3b2d10; --warn-ink:#f7dfa8; --warn-line:#8a6b1e;
+  --ed:#dba6ef; --ed-bg:#271430;
+  --hl-c:#5c4a0e; --hl-d:#14364f; --hl-u:#55211c;
+  --hl-c2:#e2b73a; --hl-d2:#6ba7ef; --hl-u2:#e88273;
+  --par:#7fd9bf; --par-bg:#10322a;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff);font-size:var(--fs);line-height:var(--ls);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--focus);text-decoration:underline;text-underline-offset:2px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+@keyframes dcUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes dcFade{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div style="height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)">
+
+  <header style="flex:none;border-bottom:1px solid var(--line);background:var(--surface)">
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;flex-wrap:wrap">
+      <button type="button" data-pop="1" onClick="{{ toggleSelettore }}" aria-expanded="{{ selettoreOpen }}" title="Cambia testo" style="flex:none;display:flex;align-items:center;gap:9px;min-width:0;border:1px solid transparent;background:transparent;border-radius:9px;padding:4px 9px;cursor:pointer;text-align:left" style-hover="background:var(--surface2);border-color:var(--line)">
+        <span style="display:flex;flex-direction:column;gap:1px;min-width:0">
+          <strong style="font-size:15px;font-weight:700;letter-spacing:-.01em;white-space:nowrap">{{ titolo }}</strong>
+          <span style="font-size:11.5px;color:var(--mute);white-space:nowrap">{{ sottotitolo }}</span>
+        </span>
+        <span aria-hidden="true" style="font-size:10px;color:var(--mute)">▾</span>
+      </button>
+
+      <button type="button" onClick="{{ apriModifica }}" title="Modifica il testo" aria-label="Modifica il testo" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">✎</button>
+
+      <span style="flex:none;width:1px;height:26px;background:var(--line2)"></span>
+
+      <div role="group" aria-label="Layout del testo" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none">
+        <button type="button" onClick="{{ setVersi }}" aria-pressed="{{ isVersi }}" style="border:0;border-right:1px solid var(--line);padding:0 14px;height:34px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ versiBg }};color:{{ versiFg }}">Versi</button>
+        <button type="button" onClick="{{ setProsa }}" aria-pressed="{{ isProsa }}" style="border:0;padding:0 14px;height:34px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ prosaBg }};color:{{ prosaFg }}">Prosa</button>
+      </div>
+
+      <button type="button" onClick="{{ toggleNumeri }}" aria-pressed="{{ numeri }}" title="Numeri di riga" aria-label="Numeri di riga" style="flex:none;border:1px solid {{ numBc }};background:{{ numBg }};color:{{ numFg }};border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1">#</button>
+
+      <div role="group" aria-label="Zoom del testo" style="flex:none;display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <button type="button" onClick="{{ zoomOut }}" aria-label="Riduci il testo" style="border:0;border-right:1px solid var(--line);background:transparent;width:32px;height:34px;font-size:15px;font-weight:700;cursor:pointer;line-height:1">−</button>
+        <button type="button" onClick="{{ zoomReset }}" title="Ripristina lo zoom (Ctrl 0)" style="border:0;border-right:1px solid var(--line);background:transparent;padding:0 9px;height:34px;font-size:12px;font-weight:700;cursor:pointer;min-width:54px">{{ zoomLabel }}</button>
+        <button type="button" onClick="{{ zoomIn }}" aria-label="Ingrandisci il testo" style="border:0;background:transparent;width:32px;height:34px;font-size:15px;font-weight:700;cursor:pointer;line-height:1">+</button>
+      </div>
+
+      <div style="flex:1 1 0;min-width:8px"></div>
+
+      <button type="button" data-pop="1" onClick="{{ toggleHelp }}" aria-expanded="{{ helpOpen }}" title="Legenda e scorciatoie" aria-label="Legenda e scorciatoie" style="flex:none;border:1px solid {{ helpBc }};background:{{ helpBg }};color:{{ helpFg }};border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1">?</button>
+      <button type="button" title="Apri la scheda di questo testo sulla mappa dell'autore" aria-label="Scheda sulla mappa dell'autore" style="flex:none;border:1px solid var(--focus);background:transparent;color:var(--focus);border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">↗</button>
+      <button type="button" onClick="{{ toggleTheme }}" title="{{ themeTitle }}" aria-label="{{ themeTitle }}" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">{{ themeIcon }}</button>
+      <button type="button" data-pop="1" onClick="{{ toggleSettings }}" aria-expanded="{{ settingsOpen }}" title="Carattere e spaziatura dell'interfaccia" style="flex:none;border:1px solid {{ setBc }};background:{{ setBg }};color:{{ setFg }};border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1">Aa</button>
+
+      <span style="flex:none;width:1px;height:26px;background:var(--line2)"></span>
+
+      <button type="button" onClick="{{ nuovoTesto }}" title="Importa un nuovo testo" style="flex:none;white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:0 13px;height:34px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">+ Testo</button>
+    </div>
+  </header>
+
+  <sc-if value="{{ selettoreOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-pop="1" style="position:fixed;top:58px;left:14px;z-index:70;width:320px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.24);padding:11px;animation:dcUp .14s ease-out;display:flex;flex-direction:column;gap:7px">
+      <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);padding:2px 3px">Testi di questo autore</span>
+      <sc-if value="{{ haArchivio }}" hint-placeholder-val="{{ false }}">
+        <sc-for list="{{ archivio }}" as="t" hint-placeholder-count="2">
+          <button type="button" onClick="{{ t.onClick }}" style="width:100%;text-align:left;display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 11px;cursor:pointer" style-hover="background:var(--surface2)">
+            <span style="font-size:13px;font-weight:700">{{ t.titolo }}</span>
+            <span style="font-size:11.5px;color:var(--mute)">{{ t.sub }} · {{ t.n }}</span>
+          </button>
+        </sc-for>
+      </sc-if>
+      <button type="button" onClick="{{ nuovoTesto }}" style="width:100%;text-align:left;border:1px dashed var(--line);background:transparent;color:var(--mute);border-radius:10px;padding:9px 11px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2);color:var(--ink)">+ Importa un nuovo testo</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-pop="1" style="position:fixed;top:58px;right:14px;z-index:70;width:286px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.22);padding:14px;animation:dcUp .14s ease-out">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <strong style="font-size:12.5px;text-transform:uppercase;letter-spacing:.06em">Lettura</strong>
+        <button type="button" onClick="{{ toggleSettings }}" aria-label="Chiudi impostazioni" style="border:1px solid var(--line);background:var(--surface);border-radius:6px;width:24px;height:24px;font-size:12px;font-weight:700;cursor:pointer;line-height:1">✕</button>
+      </div>
+      <div style="font-size:11.5px;font-weight:700;color:var(--mute);margin-bottom:5px">Carattere</div>
+      <div style="display:flex;gap:6px;margin-bottom:12px">
+        <sc-for list="{{ fonts }}" as="f" hint-placeholder-count="3">
+          <button type="button" onClick="{{ f.onClick }}" aria-pressed="{{ f.on }}" style="flex:1;border:1px solid {{ f.bc }};background:{{ f.bg }};color:{{ f.fg }};border-radius:7px;padding:8px 4px;font-size:12px;font-weight:700;cursor:pointer">{{ f.name }}</button>
+        </sc-for>
+      </div>
+      <label style="display:block;font-size:11.5px;font-weight:700;color:var(--mute);margin-bottom:4px">Dimensione interfaccia · {{ fsLabel }}</label>
+      <input type="range" min="13" max="19" step="1" value="{{ fs }}" onChange="{{ onFs }}" style="width:100%;accent-color:var(--focus);margin-bottom:12px">
+      <label style="display:block;font-size:11.5px;font-weight:700;color:var(--mute);margin-bottom:4px">Spaziatura righe · {{ lsLabel }}</label>
+      <input type="range" min="130" max="200" step="5" value="{{ lsRaw }}" onChange="{{ onLs }}" style="width:100%;accent-color:var(--focus)">
+      <p style="margin:12px 0 0;font-size:11.5px;color:var(--mute);line-height:1.45">La dimensione del testo da studiare si regola a parte, con lo zoom sulla card centrale.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ helpOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-pop="1" style="position:fixed;top:62px;right:16px;z-index:70;width:330px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.24);padding:14px;animation:dcUp .14s ease-out">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <strong style="font-size:12.5px;text-transform:uppercase;letter-spacing:.06em">Legenda</strong>
+        <button type="button" onClick="{{ toggleHelp }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:6px;width:24px;height:24px;font-size:12px;font-weight:700;cursor:pointer;line-height:1">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--mute)">
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;height:17px;border-radius:5px;background:var(--hl-c);border-bottom:3px solid var(--hl-c2)"></span>Concetto</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;height:17px;border-radius:5px;background:var(--hl-d);border-bottom:3px solid var(--hl-d2)"></span>Definizione</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;height:17px;border-radius:5px;background:var(--hl-u);border-bottom:3px solid var(--hl-u2)"></span>Dubbio</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;height:17px;border-radius:5px;background:var(--hl-c);background-image:linear-gradient(var(--hl-c2),var(--hl-c2)),linear-gradient(var(--hl-c2),var(--hl-c2));background-size:100% 2.5px,100% 2.5px;background-position:left bottom 0px,left bottom 4.5px;background-repeat:no-repeat"></span>Due annotazioni sulle stesse parole</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;height:17px;display:flex;align-items:flex-end;justify-content:center;border-bottom:3px solid var(--ink)"></span>Sottolineatura</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;text-align:center;color:var(--ed);text-decoration:underline wavy var(--ed);text-underline-offset:3px">abc</span>Figura retorica</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;display:flex;justify-content:center"><span style="border:1px solid var(--par);background:var(--par-bg);color:var(--par);border-radius:5px;padding:0 5px;font-size:11px;font-weight:700">¶</span></span>Parafrasi sul verso</span>
+        <span style="display:flex;align-items:center;gap:9px"><span aria-hidden="true" style="flex:none;width:54px;display:flex;justify-content:center"><span style="border:1px solid var(--line);background:var(--surface2);color:var(--mute);border-radius:5px;padding:0 5px;font-size:11px;font-weight:700">?3</span></span>Domanda sul verso</span>
+        <span style="display:flex;align-items:center;gap:9px"><b style="flex:none;width:54px;text-align:center;color:var(--ink)">abc</b>Parola chiave</span>
+      </div>
+      <strong style="display:block;margin:14px 0 8px;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em">Tasti</strong>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--mute);line-height:1.5">
+        <span><b style="color:var(--ink)">clic</b> una parola · <b style="color:var(--ink)">trascina</b> o <b style="color:var(--ink)">Maiusc+clic</b> un intervallo</span>
+        <span><b style="color:var(--ink)">← →</b> sposta · <b style="color:var(--ink)">Maiusc+← →</b> estendi · <b style="color:var(--ink)">Esc</b> deseleziona</span>
+        <span><b style="color:var(--ink)">1 2 3</b> evidenzia · <b style="color:var(--ink)">S</b> sottolinea · <b style="color:var(--ink)">K F N P</b></span>
+        <span><b style="color:var(--ink)">D</b> nuova domanda sul passo selezionato</span>
+        <span><b style="color:var(--ink)">Ctrl+rotellina</b> zoom del testo</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ vuoto }}" hint-placeholder-val="{{ false }}">
+    <div style="flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:center;padding:30px 20px 40px">
+      <div style="width:100%;max-width:880px">
+
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Variante dello stato vuoto</span>
+          <div role="group" aria-label="Variante dello stato vuoto" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden">
+            <button type="button" onClick="{{ setImpA }}" aria-pressed="{{ isImpA }}" style="border:0;border-right:1px solid var(--line);padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;background:{{ impABg }};color:{{ impAFg }}">A · tre vie</button>
+            <button type="button" onClick="{{ setImpB }}" aria-pressed="{{ isImpB }}" style="border:0;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;background:{{ impBBg }};color:{{ impBFg }}">B · incolla subito</button>
+          </div>
+          <div style="flex:1"></div>
+          <button type="button" onClick="{{ ripristina }}" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">Riapri «L'infinito»</button>
+        </div>
+
+        <sc-if value="{{ isImpA }}" hint-placeholder-val="{{ true }}">
+          <div style="border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:34px 32px 30px">
+            <h1 style="margin:0 0 8px;font-size:23px;font-weight:700;letter-spacing:-.015em">Nessun testo da analizzare</h1>
+            <p style="margin:0 0 26px;font-size:14px;color:var(--mute);max-width:56ch;line-height:1.6;text-wrap:pretty">Porta dentro il testo in uno dei tre modi. Dopo l'import scegli versi o prosa e puoi sistemarlo prima di iniziare ad annotare.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
+              <button type="button" onClick="{{ apriIncolla }}" style="text-align:left;border:1px solid var(--focus);background:var(--surface);border-radius:14px;padding:20px 18px;cursor:pointer;display:flex;flex-direction:column;gap:7px;min-height:150px" style-hover="background:var(--surface2)">
+                <span aria-hidden="true" style="font-size:22px;line-height:1">⌨</span>
+                <strong style="font-size:15px;font-weight:700">Incolla il testo</strong>
+                <span style="font-size:12.5px;color:var(--mute);line-height:1.5">Dal libro digitale o da una pagina web. Il modo più rapido in classe.</span>
+                <span style="margin-top:auto;font-size:12px;font-weight:700;color:var(--focus)">Apri l'area di incolla →</span>
+              </button>
+              <button type="button" onClick="{{ apriIncolla }}" style="text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:20px 18px;cursor:pointer;display:flex;flex-direction:column;gap:7px;min-height:150px" style-hover="background:var(--surface2)">
+                <span aria-hidden="true" style="font-size:22px;line-height:1">📄</span>
+                <strong style="font-size:15px;font-weight:700">File .txt</strong>
+                <span style="font-size:12.5px;color:var(--mute);line-height:1.5">Scegli un file dal computer, oppure trascinalo qui sopra.</span>
+                <span style="margin-top:auto;font-size:12px;font-weight:700;color:var(--mute)">Scegli file →</span>
+              </button>
+              <button type="button" onClick="{{ apriIncolla }}" style="text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:20px 18px;cursor:pointer;display:flex;flex-direction:column;gap:7px;min-height:150px" style-hover="background:var(--surface2)">
+                <span aria-hidden="true" style="font-size:22px;line-height:1">📕</span>
+                <strong style="font-size:15px;font-weight:700">PDF</strong>
+                <span style="font-size:12.5px;color:var(--mute);line-height:1.5">Estrae il testo dalle pagine. Da rivedere: gli a capo del PDF spesso sbagliano.</span>
+                <span style="margin-top:auto;font-size:12px;font-weight:700;color:var(--mute)">Scegli file →</span>
+              </button>
+            </div>
+            <sc-if value="{{ incollaAperto }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:20px;border-top:1px solid var(--line2);padding-top:18px">
+                <label style="display:block;font-size:12px;font-weight:700;color:var(--mute);margin-bottom:7px">Incolla qui il testo</label>
+                <textarea value="{{ bozza }}" onChange="{{ onBozza }}" placeholder="Sempre caro mi fu quest'ermo colle…" style="width:100%;min-height:150px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:13px 14px;font-size:14px;line-height:1.6;outline-offset:-2px"></textarea>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px">
+                  <button type="button" onClick="{{ importa }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Apri nell'editor</button>
+                  <span style="font-size:12px;color:var(--mute)">{{ bozzaInfo }}</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isImpB }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:30px 32px 26px">
+            <h1 style="margin:0 0 6px;font-size:23px;font-weight:700;letter-spacing:-.015em">Incolla il testo da analizzare</h1>
+            <p style="margin:0 0 18px;font-size:14px;color:var(--mute);max-width:56ch;line-height:1.6;text-wrap:pretty">Un verso per riga. Puoi sistemare il testo adesso: dopo l'import le annotazioni si agganciano alle parole, non alle righe.</p>
+            <textarea value="{{ bozza }}" onChange="{{ onBozza }}" placeholder="Sempre caro mi fu quest'ermo colle,&#10;e questa siepe, che da tanta parte…" style="width:100%;min-height:230px;resize:vertical;border:2px dashed var(--line);background:var(--bg);border-radius:14px;padding:18px;font-size:15px;line-height:1.75;outline-offset:-2px"></textarea>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px">
+              <button type="button" onClick="{{ importa }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:11px 20px;font-size:13.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Apri nell'editor</button>
+              <div role="group" aria-label="Layout del testo" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden">
+                <button type="button" onClick="{{ setVersi }}" aria-pressed="{{ isVersi }}" style="border:0;border-right:1px solid var(--line);padding:9px 14px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ versiBg }};color:{{ versiFg }}">Versi</button>
+                <button type="button" onClick="{{ setProsa }}" aria-pressed="{{ isProsa }}" style="border:0;padding:9px 14px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ prosaBg }};color:{{ prosaFg }}">Prosa</button>
+              </div>
+              <span style="font-size:12px;color:var(--mute)">{{ bozzaInfo }}</span>
+              <div style="flex:1"></div>
+              <span style="font-size:12px;color:var(--mute)">oppure</span>
+              <button type="button" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">File .txt</button>
+              <button type="button" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">PDF</button>
+            </div>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ pieno }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;min-height:0;position:relative;display:flex;flex-direction:column;overflow:hidden">
+
+    <sc-if value="{{ leftRail }}" hint-placeholder-val="{{ false }}">
+      <aside aria-label="Strumenti ridotti" style="position:absolute;left:16px;top:16px;z-index:30;width:60px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:0 12px 30px rgba(8,12,18,.16);padding:8px 8px;display:flex;flex-direction:column;gap:6px;animation:dcFade .14s ease-out">
+        <button type="button" onClick="{{ apriStrumenti }}" title="Apri gli strumenti" aria-label="Apri gli strumenti" style="border:1px solid var(--line);background:var(--surface);border-radius:10px;height:36px;font-size:14px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">☰</button>
+        <span style="height:1px;background:var(--line2)"></span>
+        <sc-for list="{{ railItems }}" as="r" hint-placeholder-count="6">
+          <button type="button" onClick="{{ r.onClick }}" disabled="{{ noSel }}" aria-pressed="{{ r.on }}" title="{{ r.title }}" style="position:relative;display:flex;align-items:center;justify-content:center;height:36px;border:1px solid {{ r.bc }};background:{{ r.bg }};color:{{ r.fg }};border-radius:10px;font-size:13px;font-weight:700;cursor:{{ cur }};opacity:{{ op }};line-height:1">
+            <span aria-hidden="true" style="width:18px;height:18px;border-radius:5px;border:1px solid {{ r.swBc }};background:{{ r.swatch }};display:flex;align-items:center;justify-content:center;font-size:11px;color:{{ r.iconFg }};line-height:1">{{ r.icon }}</span>
+            <span style="position:absolute;top:2px;right:4px;font-size:9.5px;font-weight:700;color:var(--mute);line-height:1">{{ r.n }}</span>
+          </button>
+        </sc-for>
+        <span style="height:1px;background:var(--line2)"></span>
+        <div title="Annotazioni sul testo" style="display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 0">
+          <span style="font-size:14px;font-weight:700;line-height:1.1">{{ nAnn }}</span>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.04em;color:var(--mute);line-height:1">NOTE</span>
+        </div>
+      </aside>
+    </sc-if>
+
+    <sc-if value="{{ leftOpen }}" hint-placeholder-val="{{ true }}">
+    <aside aria-label="Strumenti di annotazione" style="position:absolute;left:16px;top:16px;bottom:16px;z-index:30;width:258px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:0 12px 30px rgba(8,12,18,.16);overflow:hidden;display:flex;flex-direction:column;animation:dcFade .14s ease-out">
+
+      <div style="flex:none;display:flex;align-items:center;gap:8px;padding:11px 12px 9px;border-bottom:1px solid var(--line2)">
+        <strong style="flex:1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Strumenti</strong>
+        <button type="button" onClick="{{ chiudiStrumenti }}" title="Riduci gli strumenti" aria-label="Riduci gli strumenti" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:28px;height:28px;font-size:11px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">◂</button>
+      </div>
+
+      <div style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-gutter:stable;padding:12px 8px 18px 12px;display:flex;flex-direction:column;gap:14px">
+
+      <div style="border:1px solid {{ selBc }};background:{{ selBg }};border-radius:11px;padding:10px 11px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);margin-bottom:4px">Selezione</div>
+        <div style="font-size:13px;font-weight:700;line-height:1.45;word-break:break-word">{{ selLabel }}</div>
+        <div style="font-size:11.5px;color:var(--mute);margin-top:3px">{{ selMeta }}</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Evidenziatori</div>
+        <sc-for list="{{ hlBtns }}" as="b" hint-placeholder-count="3">
+          <button type="button" onClick="{{ b.onClick }}" disabled="{{ noSel }}" aria-pressed="{{ b.on }}" title="{{ b.title }}" style="display:flex;align-items:center;gap:10px;min-height:40px;border:1px solid {{ b.bc }};background:{{ b.bg }};color:{{ b.fg }};border-radius:9px;padding:0 12px;font-size:13px;font-weight:700;cursor:{{ cur }};opacity:{{ op }};text-align:left">
+            <span aria-hidden="true" style="flex:none;width:17px;height:17px;border-radius:5px;border:1px solid var(--line);background:{{ b.swatch }}"></span>
+            <span style="flex:1">{{ b.name }}</span>
+            <span style="flex:none;font-size:10.5px;font-weight:700;color:var(--mute)">{{ b.n }}</span>
+            <kbd style="font-size:10.5px;font-weight:700;color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:1px 5px;background:var(--bg)">{{ b.key }}</kbd>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Marcature</div>
+        <sc-for list="{{ markBtns }}" as="b" hint-placeholder-count="2">
+          <button type="button" onClick="{{ b.onClick }}" disabled="{{ noSel }}" aria-pressed="{{ b.on }}" title="{{ b.title }}" style="display:flex;align-items:center;gap:10px;min-height:40px;border:1px solid {{ b.bc }};background:{{ b.bg }};color:{{ b.fg }};border-radius:9px;padding:0 12px;font-size:13px;font-weight:700;cursor:{{ cur }};opacity:{{ op }};text-align:left">
+            <span aria-hidden="true" style="flex:none;font-size:14px;width:17px;text-align:center">{{ b.icon }}</span>
+            <span style="flex:1">{{ b.name }}</span>
+            <span style="flex:none;font-size:10.5px;font-weight:700;color:var(--mute)">{{ b.n }}</span>
+            <kbd style="font-size:10.5px;font-weight:700;color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:1px 5px;background:var(--bg)">{{ b.key }}</kbd>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:baseline;gap:7px">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Nota</div>
+          <kbd style="font-size:10.5px;font-weight:700;color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:1px 5px;background:var(--bg)">N</kbd>
+        </div>
+        <textarea ref="{{ notaRef }}" value="{{ notaVal }}" onChange="{{ onNota }}" disabled="{{ noSel }}" placeholder="{{ notaPh }}" style="width:100%;min-height:92px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:9px 10px;font-size:12.5px;line-height:1.5;outline-offset:-2px;opacity:{{ op }}"></textarea>
+        <button type="button" onClick="{{ apriFigure }}" disabled="{{ noSel }}" style="display:flex;align-items:center;gap:9px;min-height:40px;border:1px solid {{ figBc }};background:{{ figBg }};color:{{ figFg }};border-radius:9px;padding:0 12px;font-size:13px;font-weight:700;cursor:{{ cur }};opacity:{{ op }};text-align:left">
+          <span aria-hidden="true" style="flex:none;font-size:14px;width:17px;text-align:center">❧</span>
+          <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ figLabel }}</span>
+          <span aria-hidden="true" style="color:var(--mute);font-size:11px">▸</span>
+        </button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Parafrasi</div>
+        <button type="button" onClick="{{ nuovaParafrasi }}" disabled="{{ noSel }}" style="display:flex;align-items:center;gap:10px;min-height:40px;border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:0 12px;font-size:13px;font-weight:700;cursor:{{ cur }};opacity:{{ op }};text-align:left" style-hover="background:var(--surface2)">
+          <span aria-hidden="true" style="flex:none;font-size:14px;width:17px;text-align:center;color:var(--par)">¶</span>
+          <span style="flex:1">Sulla selezione</span>
+          <kbd style="font-size:10.5px;font-weight:700;color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:1px 5px;background:var(--bg)">P</kbd>
+        </button>
+        <button type="button" onClick="{{ nuovaParafrasiLibera }}" style="display:flex;align-items:center;gap:10px;min-height:40px;border:1px dashed var(--line);background:transparent;border-radius:9px;padding:0 12px;font-size:13px;font-weight:700;cursor:pointer;text-align:left;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">
+          <span aria-hidden="true" style="flex:none;font-size:14px;width:17px;text-align:center">+</span>
+          <span style="flex:1">Libera</span>
+        </button>
+      </div>
+
+      <sc-if value="{{ selAnn }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ eliminaSel }}" style="align-self:flex-start;border:1px solid var(--line);background:transparent;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">Elimina questa annotazione</button>
+      </sc-if>
+
+      </div>
+    </aside>
+    </sc-if>
+
+      <div data-textcard="1" style="flex:1;min-height:0;overflow:auto;padding:24px {{ padR }}px 60px {{ padL }}px;display:flex;justify-content:center;align-items:flex-start">
+        <div style="width:100%;max-width:{{ cardW }}px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:30px 32px 34px;margin:0 auto">
+
+          <sc-if value="{{ isVersi }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:{{ zoomFs }}px;line-height:1.95;display:flex;justify-content:center">
+             <div style="max-width:100%">
+              <sc-for list="{{ righe }}" as="r" hint-placeholder-count="15">
+                <div style="display:flex;align-items:baseline;gap:14px">
+                  <span aria-hidden="true" style="flex:none;width:{{ numW }}px;text-align:right;font-size:{{ numFs }}px;font-weight:700;color:var(--mute);user-select:none">{{ r.num }}</span>
+                  <div style="flex:1;min-width:0;font-size:0;overflow-wrap:anywhere">
+                    <sc-if value="{{ r.vuota }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:{{ zoomFs }}px;color:var(--mute);user-select:none">{{ r.raw }}</span>
+                    </sc-if>
+                    <sc-if value="{{ r.hasPre }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:{{ zoomFs }}px;white-space:pre;user-select:none">{{ r.pre }}</span>
+                    </sc-if>
+                    <sc-for list="{{ r.toks }}" as="t" hint-placeholder-count="7">
+                      <span onMouseDown="{{ t.down }}" onMouseEnter="{{ t.enter }}" role="button" tabindex="-1" aria-pressed="{{ t.sel }}" style="cursor:text;font-size:{{ zoomFs }}px;padding:2px 0 6px;border-radius:{{ t.rad }};background-color:{{ t.bg }};background-image:{{ t.img }};background-size:{{ t.size }};background-position:{{ t.pos }};background-repeat:no-repeat;font-weight:{{ t.wt }};text-decoration:{{ t.dec }};text-decoration-thickness:2px;text-underline-offset:7px">{{ t.text }}</span><sc-if value="{{ t.hasPiu }}" hint-placeholder-val="{{ false }}"><span title="{{ t.piuTitle }}" style="font-size:9px;font-weight:700;color:var(--mute);vertical-align:super;padding:0 1px;user-select:none">{{ t.piu }}</span></sc-if><span style="white-space:pre;font-size:{{ zoomFs }}px;padding:2px 0 6px;background-color:{{ t.aBg }};background-image:{{ t.aImg }};background-size:{{ t.aSize }};background-position:{{ t.aPos }};background-repeat:no-repeat">{{ t.after }}</span>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ r.dom }}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{ r.onDom }}" title="{{ r.domTitle }}" aria-label="{{ r.domTitle }}" style="flex:none;align-self:flex-start;display:flex;align-items:center;gap:3px;border:1px solid {{ r.domBc }};background:{{ r.domBg }};color:{{ r.domFg }};border-radius:6px;padding:0 6px;font-size:{{ numFs }}px;font-weight:700;cursor:pointer;line-height:1.6;white-space:nowrap">?<span style="font-size:{{ numFs }}px">{{ r.domN }}</span></button>
+                  </sc-if>
+                  <sc-if value="{{ r.par }}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{ r.onPar }}" title="Questo verso ha una parafrasi collegata" aria-label="Vai alla parafrasi collegata" style="flex:none;align-self:flex-start;border:1px solid var(--par);background:var(--par-bg);color:var(--par);border-radius:6px;padding:0 6px;font-size:{{ numFs }}px;font-weight:700;cursor:pointer;line-height:1.6;white-space:nowrap">¶</button>
+                  </sc-if>
+                </div>
+              </sc-for>
+             </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isProsa }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:{{ zoomFs }}px;line-height:1.95;max-width:68ch;margin:0 auto">
+              <sc-for list="{{ paragrafi }}" as="r" hint-placeholder-count="1">
+                <p style="margin:0 0 16px;font-size:0;overflow-wrap:anywhere">
+                  <sc-if value="{{ r.vuota }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:{{ zoomFs }}px;color:var(--mute);user-select:none">{{ r.raw }}</span>
+                  </sc-if>
+                  <sc-if value="{{ r.hasPre }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:{{ zoomFs }}px;white-space:pre-wrap;user-select:none">{{ r.pre }}</span>
+                  </sc-if>
+                  <sc-for list="{{ r.toks }}" as="t" hint-placeholder-count="40">
+                    <span onMouseDown="{{ t.down }}" onMouseEnter="{{ t.enter }}" role="button" tabindex="-1" aria-pressed="{{ t.sel }}" style="cursor:text;font-size:{{ zoomFs }}px;padding:2px 0 6px;border-radius:{{ t.rad }};background-color:{{ t.bg }};background-image:{{ t.img }};background-size:{{ t.size }};background-position:{{ t.pos }};background-repeat:no-repeat;font-weight:{{ t.wt }};text-decoration:{{ t.dec }};text-decoration-thickness:2px;text-underline-offset:7px">{{ t.text }}</span><sc-if value="{{ t.hasPiu }}" hint-placeholder-val="{{ false }}"><span title="{{ t.piuTitle }}" style="font-size:9px;font-weight:700;color:var(--mute);vertical-align:super;padding:0 1px;user-select:none">{{ t.piu }}</span></sc-if><span style="white-space:pre-wrap;font-size:{{ zoomFs }}px;padding:2px 0 6px;background-color:{{ t.aBg }};background-image:{{ t.aImg }};background-size:{{ t.aSize }};background-position:{{ t.aPos }};background-repeat:no-repeat">{{ t.after }}</span>
+                  </sc-for>
+                </p>
+              </sc-for>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+
+    <sc-if value="{{ rightRail }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ apriPannelli }}" style="position:absolute;right:16px;top:16px;z-index:30;border:1px solid var(--line);background:var(--surface);border-radius:14px;box-shadow:0 12px 30px rgba(8,12,18,.16);padding:11px 14px;font-size:12.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;animation:dcFade .14s ease-out" style-hover="background:var(--surface2)">
+        <span aria-hidden="true" style="color:var(--mute)">◂</span><span style="white-space:nowrap">{{ rightRailLabel }}</span>
+      </button>
+    </sc-if>
+
+    <sc-if value="{{ rightOpen }}" hint-placeholder-val="{{ true }}">
+    <aside aria-label="Pannelli di riepilogo" style="position:absolute;right:16px;top:16px;bottom:16px;z-index:30;width:{{ rightW }};min-width:300px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:0 12px 30px rgba(8,12,18,.16);display:flex;flex-direction:column;overflow:hidden;animation:dcFade .14s ease-out">
+
+      <div onMouseDown="{{ onResize }}" role="separator" aria-label="Trascina per allargare il pannello" title="Trascina per allargare il pannello" style="position:absolute;left:0;top:0;bottom:0;width:10px;cursor:col-resize;z-index:4;display:flex;align-items:center;justify-content:center">
+        <span aria-hidden="true" style="width:3px;height:42px;border-radius:2px;background:{{ resizeBg }}"></span>
+      </div>
+
+
+      <div role="tablist" aria-label="Pannelli" style="flex:none;display:flex;align-items:stretch;border-bottom:1px solid var(--line)">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+          <button type="button" role="tab" aria-selected="{{ t.on }}" onClick="{{ t.onClick }}" style="flex:1;min-width:0;border:0;border-bottom:3px solid {{ t.bb }};background:{{ t.bg }};color:{{ t.fg }};padding:12px 4px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</button>
+        </sc-for>
+        <button type="button" onClick="{{ allargaPannello }}" disabled="{{ allargaOff }}" title="{{ allargaLabel }}" aria-label="{{ allargaLabel }}" style="flex:none;width:36px;border:0;border-bottom:3px solid transparent;border-left:1px solid var(--line2);background:var(--bg);color:var(--mute);font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2);color:var(--ink)">{{ allargaIcon }}</button>
+        <button type="button" onClick="{{ chiudiPannelli }}" title="Riduci i pannelli" aria-label="Riduci i pannelli" style="flex:none;width:36px;border:0;border-bottom:3px solid transparent;border-left:1px solid var(--line2);background:var(--bg);color:var(--mute);font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2);color:var(--ink)">▸</button>
+      </div>
+
+      <sc-if value="{{ tabAnn }}" hint-placeholder-val="{{ true }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+          <div style="flex:none;display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(--line2);flex-wrap:wrap">
+            <span style="font-size:11.5px;color:var(--mute);font-weight:700">In ordine di testo</span>
+            <div style="flex:1"></div>
+            <div role="group" aria-label="Densità del pannello" style="display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden">
+              <button type="button" onClick="{{ setAnnA }}" aria-pressed="{{ isAnnA }}" style="border:0;border-right:1px solid var(--line);padding:6px 11px;font-size:11.5px;font-weight:700;cursor:pointer;background:{{ annABg }};color:{{ annAFg }}">Compatto</button>
+              <button type="button" onClick="{{ setAnnB }}" aria-pressed="{{ isAnnB }}" style="border:0;padding:6px 11px;font-size:11.5px;font-weight:700;cursor:pointer;background:{{ annBBg }};color:{{ annBFg }}">Esteso</button>
+            </div>
+          </div>
+
+          <sc-if value="{{ nessunaAnn }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:26px 18px;text-align:center;color:var(--mute);font-size:13px;line-height:1.6">Nessuna annotazione.<br>Seleziona una o più parole nel testo e usa gli strumenti a sinistra.</div>
+          </sc-if>
+
+          <div style="flex:1;min-height:0;overflow:auto;padding:11px 13px 24px;display:flex;flex-direction:column;gap:{{ annGap }}px">
+
+            <sc-if value="{{ isAnnA }}" hint-placeholder-val="{{ true }}">
+              <sc-for list="{{ anns }}" as="a" hint-placeholder-count="8">
+                <button type="button" onClick="{{ a.onClick }}" style="flex:none;width:100%;text-align:left;display:flex;align-items:flex-start;gap:10px;border:1px solid {{ a.bc }};background:{{ a.bg }};border-radius:9px;padding:9px 10px;cursor:pointer;min-height:40px" style-hover="background:var(--surface2)">
+                  <span aria-hidden="true" style="flex:none;width:7px;align-self:stretch;border-radius:4px;background:{{ a.dot }}"></span>
+                  <span style="flex:none;font-size:11px;font-weight:700;color:var(--mute);width:30px;padding-top:1px">{{ a.riga }}</span>
+                  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <span style="font-size:12.5px;font-weight:700;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ a.citato }}</span>
+                    <span style="font-size:11.5px;color:var(--mute);line-height:1.45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ a.sub }}</span>
+                  </span>
+                  <span style="flex:none;font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.08em">{{ a.flags }}</span>
+                </button>
+              </sc-for>
+            </sc-if>
+
+            <sc-if value="{{ isAnnB }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ anns }}" as="a" hint-placeholder-count="8">
+                <div style="flex:none;border:1px solid {{ a.bc }};background:{{ a.bg }};border-radius:11px;padding:12px 13px 11px;display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;align-items:center;gap:9px">
+                    <span aria-hidden="true" style="flex:none;width:11px;height:11px;border-radius:4px;background:{{ a.dot }}"></span>
+                    <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">{{ a.riga }}</span>
+                    <div style="flex:1"></div>
+                    <button type="button" onClick="{{ a.onClick }}" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">Vai al testo</button>
+                    <button type="button" onClick="{{ a.onDel }}" aria-label="Elimina annotazione" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;width:28px;height:28px;font-size:11px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✕</button>
+                  </div>
+                  <button type="button" onClick="{{ a.onClick }}" title="Apri la scheda dell'annotazione" style="width:100%;text-align:left;border:0;background:transparent;padding:0;cursor:pointer;display:flex;gap:10px;align-items:flex-start" style-hover="opacity:.72">
+                    <span aria-hidden="true" style="flex:none;width:3px;align-self:stretch;border-radius:2px;background:{{ a.dot }}"></span>
+                    <span style="flex:1;font-size:13.5px;font-weight:700;line-height:1.5;text-wrap:pretty">{{ a.citato }}</span>
+                    <span aria-hidden="true" style="flex:none;font-size:11px;color:var(--mute);padding-top:3px">▸</span>
+                  </button>
+                  <sc-if value="{{ a.riagg }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--mute)">
+                      <span aria-hidden="true" style="flex:none;width:7px;height:7px;border-radius:50%;background:var(--par)"></span>
+                      <span style="flex:1">Riagganciata da sola dopo una modifica del testo.</span>
+                      <button type="button" onClick="{{ a.onOk }}" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">Va bene</button>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ a.rotta }}" hint-placeholder-val="{{ false }}">
+                    <div style="border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn-ink);border-radius:9px;padding:9px 10px;font-size:12px;line-height:1.5">
+                      <b>Da riagganciare.</b> {{ a.avviso }}
+                      <div style="margin-top:8px;display:flex;gap:7px;flex-wrap:wrap">
+                        <button type="button" onClick="{{ a.onRiaggancia }}" disabled="{{ noSel }}" style="border:1px solid var(--warn-line);background:transparent;color:var(--warn-ink);border-radius:7px;padding:6px 11px;font-size:11.5px;font-weight:700;cursor:{{ cur }};opacity:{{ op }}">Riaggancia alla selezione</button>
+                        <span style="font-size:11.5px;align-self:center">{{ riaggInfo }}</span>
+                      </div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ a.hasNota }}" hint-placeholder-val="{{ true }}">
+                    <p style="margin:0;font-size:12.5px;line-height:1.6;color:var(--ink);text-wrap:pretty">{{ a.nota }}</p>
+                  </sc-if>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <sc-for list="{{ a.chips }}" as="c" hint-placeholder-count="2">
+                      <span style="border:1px solid {{ c.bc }};background:{{ c.bg }};color:{{ c.fg }};border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;white-space:nowrap">{{ c.name }}</span>
+                    </sc-for>
+                    <sc-for list="{{ a.schede }}" as="s" hint-placeholder-count="1">
+                      <button type="button" title="Apri la scheda collegata sulla mappa dell'autore" style="border:1px solid var(--focus);background:transparent;color:var(--focus);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap">↗ {{ s.nome }}</button>
+                    </sc-for>
+                    <button type="button" onClick="{{ a.onFigura }}" style="border:1px dashed var(--line);background:transparent;color:var(--mute);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="color:var(--ink)">❧ {{ a.figuraLabel }}</button>
+                  </div>
+                </div>
+              </sc-for>
+            </sc-if>
+
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabPar }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;min-height:0;overflow:auto;padding:13px 13px 24px;display:flex;flex-direction:column;gap:11px">
+          <sc-for list="{{ paras }}" as="p" hint-placeholder-count="2">
+            <div style="border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:11px 12px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:{{ p.tagFg }};border:1px solid {{ p.tagBc }};background:{{ p.tagBg }};border-radius:999px;padding:2px 9px">{{ p.tag }}</span>
+                <div style="flex:1"></div>
+                <button type="button" onClick="{{ p.onScollega }}" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">{{ p.legaLabel }}</button>
+                <button type="button" onClick="{{ p.onDel }}" aria-label="Elimina parafrasi" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;width:28px;height:28px;font-size:11px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✕</button>
+              </div>
+              <sc-if value="{{ p.hasCitato }}" hint-placeholder-val="{{ true }}">
+                <blockquote style="margin:0;font-size:12.5px;line-height:1.5;color:var(--mute);border-left:3px solid var(--par);padding-left:10px">{{ p.citato }}</blockquote>
+              </sc-if>
+              <textarea value="{{ p.testo }}" onChange="{{ p.onChange }}" placeholder="Scrivi la parafrasi…" style="width:100%;min-height:86px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:9px 10px;font-size:13px;line-height:1.6;outline-offset:-2px"></textarea>
+            </div>
+          </sc-for>
+          <button type="button" onClick="{{ nuovaParafrasiLibera }}" style="align-self:flex-start;border:1px dashed var(--line);background:transparent;color:var(--mute);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2);color:var(--ink)">+ Parafrasi libera</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabEs }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+
+          <sc-if value="{{ esNessuno }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px 22px;text-align:center">
+              <strong style="font-size:14.5px;font-weight:700">Nessun esercizio ancora</strong>
+              <p style="margin:0;font-size:12.5px;color:var(--mute);line-height:1.6;max-width:30ch;text-wrap:pretty">Importa le domande per iniziare, oppure scrivine una partendo da un passo selezionato nel testo.</p>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+                <button type="button" onClick="{{ apriImport }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Importa le domande</button>
+                <button type="button" onClick="{{ esNuovaDaSel }}" disabled="{{ noSel }}" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:700;cursor:{{ cur }};opacity:{{ op }}">Nuova sulla selezione</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ esQualcuno }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:none;display:flex;flex-direction:column;gap:9px;padding:10px 13px;border-bottom:1px solid var(--line2)">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+              <span style="font-size:12.5px;font-weight:700">{{ esAvanz }}</span>
+              <span style="font-size:11.5px;color:var(--mute)">svolte</span>
+              <div style="flex:1"></div>
+              <sc-if value="{{ haProssima }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ apriProssima }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:7px;padding:6px 11px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="opacity:.88">{{ prossimaLabel }}</button>
+              </sc-if>
+              <button type="button" onClick="{{ esNuovaDaSel }}" disabled="{{ noSel }}" title="Nuova domanda sul passo selezionato (tasto D)" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:6px 10px;font-size:11.5px;font-weight:700;cursor:{{ cur }};opacity:{{ op }};white-space:nowrap">+ Sulla selezione</button>
+              <button type="button" onClick="{{ apriImport }}" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:6px 10px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">Importa</button>
+            </div>
+            <div role="group" aria-label="Filtra per stato" style="display:flex;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ esFiltri }}" as="f" hint-placeholder-count="4">
+                <button type="button" onClick="{{ f.onClick }}" aria-pressed="{{ f.on }}" style="border:1px solid {{ f.bc }};background:{{ f.bg }};color:{{ f.fg }};border-radius:999px;padding:4px 11px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap">{{ f.name }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding:12px 13px 24px;display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ esercizi }}" as="e" hint-placeholder-count="6">
+              <div style="flex:none;border:1px solid {{ e.cardBc }};background:var(--surface);border-radius:12px;overflow:hidden;display:flex">
+                <span aria-hidden="true" style="flex:none;width:4px;background:{{ e.etBc }}"></span>
+                <button type="button" onClick="{{ e.onApri }}" title="Apri la domanda per svolgerla" style="flex:1;min-width:0;text-align:left;border:0;background:transparent;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surface2)">
+                  <span style="display:flex;align-items:center;gap:8px;width:100%">
+                    <span style="flex:none;width:22px;height:22px;border-radius:7px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">{{ e.numero }}</span>
+                    <span style="flex:none;border:1px solid {{ e.etBc }};background:{{ e.etBg }};color:{{ e.etFg }};border-radius:999px;padding:2px 9px;font-size:10.5px;font-weight:700;white-space:nowrap">{{ e.etichetta }}</span>
+                    <span style="flex:1"></span>
+                    <sc-if value="{{ e.hasSpan }}" hint-placeholder-val="{{ false }}">
+                      <span title="{{ e.passiTitle }}" style="flex:none;border:1px solid var(--par);background:var(--par-bg);color:var(--par);border-radius:5px;padding:1px 6px;font-size:10.5px;font-weight:700">{{ e.passiLabel }}</span>
+                    </sc-if>
+                    <span aria-hidden="true" style="flex:none;font-size:11px;color:var(--mute)">▸</span>
+                  </span>
+                  <span style="font-size:13px;font-weight:700;line-height:1.5;text-wrap:pretty">{{ e.testo }}</span>
+                  <sc-if value="{{ e.hasRisposta }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:11.5px;color:var(--mute);line-height:1.45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%">{{ e.anteprima }}</span>
+                  </sc-if>
+                </button>
+                <span style="flex:none;display:flex;flex-direction:column;gap:5px;padding:11px 10px 11px 0">
+                  <button type="button" onClick="{{ e.onFatta }}" aria-pressed="{{ e.fatta }}" aria-label="{{ e.spuntaLabel }}" title="{{ e.spuntaLabel }}" style="border:2px solid {{ e.spuntaBc }};background:{{ e.spuntaBg }};color:{{ e.spuntaFg }};border-radius:8px;width:28px;height:28px;font-size:13px;font-weight:700;cursor:pointer;line-height:1">✓</button>
+                  <button type="button" onClick="{{ e.onDel }}" aria-label="Elimina domanda" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;width:28px;height:26px;font-size:11px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✕</button>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+          </sc-if>
+
+        </div>
+      </sc-if>
+
+    </aside>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ haRiancoro }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:76;display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--surface);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.26);padding:11px 14px;animation:dcUp .16s ease-out">
+      <span style="font-size:12.5px;font-weight:700;white-space:nowrap">{{ riancoroTesto }}</span>
+      <button type="button" onClick="{{ chiudiRiancoro }}" aria-label="Chiudi avviso" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;width:26px;height:26px;font-size:11px;font-weight:700;cursor:pointer;line-height:1">✕</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:rgba(8,12,18,.5);display:flex;align-items:center;justify-content:center;padding:28px;animation:dcFade .12s ease-out">
+      <div role="dialog" aria-label="Modifica il testo" style="width:min(760px,100%);max-height:min(88vh,860px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:0 28px 70px rgba(0,0,0,.4);overflow:hidden;animation:dcUp .16s ease-out">
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line2)">
+          <strong style="flex:1;font-size:13.5px;font-weight:700">Modifica il testo</strong>
+          <button type="button" onClick="{{ annullaModifica }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1">✕</button>
+        </div>
+        <div style="flex:1;min-height:0;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <p style="margin:0;font-size:12.5px;color:var(--mute);line-height:1.55;text-wrap:pretty">Correggi refusi o versi. All'uscita le annotazioni cercano da sole le proprie parole nel nuovo testo; quelle che non si ritrovano restano segnalate nel pannello.</p>
+          <textarea value="{{ modBozza }}" onChange="{{ onModBozza }}" spellcheck="false" style="flex:1;min-height:280px;resize:none;border:1px solid var(--line);background:var(--bg);border-radius:11px;padding:13px 14px;font-size:14px;line-height:1.8;outline-offset:-2px"></textarea>
+        </div>
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line2)">
+          <div style="flex:1"></div>
+          <button type="button" onClick="{{ annullaModifica }}" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer">Annulla</button>
+          <button type="button" onClick="{{ salvaModifica }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Applica e riaggancia</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ nuovoOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:rgba(8,12,18,.5);display:flex;align-items:center;justify-content:center;padding:28px;animation:dcFade .12s ease-out">
+      <div role="dialog" aria-label="Nuovo testo" style="width:min(720px,100%);max-height:min(88vh,860px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:0 28px 70px rgba(0,0,0,.4);overflow:hidden;animation:dcUp .16s ease-out">
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line2)">
+          <strong style="flex:1;font-size:13.5px;font-weight:700">Nuovo testo</strong>
+          <button type="button" onClick="{{ chiudiNuovo }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1">✕</button>
+        </div>
+        <div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;padding:14px 16px 18px;display:flex;flex-direction:column;gap:12px">
+          <p style="margin:0;font-size:12.5px;color:var(--mute);line-height:1.55;text-wrap:pretty">Il testo che stai leggendo resta dov'è: questo se ne aggiunge accanto, e si passa dall'uno all'altro dal titolo in alto a sinistra.</p>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+            <sc-for list="{{ nuovoCampi }}" as="c" hint-placeholder-count="4">
+              <label style="display:flex;flex-direction:column;gap:5px">
+                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">{{ c.label }}</span>
+                <input type="text" value="{{ c.val }}" onChange="{{ c.onChange }}" placeholder="{{ c.ph }}" style="width:100%;border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:9px 11px;font-size:13px;outline-offset:-2px">
+              </label>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Forma</span>
+            <div role="group" aria-label="Forma del testo" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden">
+              <button type="button" onClick="{{ setNuovoVersi }}" aria-pressed="{{ nuovoVersi }}" style="border:0;border-right:1px solid var(--line);padding:0 14px;height:34px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ nvBg }};color:{{ nvFg }}">Versi</button>
+              <button type="button" onClick="{{ setNuovoProsa }}" aria-pressed="{{ nuovoProsa }}" style="border:0;padding:0 14px;height:34px;font-size:12.5px;font-weight:700;cursor:pointer;background:{{ npBg }};color:{{ npFg }}">Prosa</button>
+            </div>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:5px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Testo</span>
+            <textarea value="{{ nuovoVal.testo }}" onChange="{{ onNuovoTesto }}" placeholder="Incolla qui il testo…" spellcheck="false" style="width:100%;min-height:200px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:11px;padding:12px 13px;font-size:13.5px;line-height:1.75;outline-offset:-2px"></textarea>
+          </label>
+        </div>
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line2)">
+          <div style="flex:1"></div>
+          <button type="button" onClick="{{ chiudiNuovo }}" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer">Annulla</button>
+          <button type="button" onClick="{{ creaTesto }}" disabled="{{ nuovoPronto }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Crea il testo</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ esImportOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:rgba(8,12,18,.5);display:flex;align-items:center;justify-content:center;padding:28px;animation:dcFade .12s ease-out">
+      <div role="dialog" aria-label="Importa le domande" style="width:min(720px,100%);max-height:min(88vh,860px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:0 28px 70px rgba(0,0,0,.4);overflow:hidden;animation:dcUp .16s ease-out">
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line2)">
+          <strong style="flex:1;font-size:13.5px;font-weight:700">Importa le domande</strong>
+          <button type="button" onClick="{{ chiudiImport }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1">✕</button>
+        </div>
+
+        <sc-if value="{{ esImportFase1 }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;min-height:0;padding:14px 16px;display:flex;flex-direction:column;gap:11px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span style="border:1px solid var(--ink);background:var(--ink);color:var(--surface);border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:700">Incolla</span>
+              <button type="button" style="border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">Da file .txt</button>
+              <button type="button" style="border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">Da PDF</button>
+            </div>
+            <p style="margin:0;font-size:12.5px;color:var(--mute);line-height:1.55">{{ esBozzaDest }}</p>
+            <textarea value="{{ esImportTesto }}" onChange="{{ onEsImport }}" placeholder="1. Che funzione ha la siepe?&#10;2. Individua la gradazione dei versi 5-8.&#10;3. Perché il cuore «non si spaura»?" spellcheck="false" style="flex:1;min-height:240px;resize:none;border:1px solid var(--line);background:var(--bg);border-radius:11px;padding:12px 13px;font-size:13.5px;line-height:1.7;outline-offset:-2px"></textarea>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line2)">
+            <div style="flex:1"></div>
+            <button type="button" onClick="{{ chiudiImport }}" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer">Annulla</button>
+            <button type="button" onClick="{{ esSepara }}" disabled="{{ esImportVuoto }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Separa le domande</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ esImportFase2 }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line2)">
+            <strong style="font-size:13px;font-weight:700">{{ esBozzaConta }}</strong>
+            <div style="flex:1"></div>
+            <span style="font-size:11.5px;color:var(--mute)">{{ esBozzaDest }}</span>
+          </div>
+          <div style="flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;padding:13px 16px 18px;display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ esBozza }}" as="b" hint-placeholder-count="6">
+              <div style="border:1px solid var(--line);border-radius:11px;padding:10px 11px;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="flex:none;width:24px;height:24px;border-radius:7px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700">{{ b.numero }}</span>
+                  <div style="flex:1"></div>
+                  <button type="button" onClick="{{ b.onUnisci }}" disabled="{{ b.unisciOff }}" title="Unisci con la domanda successiva" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">Unisci</button>
+                  <button type="button" onClick="{{ b.onSpezza }}" title="Spezza in due domande" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">Spezza</button>
+                  <button type="button" onClick="{{ b.onDel }}" aria-label="Elimina" style="border:1px solid var(--line);background:var(--surface);border-radius:7px;width:26px;height:26px;font-size:11px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✕</button>
+                </div>
+                <textarea value="{{ b.testo }}" onChange="{{ b.onChange }}" style="width:100%;min-height:62px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:9px 10px;font-size:13px;line-height:1.6;outline-offset:-2px"></textarea>
+              </div>
+            </sc-for>
+            <button type="button" onClick="{{ esAggiungiBozza }}" style="align-self:flex-start;border:1px dashed var(--line);background:transparent;color:var(--mute);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2);color:var(--ink)">+ Aggiungi una domanda</button>
+          </div>
+          <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line2)">
+            <button type="button" onClick="{{ esIndietro }}" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer">Indietro</button>
+            <div style="flex:1"></div>
+            <button type="button" onClick="{{ salvaEsercizi }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Salva esercizi</button>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ esDetOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:79;background:rgba(8,12,18,.5);display:flex;align-items:center;justify-content:center;padding:28px;animation:dcFade .12s ease-out">
+      <div role="dialog" aria-label="Svolgimento della domanda" style="width:min(760px,100%);max-height:min(90vh,900px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:0 28px 70px rgba(0,0,0,.4);overflow:hidden;animation:dcUp .16s ease-out">
+
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line2)">
+          <span style="flex:none;width:26px;height:26px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">{{ esDet.numero }}</span>
+          <span style="flex:none;border:1px solid {{ esDet.etBc }};background:{{ esDet.etBg }};color:{{ esDet.etFg }};border-radius:999px;padding:3px 11px;font-size:11px;font-weight:700;white-space:nowrap">{{ esDet.etichetta }}</span>
+          <div style="flex:1"></div>
+          <span style="font-size:11.5px;color:var(--mute);white-space:nowrap">{{ esDet.conta }}</span>
+          <div role="group" aria-label="Scorri le domande" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden">
+            <button type="button" onClick="{{ esDet.onPrev }}" disabled="{{ esDet.prevOff }}" aria-label="Domanda precedente" style="border:0;border-right:1px solid var(--line);background:transparent;width:32px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">◂</button>
+            <button type="button" onClick="{{ esDet.onNext }}" disabled="{{ esDet.nextOff }}" aria-label="Domanda successiva" style="border:0;background:transparent;width:32px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">▸</button>
+          </div>
+          <button type="button" onClick="{{ chiudiEsDet }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">✕</button>
+        </div>
+
+        <div style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding:18px 20px 22px;display:flex;flex-direction:column;gap:16px">
+
+          <sc-if value="{{ esDet.testoVista }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <p style="flex:1;margin:0;font-size:17px;font-weight:700;line-height:1.5;text-wrap:pretty">{{ esDet.testo }}</p>
+              <button type="button" onClick="{{ esDet.onTestoEdit }}" title="Modifica il testo della domanda" aria-label="Modifica il testo della domanda" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✎</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ esDet.testoEdit }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <textarea value="{{ esDet.testoVal }}" onChange="{{ esDet.onTesto }}" placeholder="Scrivi qui la domanda." style="width:100%;min-height:86px;resize:vertical;border:1px solid var(--focus);background:var(--bg);border-radius:12px;padding:12px 13px;font-size:16px;font-weight:700;line-height:1.55;outline-offset:-2px"></textarea>
+              <button type="button" onClick="{{ esDet.onTestoFine }}" style="align-self:flex-start;border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:8px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer">Fine</button>
+            </div>
+          </sc-if>
+
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">La tua risposta</span>
+            <textarea value="{{ esDet.risposta }}" onChange="{{ esDet.onRisposta }}" placeholder="Scrivi qui con calma: questo spazio è solo tuo, la correzione si aggiunge sotto senza sovrascriverlo." style="width:100%;min-height:200px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:13px 14px;font-size:14.5px;line-height:1.75;outline-offset:-2px"></textarea>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;border-top:1px dashed var(--line2);padding-top:14px">
+            <div style="display:flex;align-items:center;gap:9px">
+              <span style="flex:1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Correzione</span>
+              <sc-if value="{{ esDet.corrVista }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ esDet.onCorrEdit }}" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">{{ esDet.corrAz }}</button>
+              </sc-if>
+              <sc-if value="{{ esDet.corrEdit }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ esDet.onCorrFine }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Fine</button>
+              </sc-if>
+            </div>
+            <sc-if value="{{ esDet.corrVista }}" hint-placeholder-val="{{ true }}">
+              <sc-if value="{{ esDet.hasCorr }}" hint-placeholder-val="{{ true }}">
+                <p style="margin:0;border-left:3px solid var(--par);padding-left:12px;font-size:13.5px;line-height:1.7;text-wrap:pretty">{{ esDet.correzione }}</p>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{ esDet.corrEdit }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ esDet.correzione }}" onChange="{{ esDet.onCorrezione }}" placeholder="Che cosa manca, che cosa va aggiunto." style="width:100%;min-height:120px;resize:vertical;border:1px solid var(--par);background:var(--bg);border-radius:12px;padding:12px 13px;font-size:13.5px;line-height:1.7;outline-offset:-2px"></textarea>
+            </sc-if>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:10px;border-top:1px dashed var(--line2);padding-top:14px">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+              <span style="flex:1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Collegamenti al testo</span>
+              <button type="button" onClick="{{ esDet.onLega }}" disabled="{{ esDet.legaOff }}" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 11px;font-size:11.5px;font-weight:700;cursor:pointer;color:var(--mute);white-space:nowrap" style-hover="background:var(--surface2);color:var(--ink)">{{ esDet.legaLabel }}</button>
+            </div>
+
+            <sc-if value="{{ esDet.senzaPasso }}" hint-placeholder-val="{{ true }}">
+              <p style="margin:0;border:1px dashed var(--line);border-radius:11px;padding:11px 13px;font-size:12.5px;color:var(--mute);line-height:1.55;text-wrap:pretty">Nessun passo collegato. Seleziona una o più parole nel testo e premi «Collega la selezione»: la domanda comparirà anche accanto a quel verso. Puoi collegarne più d'uno.</p>
+            </sc-if>
+
+            <sc-for list="{{ esDet.passi }}" as="p" hint-placeholder-count="1">
+              <div style="display:flex;flex-direction:column;gap:9px;border:1px solid var(--line);border-radius:12px;padding:11px 12px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="flex:none;width:22px;height:22px;border-radius:7px;background:var(--par-bg);color:var(--par);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">{{ p.num }}</span>
+                  <input type="text" value="{{ p.et }}" onChange="{{ p.onEt }}" placeholder="Etichetta breve (facoltativa)" style="flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:7px 10px;font-size:12.5px;font-weight:700;outline-offset:-2px">
+                  <button type="button" onClick="{{ p.onVai }}" title="Vai a questo passo nel testo" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 11px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2)">Vai</button>
+                  <button type="button" onClick="{{ p.onDel }}" aria-label="Togli questo collegamento" title="Togli questo collegamento" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;width:28px;height:28px;font-size:11px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✕</button>
+                </div>
+                <sc-if value="{{ p.hasCtx }}" hint-placeholder-val="{{ true }}">
+                  <div style="border-left:3px solid var(--par);padding-left:12px;font-size:15px;line-height:1.85">
+                    <sc-for list="{{ p.ctx }}" as="r" hint-placeholder-count="1">
+                      <div style="font-size:0">
+                        <sc-for list="{{ r.toks }}" as="t" hint-placeholder-count="8">
+                          <span style="font-size:15px;padding:2px 0;border-radius:3px;background:{{ t.bg }}">{{ t.text }}</span><span style="font-size:15px;white-space:pre;padding:2px 0;background:{{ t.aBg }}">{{ t.after }}</span>
+                        </sc-for>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+        </div>
+
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line2);white-space:nowrap">
+          <button type="button" onClick="{{ esDet.onFatta }}" aria-pressed="{{ esDet.fatta }}" style="display:flex;align-items:center;gap:9px;border:2px solid {{ esDet.spuntaBc }};background:{{ esDet.spuntaBg }};color:{{ esDet.spuntaFg }};border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer">✓ {{ esDet.spuntaLabel }}</button>
+          <div style="flex:1"></div>
+          <button type="button" onClick="{{ esDet.onNext }}" disabled="{{ esDet.nextOff }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Domanda successiva</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ detOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:78;background:rgba(8,12,18,.5);display:flex;align-items:center;justify-content:center;padding:28px;animation:dcFade .12s ease-out">
+      <div role="dialog" aria-label="Scheda dell'annotazione" style="width:min(680px,100%);max-height:min(88vh,860px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:0 28px 70px rgba(0,0,0,.4);overflow:hidden;animation:dcUp .16s ease-out">
+
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line2)">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Annotazione</span>
+          <span style="font-size:12.5px;font-weight:700">{{ det.pos }}</span>
+          <div style="flex:1"></div>
+          <span style="font-size:11.5px;color:var(--mute)">{{ det.conta }}</span>
+          <div role="group" aria-label="Scorri le annotazioni" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden">
+            <button type="button" onClick="{{ det.onPrev }}" disabled="{{ det.prevOff }}" aria-label="Annotazione precedente" style="border:0;border-right:1px solid var(--line);background:transparent;width:32px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">◂</button>
+            <button type="button" onClick="{{ det.onNext }}" disabled="{{ det.nextOff }}" aria-label="Annotazione successiva" style="border:0;background:transparent;width:32px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">▸</button>
+          </div>
+          <button type="button" onClick="{{ chiudiDet }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:30px;height:30px;font-size:12px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">✕</button>
+        </div>
+
+        <div style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding:16px 18px 20px;display:flex;flex-direction:column;gap:16px">
+
+          <sc-if value="{{ det.hasCtx }}" hint-placeholder-val="{{ true }}">
+            <div style="border:1px solid var(--line2);background:var(--bg);border-radius:12px;padding:14px 16px;font-size:16px;line-height:1.9">
+              <sc-for list="{{ det.ctx }}" as="r" hint-placeholder-count="1">
+                <div style="font-size:0">
+                  <sc-for list="{{ r.toks }}" as="t" hint-placeholder-count="8">
+                    <span style="font-size:16px;padding:2px 0;border-radius:3px;background:{{ t.bg }};font-weight:{{ t.wt }}">{{ t.text }}</span><span style="font-size:16px;white-space:pre;padding:2px 0;background:{{ t.aBg }}">{{ t.after }}</span>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ det.rotta }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.55">
+              <b>Da riagganciare.</b> Le parole citate non corrispondono più al testo: {{ det.citato }}
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ det.vista }}" hint-placeholder-val="{{ true }}">
+            <sc-if value="{{ det.hasTags }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;gap:7px;flex-wrap:wrap">
+                <sc-for list="{{ det.tags }}" as="t" hint-placeholder-count="2">
+                  <span style="display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;white-space:nowrap">
+                    <sc-if value="{{ t.hasSw }}" hint-placeholder-val="{{ true }}">
+                      <span aria-hidden="true" style="width:13px;height:13px;border-radius:4px;border:1px solid var(--line);background:{{ t.sw }}"></span>
+                    </sc-if>
+                    <span aria-hidden="true" style="font-size:12px;color:var(--mute)">{{ t.icon }}</span>{{ t.name }}
+                  </span>
+                </sc-for>
+              </div>
+            </sc-if>
+          </sc-if>
+
+          <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Evidenziatore</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ det.tipi }}" as="t" hint-placeholder-count="3">
+                <button type="button" onClick="{{ t.onClick }}" aria-pressed="{{ t.on }}" style="display:flex;align-items:center;gap:8px;border:1px solid {{ t.bc }};background:{{ t.bg }};border-radius:9px;padding:0 13px;height:38px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">
+                  <span aria-hidden="true" style="width:15px;height:15px;border-radius:5px;border:1px solid var(--line);background:{{ t.swatch }}"></span>{{ t.name }}
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Marcature</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ det.flags }}" as="t" hint-placeholder-count="3">
+                <button type="button" onClick="{{ t.onClick }}" aria-pressed="{{ t.on }}" style="display:flex;align-items:center;gap:8px;border:1px solid {{ t.bc }};background:{{ t.bg }};border-radius:9px;padding:0 13px;height:38px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">
+                  <span aria-hidden="true" style="font-size:13px">{{ t.icon }}</span><span style="white-space:nowrap">{{ t.name }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ det.mostraFig }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Figura retorica</span>
+            <div style="border:1px solid var(--line2);border-radius:12px;padding:13px 14px;display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <strong style="flex:1;font-size:14px;font-weight:700;color:var(--ed)">{{ det.figNome }}</strong>
+                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)">{{ det.figTipo }}</span>
+                <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{ det.onFigura }}" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">{{ det.figAz }}</button>
+                </sc-if>
+              </div>
+              <sc-if value="{{ det.hasFig }}" hint-placeholder-val="{{ true }}">
+                <p style="margin:0;font-size:12.5px;line-height:1.6;text-wrap:pretty">{{ det.figDesc }}</p>
+                <p style="margin:0;font-size:12px;line-height:1.5;color:var(--mute);font-style:italic;text-wrap:pretty">{{ det.figEs }}</p>
+              </sc-if>
+            </div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ det.mostraNota }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Nota</span>
+            <sc-if value="{{ det.vista }}" hint-placeholder-val="{{ true }}">
+              <p style="margin:0;font-size:14px;line-height:1.7;text-wrap:pretty">{{ det.nota }}</p>
+            </sc-if>
+            <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ det.nota }}" onChange="{{ det.onNota }}" placeholder="{{ det.notaPh }}" style="width:100%;min-height:110px;resize:vertical;border:1px solid var(--line);background:var(--bg);border-radius:11px;padding:11px 12px;font-size:13.5px;line-height:1.65;outline-offset:-2px"></textarea>
+            </sc-if>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ det.hasPar }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Parafrasi collegata</span>
+              <button type="button" onClick="{{ det.onPar }}" style="text-align:left;border:1px solid var(--par);background:var(--par-bg);color:var(--ink);border-radius:11px;padding:11px 13px;font-size:12.5px;line-height:1.6;cursor:pointer" style-hover="opacity:.85">{{ det.parTesto }}</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ det.mostraSchede }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">Schede collegate sulla mappa</span>
+              <sc-for list="{{ det.schede }}" as="s" hint-placeholder-count="1">
+                <div style="border:1px solid var(--line2);border-radius:11px;padding:10px 12px;display:flex;flex-direction:column;gap:7px">
+                  <div style="display:flex;align-items:center;gap:9px">
+                    <button type="button" title="Apri la scheda sulla mappa dell'autore" style="flex:1;min-width:0;text-align:left;border:0;background:transparent;color:var(--focus);padding:0;font-size:13px;font-weight:700;cursor:pointer" style-hover="text-decoration:underline">↗ {{ s.nome }}</button>
+                    <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+                      <button type="button" onClick="{{ s.onDel }}" aria-label="Scollega la scheda" style="flex:none;border:1px solid var(--line);background:var(--surface);border-radius:7px;width:26px;height:26px;font-size:11px;font-weight:700;cursor:pointer;line-height:1;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">✕</button>
+                    </sc-if>
+                  </div>
+                  <sc-if value="{{ det.vista }}" hint-placeholder-val="{{ true }}">
+                    <sc-if value="{{ s.hasFrase }}" hint-placeholder-val="{{ true }}">
+                      <p style="margin:0;font-size:12.5px;line-height:1.6;color:var(--mute);text-wrap:pretty">{{ s.frase }}</p>
+                    </sc-if>
+                  </sc-if>
+                  <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+                    <input type="text" value="{{ s.frase }}" onChange="{{ s.onFrase }}" placeholder="Una riga sul perché di questo collegamento (facoltativa)" style="width:100%;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:8px 10px;font-size:12.5px;outline-offset:-2px">
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+                <sc-if value="{{ det.haLibere }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;gap:7px;flex-wrap:wrap">
+                    <sc-for list="{{ det.schedeLibere }}" as="s" hint-placeholder-count="3">
+                      <button type="button" onClick="{{ s.onClick }}" style="border:1px dashed var(--line);background:transparent;color:var(--mute);border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="background:var(--surface2);color:var(--ink)">+ {{ s.nome }}</button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </sc-if>
+            </div>
+          </sc-if>
+
+        </div>
+
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line2);white-space:nowrap">
+          <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ det.onDel }}" style="border:1px solid var(--line);background:transparent;border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">Elimina</button>
+          </sc-if>
+          <div style="flex:1"></div>
+          <sc-if value="{{ det.vista }}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{ det.onEdit }}" style="border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">Modifica</button>
+            <button type="button" onClick="{{ det.onVai }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Vai al testo</button>
+          </sc-if>
+          <sc-if value="{{ det.edit }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ det.onFine }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Fine</button>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ figOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:rgba(8,12,18,.5);display:flex;align-items:center;justify-content:center;padding:28px;animation:dcFade .12s ease-out">
+      <div role="dialog" aria-label="Scegli la figura retorica" style="width:min(1000px,100%);max-height:min(86vh,760px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:0 28px 70px rgba(0,0,0,.4);animation:dcUp .16s ease-out">
+
+        <div style="flex:none;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line)">
+          <strong style="font-size:15px;font-weight:700">Figure retoriche</strong>
+          <span style="font-size:12px;color:var(--mute);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">su «{{ figTarget }}»</span>
+          <div style="flex:1;min-width:12px"></div>
+          <label style="flex:0 1 300px;min-width:170px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:0 11px">
+            <span aria-hidden="true" style="font-size:12px;color:var(--mute);font-weight:700">⌕</span>
+            <input type="search" value="{{ figQ }}" onChange="{{ onFigQ }}" placeholder="Cerca una figura…" aria-label="Cerca una figura retorica" style="flex:1;min-width:0;border:0;background:transparent;padding:9px 0;font-size:13px;outline:none">
+          </label>
+          <div role="group" aria-label="Variante della card" style="display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden">
+            <button type="button" onClick="{{ setFigA }}" aria-pressed="{{ isFigA }}" style="border:0;border-right:1px solid var(--line);padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;background:{{ figABg }};color:{{ figAFg }}">A · griglia</button>
+            <button type="button" onClick="{{ setFigB }}" aria-pressed="{{ isFigB }}" style="border:0;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;background:{{ figBBg }};color:{{ figBFg }}">B · elenco</button>
+          </div>
+          <button type="button" onClick="{{ chiudiFigure }}" aria-label="Chiudi" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;width:34px;height:34px;font-size:13px;font-weight:700;cursor:pointer;line-height:1" style-hover="background:var(--surface2)">✕</button>
+        </div>
+
+        <sc-if value="{{ isFigA }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;min-height:0;overflow:auto;padding:16px 16px 22px;display:flex;flex-direction:column;gap:18px">
+            <sc-for list="{{ figGroups }}" as="g" hint-placeholder-count="3">
+              <div>
+                <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+                  <strong style="font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">{{ g.nome }}</strong>
+                  <span style="flex:1;height:1px;background:var(--line2)"></span>
+                  <span style="font-size:11.5px;color:var(--mute);font-weight:700">{{ g.n }}</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px">
+                  <sc-for list="{{ g.figure }}" as="f" hint-placeholder-count="6">
+                    <div style="border:1px solid {{ f.bc }};background:{{ f.bg }};border-radius:11px;overflow:hidden;display:flex;flex-direction:column">
+                      <div style="display:flex;align-items:stretch">
+                        <button type="button" onClick="{{ f.onPick }}" style="flex:1;min-width:0;text-align:left;border:0;background:transparent;color:{{ f.fg }};padding:11px 12px;font-size:13.5px;font-weight:700;cursor:pointer;min-height:44px" style-hover="background:var(--surface2)">{{ f.nome }}</button>
+                        <button type="button" onClick="{{ f.onExp }}" aria-expanded="{{ f.exp }}" aria-label="Mostra descrizione" style="flex:none;width:38px;border:0;border-left:1px solid var(--line2);background:transparent;color:var(--mute);font-size:11px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2);color:var(--ink)">{{ f.caret }}</button>
+                      </div>
+                      <sc-if value="{{ f.exp }}" hint-placeholder-val="{{ false }}">
+                        <div style="border-top:1px solid var(--line2);padding:10px 12px 12px;display:flex;flex-direction:column;gap:7px">
+                          <p style="margin:0;font-size:12px;line-height:1.55;color:var(--ink);text-wrap:pretty">{{ f.descrizione }}</p>
+                          <p style="margin:0;font-size:11.5px;line-height:1.5;color:var(--mute);font-style:italic;text-wrap:pretty">{{ f.esempio }}</p>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isFigB }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1;min-height:0;display:flex;align-items:stretch">
+            <div style="flex:1;min-width:0;overflow:auto;padding:14px 14px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;align-content:start">
+              <sc-for list="{{ figGroups }}" as="g" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:5px">
+                  <div style="font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);padding:0 2px 5px;border-bottom:2px solid var(--line)">{{ g.nome }}</div>
+                  <sc-for list="{{ g.figure }}" as="f" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ f.onPick }}" onMouseEnter="{{ f.onHover }}" onFocus="{{ f.onHover }}" style="width:100%;text-align:left;border:1px solid {{ f.lbc }};background:{{ f.lbg }};color:{{ f.fg }};border-radius:8px;padding:9px 11px;font-size:13px;font-weight:700;cursor:pointer;min-height:40px" style-hover="background:var(--surface2)">{{ f.nome }}</button>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+            <div style="flex:0 0 300px;min-width:240px;border-left:1px solid var(--line);background:var(--bg);padding:16px;overflow:auto;display:flex;flex-direction:column;gap:10px">
+              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute)">{{ figPrevTipo }}</span>
+              <strong style="font-size:17px;font-weight:700;letter-spacing:-.01em">{{ figPrevNome }}</strong>
+              <p style="margin:0;font-size:13px;line-height:1.6;text-wrap:pretty">{{ figPrevDesc }}</p>
+              <p style="margin:0;font-size:12.5px;line-height:1.55;color:var(--mute);font-style:italic;text-wrap:pretty">{{ figPrevEs }}</p>
+              <div style="flex:1"></div>
+              <button type="button" onClick="{{ figPrevPick }}" style="border:1px solid var(--focus);background:var(--focus);color:var(--surface);border-radius:9px;padding:11px 14px;font-size:13px;font-weight:700;cursor:pointer" style-hover="opacity:.88">Applica alla selezione</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="flex:none;display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);flex-wrap:wrap">
+          <span style="font-size:11.5px;color:var(--mute)">{{ figCount }}</span>
+          <div style="flex:1"></div>
+          <sc-if value="{{ figHas }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ togliFigura }}" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--mute)" style-hover="background:var(--surface2);color:var(--ink)">Togli la figura</button>
+          </sc-if>
+          <button type="button" onClick="{{ chiudiFigure }}" style="border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 13px;font-size:12.5px;font-weight:700;cursor:pointer" style-hover="background:var(--surface2)">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;tema&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Chiaro&quot;, &quot;Scuro&quot;], &quot;default&quot;: &quot;Chiaro&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Aspetto&quot; },
+  &quot;carattere&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Atkinson&quot;, &quot;Lexend&quot;, &quot;Sistema&quot;], &quot;default&quot;: &quot;Atkinson&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Aspetto&quot; },
+  &quot;layout&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Versi&quot;, &quot;Prosa&quot;], &quot;default&quot;: &quot;Versi&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Testo&quot; },
+  &quot;numeriRighe&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Testo&quot; },
+  &quot;statoTesto&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Annotato&quot;, &quot;Vuoto (import)&quot;], &quot;default&quot;: &quot;Annotato&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Testo&quot; },
+  &quot;varianteAnnotazioni&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Compatto&quot;, &quot;Esteso&quot;], &quot;default&quot;: &quot;Compatto&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Varianti&quot; },
+  &quot;varianteFigure&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Griglia&quot;, &quot;Elenco&quot;], &quot;default&quot;: &quot;Griglia&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Varianti&quot; },
+  &quot;varianteImport&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;A · tre vie&quot;, &quot;B · incolla subito&quot;], &quot;default&quot;: &quot;A · tre vie&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Varianti&quot; }
+}">
+const SRC = "Sempre caro mi fu quest'ermo colle,\ne questa siepe, che da tanta parte\ndell'ultimo orizzonte il guardo esclude.\nMa sedendo e mirando, interminati\nspazi di là da quella, e sovrumani\nsilenzi, e profondissima quiete\nio nel pensier mi fingo, ove per poco\nil cor non si spaura. E come il vento\nodo stormir tra queste piante, io quello\ninfinito silenzio a questa voce\nvo comparando: e mi sovvien l'eterno,\ne le morte stagioni, e la presente\ne viva, e il suon di lei. Così tra questa\nimmensità s'annega il pensier mio:\ne il naufragar m'è dolce in questo mare.";
+
+const WORD = "\\p{L}+(?:['\u2019]\\p{L}+)*";
+
+const TIPI = { suono: "Figure di suono", significato: "Figure di significato", ordine: "Figure di ordine" };
+
+const FIGURE = [
+  { id: "allitterazione", nome: "Allitterazione", tipo: "suono", descrizione: "Ripetizione degli stessi suoni all'interno di parole vicine.", esempio: "«Fresche le mie parole ne la sera» — D'Annunzio" },
+  { id: "assonanza", nome: "Assonanza", tipo: "suono", descrizione: "Come la rima, ma dall'accento tonico coincidono solo le vocali.", esempio: "«bella» / «terra»" },
+  { id: "consonanza", nome: "Consonanza", tipo: "suono", descrizione: "Come la rima, ma dall'accento tonico coincidono solo le consonanti.", esempio: "«corda» / «scorta»" },
+  { id: "fonosimbolismo", nome: "Fonosimbolismo", tipo: "suono", descrizione: "Suoni che richiamano il messaggio che il poeta vuole trasmettere.", esempio: "Suoni cupi e ripetuti per evocare pesantezza" },
+  { id: "onomatopea", nome: "Onomatopea", tipo: "suono", descrizione: "Riproduzione scritta di suoni naturali.", esempio: "«Don... Don...» per le campane — Pascoli" },
+  { id: "allegoria", nome: "Allegoria", tipo: "significato", descrizione: "Immagini costruite con metafore che racchiudono un significato profondo.", esempio: "La «selva oscura» come il peccato — Dante" },
+  { id: "analogia", nome: "Analogia", tipo: "significato", descrizione: "Metafora che si capisce solo conoscendo intimamente il poeta.", esempio: "Gli accostamenti liberi della poesia ermetica" },
+  { id: "antitesi", nome: "Antitesi", tipo: "significato", descrizione: "Accostamento di due termini di significato opposto.", esempio: "«Pace non trovo, et non ò da far guerra» — Petrarca" },
+  { id: "iperbole", nome: "Iperbole", tipo: "significato", descrizione: "Concetto esagerato, per eccesso o per difetto.", esempio: "«Ti ho chiamato mille volte»" },
+  { id: "ironia", nome: "Ironia", tipo: "significato", descrizione: "Si scrive l'opposto del significato che si vuole dare.", esempio: "«Che bella giornata!» durante un temporale" },
+  { id: "metafora", nome: "Metafora", tipo: "significato", descrizione: "Come la similitudine, ma senza i connettori del paragone.", esempio: "«Sei un leone»" },
+  { id: "metonimia", nome: "Metonimia", tipo: "significato", descrizione: "Un termine al posto di un altro legato da una logica precisa.", esempio: "«Bere un bicchiere» (contenitore per contenuto)" },
+  { id: "ossimoro", nome: "Ossimoro", tipo: "significato", descrizione: "Due termini di senso contrario nella stessa espressione.", esempio: "«Ghiaccio bollente»" },
+  { id: "perifrasi", nome: "Perifrasi", tipo: "significato", descrizione: "Giro di parole per indicare un concetto.", esempio: "«Il Sommo Poeta» per Dante" },
+  { id: "personificazione", nome: "Personificazione", tipo: "significato", descrizione: "A una cosa o a un animale si attribuisce ciò che è delle persone.", esempio: "«Il vento sussurrava tra gli alberi»" },
+  { id: "similitudine", nome: "Similitudine", tipo: "significato", descrizione: "Paragone costruito con i nessi correlativi (come, tale che…).", esempio: "«Dormo come un ghiro»" },
+  { id: "sineddoche", nome: "Sineddoche", tipo: "significato", descrizione: "Come la metonimia, ma riguarda la quantità (la parte per il tutto).", esempio: "«Le vele» per le navi" },
+  { id: "sinestesia", nome: "Sinestesia", tipo: "significato", descrizione: "Accostamento di termini di sfere sensoriali diverse.", esempio: "«Urlo nero» — Ungaretti" },
+  { id: "anafora", nome: "Anafora", tipo: "ordine", descrizione: "Ripetizione della stessa parola all'inizio di più versi.", esempio: "«Per me si va... / Per me si va...» — Dante" },
+  { id: "anastrofe", nome: "Anastrofe", tipo: "ordine", descrizione: "Inversione della disposizione normale delle parole.", esempio: "«Del mio nemico» per «del nemico mio»" },
+  { id: "climax", nome: "Climax", tipo: "ordine", descrizione: "Termini disposti in ordine di significato crescente o decrescente.", esempio: "«Veni, vidi, vici» — Cesare" },
+  { id: "epifora", nome: "Epifora", tipo: "ordine", descrizione: "Come l'anafora, ma la ripetizione sta alla fine del verso.", esempio: "La stessa parola chiude versi consecutivi" }
+];
+
+const SCHEDE = {
+  indefinito: "Poetica dell'indefinito", teoria_piacere: "Teoria del piacere", idilli: "I piccoli idilli",
+  natura_matrigna: "La natura matrigna", pessimismo_cosmico: "Il pessimismo cosmico",
+  rimembranza: "La rimembranza", zibaldone: "Lo Zibaldone", fuga_1819: "L'anno difficile e la fuga mancata"
+};
+
+function normSchede(a) {
+  if (Array.isArray(a.schede)) return a.schede.map(s => typeof s === "string" ? { id: s, frase: "" } : { id: s.id, frase: s.frase || "" });
+  return a.scheda ? [{ id: a.scheda, frase: "" }] : [];
+}
+
+const ANN = [
+  { id: "a01", cerca: "Sempre caro mi fu quest'ermo colle", evidenzia: "concetto", figura: "anastrofe", parola_chiave: false, flashcard: false, scheda: "idilli", nota: "«Sempre» in apertura: l'affetto per il colle è un'abitudine lunga, non un'emozione del momento. Verbo in fondo, soggetto in coda." },
+  { id: "a02", cerca: "questa siepe", evidenzia: "definizione", figura: null, parola_chiave: true, flashcard: true, schede: [{ id: "indefinito", frase: "L'ostacolo che rende possibile l'immaginazione." }, { id: "teoria_piacere", frase: "" }], nota: "La siepe è l'ostacolo che toglie la vista: proprio per questo rende possibile l'immaginazione." },
+  { id: "a03", cerca: "interminati spazi di là da quella, e sovrumani silenzi, e profondissima quiete", evidenzia: "concetto", figura: "climax", parola_chiave: false, flashcard: true, scheda: "teoria_piacere", nota: "Tre gradi crescenti: spazi, silenzi, quiete. Lo spazio diventa suono e poi stato dell'animo." },
+  { id: "a04", cerca: "il cor non si spaura", evidenzia: "dubbio", figura: null, parola_chiave: false, flashcard: false, scheda: null, nota: "Perché «non si spaura»? Da chiarire in classe: il piacere nasce proprio sul confine della paura." },
+  { id: "a05", cerca: "odo stormir tra queste piante", evidenzia: null, figura: "allitterazione", parola_chiave: true, flashcard: false, scheda: null, nota: "Il suono del vento riporta al presente: da qui comincia la seconda parte della poesia." },
+  { id: "a06", cerca: "e le morte stagioni, e la presente e viva", evidenzia: "concetto", figura: "antitesi", parola_chiave: false, flashcard: false, scheda: null, sottolinea: true, nota: "Tempo passato contro tempo che si sente ora: l'eterno entra nella poesia per contrasto." },
+  { id: "a07", cerca: "il naufragar m'è dolce", evidenzia: "definizione", figura: "metafora", parola_chiave: true, flashcard: true, schede: [{ id: "indefinito", frase: "Il finale rovescia la paura in piacere." }, { id: "pessimismo_cosmico", frase: "" }, { id: "rimembranza", frase: "" }], nota: "Naufragare come abbandono dolce: il finale rovescia la paura in piacere." },
+  { id: "a09", cerca: "sovrumani silenzi", evidenzia: "concetto", figura: null, parola_chiave: false, flashcard: false, scheda: null, nota: "Dentro la gradazione, questa coppia da sola: il silenzio è «sovrumano», più grande dell'uomo." },
+  { id: "a10", span: [4, 6], citato: "il naufragar m'è dolce", evidenzia: null, figura: null, parola_chiave: false, flashcard: false, scheda: null, nota: "Nota scritta quando il testo era più corto: le parole ci sono ancora, solo più avanti." },
+  { id: "a08", span: [30, 33], citato: "silenzi, e profondissima quiete di morte", evidenzia: "concetto", figura: null, parola_chiave: false, flashcard: false, scheda: null, nota: "Nota presa su una versione precedente del testo: il verso è stato poi corretto." }
+];
+
+const ESERCIZI = [
+  { id: "e1", numero: 1, cerca: "questa siepe", testo: "Che funzione ha la siepe nella costruzione del testo? Spiega perché l'ostacolo alla vista è necessario all'immaginazione.", risposta: "La siepe impedisce di vedere l'orizzonte, e proprio per questo lo studente immagina ciò che non vede: l'ostacolo apre lo spazio interiore invece di chiuderlo.", correzione: "Corretta. Aggiungi che la siepe è un limite scelto, non subito: Leopardi lo chiama «caro» insieme al colle.", fatta: true },
+  { id: "e2", numero: 2, cerca: null, testo: "Individua la gradazione dei versi 5-8 e spiega in che ordine crescono i tre elementi.", risposta: "Spazi, silenzi, quiete: si passa da una dimensione fisica a una sonora e poi a uno stato dell'animo.", correzione: "", fatta: true },
+  { id: "e3", numero: 3, cerca: "il cor non si spaura", testo: "Perché il cuore «non si spaura»? Rispondi citando la teoria del piacere.", risposta: "", correzione: "", fatta: false },
+  { id: "e4", numero: 4, cerca: null, testo: "Qual è la funzione del vento nella seconda parte della poesia?", risposta: "", correzione: "", fatta: false },
+  { id: "e5", numero: 5, cerca: null, testo: "Spiega l'antitesi fra «le morte stagioni» e «la presente e viva».", risposta: "", correzione: "", fatta: false },
+  { id: "e6", numero: 6, cerca: "il naufragar m'è dolce", testo: "Commenta l'ultimo verso: in che modo il naufragio diventa dolce?", risposta: "", correzione: "", fatta: false }
+];
+
+const PARA = [
+  { id: "p01", cerca: "Sempre caro mi fu quest'ermo colle, e questa siepe, che da tanta parte dell'ultimo orizzonte il guardo esclude", ordine: 1, testo: "Questo colle solitario mi è sempre stato caro, e con lui questa siepe, che nasconde allo sguardo gran parte dell'orizzonte più lontano." },
+  { id: "p02", cerca: null, ordine: 2, testo: "Tutta la poesia si muove fra due limiti: la siepe, che chiude la vista, e il vento, che riporta al presente. Fra i due c'è lo spazio immaginato, dove il pensiero si perde volentieri." }
+];
+
+function words(s) { return (s || "").match(new RegExp(WORD, "gu")) || []; }
+
+function tokenize(src, layout) {
+  const blocks = [], tokens = [];
+  const parts = [];
+  if (layout === "prosa") {
+    const re = /\n\s*\n/g; let last = 0, m;
+    while ((m = re.exec(src))) { parts.push({ text: src.slice(last, m.index), start: last }); last = m.index + m[0].length; }
+    parts.push({ text: src.slice(last), start: last });
+  } else {
+    let last = 0;
+    src.split("\n").forEach(line => { parts.push({ text: line, start: last }); last += line.length + 1; });
+  }
+  parts.forEach(p => {
+    if (!p.text.trim()) return;
+    const id = "block-" + blocks.length;
+    const re = new RegExp(WORD, "gu"); let m, first = -1;
+    const mine = [];
+    while ((m = re.exec(p.text))) {
+      if (first < 0) first = m.index;
+      mine.push({ index: tokens.length + mine.length, text: m[0], blockId: id, start: p.start + m.index, end: p.start + m.index + m[0].length });
+    }
+    blocks.push({
+      id, order: blocks.length, raw: p.text, start: p.start, end: p.start + p.text.length,
+      pre: first < 0 ? "" : p.text.slice(0, first),
+      vuoto: mine.length === 0
+    });
+    mine.forEach(t => tokens.push(t));
+  });
+  return { blocks, tokens };
+}
+
+function tutteOcc(tokens, frase) {
+  const w = words(frase); if (!w.length) return [];
+  const out = [];
+  for (let i = 0; i + w.length <= tokens.length; i++) {
+    let ok = true;
+    for (let j = 0; j < w.length; j++) if (tokens[i + j].text !== w[j]) { ok = false; break; }
+    if (ok) out.push([i, i + w.length - 1]);
+  }
+  return out;
+}
+
+function passiDi(e) {
+  if (e.passi) return e.passi;
+  return e.span ? [{ span: e.span, citato: e.citato, et: "" }] : [];
+}
+
+function riancora(a, tokens, src) {
+  const giusto = a.span && a.span[1] < tokens.length &&
+    words(citaDa(src, tokens, a.span)).join(" ") === words(a.citato).join(" ");
+  if (giusto) return Object.assign({}, a, { stato: "ok" });
+  const occ = tutteOcc(tokens, a.citato);
+  if (occ.length === 1) return Object.assign({}, a, { span: occ[0], stato: "riagganciata" });
+  if (occ.length > 1 && a.span) {
+    const base = a.span[0];
+    const d = occ.map(o => Math.abs(o[0] - base));
+    const min = Math.min.apply(null, d);
+    if (d.filter(x => x === min).length === 1) return Object.assign({}, a, { span: occ[d.indexOf(min)], stato: "riagganciata" });
+    return Object.assign({}, a, { stato: "ambigua" });
+  }
+  return Object.assign({}, a, { stato: "rotta" });
+}
+
+function corsie(anns) {
+  const lane = {};
+  const vive = anns.filter(a => a.span && (a.evidenzia || a.sottolinea) && a.stato !== "rotta" && a.stato !== "ambigua")
+    .slice().sort((x, y) => x.span[0] - y.span[0] || (y.span[1] - y.span[0]) - (x.span[1] - x.span[0]));
+  const fine = [];
+  vive.forEach(a => {
+    let k = 0;
+    while (fine[k] != null && fine[k] >= a.span[0]) k++;
+    fine[k] = a.span[1];
+    lane[a.id] = k;
+  });
+  return lane;
+}
+
+function findSpan(tokens, frase) {
+  const w = words(frase); if (!w.length) return null;
+  for (let i = 0; i + w.length <= tokens.length; i++) {
+    let ok = true;
+    for (let j = 0; j < w.length; j++) if (tokens[i + j].text !== w[j]) { ok = false; break; }
+    if (ok) return [i, i + w.length - 1];
+  }
+  return null;
+}
+
+function citaDa(src, tokens, span) {
+  if (!span) return "";
+  return src.slice(tokens[span[0]].start, tokens[span[1]].end).replace(/\s+/g, " ");
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const p = props || {};
+    const layout = p.layout === "Prosa" ? "prosa" : "versi";
+    const base = tokenize(SRC, layout);
+    const anns = ANN.map(a => {
+      const span = a.span || findSpan(base.tokens, a.cerca);
+      return {
+        id: a.id, span, citato: a.citato || citaDa(SRC, base.tokens, span),
+        evidenzia: a.evidenzia, figura: a.figura, parola_chiave: a.parola_chiave,
+        flashcard: a.flashcard, sottolinea: !!a.sottolinea, nota: a.nota, schede: normSchede(a)
+      };
+    }).map(a => riancora(a, base.tokens, SRC));
+    const paras = PARA.map(x => ({ id: x.id, ordine: x.ordine, testo: x.testo, span: x.cerca ? findSpan(base.tokens, x.cerca) : null }));
+    this.state = {
+      theme: p.tema === "Scuro" ? "dark" : "light",
+      font: p.carattere || "Atkinson", fs: 14, lsRaw: 150, settingsOpen: false,
+      testo: SRC, layout, vuoto: p.statoTesto === "Vuoto (import)", bozza: "", incollaAperto: false,
+      anns, paras, sel: null, anchor: null, dragging: false,
+      zoom: 100, numeri: p.numeriRighe !== false, tab: "ann",
+      leftPin: false, helpOpen: false, annDet: null, detEdit: false,
+      vw: typeof window !== "undefined" ? window.innerWidth : 1440,
+      rightOpen: typeof window === "undefined" || window.innerWidth >= 1180,
+      annVar: p.varianteAnnotazioni === "Esteso" ? "B" : "A",
+      figVar: p.varianteFigure === "Elenco" ? "B" : "A",
+      impVar: p.varianteImport === "B · incolla subito" ? "B" : "A",
+      figOpen: false, figQ: "", figExp: null, figPrev: "metafora", nextId: 20,
+      meta: { titolo: "L'infinito", autore: "Giacomo Leopardi", anno: "1819", opera: "Canti · Idilli" },
+      archivio: [], nuovoOpen: false, nuovo: { titolo: "", autore: "", anno: "", opera: "", layout: "versi", testo: "" },
+      modOpen: false, modBozza: "", riancoroInfo: null, selettoreOpen: false,
+      rightW: 392, resizing: false, esDet: null,
+      esercizi: ESERCIZI.map(x => { const sp = x.cerca ? findSpan(base.tokens, x.cerca) : null; return Object.assign({}, x, { passi: sp ? [{ span: sp, citato: x.cerca, et: "" }] : [] }); }),
+      esFiltro: "tutti", esTestoEdit: null, esImportOpen: false, esImportTesto: "", esImportFase: "incolla", esBozza: [], esEdit: null
+    };
+    this.notaRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.applyRoot();
+    this._key = (e) => this.onKey(e);
+    this._up = () => {
+      if (this.state.dragging) this.setState({ dragging: false });
+      if (this.state.resizing) { this.setState({ resizing: false }); document.body.style.userSelect = ""; }
+    };
+    this._move = (e) => {
+      if (!this.state.resizing) return;
+      e.preventDefault();
+      const w = Math.round(window.innerWidth - e.clientX - 16);
+      this.setState(s => ({ rightW: Math.max(300, Math.min(this.maxRightW(window.innerWidth, s.leftPin), w)) }));
+    };
+    document.addEventListener("mousemove", this._move);
+    this._wheel = (e) => {
+      if (!e.ctrlKey) return;
+      const t = e.target;
+      if (!(t && t.closest && t.closest("[data-textcard]"))) return;
+      e.preventDefault();
+      this.setState(s => ({ zoom: Math.min(190, Math.max(70, s.zoom + (e.deltaY < 0 ? 10 : -10))) }));
+    };
+    this._away = (e) => {
+      if (!this.state.settingsOpen && !this.state.helpOpen) return;
+      if (e.target && e.target.closest && e.target.closest("[data-pop]")) return;
+      this.setState({ settingsOpen: false, helpOpen: false });
+    };
+    this._resize = () => this.setState(s => ({
+      vw: window.innerWidth,
+      rightOpen: window.innerWidth < 1180 ? false : (s.vw < 1180 ? true : s.rightOpen)
+    }));
+    window.addEventListener("resize", this._resize);
+    document.addEventListener("keydown", this._key);
+    document.addEventListener("mouseup", this._up);
+    document.addEventListener("wheel", this._wheel, { passive: false });
+    document.addEventListener("mousedown", this._away);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._resize);
+    document.removeEventListener("keydown", this._key);
+    document.removeEventListener("mouseup", this._up);
+    document.removeEventListener("mousemove", this._move);
+    document.removeEventListener("wheel", this._wheel);
+    document.removeEventListener("mousedown", this._away);
+  }
+  componentDidUpdate() { this.applyRoot(); }
+
+  applyRoot() {
+    const r = document.documentElement;
+    r.setAttribute("data-theme", this.state.theme);
+    r.style.setProperty("--fs", this.state.fs + "px");
+    r.style.setProperty("--ls", (this.state.lsRaw / 100).toFixed(2));
+    r.style.setProperty("--ff", this.state.font === "Lexend" ? "'Lexend',system-ui,sans-serif"
+      : this.state.font === "Sistema" ? "system-ui,-apple-system,'Segoe UI',sans-serif"
+      : "'Atkinson Hyperlegible',system-ui,sans-serif");
+  }
+
+  tok() {
+    const key = this.state.testo + "::" + this.state.layout;
+    if (this._tkKey !== key) { this._tkKey = key; this._tk = tokenize(this.state.testo, this.state.layout); }
+    return this._tk;
+  }
+
+  chip(on) {
+    return on
+      ? { bg: "var(--ink)", fg: "var(--surface)", bc: "var(--ink)" }
+      : { bg: "var(--surface)", fg: "var(--ink)", bc: "var(--line)" };
+  }
+
+  onKey(e) {
+    const t = e.target, tag = t && t.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || (t && t.isContentEditable)) {
+      if (e.key === "Escape") t.blur();
+      return;
+    }
+    if (this.state.modOpen || this.state.nuovoOpen || this.state.esImportOpen) {
+      if (e.key === "Escape") this.setState({ modOpen: false, nuovoOpen: false, esImportOpen: false });
+      return;
+    }
+    if (this.state.figOpen) { if (e.key === "Escape") this.setState({ figOpen: false }); return; }
+    if (this.state.esDet) {
+      if (e.key === "Escape") this.setState({ esDet: null });
+      return;
+    }
+    if (this.state.annDet) {
+      if (e.key === "Escape") this.setState({ annDet: null });
+      else if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); const o = this.state.anns.slice().sort((a, b) => (a.span ? a.span[0] : 1e9) - (b.span ? b.span[0] : 1e9)); const i = o.findIndex(a => a.id === this.state.annDet); const j = i + (e.key === "ArrowRight" ? 1 : -1); if (j >= 0 && j < o.length) this.setState({ annDet: o[j].id }); }
+      return;
+    }
+    if (this.state.vuoto) return;
+    const toks = this.tok().tokens, S = this.state, sel = S.sel;
+    if ((e.ctrlKey || e.metaKey) && (e.key === "0" || e.key === "+" || e.key === "=" || e.key === "-")) {
+      e.preventDefault();
+      this.setState(s => ({ zoom: e.key === "0" ? 100 : Math.min(190, Math.max(70, s.zoom + (e.key === "-" ? -10 : 10))) }));
+      return;
+    }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === "Escape") { this.setState({ sel: null, anchor: null }); return; }
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      const d = e.key === "ArrowRight" ? 1 : -1;
+      if (!sel) { this.select(0, 0); return; }
+      if (e.shiftKey) {
+        const anchor = S.anchor == null ? sel[0] : S.anchor;
+        const testa = S.testa == null ? (anchor === sel[0] ? sel[1] : sel[0]) : S.testa;
+        const np = Math.min(toks.length - 1, Math.max(0, testa + d));
+        this.setState({ sel: [Math.min(anchor, np), Math.max(anchor, np)], anchor, testa: np });
+      } else {
+        const np = Math.min(toks.length - 1, Math.max(0, (d > 0 ? sel[1] : sel[0]) + d));
+        this.select(np, np);
+      }
+      return;
+    }
+    if (!sel) return;
+    const k = e.key.toLowerCase();
+    if (k === "1") { e.preventDefault(); this.toggleHl("concetto"); }
+    else if (k === "2") { e.preventDefault(); this.toggleHl("definizione"); }
+    else if (k === "3") { e.preventDefault(); this.toggleHl("dubbio"); }
+    else if (k === "k") { e.preventDefault(); this.toggleFlag("parola_chiave"); }
+    else if (k === "f") { e.preventDefault(); this.toggleFlag("flashcard"); }
+    else if (k === "s") { e.preventDefault(); this.toggleFlag("sottolinea"); }
+    else if (k === "n") { e.preventDefault(); this.ensure(); setTimeout(() => this.notaRef.current && this.notaRef.current.focus(), 0); }
+    else if (k === "p") { e.preventDefault(); this.nuovaParafrasi(); }
+    else if (k === "d") { e.preventDefault(); this.nuovaDomanda(); }
+  }
+
+  select(a, b) { this.setState({ sel: [Math.min(a, b), Math.max(a, b)], anchor: a, testa: b }); }
+
+  current() {
+    const s = this.state.sel; if (!s) return null;
+    return this.state.anns.find(a => a.span && a.span[0] === s[0] && a.span[1] === s[1]) || null;
+  }
+
+  ensure() {
+    const cur = this.current(); if (cur) return cur;
+    const s = this.state.sel; if (!s) return null;
+    const t = this.tok().tokens;
+    const a = { id: "n" + this.state.nextId, span: [s[0], s[1]], citato: citaDa(this.state.testo, t, s), evidenzia: null, figura: null, parola_chiave: false, flashcard: false, sottolinea: false, nota: "", schede: [], stato: "ok" };
+    this.setState(st => ({ anns: st.anns.concat([a]), nextId: st.nextId + 1 }));
+    return a;
+  }
+
+  patch(id, fields) {
+    this.setState(st => ({ anns: st.anns.map(a => a.id === id ? Object.assign({}, a, fields) : a) }));
+  }
+
+  clean(id) {
+    setTimeout(() => this.setState(st => ({
+      anns: st.anns.filter(a => a.id !== id || a.evidenzia || a.figura || a.parola_chiave || a.flashcard || a.sottolinea || (a.schede || []).length || (a.nota || "").trim())
+    })), 0);
+  }
+
+  toggleHl(kind) {
+    const a = this.ensure(); if (!a) return;
+    this.patch(a.id, { evidenzia: a.evidenzia === kind ? null : kind });
+    this.clean(a.id);
+  }
+  toggleFlag(f) {
+    const a = this.ensure(); if (!a) return;
+    this.patch(a.id, { [f]: !a[f] });
+    this.clean(a.id);
+  }
+
+  nuovaParafrasi() {
+    const s = this.state.sel; if (!s) return;
+    const id = "n" + this.state.nextId;
+    this.setState(st => ({ paras: st.paras.concat([{ id, ordine: st.paras.length + 1, testo: "", span: [s[0], s[1]] }]), nextId: st.nextId + 1, tab: "par" }));
+  }
+  nuovaParafrasiLibera() {
+    const id = "n" + this.state.nextId;
+    this.setState(st => ({ paras: st.paras.concat([{ id, ordine: st.paras.length + 1, testo: "", span: null }]), nextId: st.nextId + 1, tab: "par" }));
+  }
+
+  apriModifica() { this.setState(s => ({ modOpen: true, modBozza: s.testo, sel: null, anchor: null, riancoroInfo: null })); }
+  salvaModifica() {
+    const nuovo = this.state.modBozza;
+    const tk = tokenize(nuovo, this.state.layout);
+    const anns = this.state.anns.map(a => riancora(a, tk.tokens, nuovo));
+    const ok = anns.filter(a => a.stato === "riagganciata").length;
+    const ko = anns.filter(a => a.stato === "rotta" || a.stato === "ambigua").length;
+    const paras = this.state.paras.map(p => {
+      if (!p.span) return p;
+      const occ = tutteOcc(tk.tokens, p.citatoSalvato || "");
+      return p.span[1] < tk.tokens.length ? p : Object.assign({}, p, { span: occ[0] || null });
+    });
+    this.setState({
+      testo: nuovo, anns, paras, modOpen: false, sel: null, anchor: null,
+      riancoroInfo: ok || ko ? { ok, ko } : { ok: 0, ko: 0 }
+    });
+  }
+
+  creaTesto() {
+    const n = this.state.nuovo;
+    const titolo = (n.titolo || "").trim() || "Testo senza titolo";
+    const corpo = (n.testo || "").trim();
+    this.setState(s => ({
+      archivio: s.archivio.concat([{
+        id: "t" + s.nextId, meta: s.meta, testo: s.testo, layout: s.layout,
+        anns: s.anns, paras: s.paras, esercizi: s.esercizi
+      }]),
+      meta: { titolo, autore: (n.autore || "").trim(), anno: (n.anno || "").trim(), opera: (n.opera || "").trim() },
+      testo: corpo, layout: n.layout, anns: [], paras: [], esercizi: [],
+      sel: null, anchor: null, vuoto: !corpo, nuovoOpen: false, nextId: s.nextId + 1,
+      nuovo: { titolo: "", autore: "", anno: "", opera: "", layout: "versi", testo: "" },
+      tab: "ann", annDet: null, riancoroInfo: null
+    }));
+  }
+
+  apriArchivio(id) {
+    this.setState(s => {
+      const t = s.archivio.find(x => x.id === id); if (!t) return {};
+      return {
+        archivio: s.archivio.filter(x => x.id !== id).concat([{
+          id: "t" + s.nextId, meta: s.meta, testo: s.testo, layout: s.layout,
+          anns: s.anns, paras: s.paras, esercizi: s.esercizi
+        }]),
+        meta: t.meta, testo: t.testo, layout: t.layout, anns: t.anns, paras: t.paras, esercizi: t.esercizi,
+        sel: null, anchor: null, vuoto: !t.testo, nextId: s.nextId + 1,
+        selettoreOpen: false, annDet: null, riancoroInfo: null
+      };
+    });
+  }
+
+  separaDomande(txt) {
+    const righe = (txt || "").split(/\n+/).map(r => r.trim()).filter(Boolean);
+    const out = []; let corrente = null;
+    righe.forEach(r => {
+      const m = r.match(/^\s*(\d{1,2})[\).\]]?\s+(.*)$/);
+      if (m) { if (corrente) out.push(corrente); corrente = m[2]; }
+      else if (corrente) corrente += " " + r;
+      else corrente = r;
+    });
+    if (corrente) out.push(corrente);
+    return out.map((t, i) => ({ id: "b" + i, testo: t }));
+  }
+
+  salvaEsercizi() {
+    this.setState(s => ({
+      esercizi: s.esBozza.filter(b => b.testo.trim()).map((b, i) => ({
+        id: "x" + s.nextId + "_" + i, numero: i + 1, testo: b.testo.trim(),
+        risposta: "", correzione: "", fatta: false, passi: []
+      })),
+      esImportOpen: false, esImportFase: "incolla", esImportTesto: "", esBozza: [], nextId: s.nextId + 1
+    }));
+  }
+
+  addPasso(id) {
+    const sel = this.state.sel; if (!sel) return;
+    const toks = this.tok().tokens;
+    this.setState(s => ({ esercizi: s.esercizi.map(e => e.id === id ? Object.assign({}, e, { passi: passiDi(e).concat([{ span: [sel[0], sel[1]], citato: citaDa(s.testo, toks, sel), et: "" }]) }) : e) }));
+  }
+  patchPasso(id, i, f) {
+    this.setState(s => ({ esercizi: s.esercizi.map(e => e.id === id ? Object.assign({}, e, { passi: passiDi(e).map((p, j) => j === i ? Object.assign({}, p, f) : p) }) : e) }));
+  }
+  delPasso(id, i) {
+    this.setState(s => ({ esercizi: s.esercizi.map(e => e.id === id ? Object.assign({}, e, { passi: passiDi(e).filter((p, j) => j !== i) }) : e) }));
+  }
+  patchEs(id, f) { this.setState(s => ({ esercizi: s.esercizi.map(e => e.id === id ? Object.assign({}, e, f) : e) })); }
+
+  nuovaDomanda() {
+    const sel = this.state.sel; if (!sel) return;
+    const toks = this.tok().tokens;
+    this.setState(s => ({
+      esercizi: s.esercizi.concat([{
+        id: "x" + s.nextId, numero: s.esercizi.length + 1, testo: "", risposta: "", correzione: "",
+        fatta: false, passi: [{ span: [sel[0], sel[1]], citato: citaDa(s.testo, toks, sel), et: "" }]
+      }]),
+      nextId: s.nextId + 1, tab: "es", esEdit: "x" + s.nextId, esFiltro: "tutti"
+    }));
+  }
+
+  statoEs(e) {
+    if (!(e.risposta || "").trim()) return "da_svolgere";
+    if (!(e.correzione || "").trim()) return "da_correggere";
+    return "corretta";
+  }
+
+  maxRightW(vw, leftPin) {
+    const MIN_TESTO = 420;
+    return Math.max(300, (vw || 1440) - (leftPin ? 290 : 92) - 16 - MIN_TESTO);
+  }
+
+  rotta(a) { return a.stato === "rotta" || a.stato === "ambigua"; }
+
+  riancoraTutte(testo, layout) {
+    const tk = tokenize(testo, layout);
+    const anns = this.state.anns.map(a => riancora(a, tk.tokens, testo));
+    const ok = anns.filter(a => a.stato === "riagganciata").length;
+    const ko = anns.filter(a => a.stato === "rotta" || a.stato === "ambigua").length;
+    return { anns, ok, ko, tk };
+  }
+
+  rigaDi(span) {
+    if (!span) return "—";
+    const tk = this.tok();
+    const b = tk.tokens[span[0]] && tk.tokens[span[0]].blockId;
+    const i = tk.blocks.findIndex(x => x.id === b);
+    if (i < 0) return "—";
+    const b2 = tk.tokens[span[1]] && tk.tokens[span[1]].blockId;
+    const j = tk.blocks.findIndex(x => x.id === b2);
+    return this.state.layout === "prosa" ? "¶ " + (i + 1) : (j > i ? "vv. " + (i + 1) + "–" + (j + 1) : "v. " + (i + 1));
+  }
+
+  renderVals() {
+    const S = this.state, tk = this.tok(), toks = tk.tokens;
+    const sel = S.sel, cur = this.current();
+    const noSel = !sel;
+    const wDx = Math.max(300, Math.min(this.maxRightW(S.vw, S.leftPin), S.rightW));
+    const hlVar = { concetto: "var(--hl-c)", definizione: "var(--hl-d)", dubbio: "var(--hl-u)" };
+
+    const PRI = { concetto: 1, definizione: 2, dubbio: 3 };
+    const STRONG = { concetto: "var(--hl-c2)", definizione: "var(--hl-d2)", dubbio: "var(--hl-u2)" };
+    const LANE = corsie(S.anns);
+    const MAXC = 3;
+    const cov = toks.map(() => []);
+    const style = toks.map(() => ({ wt: "400", dec: "none" }));
+    S.anns.forEach(a => {
+      if (!a.span || this.rotta(a)) return;
+      for (let i = a.span[0]; i <= a.span[1] && i < toks.length; i++) {
+        cov[i].push(a);
+        if (a.parola_chiave) style[i].wt = "700";
+        if (a.figura) style[i].dec = "underline wavy var(--ed)";
+      }
+    });
+    const paint = (list) => {
+      let band = null;
+      list.forEach(a => { if (a.evidenzia && (!band || PRI[a.evidenzia] >= PRI[band])) band = a.evidenzia; });
+      const bars = [];
+      let extra = 0;
+      list.forEach(a => {
+        const k = LANE[a.id];
+        if (k == null) return;
+        if (k >= MAXC) { extra++; return; }
+        bars.push({ k, c: a.sottolinea ? "var(--ink)" : STRONG[a.evidenzia] });
+      });
+      bars.sort((x, y) => x.k - y.k);
+      return {
+        bg: band ? hlVar[band] : "transparent",
+        img: bars.length ? bars.map(b => "linear-gradient(" + b.c + "," + b.c + ")").join(",") : "none",
+        size: bars.length ? bars.map(() => "100% 2.5px").join(",") : "auto",
+        pos: bars.length ? bars.map(b => "left bottom " + (b.k * 4.5) + "px").join(",") : "0 0",
+        extra, any: !!band || !!bars.length
+      };
+    };
+    const tokPaint = cov.map(paint);
+    const sepPaint = toks.map((t, i) => {
+      const n = toks[i + 1];
+      if (!n || n.blockId !== t.blockId) return null;
+      const common = cov[i].filter(a => cov[i + 1].indexOf(a) > -1);
+      return common.length ? paint(common) : null;
+    });
+    const parTok = {};
+    S.paras.forEach(p => { if (p.span) for (let i = p.span[0]; i <= p.span[1]; i++) parTok[i] = p.id; });
+    const esTok = {};
+    S.esercizi.forEach(e => passiDi(e).forEach(p => { if (p.span) for (let i = p.span[0]; i <= p.span[1]; i++) esTok[i] = e; }));
+
+    const mk = (t) => {
+      const i = t.index, inSel = sel && i >= sel[0] && i <= sel[1];
+      const blk = tk.blocks.find(b => b.id === t.blockId);
+      const next = toks[i + 1];
+      let after = (next && next.blockId === t.blockId) ? S.testo.slice(t.end, next.start) : S.testo.slice(t.end, blk.end);
+      if (S.layout === "prosa") after = after.replace(/\n/g, " ");
+      const p = tokPaint[i], sp = sepPaint[i], spv = sepPaint[i - 1];
+      const joinL = !!(spv && spv.any), joinR = !!(sp && sp.any);
+      const aInSel = !!(inSel && next && next.blockId === t.blockId && sel && i + 1 <= sel[1]);
+      const mix = (c) => "color-mix(in srgb, var(--focus) 26%, " + (c === "transparent" ? "var(--surface)" : c) + ")";
+      const r1 = joinL ? "0" : "5px", r2 = joinR ? "0" : "5px";
+      return {
+        text: t.text, after,
+        bg: inSel ? mix(p.bg) : p.bg, img: p.img, size: p.size, pos: p.pos,
+        rad: r1 + " " + r2 + " " + r2 + " " + r1,
+        aBg: aInSel ? mix(sp ? sp.bg : "transparent") : (sp ? sp.bg : "transparent"),
+        aImg: sp ? sp.img : "none", aSize: sp ? sp.size : "auto", aPos: sp ? sp.pos : "0 0",
+        piu: p.extra ? "+" + p.extra : "", hasPiu: p.extra > 0,
+        piuTitle: p.extra ? p.extra + (p.extra === 1 ? " altra annotazione su questa parola" : " altre annotazioni su questa parola") : "",
+        wt: style[i].wt, dec: style[i].dec, sel: !!inSel,
+        down: (e) => {
+          e.preventDefault();
+          if (e.shiftKey && sel) { const an = S.anchor == null ? sel[0] : S.anchor; this.setState({ sel: [Math.min(an, i), Math.max(an, i)], anchor: an, testa: i }); }
+          else { this.select(i, i); this.setState({ dragging: true }); }
+        },
+        enter: () => { if (S.dragging && S.anchor != null) this.setState({ sel: [Math.min(S.anchor, i), Math.max(S.anchor, i)], testa: i }); }
+      };
+    };
+
+    const righe = tk.blocks.map((b, bi) => {
+      const list = toks.filter(t => t.blockId === b.id);
+      const n = bi + 1;
+      const eq = list.map(t => esTok[t.index]).find(Boolean);
+      return {
+        num: S.numeri && (n === 1 || n % 5 === 0) ? String(n) : "",
+        pre: b.pre, hasPre: !!b.pre, vuota: b.vuoto, raw: b.raw,
+        toks: list.map(mk), par: list.some(t => parTok[t.index]),
+        onPar: () => this.setState({ tab: "par" }),
+        dom: !!eq, domN: eq ? String(eq.numero) : "",
+        domTitle: eq ? "Domanda " + eq.numero + " su questo passo" : "",
+        domBc: eq && this.statoEs(eq) === "corretta" ? "var(--par)" : eq && this.statoEs(eq) === "da_correggere" ? "var(--warn-line)" : "var(--line)",
+        domBg: eq && this.statoEs(eq) === "corretta" ? "var(--par-bg)" : eq && this.statoEs(eq) === "da_correggere" ? "var(--warn-bg)" : "var(--surface2)",
+        domFg: eq && this.statoEs(eq) === "corretta" ? "var(--par)" : eq && this.statoEs(eq) === "da_correggere" ? "var(--warn-ink)" : "var(--mute)",
+        onDom: () => { if (eq) this.setState({ tab: "es", esDet: eq.id, esEdit: null }); }
+      };
+    });
+    const paragrafi = tk.blocks.map(b => ({
+      pre: b.pre, hasPre: !!b.pre, vuota: b.vuoto, raw: b.raw,
+      toks: toks.filter(t => t.blockId === b.id).map(mk)
+    }));
+
+    const ordered = S.anns.slice().sort((a, b) => (a.span ? a.span[0] : 1e9) - (b.span ? b.span[0] : 1e9) || (a.span ? a.span[1] : 0) - (b.span ? b.span[1] : 0));
+    const dotOf = (a) => a.evidenzia === "concetto" ? "var(--hl-c)" : a.evidenzia === "definizione" ? "var(--hl-d)" : a.evidenzia === "dubbio" ? "var(--hl-u)" : "var(--line)";
+
+    const anns = ordered.map(a => {
+      const rot = this.rotta(a);
+      const fig = FIGURE.find(f => f.id === a.figura);
+      const chips = [];
+      if (a.evidenzia) chips.push({ name: a.evidenzia === "concetto" ? "Concetto" : a.evidenzia === "definizione" ? "Definizione" : "Dubbio", bg: dotOf(a), fg: "var(--ink)", bc: "var(--line)" });
+      if (fig) chips.push({ name: "❧ " + fig.nome, bg: "var(--ed-bg)", fg: "var(--ed)", bc: "var(--ed)" });
+      if (a.sottolinea) chips.push({ name: "Sottolineata", bg: "var(--surface2)", fg: "var(--ink)", bc: "var(--ink)" });
+      if (a.parola_chiave) chips.push({ name: "Parola chiave", bg: "var(--surface2)", fg: "var(--ink)", bc: "var(--line)" });
+      if (a.flashcard) chips.push({ name: "Flashcard", bg: "var(--surface2)", fg: "var(--ink)", bc: "var(--line)" });
+      const flags = (a.parola_chiave ? "K" : "") + (a.flashcard ? "F" : "") + (fig ? "❧" : "");
+      return {
+        id: a.id, citato: "«" + a.citato + "»", riga: rot ? "⚑" : this.rigaDi(a.span),
+        sub: rot ? "Da riagganciare" : (a.nota || "—"),
+        nota: a.nota, hasNota: !!(a.nota || "").trim(), rotta: rot, flags,
+        riagg: a.stato === "riagganciata", ambigua: a.stato === "ambigua",
+        avviso: a.stato === "ambigua" ? "Le parole citate compaiono in più punti: scegli tu quale." : "Le parole citate non si trovano più nel testo.",
+        onOk: () => this.patch(a.id, { stato: "ok" }),
+        dot: rot ? "var(--warn-line)" : dotOf(a),
+        bc: rot ? "var(--warn-line)" : "var(--line)", bg: rot ? "var(--warn-bg)" : "var(--surface)",
+        chips, figuraLabel: fig ? "Cambia figura" : "Aggiungi figura",
+        schede: (a.schede || []).map(s => ({ nome: SCHEDE[s.id] || s.id })),
+        onClick: () => { if (a.span && !rot) this.select(a.span[0], a.span[1]); this.setState({ annDet: a.id, detEdit: false }); },
+        onDel: () => this.setState(st => ({ anns: st.anns.filter(x => x.id !== a.id) })),
+        onFigura: () => { if (a.span && !rot) this.select(a.span[0], a.span[1]); this.setState({ figOpen: true, figQ: "", figPrev: a.figura || "metafora", _figTarget: a.id }); },
+        onRiaggancia: () => {
+          if (!sel) return;
+          this.patch(a.id, { span: [sel[0], sel[1]], citato: citaDa(S.testo, toks, sel), stato: "ok" });
+        }
+      };
+    });
+
+    const paras = S.paras.slice().sort((a, b) => (a.span ? 0 : 1) - (b.span ? 0 : 1) || (a.span && b.span ? a.span[0] - b.span[0] : a.ordine - b.ordine)).map(p => ({
+      tag: p.span ? this.rigaDi(p.span) : "Libera",
+      tagBg: p.span ? "var(--par-bg)" : "var(--surface2)", tagFg: p.span ? "var(--par)" : "var(--mute)", tagBc: p.span ? "var(--par)" : "var(--line)",
+      hasCitato: !!p.span, citato: p.span ? "«" + citaDa(S.testo, toks, p.span) + "»" : "",
+      testo: p.testo, legaLabel: p.span ? "Scollega" : "Collega alla selezione",
+      onChange: (e) => { const v = e.target.value; this.setState(st => ({ paras: st.paras.map(x => x.id === p.id ? Object.assign({}, x, { testo: v }) : x) })); },
+      onScollega: () => this.setState(st => ({ paras: st.paras.map(x => x.id === p.id ? Object.assign({}, x, { span: p.span ? null : (sel ? [sel[0], sel[1]] : null) }) : x) })),
+      onDel: () => this.setState(st => ({ paras: st.paras.filter(x => x.id !== p.id) }))
+    }));
+
+    const q = S.figQ.trim().toLowerCase();
+    const figTargetAnn = cur || S.anns.find(a => a.id === S._figTarget) || null;
+    const figGroups = Object.keys(TIPI).map(tipo => {
+      const list = FIGURE.filter(f => f.tipo === tipo && (!q || f.nome.toLowerCase().includes(q) || f.descrizione.toLowerCase().includes(q)))
+        .sort((a, b) => a.nome.localeCompare(b.nome, "it"))
+        .map(f => {
+          const on = figTargetAnn && figTargetAnn.figura === f.id;
+          return {
+            nome: f.nome, descrizione: f.descrizione, esempio: f.esempio,
+            exp: S.figExp === f.id, caret: S.figExp === f.id ? "▴" : "▾",
+            bc: on ? "var(--ed)" : "var(--line)", bg: on ? "var(--ed-bg)" : "var(--surface)", fg: on ? "var(--ed)" : "var(--ink)",
+            lbc: on ? "var(--ed)" : "var(--line2)", lbg: on ? "var(--ed-bg)" : "transparent",
+            onExp: () => this.setState(st => ({ figExp: st.figExp === f.id ? null : f.id })),
+            onHover: () => this.setState({ figPrev: f.id }),
+            onPick: () => { const a = this.ensure() || figTargetAnn; if (a) { this.patch(a.id, { figura: a.figura === f.id ? null : f.id }); this.clean(a.id); } this.setState({ figOpen: false }); }
+          };
+        });
+      return { nome: TIPI[tipo], n: list.length + (list.length === 1 ? " figura" : " figure"), figure: list };
+    }).filter(g => g.figure.length);
+
+    const detA = S.annDet ? S.anns.find(a => a.id === S.annDet) : null;
+    let det = null;
+    if (detA) {
+      const iDet = ordered.findIndex(a => a.id === detA.id);
+      const rot = this.rotta(detA);
+      const f = FIGURE.find(x => x.id === detA.figura);
+      const ctx = [];
+      if (detA.span && !rot) {
+        const b0 = toks[detA.span[0]].blockId, b1 = toks[Math.min(detA.span[1], toks.length - 1)].blockId;
+        const i0 = tk.blocks.findIndex(b => b.id === b0), i1 = tk.blocks.findIndex(b => b.id === b1);
+        tk.blocks.slice(i0, i1 + 1).forEach(b => {
+          const list = toks.filter(t => t.blockId === b.id);
+          ctx.push({
+            toks: list.map(t => {
+              const inA = t.index >= detA.span[0] && t.index <= detA.span[1];
+              const nx = toks[t.index + 1];
+              const sameBlk = nx && nx.blockId === b.id;
+              const inAfter = inA && sameBlk && t.index + 1 <= detA.span[1];
+              return {
+                text: t.text, after: sameBlk ? S.testo.slice(t.end, nx.start) : "",
+                bg: inA ? (detA.evidenzia ? hlVar[detA.evidenzia] : "var(--surface2)") : "transparent",
+                aBg: inAfter ? (detA.evidenzia ? hlVar[detA.evidenzia] : "var(--surface2)") : "transparent",
+                wt: inA && detA.parola_chiave ? "700" : "400"
+              };
+            })
+          });
+        });
+      }
+      const parLink = S.paras.find(p => p.span && detA.span && p.span[0] <= detA.span[1] && p.span[1] >= detA.span[0]);
+      const tipoBtn = (kind, name) => {
+        const on = detA.evidenzia === kind;
+        return { name, on, swatch: hlVar[kind], bc: on ? "var(--ink)" : "var(--line)", bg: on ? "var(--surface2)" : "var(--surface)", onClick: () => { this.patch(detA.id, { evidenzia: on ? null : kind }); } };
+      };
+      const flagBtn = (f2, name, icon) => {
+        const on = !!detA[f2];
+        return { name, icon, on, bc: on ? "var(--ink)" : "var(--line)", bg: on ? "var(--surface2)" : "var(--surface)", onClick: () => this.patch(detA.id, { [f2]: !on }) };
+      };
+      const tags = [];
+      if (detA.evidenzia) tags.push({ name: detA.evidenzia === "concetto" ? "Concetto" : detA.evidenzia === "definizione" ? "Definizione" : "Dubbio", sw: hlVar[detA.evidenzia], hasSw: true, icon: "" });
+      if (detA.sottolinea) tags.push({ name: "Sottolineatura", sw: "transparent", hasSw: false, icon: "⎯" });
+      if (detA.parola_chiave) tags.push({ name: "Parola chiave", sw: "transparent", hasSw: false, icon: "✦" });
+      if (detA.flashcard) tags.push({ name: "Flashcard", sw: "transparent", hasSw: false, icon: "▣" });
+      det = {
+        edit: S.detEdit, vista: !S.detEdit,
+        onEdit: () => this.setState({ detEdit: true }),
+        onFine: () => this.setState({ detEdit: false }),
+        tags, hasTags: tags.length > 0,
+        hasNota: !!(detA.nota || "").trim(),
+        citato: "«" + detA.citato + "»",
+        pos: rot ? "Da riagganciare" : this.rigaDi(detA.span),
+        rotta: rot, ctx, hasCtx: ctx.length > 0,
+        conta: (iDet + 1) + " di " + ordered.length,
+        tipi: [tipoBtn("concetto", "Concetto"), tipoBtn("definizione", "Definizione"), tipoBtn("dubbio", "Dubbio")],
+        flags: [flagBtn("sottolinea", "Sottolineatura", "⎯"), flagBtn("parola_chiave", "Parola chiave", "✦"), flagBtn("flashcard", "Flashcard", "▣")],
+        mostraFig: !!f || S.detEdit, mostraNota: !!(detA.nota || "").trim() || S.detEdit,
+        hasFig: !!f, figNome: f ? f.nome : "Nessuna figura retorica",
+        figTipo: f ? TIPI[f.tipo] : "", figDesc: f ? f.descrizione : "", figEs: f ? f.esempio : "",
+        figAz: f ? "Cambia" : "Aggiungi",
+        onFigura: () => this.setState({ figOpen: true, figQ: "", figPrev: detA.figura || "metafora", _figTarget: detA.id }),
+        nota: detA.nota || "", notaPh: "Scrivi qui la nota di studio su questo passo…",
+        onNota: (e) => { const v = e.target.value; this.patch(detA.id, { nota: v }); },
+        schede: (detA.schede || []).map((s, k) => ({
+          nome: SCHEDE[s.id] || s.id, frase: s.frase || "", hasFrase: !!(s.frase || "").trim(),
+          onFrase: (ev) => { const v = ev.target.value; this.setState(st => ({ anns: st.anns.map(x => x.id === detA.id ? Object.assign({}, x, { schede: x.schede.map((y, j) => j === k ? { id: y.id, frase: v } : y) }) : x) })); },
+          onDel: () => this.setState(st => ({ anns: st.anns.map(x => x.id === detA.id ? Object.assign({}, x, { schede: x.schede.filter((y, j) => j !== k) }) : x) }))
+        })),
+        hasSchede: (detA.schede || []).length > 0,
+        mostraSchede: (detA.schede || []).length > 0 || S.detEdit,
+        schedeLibere: Object.keys(SCHEDE)
+          .filter(id => !(detA.schede || []).some(s => s.id === id))
+          .map(id => ({ nome: SCHEDE[id], onClick: () => this.setState(st => ({ anns: st.anns.map(x => x.id === detA.id ? Object.assign({}, x, { schede: (x.schede || []).concat([{ id, frase: "" }]) }) : x) })) })),
+        haLibere: Object.keys(SCHEDE).some(id => !(detA.schede || []).some(s => s.id === id)),
+        hasPar: !!parLink, parTesto: parLink ? (parLink.testo || "Parafrasi ancora vuota.") : "",
+        onPar: () => this.setState({ tab: "par", annDet: null }),
+        prevOff: iDet <= 0, nextOff: iDet >= ordered.length - 1,
+        onPrev: () => { if (iDet > 0) this.setState({ annDet: ordered[iDet - 1].id }); },
+        onNext: () => { if (iDet < ordered.length - 1) this.setState({ annDet: ordered[iDet + 1].id }); },
+        onVai: () => { if (detA.span && !rot) this.select(detA.span[0], detA.span[1]); this.setState({ annDet: null }); },
+        onDel: () => this.setState(st => ({ anns: st.anns.filter(x => x.id !== detA.id), annDet: null }))
+      };
+    }
+
+    const eD = S.esDet ? S.esercizi.find(e => e.id === S.esDet) : null;
+    let esDet = null;
+    if (eD) {
+      const iE = S.esercizi.findIndex(e => e.id === eD.id);
+      const st = this.statoEs(eD);
+      const eti = { da_svolgere: "Da svolgere", da_correggere: "Da correggere", corretta: "Corretta" }[st];
+      const col = { da_svolgere: ["var(--line)", "var(--surface2)", "var(--mute)"], da_correggere: ["var(--warn-line)", "var(--warn-bg)", "var(--warn-ink)"], corretta: ["var(--par)", "var(--par-bg)", "var(--par)"] }[st];
+      const ctxDi = (span) => {
+        const out = [];
+        if (!span || span[1] >= toks.length) return out;
+        const b0 = toks[span[0]].blockId, b1 = toks[span[1]].blockId;
+        const i0 = tk.blocks.findIndex(b => b.id === b0), i1 = tk.blocks.findIndex(b => b.id === b1);
+        tk.blocks.slice(i0, i1 + 1).forEach(b => {
+          out.push({
+            toks: toks.filter(t => t.blockId === b.id).map(t => {
+              const inA = t.index >= span[0] && t.index <= span[1];
+              const nx = toks[t.index + 1], same = nx && nx.blockId === b.id;
+              return {
+                text: t.text, after: same ? S.testo.slice(t.end, nx.start) : "",
+                bg: inA ? "var(--par-bg)" : "transparent",
+                aBg: inA && same && t.index + 1 <= span[1] ? "var(--par-bg)" : "transparent"
+              };
+            })
+          });
+        });
+        return out;
+      };
+      const passi = passiDi(eD).map((p, pi) => ({
+        num: String(pi + 1),
+        et: p.et || "",
+        onEt: (ev) => { const v = ev.target.value; this.patchPasso(eD.id, pi, { et: v }); },
+        citato: p.citato ? "«" + p.citato + "»" : "",
+        ctx: ctxDi(p.span), hasCtx: !!(p.span && p.span[1] < toks.length),
+        onVai: () => { if (p.span) { this.select(p.span[0], p.span[1]); this.setState({ esDet: null }); } },
+        onDel: () => this.delPasso(eD.id, pi)
+      }));
+      esDet = {
+        numero: eD.numero, conta: (iE + 1) + " di " + S.esercizi.length,
+        testo: eD.testo || "Domanda senza testo",
+        etichetta: eti, etBc: col[0], etBg: col[1], etFg: col[2],
+        passi, hasPassi: passi.length > 0, senzaPasso: passi.length === 0,
+        fatta: !!eD.fatta,
+        spuntaBc: eD.fatta ? "var(--par)" : "var(--line)", spuntaBg: eD.fatta ? "var(--par)" : "var(--surface)",
+        spuntaFg: eD.fatta ? "var(--on)" : "var(--mute)",
+        spuntaLabel: eD.fatta ? "Fatta" : "Segna come fatta",
+        onFatta: () => this.patchEs(eD.id, { fatta: !eD.fatta }),
+        risposta: eD.risposta || "",
+        onRisposta: (ev) => { const v = ev.target.value; this.patchEs(eD.id, { risposta: v }); },
+        correzione: eD.correzione || "", hasCorr: !!(eD.correzione || "").trim(),
+        onCorrezione: (ev) => { const v = ev.target.value; this.patchEs(eD.id, { correzione: v }); },
+        corrEdit: S.esEdit === eD.id, corrVista: S.esEdit !== eD.id,
+        corrAz: (eD.correzione || "").trim() ? "Modifica" : "Scrivi la correzione",
+        onCorrEdit: () => this.setState({ esEdit: eD.id }),
+        onCorrFine: () => this.setState({ esEdit: null }),
+        prevOff: iE <= 0, nextOff: iE >= S.esercizi.length - 1,
+        onPrev: () => { if (iE > 0) this.setState({ esDet: S.esercizi[iE - 1].id, esEdit: null }); },
+        onNext: () => { if (iE < S.esercizi.length - 1) this.setState({ esDet: S.esercizi[iE + 1].id, esEdit: null }); },
+        onVai: () => { if (eD.span) this.select(eD.span[0], eD.span[1]); this.setState({ esDet: null }); },
+        legaLabel: "+ Collega la selezione",
+        legaOff: !sel,
+        onLega: () => this.addPasso(eD.id),
+        testoVal: eD.testo || "",
+        testoEdit: S.esTestoEdit === eD.id, testoVista: S.esTestoEdit !== eD.id,
+        onTestoEdit: () => this.setState({ esTestoEdit: eD.id }),
+        onTestoFine: () => this.setState({ esTestoEdit: null }),
+        onTesto: (ev) => { const v = ev.target.value; this.patchEs(eD.id, { testo: v }); }
+      };
+    }
+
+    const prev = FIGURE.find(f => f.id === S.figPrev) || FIGURE[0];
+    const nFig = figGroups.reduce((s, g) => s + g.figure.length, 0);
+
+    const cnt = (fn) => S.anns.filter(fn).length;
+    const hb = (kind, name, key) => {
+      const on = !!(cur && cur.evidenzia === kind);
+      const n = cnt(a => a.evidenzia === kind);
+      return Object.assign({ name, key, n: n || "", swatch: hlVar[kind], title: "Evidenzia " + name.toLowerCase() + " (tasto " + key + ") · " + n + " nel testo", on, onClick: () => this.toggleHl(kind) }, this.chip(on));
+    };
+    const fb = (f, name, icon, key, title) => {
+      const on = !!(cur && cur[f]);
+      const n = cnt(a => a[f]);
+      return Object.assign({ name, icon, key, n: n || "", title, on, onClick: () => this.toggleFlag(f) }, this.chip(on));
+    };
+
+    const figCur = cur && cur.figura ? FIGURE.find(f => f.id === cur.figura) : null;
+    const selTxt = sel ? citaDa(S.testo, toks, sel) : "";
+
+    const railOf = (title, swatch, icon, on, n, onClick) => ({
+      title: title + " · " + n + " nel testo", swatch, icon, n: n || "",
+      swBc: swatch === "transparent" ? "transparent" : "var(--line)",
+      iconFg: "var(--ink)", on, onClick,
+      bc: on ? "var(--ink)" : "var(--line)", bg: on ? "var(--surface2)" : "var(--surface)", fg: "var(--ink)"
+    });
+    const railItems = [
+      railOf("Concetto", "var(--hl-c)", "", !!(cur && cur.evidenzia === "concetto"), cnt(a => a.evidenzia === "concetto"), () => this.toggleHl("concetto")),
+      railOf("Definizione", "var(--hl-d)", "", !!(cur && cur.evidenzia === "definizione"), cnt(a => a.evidenzia === "definizione"), () => this.toggleHl("definizione")),
+      railOf("Dubbio", "var(--hl-u)", "", !!(cur && cur.evidenzia === "dubbio"), cnt(a => a.evidenzia === "dubbio"), () => this.toggleHl("dubbio")),
+      railOf("Sottolineatura", "transparent", "⎯", !!(cur && cur.sottolinea), cnt(a => a.sottolinea), () => this.toggleFlag("sottolinea")),
+      railOf("Parola chiave", "transparent", "✦", !!(cur && cur.parola_chiave), cnt(a => a.parola_chiave), () => this.toggleFlag("parola_chiave")),
+      railOf("Flashcard", "transparent", "▣", !!(cur && cur.flashcard), cnt(a => a.flashcard), () => this.toggleFlag("flashcard"))
+    ];
+    const seg = (on) => on ? { bg: "var(--ink)", fg: "var(--surface)" } : { bg: "var(--surface)", fg: "var(--ink)" };
+    const sV = seg(S.layout === "versi"), sP = seg(S.layout === "prosa");
+    const sAA = seg(S.annVar === "A"), sAB = seg(S.annVar === "B");
+    const sFA = seg(S.figVar === "A"), sFB = seg(S.figVar === "B");
+    const sIA = seg(S.impVar === "A"), sIB = seg(S.impVar === "B");
+
+    const nRighe = tk.blocks.length;
+
+    return {
+      titolo: S.vuoto ? "Nuovo testo" : (S.meta.titolo || "Testo senza titolo"),
+      sottotitolo: S.vuoto ? "Nessun testo importato" : ([S.meta.autore, S.meta.anno, S.meta.opera].filter(Boolean).join(" · ") || "Senza dati"),
+
+      haArchivio: S.archivio.length > 0, selettoreOpen: S.selettoreOpen,
+      toggleSelettore: () => this.setState(s => ({ selettoreOpen: !s.selettoreOpen })),
+      archivio: S.archivio.slice().reverse().map(t => ({
+        titolo: t.meta.titolo || "Testo senza titolo",
+        sub: [t.meta.autore, t.meta.anno].filter(Boolean).join(" · ") || "—",
+        n: t.anns.length + (t.anns.length === 1 ? " annotazione" : " annotazioni"),
+        onClick: () => this.apriArchivio(t.id)
+      })),
+
+      modOpen: S.modOpen, modBozza: S.modBozza,
+      apriModifica: () => this.apriModifica(),
+      annullaModifica: () => this.setState({ modOpen: false }),
+      salvaModifica: () => this.salvaModifica(),
+      onModBozza: (e) => { const v = e.target.value; this.setState({ modBozza: v }); },
+      haRiancoro: !!S.riancoroInfo,
+      riancoroTesto: S.riancoroInfo
+        ? (S.riancoroInfo.ok + (S.riancoroInfo.ok === 1 ? " annotazione riagganciata" : " annotazioni riagganciate") + " · " + S.riancoroInfo.ko + " da sistemare")
+        : "",
+      chiudiRiancoro: () => this.setState({ riancoroInfo: null }),
+
+      nuovoOpen: S.nuovoOpen, nuovoVal: S.nuovo,
+      chiudiNuovo: () => this.setState({ nuovoOpen: false }),
+      creaTesto: () => this.creaTesto(),
+      nuovoPronto: !(S.nuovo.titolo || "").trim() || !(S.nuovo.testo || "").trim(),
+      nuovoCampi: [
+        { id: "titolo", label: "Titolo", ph: "L'infinito", val: S.nuovo.titolo },
+        { id: "autore", label: "Autore", ph: "Giacomo Leopardi", val: S.nuovo.autore },
+        { id: "anno", label: "Anno", ph: "1819", val: S.nuovo.anno },
+        { id: "opera", label: "Opera o raccolta", ph: "Canti · Idilli", val: S.nuovo.opera }
+      ].map(c => Object.assign(c, {
+        onChange: (e) => { const v = e.target.value; this.setState(s => ({ nuovo: Object.assign({}, s.nuovo, { [c.id]: v }) })); }
+      })),
+      onNuovoTesto: (e) => { const v = e.target.value; this.setState(s => ({ nuovo: Object.assign({}, s.nuovo, { testo: v }) })); },
+      nuovoVersi: S.nuovo.layout === "versi", nuovoProsa: S.nuovo.layout === "prosa",
+      setNuovoVersi: () => this.setState(s => ({ nuovo: Object.assign({}, s.nuovo, { layout: "versi" }) })),
+      setNuovoProsa: () => this.setState(s => ({ nuovo: Object.assign({}, s.nuovo, { layout: "prosa" }) })),
+      nvBg: S.nuovo.layout === "versi" ? "var(--ink)" : "var(--surface)", nvFg: S.nuovo.layout === "versi" ? "var(--surface)" : "var(--ink)",
+      npBg: S.nuovo.layout === "prosa" ? "var(--ink)" : "var(--surface)", npFg: S.nuovo.layout === "prosa" ? "var(--surface)" : "var(--ink)",
+
+      themeIcon: S.theme === "dark" ? "☾" : "☀",
+      themeTitle: S.theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro",
+      setBg: S.settingsOpen ? "var(--ink)" : "var(--surface)", setFg: S.settingsOpen ? "var(--surface)" : "var(--ink)", setBc: S.settingsOpen ? "var(--ink)" : "var(--line)",
+      vuoto: S.vuoto, pieno: !S.vuoto,
+
+      leftOpen: S.leftPin, leftRail: !S.leftPin, railItems, nAnn: S.anns.length,
+      apriStrumenti: () => this.setState({ leftPin: true }),
+      chiudiStrumenti: () => this.setState({ leftPin: false }),
+      rightOpen: S.rightOpen, rightRail: !S.rightOpen,
+      apriPannelli: () => this.setState({ rightOpen: true }),
+      chiudiPannelli: () => this.setState({ rightOpen: false }),
+      rightRailLabel: S.tab === "par" ? "Parafrasi · " + S.paras.length : S.tab === "es" ? "Esercizi" : "Annotazioni · " + S.anns.length,
+      padL: S.leftPin ? 290 : 92, padR: S.rightOpen ? wDx + 32 : 196,
+      rightW: wDx + "px",
+      onResize: (e) => { e.preventDefault(); document.body.style.userSelect = "none"; this.setState({ resizing: true }); },
+      resizeBg: S.resizing ? "var(--focus)" : "transparent",
+      allargaPannello: () => this.setState(s => ({ rightW: s.rightW >= 560 ? 392 : Math.min(640, this.maxRightW(s.vw, s.leftPin)) })),
+      allargaLabel: wDx >= 560 ? "Riduci il pannello" : "Allarga il pannello",
+      allargaIcon: wDx >= 560 ? "⇥" : "⇤",
+      allargaOff: this.maxRightW(S.vw, S.leftPin) <= 400 && wDx < 560,
+      helpOpen: S.helpOpen,
+      toggleHelp: () => this.setState(st => ({ helpOpen: !st.helpOpen, settingsOpen: false })),
+      helpBg: S.helpOpen ? "var(--ink)" : "var(--surface)", helpFg: S.helpOpen ? "var(--surface)" : "var(--ink)", helpBc: S.helpOpen ? "var(--ink)" : "var(--line)",
+
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),
+      settingsOpen: S.settingsOpen,
+      toggleSettings: () => this.setState(st => ({ settingsOpen: !st.settingsOpen })),
+      fonts: ["Atkinson", "Lexend", "Sistema"].map(f => Object.assign({ name: f, on: S.font === f }, this.chip(S.font === f), { onClick: () => this.setState({ font: f }) })),
+      fs: S.fs, fsLabel: S.fs + " px", onFs: (e) => this.setState({ fs: +e.target.value }),
+      lsRaw: S.lsRaw, lsLabel: (S.lsRaw / 100).toFixed(2), onLs: (e) => this.setState({ lsRaw: +e.target.value }),
+
+      isVersi: S.layout === "versi", isProsa: S.layout === "prosa",
+      versiBg: sV.bg, versiFg: sV.fg, prosaBg: sP.bg, prosaFg: sP.fg,
+      setVersi: () => this.setState({ layout: "versi" }), setProsa: () => this.setState({ layout: "prosa" }),
+
+      nuovoTesto: () => this.setState({ nuovoOpen: true, selettoreOpen: false }),
+      ripristina: () => this.setState({ vuoto: false, testo: SRC }),
+      isImpA: S.impVar === "A", isImpB: S.impVar === "B",
+      impABg: sIA.bg, impAFg: sIA.fg, impBBg: sIB.bg, impBFg: sIB.fg,
+      setImpA: () => this.setState({ impVar: "A" }), setImpB: () => this.setState({ impVar: "B" }),
+      incollaAperto: S.incollaAperto, apriIncolla: () => this.setState({ incollaAperto: true }),
+      bozza: S.bozza, onBozza: (e) => this.setState({ bozza: e.target.value }),
+      bozzaInfo: S.bozza.trim() ? words(S.bozza).length + " parole · " + S.bozza.trim().split("\n").filter(x => x.trim()).length + " righe" : "Il testo si può ancora sistemare dopo l'import.",
+      importa: () => { const b = S.bozza.trim(); if (!b) return; this.setState({ testo: b, vuoto: false, anns: [], paras: [], sel: null, bozza: "" }); },
+
+      numeri: S.numeri, toggleNumeri: () => this.setState(st => ({ numeri: !st.numeri })),
+      numBg: S.numeri ? "var(--ink)" : "var(--surface)", numFg: S.numeri ? "var(--surface)" : "var(--ink)", numBc: S.numeri ? "var(--ink)" : "var(--line)",
+      zoomLabel: S.zoom + "%", zoomFs: (19 * S.zoom / 100).toFixed(1), numFs: (12 * Math.max(0.9, S.zoom / 100)).toFixed(1),
+      numW: S.numeri ? 26 : 0, cardW: Math.round(760 * Math.max(1, S.zoom / 100)),
+      zoomIn: () => this.setState(st => ({ zoom: Math.min(190, st.zoom + 10) })),
+      zoomOut: () => this.setState(st => ({ zoom: Math.max(70, st.zoom - 10) })),
+      zoomReset: () => this.setState({ zoom: 100 }),
+      righe, paragrafi,
+
+      noSel, cur: noSel ? "not-allowed" : "pointer", op: noSel ? "0.45" : "1",
+      selAnn: !!cur,
+      selLabel: sel ? "«" + selTxt + "»" : "Nessuna selezione",
+      selMeta: sel ? this.rigaDi(sel) + " · parole " + sel[0] + "–" + sel[1] : "Clicca una parola nel testo per iniziare",
+      selBg: sel ? "var(--surface2)" : "var(--bg)", selBc: sel ? "var(--focus)" : "var(--line2)",
+      hlBtns: [hb("concetto", "Concetto", "1"), hb("definizione", "Definizione", "2"), hb("dubbio", "Dubbio", "3")],
+      markBtns: [
+        fb("sottolinea", "Sottolineatura", "⎯", "S", "Sottolinea la selezione (tasto S)"),
+        fb("parola_chiave", "Parola chiave", "✦", "K", "Segna come parola chiave (tasto K)"),
+        fb("flashcard", "Flashcard", "▣", "F", "Crea una flashcard da questo intervallo (tasto F)")
+      ],
+      notaVal: cur ? cur.nota : "",
+      notaPh: noSel ? "Seleziona delle parole" : "Scrivi una nota su questa selezione…",
+      notaRef: this.notaRef,
+      onNota: (e) => { const v = e.target.value; const a = this.ensure(); if (a) { this.patch(a.id, { nota: v }); if (!v.trim()) this.clean(a.id); } },
+      figLabel: figCur ? figCur.nome : "Figura retorica…",
+      figBg: figCur ? "var(--ed-bg)" : "var(--surface)", figFg: figCur ? "var(--ed)" : "var(--ink)", figBc: figCur ? "var(--ed)" : "var(--line)",
+      apriFigure: () => this.setState({ figOpen: true, figQ: "", figPrev: (cur && cur.figura) || "metafora", _figTarget: cur ? cur.id : null }),
+      nuovaParafrasi: () => this.nuovaParafrasi(),
+      nuovaParafrasiLibera: () => this.nuovaParafrasiLibera(),
+      eliminaSel: () => { if (cur) this.setState(st => ({ anns: st.anns.filter(x => x.id !== cur.id) })); },
+
+      tabs: [["ann", "Annotazioni · " + S.anns.length], ["par", "Parafrasi · " + S.paras.length], ["es", "Esercizi · " + S.esercizi.length]].map(([k, name]) => ({
+        name, on: S.tab === k, bb: S.tab === k ? "var(--focus)" : "transparent",
+        bg: S.tab === k ? "var(--surface)" : "var(--bg)", fg: S.tab === k ? "var(--ink)" : "var(--mute)",
+        onClick: () => this.setState({ tab: k })
+      })),
+      tabAnn: S.tab === "ann", tabPar: S.tab === "par", tabEs: S.tab === "es",
+
+      esNessuno: S.esercizi.length === 0, esQualcuno: S.esercizi.length > 0,
+      esFatte: S.esercizi.filter(e => (e.risposta || "").trim()).length,
+      esTot: S.esercizi.length,
+      esAvanz: S.esercizi.filter(e => (e.risposta || "").trim()).length + " / " + S.esercizi.length,
+      esFiltri: [["tutti", "Tutte"], ["da_svolgere", "Da svolgere"], ["da_correggere", "Da correggere"], ["corretta", "Corrette"]].map(([k, name]) => {
+        const n = k === "tutti" ? S.esercizi.length : S.esercizi.filter(e => this.statoEs(e) === k).length;
+        const on = S.esFiltro === k;
+        return {
+          name: name + " · " + n, on,
+          bc: on ? "var(--ink)" : "var(--line)", bg: on ? "var(--ink)" : "var(--surface)", fg: on ? "var(--surface)" : "var(--ink)",
+          onClick: () => this.setState({ esFiltro: k })
+        };
+      }),
+      esNuovaDaSel: () => this.nuovaDomanda(),
+      haProssima: S.esercizi.some(e => !(e.risposta || "").trim()),
+      prossimaLabel: S.esercizi.some(e => (e.risposta || "").trim()) ? "Continua" : "Inizia",
+      apriProssima: () => {
+        const p = S.esercizi.find(e => !(e.risposta || "").trim()) || S.esercizi[0];
+        if (p) this.setState({ esDet: p.id, esEdit: null, esTestoEdit: null });
+      },
+      esercizi: S.esercizi
+        .filter(e => S.esFiltro === "tutti" || this.statoEs(e) === S.esFiltro)
+        .map(e => {
+          const st = this.statoEs(e);
+          const eti = { da_svolgere: "Da svolgere", da_correggere: "Da correggere", corretta: "Corretta" }[st];
+          const col = { da_svolgere: ["var(--line)", "var(--surface2)", "var(--mute)"], da_correggere: ["var(--warn-line)", "var(--warn-bg)", "var(--warn-ink)"], corretta: ["var(--par)", "var(--par-bg)", "var(--par)"] }[st];
+          const inEdit = S.esEdit === e.id;
+          return {
+            numero: e.numero, testo: e.testo || "Domanda senza testo",
+            etichetta: eti, etBc: col[0], etBg: col[1], etFg: col[2],
+            fatta: !!e.fatta,
+            spuntaBc: e.fatta ? "var(--par)" : "var(--line)", spuntaBg: e.fatta ? "var(--par)" : "var(--surface)",
+            spuntaFg: e.fatta ? "var(--on)" : "transparent",
+            spuntaLabel: e.fatta ? "Segna come non fatta" : "Segna come fatta",
+            onFatta: () => this.patchEs(e.id, { fatta: !e.fatta }),
+            risposta: e.risposta || "",
+            hasRisposta: !!(e.risposta || "").trim(),
+            anteprima: (e.risposta || "").trim(),
+            cardBc: st === "da_correggere" ? "var(--warn-line)" : "var(--line)",
+            onRisposta: (ev) => { const v = ev.target.value; this.patchEs(e.id, { risposta: v }); },
+            hasCorr: !!(e.correzione || "").trim(),
+            correzione: e.correzione || "",
+            onCorrezione: (ev) => { const v = ev.target.value; this.patchEs(e.id, { correzione: v }); },
+            corrEdit: inEdit, corrVista: !inEdit,
+            onCorrEdit: () => this.setState({ esEdit: e.id }),
+            onCorrFine: () => this.setState({ esEdit: null }),
+            corrAz: (e.correzione || "").trim() ? "Modifica" : "Scrivi la correzione",
+            hasSpan: passiDi(e).length > 0,
+            passiLabel: passiDi(e).length > 1 ? "¶ " + passiDi(e).length : "¶",
+            passiTitle: passiDi(e).length > 1 ? passiDi(e).length + " passi collegati" : "Collegata a un passo del testo",
+            onApri: () => this.setState({ esDet: e.id, esTestoEdit: null }),
+            onDel: () => this.setState(s => ({ esercizi: s.esercizi.filter(x => x.id !== e.id).map((x, i) => Object.assign({}, x, { numero: i + 1 })) }))
+          };
+        }),
+
+      esDetOpen: !!esDet, esDet: esDet || {},
+      chiudiEsDet: () => this.setState({ esDet: null, esTestoEdit: null }),
+
+      esImportOpen: S.esImportOpen,
+      esImportFase1: S.esImportFase === "incolla", esImportFase2: S.esImportFase === "separa",
+      apriImport: () => this.setState({ esImportOpen: true, esImportFase: "incolla", esImportTesto: "", esBozza: [] }),
+      chiudiImport: () => this.setState({ esImportOpen: false }),
+      esImportTesto: S.esImportTesto,
+      onEsImport: (e) => { const v = e.target.value; this.setState({ esImportTesto: v }); },
+      esImportVuoto: !S.esImportTesto.trim(),
+      esSepara: () => this.setState(s => ({ esImportFase: "separa", esBozza: this.separaDomande(s.esImportTesto) })),
+      esIndietro: () => this.setState({ esImportFase: "incolla" }),
+      esBozzaConta: S.esBozza.length + (S.esBozza.length === 1 ? " domanda riconosciuta" : " domande riconosciute"),
+      esBozzaDest: "Si collegano a: " + (S.meta.titolo || "questo testo"),
+      salvaEsercizi: () => this.salvaEsercizi(),
+      esBozza: S.esBozza.map((b, i) => ({
+        numero: i + 1, testo: b.testo,
+        onChange: (e) => { const v = e.target.value; this.setState(s => ({ esBozza: s.esBozza.map(x => x.id === b.id ? { id: x.id, testo: v } : x) })); },
+        unisciOff: i >= S.esBozza.length - 1,
+        onUnisci: () => this.setState(s => {
+          const l = s.esBozza.slice();
+          if (i >= l.length - 1) return {};
+          l[i] = { id: l[i].id, testo: l[i].testo + " " + l[i + 1].testo };
+          l.splice(i + 1, 1);
+          return { esBozza: l };
+        }),
+        onSpezza: () => this.setState(s => {
+          const l = s.esBozza.slice();
+          const t = l[i].testo;
+          const p = t.indexOf("? ");
+          const cut = p > 0 ? p + 1 : Math.floor(t.length / 2);
+          l.splice(i, 1, { id: l[i].id, testo: t.slice(0, cut).trim() }, { id: l[i].id + "s", testo: t.slice(cut).trim() });
+          return { esBozza: l };
+        }),
+        onDel: () => this.setState(s => ({ esBozza: s.esBozza.filter(x => x.id !== b.id) }))
+      })),
+      esAggiungiBozza: () => this.setState(s => ({ esBozza: s.esBozza.concat([{ id: "b" + s.esBozza.length + "_" + s.nextId, testo: "" }]) })),
+
+      isAnnA: S.annVar === "A", isAnnB: S.annVar === "B",
+      annABg: sAA.bg, annAFg: sAA.fg, annBBg: sAB.bg, annBFg: sAB.fg,
+      setAnnA: () => this.setState({ annVar: "A" }), setAnnB: () => this.setState({ annVar: "B" }),
+      annGap: S.annVar === "A" ? 6 : 11,
+      nessunaAnn: S.anns.length === 0,
+      anns, paras,
+      riaggInfo: sel ? "Userà «" + selTxt.slice(0, 28) + (selTxt.length > 28 ? "…" : "") + "»" : "Seleziona prima le parole giuste nel testo.",
+
+      detOpen: !!det, det: det || {},
+      chiudiDet: () => this.setState({ annDet: null, detEdit: false }),
+      figOpen: S.figOpen, chiudiFigure: () => this.setState({ figOpen: false }),
+      figQ: S.figQ, onFigQ: (e) => this.setState({ figQ: e.target.value }),
+      isFigA: S.figVar === "A", isFigB: S.figVar === "B",
+      figABg: sFA.bg, figAFg: sFA.fg, figBBg: sFB.bg, figBFg: sFB.fg,
+      setFigA: () => this.setState({ figVar: "A" }), setFigB: () => this.setState({ figVar: "B" }),
+      figGroups, figCount: nFig + " figure su " + FIGURE.length + " nel dizionario condiviso",
+      figTarget: figTargetAnn ? figTargetAnn.citato : selTxt,
+      figHas: !!(figTargetAnn && figTargetAnn.figura),
+      togliFigura: () => { if (figTargetAnn) { this.patch(figTargetAnn.id, { figura: null }); this.clean(figTargetAnn.id); } this.setState({ figOpen: false }); },
+      figPrevNome: prev.nome, figPrevTipo: TIPI[prev.tipo], figPrevDesc: prev.descrizione, figPrevEs: prev.esempio,
+      figPrevPick: () => { const a = this.ensure() || figTargetAnn; if (a) { this.patch(a.id, { figura: prev.id }); this.clean(a.id); } this.setState({ figOpen: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
