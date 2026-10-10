@@ -26,3 +26,4 @@ Elenco raccolto il 2026-10-10. Spuntare quando fatto.
 - [x] **Modalità riproduzione** («▶ Riproduci»): apre le schede una alla volta in ordine cronologico, rispetta i filtri; frecce ← →, spazio = pausa/avvio, passaggio automatico ogni N secondi (impostabile). È anche il ripasso dell'autore (come descritto dall'utente)
 - Nota: la dimensione del testo non cambiava perché i testi erano in pixel fissi; ora la dimensione dell'interfaccia è uno zoom vero, predefinito 115%
 - [ ] Da vedere dopo la prova: i «Dettagli» di alcune schede ripetono il riassunto (dato da rivedere, non il codice)
+- [x] **Elimina scheda** (editor, «Elimina…» con conferma): il file va in `99_Archivio/schede_eliminate/`, la scheda viene tolta dai collegamenti delle altre e dal glossario

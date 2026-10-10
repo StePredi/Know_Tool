@@ -136,6 +136,7 @@ function registraIpc(): void {
   ipcMain.handle('autore:scegli', (_e, id: string) => (radice ? apri(radice, id) : apri(null)))
   ipcMain.handle('scheda:aggiorna', (_e, id: string, patch) => serve().aggiornaScheda(id, patch))
   ipcMain.handle('scheda:crea', (_e, nuova) => serve().creaScheda(nuova))
+  ipcMain.handle('scheda:elimina', (_e, id: string) => serve().eliminaScheda(id))
   ipcMain.handle('scheda:duplica', (_e, id: string) => serve().duplicaScheda(id))
   ipcMain.handle('autore:aggiorna', (_e, patch) => serve().aggiornaAutore(patch))
   ipcMain.handle('temi:aggiorna', (_e, temi) => serve().aggiornaTemi(temi))

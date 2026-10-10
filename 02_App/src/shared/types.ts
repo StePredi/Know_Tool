@@ -136,6 +136,7 @@ export interface Api {
   scegliAutore(id: string): Promise<StatoApp>
   aggiornaScheda(id: string, patch: SchedaPatch): Promise<Modello>
   creaScheda(nuova: NuovaScheda): Promise<{ id: string; modello: Modello }>
+  eliminaScheda(id: string): Promise<{ modello: Modello; archiviata: string; collegamentiTolti: number; vociTolte: number }>
   duplicaScheda(id: string): Promise<{ id: string; modello: Modello }>
   aggiornaAutore(patch: AutorePatch): Promise<Modello>
   aggiornaTemi(temi: Tema[]): Promise<Modello>

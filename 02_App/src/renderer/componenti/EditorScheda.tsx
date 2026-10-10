@@ -15,8 +15,12 @@ export function EditorScheda({ id }: { id: string }) {
   const colore = useColore()
   const s = ix.byId.get(id)
   const [filtro, setFiltro] = useState('')
+  const [conferma, setConferma] = useState(false)
   const primo = useRef<HTMLInputElement & HTMLTextAreaElement>(null)
-  useEffect(() => primo.current?.focus(), [id])
+  useEffect(() => {
+    primo.current?.focus()
+    setConferma(false)
+  }, [id])
   if (!s) return null
 
   const salva = (p: SchedaPatch): void => void patch(id, p)
@@ -138,9 +142,39 @@ export function EditorScheda({ id }: { id: string }) {
           <div style={{ flex: 1 }} />
           <button className="btn lg" onClick={async () => { const r = await window.api.duplicaScheda(id); useStore.getState().applica(r.modello); vai(r.id) }}>Duplica</button>
           <button className="btn lg" onClick={async () => { const r = await window.api.creaScheda({ corsia: s.corsia }); useStore.getState().applica(r.modello); vai(r.id) }}>+ Nuova scheda</button>
+          <button className="btn lg" style={{ borderColor: 'var(--err-line)', color: 'var(--err-ink)', background: 'var(--err-bg)' }} onClick={() => setConferma(true)}>Elimina…</button>
           <button className="btn lg ed" onClick={() => imposta({ editId: null })}>Fatto</button>
         </div>
       </div>
+      {conferma && (
+        <div role="alertdialog" aria-label="Conferma eliminazione" className="overlay" style={{ zIndex: 95, alignItems: 'center', padding: 22, background: 'rgba(8,12,18,.6)' }}>
+          <div style={{ maxWidth: 520, background: 'var(--surface)', border: '1px solid var(--line)', borderTop: '4px solid var(--err-line)', borderRadius: 14, padding: 20, boxShadow: '0 30px 80px rgba(0,0,0,.4)' }}>
+            <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>Eliminare «{s.titolo_breve}»?</h3>
+            <p style={{ margin: '0 0 8px', fontSize: 14.5 }}>
+              La scheda non viene cancellata: il file va in <b>99_Archivio/schede_eliminate/</b> e lo puoi recuperare.
+            </p>
+            <p style={{ margin: '0 0 14px', fontSize: 14.5 }}>
+              La tolgo da <b>{collegate.size}</b> collegament{collegate.size === 1 ? 'o' : 'i'} e da <b>{m.glossario.filter((v) => v.schede.includes(id)).length}</b> vo{m.glossario.filter((v) => v.schede.includes(id)).length === 1 ? 'ce' : 'ci'} del glossario.
+            </p>
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+              <button className="btn lg" onClick={() => setConferma(false)}>Annulla</button>
+              <button className="btn lg" style={{ background: 'var(--err-line)', color: '#fff', borderColor: 'var(--err-line)' }} onClick={async () => {
+                const prossima = lista[pos + 1]?.id ?? lista[pos - 1]?.id ?? null
+                try {
+                  const r = await window.api.eliminaScheda(id)
+                  const st = useStore.getState()
+                  st.applica(r.modello)
+                  st.imposta({ editId: prossima && prossima !== id ? prossima : null, selId: null, apertaId: null })
+                  st.mostraToast(`Scheda spostata in 99_Archivio · tolta da ${r.collegamentiTolti} collegamenti`)
+                } catch (e) {
+                  useStore.getState().mostraToast((e as Error).message)
+                }
+                setConferma(false)
+              }}>Sposta in archivio</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { Repository } from '../src/main/repository'
 
 const sorgente = resolve(__dirname, '../../01_Argomenti')
+const prima_dir = (r: string): string => join(r, '01_Argomenti/italiano/autori/leopardi/schede')
 const attesa = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms))
 
 describe.skipIf(!existsSync(sorgente))('Repository', () => {
@@ -74,6 +75,30 @@ describe.skipIf(!existsSync(sorgente))('Repository', () => {
     const d = await repo.duplicaScheda(a.id)
     expect(d.id).toBe('nuova_copia')
     expect(d.modello.schede).toHaveLength(108)
+  })
+
+  it("elimina = sposta in archivio e ripulisce collegamenti e glossario", async () => {
+    const r = copia()
+    repo = new Repository(r, 'leopardi')
+    await repo.carica()
+    const prima = repo.modello()
+    const id = 'parali'
+    const nColl = prima.schede.filter((x) => x.collegamenti.includes(id)).length
+    const glPrima = readFileSync(join(r, '01_Argomenti/italiano/autori/leopardi/glossario.md'), 'utf8')
+    const esito = await repo.eliminaScheda(id)
+    expect(existsSync(join(prima_dir(r), `${id}.md`))).toBe(false)
+    expect(existsSync(esito.archiviata)).toBe(true)
+    expect(esito.archiviata).toContain('99_Archivio')
+    expect(esito.collegamentiTolti).toBe(nColl)
+    const m = repo.modello()
+    expect(m.schede).toHaveLength(104)
+    expect(m.problemi.filter((p) => p.codice.includes('inesistente'))).toEqual([])
+    expect(m.schede.some((x) => x.collegamenti.includes(id))).toBe(false)
+    const glDopo = readFileSync(join(r, '01_Argomenti/italiano/autori/leopardi/glossario.md'), 'utf8')
+    const righe = (t: string): string[] => t.split('\n')
+    const diverse = righe(glDopo).filter((l, i) => l !== righe(glPrima)[i]).length
+    expect(diverse).toBeLessThanOrEqual(esito.vociTolte * 2 + 1)
+    await expect(repo.eliminaScheda(id)).rejects.toThrow()
   })
 
   it('un file rotto a mano non blocca le altre schede', async () => {

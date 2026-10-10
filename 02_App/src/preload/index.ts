@@ -7,6 +7,7 @@ const api: Api = {
   scegliAutore: (id) => ipcRenderer.invoke('autore:scegli', id),
   aggiornaScheda: (id, patch) => ipcRenderer.invoke('scheda:aggiorna', id, patch),
   creaScheda: (n) => ipcRenderer.invoke('scheda:crea', n),
+  eliminaScheda: (id) => ipcRenderer.invoke('scheda:elimina', id),
   duplicaScheda: (id) => ipcRenderer.invoke('scheda:duplica', id),
   aggiornaAutore: (p) => ipcRenderer.invoke('autore:aggiorna', p),
   aggiornaTemi: (t) => ipcRenderer.invoke('temi:aggiorna', t),

@@ -245,6 +245,56 @@ export class Repository {
     })
   }
 
+  /**
+   * «Elimina» non cancella: sposta il file in 99_Archivio/schede_eliminate/ (si recupera a mano o con git)
+   * e toglie la scheda dai collegamenti delle altre schede e dalle voci del glossario.
+   */
+  eliminaScheda(id: string): Promise<{ modello: Modello; archiviata: string; collegamentiTolti: number; vociTolte: number }> {
+    return this.inCoda(async () => {
+      const rel = `schede/${id}.md`
+      if (!this.cache.has(rel)) throw new Error(`La scheda «${id}» non esiste più.`)
+      const cartella = join(this.radice, '99_Archivio', 'schede_eliminate')
+      await fs.mkdir(cartella, { recursive: true })
+      const ora = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)
+      const destinazione = join(cartella, `${this.autoreId}_${id}_${ora}.md`)
+      await fs.rename(join(this.dir, rel), destinazione)
+      this.cache.delete(rel)
+
+      let collegamentiTolti = 0
+      for (const [altro, testo] of [...this.cache]) {
+        if (!/^schede\/[^/]+\.md$/.test(altro)) continue
+        const doc = leggiDocMd(testo)
+        const col = doc.fm.collegamenti
+        if (doc.erroreYaml || !Array.isArray(col) || !col.includes(id)) continue
+        const resto = col.filter((x) => x !== id)
+        if (resto.length) doc.fm.collegamenti = resto
+        else delete doc.fm.collegamenti
+        collegamentiTolti++
+        await this.scrivi(altro, scriviDocMd(doc, { ordine: ORDINE_CAMPI_SCHEDA }))
+      }
+
+      let vociTolte = 0
+      const testoGl = this.cache.get('glossario.md')
+      if (testoGl) {
+        const gl = leggiDocMd(testoGl)
+        const voci = gl.fm.voci
+        if (!gl.erroreYaml && Array.isArray(voci)) {
+          let cambiato = false
+          for (const v of voci as { schede?: unknown }[]) {
+            if (v && Array.isArray(v.schede) && v.schede.includes(id)) {
+              v.schede = v.schede.filter((x) => x !== id)
+              vociTolte++
+              cambiato = true
+            }
+          }
+          if (cambiato) await this.scrivi('glossario.md', scriviDocMd(gl))
+        }
+      }
+      this.emetti([])
+      return { modello: this.modello(), archiviata: destinazione, collegamentiTolti, vociTolte }
+    })
+  }
+
   aggiornaAutore(patch: AutorePatch): Promise<Modello> {
     return this.inCoda(async () => {
       const testo = await this.leggiDisco('autore.md')
