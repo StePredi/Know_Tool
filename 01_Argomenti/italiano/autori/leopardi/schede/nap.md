@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Dal 1833 a Napoli con Ranieri; le Opere in sei volumi (1835-36) sono sequestrate dai Borbone.
+Nell'ottobre 1833, in cerca di un clima più mite, Leopardi si stabilisce a Napoli con l'amico Ranieri. Nel 1835 firma il contratto per la pubblicazione delle Opere in sei volumi: il primo volume, con la seconda edizione dei Canti, esce a settembre; il secondo, con le Operette morali, a gennaio 1836. Entrambi vengono sequestrati per ordine del governo borbonico.
 
 ## Dettagli
 - In cerca di un **clima più mite**, si stabilisce a Napoli con l'amico Ranieri.

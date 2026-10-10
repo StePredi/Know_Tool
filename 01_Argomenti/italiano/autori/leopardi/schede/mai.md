@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Cardinale che ritrovò il De republica di Cicerone: ispira la canzone Ad Angelo Mai.
+Angelo Mai è un cardinale, direttore della Biblioteca Vaticana, che ritrova il De republica di Cicerone. Il ritrovamento ispira la canzone Ad Angelo Mai (1820). Nel 1821 Leopardi gli scrive anche una lettera per chiedergli un favore.
 
 ## Dettagli
 - Cardinale, direttore della **Biblioteca Vaticana**: ritrova il *De republica* di **Cicerone**.

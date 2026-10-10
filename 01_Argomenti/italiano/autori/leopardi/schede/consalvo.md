@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1832: novella in versi: l'innamorato morente ottiene il bacio.
+Consalvo (1832) è una novella in versi di intonazione patetica e sentimentale: il culmine è nel bacio che l'innamorato, morente, ottiene confessando alla donna il proprio amore.
 
 ## Dettagli
 - **Novella in versi** di intonazione patetica e sentimentale: culmine nel **bacio** che l'innamorato, morente, ottiene confessando alla donna il proprio amore.

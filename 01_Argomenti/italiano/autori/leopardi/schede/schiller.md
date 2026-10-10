@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Nel 1796 distingue poesia ingenua (antica) e sentimentale (moderna).
+Nel trattato Sulla poesia ingenua e sentimentale (1796) Schiller aveva già distinto i due tipi di poesia: l'ingenua (antica) e la sentimentale (moderna).
 
 ## Dettagli
 - Nel trattato *Sulla poesia ingenua e sentimentale* (1796) aveva già distinto i **due tipi di poesia**, antica e moderna.

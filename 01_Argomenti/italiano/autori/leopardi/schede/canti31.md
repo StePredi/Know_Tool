@@ -9,7 +9,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Firenze 1831: 23 liriche, dedicata agli amici fiorentini.
+La prima edizione dei Canti (Firenze, 1831) comprende 23 liriche ed è dedicata agli «amici fiorentini».
 
 ## Dettagli
 - Stampata a **Firenze** e dedicata agli «amici fiorentini». **23 liriche**.

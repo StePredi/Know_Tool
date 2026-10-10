@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1834: Sopra un bassorilievo e Sopra il ritratto di una bella donna, di tono agonistico.
+Le canzoni sepolcrali (1834) sono Sopra un bassorilievo antico sepolcrale e Sopra il ritratto di una bella donna. Manifestano una tensione agonistica, tipica dell'ultima fase.
 
 ## Dettagli
 - *Sopra un bassorilievo antico sepolcrale* e *Sopra il ritratto di una bella donna*.

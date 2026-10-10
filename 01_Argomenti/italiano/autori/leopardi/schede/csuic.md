@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Bruto minore e Saffo: il suicidio come scelta eroica di libertà o ribellione al destino.
+Bruto minore (1821) e Ultimo canto di Saffo (1822) sono composte quando matura il cambiamento nella concezione della natura, da «benigna» a «matrigna». Bruto, sconfitto a Filippi, si uccide davanti al crollo degli ideali di libertà e giustizia: suicidio come scelta titanica. Saffo, dall'animo stupendo in un brutto corpo, ama Faone senza essere ricambiata: suicidio come ribellione al destino.
 
 ## Dettagli
 - *Bruto minore* (1821) e *Ultimo canto di Saffo* (1822): composte quando matura il cambiamento nella concezione della natura, da «benigna» a «matrigna» (**crisi del pessimismo storico**).

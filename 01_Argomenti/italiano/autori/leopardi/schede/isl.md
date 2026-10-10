@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-La Natura risponde all'islandese di essere indifferente alla sorte delle creature.
+Nel Dialogo della Natura e di un Islandese, un islandese attraversa il mondo per sfuggire al dolore e alla forza malvagia della Natura. Quando si incontrano, chiede spiegazioni della sofferenza umana: la Natura risponde di essere indifferente alla sorte di tutte le creature. Il testo svela la verità sul destino doloroso riservato dalla natura.
 
 ## Dettagli
 - Un islandese attraversa il mondo per sfuggire al dolore e alla forza malvagia della Natura. Quando si incontrano, chiede spiegazioni della sofferenza umana: la Natura risponde di essere **indifferente alla sorte di tutte le creature**.

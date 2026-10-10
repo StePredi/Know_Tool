@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Ultimo Leopardi: satira contro l'ottimismo e solidarietà tra gli uomini contro la natura.
+A Napoli (1833-1837) Leopardi unisce la satira per criticare l'ottimismo ideologico del suo tempo, «superbo e sciocco», e rifiuta l'assolutismo delle idee metafisiche e i facili miti della scienza. Li sostituisce con una moralità laica di solidarietà sociale, atteggiamento comune di tutta l'umanità: la «social catena». Il Dialogo di Tristano e di un amico (1832) anticipa il «pessimismo eroico».
 
 ## Dettagli
 - A Napoli (1833-1837) unisce la **satira** per criticare l'**ottimismo ideologico** del suo tempo, «superbo e sciocco».

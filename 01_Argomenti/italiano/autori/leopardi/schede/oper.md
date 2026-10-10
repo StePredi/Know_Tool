@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-24 prose filosofiche e satiriche scritte nel 1824: il male è intrinseco all'esistenza.
+Le Operette morali sono 24 prose filosofiche, in gran parte satiriche e in forma di dialogo, scritte soprattutto nel 1824 a Recanati, nel periodo di silenzio poetico. Attraverso l'analisi dell'«arido vero» Leopardi conclude che il male è intrinseco all'esistenza e vi espone in modo organico le riflessioni dello Zibaldone. Fonti: Luciano di Samòsata, gli illuministi francesi, i detti memorabili, l'elogio, il frammento apocrifo.
 
 ## Dettagli
 - Dopo Canzoni civili e Piccoli idilli inizia un periodo di **silenzio poetico (1823-1828)**: la nuova concezione pessimistica della natura impediva l'espressione dei sentimenti e dell'immaginazione. Nasce così la **prosa filosofica**: attraverso l'analisi dell'**«arido vero»** Leopardi arriva a concludere che il **male è intrinseco all'esistenza**.

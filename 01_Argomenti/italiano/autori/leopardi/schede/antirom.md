@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Né romantico né classicista: rifiuta imitazione e modelli nordici, esalta il naturale e spontaneo.
+Leopardi non è né romantico né classicista. Contro i romantici condanna i modelli della letteratura nordica; contro i classicisti respinge l'imitazione, l'abuso della mitologia e le regole dei generi, esaltando ciò che è spontaneo e originario. Con i romantici condivide l'esaltazione dell'io, la vita come dolore, l'aspirazione all'infinito e il titanismo. La lettera del 18 luglio 1816 anticipa il Discorso del 1818.
 
 ## Dettagli
 - La lettera del **18 luglio 1816** anticipa il *Discorso di un italiano intorno alla poesia romantica* (1818).

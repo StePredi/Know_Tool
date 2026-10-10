@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Classicista contrario alla Restaurazione: primo amico di Leopardi e causa del suo distacco dal padre.
+Pietro Giordani è uno scrittore classicista contrario alla Restaurazione. Si accorge del talento del giovane Leopardi e nel 1817 inizia con lui un rapporto epistolare: è il suo primo amico e sostenitore culturale. Grazie a lui Leopardi abbandona le posizioni politiche del padre e si avvicina al patriottismo laico e liberale.
 
 ## Dettagli
 - Scrittore **classicista, contrario alla Restaurazione**. Si accorge del talento del giovane Leopardi nonostante la lettera non pubblicata: nel **1817** inizia tra i due un **rapporto epistolare**.

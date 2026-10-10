@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1836: testamento spirituale: solidarietà («social catena»); la ginestra resiste alla lava.
+La ginestra (primavera 1836) è l'ultima grande composizione, il testamento spirituale, letterario e filosofico di Leopardi: un canto polemico contro ogni fiducia religiosa e contro la superbia antropocentrica. Propone di accettare con coraggio la propria mancanza di significato nell'universo e di stringersi in una «social catena», patto di solidarietà contro la natura e le ingiustizie sociali. La ginestra che fiorisce tra la lava del Vesuvio è allegoria della vita che resiste alla distruzione.
 
 ## Dettagli
 - **Ultima grande composizione**: il **testamento spirituale** e il **testamento letterario e filosofico**. Canto polemico contro ogni forma di **fiducia religiosa** e contro la vana e folle **superbia antropocentrica**.

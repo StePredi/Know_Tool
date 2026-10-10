@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Per Schopenhauer il piacere è solo cessazione del dolore: pensiero molto vicino a Leopardi.
+Schopenhauer è un filosofo tedesco spesso accostato a Leopardi. In Il mondo come volontà e rappresentazione (1818) afferma che il piacere è solo una momentanea cessazione del dolore, a cui subentra la noia o altro dolore: una riflessione molto vicina alla teoria del piacere di Leopardi.
 
 ## Dettagli
 - Filosofo tedesco spesso accostato a Leopardi. In *Il mondo come volontà e rappresentazione* (1818) afferma che il **piacere è solo una momentanea cessazione del dolore**, a cui però subentra la **noia** o altro dolore.

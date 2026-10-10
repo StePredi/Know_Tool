@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Elegia-cerniera del 1817: passa dai temi civili al soggettivismo degli idilli.
+Il primo amore (1817) è un'elegia-cerniera tra le Canzoni e i Piccoli idilli: primo componimento in ordine cronologico, è collocato tra le Canzoni civili e filosofiche e i Piccoli idilli, più soggettivi. Esprime la delusione per l'amore impossibile per la cugina Geltrude Cassi e conclude la prima fase dell'attività letteraria.
 
 ## Dettagli
 - **Elegia-cerniera** tra Canzoni e Piccoli idilli: primo componimento in ordine cronologico, ma posto tra le *Canzoni civili e filosofiche* e i *Piccoli idilli*, che hanno carattere più **soggettivo** con protagonista l'io lirico.

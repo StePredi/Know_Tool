@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1836-37: a Villa Ferrigni, ai piedi del Vesuvio, scrive La ginestra e Il tramonto della luna.
+Afflitto da problemi respiratori e per sfuggire a un'epidemia di colera, nel 1836-1837 Leopardi abita a lungo a Villa Ferrigni, fra Torre del Greco e Torre Annunziata, con Ranieri e sua sorella Paolina. Nel paesaggio di lave vulcaniche e fiori mediterranei scrive il suo testamento spirituale: Il tramonto della luna e La ginestra.
 
 ## Dettagli
 - Afflitto da problemi respiratori e per sfuggire a un'**epidemia di colera**, abita a lungo nella **Villa Ferrigni**, fra Torre del Greco e Torre Annunziata, con Ranieri e sua sorella Paolina.

@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1831-34: cinque canti anti-idillici sull'amore per Fanny, combattivi e consapevoli.
+Il Ciclo di Aspasia (1831-1834) comprende cinque canti ispirati all'amore, mai corrisposto, per Fanny Targioni Tozzetti, cantata come Aspasia: Il pensiero dominante, Amore e Morte, Consalvo, A se stesso, Aspasia. È una poesia anti-idillica, non più basata sui sogni giovanili recuperati dalla memoria ma combattiva ed energica. L'amore è l'estremo potere, poi rivelatosi illusorio, di riscattare una vita di affanni.
 
 ## Dettagli
 - Cinque canti ispirati all'amore, mai corrisposto, per **Fanny Targioni Tozzetti**, cantata come Aspasia.

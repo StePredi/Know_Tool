@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Aprile 1828: rinascono emozioni e speranze, ma con l'«infausta verità» accanto.
+Il 2 maggio 1828 Leopardi scrive alla sorella Paolina: «dopo due anni ho fatto dei versi quest'aprile». Nel poeta rivivono le speranze, i «dolci affanni» e il sentimento del dolore: elenca le sventure dell'«infausta verità», ma nota con stupore che sente ancora rivivere in sé gli inganni. È la rinascita delle emozioni.
 
 ## Dettagli
 - Il 2 maggio 1828 scrive alla sorella Paolina: «dopo due anni ho fatto dei versi quest'aprile».

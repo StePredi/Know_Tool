@@ -10,7 +10,7 @@ fuori_dal_libro: true
 ---
 
 ## Riassunto
-Il padre Monaldo è conservatore e amante dei libri; la madre Adelaide è severa e governa la casa.
+Il padre è il conte Monaldo Leopardi, conservatore e appassionato di libri, che ha raccolto in casa una grande biblioteca; la madre è la marchesa Adelaide Antici, severa e rigida, che governa la casa e il patrimonio. Giacomo è il primo dei figli, tra i quali Carlo e Paolina. L'ambiente aristocratico, provinciale e chiuso e il disagio familiare contribuiscono al suo pessimismo.
 
 ## Dettagli
 - **Padre**: il conte Monaldo Leopardi, conservatore, appassionato di libri; ha raccolto in casa una grande biblioteca.

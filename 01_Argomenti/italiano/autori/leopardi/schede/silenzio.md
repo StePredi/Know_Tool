@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1823-28: solo due poesie; Leopardi scrive le Operette e matura il pessimismo cosmico.
+Nel periodo del silenzio poetico (1823-1828), tra Piccoli idilli e Canti pisano-recanatesi, Leopardi compone solo due poesie, Alla sua donna (1823) e l'epistola Al conte Carlo Pepoli (1826), e si concentra sulla prosa delle Operette morali. Intanto matura una trasformazione umana e culturale. La nuova concezione pessimistica della natura impediva l'espressione dei sentimenti e dell'immaginazione: nasce così la prosa filosofica.
 
 ## Dettagli
 - Tra i Piccoli idilli e i Canti pisano-recanatesi, Leopardi compone solo due poesie: *Alla sua donna* (1823) e l'epistola in endecasillabi *Al conte Carlo Pepoli* (1826). Si concentra sulla **prosa delle Operette morali**.

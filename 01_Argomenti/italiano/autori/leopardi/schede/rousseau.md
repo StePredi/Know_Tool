@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Progresso e ragione corrompono e allontanano dalla natura: influenza il pessimismo storico.
+Secondo Rousseau il progresso ha portato decadenza e corruzione morale, e la ragione è causa dell'infelicità del genere umano perché ci ha allontanato dalla natura. Leopardi ne subisce l'influsso nella fase del pessimismo storico (fino al 1822 circa).
 
 ## Dettagli
 - Secondo lui il **progresso** ha portato **decadenza e corruzione morale**, e la **ragione** è causa dell'infelicità del genere umano perché ci ha allontanato dalla natura.

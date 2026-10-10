@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Letterato bolognese: a lui è dedicata l'epistola del 1826, una delle due poesie del silenzio.
+Il conte Carlo Pepoli è un letterato bolognese frequentato da Leopardi durante il soggiorno a Bologna. A lui è dedicata l'epistola in endecasillabi Al conte Carlo Pepoli (1826), una delle due sole poesie del periodo di silenzio poetico.
 
 ## Dettagli
 - Letterato bolognese frequentato nel soggiorno a Bologna.

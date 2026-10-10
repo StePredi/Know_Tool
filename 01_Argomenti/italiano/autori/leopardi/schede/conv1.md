@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1816: passa dall'erudizione alla poesia; scrive contro de Staël e stringe rapporto con Giordani.
+Tra il 1816 e il 1818 Leopardi compie una conversione «dall'erudizione al bello», dallo studio passivo alla poesia, spinto da infelicità, insoddisfazione e bisogno di realizzare qualcosa di grande e di assoluto. Traduce i classici greci e latini, compone i primi esperimenti poetici e legge classici e moderni. Nel 1816, con la polemica tra classicisti e romantici, scrive una lettera in risposta a Madame de Staël che non viene pubblicata.
 
 ## Dettagli
 - Infelicità, insoddisfazione e bisogno di realizzare qualcosa di grande e di assoluto lo spingono, come scrive lui stesso, a una conversione «dall'erudizione al bello»: dallo **studio passivo alla poesia**.

@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Il Neoclassicismo voleva imitare gli antichi; Leopardi li vede come modelli di etica e spontaneità.
+Il Neoclassicismo difendeva gli antichi come riferimenti letterari di razionalità e armonia da imitare. Leopardi non li difende così: per lui gli antichi sono modelli di regole e principi etici e creatori di una poesia spontanea.
 
 ## Dettagli
 - Difendeva gli antichi come riferimenti letterari di **razionalità e armonia da imitare**.

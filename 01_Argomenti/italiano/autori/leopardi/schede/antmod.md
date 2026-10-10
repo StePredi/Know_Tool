@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Antichi = fantasia e illusioni; moderni = ragione e vero: la poesia moderna è «sentimentale» e vive di ricordo.
+Per Leopardi gli antichi, vicini alla natura e liberi dalla ragione, fanno poesia di fantasia e creano miti e favole, cioè le «illusioni» che rivestono la dura realtà e nascondono il «vero». La ragione fa cadere le illusioni e svela l'inutilità dell'esistenza. Ai moderni spetta una poesia «sentimentale», legata alla realtà interiore, che recupera attraverso il ricordo la poeticità delle sensazioni della fanciullezza.
 
 ## Dettagli
 - **Antichi** (vicini alla natura incontaminata, liberi dalla ragione): poesia di **fantasia e immaginazione**, qualità dei primitivi e dei fanciulli. Hanno creato miti e favole, cioè le **«illusioni»** che rivestono la dura realtà e nascondono il **«vero»**.

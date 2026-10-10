@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1837: ultimo componimento, scritto nelle ultime settimane di vita.
+Il tramonto della luna (1837) è l'ultimo componimento di Leopardi, scritto nelle ultime settimane di vita a Villa Ferrigni. Con La ginestra forma il suo testamento spirituale.
 
 ## Dettagli
 - **Ultimo componimento** di Leopardi, scritto nelle ultime settimane di vita a Villa Ferrigni. Con *La ginestra* forma il **testamento spirituale**.

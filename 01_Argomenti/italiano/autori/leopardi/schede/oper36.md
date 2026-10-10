@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Napoli 1836: edizione censurata dai Borbone.
+L'edizione delle Operette morali del gennaio 1836 (Napoli) è curata dall'autore ed è censurata dal governo borbonico: il secondo volume delle Opere viene sequestrato.
 
 ## Dettagli
 - Curata dall'autore, **censurata dal governo borbonico**: il secondo volume delle *Opere* venne sequestrato.

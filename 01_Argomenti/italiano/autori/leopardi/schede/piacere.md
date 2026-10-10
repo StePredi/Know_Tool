@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Il piacere infinito desiderato è irraggiungibile; il solo piacere è immaginarlo: da qui la noia.
+Formulata dal luglio 1820, la teoria del piacere cerca di conciliare bisogni materiali e aspirazione alla felicità assoluta. L'individuo aspira a un piacere infinito, ma il piacere reale è sempre finito. Da questa «contraddizione spaventevole» deriva che l'unico piacere è immaginare la realizzazione dei desideri più che ottenerla; ne consegue la noia, il vuoto prodotto da una tensione inappagata.
 
 ## Dettagli
 - Nasce da dolore fisico, disagio familiare e insofferenza per Recanati; formulata **dal luglio 1820**.

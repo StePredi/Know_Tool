@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Firenze 1834: esclude il Dialogo di un lettore di umanità e di Sallustio: da 25 a 24 testi.
+L'edizione delle Operette morali del 1834 (Firenze) è curata dall'autore. Leopardi esclude il Dialogo di un lettore di umanità e di Sallustio, presente nella prima edizione: i testi passano da 25 a 24.
 
 ## Dettagli
 - Curata dall'autore. Nel 1834 esclude il *Dialogo di un lettore di umanità e di Sallustio*, presente nella prima edizione: i testi passano da 25 a **24**.

@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1823-28: la natura è indifferente e il male è intrinseco all'esistenza, per tutto il genere umano.
+Tra il 1823 e il 1828, con il lungo silenzio poetico e la scrittura delle Operette morali, la visione filosofica diventa ancora più sconsolata. Il male è intrinseco all'esistenza («arido vero»): la natura è matrigna e indifferente e il dolore riguarda l'intero genere umano, specie non privilegiata e trascurabile nell'universo. Leopardi respinge ogni conforto derivante da una concezione finalistica o provvidenziale.
 
 ## Dettagli
 - Tra il 1823 e il 1828, lungo **silenzio poetico** e scrittura delle **Operette morali**: visione filosofica ancora più sconsolata. Il ritorno alla poesia con i **Grandi idilli** è segnato dal passaggio dal pessimismo storico a quello cosmico.

@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1825: l'editore Stella lo chiama a Milano per l'edizione delle opere di Cicerone.
+Nell'estate 1825 l'editore milanese Stella gli offre la direzione dell'edizione completa delle opere di Cicerone. Leopardi parte a luglio, sostando a Bologna dove rivede Giordani, e resta a Milano fino a fine settembre, visitando il vecchio Vincenzo Monti.
 
 ## Dettagli
 - L'editore milanese **Stella** gli offre la direzione dell'edizione completa delle opere di **Cicerone**.

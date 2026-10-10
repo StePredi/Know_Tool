@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Prima operetta: mito delle epoche dell'umanità e ricerca tragica della felicità.
+La Storia del genere umano è la prima delle Operette morali: una narrazione allegorica e mitica delle vicende dell'umanità, in varie epoche, contrassegnate dalla tragica ricerca della felicità. Vi si afferma già che l'amore ha il potere di riscattare una vita di affanni, tema ripreso nel Ciclo di Aspasia.
 
 ## Dettagli
 - **Prima delle Operette morali**: narrazione allegorica e mitica delle vicende dell'umanità, in varie epoche, contrassegnate dalla tragica ricerca della felicità.

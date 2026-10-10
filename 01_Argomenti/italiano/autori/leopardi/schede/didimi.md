@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Sportivo recanatese a cui è dedicata A un vincitore nel pallone.
+Carlo Didimi è uno sportivo recanatese a cui Leopardi dedica la canzone A un vincitore nel pallone (1821).
 
 ## Dettagli
 - Sportivo recanatese a cui è dedicata *A un vincitore nel pallone* (1821).

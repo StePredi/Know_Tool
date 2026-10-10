@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Esule napoletano, amico di Leopardi a Firenze e Napoli: eredita lo Zibaldone (non lo pubblica), cura Canti e Operette 1845.
+Antonio Ranieri è un esule politico napoletano che Leopardi conosce a Firenze nel 1827 e con cui nell'ottobre 1833 si stabilisce a Napoli; nel 1836-1837 vive con lui e con sua sorella Paolina a Villa Ferrigni. Leopardi gli lascia il manoscritto dello Zibaldone (circa 4000 pagine in sette taccuini), ma Ranieri non lo pubblica. Cura invece le edizioni definitive del 1845: i Canti (41 testi) e le Operette morali (24 testi).
 
 ## Dettagli
 - **Esule politico napoletano**, conosciuto a Firenze nel 1827. L'amicizia si rafforza a Firenze; nell'**ottobre 1833** Leopardi si stabilisce con lui a **Napoli**.

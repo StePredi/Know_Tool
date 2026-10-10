@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1833: le speranze d'amore sono morte, il cuore deve riposare per sempre.
+A se stesso (1833) segna la brusca interruzione del sentimento verso una donna concreta: sono morte le speranze dell'amore e il desiderio di altri inganni. L'io lirico invita il proprio cuore a riposare per sempre, in una virile rinuncia a ogni desiderio vitale, con un linguaggio duro, aspro e spezzato.
 
 ## Dettagli
 - **Brusca interruzione del sentimento** verso una donna concreta: **morte le speranze** dell'amore e il desiderio di altri inganni. L'io lirico invita il proprio cuore a **riposare per sempre**, in una **virile rinuncia a ogni desiderio vitale**.

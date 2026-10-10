@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Contessa bolognese: Leopardi si innamora senza essere corrisposto.
+Teresa Carniani Malvezzi è una contessa bolognese di cui Leopardi si innamora senza essere corrisposto. L'amore per lei è tra le esperienze che maturano il poeta prima dei Grandi idilli.
 
 ## Dettagli
 - Contessa bolognese di cui Leopardi si innamora **senza essere corrisposto**.

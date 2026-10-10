@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1835: finta ritrattazione a Capponi per criticare l'ottimismo e il mito del progresso.
+Nella Palinodia a Gino Capponi (1835) il poeta finge una ritrattazione delle proprie idee, con lo stesso procedimento del Dialogo di Tristano: un elogio esagerato del presente. Il tono è polemico verso la cultura cattolica e la realtà scientifica, industriale e commerciale dell'Ottocento. Leopardi riconosce il potere liberatorio dell'Illuminismo ma nega che il dominio razionale sulla natura sia stato progresso.
 
 ## Dettagli
 - Il poeta finge una **ritrattazione** delle proprie idee, con lo stesso procedimento del *Dialogo di Tristano*: elogio esagerato del presente.

@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1828-30: canzone libera, rimembranza e pessimismo cosmico; più lunghi dei Piccoli idilli.
+I Grandi idilli (1828-1830) hanno come fonte del sentimento poetico la «rimembranza»: alla dolcezza del ricordo si unisce la cognizione del presente e delle perdute illusioni giovanili. Le immagini liete create dalla memoria sono accompagnate dall'«acerbo vero» e dal pessimismo cosmico. La forma è la canzone libera, mista di endecasillabi e settenari, più lunga che nei Piccoli idilli (da qui «Grandi»).
 
 ## Dettagli
 - **Fonte del sentimento poetico**: la **«rimembranza»**, in sé dolce ma anche dolorosa. Alla dolcezza del ricordo si unisce la cognizione del presente e delle **perdute illusioni giovanili**.

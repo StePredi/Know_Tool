@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Copernico e la Terra: satira dell'antropocentrismo e della fiducia nel progresso.
+Nel Copernico, l'assertore dell'eliocentrismo deve convincere la Terra a muoversi. L'espediente permette a Leopardi di attaccare l'antropocentrismo e la fiducia nel progresso.
 
 ## Dettagli
 - Copernico, assertore dell'eliocentrismo, deve convincere la Terra a muoversi. L'espediente permette di attaccare l'**antropocentrismo** e la fiducia nel progresso.

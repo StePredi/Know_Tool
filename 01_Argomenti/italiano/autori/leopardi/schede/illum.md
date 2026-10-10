@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Il materialismo settecentesco nega lo spirito: Leopardi lo adotta ma ne critica il progresso.
+Il materialismo settecentesco negava una dimensione spirituale all'essere umano, considerando soltanto la realtà biologico-materiale; Leopardi vi aderisce tra il 1819 e il 1823. Riconosce il potere liberatorio dell'Illuminismo (Palinodia) ma nega che il dominio razionale dell'umanità sulla natura sia stato progresso. Gli illuministi francesi (Diderot, Voltaire) sono tra le fonti delle Operette morali.
 
 ## Dettagli
 - Il **materialismo settecentesco** negava una dimensione spirituale all'essere umano, considerando soltanto la realtà biologico-materiale.

@@ -9,7 +9,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Fondatore dell'Antologia: il suo gruppo dà a Leopardi un assegno per lasciare Recanati.
+Vieusseux è un ricco commerciante ginevrino, fondatore a Firenze della rivista «Antologia», attorno a cui si riuniscono intellettuali cattolico-liberali. Il suo gruppo offre a Leopardi per un anno un assegno mensile «in segno di stima»: nel 1830 il poeta può così lasciare Recanati per sempre.
 
 ## Dettagli
 - **Vieusseux**: ricco commerciante ginevrino, fondatore della rivista **«Antologia»** a Firenze. Nel gruppo, intellettuali **cattolico-liberali**.

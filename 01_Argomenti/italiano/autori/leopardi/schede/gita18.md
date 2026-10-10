@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Sett. 1818: prima volta che viaggia senza familiari (Macerata, con Giordani).
+Nel settembre 1818 Giordani visita Recanati e fa con Leopardi una gita a Macerata. È la prima volta che Giacomo viaggia senza essere accompagnato da un familiare.
 
 ## Dettagli
 - Giordani va in visita a Recanati e fa una gita a **Macerata** con Leopardi.

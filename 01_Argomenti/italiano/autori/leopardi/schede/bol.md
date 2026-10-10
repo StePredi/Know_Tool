@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1825-26: commento a Petrarca per Stella, amici bolognesi, amore non ricambiato per la Malvezzi.
+Leopardi si ferma circa un anno a Bologna (1825-1826), dove lavora al commento alle Rime di Petrarca commissionato da Stella. Frequenta Giordani e vari letterati, tra cui il conte Carlo Pepoli e la contessa Teresa Carniani Malvezzi, di cui si innamora senza essere corrisposto. Dopo un nuovo ritorno a Recanati nell'inverno 1826, nella primavera 1827 ha una seconda permanenza a Bologna.
 
 ## Dettagli
 - Si ferma circa un anno a Bologna: lavora a un **commento alle Rime di Petrarca** commissionato da Stella.

@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1821-22: la natura diventa matrigna e cadono anche le illusioni sull'eroismo antico.
+Tra il 1821 e il 1822 la natura passa da madre «benigna» a «matrigna». All'opposizione natura-ragione subentra quella natura-umanità: gli esseri umani sono vittime innocenti di un inganno crudele. Cadono le illusioni e anche l'eroico passato di Grecia e Roma è ricondotto al comune destino di dolore; la grandezza d'animo si misura nelle scelte eroiche di Bruto e Saffo.
 
 ## Dettagli
 - Cambia la concezione della natura, da madre **«benigna»** a **«matrigna»**.

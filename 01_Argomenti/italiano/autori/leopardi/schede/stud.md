@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Dal 1809 al 1816 studia in modo «matto e disperatissimo»: si erudisce, ma rovina fisico e vista.
+Tra il 1809 e il 1816 Leopardi riceve una formazione erudita, con uno «studio matto e disperatissimo»: nel 1812-1815 scrive saggi eruditi, nel 1816 traduzioni e prime poesie. Gli intensi anni di studio indeboliscono il fisico, già colpito da una precoce patologia delle ossa, e gli causano una grave malattia agli occhi. Il suo orizzonte culturale si apre ed entra in conflitto con l'ambiente gretto e soffocante in cui è costretto a vivere.
 
 ## Dettagli
 - Riceve una **formazione erudita**: «studio matto e disperatissimo».

@@ -9,7 +9,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1821: il poeta solitario nei boschi riflette sulla propria condizione.
+L'io lirico cammina solitario nei boschi al chiaror della luna, riflettendo sulla propria condizione esistenziale.
 
 ## Dettagli
 - L'io lirico cammina **solitario nei boschi** al chiaror della luna, riflettendo sulla propria **condizione esistenziale**.

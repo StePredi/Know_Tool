@@ -9,7 +9,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Napoli 1835: 39 liriche.
+La seconda edizione dei Canti (Napoli, estate 1835) comprende 39 liriche. Fa parte del primo volume delle Opere in sei volumi, sequestrato dal governo borbonico.
 
 ## Dettagli
 - **Napoli**, estate 1835. **39 liriche**. Fa parte del primo volume delle *Opere* in sei volumi, sequestrato dal governo borbonico.

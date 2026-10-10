@@ -10,7 +10,7 @@ fuori_dal_libro: true
 ---
 
 ## Riassunto
-1830-31: insurrezioni nell'Italia centrale; nel 1831 escono i Canti.
+Tra il 1830 e il 1831 ci sono insurrezioni a Modena, Parma e nello Stato della Chiesa (compresa Bologna), represse con l'aiuto dell'Austria. Nel 1831 Leopardi, a Firenze, pubblica la prima edizione dei Canti.
 
 ## Dettagli
 - Insurrezioni a Modena, Parma e nello Stato della Chiesa (compresa Bologna), represse con l'aiuto dell'Austria.

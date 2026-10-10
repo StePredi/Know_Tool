@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1829: ricordi d'infanzia dal palazzo paterno e rimpianto; la poesia consola.
+Dalle finestre del palazzo paterno il poeta osserva le stelle dell'Orsa Maggiore ed è assalito dai ricordi dell'infanzia, che si sovrappongono alle immagini del presente. Seguono amare riflessioni sulla caducità della speranza e il rimpianto di un passato perduto, con la morte della giovanissima amata Nerina. Resta la consolazione della poesia, che nasce dal ricordo e dall'atmosfera di vaghezza.
 
 ## Dettagli
 - Il poeta osserva dalle finestre del **palazzo paterno** le stelle dell'Orsa Maggiore ed è assalito dai **ricordi dell'infanzia**, che si sovrappongono alle immagini del presente.

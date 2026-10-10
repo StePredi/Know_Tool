@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1829: il piacere è «figlio d'affanno»: solo fine momentanea di un dolore.
+La poesia si apre con quadri di vita paesana, il borgo che riprende dopo un temporale. La strofa conclusiva svela la teoria del piacere negativo: il piacere è «figlio d'affanno». Come la «quiete» dopo la «tempesta», la fine di un dolore procura una momentanea consolazione, un effimero conforto.
 
 ## Dettagli
 - Apre con quadri di vita paesana (il borgo che riprende dopo un temporale). La strofa conclusiva svela la **teoria del piacere negativo**: il piacere è **«figlio d'affanno»**.

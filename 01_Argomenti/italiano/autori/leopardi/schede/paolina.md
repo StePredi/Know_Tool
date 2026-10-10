@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Sorella di Leopardi: le nozze fallite ispirano una canzone; a lei scrive del Risorgimento.
+Paolina è la sorella di Leopardi. Il suo progetto di matrimonio, poi fallito, ispira nel 1821 la canzone Nelle nozze della sorella Paolina. Il 2 maggio 1828 Leopardi le scrive di aver fatto versi «veramente all'antica» quell'aprile, riferendosi a Il risorgimento.
 
 ## Dettagli
 - Il suo progetto di matrimonio (poi fallito) ispira la canzone *Nelle nozze della sorella Paolina* (1821).

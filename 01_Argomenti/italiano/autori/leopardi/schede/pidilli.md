@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Brevi componimenti soggettivi (1819-21): paesaggio, immaginazione, ricordo, indefinito.
+I Piccoli idilli (1819-1821) abbandonano l'ispirazione classica per temi più personali e intimi: Leopardi li definì «esperimenti, situazioni, affezioni, avventure storiche del mio animo». Al posto di miti eroici e stile solenne c'è un discorso lirico-soggettivo, con componimenti brevi e strutture agili. Rielaborano l'idillio: la percezione visiva e uditiva diventa occasione di una poesia dell'immaginazione, della rimembranza e dell'indefinito.
 
 ## Dettagli
 - Abbandonata l'ispirazione classica per temi più **personali e intimi**, alla ricerca di un nuovo stile. Leopardi li definì «esperimenti, situazioni, affezioni, avventure storiche del mio animo».

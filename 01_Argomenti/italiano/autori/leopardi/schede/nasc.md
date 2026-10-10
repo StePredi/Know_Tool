@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Nasce a Recanati nel 1798: ambiente provinciale e disagio familiare alimentano il suo pessimismo.
+Leopardi nasce a Recanati, nello Stato della Chiesa, nel 1798. L'ambiente provinciale e il disagio familiare, insieme al dolore fisico, contribuiscono alla sua visione pessimistica della condizione umana.
 
 ## Dettagli
 - Nasce a **Recanati** (sulla mappa del libro: Stato della Chiesa).

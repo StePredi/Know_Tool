@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Il padre è conservatore: Leopardi se ne distacca grazie a Giordani (patriottismo laico e liberale).
+Il padre di Leopardi rappresenta le posizioni politiche conservatrici da cui Giacomo si distacca, avvicinandosi al patriottismo laico e liberale grazie a Giordani. Nel novembre 1822 concede finalmente il permesso di andare a Roma dagli zii Antici.
 
 ## Dettagli
 - Rappresenta le **posizioni politiche conservatrici** da cui Giacomo si distacca, avvicinandosi al patriottismo laico e liberale grazie a Giordani.

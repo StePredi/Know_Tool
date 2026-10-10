@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1830: un pastore chiede alla Luna il senso della vita: nessuna risposta, universo indifferente.
+Al motivo della ricordanza subentra l'aspirazione universale a comprendere il significato dell'esistenza. Un umile pastore, portavoce del poeta, chiede alla silenziosa Luna quale senso abbia la vita, che comincia nel dolore della nascita e finisce nel nulla della morte, ma non ci sono risposte. Anche gli altri esseri viventi sono condannati a un viaggio senza senso in un universo indifferente.
 
 ## Dettagli
 - Al motivo della ricordanza subentra l'**aspirazione universale a comprendere il significato dell'esistenza**.

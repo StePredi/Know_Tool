@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1819: la luna e il ricordo che rende dolce il passato, anche se triste.
+La contemplazione della luna abbellisce poeticamente le riflessioni sul ricordo, che, come l'immaginazione, abbellisce il passato anche se è stato triste.
 
 ## Dettagli
 - La contemplazione della luna abbellisce poeticamente le **riflessioni sul ricordo**, che come l'immaginazione abbellisce il passato, anche se è stato triste.

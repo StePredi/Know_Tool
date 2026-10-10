@@ -10,7 +10,7 @@ fuori_dal_libro: true
 ---
 
 ## Riassunto
-Precettori ecclesiastici, poi studio da solo nella biblioteca paterna: formazione religiosa e classica.
+Leopardi nasce a Recanati il 29 giugno 1798. I primi studi sono con precettori ecclesiastici in casa: una formazione tradizionale, religiosa e classica. Dal 1809 studia da solo nella biblioteca paterna (lingue antiche e moderne, filologia, filosofia) e comincia lo «studio matto e disperatissimo»; i saggi eruditi del 1812-1815 sono per esempio la Storia della astronomia (1813) e il Saggio sopra gli errori popolari degli antichi (1815).
 
 ## Dettagli
 - Nasce a Recanati il 29 giugno 1798.

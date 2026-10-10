@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Plotino dissuade Porfirio dal suicidio: solidarietà nel rendere la vita sopportabile.
+Nel Dialogo di Plotino e di Porfirio, in nome della solidarietà, il filosofo Plotino cerca di convincere l'amico Porfirio ad abbandonare i progetti suicidi. La vita è dolore e noia, ma è compito degli esseri umani cercare insieme di renderla più sopportabile.
 
 ## Dettagli
 - In nome della **solidarietà** il filosofo Plotino cerca di convincere l'amico Porfirio ad abbandonare i progetti suicidi: la vita è dolore e noia, ma è compito degli esseri umani **cercare insieme di renderla più sopportabile**.

@@ -9,7 +9,7 @@ fuori_dal_libro: true
 ---
 
 ## Riassunto
-Leopardi nasce e cresce negli anni di Napoleone, che riorganizza gli Stati italiani.
+Leopardi nasce (1798) e cresce negli anni in cui Napoleone riorganizza gli Stati italiani. Nel 1815 il Congresso di Vienna chiude questa fase.
 
 ## Dettagli
 - Leopardi nasce (1798) e cresce negli anni in cui Napoleone riorganizza gli Stati italiani.

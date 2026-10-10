@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Editore milanese: Cicerone, commento a Petrarca e prima edizione delle Operette (1827).
+Stella è l'editore milanese che nel 1825 offre a Leopardi la direzione dell'edizione completa delle opere di Cicerone e gli commissiona il commento alle Rime di Petrarca, a Bologna. Pubblica a Milano le Operette morali nel giugno 1827.
 
 ## Dettagli
 - 1825: gli offre la direzione dell'**edizione completa delle opere di Cicerone**.

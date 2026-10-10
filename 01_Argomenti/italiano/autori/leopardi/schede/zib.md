@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-4000 pagine di appunti (1817-1832) lasciate a Ranieri: pensieri, filologia, poetica, pessimismo.
+Lo Zibaldone è insieme cronaca, autobiografia e raccolta di appunti e pensieri: critica letteraria, schede filologiche, progetti di opere, abbozzi poetici. Il manoscritto, circa 4000 pagine in sette taccuini (1817-1832), fu lasciato a Ranieri, che non lo pubblicò. Il titolo «Zibaldone di pensieri», dato dal poeta nel 1827, compare per la prima volta nell'edizione del 1937 e indica «un piatto fatto con molti ingredienti».
 
 ## Dettagli
 - Contemporaneamente **cronaca e autobiografia**, raccolta di appunti e pensieri: critica letteraria, schede filologiche sui classici e sulle letterature moderne, progetti di opere, abbozzi di componimenti poetici, dubbi e ricerche.

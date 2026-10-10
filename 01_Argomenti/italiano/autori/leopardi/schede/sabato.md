@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1829: l'attesa del piacere (sabato) vale più del piacere stesso (domenica).
+La poesia è incentrata sulla felicità del sabato, che risulterà vana quando arriverà la domenica, con la noia e il pensiero già rivolto alle fatiche del lunedì. È la rappresentazione della teoria del piacere: l'attesa del piacere è superiore al suo raggiungimento.
 
 ## Dettagli
 - Incentrato sulla **felicità del sabato**, che risulterà vana quando arriverà la domenica con la noia e il pensiero già rivolto alle fatiche del lunedì.

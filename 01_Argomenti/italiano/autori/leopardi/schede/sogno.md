@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1820: incontro con la fanciulla morta, simbolo delle speranze giovanili crollate.
+Il poeta immagina l'incontro con una fanciulla morta e amata in passato, simbolo del crollo delle speranze giovanili.
 
 ## Dettagli
 - Immagina l'incontro con una **fanciulla morta** e amata in passato, simbolo del **crollo delle speranze giovanili**.

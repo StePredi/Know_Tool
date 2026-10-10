@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Roma 1822-23: delusione totale; torna a Recanati e scrive Operette e Zibaldone.
+Nel novembre 1822 Leopardi ottiene dal padre il permesso di andare a Roma dagli zii Antici, ma la città lo delude profondamente: ambiente letterario mediocre, chiuso e arretrato, e nessun posto di bibliotecario nella Cancelleria papale. Nel maggio 1823 torna a Recanati con la consapevolezza di non poter sfuggire alla propria condizione. Il pessimismo si accentua: nascono lo Zibaldone e le Operette morali.
 
 ## Dettagli
 - Ottiene finalmente dal **padre** il permesso di trasferirsi dagli zii Antici a Roma.

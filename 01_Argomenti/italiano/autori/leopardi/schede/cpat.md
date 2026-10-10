@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Canzoni civili: il passato eroico è modello contro la decadenza (All'Italia, Dante, Mai, Paolina, pallone).
+Nelle canzoni civili Leopardi si rammarica per la decadenza dell'Italia e vuole valorizzare le virtù degli antichi come modelli, con stile ricercato e classicheggiante. Ne fanno parte All'Italia e Sopra il monumento di Dante (1818), Ad Angelo Mai (1820), Nelle nozze della sorella Paolina e A un vincitore nel pallone (1821). All'Italia, in piena Restaurazione, segna il distacco dal padre e l'adesione alle idee democratiche e repubblicane.
 
 ## Dettagli
 - Leopardi si rammarica per la **decadenza dell'Italia** e vuole valorizzare le **virtù degli antichi** come modelli per l'educazione. Stile ricercato e classicheggiante, temi storico-mitologici o politici.

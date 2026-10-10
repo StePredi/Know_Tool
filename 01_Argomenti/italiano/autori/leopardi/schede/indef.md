@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Il vago e l'indefinito (notte, luna, parole vaghe) accendono l'immaginazione e la rimembranza.
+Sensazioni visive e uditive indefinite, suscitate soprattutto dalla notte e dalla luna, alimentano l'immaginazione. Lo stile è ricco di parole vaghe e indefinite, che nello Zibaldone Leopardi spiega essere più poetiche perché rimandano all'idea di vago e di indefinito. Il paesaggio esterno diventa paesaggio interiore, a cui si associa la riflessione filosofica.
 
 ## Dettagli
 - Sensazioni **visive e uditive indefinite**, suscitate soprattutto dalla **notte e dalla luna**, alimentano l'immaginazione.

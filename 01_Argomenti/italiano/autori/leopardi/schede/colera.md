@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1836-37: per sfuggire al colera Leopardi va a Villa Ferrigni, ai piedi del Vesuvio.
+Per sfuggire all'epidemia di colera (e per i suoi problemi respiratori), nel 1836-1837 Leopardi si trasferisce a Villa Ferrigni, ai piedi del Vesuvio.
 
 ## Dettagli
 - Per sfuggire all'epidemia (e per i suoi problemi respiratori), Leopardi si trasferisce a **Villa Ferrigni**, ai piedi del Vesuvio.

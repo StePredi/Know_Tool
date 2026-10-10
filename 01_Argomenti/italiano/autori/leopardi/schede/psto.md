@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Fino al 1822: la natura è benigna, ragione e società moderna corrompono; gli antichi erano eroici.
+Fino al 1822 Leopardi vede la decadenza della società moderna come effetto di un processo storico (influsso di Rousseau). La natura è «benigna» e protettiva e si contrappone alla ragione e alla società corrotta; gli antichi, in comunione con la natura, vivevano di illusioni ed erano capaci di azioni eroiche e disinteressate. Opere di questa fase: Piccoli idilli e Canzoni civili.
 
 ## Dettagli
 - La decadenza della società moderna come **effetto di un processo storico** (influsso di **Rousseau**).

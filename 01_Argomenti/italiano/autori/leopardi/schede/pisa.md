@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Da novembre 1827 a Pisa il clima mite lo rimette: ritrova la poesia (Il risorgimento, A Silvia).
+Alla fine del 1827 Leopardi si stabilisce a Pisa: il clima mite e la cordiale accoglienza riducono i suoi disturbi di salute. Ritrova l'ispirazione poetica e nell'aprile 1828 scrive Il risorgimento e A Silvia, con cui si apre il ciclo dei Canti pisano-recanatesi, detti anche Grandi idilli.
 
 ## Dettagli
 - Alla fine del 1827 si stabilisce a **Pisa**: il **clima più mite** e la cordiale accoglienza riducono i suoi disturbi di salute.

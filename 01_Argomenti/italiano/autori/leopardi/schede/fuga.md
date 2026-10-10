@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1819: malattia agli occhi, fuga da Recanati scoperta, disperazione; poi nasce la grande poesia.
+Nel 1819 una grave malattia agli occhi gli impedisce ogni lettura e studio e lo porta a meditare spesso il suicidio. A luglio prepara in segreto la fuga da Recanati chiedendo un passaporto per Milano, ma il piano è scoperto e rinuncia. Cade in una disperazione ancora più cupa e, mentre approfondisce il pensiero filosofico (lo Zibaldone), dà avvio al periodo della grande poesia: Idilli e altre Canzoni.
 
 ## Dettagli
 - Grave **malattia agli occhi**: gli impedisce «qualunque lettura o studio». Con l'insofferenza verso l'ambiente familiare lo porta a meditare spesso il suicidio.

@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1831-42 (postumo): poemetto satirico contro Borboni, liberali e fede oltremondana.
+I Paralipomeni della Batracomiomachia sono un poemetto non incluso nei Canti: iniziato a Firenze nel 1831, ultimato poco prima della morte e pubblicato postumo a Parigi nel 1842. Contengono satira politica contro l'assolutismo borbonico e gli intellettuali liberali e satira metafisica contro la fede in una vita oltremondana. La battaglia tra topi e rane allude allo scontro tra liberali italiani ed esercito austriaco.
 
 ## Dettagli
 - Poemetto **non incluso nei Canti**: iniziato a Firenze nel 1831, ultimato poco prima della morte, **pubblicato postumo a Parigi nel 1842**.

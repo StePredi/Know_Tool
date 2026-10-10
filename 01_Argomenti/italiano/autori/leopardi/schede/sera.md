@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1820: notte di luna, canto che si spegne: infelicità, solitudine e vanità delle cose.
+La poesia si apre con la descrizione del notturno lunare, in stile vago e indeterminato. Sulle note di un canto solitario che si spegne a poco a poco sviluppa il motivo dell'infelicità e della solitudine e medita sulla vanità delle cose umane.
 
 ## Dettagli
 - Si apre con la descrizione del **notturno lunare**, in stile vago e indeterminato. Sulle note di un canto solitario che si spegne a poco a poco sviluppa il motivo dell'**infelicità e della solitudine** e medita sulla vanità delle cose umane.

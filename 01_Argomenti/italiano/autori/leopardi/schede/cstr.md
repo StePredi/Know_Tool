@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Capolavoro in 3 edizioni (1831, 1835, 1845): ordinato per cronologia, genere e temi.
+I Canti sono la raccolta delle poesie di Leopardi, il suo capolavoro. Le liriche sono ordinate per cronologia di stesura (dal 1817 alle ultime settimane di vita), per genere (canzoni, idilli) e per elementi stilistici e tematici. La raccolta è curata in tre edizioni: 1831 (Firenze, 23 liriche), 1835 (Napoli, 39) e 1845 (postuma, 41).
 
 ## Dettagli
 - Raccolta delle poesie, **capolavoro** di Leopardi. Le liriche sono ordinate sia per **ordine cronologico di stesura** (dal 1817, *Il primo amore*, alle ultime settimane di vita, *Il tramonto della luna*) sia per **genere** (canzoni, idilli) e per **elementi stilistici e tematici**.

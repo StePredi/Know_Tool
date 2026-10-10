@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1827: a Firenze entra nel gruppo dell'Antologia, conosce Ranieri, Manzoni e Stendhal.
+Nel 1827 Leopardi si trasferisce a Firenze, dove entra in contatto con gli intellettuali cattolico-liberali del gruppo dell'«Antologia» di Vieusseux. Conosce l'esule napoletano Antonio Ranieri, incontra Alessandro Manzoni e lo scrittore francese Stendhal. A giugno escono a Milano le Operette morali, pubblicate da Stella.
 
 ## Dettagli
 - Si trasferisce a Firenze: contatti con intellettuali **cattolico-liberali** del gruppo dell'**«Antologia»**, rivista del ricco commerciante ginevrino Giovan Pietro **Vieusseux**.

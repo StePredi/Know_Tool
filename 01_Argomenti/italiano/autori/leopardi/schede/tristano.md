@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Ultima operetta: Tristano finge di ritrattare, poi difende pessimismo e verità.
+Il Dialogo di Tristano e di un amico è l'ultima delle Operette morali e preannuncia la stagione di disincanto e sarcasmo del «pessimismo eroico». Tristano, alter ego del poeta, finge una palinodia, cioè una ritrattazione del proprio pessimismo, ma l'elogio del presente è così esagerato che persino l'amico si accorge che parla «un poco ironico». Poi torna a polemizzare con la cultura dominante.
 
 ## Dettagli
 - **Ultima delle Operette morali**, preannuncia la stagione di disincanto e sarcasmo coincidente con il **«pessimismo eroico»**.

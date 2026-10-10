@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-L'unico piacere possibile è nel futuro: attesa e speranza.
+Nel Dialogo di un venditore d'almanacchi e di un passeggero, il passeggero, invitato ad acquistare un calendario, dimostra che il solo piacere possibile si trova nel futuro: quello provocato dall'attesa e dalla speranza, dalle illusioni che alleviano l'infelicità del presente. L'atteggiamento è di ironico distacco.
 
 ## Dettagli
 - Un passeggero, invitato ad acquistare un calendario, dimostra che il **solo piacere possibile si trova nel futuro**: quello provocato dall'attesa e dalla speranza, dalle illusioni che alleviano l'infelicità del presente.

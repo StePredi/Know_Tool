@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Alla Primavera e Inno ai Patriarchi: nostalgia dell'età dell'oro, felicità = infanzia e immaginazione.
+Alla Primavera, o delle favole antiche (in prospettiva classica) e Inno ai Patriarchi, o de' principii del genere umano (in chiave cristiana) celebrano la mitica età dell'oro, quando la natura era incontaminata e gli esseri umani vivevano in armonia con essa. L'idea comune è che la felicità appartenga all'età dell'immaginazione e dell'infanzia, visione che i moderni hanno perso. Sono testimonianze del pessimismo storico.
 
 ## Dettagli
 - *Alla Primavera, o delle favole antiche* (in prospettiva classica) e *Inno ai Patriarchi, o de' principii del genere umano* (in chiave cristiana).

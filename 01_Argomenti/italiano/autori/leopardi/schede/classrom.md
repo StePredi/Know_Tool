@@ -11,7 +11,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1816: polemica tra classicisti e romantici; Leopardi interviene contro entrambi.
+Nel 1816 scoppia la polemica tra classicisti e romantici. I classicisti difendono l'imitazione degli antichi, la mitologia e le regole dei generi; i romantici introducono in Italia i modelli della letteratura nordica. Leopardi interviene con la lettera alla «Biblioteca italiana» e con il Discorso di un italiano intorno alla poesia romantica (1818): contro entrambi, ma affine ai romantici in molti motivi.
 
 ## Dettagli
 - Nel 1816 scoppia la **polemica tra classicisti e romantici** (il libro rimanda a p. 447).

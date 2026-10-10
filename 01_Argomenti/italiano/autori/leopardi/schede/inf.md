@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1819: una siepe fa immaginare spazi e tempi senza fine.
+Una siepe impedisce di vedere parte del paesaggio e spinge il poeta a immaginare un mondo lontano, sconfinato e immobile. Il fruscio del vento tra le foglie stimola il confronto tra il tempo presente e le età passate sepolte nel silenzio infinito.
 
 ## Dettagli
 - Una **siepe** impedisce di vedere parte del paesaggio e spinge il poeta a **immaginare un mondo lontano, sconfinato e immobile**.

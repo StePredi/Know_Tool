@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-Cugina del padre: nel 1817 gli fa scoprire l'amore (Il primo amore).
+Geltrude Cassi Lazzari, cugina del padre, ventiseienne, è in visita a Recanati nel dicembre 1817 e fa scoprire a Leopardi l'amore. Gli ispira l'Elegia I (poi Il primo amore) e il Diario del primo amore.
 
 ## Dettagli
 - Cugina del padre, ventiseienne, in visita a Recanati nel dicembre 1817: gli fa **scoprire l'amore**.

@@ -10,7 +10,7 @@ fuori_dal_libro: false
 ---
 
 ## Riassunto
-1831-35: il poeta è come un passero solitario; rimpiangerà la giovinezza mai vissuta.
+Il passero solitario, composto tra il 1831 e il 1835, è il canto della solitudine giovanile, con corrispondenza tra ambiente esterno e condizione dell'animo. Il poeta si immedesima in un passero che canta da un'antica torre: come lui non partecipa alla vita gioiosa e all'amore dei ragazzi del borgo durante la festa. Ma la solitudine del passero è istinto naturale e non avrà rimpianti, mentre il poeta sa che rimpiangerà la giovinezza di cui non ha goduto.
 
 ## Dettagli
 - Posto dal poeta prima dei Piccoli idilli, ma appartiene alla fase dei Grandi idilli per estensione e per la **canzone libera**. Canto della **solitudine giovanile**, con corrispondenza tra ambiente esterno e condizione dell'animo.
