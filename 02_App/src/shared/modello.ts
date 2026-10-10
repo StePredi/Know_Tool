@@ -4,7 +4,8 @@
 import { z } from 'zod'
 import { leggiDocMd, leggiDettagli, leggiTabella, trovaSezione, type DocMd } from './scheda_md'
 import { erroreFine, parseData } from './dates'
-import type { Autore, Corsia, Modello, Periodo, Problema, Scheda, Tema, VoceGlossario } from './types'
+import { controllaTesti, leggiFigure, leggiTesto, type FileTesto } from './testo'
+import type { Autore, Corsia, Modello, Testo, Periodo, Problema, Scheda, Tema, VoceGlossario } from './types'
 
 /** chiave = percorso relativo alla cartella dell'autore ("autore.md", "schede/fuga.md"), valore = testo del file */
 export type MappaFile = Record<string, string>
@@ -286,7 +287,32 @@ export function costruisciModello(files: MappaFile, idAutoreAtteso: string): Mod
     }
   }
 
+  // testi (editor): cartelle testi/<id>/ e dizionario condiviso delle figure retoriche
+  const figure = leggiFigure(files['../../_condiviso/figure_retoriche.json'], problemi)
+  const idFigure = new Set(figure.map((f) => f.id))
+  const perId = new Map<string, FileTesto>()
+  for (const k of Object.keys(files)) {
+    const m = k.match(/^testi\/([^/]+)\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json)$/)
+    if (!m) continue
+    const f = perId.get(m[1]!) ?? { id: m[1]! }
+    const campo = m[2] === 'testo.md' ? 'testo' : (m[2]!.replace('.json', '') as 'annotazioni' | 'parafrasi' | 'esercizi')
+    f[campo] = files[k]!
+    perId.set(m[1]!, f)
+  }
+  const testi: Testo[] = []
+  for (const id of [...perId.keys()].sort()) {
+    const t = leggiTesto(perId.get(id)!, problemi, idFigure)
+    if (t) testi.push(t)
+  }
+  controllaTesti(testi, idSchede, problemi)
+  const idTesti = new Set(testi.map((t) => t.id))
+  for (const sc of schede) {
+    for (const k of sc.testi) {
+      if (!idTesti.has(k)) push('avviso', 'testo-inesistente', sc, `La scheda cita il testo «${k}», che non esiste in testi/.`)
+    }
+  }
+
   const ordine = { errore: 0, avviso: 1 } as const
   problemi.sort((a, b) => ordine[a.gravita] - ordine[b.gravita] || a.file.localeCompare(b.file) || a.codice.localeCompare(b.codice))
-  return { autore, temi, glossario, schede, problemi }
+  return { autore, temi, glossario, schede, testi, figure, problemi }
 }

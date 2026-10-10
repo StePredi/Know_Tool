@@ -1,0 +1,108 @@
+[
+  {
+    "id": "a001",
+    "span": [0, 5],
+    "citato": "Sempre caro mi fu quest'ermo colle",
+    "evidenzia": "concetto",
+    "figura": "anastrofe",
+    "parola_chiave": false,
+    "sottolinea": false,
+    "nota": "«Sempre» in apertura: l'affetto per il colle è un'abitudine lunga, non un'emozione del momento. Verbo in fondo, soggetto in coda.",
+    "flashcard": false,
+    "schede": [
+      { "id": "pidilli", "frase": "" }
+    ]
+  },
+  {
+    "id": "a002",
+    "span": [7, 8],
+    "citato": "questa siepe",
+    "evidenzia": "definizione",
+    "figura": null,
+    "parola_chiave": true,
+    "sottolinea": false,
+    "nota": "La siepe è l'ostacolo che toglie la vista: proprio per questo rende possibile l'immaginazione.",
+    "flashcard": true,
+    "schede": [
+      { "id": "indef", "frase": "L'ostacolo che rende possibile l'immaginazione." },
+      { "id": "piacere", "frase": "" }
+    ]
+  },
+  {
+    "id": "a003",
+    "span": [22, 33],
+    "citato": "interminati spazi di là da quella, e sovrumani silenzi, e profondissima quiete",
+    "evidenzia": "concetto",
+    "figura": "climax",
+    "parola_chiave": false,
+    "sottolinea": false,
+    "nota": "Tre gradi crescenti: spazi, silenzi, quiete. Lo spazio diventa suono e poi stato dell'animo.",
+    "flashcard": true,
+    "schede": [
+      { "id": "piacere", "frase": "" }
+    ]
+  },
+  {
+    "id": "a004",
+    "span": [42, 46],
+    "citato": "il cor non si spaura",
+    "evidenzia": "dubbio",
+    "figura": null,
+    "parola_chiave": false,
+    "sottolinea": false,
+    "nota": "Perché «non si spaura»? Da chiarire in classe: il piacere nasce proprio sul confine della paura.",
+    "flashcard": false,
+    "schede": []
+  },
+  {
+    "id": "a005",
+    "span": [51, 55],
+    "citato": "odo stormir tra queste piante",
+    "evidenzia": null,
+    "figura": "allitterazione",
+    "parola_chiave": true,
+    "sottolinea": false,
+    "nota": "Il suono del vento riporta al presente: da qui comincia la seconda parte della poesia.",
+    "flashcard": false,
+    "schede": []
+  },
+  {
+    "id": "a006",
+    "span": [69, 77],
+    "citato": "e le morte stagioni, e la presente e viva",
+    "evidenzia": "concetto",
+    "figura": "antitesi",
+    "parola_chiave": false,
+    "sottolinea": true,
+    "nota": "Tempo passato contro tempo che si sente ora: l'eterno entra nella poesia per contrasto.",
+    "flashcard": false,
+    "schede": []
+  },
+  {
+    "id": "a007",
+    "span": [92, 95],
+    "citato": "il naufragar m'è dolce",
+    "evidenzia": "definizione",
+    "figura": "metafora",
+    "parola_chiave": true,
+    "sottolinea": false,
+    "nota": "Naufragare come abbandono dolce: il finale rovescia la paura in piacere.",
+    "flashcard": true,
+    "schede": [
+      { "id": "indef", "frase": "Il finale rovescia la paura in piacere." },
+      { "id": "pcosm", "frase": "" }
+    ]
+  },
+  {
+    "id": "a008",
+    "span": [29, 30],
+    "citato": "sovrumani silenzi",
+    "evidenzia": "concetto",
+    "figura": null,
+    "parola_chiave": false,
+    "sottolinea": false,
+    "nota": "Dentro la gradazione, questa coppia da sola: il silenzio è «sovrumano», più grande dell'uomo.",
+    "flashcard": false,
+    "schede": []
+  }
+]

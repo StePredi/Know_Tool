@@ -27,3 +27,7 @@ Elenco raccolto il 2026-10-10. Spuntare quando fatto.
 - Nota: la dimensione del testo non cambiava perché i testi erano in pixel fissi; ora la dimensione dell'interfaccia è uno zoom vero, predefinito 115%
 - [ ] Da vedere dopo la prova: i «Dettagli» di alcune schede ripetono il riassunto (dato da rivedere, non il codice)
 - [x] **Elimina scheda** (editor, «Elimina…» con conferma): il file va in `99_Archivio/schede_eliminate/`, la scheda viene tolta dai collegamenti delle altre e dal glossario
+
+## Editor del testo — da rivedere dopo la prova su Windows
+- Provato solo nel browser con dati simulati, non in Electron
+- Nell'elenco esercizi il foglio della risposta compare sotto l'elenco (da valutare se spostarlo)

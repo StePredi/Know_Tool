@@ -1,0 +1,74 @@
+[
+  {
+    "id": "e001",
+    "numero": 1,
+    "testo": "Che funzione ha la siepe nella costruzione del testo? Spiega perché l'ostacolo alla vista è necessario all'immaginazione.",
+    "risposta": "La siepe impedisce di vedere l'orizzonte, e proprio per questo lo studente immagina ciò che non vede: l'ostacolo apre lo spazio interiore invece di chiuderlo.",
+    "correzione": "Corretta. Aggiungi che la siepe è un limite scelto, non subito: Leopardi lo chiama «caro» insieme al colle.",
+    "fatta": true,
+    "passi": [
+      {
+        "span": [7, 8],
+        "citato": "questa siepe",
+        "et": ""
+      }
+    ]
+  },
+  {
+    "id": "e002",
+    "numero": 2,
+    "testo": "Individua la gradazione dei versi 5-8 e spiega in che ordine crescono i tre elementi.",
+    "risposta": "Spazi, silenzi, quiete: si passa da una dimensione fisica a una sonora e poi a uno stato dell'animo.",
+    "correzione": "",
+    "fatta": true,
+    "passi": []
+  },
+  {
+    "id": "e003",
+    "numero": 3,
+    "testo": "Perché il cuore «non si spaura»? Rispondi citando la teoria del piacere.",
+    "risposta": "",
+    "correzione": "",
+    "fatta": false,
+    "passi": [
+      {
+        "span": [42, 46],
+        "citato": "il cor non si spaura",
+        "et": "v. 8"
+      }
+    ]
+  },
+  {
+    "id": "e004",
+    "numero": 4,
+    "testo": "Qual è la funzione del vento nella seconda parte della poesia?",
+    "risposta": "",
+    "correzione": "",
+    "fatta": false,
+    "passi": []
+  },
+  {
+    "id": "e005",
+    "numero": 5,
+    "testo": "Spiega l'antitesi fra «le morte stagioni» e «la presente e viva».",
+    "risposta": "",
+    "correzione": "",
+    "fatta": false,
+    "passi": []
+  },
+  {
+    "id": "e006",
+    "numero": 6,
+    "testo": "Commenta l'ultimo verso: in che modo il naufragio diventa dolce?",
+    "risposta": "",
+    "correzione": "",
+    "fatta": false,
+    "passi": [
+      {
+        "span": [92, 95],
+        "citato": "il naufragar m'è dolce",
+        "et": ""
+      }
+    ]
+  }
+]

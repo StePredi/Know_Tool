@@ -1,0 +1,16 @@
+[
+  {
+    "id": "p001",
+    "ordine": 1,
+    "span": [0, 17],
+    "citato": "Sempre caro mi fu quest'ermo colle, e questa siepe, che da tanta parte dell'ultimo orizzonte il guardo esclude",
+    "testo": "Questo colle solitario mi è sempre stato caro, e con lui questa siepe, che nasconde allo sguardo gran parte dell'orizzonte più lontano."
+  },
+  {
+    "id": "p002",
+    "ordine": 2,
+    "span": null,
+    "citato": null,
+    "testo": "Tutta la poesia si muove fra due limiti: la siepe, che chiude la vista, e il vento, che riporta al presente. Fra i due c'è lo spazio immaginato, dove il pensiero si perde volentieri."
+  }
+]

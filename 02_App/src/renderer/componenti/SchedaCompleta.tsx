@@ -3,6 +3,7 @@ import { corsiaDi, temiDi } from '@shared/derivati'
 import { dataBreve, dataLunga } from '@shared/dates'
 import { useColore, useStore } from '../store'
 import { Md, usaFiltro } from '../utili'
+import { useEditor } from '../editor/stato'
 
 export function SchedaCompleta({ id }: { id: string }) {
   const m = useStore((s) => s.modello)!
@@ -52,6 +53,7 @@ export function SchedaCompleta({ id }: { id: string }) {
   const prima = collegate.filter((x) => (ix.num(x) ?? 1e9) < (num ?? 1e9) || (ix.num(x) === num && x.id < s.id))
   const dopo = collegate.filter((x) => !prima.includes(x))
   const voci = m.glossario.filter((v) => v.schede.includes(s.id))
+  const testiScheda = m.testi.filter((t) => t.scheda === s.id || (s.testi ?? []).includes(t.id))
 
   const vai = (k: string): void => imposta({ apertaId: k, selId: k })
   const Lista = ({ items, vuoto }: { items: typeof collegate; vuoto: string }) => (
@@ -161,6 +163,11 @@ export function SchedaCompleta({ id }: { id: string }) {
           <button className="btn" disabled={pos >= seq.length - 1} onClick={() => vaiSeq(1)}>Successiva →</button>
           <span style={{ fontSize: 13, color: 'var(--mute)', fontWeight: 600 }}>{pos + 1} di {seq.length} in ordine cronologico</span>
           <div style={{ flex: 1 }} />
+          {testiScheda.map((t) => (
+            <button key={t.id} className="btn" onClick={() => { imposta({ apertaId: null, auto: false }); useEditor.getState().imposta({ testoId: t.id, sel: null, anchor: null, testa: null, esercizioAperto: null }) }}>
+              Apri nell'editor{testiScheda.length > 1 ? ` · ${t.titolo}` : ''}
+            </button>
+          ))}
           <button className={'btn' + (auto ? ' on' : '')} aria-pressed={auto} title="Passa da sola alla scheda successiva (barra spaziatrice)" onClick={() => imposta({ auto: !auto })}>
             {auto ? '⏸ Pausa' : `▶ Riproduci · ${intervallo} s`}
           </button>

@@ -8,6 +8,8 @@ import { SchedaCompleta } from './componenti/SchedaCompleta'
 import { EditorScheda } from './componenti/EditorScheda'
 import { Controlli } from './componenti/Controlli'
 import { Applicazione } from './componenti/Applicazione'
+import { EditorTesti, FinestreEditorHome } from './editor/EditorTesti'
+import { useEditor } from './editor/stato'
 
 const FONT = {
   atkinson: "'Atkinson Hyperlegible', system-ui, sans-serif",
@@ -36,6 +38,16 @@ export function App() {
   useEffect(() => {
     const h = (e: KeyboardEvent): void => {
       if (!e.ctrlKey && !e.metaKey) return
+      if (useEditor.getState().testoId) {
+        // nell'editor Ctrl + / - ingrandisce il testo, non l'interfaccia
+        const ez = useEditor.getState().zoom
+        const nz = e.key === '+' || e.key === '=' ? ez + 10 : e.key === '-' ? ez - 10 : e.key === '0' ? 100 : null
+        if (nz != null) {
+          e.preventDefault()
+          useEditor.getState().imposta({ zoom: Math.max(70, Math.min(190, nz)) })
+        }
+        return
+      }
       const z = useStore.getState().zoomUi
       let n: number | null = null
       if (e.key === '+' || e.key === '=') n = Math.min(2, z + 0.1)
@@ -65,6 +77,8 @@ export function App() {
     return () => document.removeEventListener('keydown', h)
   }, [])
 
+  const testoId = useEditor((e) => e.testoId)
+
   if (st.caricamento) return <p style={{ padding: 30 }}>Apro la cartella…</p>
 
   if (!st.modello) {
@@ -82,13 +96,20 @@ export function App() {
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--bg)' }}>
-      <Header />
-      <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-        <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-          {st.vista === 'mappa' ? <Mappa /> : <Lista />}
-        </main>
-        {st.selId && <Anteprima id={st.selId} />}
-      </div>
+      {testoId ? (
+        <EditorTesti />
+      ) : (
+        <>
+          <Header />
+          <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
+            <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+              {st.vista === 'mappa' ? <Mappa /> : <Lista />}
+            </main>
+            {st.selId && <Anteprima id={st.selId} />}
+          </div>
+        </>
+      )}
+      <FinestreEditorHome />
       {st.apertaId && <SchedaCompleta id={st.apertaId} />}
       {st.editId && <EditorScheda id={st.editId} />}
       {st.controlli && <Controlli />}

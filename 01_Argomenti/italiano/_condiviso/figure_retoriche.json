@@ -1,0 +1,156 @@
+[
+  {
+    "id": "allitterazione",
+    "nome": "Allitterazione",
+    "tipo": "suono",
+    "descrizione": "Ripetizione degli stessi suoni all'interno di parole vicine.",
+    "esempio": "«Fresche le mie parole ne la sera» — D'Annunzio"
+  },
+  {
+    "id": "assonanza",
+    "nome": "Assonanza",
+    "tipo": "suono",
+    "descrizione": "Come la rima, ma dall'accento tonico coincidono solo le vocali.",
+    "esempio": "«bella» / «terra»"
+  },
+  {
+    "id": "consonanza",
+    "nome": "Consonanza",
+    "tipo": "suono",
+    "descrizione": "Come la rima, ma dall'accento tonico coincidono solo le consonanti.",
+    "esempio": "«corda» / «scorta»"
+  },
+  {
+    "id": "fonosimbolismo",
+    "nome": "Fonosimbolismo",
+    "tipo": "suono",
+    "descrizione": "Suoni che richiamano il messaggio che il poeta vuole trasmettere.",
+    "esempio": "Suoni cupi e ripetuti per evocare pesantezza"
+  },
+  {
+    "id": "onomatopea",
+    "nome": "Onomatopea",
+    "tipo": "suono",
+    "descrizione": "Riproduzione scritta di suoni naturali.",
+    "esempio": "«Don... Don...» per le campane — Pascoli"
+  },
+  {
+    "id": "allegoria",
+    "nome": "Allegoria",
+    "tipo": "significato",
+    "descrizione": "Immagini costruite con metafore che racchiudono un significato profondo.",
+    "esempio": "La «selva oscura» come il peccato — Dante"
+  },
+  {
+    "id": "analogia",
+    "nome": "Analogia",
+    "tipo": "significato",
+    "descrizione": "Metafora che si capisce solo conoscendo intimamente il poeta.",
+    "esempio": "Gli accostamenti liberi della poesia ermetica"
+  },
+  {
+    "id": "antitesi",
+    "nome": "Antitesi",
+    "tipo": "significato",
+    "descrizione": "Accostamento di due termini di significato opposto.",
+    "esempio": "«Pace non trovo, et non ò da far guerra» — Petrarca"
+  },
+  {
+    "id": "iperbole",
+    "nome": "Iperbole",
+    "tipo": "significato",
+    "descrizione": "Concetto esagerato, per eccesso o per difetto.",
+    "esempio": "«Ti ho chiamato mille volte»"
+  },
+  {
+    "id": "ironia",
+    "nome": "Ironia",
+    "tipo": "significato",
+    "descrizione": "Si scrive l'opposto del significato che si vuole dare.",
+    "esempio": "«Che bella giornata!» durante un temporale"
+  },
+  {
+    "id": "metafora",
+    "nome": "Metafora",
+    "tipo": "significato",
+    "descrizione": "Come la similitudine, ma senza i connettori del paragone.",
+    "esempio": "«Sei un leone»"
+  },
+  {
+    "id": "metonimia",
+    "nome": "Metonimia",
+    "tipo": "significato",
+    "descrizione": "Un termine al posto di un altro legato da una logica precisa.",
+    "esempio": "«Bere un bicchiere» (contenitore per contenuto)"
+  },
+  {
+    "id": "ossimoro",
+    "nome": "Ossimoro",
+    "tipo": "significato",
+    "descrizione": "Due termini di senso contrario nella stessa espressione.",
+    "esempio": "«Ghiaccio bollente»"
+  },
+  {
+    "id": "perifrasi",
+    "nome": "Perifrasi",
+    "tipo": "significato",
+    "descrizione": "Giro di parole per indicare un concetto.",
+    "esempio": "«Il Sommo Poeta» per Dante"
+  },
+  {
+    "id": "personificazione",
+    "nome": "Personificazione",
+    "tipo": "significato",
+    "descrizione": "A una cosa o a un animale si attribuisce ciò che è delle persone.",
+    "esempio": "«Il vento sussurrava tra gli alberi»"
+  },
+  {
+    "id": "similitudine",
+    "nome": "Similitudine",
+    "tipo": "significato",
+    "descrizione": "Paragone costruito con i nessi correlativi (come, tale che…).",
+    "esempio": "«Dormo come un ghiro»"
+  },
+  {
+    "id": "sineddoche",
+    "nome": "Sineddoche",
+    "tipo": "significato",
+    "descrizione": "Come la metonimia, ma riguarda la quantità (la parte per il tutto).",
+    "esempio": "«Le vele» per le navi"
+  },
+  {
+    "id": "sinestesia",
+    "nome": "Sinestesia",
+    "tipo": "significato",
+    "descrizione": "Accostamento di termini di sfere sensoriali diverse.",
+    "esempio": "«Urlo nero» — Ungaretti"
+  },
+  {
+    "id": "anafora",
+    "nome": "Anafora",
+    "tipo": "ordine",
+    "descrizione": "Ripetizione della stessa parola all'inizio di più versi.",
+    "esempio": "«Per me si va... / Per me si va...» — Dante"
+  },
+  {
+    "id": "anastrofe",
+    "nome": "Anastrofe",
+    "tipo": "ordine",
+    "descrizione": "Inversione della disposizione normale delle parole.",
+    "esempio": "«Del mio nemico» per «del nemico mio»"
+  },
+  {
+    "id": "climax",
+    "nome": "Climax",
+    "tipo": "ordine",
+    "descrizione": "Termini disposti in ordine di significato crescente o decrescente.",
+    "esempio": "«Veni, vidi, vici» — Cesare"
+  },
+  {
+    "id": "epifora",
+    "nome": "Epifora",
+    "tipo": "ordine",
+    "descrizione": "Come l'anafora, ma la ripetizione sta alla fine del verso.",
+    "esempio": "La stessa parola chiude versi consecutivi"
+  }
+]

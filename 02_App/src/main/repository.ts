@@ -4,9 +4,11 @@
 // - guarda la cartella e avvisa quando un file cambia dall'esterno (AI, editor di testo, git)
 
 import { promises as fs } from 'node:fs'
-import { join } from 'node:path'
+import { join, relative } from 'node:path'
 import chokidar, { type FSWatcher } from 'chokidar'
 import { costruisciModello, idDaFile, type MappaFile } from '../shared/modello'
+import { yamlFrontmatter } from '../shared/scheda_md'
+import { corpoDi, jsonLeggibile, riancora, slug, tokenizza } from '../shared/testo'
 import {
   applicaPatchScheda,
   leggiDocMd,
@@ -15,11 +17,11 @@ import {
   scriviDocMd,
   type DocMd
 } from '../shared/scheda_md'
-import type { AutorePatch, Modello, NuovaScheda, SchedaPatch, Tema } from '../shared/types'
+import type { AutorePatch, EsitoRiaggancio, Layout, Modello, NuovaScheda, NuovoTesto, Raccolta, SchedaPatch, Tema, VoceScritta } from '../shared/types'
 
 export const PERCORSO_AUTORI = ['01_Argomenti', 'italiano', 'autori']
 
-const FILE_NOTI = /^(autore\.md|temi\.md|glossario\.md|schede\/[^/]+\.md)$/i
+const FILE_NOTI = /^(autore\.md|temi\.md|glossario\.md|schede\/[^/]+\.md|testi\/[^/]+\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json)|\.\.\/\.\.\/_condiviso\/figure_retoriche\.json)$/i
 const TEMPORANEI = /\.tmp-|\.swp$|~$|\.lock$/i
 
 export interface EventoRepo {
@@ -103,6 +105,16 @@ export class Repository {
       // niente cartella schede: mappa vuota, nessun errore
     }
     await Promise.all(schede.map((f) => leggi(`schede/${f}`)))
+    await leggi('../../_condiviso/figure_retoriche.json')
+    let testi: string[] = []
+    try {
+      testi = (await fs.readdir(join(this.dir, 'testi'), { withFileTypes: true })).filter((d) => d.isDirectory()).map((d) => d.name)
+    } catch {
+      // nessun testo: l'editor parte vuoto
+    }
+    for (const t of testi) {
+      await Promise.all(['testo.md', 'annotazioni.json', 'parafrasi.json', 'esercizi.json'].map((n) => leggi(`testi/${t}/${n}`)))
+    }
   }
 
   modello(): Modello {
@@ -125,8 +137,8 @@ export class Repository {
 
   avvia(): void {
     if (this.watcher) return
-    const relativo = (p: string): string => p.slice(this.dir.length + 1).replace(/\\/g, '/')
-    this.watcher = chokidar.watch(this.dir, {
+    const relativo = (p: string): string => relative(this.dir, p).replace(/\\/g, '/')
+    this.watcher = chokidar.watch([this.dir, join(this.dir, '..', '..', '_condiviso')], {
       ignoreInitial: true,
       ignored: (p: string) => TEMPORANEI.test(p),
       awaitWriteFinish: { stabilityThreshold: 120, pollInterval: 30 }
@@ -292,6 +304,175 @@ export class Repository {
       }
       this.emetti([])
       return { modello: this.modello(), archiviata: destinazione, collegamentiTolti, vociTolte }
+    })
+  }
+
+  // ---------- testi (editor) ----------
+
+  private async leggiRaccolta(testoId: string, raccolta: Raccolta): Promise<Record<string, unknown>[]> {
+    try {
+      const v = JSON.parse(await this.leggiDisco(`testi/${testoId}/${raccolta}.json`)) as unknown
+      return Array.isArray(v) ? (v.filter((x) => typeof x === 'object' && x !== null && !Array.isArray(x)) as Record<string, unknown>[]) : []
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') return []
+      throw new Error(`${raccolta}.json del testo «${testoId}» non si legge come JSON: correggilo a mano prima di modificarlo dall'app.`)
+    }
+  }
+
+  private scriviRaccolta(testoId: string, raccolta: Raccolta, voci: unknown[]): Promise<void> {
+    return this.scrivi(`testi/${testoId}/${raccolta}.json`, jsonLeggibile(voci))
+  }
+
+  private async esisteTesto(id: string): Promise<void> {
+    if (!this.cache.has(`testi/${id}/testo.md`)) throw new Error(`Il testo «${id}» non esiste.`)
+  }
+
+  /** Riscrive testo.md cambiando solo il frontmatter e/o il corpo; gli altri campi del frontmatter restano. */
+  private async riscriviTesto(id: string, cambia: (fm: Record<string, unknown>) => void, corpo?: string): Promise<void> {
+    const rel = `testi/${id}/testo.md`
+    const vecchio = await this.leggiDisco(rel)
+    const doc = leggiDocMd(vecchio)
+    if (doc.erroreYaml) throw new Error(`testo.md di «${id}» ha un frontmatter non valido: correggilo a mano.`)
+    cambia(doc.fm)
+    const ordine = ['id', 'titolo', 'scheda', 'layout', 'fonte', 'anno', 'opera']
+    const fm: Record<string, unknown> = {}
+    for (const k of ordine) if (k in doc.fm && doc.fm[k] !== '' && doc.fm[k] != null) fm[k] = doc.fm[k]
+    for (const k of Object.keys(doc.fm)) if (!(k in fm) && doc.fm[k] != null && doc.fm[k] !== '') fm[k] = doc.fm[k]
+    const testo = `---\n${yamlFrontmatter(fm)}\n---\n\n${corpo ?? corpoDi(vecchio)}\n`
+    if (testo !== vecchio) await this.scrivi(rel, testo)
+  }
+
+  creaTesto(nuovo: NuovoTesto): Promise<{ id: string; modello: Modello }> {
+    return this.inCoda(async () => {
+      const base = slug(nuovo.titolo)
+      let id = base
+      for (let i = 2; this.cache.has(`testi/${id}/testo.md`); i++) id = `${base}_${i}`
+      const fm: Record<string, unknown> = { id, titolo: nuovo.titolo.trim() || 'Nuovo testo' }
+      if (nuovo.scheda) fm.scheda = nuovo.scheda
+      fm.layout = nuovo.layout
+      fm.fonte = 'incolla'
+      if (nuovo.anno?.trim()) fm.anno = nuovo.anno.trim()
+      if (nuovo.opera?.trim()) fm.opera = nuovo.opera.trim()
+      const corpo = nuovo.corpo.replace(/\r\n?/g, '\n').replace(/^\n+|\s+$/g, '')
+      await this.scrivi(`testi/${id}/testo.md`, `---\n${yamlFrontmatter(fm)}\n---\n\n${corpo}\n`)
+      for (const r of ['annotazioni', 'parafrasi', 'esercizi'] as Raccolta[]) await this.scriviRaccolta(id, r, [])
+      this.emetti([])
+      return { id, modello: this.modello() }
+    })
+  }
+
+  aggiornaTesto(id: string, patch: { layout?: Layout; titolo?: string; anno?: string; opera?: string; scheda?: string | null }): Promise<Modello> {
+    return this.inCoda(async () => {
+      await this.esisteTesto(id)
+      await this.riscriviTesto(id, (fm) => {
+        if (patch.layout !== undefined) fm.layout = patch.layout
+        if (patch.titolo !== undefined) fm.titolo = patch.titolo
+        if (patch.anno !== undefined) fm.anno = patch.anno
+        if (patch.opera !== undefined) fm.opera = patch.opera
+        if (patch.scheda !== undefined) fm.scheda = patch.scheda
+      })
+      this.emetti([])
+      return this.modello()
+    })
+  }
+
+  /** Cambia il testo e riaggancia annotazioni, parafrasi e passi degli esercizi (decisioni_editor_testo.md §4). Niente si perde: ciò che non si ritrova resta com'è e viene segnalato. */
+  modificaCorpo(id: string, corpoNuovo: string): Promise<{ modello: Modello; esito: EsitoRiaggancio }> {
+    return this.inCoda(async () => {
+      await this.esisteTesto(id)
+      const corpo = corpoNuovo.replace(/\r\n?/g, '\n').replace(/^\n+|\s+$/g, '')
+      const doc = leggiDocMd(await this.leggiDisco(`testi/${id}/testo.md`))
+      const layout: Layout = doc.fm.layout === 'prosa' ? 'prosa' : 'verso'
+      const tk = tokenizza(corpo, layout)
+      let riagganciate = 0
+      let daSistemare = 0
+      const ricolloca = (o: Record<string, unknown>): void => {
+        const span = Array.isArray(o.span) && o.span.length === 2 ? ([o.span[0], o.span[1]] as [number, number]) : null
+        const citato = typeof o.citato === 'string' ? o.citato : null
+        if (!citato) return
+        const r = riancora(span, citato, tk, corpo)
+        if (r.stato === 'riagganciata') {
+          o.span = r.span
+          riagganciate++
+        } else if (r.stato === 'rotta' || r.stato === 'ambigua') daSistemare++
+      }
+      const raccolte = {} as Record<Raccolta, Record<string, unknown>[]>
+      for (const r of ['annotazioni', 'parafrasi', 'esercizi'] as Raccolta[]) raccolte[r] = await this.leggiRaccolta(id, r)
+      raccolte.annotazioni.forEach(ricolloca)
+      raccolte.parafrasi.forEach(ricolloca)
+      for (const e of raccolte.esercizi) {
+        if (Array.isArray(e.passi)) (e.passi as Record<string, unknown>[]).forEach(ricolloca)
+      }
+      await this.riscriviTesto(id, () => undefined, corpo)
+      for (const r of ['annotazioni', 'parafrasi', 'esercizi'] as Raccolta[]) await this.scriviRaccolta(id, r, raccolte[r])
+      this.emetti([])
+      return { modello: this.modello(), esito: { riagganciate, daSistemare } }
+    })
+  }
+
+  salvaVoce(testoId: string, raccolta: Raccolta, voce: VoceScritta): Promise<{ id: string; modello: Modello }> {
+    return this.inCoda(async () => {
+      await this.esisteTesto(testoId)
+      const voci = await this.leggiRaccolta(testoId, raccolta)
+      const { stato: _s, spanScritto: _w, ...pulita } = voce as Record<string, unknown>
+      void _s
+      void _w
+      if (Array.isArray(pulita.passi)) {
+        pulita.passi = (pulita.passi as Record<string, unknown>[]).map(({ stato: _a, spanScritto: _b, ...p }) => {
+          void _a
+          void _b
+          return p
+        })
+      }
+      const prefisso = raccolta === 'annotazioni' ? 'a' : raccolta === 'parafrasi' ? 'p' : 'e'
+      let id = typeof pulita.id === 'string' && pulita.id ? pulita.id : ''
+      const i = id ? voci.findIndex((v) => v.id === id) : -1
+      if (i >= 0) voci[i] = { ...voci[i], ...pulita }
+      else {
+        if (!id) {
+          const max = voci.reduce((m, v) => Math.max(m, Number(String(v.id ?? '').replace(/^\D+/, '')) || 0), 0)
+          id = `${prefisso}${String(max + 1).padStart(3, '0')}`
+        }
+        const nuova: Record<string, unknown> = { ...pulita, id }
+        if (raccolta === 'esercizi' && nuova.numero === undefined) nuova.numero = voci.reduce((m, v) => Math.max(m, Number(v.numero) || 0), 0) + 1
+        if (raccolta === 'parafrasi' && nuova.ordine === undefined) nuova.ordine = voci.reduce((m, v) => Math.max(m, Number(v.ordine) || 0), 0) + 1
+        // id in testa, come negli altri file
+        const { id: _i, ...resto } = nuova
+        void _i
+        voci.push({ id, ...resto })
+      }
+      await this.scriviRaccolta(testoId, raccolta, voci)
+      this.emetti([])
+      return { id, modello: this.modello() }
+    })
+  }
+
+  eliminaVoce(testoId: string, raccolta: Raccolta, id: string): Promise<Modello> {
+    return this.inCoda(async () => {
+      await this.esisteTesto(testoId)
+      const voci = await this.leggiRaccolta(testoId, raccolta)
+      const resto = voci.filter((v) => v.id !== id)
+      if (resto.length !== voci.length) {
+        await this.scriviRaccolta(testoId, raccolta, resto)
+        this.emetti([])
+      }
+      return this.modello()
+    })
+  }
+
+  salvaRaccolta(testoId: string, raccolta: Raccolta, voci: VoceScritta[]): Promise<Modello> {
+    return this.inCoda(async () => {
+      await this.esisteTesto(testoId)
+      const pulite = voci.map((v) => {
+        const { stato: _s, spanScritto: _w, ...p } = v as Record<string, unknown>
+        void _s
+        void _w
+        if (Array.isArray(p.passi)) p.passi = (p.passi as Record<string, unknown>[]).map(({ stato: _a, spanScritto: _b, ...q }) => { void _a; void _b; return q })
+        return p
+      })
+      await this.scriviRaccolta(testoId, raccolta, pulite)
+      this.emetti([])
+      return this.modello()
     })
   }
 

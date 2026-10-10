@@ -12,6 +12,12 @@ const api: Api = {
   aggiornaAutore: (p) => ipcRenderer.invoke('autore:aggiorna', p),
   aggiornaTemi: (t) => ipcRenderer.invoke('temi:aggiorna', t),
   mostraCartella: () => ipcRenderer.invoke('cartella:mostra'),
+  creaTesto: (n) => ipcRenderer.invoke('testo:crea', n),
+  aggiornaTesto: (id, p) => ipcRenderer.invoke('testo:aggiorna', id, p),
+  modificaCorpo: (id, c) => ipcRenderer.invoke('testo:corpo', id, c),
+  salvaVoce: (t, r, v) => ipcRenderer.invoke('voce:salva', t, r, v),
+  eliminaVoce: (t, r, id) => ipcRenderer.invoke('voce:elimina', t, r, id),
+  salvaRaccolta: (t, r, v) => ipcRenderer.invoke('raccolta:salva', t, r, v),
   zoom: (f) => webFrame.setZoomFactor(f),
   onModello: (cb) => {
     const h = (_: unknown, e: EventoModello): void => cb(e)

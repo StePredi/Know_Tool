@@ -5,6 +5,7 @@ import type { Corsia, Periodo, Tema } from '@shared/types'
 import { useColore, useStore, type Popover } from '../store'
 import { Campo, slug, usaFiltro } from '../utili'
 import { EVENTO_SENZA_DATA } from './Mappa'
+import { useEditor } from '../editor/stato'
 
 function Filtro(props: { id: Exclude<Popover, 'lettura' | null>; titolo: string; etichetta: string; attivo: boolean; children: ReactNode }) {
   const popover = useStore((s) => s.popover)
@@ -94,6 +95,7 @@ export function Header() {
           <input type="search" value={st.query} onChange={(e) => imposta({ query: e.target.value })} placeholder="Cerca titolo, dettagli, tema…" style={{ flex: 1, minWidth: 0, border: 0, background: 'transparent', padding: '8px 0', fontSize: 13, outline: 'none' }} />
         </label>
         <div style={{ flex: '1 1 0', minWidth: 8 }} />
+        <button className="btn" title="Apri l'editor dei testi" onClick={() => useEditor.getState().imposta({ elencoTesti: true })}>Testi · {m.testi.length}</button>
         <button className="btn" onClick={() => imposta({ controlli: !st.controlli })} aria-expanded={st.controlli} style={nProblemi ? { borderColor: errori ? 'var(--err-line)' : 'var(--warn-line)' } : undefined}>
           Controlli{nProblemi ? ` · ${nProblemi}` : ' ✓'}
         </button>

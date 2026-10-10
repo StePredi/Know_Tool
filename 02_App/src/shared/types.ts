@@ -95,11 +95,111 @@ export interface Autore {
   periodi: Periodo[]
 }
 
+// ---------- testi e editor ----------
+
+export type Layout = 'verso' | 'prosa'
+export type Evidenzia = 'concetto' | 'definizione' | 'dubbio'
+export type StatoRiaggancio = 'ok' | 'riagganciata' | 'ambigua' | 'rotta'
+export type Span = [number, number]
+export type TipoFigura = 'suono' | 'ordine' | 'significato' | 'sintassi'
+
+export interface Figura {
+  id: string
+  nome: string
+  tipo: TipoFigura
+  descrizione: string
+  esempio: string
+}
+
+/** Un punto del testo: `span` è quello valido adesso (dopo l'eventuale riaggancio), `spanScritto` quello che c'è nel file. */
+export interface Ancora {
+  span: Span | null
+  citato: string | null
+  /** calcolato a ogni lettura, mai scritto */
+  stato: StatoRiaggancio
+  spanScritto: Span | null
+}
+
+export interface SchedaCitata {
+  id: string
+  frase: string
+}
+
+export interface Annotazione extends Ancora {
+  id: string
+  evidenzia: Evidenzia | null
+  figura: string | null
+  parola_chiave: boolean
+  sottolinea: boolean
+  nota: string
+  flashcard: boolean
+  schede: SchedaCitata[]
+}
+
+export interface Parafrasi extends Ancora {
+  id: string
+  ordine: number
+  testo: string
+}
+
+export interface Passo extends Ancora {
+  /** etichetta breve scritta a mano, es. «v. 1-4» */
+  et: string
+}
+
+export interface Esercizio {
+  id: string
+  numero: number
+  testo: string
+  risposta: string
+  correzione: string
+  fatta: boolean
+  passi: Passo[]
+}
+
+export interface Testo {
+  id: string
+  titolo: string
+  /** scheda-opera che lo contiene (ponte verso la mappa) */
+  scheda: string | null
+  layout: Layout
+  fonte: string
+  anno: string
+  opera: string
+  corpo: string
+  /** percorso relativo del testo.md */
+  file: string
+  annotazioni: Annotazione[]
+  parafrasi: Parafrasi[]
+  esercizi: Esercizio[]
+}
+
+export type Raccolta = 'annotazioni' | 'parafrasi' | 'esercizi'
+
+/** Come si scrive una voce: i campi calcolati (stato, spanScritto) non ci sono. */
+export type VoceScritta = Record<string, unknown> & { id?: string }
+
+export interface NuovoTesto {
+  titolo: string
+  anno?: string
+  opera?: string
+  layout: Layout
+  corpo: string
+  scheda?: string | null
+}
+
+export interface EsitoRiaggancio {
+  riagganciate: number
+  daSistemare: number
+}
+
 export interface Modello {
   autore: Autore
   temi: Tema[]
   glossario: VoceGlossario[]
   schede: Scheda[]
+  testi: Testo[]
+  figure: Figura[]
   problemi: Problema[]
 }
 
@@ -141,6 +241,15 @@ export interface Api {
   aggiornaAutore(patch: AutorePatch): Promise<Modello>
   aggiornaTemi(temi: Tema[]): Promise<Modello>
   mostraCartella(): Promise<void>
+  /** testi: ogni scrittura restituisce il modello aggiornato */
+  creaTesto(nuovo: NuovoTesto): Promise<{ id: string; modello: Modello }>
+  aggiornaTesto(id: string, patch: { layout?: Layout; titolo?: string; anno?: string; opera?: string; scheda?: string | null }): Promise<Modello>
+  /** sostituisce il corpo del testo e riaggancia annotazioni, parafrasi e passi degli esercizi */
+  modificaCorpo(id: string, corpo: string): Promise<{ modello: Modello; esito: EsitoRiaggancio }>
+  salvaVoce(testoId: string, raccolta: Raccolta, voce: VoceScritta): Promise<{ id: string; modello: Modello }>
+  eliminaVoce(testoId: string, raccolta: Raccolta, id: string): Promise<Modello>
+  /** scrive l'intera raccolta (importazione domande, rinumerazione, riordino) */
+  salvaRaccolta(testoId: string, raccolta: Raccolta, voci: VoceScritta[]): Promise<Modello>
   /** zoom di tutta l'interfaccia (1 = 100%) */
   zoom(fattore: number): void
   onModello(cb: (e: EventoModello) => void): () => void
