@@ -1,5 +1,5 @@
 // Processo principale: finestra, scelta della cartella, ponte (IPC) verso l'interfaccia.
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, dialog, ipcMain, Menu, shell } from 'electron'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -146,6 +146,7 @@ function registraIpc(): void {
 
 app.whenReady().then(async () => {
   config = await leggiConfig()
+  Menu.setApplicationMenu(null)
   registraIpc()
   creaFinestra()
   app.on('activate', () => {

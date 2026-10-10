@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, webFrame } from 'electron'
 import type { Api, EventoModello } from '../shared/types'
 
 const api: Api = {
@@ -11,6 +11,7 @@ const api: Api = {
   aggiornaAutore: (p) => ipcRenderer.invoke('autore:aggiorna', p),
   aggiornaTemi: (t) => ipcRenderer.invoke('temi:aggiorna', t),
   mostraCartella: () => ipcRenderer.invoke('cartella:mostra'),
+  zoom: (f) => webFrame.setZoomFactor(f),
   onModello: (cb) => {
     const h = (_: unknown, e: EventoModello): void => cb(e)
     ipcRenderer.on('modello:cambiato', h)

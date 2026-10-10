@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { corsiaDi, temiDi } from '@shared/derivati'
 import { dataBreve, dataLunga } from '@shared/dates'
 import { useColore, useStore } from '../store'
-import { Md } from '../utili'
+import { Md, usaFiltro } from '../utili'
 
 export function SchedaCompleta({ id }: { id: string }) {
   const m = useStore((s) => s.modello)!
@@ -11,9 +11,39 @@ export function SchedaCompleta({ id }: { id: string }) {
   const editando = useStore((s) => s.editando)
   const colore = useColore()
   const chiudi = useRef<HTMLButtonElement>(null)
+  const corpo = useRef<HTMLDivElement>(null)
+  const auto = useStore((x) => x.auto)
+  const intervallo = useStore((x) => x.intervallo)
+  const corsieSpente = useStore((x) => x.corsieSpente)
+  const passa = usaFiltro()
   const s = ix.byId.get(id)
 
-  useEffect(() => chiudi.current?.focus(), [id])
+  // sequenza cronologica: le schede visibili con i filtri attuali (se la scheda aperta non c'è, si usano tutte)
+  const filtrata = ix.chron.filter((x) => passa(x) && !corsieSpente[x.corsia])
+  const seq = filtrata.some((x) => x.id === id) ? filtrata : ix.chron
+  const pos = seq.findIndex((x) => x.id === id)
+  const vaiSeq = (d: number): void => {
+    const n = seq[pos + d]
+    if (n) imposta({ apertaId: n.id, selId: n.id })
+  }
+
+  useEffect(() => {
+    chiudi.current?.focus()
+    corpo.current?.scrollTo({ top: 0 })
+  }, [id])
+
+  // riproduzione automatica: passa alla successiva e si ferma all'ultima
+  useEffect(() => {
+    if (!auto) return
+    if (pos < 0 || pos >= seq.length - 1) {
+      imposta({ auto: false })
+      return
+    }
+    const t = setTimeout(() => vaiSeq(1), intervallo * 1000)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auto, id, intervallo, pos])
+
   if (!s) return null
   const c = corsiaDi(m, s.corsia)
   const col = colore(c.id)
@@ -36,33 +66,39 @@ export function SchedaCompleta({ id }: { id: string }) {
     </div>
   )
 
+  const tasto = (e: React.KeyboardEvent): void => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); vaiSeq(1) }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); vaiSeq(-1) }
+    else if (e.key === ' ' && (e.target as HTMLElement).tagName !== 'BUTTON') { e.preventDefault(); imposta({ auto: !auto }) }
+  }
+
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Scheda completa"
       className="overlay"
-      style={{ zIndex: 70, alignItems: 'flex-start', padding: '34px 22px', overflow: 'auto' }}
-      onMouseDown={(e) => e.target === e.currentTarget && imposta({ apertaId: null })}
+      style={{ zIndex: 70, alignItems: 'center', padding: 22 }}
+      onKeyDown={tasto}
+      onMouseDown={(e) => e.target === e.currentTarget && imposta({ apertaId: null, auto: false })}
     >
-      <div style={{ width: '100%', maxWidth: 1060, background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 12, boxShadow: '0 26px 70px rgba(0,0,0,.34)', overflow: 'hidden', animation: 'dcUp .18s ease-out', alignSelf: 'flex-start' }}>
-        <div style={{ height: 5, background: col }} />
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '14px 18px', borderBottom: '1px solid var(--line)' }}>
+      <div style={{ width: '100%', maxWidth: 1180, height: '88vh', display: 'flex', flexDirection: 'column', background: 'var(--surface)', border: '1px solid var(--line)', borderTop: `4px solid ${col}`, borderRadius: 14, boxShadow: '0 30px 80px rgba(0,0,0,.4)', overflow: 'hidden', animation: 'dcUp .18s ease-out' }}>
+        <div style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 14, padding: '12px 16px', borderBottom: '1px solid var(--line)', background: 'var(--bg)' }}>
           <div style={{ minWidth: 0, flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexWrap: 'wrap' }}>
-              <span style={{ background: col, color: 'var(--on)', borderRadius: 999, padding: '3px 10px', fontSize: 11.5, fontWeight: 700 }}>{c.nome}</span>
-              <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--mute)' }}>{dataLunga(s.data)}</span>
-              {s.pagine && <span style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--mute)' }}>· {s.pagine}</span>}
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, border: `1px solid ${col}`, color: col, borderRadius: 999, padding: '3px 11px', fontSize: 12.5, fontWeight: 700 }}>
+                <span aria-hidden style={{ width: 9, height: 9, borderRadius: '50%', background: col }} />{c.nome}
+              </span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--mute)' }}>{dataLunga(s.data)}</span>
+              {s.pagine && <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--mute)' }}>· {s.pagine}</span>}
               {s.fuori_dal_libro && <span className="chip soft" style={{ padding: '2px 9px' }}>fuori dal libro</span>}
             </div>
-            <h2 style={{ margin: '6px 0 0', fontSize: 22, lineHeight: 1.2, fontWeight: 700 }}>{s.titolo || s.titolo_breve}</h2>
+            <h2 style={{ margin: '6px 0 0', fontSize: 24, lineHeight: 1.2, fontWeight: 700 }}>{s.titolo || s.titolo_breve}</h2>
           </div>
-          {editando && (
-            <button className="btn ed" onClick={() => imposta({ editId: s.id })}>Modifica</button>
-          )}
-          <button ref={chiudi} className="btn" onClick={() => imposta({ apertaId: null })}>Chiudi ✕</button>
+          {editando && <button className="btn ed" onClick={() => imposta({ editId: s.id, auto: false })}>Modifica</button>}
+          <button ref={chiudi} className="btn" aria-label="Chiudi" onClick={() => imposta({ apertaId: null, auto: false })}>✕</button>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '200px minmax(0,1fr) 200px', alignItems: 'start' }}>
+        <div ref={corpo} style={{ flex: 1, minHeight: 0, overflow: 'auto', display: 'grid', gridTemplateColumns: '210px minmax(0,1fr) 210px', alignItems: 'start' }}>
           <nav aria-label="Schede collegate prima" style={{ padding: 14, borderRight: '1px solid var(--line2)', alignSelf: 'stretch', background: 'var(--bg)' }}>
             <h3 className="h3s">← Prima</h3>
             <Lista items={prima} vuoto="Nessun collegamento precedente." />
@@ -119,6 +155,16 @@ export function SchedaCompleta({ id }: { id: string }) {
             <h3 className="h3s">Dopo →</h3>
             <Lista items={dopo} vuoto="Nessun collegamento successivo." />
           </nav>
+        </div>
+        <div style={{ flex: 'none', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 8, padding: '10px 16px', borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
+          <button className="btn" disabled={pos <= 0} onClick={() => vaiSeq(-1)}>← Precedente</button>
+          <button className="btn" disabled={pos >= seq.length - 1} onClick={() => vaiSeq(1)}>Successiva →</button>
+          <span style={{ fontSize: 13, color: 'var(--mute)', fontWeight: 600 }}>{pos + 1} di {seq.length} in ordine cronologico</span>
+          <div style={{ flex: 1 }} />
+          <button className={'btn' + (auto ? ' on' : '')} aria-pressed={auto} title="Passa da sola alla scheda successiva (barra spaziatrice)" onClick={() => imposta({ auto: !auto })}>
+            {auto ? '⏸ Pausa' : `▶ Riproduci · ${intervallo} s`}
+          </button>
+          <button className="btn" onClick={() => imposta({ apertaId: null, auto: false })}>Chiudi</button>
         </div>
       </div>
     </div>

@@ -140,5 +140,7 @@ export interface Api {
   aggiornaAutore(patch: AutorePatch): Promise<Modello>
   aggiornaTemi(temi: Tema[]): Promise<Modello>
   mostraCartella(): Promise<void>
+  /** zoom di tutta l'interfaccia (1 = 100%) */
+  zoom(fattore: number): void
   onModello(cb: (e: EventoModello) => void): () => void
 }

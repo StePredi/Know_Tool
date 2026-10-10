@@ -9,12 +9,14 @@ interface Preferenze {
   scuro: boolean
   sobria: boolean
   font: 'atkinson' | 'lexend' | 'sistema'
-  fs: number
+  zoomUi: number
+  zoomMappa: number
+  intervallo: number
   ls: number
   vista: Vista
 }
 
-const PREF_DEFAULT: Preferenze = { scuro: false, sobria: false, font: 'atkinson', fs: 14, ls: 150, vista: 'mappa' }
+const PREF_DEFAULT: Preferenze = { scuro: false, sobria: false, font: 'atkinson', zoomUi: 1.15, zoomMappa: 1, intervallo: 15, ls: 150, vista: 'mappa' }
 
 function leggiPref(): Preferenze {
   try {
@@ -42,6 +44,8 @@ interface Store extends Preferenze {
   controlli: boolean
   popover: Popover
   toast: string | null
+  auto: boolean
+  applicazione: boolean
 
   init(): Promise<void>
   scegliRadice(): Promise<void>
@@ -74,6 +78,8 @@ export const useStore = create<Store>((set, get) => ({
   controlli: false,
   popover: null,
   toast: null,
+  auto: false,
+  applicazione: false,
 
   async init() {
     const s = await window.api.stato()
@@ -120,9 +126,9 @@ export const useStore = create<Store>((set, get) => ({
   },
   prefs(p) {
     set(p)
-    const { scuro, sobria, font, fs, ls, vista } = get()
+    const { scuro, sobria, font, zoomUi, zoomMappa, intervallo, ls, vista } = get()
     try {
-      localStorage.setItem('kt-pref', JSON.stringify({ scuro, sobria, font, fs, ls, vista }))
+      localStorage.setItem('kt-pref', JSON.stringify({ scuro, sobria, font, zoomUi, zoomMappa, intervallo, ls, vista }))
     } catch {
       // vedi sopra
     }

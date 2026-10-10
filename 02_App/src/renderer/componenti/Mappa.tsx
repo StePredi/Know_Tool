@@ -11,6 +11,8 @@ export function Mappa() {
   const selId = useStore((s) => s.selId)
   const corsieSpente = useStore((s) => s.corsieSpente)
   const imposta = useStore((s) => s.imposta)
+  const zoom = useStore((s) => s.zoomMappa)
+  const prefs = useStore((s) => s.prefs)
   const scuro = useStore((s) => s.scuro)
   const sobria = useStore((s) => s.sobria)
   const colore = useColore()
@@ -72,9 +74,23 @@ export function Mappa() {
     else if (e.key === 'Escape') imposta({ selId: null })
   }
 
+  // Ctrl + rotella = zoom della mappa
+  useEffect(() => {
+    const el = scroller.current
+    if (!el) return
+    const h = (e: WheelEvent): void => {
+      if (!e.ctrlKey) return
+      e.preventDefault()
+      const z = useStore.getState().zoomMappa
+      prefs({ zoomMappa: Math.min(1.6, Math.max(0.5, +(z + (e.deltaY < 0 ? 0.1 : -0.1)).toFixed(2))) })
+    }
+    el.addEventListener('wheel', h, { passive: false })
+    return () => el.removeEventListener('wheel', h)
+  }, [prefs])
+
   return (
     <div ref={scroller} onMouseDown={giu} onKeyDown={tasto} style={{ flex: 1, minHeight: 0, overflow: 'auto', position: 'relative', background: 'var(--bg)' }}>
-      <div style={{ position: 'relative', width: L.canvasW, height: L.canvasH }}>
+      <div style={{ position: 'relative', width: L.canvasW, height: L.canvasH, zoom }}>
         <div style={{ position: 'sticky', top: 0, zIndex: 7, height: AXIS, background: 'var(--axis)', borderBottom: '1px solid var(--line)', width: L.canvasW }}>
           {L.ticks.map((t) => (
             <span key={t.label + t.x} style={{ position: 'absolute', top: 6, left: t.x, fontSize: 11, fontWeight: 700, color: 'var(--mute)', whiteSpace: 'nowrap' }}>{t.label}</span>

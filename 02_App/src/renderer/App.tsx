@@ -7,6 +7,7 @@ import { Anteprima } from './componenti/Anteprima'
 import { SchedaCompleta } from './componenti/SchedaCompleta'
 import { EditorScheda } from './componenti/EditorScheda'
 import { Controlli } from './componenti/Controlli'
+import { Applicazione } from './componenti/Applicazione'
 
 const FONT = {
   atkinson: "'Atkinson Hyperlegible', system-ui, sans-serif",
@@ -26,10 +27,28 @@ export function App() {
   useEffect(() => {
     const r = document.documentElement
     r.dataset.theme = st.scuro ? 'dark' : 'light'
-    r.style.setProperty('--fs', st.fs + 'px')
+    window.api.zoom(st.zoomUi)
     r.style.setProperty('--ls', String(st.ls / 100))
     r.style.setProperty('--ff', FONT[st.font])
-  }, [st.scuro, st.fs, st.ls, st.font])
+  }, [st.scuro, st.zoomUi, st.ls, st.font])
+
+  // zoom di tutta l'interfaccia: Ctrl + / Ctrl - / Ctrl 0
+  useEffect(() => {
+    const h = (e: KeyboardEvent): void => {
+      if (!e.ctrlKey && !e.metaKey) return
+      const z = useStore.getState().zoomUi
+      let n: number | null = null
+      if (e.key === '+' || e.key === '=') n = Math.min(2, z + 0.1)
+      else if (e.key === '-') n = Math.max(0.7, z - 0.1)
+      else if (e.key === '0') n = 1.15
+      if (n != null) {
+        e.preventDefault()
+        useStore.getState().prefs({ zoomUi: +n.toFixed(2) })
+      }
+    }
+    document.addEventListener('keydown', h)
+    return () => document.removeEventListener('keydown', h)
+  }, [])
 
   // Esc chiude, dall'alto verso il basso
   useEffect(() => {
@@ -37,8 +56,9 @@ export function App() {
       if (e.key !== 'Escape') return
       const s = useStore.getState()
       if (s.editId) return
-      if (s.popover) s.imposta({ popover: null })
-      else if (s.apertaId) s.imposta({ apertaId: null })
+      if (s.applicazione) s.imposta({ applicazione: false })
+      else if (s.popover) s.imposta({ popover: null })
+      else if (s.apertaId) s.imposta({ apertaId: null, auto: false })
       else if (s.controlli) s.imposta({ controlli: false })
     }
     document.addEventListener('keydown', h)
@@ -72,6 +92,7 @@ export function App() {
       {st.apertaId && <SchedaCompleta id={st.apertaId} />}
       {st.editId && <EditorScheda id={st.editId} />}
       {st.controlli && <Controlli />}
+      {st.applicazione && <Applicazione />}
       {st.toast && (
         <div role="status" style={{ position: 'fixed', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 100, background: 'var(--ink)', color: 'var(--surface)', borderRadius: 10, padding: '10px 16px', fontSize: 13.5, fontWeight: 700, boxShadow: '0 10px 30px rgba(0,0,0,.3)', animation: 'dcUp .16s ease-out' }}>
           {st.toast}

@@ -3,7 +3,7 @@ import { erroreFine } from '@shared/dates'
 import { schedeDelTema } from '@shared/derivati'
 import type { Corsia, Periodo, Tema } from '@shared/types'
 import { useColore, useStore, type Popover } from '../store'
-import { Campo, slug } from '../utili'
+import { Campo, slug, usaFiltro } from '../utili'
 import { EVENTO_SENZA_DATA } from './Mappa'
 
 function Filtro(props: { id: Exclude<Popover, 'lettura' | null>; titolo: string; etichetta: string; attivo: boolean; children: ReactNode }) {
@@ -31,6 +31,7 @@ export function Header() {
   const ix = useStore((s) => s.indice)!
   const st = useStore()
   const colore = useColore()
+  const passa = usaFiltro()
   const { imposta, prefs } = st
 
   // un clic fuori chiude i popover
@@ -74,6 +75,18 @@ export function Header() {
         {st.vista === 'mappa' && nSenza > 0 && (
           <button type="button" className="btn" style={{ borderStyle: 'dashed', color: 'var(--mute)' }} onClick={() => window.dispatchEvent(new Event(EVENTO_SENZA_DATA))}>Senza data · {nSenza} →</button>
         )}
+        <button type="button" className="btn on" title="Mostra le schede una alla volta in ordine cronologico (rispetta i filtri)" onClick={() => {
+          const vis = ix.chron.filter((x) => passa(x) && !st.corsieSpente[x.corsia])
+          const da = vis.find((x) => x.id === st.selId) ?? vis[0]
+          if (da) imposta({ apertaId: da.id, selId: da.id, auto: true })
+        }}>▶ Riproduci</button>
+        {st.vista === 'mappa' && (
+          <div role="group" aria-label="Zoom della mappa" style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
+            <button className="btn" style={{ border: 0, borderRadius: 0 }} aria-label="Riduci la mappa" onClick={() => prefs({ zoomMappa: Math.max(0.5, +(st.zoomMappa - 0.1).toFixed(2)) })}>−</button>
+            <button className="btn" style={{ border: 0, borderRadius: 0, minWidth: 60 }} title="Torna al 100%" onClick={() => prefs({ zoomMappa: 1 })}>{Math.round(st.zoomMappa * 100)}%</button>
+            <button className="btn" style={{ border: 0, borderRadius: 0 }} aria-label="Ingrandisci la mappa" onClick={() => prefs({ zoomMappa: Math.min(1.6, +(st.zoomMappa + 0.1).toFixed(2)) })}>+</button>
+          </div>
+        )}
         <div style={{ flex: '1 1 0', minWidth: 8 }} />
         <label style={{ flex: '0 1 380px', minWidth: 120, display: 'flex', alignItems: 'center', gap: 8, border: '1px solid var(--line)', borderRadius: 8, background: 'var(--bg)', padding: '0 10px' }}>
           <span aria-hidden style={{ fontSize: 12, color: 'var(--mute)', fontWeight: 700 }}>⌕</span>
@@ -81,12 +94,10 @@ export function Header() {
           <input type="search" value={st.query} onChange={(e) => imposta({ query: e.target.value })} placeholder="Cerca titolo, dettagli, tema…" style={{ flex: 1, minWidth: 0, border: 0, background: 'transparent', padding: '8px 0', fontSize: 13, outline: 'none' }} />
         </label>
         <div style={{ flex: '1 1 0', minWidth: 8 }} />
-        <button className="btn" onClick={() => void window.api.mostraCartella()} title="Apri la cartella dell'autore">Cartella</button>
         <button className="btn" onClick={() => imposta({ controlli: !st.controlli })} aria-expanded={st.controlli} style={nProblemi ? { borderColor: errori ? 'var(--err-line)' : 'var(--warn-line)' } : undefined}>
           Controlli{nProblemi ? ` · ${nProblemi}` : ' ✓'}
         </button>
-        <button className="btn" onClick={() => prefs({ scuro: !st.scuro })}>{st.scuro ? 'Chiaro' : 'Scuro'}</button>
-        <button className="btn" data-pop="1" aria-expanded={st.popover === 'lettura'} onClick={() => imposta({ popover: st.popover === 'lettura' ? null : 'lettura' })}>Aa Lettura</button>
+        <button className="btn" onClick={() => imposta({ applicazione: true })}>Applicazione</button>
         <button className="btn" aria-pressed={st.editando} title="Attiva o disattiva la modifica dei contenuti" onClick={() => imposta({ editando: !st.editando })} style={st.editando ? { background: 'var(--ed)', color: 'var(--surface)', borderColor: 'var(--ed)' } : undefined}>
           {st.editando ? 'Modifica attiva' : 'Modifica'}
         </button>
@@ -191,28 +202,6 @@ export function Header() {
         </Filtro>
       </div>
 
-      {st.popover === 'lettura' && (
-        <div data-pop="1" style={{ position: 'fixed', top: 56, right: 14, zIndex: 60, width: 286, background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 10, boxShadow: '0 14px 40px rgba(0,0,0,.22)', padding: 14, animation: 'dcUp .14s ease-out' }}>
-          <strong style={{ display: 'block', fontSize: 12.5, textTransform: 'uppercase', letterSpacing: '.06em', marginBottom: 10 }}>Lettura</strong>
-          <div className="h3s">Carattere</div>
-          <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
-            {([['atkinson', 'Atkinson'], ['lexend', 'Lexend'], ['sistema', 'Sistema']] as const).map(([k, n]) => (
-              <button key={k} className={'btn' + (st.font === k ? ' on' : '')} style={{ flex: 1 }} aria-pressed={st.font === k} onClick={() => prefs({ font: k })}>{n}</button>
-            ))}
-          </div>
-          <label className="h3s" style={{ display: 'block' }}>Dimensione testo · {st.fs}px</label>
-          <input type="range" min={13} max={19} step={1} value={st.fs} onChange={(e) => prefs({ fs: +e.target.value })} style={{ width: '100%', marginBottom: 12 }} />
-          <label className="h3s" style={{ display: 'block' }}>Spaziatura righe · {(st.ls / 100).toFixed(2)}</label>
-          <input type="range" min={130} max={200} step={5} value={st.ls} onChange={(e) => prefs({ ls: +e.target.value })} style={{ width: '100%', marginBottom: 12 }} />
-          <div className="h3s">Palette delle categorie</div>
-          <div style={{ display: 'flex', gap: 6 }}>
-            {([[false, 'Vivace'], [true, 'Sobria']] as const).map(([v, n]) => (
-              <button key={n} className={'btn' + (st.sobria === v ? ' on' : '')} style={{ flex: 1 }} aria-pressed={st.sobria === v} onClick={() => prefs({ sobria: v })}>{n}</button>
-            ))}
-          </div>
-          <p style={{ margin: '12px 0 0', fontSize: 11.5, color: 'var(--mute)', lineHeight: 1.4 }}>Valgono per tutta l'app. Nella mappa: <b>←</b> <b>→</b> fra le schede, <b>Invio</b> apre, <b>Esc</b> chiude.</p>
-        </div>
-      )}
     </header>
   )
 }
