@@ -35,7 +35,7 @@ export function Mappa() {
   // la scheda selezionata resta in vista
   useEffect(() => {
     if (!selId) return
-    document.getElementById(`card-${selId}`)?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    document.getElementById(`card-${selId}`)?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' })
   }, [selId])
 
   // trascinamento per spostarsi

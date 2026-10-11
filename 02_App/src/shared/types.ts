@@ -243,6 +243,7 @@ export interface Api {
   mostraCartella(): Promise<void>
   /** testi: ogni scrittura restituisce il modello aggiornato */
   creaTesto(nuovo: NuovoTesto): Promise<{ id: string; modello: Modello }>
+  eliminaTesto(id: string): Promise<{ modello: Modello; archiviato: string }>
   aggiornaTesto(id: string, patch: { layout?: Layout; titolo?: string; anno?: string; opera?: string; scheda?: string | null }): Promise<Modello>
   /** sostituisce il corpo del testo e riaggancia annotazioni, parafrasi e passi degli esercizi */
   modificaCorpo(id: string, corpo: string): Promise<{ modello: Modello; esito: EsitoRiaggancio }>

@@ -361,6 +361,21 @@ export class Repository {
     })
   }
 
+  /** «Elimina» non cancella: sposta la cartella del testo in 99_Archivio/testi_eliminati/ (si recupera a mano o con git). */
+  eliminaTesto(id: string): Promise<{ modello: Modello; archiviato: string }> {
+    return this.inCoda(async () => {
+      await this.esisteTesto(id)
+      const cartella = join(this.radice, '99_Archivio', 'testi_eliminati')
+      await fs.mkdir(cartella, { recursive: true })
+      const ora = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)
+      const destinazione = join(cartella, `${this.autoreId}_${id}_${ora}`)
+      await fs.rename(join(this.dir, 'testi', id), destinazione)
+      for (const k of [...this.cache.keys()]) if (k.startsWith(`testi/${id}/`)) this.cache.delete(k)
+      this.emetti([])
+      return { modello: this.modello(), archiviato: destinazione }
+    })
+  }
+
   aggiornaTesto(id: string, patch: { layout?: Layout; titolo?: string; anno?: string; opera?: string; scheda?: string | null }): Promise<Modello> {
     return this.inCoda(async () => {
       await this.esisteTesto(id)

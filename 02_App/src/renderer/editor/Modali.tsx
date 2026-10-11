@@ -636,8 +636,11 @@ export function ModificaTesto() {
   const ed = useEditor()
   const { testo } = d
   const [occ, setOcc] = useState(false)
+  const [conferma, setConferma] = useState(false)
+  const mod = useStore((x) => x.modello)!
   const chiudi = (): void => ed.imposta({ modOpen: false })
   return (
+    <>
     <Modale
       titolo="Modifica il testo"
       larghezza={760}
@@ -652,6 +655,7 @@ export function ModificaTesto() {
       }
       piede={
         <>
+          <button type="button" className="hv" onClick={() => setConferma(true)} style={{ ...secondario, color: 'var(--err-ink)', borderColor: 'var(--err-line)', background: 'var(--err-bg)' }}><Con i="cestino" size={14}>Elimina testo</Con></button>
           <div style={{ flex: 1 }} />
           <button type="button" className="hv" onClick={chiudi} style={secondario}><Con i="chiudi" size={13}>Annulla</Con></button>
           <button
@@ -680,6 +684,33 @@ export function ModificaTesto() {
       <p style={{ margin: 0, fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.55, textWrap: 'pretty' }}>Correggi refusi o versi. All'uscita le annotazioni cercano da sole le proprie parole nel nuovo testo; quelle che non si ritrovano restano segnalate nel pannello.</p>
       <textarea aria-label="Corpo del testo" autoFocus spellCheck={false} value={ed.modBozza} onChange={(e) => ed.imposta({ modBozza: e.target.value })} style={{ flex: 1, minHeight: 280, resize: 'none', border: '1px solid var(--line)', background: 'var(--bg)', borderRadius: 11, padding: '13px 14px', fontSize: 14, lineHeight: 1.8, outlineOffset: -2 }} />
     </Modale>
+    {conferma && (
+      <div role="alertdialog" aria-label="Conferma eliminazione del testo" className="overlay" style={{ zIndex: 95, alignItems: 'center', padding: 22, background: 'rgba(8,12,18,.6)' }}>
+        <div style={{ maxWidth: 500, background: 'var(--surface)', border: '1px solid var(--line)', borderTop: '4px solid var(--err-line)', borderRadius: 14, padding: 20, boxShadow: '0 30px 80px rgba(0,0,0,.4)', animation: 'dcUp .18s ease-out' }}>
+          <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>Eliminare «{testo.titolo || 'questo testo'}»?</h3>
+          <p style={{ margin: '0 0 8px', fontSize: 14.5 }}>Il testo non viene cancellato: la sua cartella (testo, {testo.annotazioni.length} annotazioni, {testo.parafrasi.length} parafrasi, {testo.esercizi.length} esercizi) va in <b>99_Archivio/testi_eliminati/</b> e la puoi recuperare.</p>
+          <p style={{ margin: '0 0 14px', fontSize: 14.5 }}>Nell'app sparisce subito dall'elenco dei testi.</p>
+          <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+            <button type="button" className="btn lg" onClick={() => setConferma(false)}>Annulla</button>
+            <button type="button" className="btn lg" disabled={occ} style={{ background: 'var(--err-line)', color: '#fff', borderColor: 'var(--err-line)' }} onClick={async () => {
+              setOcc(true)
+              const altro = mod.testi.find((x) => x.id !== testo.id)?.id ?? null
+              try {
+                const r = await window.api.eliminaTesto(testo.id)
+                useStore.getState().applica(r.modello)
+                ed.imposta({ modOpen: false, selettoreOpen: false, testoId: altro, sel: null, anchor: null, testa: null, tab: 'ann', annDet: null, esDet: null, riancoroInfo: null })
+                useStore.getState().mostraToast('Testo spostato in 99_Archivio/testi_eliminati')
+              } catch (e) {
+                useStore.getState().mostraToast((e as Error).message)
+              }
+              setOcc(false)
+              setConferma(false)
+            }}><Con i="cartella">Sposta in archivio</Con></button>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   )
 }
 

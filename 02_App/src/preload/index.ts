@@ -13,6 +13,7 @@ const api: Api = {
   aggiornaTemi: (t) => ipcRenderer.invoke('temi:aggiorna', t),
   mostraCartella: () => ipcRenderer.invoke('cartella:mostra'),
   creaTesto: (n) => ipcRenderer.invoke('testo:crea', n),
+  eliminaTesto: (id) => ipcRenderer.invoke('testo:elimina', id),
   aggiornaTesto: (id, p) => ipcRenderer.invoke('testo:aggiorna', id, p),
   modificaCorpo: (id, c) => ipcRenderer.invoke('testo:corpo', id, c),
   salvaVoce: (t, r, v) => ipcRenderer.invoke('voce:salva', t, r, v),

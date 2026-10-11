@@ -6,20 +6,22 @@ import { useColore, useStore, type Popover } from '../store'
 import { Campo, slug, usaFiltro } from '../utili'
 import { EVENTO_SENZA_DATA } from './Mappa'
 import { useEditor } from '../editor/stato'
-import { Con, Icona } from './Icona'
+import { Con, Icona, type NomeIcona } from './Icona'
 
-function Filtro(props: { id: Exclude<Popover, 'lettura' | null>; titolo: string; etichetta: string; attivo: boolean; children: ReactNode }) {
+function Filtro(props: { id: Exclude<Popover, 'lettura' | null>; titolo: string; icona: NomeIcona; n: number; riassunto: string; larghezza?: number; children: ReactNode }) {
   const popover = useStore((s) => s.popover)
   const imposta = useStore((s) => s.imposta)
   const aperto = popover === props.id
+  const attivo = props.n > 0
   return (
-    <div data-pop="1" style={{ position: 'relative', flex: '1 1 280px', minWidth: 230, maxWidth: 430, border: `1px solid ${props.attivo ? 'var(--ink)' : 'var(--line)'}`, borderRadius: 14, background: props.attivo ? 'var(--surface2)' : 'var(--surface)' }}>
-      <button type="button" aria-expanded={aperto} onClick={() => imposta({ popover: aperto ? null : props.id })} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 10, border: 0, borderRadius: 13, background: 'transparent', padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', textAlign: 'left' }}>
-        <span style={{ textTransform: 'uppercase', letterSpacing: '.06em', fontSize: 11, color: 'var(--mute)' }}>{props.titolo}</span>
-        <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{props.etichetta}</span>
-        <span aria-hidden style={{ color: 'var(--mute)', fontSize: 11 }}><Icona nome={aperto ? 'chiuso' : 'apri'} size={14} /></span>
+    <div data-pop="1" style={{ position: 'relative', flex: 'none' }}>
+      <button type="button" className="hd-b" aria-expanded={aperto} title={`${props.titolo}: ${props.riassunto}`} onClick={() => imposta({ popover: aperto ? null : props.id })} style={{ borderColor: attivo || aperto ? 'var(--ink)' : undefined, background: attivo ? 'var(--surface2)' : undefined }}>
+        <Icona nome={props.icona} size={15} />
+        <span className="hd-lab">{props.titolo}</span>
+        {attivo && <span aria-label={`${props.n} attivi`} style={{ background: 'var(--ink)', color: 'var(--surface)', borderRadius: 999, minWidth: 18, height: 18, padding: '0 5px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11 }}>{props.n}</span>}
+        <Icona nome={aperto ? 'chiuso' : 'apri'} size={13} style={{ color: 'var(--mute)' }} />
       </button>
-      {aperto && <div className="pop">{props.children}</div>}
+      {aperto && <div className="pop" style={{ right: 'auto', left: 0, width: props.larghezza ?? 360 }}>{props.children}</div>}
     </div>
   )
 }
@@ -49,73 +51,37 @@ export function Header() {
   const errori = m.problemi.filter((p) => p.gravita === 'errore').length
   const nProblemi = m.problemi.length
   const attiviPer = st.periodi.length
+  const nSpente = m.autore.corsie.filter((c) => st.corsieSpente[c.id]).length
   const aggiornaPeriodi = (periodi: Periodo[]): void => void window.api.aggiornaAutore({ periodi }).then((x) => st.applica(x))
   const aggiornaCorsie = (corsie: Corsia[]): void => void window.api.aggiornaAutore({ corsie }).then((x) => st.applica(x))
   const aggiornaTemi = (temi: Tema[]): void => void window.api.aggiornaTemi(temi).then((x) => st.applica(x))
   const commuta = (lista: number[], v: number): number[] => (lista.includes(v) ? lista.filter((x) => x !== v) : [...lista, v])
 
   return (
-    <header style={{ flex: 'none', borderBottom: '1px solid var(--line)', background: 'var(--surface)', borderTop: `3px solid ${st.editando ? 'var(--ed)' : 'transparent'}` }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '10px 14px', flexWrap: 'wrap' }}>
+    <header className="hd" style={{ flex: 'none', borderBottom: '1px solid var(--line)', background: 'var(--surface)', borderTop: `3px solid ${st.editando ? 'var(--ed)' : 'transparent'}`, transition: 'border-color .18s' }}>
+      <div className="hd-riga">
         {st.editando ? (
-          <Campo valore={m.autore.nome} salva={(v) => void window.api.aggiornaAutore({ nome: v }).then((x) => st.applica(x))} label="Nome dell'autore" className="inp big" style={{ width: 220, flex: 'none', borderColor: 'var(--ed)', fontWeight: 700 }} />
+          <Campo valore={m.autore.nome} salva={(v) => void window.api.aggiornaAutore({ nome: v }).then((x) => st.applica(x))} label="Nome dell'autore" className="inp big" style={{ width: 190, flex: 'none', borderColor: 'var(--ed)', fontWeight: 700, padding: '6px 10px', fontSize: 14.5 }} />
         ) : (
-          <strong style={{ fontSize: 15, whiteSpace: 'nowrap' }}>{m.autore.nome}</strong>
+          <strong style={{ fontSize: 15, whiteSpace: 'nowrap', flex: 'none' }}>{m.autore.nome}</strong>
         )}
         {st.stato && st.stato.autori.length > 1 && (
-          <select className="inp" style={{ width: 'auto' }} value={st.stato.autoreId ?? ''} onChange={(e) => void st.scegliAutore(e.target.value)} aria-label="Autore">
+          <select className="inp" style={{ width: 'auto', flex: 'none' }} value={st.stato.autoreId ?? ''} onChange={(e) => void st.scegliAutore(e.target.value)} aria-label="Autore">
             {st.stato.autori.map((a) => <option key={a.id} value={a.id}>{a.nome}</option>)}
           </select>
         )}
-        <div role="group" aria-label="Vista" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
+
+        <span className="hd-sep" aria-hidden />
+
+        <div role="group" aria-label="Vista" className="hd-seg">
           {(['mappa', 'lista'] as const).map((v) => (
-            <button key={v} type="button" aria-pressed={st.vista === v} onClick={() => prefs({ vista: v })} style={{ border: 0, borderRight: v === 'mappa' ? '1px solid var(--line)' : 0, padding: '7px 14px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', background: st.vista === v ? 'var(--ink)' : 'var(--surface)', color: st.vista === v ? 'var(--surface)' : 'var(--ink)' }}>
-              <Con i={v === 'mappa' ? 'mappa' : 'elenco'}>{v === 'mappa' ? 'Mappa' : 'Lista'}</Con>
+            <button key={v} type="button" aria-pressed={st.vista === v} onClick={() => prefs({ vista: v })} style={{ borderRight: v === 'mappa' ? '1px solid var(--line)' : 0, background: st.vista === v ? 'var(--ink)' : 'var(--surface)', color: st.vista === v ? 'var(--surface)' : 'var(--ink)' }}>
+              <Icona nome={v === 'mappa' ? 'mappa' : 'elenco'} size={15} /><span className="hd-lab">{v === 'mappa' ? 'Mappa' : 'Lista'}</span>
             </button>
           ))}
         </div>
-        {st.vista === 'mappa' && nSenza > 0 && (
-          <button type="button" className="btn" style={{ borderStyle: 'dashed', color: 'var(--mute)' }} onClick={() => window.dispatchEvent(new Event(EVENTO_SENZA_DATA))}><Con i="orologio">Senza data · {nSenza}</Con></button>
-        )}
-        <button type="button" className="btn on" title="Mostra le schede una alla volta in ordine cronologico (rispetta i filtri)" onClick={() => {
-          const vis = ix.chron.filter((x) => passa(x) && !st.corsieSpente[x.corsia])
-          const da = vis.find((x) => x.id === st.selId) ?? vis[0]
-          if (da) imposta({ apertaId: da.id, selId: da.id, auto: true })
-        }}><Con i="gioca">Riproduci</Con></button>
-        {st.vista === 'mappa' && (
-          <div role="group" aria-label="Zoom della mappa" style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
-            <button className="btn" style={{ border: 0, borderRadius: 0 }} aria-label="Riduci la mappa" onClick={() => prefs({ zoomMappa: Math.max(0.5, +(st.zoomMappa - 0.1).toFixed(2)) })}><Icona nome="meno" /></button>
-            <button className="btn" style={{ border: 0, borderRadius: 0, minWidth: 60 }} title="Torna al 100%" onClick={() => prefs({ zoomMappa: 1 })}>{Math.round(st.zoomMappa * 100)}%</button>
-            <button className="btn" style={{ border: 0, borderRadius: 0 }} aria-label="Ingrandisci la mappa" onClick={() => prefs({ zoomMappa: Math.min(1.6, +(st.zoomMappa + 0.1).toFixed(2)) })}><Icona nome="piu" /></button>
-          </div>
-        )}
-        <div style={{ flex: '1 1 0', minWidth: 8 }} />
-        <label style={{ flex: '0 1 380px', minWidth: 120, display: 'flex', alignItems: 'center', gap: 8, border: '1px solid var(--line)', borderRadius: 8, background: 'var(--bg)', padding: '0 10px' }}>
-          <span aria-hidden style={{ fontSize: 12, color: 'var(--mute)', fontWeight: 700 }}><Icona nome="cerca" size={15} /></span>
-          <span className="sr">Cerca nelle schede</span>
-          <input type="search" value={st.query} onChange={(e) => imposta({ query: e.target.value })} placeholder="Cerca titolo, dettagli, tema…" style={{ flex: 1, minWidth: 0, border: 0, background: 'transparent', padding: '8px 0', fontSize: 13, outline: 'none' }} />
-        </label>
-        <div style={{ flex: '1 1 0', minWidth: 8 }} />
-        <button className="btn" title="Apri l'editor dei testi" onClick={() => useEditor.getState().imposta({ elencoTesti: true })}><Con i="libro">Testi · {m.testi.length}</Con></button>
-        <button className="btn" onClick={() => imposta({ controlli: !st.controlli })} aria-expanded={st.controlli} style={nProblemi ? { borderColor: errori ? 'var(--err-line)' : 'var(--warn-line)' } : undefined}>
-          <Con i={nProblemi ? 'avviso' : 'scudo'}>Controlli{nProblemi ? ` · ${nProblemi}` : ''}</Con>
-        </button>
-        <button className="btn" onClick={() => imposta({ applicazione: true })}><Con i="regolazioni">Applicazione</Con></button>
-        <button className="btn" aria-pressed={st.editando} title="Attiva o disattiva la modifica dei contenuti" onClick={() => imposta({ editando: !st.editando })} style={st.editando ? { background: 'var(--ed)', color: 'var(--surface)', borderColor: 'var(--ed)' } : undefined}>
-          <Con i="matita">{st.editando ? 'Modifica attiva' : 'Modifica'}</Con>
-        </button>
-      </div>
 
-      {st.editando && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexWrap: 'wrap', padding: '0 14px 10px' }}>
-          <Gestisci t="Modifica attiva" />
-          <button className="btn ed" onClick={async () => { const r = await window.api.creaScheda({}); st.applica(r.modello); imposta({ editId: r.id, selId: r.id }) }}><Con i="aggiungiScheda">Nuova scheda</Con></button>
-          <span style={{ fontSize: 12, color: 'var(--mute)' }}>{m.schede.length} schede · ogni cambiamento è subito nel file</span>
-        </div>
-      )}
-
-      <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', justifyContent: 'center', padding: '0 14px 11px', flexWrap: 'wrap' }}>
-        <Filtro id="periodi" titolo="Periodi" attivo={attiviPer > 0} etichetta={attiviPer ? st.periodi.map((i) => m.autore.periodi[i]?.nome).filter(Boolean).join(' · ') : 'Tutti'}>
+        <Filtro id="periodi" titolo="Periodi" icona="orologio" n={attiviPer} riassunto={attiviPer ? st.periodi.map((i) => m.autore.periodi[i]?.nome).filter(Boolean).join(' · ') : 'tutti'}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             <button className={'chip' + (attiviPer ? '' : ' on')} onClick={() => imposta({ periodi: [] })}>Tutti</button>
             {m.autore.periodi.map((p, i) => (
@@ -145,7 +111,7 @@ export function Header() {
           )}
         </Filtro>
 
-        <Filtro id="temi" titolo="Temi" attivo={st.temi.length > 0} etichetta={st.temi.length ? st.temi.map((k) => m.temi.find((t) => t.id === k)?.nome).filter(Boolean).join(' · ') : 'Tutti'}>
+        <Filtro id="temi" titolo="Temi" icona="segnalibro" n={st.temi.length} riassunto={st.temi.length ? st.temi.map((k) => m.temi.find((t) => t.id === k)?.nome).filter(Boolean).join(' · ') : 'tutti'}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             <button className={'chip' + (st.temi.length ? '' : ' on')} onClick={() => imposta({ temi: [] })}>Tutti</button>
             {m.temi.map((t) => (
@@ -164,12 +130,12 @@ export function Header() {
               <button className="btn ghost-ed" style={{ alignSelf: 'flex-start' }} onClick={() => {
                 let id = slug('nuovo tema'); for (let n = 2; m.temi.some((t) => t.id === id); n++) id = `nuovo_tema${n}`
                 aggiornaTemi([...m.temi, { id, nome: 'Nuovo tema' }])
-              }}>+ Tema</button>
+              }}><Con i="piu">Tema</Con></button>
             </div>
           )}
         </Filtro>
 
-        <Filtro id="corsie" titolo="Categorie" attivo={Object.values(st.corsieSpente).some(Boolean)} etichetta={Object.values(st.corsieSpente).some(Boolean) ? `${m.autore.corsie.filter((c) => !st.corsieSpente[c.id]).length} di ${m.autore.corsie.length}` : 'Tutte'}>
+        <Filtro id="corsie" titolo="Categorie" icona="cartella" larghezza={430} n={nSpente} riassunto={nSpente ? `${m.autore.corsie.length - nSpente} di ${m.autore.corsie.length}` : 'tutte'}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             {m.autore.corsie.map((c) => (
               <button key={c.id} className={'chip' + (st.corsieSpente[c.id] ? '' : ' on')} aria-pressed={!st.corsieSpente[c.id]} style={{ display: 'flex', alignItems: 'center', gap: 7 }} onClick={() => imposta({ corsieSpente: { ...st.corsieSpente, [c.id]: !st.corsieSpente[c.id] } })}>
@@ -199,12 +165,48 @@ export function Header() {
               <button className="btn ghost-ed" style={{ alignSelf: 'flex-start' }} onClick={() => {
                 let id = 'nuova_categoria'; for (let n = 2; m.autore.corsie.some((c) => c.id === id); n++) id = `nuova_categoria${n}`
                 aggiornaCorsie([...m.autore.corsie, { id, nome: 'Nuova categoria', sigla: 'NUO', tonalita: 200 }])
-              }}>+ Categoria</button>
+              }}><Con i="piu">Categoria</Con></button>
             </div>
           )}
         </Filtro>
-      </div>
 
+        <label className="hd-cerca">
+          <Icona nome="cerca" size={15} style={{ color: 'var(--mute)' }} />
+          <span className="sr">Cerca nelle schede</span>
+          <input type="search" value={st.query} onChange={(e) => imposta({ query: e.target.value })} placeholder="Cerca titolo, dettagli, tema…" />
+        </label>
+
+        {st.vista === 'mappa' && nSenza > 0 && (
+          <button type="button" className="hd-b" title={`${nSenza} schede senza data: vai alla zona «Senza data»`} onClick={() => window.dispatchEvent(new Event(EVENTO_SENZA_DATA))} style={{ borderStyle: 'dashed', color: 'var(--mute)' }}><Icona nome="orologio" size={15} />{nSenza}</button>
+        )}
+        {st.vista === 'mappa' && (
+          <div role="group" aria-label="Zoom della mappa" className="hd-seg">
+            <button type="button" aria-label="Riduci la mappa" onClick={() => prefs({ zoomMappa: Math.max(0.5, +(st.zoomMappa - 0.1).toFixed(2)) })} style={{ padding: '0 9px' }}><Icona nome="meno" size={15} /></button>
+            <button type="button" title="Torna al 100%" onClick={() => prefs({ zoomMappa: 1 })} style={{ minWidth: 50, borderLeft: '1px solid var(--line)', borderRight: '1px solid var(--line)', fontVariantNumeric: 'tabular-nums' }}>{Math.round(st.zoomMappa * 100)}%</button>
+            <button type="button" aria-label="Ingrandisci la mappa" onClick={() => prefs({ zoomMappa: Math.min(1.6, +(st.zoomMappa + 0.1).toFixed(2)) })} style={{ padding: '0 9px' }}><Icona nome="piu" size={15} /></button>
+          </div>
+        )}
+        <button type="button" className="hd-b on" title="Mostra le schede una alla volta in ordine cronologico (rispetta i filtri)" onClick={() => {
+          const vis = ix.chron.filter((x) => passa(x) && !st.corsieSpente[x.corsia])
+          const da = vis.find((x) => x.id === st.selId) ?? vis[0]
+          if (da) imposta({ apertaId: da.id, selId: da.id, auto: true })
+        }}><Icona nome="gioca" size={15} /><span className="hd-lab hd-lab2">Riproduci</span></button>
+
+        <span className="hd-sep" aria-hidden />
+
+        <button type="button" className="hd-b" title="Apri l'editor dei testi" aria-label={`Testi, ${m.testi.length}`} onClick={() => useEditor.getState().imposta({ elencoTesti: true })}><Icona nome="libro" size={15} /><span className="hd-lab hd-lab2">Testi</span><span className="hd-n">{m.testi.length}</span></button>
+        <button type="button" className="hd-b" title="Controlli sui file" aria-label={`Controlli, ${nProblemi} segnalazioni`} onClick={() => imposta({ controlli: !st.controlli })} aria-expanded={st.controlli} style={nProblemi ? { borderColor: errori ? 'var(--err-line)' : 'var(--warn-line)' } : undefined}>
+          <Icona nome={nProblemi ? 'avviso' : 'scudo'} size={15} />{nProblemi > 0 && <span className="hd-n">{nProblemi}</span>}<span className="hd-lab hd-lab2">Controlli</span>
+        </button>
+        <button type="button" className="hd-b" title="Applicazione: aspetto, zoom, cartella" aria-label="Applicazione" onClick={() => imposta({ applicazione: true })}><Icona nome="regolazioni" size={15} /></button>
+
+        {st.editando && (
+          <button type="button" className="hd-b ed hd-entra" title={`Nuova scheda (${m.schede.length} schede, ogni cambiamento è subito nel file)`} onClick={async () => { const r = await window.api.creaScheda({}); st.applica(r.modello); imposta({ editId: r.id, selId: r.id }) }}><Icona nome="aggiungiScheda" size={15} /><span className="hd-lab hd-lab2">Nuova scheda</span></button>
+        )}
+        <button type="button" className="hd-b" aria-pressed={st.editando} title="Attiva o disattiva la modifica dei contenuti" onClick={() => imposta({ editando: !st.editando })} style={st.editando ? { background: 'var(--ed)', color: 'var(--surface)', borderColor: 'var(--ed)' } : undefined}>
+          <Icona nome="matita" size={15} /><span className="hd-lab">Modifica</span>
+        </button>
+      </div>
     </header>
   )
 }

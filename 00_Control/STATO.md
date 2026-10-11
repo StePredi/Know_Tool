@@ -14,6 +14,7 @@
 - Dati di prova: Leopardi convertito nel formato a file (105 schede, 10 temi, glossario) in `01_Argomenti/italiano/autori/leopardi/`
 - Scheletro dell'app Electron in `02_App/`: legge e valida i file (errori segnalati, mai blocchi), Home con Mappa e Lista, anteprima, scheda completa, modifica con scrittura immediata, aggiornamento automatico quando i file cambiano da fuori, pannello Controlli
 - 39 test automatici (date, validazione, round-trip dei 105 file, scrittura e watcher, testi e riaggancio)
+- Elimina testo (archivia in `99_Archivio/testi_eliminati/`); barra in alto della Home su un solo livello; transizioni fluide
 - Icone SVG uniche in tutta l'app (Icona.tsx) al posto dei simboli di testo
 - Home: zoom, riproduzione cronologica, pagina Applicazione, elimina scheda (archivia in `99_Archivio/schede_eliminate/`)
 - Editor del testo (riscritto sul prototipo): testi in `testi/<id>/` (testo.md + annotazioni/parafrasi/esercizi .json), figure in `_condiviso/figure_retoriche.json`; evidenziazione, annotazioni, parafrasi, esercizi (importazione, correzione, filtri), riaggancio automatico; dati di prova «L'infinito». Ingressi: «Testi» nella Home, «Apri nell'editor» nella scheda, «↗ Scheda sulla mappa» dall'editor

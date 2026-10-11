@@ -165,6 +165,18 @@ describe.skipIf(!existsSync(join(sorgente, 'italiano/autori/leopardi/testi/inf')
     expect(m.problemi.filter((p) => p.gravita === 'errore')).toEqual([])
   })
 
+  it('eliminaTesto: sposta la cartella in 99_Archivio e non cancella nulla', async () => {
+    const r = copia()
+    const rep = await apri(r)
+    const prima = rep.modello().testi.length
+    const id = rep.modello().testi[0]!.id
+    const x = await rep.eliminaTesto(id)
+    expect(x.modello.testi).toHaveLength(prima - 1)
+    expect(existsSync(join(x.archiviato, 'testo.md'))).toBe(true)
+    expect(existsSync(join(dirInf(r), 'testo.md'))).toBe(false)
+    await expect(rep.eliminaTesto(id)).rejects.toThrow()
+  })
+
   it('un json rotto a mano è segnalato e non rompe il resto', () => {
     const r = copia()
     writeFileSync(join(dirInf(r), 'annotazioni.json'), '[ { rotto')
