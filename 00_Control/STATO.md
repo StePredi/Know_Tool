@@ -8,6 +8,8 @@
 
 ## Fatto
 
+- Scheda riassuntiva generata dall'AI (2026-10-11): richiesta da copiare, proposta confronto Ora|Proposta con Applica/Scarta, nuove sezioni nella scheda
+
 - Formato dei file di studio
 - Design della Home dell'autore
 - Design dell'Editor del testo (annotazioni, parafrasi, esercizi con correzione, archivio testi)
@@ -27,14 +29,13 @@
 - Provare l'app su Windows e correggere quello che non va
 - Provare l'editor del testo su Windows e correggere
 - Installer finale (.exe) con electron-builder, a fine app
-- Scheda riassuntiva generata dall'AI
+- Provare la scheda riassuntiva su Windows (con una proposta vera scritta da Claude)
 - Home generale con tutte le materie (design da fare)
 
 ---
 
 ## Punti aperti (da decidere con l'utente)
 
-- Scheda riassuntiva generata dall'AI
 - Gli altri punti in `specifiche/formato_studio_italiano.md`, sezione "Da decidere con la demo"
 - Dati dell'HTML non ancora convertiti: confronti, ripasso, note su lacune/trappole, testi chiave, luoghi/percorso, 3 voci di glossario extra
 

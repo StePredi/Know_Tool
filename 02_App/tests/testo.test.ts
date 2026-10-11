@@ -193,6 +193,92 @@ describe.skipIf(!existsSync(join(sorgente, 'italiano/autori/leopardi/testi/inf')
     await expect(spostaCartella(a, join(r, 'x'), altro)).rejects.toThrow()
   })
 
+  const PROPOSTA = `---
+id: infinito_ai
+corsia: canti
+data: "1819"
+temi: [morte, tema_che_non_esiste]
+generata: 2026-10-11
+---
+
+## Riassunto
+Il poeta, davanti alla siepe, immagina spazi infiniti.
+
+## Struttura e metrica
+Un'unica strofa di 15 endecasillabi sciolti.
+
+## Contesto
+Idillio composto nel 1819.
+
+## Citazioni chiave
+- «Sempre caro mi fu quest'ermo colle» (v. 1): l'apertura
+- «Questo verso non esiste nel testo» (v. 99): inventato
+
+## Domande
+- Che ruolo ha la siepe?
+  Limita lo sguardo e libera l'immaginazione.
+`
+
+  it('proposta della scheda: letta, con citazioni e temi controllati', async () => {
+    const r = copia()
+    writeFileSync(join(dirInf(r), 'proposta_scheda.md'), PROPOSTA)
+    const rep = await apri(r)
+    const t = rep.modello().testi.find((x) => x.id === 'inf')!
+    expect(t.proposta).not.toBeNull()
+    expect(t.proposta!.sezioni.struttura).toContain('endecasillabi')
+    expect(t.proposta!.citazioniNonTrovate).toEqual(['Questo verso non esiste nel testo'])
+    expect(t.proposta!.temi).not.toContain('tema_che_non_esiste')
+    expect(t.proposta!.avvisi.some((a) => a.includes('tema_che_non_esiste'))).toBe(true)
+  })
+
+  it('applicaProposta: aggiorna le sezioni scelte della scheda collegata e archivia la proposta', async () => {
+    const r = copia()
+    writeFileSync(join(dirInf(r), 'proposta_scheda.md'), PROPOSTA)
+    const rep = await apri(r)
+    const prima = rep.modello()
+    const idScheda = prima.testi.find((x) => x.id === 'inf')!.scheda!
+    const riassuntoPrima = prima.schede.find((x) => x.id === idScheda)!.riassunto
+    const out = await rep.applicaProposta('inf', { sezioni: ['struttura', 'domande'] })
+    expect(out.creata).toBe(false)
+    const sc = out.modello.schede.find((x) => x.id === idScheda)!
+    expect(sc.struttura).toContain('endecasillabi')
+    expect(sc.domande).toContain('siepe')
+    expect(sc.contesto).toBe('')
+    expect(sc.riassunto).toBe(riassuntoPrima)
+    expect(out.modello.testi.find((x) => x.id === 'inf')!.proposta).toBeNull()
+    expect(existsSync(join(dirInf(r), 'proposta_scheda.md'))).toBe(false)
+    expect(existsSync(join(r, '99_Archivio', 'proposte_applicate'))).toBe(true)
+  })
+
+  it('applicaProposta: crea e collega la scheda se il testo non ne ha una', async () => {
+    const r = copia()
+    const rep = await apri(r)
+    await rep.aggiornaTesto('inf', { scheda: null })
+    writeFileSync(join(dirInf(r), 'proposta_scheda.md'), PROPOSTA)
+    await rep.ferma()
+    const rep2 = await apri(r)
+    await expect(rep2.applicaProposta('inf', { sezioni: ['riassunto'] })).rejects.toThrow()
+    const out = await rep2.applicaProposta('inf', { sezioni: ['riassunto', 'contesto', 'temi'], nuova: { corsia: 'canti', data: '1819', titolo_breve: "L'infinito" } })
+    expect(out.creata).toBe(true)
+    const sc = out.modello.schede.find((x) => x.id === out.schedaId)!
+    expect(sc.riassunto).toContain('siepe')
+    expect(sc.contesto).toContain('1819')
+    expect(sc.testi).toContain('inf')
+    expect(sc.temi).toContain('morte')
+    expect(out.modello.testi.find((x) => x.id === 'inf')!.scheda).toBe(out.schedaId)
+    expect(out.modello.problemi.filter((p) => p.gravita === 'errore')).toEqual([])
+  })
+
+  it('scartaProposta: la proposta va in archivio e non si perde', async () => {
+    const r = copia()
+    writeFileSync(join(dirInf(r), 'proposta_scheda.md'), PROPOSTA)
+    const rep = await apri(r)
+    const m = await rep.scartaProposta('inf')
+    expect(m.testi.find((x) => x.id === 'inf')!.proposta).toBeNull()
+    expect(existsSync(join(dirInf(r), 'proposta_scheda.md'))).toBe(false)
+    expect(existsSync(join(r, '99_Archivio', 'proposte_scartate'))).toBe(true)
+  })
+
   it('un json rotto a mano è segnalato e non rompe il resto', () => {
     const r = copia()
     writeFileSync(join(dirInf(r), 'annotazioni.json'), '[ { rotto')

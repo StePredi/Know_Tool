@@ -114,6 +114,21 @@ export function EditorScheda({ id }: { id: string }) {
               <Campo multi rows={9} valore={s.dettagli.join('\n')} salva={(v) => salva({ dettagli: v.split('\n') })} placeholder="Un punto per riga." className="inp big" style={{ minHeight: 240, fontSize: 15 }} />
             </label>
             <div style={{ border: '1px solid var(--line)', borderRadius: 10, background: 'var(--bg)', padding: '9px 10px', display: 'flex', flexDirection: 'column', gap: 7 }}>
+              <span className="h3">5 · Analisi del testo</span>
+              <label className="lbl">Struttura e metrica
+                <Campo multi rows={3} valore={s.struttura ?? ''} salva={(v) => salva({ struttura: v })} placeholder="Strofe, versi, rime, schema…" className="inp big" style={{ fontSize: 14 }} />
+              </label>
+              <label className="lbl">Contesto
+                <Campo multi rows={3} valore={s.contesto ?? ''} salva={(v) => salva({ contesto: v })} placeholder="Quando, perché, in quale raccolta…" className="inp big" style={{ fontSize: 14 }} />
+              </label>
+              <label className="lbl">Citazioni chiave · una per riga
+                <Campo multi rows={3} valore={s.citazioni ?? ''} salva={(v) => salva({ citazioni: v })} placeholder="Versi o frasi da ricordare" className="inp big" style={{ fontSize: 14 }} />
+              </label>
+              <label className="lbl">Domande da interrogazione · una per riga
+                <Campo multi rows={3} valore={s.domande ?? ''} salva={(v) => salva({ domande: v })} placeholder="Che cosa potrebbe chiedere il professore?" className="inp big" style={{ fontSize: 14 }} />
+              </label>
+            </div>
+            <div style={{ border: '1px solid var(--line)', borderRadius: 10, background: 'var(--bg)', padding: '9px 10px', display: 'flex', flexDirection: 'column', gap: 7 }}>
               <span className="h3">4 · Tabella</span>
               <Campo valore={tab.intro} salva={(v) => salvaTab(v, testoTab)} placeholder="Riga introduttiva" className="inp big" />
               <Campo multi rows={4} valore={testoTab} salva={(v) => salvaTab(tab.intro, v)} placeholder="Prima riga = intestazioni. Celle separate da |" className="inp big" style={{ fontSize: 14 }} />

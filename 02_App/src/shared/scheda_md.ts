@@ -33,10 +33,11 @@ export const ORDINE_CAMPI_SCHEDA = [
   'collegamenti',
   'testi',
   'pagine',
-  'fuori_dal_libro'
+  'fuori_dal_libro',
+  'origine'
 ]
 
-const ORDINE_SEZIONI = ['riassunto', 'dettagli', 'attenzione', 'tabella']
+const ORDINE_SEZIONI = ['riassunto', 'dettagli', 'struttura e metrica', 'contesto', 'citazioni chiave', 'domande', 'attenzione', 'tabella']
 const chiave = (t: string): string => t.trim().toLowerCase()
 
 export function normalizzaFineRiga(testo: string): string {
@@ -249,6 +250,13 @@ export function applicaPatchScheda(doc: DocMd, patch: SchedaPatch): void {
   if (patch.riassunto !== undefined) impostaSezione(doc, 'Riassunto', patch.riassunto.trim())
   if (patch.dettagli !== undefined) impostaSezione(doc, 'Dettagli', scriviDettagli(patch.dettagli.filter((d) => d.trim())))
   if (patch.attenzione !== undefined) impostaSezione(doc, 'Attenzione', patch.attenzione.trim() ? patch.attenzione.trim() : null)
+  const libera = (titolo: string, v: string | undefined): void => {
+    if (v !== undefined) impostaSezione(doc, titolo, v.trim() ? v.trim() : null)
+  }
+  libera('Struttura e metrica', patch.struttura)
+  libera('Contesto', patch.contesto)
+  libera('Citazioni chiave', patch.citazioni)
+  libera('Domande', patch.domande)
   if (patch.tabella !== undefined) {
     const t = patch.tabella
     impostaSezione(doc, 'Tabella', t && (t.colonne.length || t.intro.trim()) ? scriviTabella(t) : null)

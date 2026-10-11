@@ -37,6 +37,7 @@ interface StatoEditor {
   figPrev: string
   figTarget: string | null
   modOpen: boolean
+  riasOpen: boolean
   modBozza: string
   nuovoOpen: boolean
   elencoTesti: boolean
@@ -94,6 +95,7 @@ export const useEditor = create<StatoEditor>((set, get) => ({
   figPrev: 'metafora',
   figTarget: null,
   modOpen: false,
+  riasOpen: false,
   modBozza: '',
   nuovoOpen: false,
   elencoTesti: false,

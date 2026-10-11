@@ -2,6 +2,7 @@
 // ogni problema diventa una voce in `problemi`, mai un'eccezione (formato_studio_italiano.md §10).
 
 import { z } from 'zod'
+import { leggiProposta } from './proposta'
 import { leggiDocMd, leggiDettagli, leggiTabella, trovaSezione, type DocMd } from './scheda_md'
 import { erroreFine, parseData } from './dates'
 import { controllaTesti, leggiFigure, leggiTesto, type FileTesto } from './testo'
@@ -228,6 +229,10 @@ export function leggiScheda(file: string, testoFile: string, corsiaPredefinita: 
     dettagli: sDett ? leggiDettagli(sDett.testo) : [],
     attenzione: sAtt ? sAtt.testo.trim() : '',
     tabella: sTab ? leggiTabella(sTab.testo) : null,
+    struttura: trovaSezione(doc, 'Struttura e metrica')?.testo.trim() ?? '',
+    contesto: trovaSezione(doc, 'Contesto')?.testo.trim() ?? '',
+    citazioni: trovaSezione(doc, 'Citazioni chiave')?.testo.trim() ?? '',
+    domande: trovaSezione(doc, 'Domande')?.testo.trim() ?? '',
     file
   }
 }
@@ -292,17 +297,21 @@ export function costruisciModello(files: MappaFile, idAutoreAtteso: string): Mod
   const idFigure = new Set(figure.map((f) => f.id))
   const perId = new Map<string, FileTesto>()
   for (const k of Object.keys(files)) {
-    const m = k.match(/^testi\/([^/]+)\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json)$/)
+    const m = k.match(/^testi\/([^/]+)\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json|proposta_scheda\.md)$/)
     if (!m) continue
     const f = perId.get(m[1]!) ?? { id: m[1]! }
-    const campo = m[2] === 'testo.md' ? 'testo' : (m[2]!.replace('.json', '') as 'annotazioni' | 'parafrasi' | 'esercizi')
+    const campo = m[2] === 'testo.md' ? 'testo' : m[2] === 'proposta_scheda.md' ? 'proposta' : (m[2]!.replace('.json', '') as 'annotazioni' | 'parafrasi' | 'esercizi')
     f[campo] = files[k]!
     perId.set(m[1]!, f)
   }
   const testi: Testo[] = []
   for (const id of [...perId.keys()].sort()) {
-    const t = leggiTesto(perId.get(id)!, problemi, idFigure)
-    if (t) testi.push(t)
+    const f = perId.get(id)!
+    const t = leggiTesto(f, problemi, idFigure)
+    if (t) {
+      if (f.proposta != null) t.proposta = leggiProposta(id, f.proposta, { temi: new Set(temi.map((x) => x.id)), corsie: new Set(autore.corsie.map((c) => c.id)), corpo: t.corpo })
+      testi.push(t)
+    }
   }
   controllaTesti(testi, idSchede, problemi)
   const idTesti = new Set(testi.map((t) => t.id))

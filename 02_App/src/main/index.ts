@@ -147,6 +147,8 @@ function registraIpc(): void {
   ipcMain.handle('scheda:duplica', (_e, id: string) => serve().duplicaScheda(id))
   ipcMain.handle('autore:aggiorna', (_e, patch) => serve().aggiornaAutore(patch))
   ipcMain.handle('temi:aggiorna', (_e, temi) => serve().aggiornaTemi(temi))
+  ipcMain.handle('proposta:applica', (_e, id: string, scelte) => serve().applicaProposta(id, scelte))
+  ipcMain.handle('proposta:scarta', (_e, id: string) => serve().scartaProposta(id))
   ipcMain.handle('tema:elimina', (_e, id: string) => serve().eliminaTema(id))
   ipcMain.handle('corsia:elimina', (_e, id: string, verso: string | null) => serve().eliminaCorsia(id, verso))
   ipcMain.handle('cartella:mostra', async () => {

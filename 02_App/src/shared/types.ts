@@ -57,6 +57,11 @@ export interface Scheda {
   dettagli: string[]
   attenzione: string
   tabella: Tabella | null
+  /** analisi del testo (di solito scritte dall'AI): testo libero, anche con elenchi */
+  struttura: string
+  contesto: string
+  citazioni: string
+  domande: string
   /** percorso relativo del file */
   file: string
 }
@@ -77,6 +82,10 @@ export type SchedaPatch = Partial<
     | 'dettagli'
     | 'attenzione'
     | 'tabella'
+    | 'struttura'
+    | 'contesto'
+    | 'citazioni'
+    | 'domande'
   >
 >
 
@@ -172,6 +181,33 @@ export interface Testo {
   annotazioni: Annotazione[]
   parafrasi: Parafrasi[]
   esercizi: Esercizio[]
+  /** proposta di scheda scritta dall'AI, in attesa che lo studente la confermi */
+  proposta: PropostaScheda | null
+}
+
+/** Una proposta di scheda riassuntiva (file `proposta_scheda.md` accanto al testo). */
+export interface PropostaScheda {
+  file: string
+  generata: string
+  /** id proposto per la scheda */
+  scheda: string | null
+  corsia: string | null
+  data: string
+  titolo_breve: string
+  /** solo temi che esistono */
+  temi: string[]
+  sezioni: { riassunto: string; struttura: string; contesto: string; citazioni: string; domande: string }
+  citazioniNonTrovate: string[]
+  avvisi: string[]
+  errore: string | null
+}
+
+export type SezioneProposta = 'riassunto' | 'struttura' | 'contesto' | 'citazioni' | 'domande' | 'temi'
+
+export interface ApplicaProposta {
+  sezioni: SezioneProposta[]
+  /** serve solo se il testo non ha ancora una scheda */
+  nuova?: { corsia: string; data: string; titolo_breve: string }
 }
 
 export type Raccolta = 'annotazioni' | 'parafrasi' | 'esercizi'
@@ -240,6 +276,8 @@ export interface Api {
   duplicaScheda(id: string): Promise<{ id: string; modello: Modello }>
   aggiornaAutore(patch: AutorePatch): Promise<Modello>
   aggiornaTemi(temi: Tema[]): Promise<Modello>
+  applicaProposta(testoId: string, scelte: ApplicaProposta): Promise<{ modello: Modello; schedaId: string; creata: boolean }>
+  scartaProposta(testoId: string): Promise<Modello>
   eliminaTema(id: string): Promise<{ modello: Modello; schedeToccate: number }>
   eliminaCorsia(id: string, verso: string | null): Promise<{ modello: Modello; schedeSpostate: number }>
   mostraCartella(): Promise<void>

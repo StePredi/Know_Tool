@@ -1,6 +1,6 @@
 # Scheda riassuntiva generata dall'AI: design (2026-10-11)
 
-Stato: **progettata, da costruire** (in attesa di conferma dell'utente).
+Stato: **costruita** (2026-10-11), da provare su Windows con una proposta vera.
 
 ## Decisioni dell'utente
 

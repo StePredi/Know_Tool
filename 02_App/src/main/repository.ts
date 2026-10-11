@@ -17,11 +17,11 @@ import {
   scriviDocMd,
   type DocMd
 } from '../shared/scheda_md'
-import type { AutorePatch, EsitoRiaggancio, Layout, Modello, NuovaScheda, NuovoTesto, Raccolta, SchedaPatch, Tema, VoceScritta } from '../shared/types'
+import type { ApplicaProposta, AutorePatch, EsitoRiaggancio, Layout, Modello, NuovaScheda, NuovoTesto, Raccolta, SchedaPatch, Tema, VoceScritta } from '../shared/types'
 
 export const PERCORSO_AUTORI = ['01_Argomenti', 'italiano', 'autori']
 
-const FILE_NOTI = /^(autore\.md|temi\.md|glossario\.md|schede\/[^/]+\.md|testi\/[^/]+\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json)|\.\.\/\.\.\/_condiviso\/figure_retoriche\.json)$/i
+const FILE_NOTI = /^(autore\.md|temi\.md|glossario\.md|schede\/[^/]+\.md|testi\/[^/]+\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json|proposta_scheda\.md)|\.\.\/\.\.\/_condiviso\/figure_retoriche\.json)$/i
 const TEMPORANEI = /\.tmp-|\.swp$|~$|\.lock$/i
 
 export interface EventoRepo {
@@ -137,7 +137,7 @@ export class Repository {
       // nessun testo: l'editor parte vuoto
     }
     for (const t of testi) {
-      await Promise.all(['testo.md', 'annotazioni.json', 'parafrasi.json', 'esercizi.json'].map((n) => leggi(`testi/${t}/${n}`)))
+      await Promise.all(['testo.md', 'annotazioni.json', 'parafrasi.json', 'esercizi.json', 'proposta_scheda.md'].map((n) => leggi(`testi/${t}/${n}`)))
     }
   }
 
@@ -558,6 +558,90 @@ export class Repository {
         await this.scrivi('temi.md', nuovo)
         this.emetti([])
       }
+      return this.modello()
+    })
+  }
+
+  /** Sposta un file in 99_Archivio/<cartella>/ (mai cancellato) e lo toglie dalla memoria. */
+  private async archiviaFile(rel: string, cartella: string, nome: string): Promise<string> {
+    const dir = join(this.radice, '99_Archivio', cartella)
+    await fs.mkdir(dir, { recursive: true })
+    const ora = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)
+    const dest = join(dir, `${this.autoreId}_${nome}_${ora}.md`)
+    const da = join(this.dir, rel)
+    try {
+      await fs.rename(da, dest)
+    } catch {
+      await fs.copyFile(da, dest)
+      await fs.rm(da, { force: true, maxRetries: 5, retryDelay: 100 })
+    }
+    this.cache.delete(rel)
+    return dest
+  }
+
+  /**
+   * Applica a una scheda le sezioni scelte della proposta dell'AI. Se il testo non ha una scheda la crea (serve `nuova`)
+   * e la collega. La proposta, usata, va in 99_Archivio/proposte_applicate/.
+   */
+  applicaProposta(testoId: string, scelte: ApplicaProposta): Promise<{ modello: Modello; schedaId: string; creata: boolean }> {
+    return this.inCoda(async () => {
+      const m = this.modello()
+      const t = m.testi.find((x) => x.id === testoId)
+      const p = t?.proposta
+      if (!t || !p) throw new Error('Non c\'è nessuna proposta da applicare.')
+      if (p.errore) throw new Error(p.errore)
+      const sez = new Set(scelte.sezioni)
+      let schedaId = t.scheda && m.schede.some((x) => x.id === t.scheda) ? t.scheda : null
+      const creata = !schedaId
+      if (!schedaId) {
+        const n = scelte.nuova
+        if (!n || !m.autore.corsie.some((c) => c.id === n.corsia)) throw new Error('Scegli la categoria della nuova scheda.')
+        let id = slug(p.scheda || t.id) || 'scheda'
+        for (let i = 2; this.cache.has(`schede/${id}.md`); i++) id = `${slug(p.scheda || t.id)}_${i}`
+        schedaId = id
+        sez.add('riassunto')
+        const doc: DocMd = {
+          haFrontmatter: true,
+          erroreYaml: null,
+          preambolo: '',
+          fm: { id, corsia: n.corsia, data: n.data.trim(), titolo_breve: n.titolo_breve.trim() || t.titolo, testi: [t.id], fuori_dal_libro: false, origine: 'analisi' },
+          sezioni: [
+            { titolo: 'Riassunto', testo: '' },
+            { titolo: 'Dettagli', testo: '' }
+          ]
+        }
+        await this.scrivi(`schede/${id}.md`, scriviDocMd(doc, { ordine: ORDINE_CAMPI_SCHEDA }))
+      }
+      const rel = `schede/${schedaId}.md`
+      const testoScheda = await this.leggiDisco(rel)
+      const doc = leggiDocMd(testoScheda)
+      if (doc.erroreYaml) throw new Error(`«${schedaId}.md» ha un frontmatter non valido: correggilo a mano.`)
+      const patch: SchedaPatch = {}
+      if (sez.has('riassunto') && p.sezioni.riassunto) patch.riassunto = p.sezioni.riassunto
+      if (sez.has('struttura')) patch.struttura = p.sezioni.struttura
+      if (sez.has('contesto')) patch.contesto = p.sezioni.contesto
+      if (sez.has('citazioni')) patch.citazioni = p.sezioni.citazioni
+      if (sez.has('domande')) patch.domande = p.sezioni.domande
+      if (sez.has('temi')) {
+        const attuali = Array.isArray(doc.fm.temi) ? doc.fm.temi.map(String) : []
+        patch.temi = [...new Set([...attuali, ...p.temi])]
+      }
+      applicaPatchScheda(doc, patch)
+      await this.scrivi(rel, scriviDocMd(doc, { ordine: ORDINE_CAMPI_SCHEDA }))
+      if (creata) await this.riscriviTesto(testoId, (fm) => { fm.scheda = schedaId })
+      await this.archiviaFile(p.file, 'proposte_applicate', testoId)
+      this.emetti([])
+      return { modello: this.modello(), schedaId, creata }
+    })
+  }
+
+  /** Scarta la proposta: il file va in 99_Archivio/proposte_scartate/. */
+  scartaProposta(testoId: string): Promise<Modello> {
+    return this.inCoda(async () => {
+      const rel = `testi/${testoId}/proposta_scheda.md`
+      if (!this.cache.has(rel)) throw new Error('Non c\'è nessuna proposta da scartare.')
+      await this.archiviaFile(rel, 'proposte_scartate', testoId)
+      this.emetti([])
       return this.modello()
     })
   }

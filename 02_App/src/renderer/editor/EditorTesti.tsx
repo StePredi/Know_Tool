@@ -7,6 +7,7 @@ import { contesto, nuovaDomanda, nuovaParafrasi, toggleFlag, toggleHl } from './
 import { BarraStrumenti } from './BarraStrumenti'
 import { TestoCard } from './TestoCard'
 import { PannelloDestro, PillolaDestra } from './Pannelli'
+import { SchedaRiassuntiva } from './Riassuntiva'
 import { AvvisoRiancoro, ElencoTesti, ImportaEsercizi, ModificaTesto, NuovoTesto, PopoverLegenda, PopoverLettura, PopoverSelettore, SchedaAnnotazione, SchedaDomanda, SelettoreFigure } from './Modali'
 import { lbl } from './ui'
 import { Con, Icona } from '../componenti/Icona'
@@ -83,8 +84,8 @@ export function EditorTesti() {
         if (e.key === 'Escape') (e.target as HTMLElement).blur()
         return
       }
-      if (s.modOpen || s.nuovoOpen || s.esImportOpen) {
-        if (e.key === 'Escape') s.imposta({ modOpen: false, nuovoOpen: false, esImportOpen: false })
+      if (s.modOpen || s.nuovoOpen || s.esImportOpen || s.riasOpen) {
+        if (e.key === 'Escape') s.imposta({ modOpen: false, nuovoOpen: false, esImportOpen: false, riasOpen: false })
         return
       }
       if (s.figOpen) {
@@ -221,6 +222,9 @@ export function EditorTesti() {
           </button>
           <button type="button" className="hv" onClick={() => st.prefs({ scuro: !scuro })} title={scuro ? 'Passa al tema chiaro' : 'Passa al tema scuro'} aria-label={scuro ? 'Passa al tema chiaro' : 'Passa al tema scuro'} style={quadro}><Icona nome={scuro ? 'luna' : 'sole'} size={17} style={{ margin: '0 auto' }} /></button>
           <button type="button" data-pop="1" onClick={() => ed.imposta({ settingsOpen: !ed.settingsOpen, helpOpen: false })} aria-expanded={ed.settingsOpen} title="Carattere e spaziatura dell'interfaccia" style={{ ...quadro, ...attivo(ed.settingsOpen) }}><Icona nome="testo" size={17} style={{ margin: '0 auto' }} /></button>
+          <button type="button" className="hv" disabled={vuoto} onClick={() => ed.imposta({ riasOpen: true })} title={testo?.proposta ? 'Claude ha preparato una proposta di scheda: aprila' : 'Scheda riassuntiva: chiedi a Claude di prepararla'} style={{ flex: 'none', whiteSpace: 'nowrap', border: `1px solid ${testo?.proposta ? 'var(--par)' : 'var(--line)'}`, background: testo?.proposta ? 'var(--par-bg)' : 'var(--surface)', color: testo?.proposta ? 'var(--par)' : undefined, borderRadius: 8, padding: '0 13px', height: 34, fontSize: 12.5, fontWeight: 700, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 7, opacity: vuoto ? 0.45 : 1 }}>
+            <Icona nome="carte" size={15} />Scheda riassuntiva{testo?.proposta ? ' · pronta' : ''}
+          </button>
           {separatore}
           <button type="button" className="hv" onClick={() => ed.imposta({ nuovoOpen: true })} title="Importa un nuovo testo" style={{ flex: 'none', whiteSpace: 'nowrap', border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, padding: '0 13px', height: 34, fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}><Con i="aggiungiScheda">Testo</Con></button>
         </div>
@@ -242,6 +246,7 @@ export function EditorTesti() {
 
       <AvvisoRiancoro />
       {ed.modOpen && <ModificaTesto />}
+      {ed.riasOpen && <SchedaRiassuntiva />}
       {ed.esImportOpen && <ImportaEsercizi />}
       {ed.esDet && <SchedaDomanda />}
       {ed.annDet && <SchedaAnnotazione />}

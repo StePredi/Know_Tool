@@ -224,6 +224,7 @@ export interface FileTesto {
   annotazioni?: string
   parafrasi?: string
   esercizi?: string
+  proposta?: string
 }
 
 export function leggiTesto(f: FileTesto, problemi: Problema[], figure: Set<string>): Testo | null {
@@ -300,7 +301,8 @@ export function leggiTesto(f: FileTesto, problemi: Problema[], figure: Set<strin
     file,
     annotazioni,
     parafrasi,
-    esercizi
+    esercizi,
+    proposta: null
   }
 }
 

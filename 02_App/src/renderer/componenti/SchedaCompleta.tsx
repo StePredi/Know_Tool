@@ -55,6 +55,9 @@ export function SchedaCompleta({ id }: { id: string }) {
   const dopo = collegate.filter((x) => !prima.includes(x))
   const voci = m.glossario.filter((v) => v.schede.includes(s.id))
   const testiScheda = m.testi.filter((t) => t.scheda === s.id || (s.testi ?? []).includes(t.id))
+  const paroleChiave = Array.from(new Set(testiScheda.flatMap((t) => t.annotazioni.filter((a) => a.parola_chiave && a.citato).map((a) => (a.citato as string).trim()))))
+  const righe = (x: string): string[] => x.split('\n').map((r) => r.trim()).filter(Boolean)
+  const domande = righe(s.domande ?? '')
 
   const vai = (k: string): void => imposta({ apertaId: k, selId: k })
   const Lista = ({ items, vuoto }: { items: typeof collegate; vuoto: string }) => (
@@ -120,6 +123,44 @@ export function SchedaCompleta({ id }: { id: string }) {
                 <ul style={{ margin: 0, paddingLeft: 20, fontSize: 15, lineHeight: 1.6 }}>
                   {s.dettagli.map((d, i) => <li key={i} style={{ marginBottom: 4 }}><Md testo={d} /></li>)}
                 </ul>
+              </section>
+            )}
+            {paroleChiave.length > 0 && (
+              <section style={{ marginBottom: 18 }}>
+                <h3 className="h3s">Parole chiave</h3>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {paroleChiave.map((p) => <span key={p} className="chip" style={{ padding: '4px 11px', fontWeight: 600 }}>{p}</span>)}
+                </div>
+              </section>
+            )}
+            {s.struttura && (
+              <section style={{ marginBottom: 18 }}>
+                <h3 className="h3s">Struttura e metrica</h3>
+                <div style={{ fontSize: 15, lineHeight: 1.6 }}>{righe(s.struttura).map((r, i) => <p key={i} style={{ margin: '0 0 4px' }}><Md testo={r.replace(/^[-*]\s+/, '')} /></p>)}</div>
+              </section>
+            )}
+            {s.contesto && (
+              <section style={{ marginBottom: 18 }}>
+                <h3 className="h3s">Contesto</h3>
+                <div style={{ fontSize: 15, lineHeight: 1.6 }}>{righe(s.contesto).map((r, i) => <p key={i} style={{ margin: '0 0 4px' }}><Md testo={r.replace(/^[-*]\s+/, '')} /></p>)}</div>
+              </section>
+            )}
+            {s.citazioni && (
+              <section style={{ marginBottom: 18 }}>
+                <h3 className="h3s">Citazioni chiave</h3>
+                {righe(s.citazioni).map((r, i) => <blockquote key={i} style={{ margin: '0 0 7px', padding: '4px 12px', borderLeft: `3px solid ${col}`, fontSize: 15, lineHeight: 1.55, fontStyle: 'italic' }}><Md testo={r.replace(/^(>|[-*])\s+/, '')} /></blockquote>)}
+              </section>
+            )}
+            {domande.length > 0 && (
+              <section style={{ marginBottom: 18 }}>
+                <h3 className="h3s">Domande da interrogazione</h3>
+                <ol style={{ margin: 0, paddingLeft: 22, fontSize: 15, lineHeight: 1.6 }}>
+                  {domande.map((d, i) => {
+                    const t = d.replace(/^(\d+[.)]|[-*])\s+/, '')
+                    const q = t.indexOf('?')
+                    return <li key={i} style={{ marginBottom: 5 }}>{q >= 0 ? <><strong>{t.slice(0, q + 1)}</strong>{t.slice(q + 1)}</> : t}</li>
+                  })}
+                </ol>
               </section>
             )}
             {s.attenzione && (
