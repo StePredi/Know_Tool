@@ -46,6 +46,30 @@ async function scriviAtomico(percorso: string, testo: string): Promise<void> {
   throw ultimo
 }
 
+/**
+ * Sposta una cartella. Su Windows `rename` fallisce (EPERM/EBUSY) se qualcosa la tiene aperta, per esempio il
+ * controllo dei file: in quel caso si copia tutto nella destinazione e poi si tolgono gli originali.
+ * La copia è completa prima di toccare gli originali, quindi non si perde nulla.
+ */
+export async function spostaCartella(da: string, a: string, rinomina: (x: string, y: string) => Promise<void> = fs.rename): Promise<void> {
+  try {
+    await rinomina(da, a)
+    return
+  } catch (e) {
+    const c = (e as NodeJS.ErrnoException).code
+    if (!['EPERM', 'EBUSY', 'EACCES', 'EXDEV', 'ENOTEMPTY'].includes(c ?? '')) throw e
+  }
+  await fs.cp(da, a, { recursive: true, errorOnExist: true, force: false })
+  try {
+    await fs.rm(da, { recursive: true, force: true, maxRetries: 6, retryDelay: 100 })
+  } catch {
+    // la cartella può restare occupata: si tolgono almeno i file (la cartella vuota è ignorata dall'app)
+    for (const f of await fs.readdir(da, { recursive: true, withFileTypes: true })) {
+      if (f.isFile()) await fs.rm(join(f.parentPath, f.name), { force: true })
+    }
+  }
+}
+
 export class Repository {
   readonly dir: string
   private cache = new Map<string, string>()
@@ -369,7 +393,13 @@ export class Repository {
       await fs.mkdir(cartella, { recursive: true })
       const ora = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14)
       const destinazione = join(cartella, `${this.autoreId}_${id}_${ora}`)
-      await fs.rename(join(this.dir, 'testi', id), destinazione)
+      const origine = join(this.dir, 'testi', id)
+      try {
+        await this.watcher?.unwatch(origine)
+      } catch {
+        // non importa se non era osservata
+      }
+      await spostaCartella(origine, destinazione)
       for (const k of [...this.cache.keys()]) if (k.startsWith(`testi/${id}/`)) this.cache.delete(k)
       this.emetti([])
       return { modello: this.modello(), archiviato: destinazione }
