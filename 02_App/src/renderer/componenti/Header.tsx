@@ -3,9 +3,7 @@ import { erroreFine } from '@shared/dates'
 import { schedeDelTema } from '@shared/derivati'
 import type { Corsia, Periodo, Tema } from '@shared/types'
 import { useColore, useStore, type Popover } from '../store'
-import { Campo, slug, usaFiltro } from '../utili'
-import { EVENTO_SENZA_DATA } from './Mappa'
-import { useEditor } from '../editor/stato'
+import { Campo, slug } from '../utili'
 import { Con, Icona, type NomeIcona } from './Icona'
 
 function Filtro(props: { id: Exclude<Popover, 'lettura' | null>; titolo: string; icona: NomeIcona; n: number; riassunto: string; larghezza?: number; children: ReactNode }) {
@@ -32,10 +30,8 @@ const Gestisci = ({ t }: { t: string }) => (
 
 export function Header() {
   const m = useStore((s) => s.modello)!
-  const ix = useStore((s) => s.indice)!
   const st = useStore()
   const colore = useColore()
-  const passa = usaFiltro()
   const { imposta, prefs } = st
 
   // un clic fuori chiude i popover
@@ -47,9 +43,6 @@ export function Header() {
     return () => document.removeEventListener('mousedown', h)
   }, [])
 
-  const nSenza = m.schede.filter((s) => ix.num(s) == null).length
-  const errori = m.problemi.filter((p) => p.gravita === 'errore').length
-  const nProblemi = m.problemi.length
   const attiviPer = st.periodi.length
   const nSpente = m.autore.corsie.filter((c) => st.corsieSpente[c.id]).length
   const aggiornaPeriodi = (periodi: Periodo[]): void => void window.api.aggiornaAutore({ periodi }).then((x) => st.applica(x))
@@ -60,27 +53,29 @@ export function Header() {
   return (
     <header className="hd" style={{ flex: 'none', borderBottom: '1px solid var(--line)', background: 'var(--surface)', borderTop: `3px solid ${st.editando ? 'var(--ed)' : 'transparent'}`, transition: 'border-color .18s' }}>
       <div className="hd-riga">
-        {st.editando ? (
-          <Campo valore={m.autore.nome} salva={(v) => void window.api.aggiornaAutore({ nome: v }).then((x) => st.applica(x))} label="Nome dell'autore" className="inp big" style={{ width: 190, flex: 'none', borderColor: 'var(--ed)', fontWeight: 700, padding: '6px 10px', fontSize: 14.5 }} />
-        ) : (
-          <strong style={{ fontSize: 15, whiteSpace: 'nowrap', flex: 'none' }}>{m.autore.nome}</strong>
-        )}
-        {st.stato && st.stato.autori.length > 1 && (
-          <select className="inp" style={{ width: 'auto', flex: 'none' }} value={st.stato.autoreId ?? ''} onChange={(e) => void st.scegliAutore(e.target.value)} aria-label="Autore">
-            {st.stato.autori.map((a) => <option key={a.id} value={a.id}>{a.nome}</option>)}
-          </select>
-        )}
-
-        <span className="hd-sep" aria-hidden />
-
-        <div role="group" aria-label="Vista" className="hd-seg">
-          {(['mappa', 'lista'] as const).map((v) => (
-            <button key={v} type="button" aria-pressed={st.vista === v} onClick={() => prefs({ vista: v })} style={{ borderRight: v === 'mappa' ? '1px solid var(--line)' : 0, background: st.vista === v ? 'var(--ink)' : 'var(--surface)', color: st.vista === v ? 'var(--surface)' : 'var(--ink)' }}>
-              <Icona nome={v === 'mappa' ? 'mappa' : 'elenco'} size={15} /><span className="hd-lab">{v === 'mappa' ? 'Mappa' : 'Lista'}</span>
-            </button>
-          ))}
+        {/* sinistra: dove sono */}
+        <div className="hd-gruppo">
+          {st.editando ? (
+            <Campo valore={m.autore.nome} salva={(v) => void window.api.aggiornaAutore({ nome: v }).then((x) => st.applica(x))} label="Nome dell'autore" className="inp big" style={{ width: 190, flex: 'none', borderColor: 'var(--ed)', fontWeight: 700, padding: '6px 10px', fontSize: 14.5 }} />
+          ) : (
+            <strong style={{ fontSize: 15, whiteSpace: 'nowrap', flex: 'none' }}>{m.autore.nome}</strong>
+          )}
+          {st.stato && st.stato.autori.length > 1 && (
+            <select className="inp" style={{ width: 'auto', flex: 'none' }} value={st.stato.autoreId ?? ''} onChange={(e) => void st.scegliAutore(e.target.value)} aria-label="Autore">
+              {st.stato.autori.map((a) => <option key={a.id} value={a.id}>{a.nome}</option>)}
+            </select>
+          )}
+          <div role="group" aria-label="Vista" className="hd-seg" style={{ marginLeft: 6 }}>
+            {(['mappa', 'lista'] as const).map((v) => (
+              <button key={v} type="button" aria-pressed={st.vista === v} onClick={() => prefs({ vista: v })} style={{ borderRight: v === 'mappa' ? '1px solid var(--line)' : 0, background: st.vista === v ? 'var(--ink)' : 'var(--surface)', color: st.vista === v ? 'var(--surface)' : 'var(--ink)' }}>
+                <Icona nome={v === 'mappa' ? 'mappa' : 'elenco'} size={15} /><span className="hd-lab">{v === 'mappa' ? 'Mappa' : 'Lista'}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
+        {/* centro: cosa guardo (filtri e ricerca) */}
+        <div className="hd-gruppo hd-centro">
         <Filtro id="periodi" titolo="Periodi" icona="orologio" n={attiviPer} riassunto={attiviPer ? st.periodi.map((i) => m.autore.periodi[i]?.nome).filter(Boolean).join(' · ') : 'tutti'}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             <button className={'chip' + (attiviPer ? '' : ' on')} onClick={() => imposta({ periodi: [] })}>Tutti</button>
@@ -111,7 +106,7 @@ export function Header() {
           )}
         </Filtro>
 
-        <Filtro id="temi" titolo="Temi" icona="segnalibro" n={st.temi.length} riassunto={st.temi.length ? st.temi.map((k) => m.temi.find((t) => t.id === k)?.nome).filter(Boolean).join(' · ') : 'tutti'}>
+          <Filtro id="temi" titolo="Temi" icona="segnalibro" n={st.temi.length} riassunto={st.temi.length ? st.temi.map((k) => m.temi.find((t) => t.id === k)?.nome).filter(Boolean).join(' · ') : 'tutti'}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             <button className={'chip' + (st.temi.length ? '' : ' on')} onClick={() => imposta({ temi: [] })}>Tutti</button>
             {m.temi.map((t) => (
@@ -135,7 +130,7 @@ export function Header() {
           )}
         </Filtro>
 
-        <Filtro id="corsie" titolo="Categorie" icona="cartella" larghezza={430} n={nSpente} riassunto={nSpente ? `${m.autore.corsie.length - nSpente} di ${m.autore.corsie.length}` : 'tutte'}>
+          <Filtro id="corsie" titolo="Categorie" icona="cartella" larghezza={430} n={nSpente} riassunto={nSpente ? `${m.autore.corsie.length - nSpente} di ${m.autore.corsie.length}` : 'tutte'}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             {m.autore.corsie.map((c) => (
               <button key={c.id} className={'chip' + (st.corsieSpente[c.id] ? '' : ' on')} aria-pressed={!st.corsieSpente[c.id]} style={{ display: 'flex', alignItems: 'center', gap: 7 }} onClick={() => imposta({ corsieSpente: { ...st.corsieSpente, [c.id]: !st.corsieSpente[c.id] } })}>
@@ -170,42 +165,22 @@ export function Header() {
           )}
         </Filtro>
 
-        <label className="hd-cerca">
-          <Icona nome="cerca" size={15} style={{ color: 'var(--mute)' }} />
-          <span className="sr">Cerca nelle schede</span>
-          <input type="search" value={st.query} onChange={(e) => imposta({ query: e.target.value })} placeholder="Cerca titolo, dettagli, tema…" />
-        </label>
+          <label className="hd-cerca">
+            <Icona nome="cerca" size={15} style={{ color: 'var(--mute)' }} />
+            <span className="sr">Cerca nelle schede</span>
+            <input type="search" value={st.query} onChange={(e) => imposta({ query: e.target.value })} placeholder="Cerca titolo, dettagli, tema…" />
+          </label>
+        </div>
 
-        {st.vista === 'mappa' && nSenza > 0 && (
-          <button type="button" className="hd-b" title={`${nSenza} schede senza data: vai alla zona «Senza data»`} onClick={() => window.dispatchEvent(new Event(EVENTO_SENZA_DATA))} style={{ borderStyle: 'dashed', color: 'var(--mute)' }}><Icona nome="orologio" size={15} />{nSenza}</button>
-        )}
-        {st.vista === 'mappa' && (
-          <div role="group" aria-label="Zoom della mappa" className="hd-seg">
-            <button type="button" aria-label="Riduci la mappa" onClick={() => prefs({ zoomMappa: Math.max(0.5, +(st.zoomMappa - 0.1).toFixed(2)) })} style={{ padding: '0 9px' }}><Icona nome="meno" size={15} /></button>
-            <button type="button" title="Torna al 100%" onClick={() => prefs({ zoomMappa: 1 })} style={{ minWidth: 50, borderLeft: '1px solid var(--line)', borderRight: '1px solid var(--line)', fontVariantNumeric: 'tabular-nums' }}>{Math.round(st.zoomMappa * 100)}%</button>
-            <button type="button" aria-label="Ingrandisci la mappa" onClick={() => prefs({ zoomMappa: Math.min(1.6, +(st.zoomMappa + 0.1).toFixed(2)) })} style={{ padding: '0 9px' }}><Icona nome="piu" size={15} /></button>
-          </div>
-        )}
-        <button type="button" className="hd-b on" title="Mostra le schede una alla volta in ordine cronologico (rispetta i filtri)" onClick={() => {
-          const vis = ix.chron.filter((x) => passa(x) && !st.corsieSpente[x.corsia])
-          const da = vis.find((x) => x.id === st.selId) ?? vis[0]
-          if (da) imposta({ apertaId: da.id, selId: da.id, auto: true })
-        }}><Icona nome="gioca" size={15} /><span className="hd-lab hd-lab2">Riproduci</span></button>
-
-        <span className="hd-sep" aria-hidden />
-
-        <button type="button" className="hd-b" title="Apri l'editor dei testi" aria-label={`Testi, ${m.testi.length}`} onClick={() => useEditor.getState().imposta({ elencoTesti: true })}><Icona nome="libro" size={15} /><span className="hd-lab hd-lab2">Testi</span><span className="hd-n">{m.testi.length}</span></button>
-        <button type="button" className="hd-b" title="Controlli sui file" aria-label={`Controlli, ${nProblemi} segnalazioni`} onClick={() => imposta({ controlli: !st.controlli })} aria-expanded={st.controlli} style={nProblemi ? { borderColor: errori ? 'var(--err-line)' : 'var(--warn-line)' } : undefined}>
-          <Icona nome={nProblemi ? 'avviso' : 'scudo'} size={15} />{nProblemi > 0 && <span className="hd-n">{nProblemi}</span>}<span className="hd-lab hd-lab2">Controlli</span>
-        </button>
-        <button type="button" className="hd-b" title="Applicazione: aspetto, zoom, cartella" aria-label="Applicazione" onClick={() => imposta({ applicazione: true })}><Icona nome="regolazioni" size={15} /></button>
-
-        {st.editando && (
-          <button type="button" className="hd-b ed hd-entra" title={`Nuova scheda (${m.schede.length} schede, ogni cambiamento è subito nel file)`} onClick={async () => { const r = await window.api.creaScheda({}); st.applica(r.modello); imposta({ editId: r.id, selId: r.id }) }}><Icona nome="aggiungiScheda" size={15} /><span className="hd-lab hd-lab2">Nuova scheda</span></button>
-        )}
-        <button type="button" className="hd-b" aria-pressed={st.editando} title="Attiva o disattiva la modifica dei contenuti" onClick={() => imposta({ editando: !st.editando })} style={st.editando ? { background: 'var(--ed)', color: 'var(--surface)', borderColor: 'var(--ed)' } : undefined}>
-          <Icona nome="matita" size={15} /><span className="hd-lab">Modifica</span>
-        </button>
+        {/* destra: modificare */}
+        <div className="hd-gruppo" style={{ justifyContent: 'flex-end' }}>
+          {st.editando && (
+            <button type="button" className="hd-b ed hd-entra" title={`Nuova scheda (${m.schede.length} schede, ogni cambiamento è subito nel file)`} onClick={async () => { const r = await window.api.creaScheda({}); st.applica(r.modello); imposta({ editId: r.id, selId: r.id }) }}><Icona nome="aggiungiScheda" size={15} /><span className="hd-lab hd-lab2">Nuova scheda</span></button>
+          )}
+          <button type="button" className="hd-b" aria-pressed={st.editando} title="Attiva o disattiva la modifica dei contenuti" onClick={() => imposta({ editando: !st.editando })} style={st.editando ? { background: 'var(--ed)', color: 'var(--surface)', borderColor: 'var(--ed)' } : undefined}>
+            <Icona nome="matita" size={15} /><span className="hd-lab">Modifica</span>
+          </button>
+        </div>
       </div>
     </header>
   )

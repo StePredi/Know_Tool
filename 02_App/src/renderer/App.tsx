@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useStore } from './store'
 import { Header } from './componenti/Header'
+import { BarraInferiore, BarraLaterale } from './componenti/Barre'
 import { Mappa } from './componenti/Mappa'
 import { Lista } from './componenti/Lista'
 import { Anteprima } from './componenti/Anteprima'
@@ -107,8 +108,10 @@ export function App() {
         <>
           <Header />
           <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-            <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+            <BarraLaterale />
+            <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', position: 'relative' }}>
               {st.vista === 'mappa' ? <Mappa /> : <Lista />}
+              <BarraInferiore />
             </main>
             {st.selId && <Anteprima id={st.selId} />}
           </div>

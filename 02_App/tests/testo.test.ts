@@ -2,7 +2,7 @@ import { cpSync, existsSync, mkdtempSync, readFileSync, writeFileSync } from 'no
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
-import { Repository } from '../src/main/repository'
+import { Repository, spostaCartella } from '../src/main/repository'
 import { costruisciModello } from '../src/shared/modello'
 import { citaDa, corsieBarre, jsonLeggibile, parole, riancora, tokenizza, trovaSpan } from '../src/shared/testo'
 import type { Annotazione } from '../src/shared/types'
@@ -175,6 +175,22 @@ describe.skipIf(!existsSync(join(sorgente, 'italiano/autori/leopardi/testi/inf')
     expect(existsSync(join(x.archiviato, 'testo.md'))).toBe(true)
     expect(existsSync(join(dirInf(r), 'testo.md'))).toBe(false)
     await expect(rep.eliminaTesto(id)).rejects.toThrow()
+  })
+
+  it('spostaCartella: se rename è bloccato (Windows) copia e poi toglie gli originali', async () => {
+    const r = copia()
+    const da = dirInf(r)
+    const a = join(r, 'archivio_prova')
+    const bloccato = async (): Promise<void> => {
+      throw Object.assign(new Error('occupata'), { code: 'EPERM' })
+    }
+    await spostaCartella(da, a, bloccato)
+    expect(existsSync(join(a, 'testo.md'))).toBe(true)
+    expect(existsSync(join(da, 'testo.md'))).toBe(false)
+    const altro = async (): Promise<void> => {
+      throw Object.assign(new Error('boh'), { code: 'ENOENT' })
+    }
+    await expect(spostaCartella(a, join(r, 'x'), altro)).rejects.toThrow()
   })
 
   it('un json rotto a mano è segnalato e non rompe il resto', () => {
