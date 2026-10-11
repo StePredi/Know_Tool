@@ -42,7 +42,11 @@ export function Mappa() {
   const pan = useRef<{ x: number; y: number; sl: number; st: number } | null>(null)
   const giu = (e: React.MouseEvent): void => {
     if ((e.target as HTMLElement).closest('button')) return
+    if (e.button !== 0) return
+    e.preventDefault() // niente selezione di testo mentre si trascina
     const el = scroller.current!
+    el.focus({ preventScroll: true })
+    el.style.cursor = 'grabbing'
     pan.current = { x: e.clientX, y: e.clientY, sl: el.scrollLeft, st: el.scrollTop }
     const muovi = (ev: MouseEvent): void => {
       if (!pan.current) return
@@ -51,6 +55,7 @@ export function Mappa() {
     }
     const su = (): void => {
       pan.current = null
+      el.style.cursor = ''
       window.removeEventListener('mousemove', muovi)
       window.removeEventListener('mouseup', su)
     }
@@ -89,7 +94,7 @@ export function Mappa() {
   }, [prefs])
 
   return (
-    <div ref={scroller} onMouseDown={giu} onKeyDown={tasto} style={{ flex: 1, minHeight: 0, overflow: 'auto', position: 'relative', background: 'var(--bg)' }}>
+    <div ref={scroller} tabIndex={-1} onMouseDown={giu} onKeyDown={tasto} style={{ flex: 1, minHeight: 0, overflow: 'auto', position: 'relative', background: 'var(--bg)', cursor: 'grab', userSelect: 'none', WebkitUserSelect: 'none' }}>
       <div style={{ position: 'relative', width: L.canvasW, height: L.canvasH, zoom }}>
         <div style={{ position: 'sticky', top: 0, zIndex: 7, height: AXIS, background: 'var(--axis)', borderBottom: '1px solid var(--line)', width: L.canvasW }}>
           {L.ticks.map((t) => (
