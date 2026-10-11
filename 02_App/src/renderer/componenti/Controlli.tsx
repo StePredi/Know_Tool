@@ -1,4 +1,5 @@
 import { useStore } from '../store'
+import { Con, Icona } from './Icona'
 
 /** Pannello dei problemi trovati nei file: l'app li mostra, non li corregge da sola. */
 export function Controlli() {
@@ -11,7 +12,7 @@ export function Controlli() {
       <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--mute)' }}>{p.file}</div>
       <div style={{ fontSize: 14 }}>{p.messaggio}</div>
       {p.scheda && (
-        <button className="btn" style={{ marginTop: 4 }} onClick={() => imposta({ apertaId: p.scheda!, controlli: false })}>Apri la scheda</button>
+        <button className="btn" style={{ marginTop: 4 }} onClick={() => imposta({ apertaId: p.scheda!, controlli: false })}><Con i="esterno">Apri la scheda</Con></button>
       )}
     </li>
   )
@@ -19,7 +20,7 @@ export function Controlli() {
     <aside role="dialog" aria-label="Controlli" style={{ position: 'fixed', top: 56, right: 14, bottom: 14, zIndex: 60, width: 420, background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 12, boxShadow: '0 14px 40px rgba(0,0,0,.22)', display: 'flex', flexDirection: 'column', animation: 'dcUp .14s ease-out' }}>
       <div style={{ display: 'flex', alignItems: 'center', padding: '12px 14px', borderBottom: '1px solid var(--line)' }}>
         <strong style={{ flex: 1, fontSize: 14 }}>Controlli · {errori.length} errori · {avvisi.length} avvisi</strong>
-        <button className="btn" aria-label="Chiudi" onClick={() => imposta({ controlli: false })}>✕</button>
+        <button className="btn" aria-label="Chiudi" onClick={() => imposta({ controlli: false })}><Icona nome="chiudi" /></button>
       </div>
       <div style={{ overflow: 'auto', padding: '4px 14px 14px' }}>
         {!m.problemi.length && <p style={{ color: 'var(--mute)' }}>Tutto a posto: nessun problema nei file.</p>}

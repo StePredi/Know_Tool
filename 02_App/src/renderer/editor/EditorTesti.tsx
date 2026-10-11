@@ -9,6 +9,7 @@ import { TestoCard } from './TestoCard'
 import { PannelloDestro, PillolaDestra } from './Pannelli'
 import { AvvisoRiancoro, ElencoTesti, ImportaEsercizi, ModificaTesto, NuovoTesto, PopoverLegenda, PopoverLettura, PopoverSelettore, SchedaAnnotazione, SchedaDomanda, SelettoreFigure } from './Modali'
 import { lbl } from './ui'
+import { Con, Icona } from '../componenti/Icona'
 
 const èCampo = (t: EventTarget | null): boolean => {
   const e = t as HTMLElement | null
@@ -179,30 +180,30 @@ export function EditorTesti() {
     <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--bg)' }}>
       <header style={{ flex: 'none', borderBottom: '1px solid var(--line)', background: 'var(--surface)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', flexWrap: 'wrap' }}>
-          <button type="button" className="hv" onClick={() => ed.imposta({ testoId: null, sel: null, anchor: null, testa: null, annDet: null, esDet: null, selettoreOpen: false })} title="Torna alla Home" aria-label="Torna alla Home" style={quadro}>←</button>
+          <button type="button" className="hv" onClick={() => ed.imposta({ testoId: null, sel: null, anchor: null, testa: null, annDet: null, esDet: null, selettoreOpen: false })} title="Torna alla Home" aria-label="Torna alla Home" style={quadro}><Icona nome="casa" size={17} style={{ margin: '0 auto' }} /></button>
           <button type="button" data-pop="1" className="hv" onClick={() => ed.imposta({ selettoreOpen: !ed.selettoreOpen })} aria-expanded={ed.selettoreOpen} title="Cambia testo" style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 9, minWidth: 0, border: '1px solid transparent', background: 'transparent', borderRadius: 9, padding: '4px 9px', cursor: 'pointer', textAlign: 'left' }}>
             <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
               <strong style={{ fontSize: 15, fontWeight: 700, letterSpacing: '-.01em', whiteSpace: 'nowrap' }}>{testo.titolo || 'Testo senza titolo'}</strong>
               <span style={{ fontSize: 11.5, color: 'var(--mute)', whiteSpace: 'nowrap' }}>{sottotitolo}</span>
             </span>
-            <span aria-hidden style={{ fontSize: 10, color: 'var(--mute)' }}>▾</span>
+            <span aria-hidden style={{ color: 'var(--mute)', display: 'flex' }}><Icona nome="apri" size={15} /></span>
           </button>
-          <button type="button" className="hv" onClick={() => ed.imposta({ modOpen: true, modBozza: testo.corpo, sel: null, anchor: null, testa: null, riancoroInfo: null })} title="Modifica il testo" aria-label="Modifica il testo" style={quadro}>✎</button>
+          <button type="button" className="hv" onClick={() => ed.imposta({ modOpen: true, modBozza: testo.corpo, sel: null, anchor: null, testa: null, riancoroInfo: null })} title="Modifica il testo" aria-label="Modifica il testo" style={quadro}><Icona nome="matita" size={16} style={{ margin: '0 auto' }} /></button>
           {separatore}
           <div role="group" aria-label="Layout del testo" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden', flex: 'none' }}>
-            <button type="button" aria-pressed={!prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'verso' })} style={seg(!prosa, { borderRight: '1px solid var(--line)' })}>Versi</button>
-            <button type="button" aria-pressed={prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'prosa' })} style={seg(prosa)}>Prosa</button>
+            <button type="button" aria-pressed={!prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'verso' })} style={seg(!prosa, { borderRight: '1px solid var(--line)' })}><Con i="versi" size={14}>Versi</Con></button>
+            <button type="button" aria-pressed={prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'prosa' })} style={seg(prosa)}><Con i="prosa" size={14}>Prosa</Con></button>
           </div>
-          <button type="button" aria-pressed={ed.numeri} onClick={() => ed.imposta({ numeri: !ed.numeri })} title="Numeri di riga" aria-label="Numeri di riga" style={{ ...quadro, ...attivo(ed.numeri) }}>#</button>
+          <button type="button" aria-pressed={ed.numeri} onClick={() => ed.imposta({ numeri: !ed.numeri })} title="Numeri di riga" aria-label="Numeri di riga" style={{ ...quadro, ...attivo(ed.numeri) }}><Icona nome="numeri" size={16} style={{ margin: '0 auto' }} /></button>
           <div role="group" aria-label="Zoom del testo" style={{ flex: 'none', display: 'flex', alignItems: 'center', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden', background: 'var(--surface)' }}>
-            <button type="button" onClick={() => zoom(ed.zoom - 10)} aria-label="Riduci il testo" style={{ border: 0, borderRight: '1px solid var(--line)', background: 'transparent', width: 32, height: 34, fontSize: 15, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }}>−</button>
+            <button type="button" onClick={() => zoom(ed.zoom - 10)} aria-label="Riduci il testo" style={{ border: 0, borderRight: '1px solid var(--line)', background: 'transparent', width: 32, height: 34, fontSize: 15, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icona nome="meno" size={15} /></button>
             <button type="button" onClick={() => zoom(100)} title="Ripristina lo zoom (Ctrl 0)" style={{ border: 0, borderRight: '1px solid var(--line)', background: 'transparent', padding: '0 9px', height: 34, fontSize: 12, fontWeight: 700, cursor: 'pointer', minWidth: 54 }}>{ed.zoom}%</button>
-            <button type="button" onClick={() => zoom(ed.zoom + 10)} aria-label="Ingrandisci il testo" style={{ border: 0, background: 'transparent', width: 32, height: 34, fontSize: 15, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }}>+</button>
+            <button type="button" onClick={() => zoom(ed.zoom + 10)} aria-label="Ingrandisci il testo" style={{ border: 0, background: 'transparent', width: 32, height: 34, fontSize: 15, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icona nome="piu" size={15} /></button>
           </div>
 
           <div style={{ flex: '1 1 0', minWidth: 8 }} />
 
-          <button type="button" data-pop="1" onClick={() => ed.imposta({ helpOpen: !ed.helpOpen, settingsOpen: false })} aria-expanded={ed.helpOpen} title="Legenda e scorciatoie" aria-label="Legenda e scorciatoie" style={{ ...quadro, ...attivo(ed.helpOpen) }}>?</button>
+          <button type="button" data-pop="1" onClick={() => ed.imposta({ helpOpen: !ed.helpOpen, settingsOpen: false })} aria-expanded={ed.helpOpen} title="Legenda e scorciatoie" aria-label="Legenda e scorciatoie" style={{ ...quadro, ...attivo(ed.helpOpen) }}><Icona nome="aiuto" size={17} style={{ margin: '0 auto' }} /></button>
           <button
             type="button"
             className="hv"
@@ -216,12 +217,12 @@ export function EditorTesti() {
             aria-label="Scheda sulla mappa dell'autore"
             style={{ ...quadro, border: '1px solid var(--focus)', background: 'transparent', color: 'var(--focus)', opacity: scheda ? 1 : 0.45, cursor: scheda ? 'pointer' : 'not-allowed' }}
           >
-            ↗
+            <Icona nome="mappa" size={17} style={{ margin: '0 auto' }} />
           </button>
-          <button type="button" className="hv" onClick={() => st.prefs({ scuro: !scuro })} title={scuro ? 'Passa al tema chiaro' : 'Passa al tema scuro'} aria-label={scuro ? 'Passa al tema chiaro' : 'Passa al tema scuro'} style={quadro}>{scuro ? '☾' : '☀'}</button>
-          <button type="button" data-pop="1" onClick={() => ed.imposta({ settingsOpen: !ed.settingsOpen, helpOpen: false })} aria-expanded={ed.settingsOpen} title="Carattere e spaziatura dell'interfaccia" style={{ ...quadro, ...attivo(ed.settingsOpen) }}>Aa</button>
+          <button type="button" className="hv" onClick={() => st.prefs({ scuro: !scuro })} title={scuro ? 'Passa al tema chiaro' : 'Passa al tema scuro'} aria-label={scuro ? 'Passa al tema chiaro' : 'Passa al tema scuro'} style={quadro}><Icona nome={scuro ? 'luna' : 'sole'} size={17} style={{ margin: '0 auto' }} /></button>
+          <button type="button" data-pop="1" onClick={() => ed.imposta({ settingsOpen: !ed.settingsOpen, helpOpen: false })} aria-expanded={ed.settingsOpen} title="Carattere e spaziatura dell'interfaccia" style={{ ...quadro, ...attivo(ed.settingsOpen) }}><Icona nome="testo" size={17} style={{ margin: '0 auto' }} /></button>
           {separatore}
-          <button type="button" className="hv" onClick={() => ed.imposta({ nuovoOpen: true })} title="Importa un nuovo testo" style={{ flex: 'none', whiteSpace: 'nowrap', border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, padding: '0 13px', height: 34, fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}>+ Testo</button>
+          <button type="button" className="hv" onClick={() => ed.imposta({ nuovoOpen: true })} title="Importa un nuovo testo" style={{ flex: 'none', whiteSpace: 'nowrap', border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, padding: '0 13px', height: 34, fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}><Con i="aggiungiScheda">Testo</Con></button>
         </div>
       </header>
 
@@ -296,23 +297,23 @@ function StatoVuoto() {
             <p style={{ margin: '0 0 26px', fontSize: 14, color: 'var(--mute)', maxWidth: '56ch', lineHeight: 1.6, textWrap: 'pretty' }}>Porta dentro il testo in uno dei tre modi. Dopo l'import scegli versi o prosa e puoi sistemarlo prima di iniziare ad annotare.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(210px,1fr))', gap: 14 }}>
               <button type="button" className="hv" onClick={() => ed.imposta({ incollaAperto: true })} style={{ ...scheda, border: '1px solid var(--focus)' }}>
-                <span aria-hidden style={{ fontSize: 22, lineHeight: 1 }}>⌨</span>
+                <Icona nome="tastiera" size={26} />
                 <strong style={{ fontSize: 15 }}>Incolla il testo</strong>
                 <span style={{ fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.5 }}>Dal libro digitale o da una pagina web. Il modo più rapido in classe.</span>
-                <span style={{ marginTop: 'auto', fontSize: 12, fontWeight: 700, color: 'var(--focus)' }}>Apri l'area di incolla →</span>
+                <span style={{ marginTop: 'auto', fontSize: 12, fontWeight: 700, color: 'var(--focus)' }}><Con i="avanti" size={13} fine>Apri l'area di incolla</Con></span>
               </button>
               <label className="hv" style={{ ...scheda, border: '1px solid var(--line)' }}>
                 <input type="file" accept=".txt,text/plain" onChange={(e) => leggiFile(e.target.files?.[0])} style={{ display: 'none' }} />
-                <span aria-hidden style={{ fontSize: 22, lineHeight: 1 }}>📄</span>
+                <Icona nome="file" size={26} />
                 <strong style={{ fontSize: 15 }}>File .txt</strong>
                 <span style={{ fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.5 }}>Scegli un file dal computer.</span>
-                <span style={{ marginTop: 'auto', fontSize: 12, fontWeight: 700, color: 'var(--mute)' }}>Scegli file →</span>
+                <span style={{ marginTop: 'auto', fontSize: 12, fontWeight: 700, color: 'var(--mute)' }}><Con i="avanti" size={13} fine>Scegli file</Con></span>
               </label>
               <button type="button" className="hv" onClick={() => { ed.imposta({ incollaAperto: true }); setAvviso("L'importazione dei PDF non è ancora disponibile: apri il PDF, copia il testo e incollalo qui.") }} style={{ ...scheda, border: '1px solid var(--line)' }}>
-                <span aria-hidden style={{ fontSize: 22, lineHeight: 1 }}>📕</span>
+                <Icona nome="libro" size={26} />
                 <strong style={{ fontSize: 15 }}>PDF</strong>
                 <span style={{ fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.5 }}>Estrae il testo dalle pagine. Da rivedere: gli a capo del PDF spesso sbagliano.</span>
-                <span style={{ marginTop: 'auto', fontSize: 12, fontWeight: 700, color: 'var(--mute)' }}>Scegli file →</span>
+                <span style={{ marginTop: 'auto', fontSize: 12, fontWeight: 700, color: 'var(--mute)' }}><Con i="avanti" size={13} fine>Scegli file</Con></span>
               </button>
             </div>
             {ed.incollaAperto && (
@@ -321,7 +322,7 @@ function StatoVuoto() {
                 {avviso && <p style={{ margin: '0 0 8px', fontSize: 12.5, color: 'var(--warn-ink)' }}>{avviso}</p>}
                 <textarea autoFocus aria-label="Testo da importare" value={b} onChange={(e) => ed.imposta({ bozza: e.target.value })} placeholder="Sempre caro mi fu quest'ermo colle…" style={{ width: '100%', minHeight: 150, resize: 'vertical', border: '1px solid var(--line)', background: 'var(--bg)', borderRadius: 12, padding: '13px 14px', fontSize: 14, lineHeight: 1.6, outlineOffset: -2 }} />
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginTop: 12 }}>
-                  <button type="button" className="hvp" disabled={!b.trim()} onClick={() => void importa()} style={{ ...vai, padding: '10px 18px', fontSize: 13, opacity: b.trim() ? 1 : 0.45 }}>Apri nell'editor</button>
+                  <button type="button" className="hvp" disabled={!b.trim()} onClick={() => void importa()} style={{ ...vai, padding: '10px 18px', fontSize: 13, opacity: b.trim() ? 1 : 0.45 }}><Con i="avanti" fine>Apri nell'editor</Con></button>
                   <span style={{ fontSize: 12, color: 'var(--mute)' }}>{info}</span>
                 </div>
               </div>
@@ -333,10 +334,10 @@ function StatoVuoto() {
             <p style={{ margin: '0 0 18px', fontSize: 14, color: 'var(--mute)', maxWidth: '56ch', lineHeight: 1.6, textWrap: 'pretty' }}>Un verso per riga. Puoi sistemare il testo adesso: dopo l'import le annotazioni si agganciano alle parole, non alle righe.</p>
             <textarea aria-label="Testo da importare" value={b} onChange={(e) => ed.imposta({ bozza: e.target.value })} placeholder={"Sempre caro mi fu quest'ermo colle,\ne questa siepe, che da tanta parte…"} style={{ width: '100%', minHeight: 230, resize: 'vertical', border: '2px dashed var(--line)', background: 'var(--bg)', borderRadius: 14, padding: 18, fontSize: 15, lineHeight: 1.75, outlineOffset: -2 }} />
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', marginTop: 14 }}>
-              <button type="button" className="hvp" disabled={!b.trim()} onClick={() => void importa()} style={{ ...vai, padding: '11px 20px', fontSize: 13.5, opacity: b.trim() ? 1 : 0.45 }}>Apri nell'editor</button>
+              <button type="button" className="hvp" disabled={!b.trim()} onClick={() => void importa()} style={{ ...vai, padding: '11px 20px', fontSize: 13.5, opacity: b.trim() ? 1 : 0.45 }}><Con i="avanti" fine>Apri nell'editor</Con></button>
               <div role="group" aria-label="Layout del testo" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
-                <button type="button" aria-pressed={!prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'verso' })} style={seg(!prosa, { borderRight: '1px solid var(--line)' })}>Versi</button>
-                <button type="button" aria-pressed={prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'prosa' })} style={seg(prosa)}>Prosa</button>
+                <button type="button" aria-pressed={!prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'verso' })} style={seg(!prosa, { borderRight: '1px solid var(--line)' })}><Con i="versi" size={14}>Versi</Con></button>
+                <button type="button" aria-pressed={prosa} onClick={() => aggiornaTesto(testo.id, { layout: 'prosa' })} style={seg(prosa)}><Con i="prosa" size={14}>Prosa</Con></button>
               </div>
               <span style={{ fontSize: 12, color: 'var(--mute)' }}>{info}</span>
               <div style={{ flex: 1 }} />

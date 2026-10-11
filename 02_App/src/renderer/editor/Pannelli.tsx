@@ -6,6 +6,7 @@ import { maxRightW, useEditor } from './stato'
 import { eliminaVoce, rigaDi, salvaRaccolta, salvaVoce, scrivibile, statoEs, useTesto } from './dati'
 import { nuovaDomanda, nuovaParafrasiLibera } from './azioni'
 import { Area, lbl, Quadro } from './ui'
+import { Con, Icona } from '../componenti/Icona'
 
 const HL: Record<Evidenzia, string> = { concetto: 'var(--hl-c)', definizione: 'var(--hl-d)', dubbio: 'var(--hl-u)' }
 export const NOME_EV: Record<Evidenzia, string> = { concetto: 'Concetto', definizione: 'Definizione', dubbio: 'Dubbio' }
@@ -69,10 +70,10 @@ export function PannelloDestro() {
       </div>
       <div role="tablist" aria-label="Pannelli" style={{ flex: 'none', display: 'flex', alignItems: 'stretch', borderBottom: '1px solid var(--line)' }}>
         {tabs.map(([k, nome]) => (
-          <button key={k} type="button" role="tab" aria-selected={ed.tab === k} onClick={() => ed.imposta({ tab: k })} style={{ flex: 1, minWidth: 0, border: 0, borderBottom: `3px solid ${ed.tab === k ? 'var(--focus)' : 'transparent'}`, background: ed.tab === k ? 'var(--surface)' : 'var(--bg)', color: ed.tab === k ? 'var(--ink)' : 'var(--mute)', padding: '12px 4px', fontSize: 12, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{nome}</button>
+          <button key={k} type="button" role="tab" aria-selected={ed.tab === k} onClick={() => ed.imposta({ tab: k })} style={{ flex: 1, minWidth: 0, border: 0, borderBottom: `3px solid ${ed.tab === k ? 'var(--focus)' : 'transparent'}`, background: ed.tab === k ? 'var(--surface)' : 'var(--bg)', color: ed.tab === k ? 'var(--ink)' : 'var(--mute)', padding: '12px 4px', fontSize: 12, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}><Icona nome={k === 'ann' ? 'evidenzia' : k === 'par' ? 'parafrasi' : 'domanda'} size={14} style={{ display: 'inline-block', verticalAlign: '-2px', marginRight: 6 }} />{nome}</button>
         ))}
-        <button type="button" className="hvi" disabled={allargaOff} onClick={() => ed.imposta({ rightW: ed.rightW >= 560 ? 392 : Math.min(640, maxRightW(ed.vw, ed.leftPin)) })} title={larga ? 'Riduci il pannello' : 'Allarga il pannello'} aria-label={larga ? 'Riduci il pannello' : 'Allarga il pannello'} style={lato}>{larga ? '⇥' : '⇤'}</button>
-        <button type="button" className="hvi" onClick={() => ed.imposta({ rightOpen: false })} title="Riduci i pannelli" aria-label="Riduci i pannelli" style={lato}>▸</button>
+        <button type="button" className="hvi" disabled={allargaOff} onClick={() => ed.imposta({ rightW: ed.rightW >= 560 ? 392 : Math.min(640, maxRightW(ed.vw, ed.leftPin)) })} title={larga ? 'Riduci il pannello' : 'Allarga il pannello'} aria-label={larga ? 'Riduci il pannello' : 'Allarga il pannello'} style={lato}><Icona nome={larga ? 'riduci' : 'allarga'} size={15} style={{ margin: '0 auto' }} /></button>
+        <button type="button" className="hvi" onClick={() => ed.imposta({ rightOpen: false })} title="Riduci i pannelli" aria-label="Riduci i pannelli" style={lato}><Icona nome="dx" size={16} style={{ margin: '0 auto' }} /></button>
       </div>
       {ed.tab === 'ann' && <TabAnnotazioni />}
       {ed.tab === 'par' && <TabParafrasi />}
@@ -89,7 +90,7 @@ export function PillolaDestra() {
   const nome = ed.tab === 'par' ? `Parafrasi · ${testo.parafrasi.length}` : ed.tab === 'es' ? 'Esercizi' : `Annotazioni · ${testo.annotazioni.length}`
   return (
     <button type="button" className="hv" onClick={() => ed.imposta({ rightOpen: true })} style={{ position: 'absolute', right: 16, top: 16, zIndex: 30, border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 14, boxShadow: '0 12px 30px rgba(8,12,18,.16)', padding: '11px 14px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10, animation: 'dcFade .14s ease-out' }}>
-      <span aria-hidden style={{ color: 'var(--mute)' }}>◂</span>
+      <span aria-hidden style={{ color: 'var(--mute)', display: 'flex' }}><Icona nome="sx" size={15} /></span>
       <span style={{ whiteSpace: 'nowrap' }}>{nome}</span>
     </button>
   )
@@ -131,8 +132,8 @@ function TabAnnotazioni() {
         {ordinate.map((a) => {
           const rot = daSistemare(a.stato)
           const fig = modello.figure.find((f) => f.id === a.figura)
-          const riga = rot ? '⚑' : rigaDi(tk, testo.layout, a.span)
-          const flags = (a.parola_chiave ? 'K' : '') + (a.flashcard ? 'F' : '') + (fig ? '❧' : '')
+          const riga = rot ? 'Da riagganciare' : rigaDi(tk, testo.layout, a.span)
+          const flags = (a.parola_chiave || a.flashcard || fig) ? <span style={{ display: 'inline-flex', gap: 4, alignItems: 'center' }}>{a.parola_chiave && <Icona nome="stella" size={12} />}{a.flashcard && <Icona nome="carte" size={12} />}{fig && <Icona nome="figura" size={12} />}</span> : null
           if (!B) {
             return (
               <button key={a.id} type="button" className="hv" onClick={() => apri(a)} style={{ flex: 'none', width: '100%', textAlign: 'left', display: 'flex', alignItems: 'flex-start', gap: 10, border: `1px solid ${rot ? 'var(--warn-line)' : 'var(--line)'}`, background: rot ? 'var(--warn-bg)' : 'var(--surface)', borderRadius: 9, padding: '9px 10px', cursor: 'pointer', minHeight: 40 }}>
@@ -153,27 +154,27 @@ function TabAnnotazioni() {
                 <span aria-hidden style={{ flex: 'none', width: 11, height: 11, borderRadius: 4, background: rot ? 'var(--warn-line)' : dot(a) }} />
                 <span style={lbl}>{riga}</span>
                 <div style={{ flex: 1 }} />
-                <button type="button" className="hv" onClick={() => apri(a)} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 7, padding: '5px 10px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>Vai al testo</button>
-                <Quadro onClick={() => void eliminaVoce(testo.id, 'annotazioni', a.id)} label="Elimina annotazione">✕</Quadro>
+                <button type="button" className="hv" onClick={() => apri(a)} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 7, padding: '5px 10px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}><Con i="mirino" size={13}>Vai al testo</Con></button>
+                <Quadro onClick={() => void eliminaVoce(testo.id, 'annotazioni', a.id)} label="Elimina annotazione"><Icona nome="cestino" size={14} style={{ margin: '0 auto' }} /></Quadro>
               </div>
               <button type="button" className="hvo" onClick={() => apri(a)} title="Apri la scheda dell'annotazione" style={{ width: '100%', textAlign: 'left', border: 0, background: 'transparent', padding: 0, cursor: 'pointer', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <span aria-hidden style={{ flex: 'none', width: 3, alignSelf: 'stretch', borderRadius: 2, background: rot ? 'var(--warn-line)' : dot(a) }} />
                 <span style={{ flex: 1, fontSize: 13.5, fontWeight: 700, lineHeight: 1.5, textWrap: 'pretty' }}>«{a.citato}»</span>
-                <span aria-hidden style={{ flex: 'none', fontSize: 11, color: 'var(--mute)', paddingTop: 3 }}>▸</span>
+                <span aria-hidden style={{ flex: 'none', color: 'var(--mute)', paddingTop: 3, display: 'flex' }}><Icona nome="dx" size={14} /></span>
               </button>
               {a.stato === 'riagganciata' && <Riagganciata testo="Riagganciata da sola dopo una modifica del testo." etichetta="Va bene" onOk={() => void salvaVoce(testo.id, 'annotazioni', { id: a.id, span: a.span, citato: a.citato })} />}
               {rot && <Avviso testo={a.stato === 'ambigua' ? 'Le parole citate compaiono in più punti: scegli tu quale.' : 'Le parole citate non si trovano più nel testo.'} etichetta="Riaggancia alla selezione" sel={sel} citato={citatoSel} onRiaggancia={() => riaggancia(a)} />}
               {a.nota.trim() && <p style={{ margin: 0, fontSize: 12.5, lineHeight: 1.6, color: 'var(--ink)', textWrap: 'pretty' }}>{a.nota}</p>}
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {a.evidenzia && chip(NOME_EV[a.evidenzia], dot(a), 'var(--ink)', 'var(--line)')}
-                {fig && chip(`❧ ${fig.nome}`, 'var(--ed-bg)', 'var(--ed)', 'var(--ed)')}
+                {fig && chip(`${fig.nome}`, 'var(--ed-bg)', 'var(--ed)', 'var(--ed)')}
                 {a.sottolinea && chip('Sottolineata', 'var(--surface2)', 'var(--ink)', 'var(--ink)')}
                 {a.parola_chiave && chip('Parola chiave', 'var(--surface2)', 'var(--ink)', 'var(--line)')}
                 {a.flashcard && chip('Flashcard', 'var(--surface2)', 'var(--ink)', 'var(--line)')}
                 {a.schede.map((s) => (
-                  <button key={s.id} type="button" onClick={() => apriScheda(s.id)} title="Apri la scheda collegata sulla mappa dell'autore" style={{ border: '1px solid var(--focus)', background: 'transparent', color: 'var(--focus)', borderRadius: 999, padding: '3px 10px', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>↗ {nomeScheda(s.id)}</button>
+                  <button key={s.id} type="button" onClick={() => apriScheda(s.id)} title="Apri la scheda collegata sulla mappa dell'autore" style={{ border: '1px solid var(--focus)', background: 'transparent', color: 'var(--focus)', borderRadius: 999, padding: '3px 10px', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}><Con i="esterno" size={12}>{nomeScheda(s.id)}</Con></button>
                 ))}
-                <button type="button" className="hvi" onClick={() => { if (a.span && !rot) ed.seleziona(a.span[0], a.span[1]); ed.imposta({ figOpen: true, figQ: '', figPrev: a.figura || 'metafora', figTarget: a.id }) }} style={{ border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 999, padding: '3px 10px', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>❧ {fig ? 'Cambia figura' : 'Aggiungi figura'}</button>
+                <button type="button" className="hvi" onClick={() => { if (a.span && !rot) ed.seleziona(a.span[0], a.span[1]); ed.imposta({ figOpen: true, figQ: '', figPrev: a.figura || 'metafora', figTarget: a.id }) }} style={{ border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 999, padding: '3px 10px', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}><Con i="figura" size={12}>{fig ? 'Cambia figura' : 'Aggiungi figura'}</Con></button>
               </div>
             </div>
           )
@@ -188,7 +189,7 @@ function Riagganciata(props: { testo: string; etichetta: string; onOk: () => voi
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--mute)' }}>
       <span aria-hidden style={{ flex: 'none', width: 7, height: 7, borderRadius: '50%', background: 'var(--par)' }} />
       <span style={{ flex: 1 }}>{props.testo}</span>
-      <button type="button" className="hv" onClick={props.onOk} style={{ flex: 'none', border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 6, padding: '3px 9px', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>{props.etichetta}</button>
+      <button type="button" className="hv" onClick={props.onOk} style={{ flex: 'none', border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 6, padding: '3px 9px', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}><Con i="spunta" size={12}>{props.etichetta}</Con></button>
     </div>
   )
 }
@@ -198,7 +199,7 @@ export function Avviso(props: { testo: string; etichetta: string; sel: [number, 
     <div style={{ border: '1px solid var(--warn-line)', background: 'var(--warn-bg)', color: 'var(--warn-ink)', borderRadius: 9, padding: '9px 10px', fontSize: 12, lineHeight: 1.5 }}>
       <b>Da riagganciare.</b> {props.testo}
       <div style={{ marginTop: 8, display: 'flex', gap: 7, flexWrap: 'wrap' }}>
-        <button type="button" disabled={!props.sel} onClick={props.onRiaggancia} style={{ border: '1px solid var(--warn-line)', background: 'transparent', color: 'var(--warn-ink)', borderRadius: 7, padding: '6px 11px', fontSize: 11.5, fontWeight: 700, cursor: props.sel ? 'pointer' : 'not-allowed', opacity: props.sel ? 1 : 0.45 }}>{props.etichetta}</button>
+        <button type="button" disabled={!props.sel} onClick={props.onRiaggancia} style={{ border: '1px solid var(--warn-line)', background: 'transparent', color: 'var(--warn-ink)', borderRadius: 7, padding: '6px 11px', fontSize: 11.5, fontWeight: 700, cursor: props.sel ? 'pointer' : 'not-allowed', opacity: props.sel ? 1 : 0.45 }}><Con i="collega" size={12}>{props.etichetta}</Con></button>
         <span style={{ fontSize: 11.5, alignSelf: 'center' }}>{props.sel ? `Userà «${props.citato.slice(0, 28)}${props.citato.length > 28 ? '…' : ''}»` : 'Seleziona prima le parole giuste nel testo.'}</span>
       </div>
     </div>
@@ -227,8 +228,8 @@ function TabParafrasi() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ ...lbl, letterSpacing: '.07em', color: rot ? 'var(--warn-ink)' : viva ? 'var(--par)' : 'var(--mute)', border: `1px solid ${rot ? 'var(--warn-line)' : viva ? 'var(--par)' : 'var(--line)'}`, background: rot ? 'var(--warn-bg)' : viva ? 'var(--par-bg)' : 'var(--surface2)', borderRadius: 999, padding: '2px 9px' }}>{viva ? rigaDi(tk, testo.layout, p.span) : p.citato ? 'Da riagganciare' : 'Libera'}</span>
               <div style={{ flex: 1 }} />
-              <button type="button" className="hvi" onClick={() => salva(p.id, p.span ? { span: null, citato: '' } : sel ? { span: sel, citato: citatoSel } : {})} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 7, padding: '5px 10px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', color: 'var(--mute)' }}>{p.span ? 'Scollega' : 'Collega alla selezione'}</button>
-              <Quadro onClick={() => void eliminaVoce(testo.id, 'parafrasi', p.id)} label="Elimina parafrasi">✕</Quadro>
+              <button type="button" className="hvi" onClick={() => salva(p.id, p.span ? { span: null, citato: '' } : sel ? { span: sel, citato: citatoSel } : {})} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 7, padding: '5px 10px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', color: 'var(--mute)' }}><Con i={p.span ? 'scollega' : 'collega'} size={13}>{p.span ? 'Scollega' : 'Collega alla selezione'}</Con></button>
+              <Quadro onClick={() => void eliminaVoce(testo.id, 'parafrasi', p.id)} label="Elimina parafrasi"><Icona nome="cestino" size={14} style={{ margin: '0 auto' }} /></Quadro>
             </div>
             {p.citato && <blockquote style={{ margin: 0, fontSize: 12.5, lineHeight: 1.5, color: 'var(--mute)', borderLeft: '3px solid var(--par)', paddingLeft: 10 }}>«{p.citato}»</blockquote>}
             {p.stato === 'riagganciata' && <Riagganciata testo="Riagganciata da sola dopo una modifica del testo." etichetta="Ok" onOk={() => salva(p.id, { span: p.span, citato: p.citato })} />}
@@ -237,7 +238,7 @@ function TabParafrasi() {
           </div>
         )
       })}
-      <button type="button" className="hvi" onClick={() => void nuovaParafrasiLibera()} style={{ alignSelf: 'flex-start', border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 9, padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}>+ Parafrasi libera</button>
+      <button type="button" className="hvi" onClick={() => void nuovaParafrasiLibera()} style={{ alignSelf: 'flex-start', border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 9, padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}><Con i="piu">Parafrasi libera</Con></button>
     </div>
   )
 }
@@ -268,8 +269,8 @@ function TabEsercizi() {
         <strong style={{ fontSize: 14.5 }}>Nessun esercizio ancora</strong>
         <p style={{ margin: 0, fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.6, maxWidth: '30ch', textWrap: 'pretty' }}>Importa le domande per iniziare, oppure scrivine una partendo da un passo selezionato nel testo.</p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
-          <button type="button" className="hvp" onClick={apriImport} style={{ border: '1px solid var(--focus)', background: 'var(--focus)', color: 'var(--surface)', borderRadius: 9, padding: '10px 15px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}>Importa le domande</button>
-          <button type="button" disabled={!sel} onClick={() => void nuovaDomanda()} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 9, padding: '10px 15px', fontSize: 12.5, fontWeight: 700, cursor: sel ? 'pointer' : 'not-allowed', opacity: sel ? 1 : 0.45 }}>Nuova sulla selezione</button>
+          <button type="button" className="hvp" onClick={apriImport} style={{ border: '1px solid var(--focus)', background: 'var(--focus)', color: 'var(--surface)', borderRadius: 9, padding: '10px 15px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}><Con i="incolla">Importa le domande</Con></button>
+          <button type="button" disabled={!sel} onClick={() => void nuovaDomanda()} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 9, padding: '10px 15px', fontSize: 12.5, fontWeight: 700, cursor: sel ? 'pointer' : 'not-allowed', opacity: sel ? 1 : 0.45 }}><Con i="piu">Nuova sulla selezione</Con></button>
         </div>
       </div>
     )
@@ -284,10 +285,10 @@ function TabEsercizi() {
           <span style={{ fontSize: 11.5, color: 'var(--mute)' }}>svolte</span>
           <div style={{ flex: 1 }} />
           {prossima && (
-            <button type="button" className="hvp" onClick={() => ed.imposta({ esDet: prossima.id, esEdit: null, esTestoEdit: null })} style={{ border: '1px solid var(--focus)', background: 'var(--focus)', color: 'var(--surface)', borderRadius: 7, padding: '6px 11px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>{svolte ? 'Continua' : 'Inizia'}</button>
+            <button type="button" className="hvp" onClick={() => ed.imposta({ esDet: prossima.id, esEdit: null, esTestoEdit: null })} style={{ border: '1px solid var(--focus)', background: 'var(--focus)', color: 'var(--surface)', borderRadius: 7, padding: '6px 11px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}><Con i="gioca" size={12}>{svolte ? 'Continua' : 'Inizia'}</Con></button>
           )}
-          <button type="button" disabled={!sel} title="Nuova domanda sul passo selezionato (tasto D)" onClick={() => void nuovaDomanda()} style={{ ...piccolo, cursor: sel ? 'pointer' : 'not-allowed', opacity: sel ? 1 : 0.45 }}>+ Sulla selezione</button>
-          <button type="button" className="hv" onClick={apriImport} style={piccolo}>Importa</button>
+          <button type="button" disabled={!sel} title="Nuova domanda sul passo selezionato (tasto D)" onClick={() => void nuovaDomanda()} style={{ ...piccolo, cursor: sel ? 'pointer' : 'not-allowed', opacity: sel ? 1 : 0.45 }}><Con i="piu" size={13}>Sulla selezione</Con></button>
+          <button type="button" className="hv" onClick={apriImport} style={piccolo}><Con i="incolla" size={13}>Importa</Con></button>
         </div>
         <div role="group" aria-label="Filtra per stato" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {filtri.map(([k, nome]) => {
@@ -310,15 +311,15 @@ function TabEsercizi() {
                   <span style={{ flex: 'none', width: 22, height: 22, borderRadius: 7, background: 'var(--surface2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>{e.numero}</span>
                   <span style={{ flex: 'none', border: `1px solid ${col[0]}`, background: col[1], color: col[2], borderRadius: 999, padding: '2px 9px', fontSize: 10.5, fontWeight: 700, whiteSpace: 'nowrap' }}>{ETI[st]}</span>
                   <span style={{ flex: 1 }} />
-                  {nPassi > 0 && <span title={nPassi > 1 ? `${nPassi} passi collegati` : 'Collegata a un passo del testo'} style={{ flex: 'none', border: '1px solid var(--par)', background: 'var(--par-bg)', color: 'var(--par)', borderRadius: 5, padding: '1px 6px', fontSize: 10.5, fontWeight: 700 }}>{nPassi > 1 ? `¶ ${nPassi}` : '¶'}</span>}
-                  <span aria-hidden style={{ flex: 'none', fontSize: 11, color: 'var(--mute)' }}>▸</span>
+                  {nPassi > 0 && <span title={nPassi > 1 ? `${nPassi} passi collegati` : 'Collegata a un passo del testo'} style={{ flex: 'none', border: '1px solid var(--par)', background: 'var(--par-bg)', color: 'var(--par)', borderRadius: 5, padding: '1px 6px', fontSize: 10.5, fontWeight: 700 }}><span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}><Icona nome="collega" size={11} />{nPassi > 1 ? nPassi : ''}</span></span>}
+                  <span aria-hidden style={{ flex: 'none', color: 'var(--mute)', display: 'flex' }}><Icona nome="dx" size={14} /></span>
                 </span>
                 <span style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.5, textWrap: 'pretty' }}>{e.testo || 'Domanda senza testo'}</span>
                 {e.risposta.trim() && <span style={{ fontSize: 11.5, color: 'var(--mute)', lineHeight: 1.45, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>{e.risposta.trim()}</span>}
               </button>
               <span style={{ flex: 'none', display: 'flex', flexDirection: 'column', gap: 5, padding: '11px 10px 11px 0' }}>
-                <button type="button" aria-pressed={e.fatta} aria-label={e.fatta ? 'Segna come non fatta' : 'Segna come fatta'} title={e.fatta ? 'Segna come non fatta' : 'Segna come fatta'} onClick={() => void salvaVoce(testo.id, 'esercizi', { id: e.id, fatta: !e.fatta })} style={{ border: `2px solid ${e.fatta ? 'var(--par)' : 'var(--line)'}`, background: e.fatta ? 'var(--par)' : 'var(--surface)', color: e.fatta ? 'var(--on)' : 'transparent', borderRadius: 8, width: 28, height: 28, fontSize: 13, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }}>✓</button>
-                <Quadro size={26} label="Elimina domanda" onClick={() => void scriviEsercizi(testo.id, rinumera(lista.filter((x) => x.id !== e.id)))}>✕</Quadro>
+                <button type="button" aria-pressed={e.fatta} aria-label={e.fatta ? 'Segna come non fatta' : 'Segna come fatta'} title={e.fatta ? 'Segna come non fatta' : 'Segna come fatta'} onClick={() => void salvaVoce(testo.id, 'esercizi', { id: e.id, fatta: !e.fatta })} style={{ border: `2px solid ${e.fatta ? 'var(--par)' : 'var(--line)'}`, background: e.fatta ? 'var(--par)' : 'var(--surface)', color: e.fatta ? 'var(--on)' : 'transparent', borderRadius: 8, width: 28, height: 28, fontSize: 13, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Icona nome="spunta" size={15} /></button>
+                <Quadro size={26} label="Elimina domanda" onClick={() => void scriviEsercizi(testo.id, rinumera(lista.filter((x) => x.id !== e.id)))}><Icona nome="cestino" size={13} style={{ margin: '0 auto' }} /></Quadro>
               </span>
             </div>
           )

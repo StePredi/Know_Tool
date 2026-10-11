@@ -7,7 +7,7 @@ export const Kbd = ({ k }: { k: string }) => (
   <kbd style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--mute)', border: '1px solid var(--line)', borderRadius: 4, padding: '1px 5px', background: 'var(--bg)' }}>{k}</kbd>
 )
 
-/** Pulsante quadrato con un segno (✕, ◂, ▸, ✎…). */
+/** Pulsante quadrato con un segno (icona SVG). */
 export function Quadro(props: { onClick: () => void; label: string; children: React.ReactNode; size?: number; disabled?: boolean; style?: CSSProperties }) {
   const s = props.size ?? 28
   return (
@@ -17,9 +17,9 @@ export function Quadro(props: { onClick: () => void; label: string; children: Re
   )
 }
 
-export const primario: CSSProperties = { border: '1px solid var(--focus)', background: 'var(--focus)', color: 'var(--surface)', borderRadius: 9, padding: '9px 15px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }
-export const secondario: CSSProperties = { border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 9, padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }
-export const tratteggiato: CSSProperties = { border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 9, padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }
+export const primario: CSSProperties = { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7, border: '1px solid var(--focus)', background: 'var(--focus)', color: 'var(--surface)', borderRadius: 9, padding: '9px 15px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }
+export const secondario: CSSProperties = { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7, border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 9, padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }
+export const tratteggiato: CSSProperties = { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7, border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 9, padding: '9px 13px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }
 
 /** Area di testo a scrittura immediata (copia locale, salva dopo una pausa e quando si esce dal campo). */
 export function Area(props: { valore: string; salva: (v: string) => void; placeholder?: string; disabled?: boolean; label?: string; style?: CSSProperties; innerRef?: Ref<HTMLTextAreaElement>; spellcheck?: boolean }) {

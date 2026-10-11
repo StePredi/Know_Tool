@@ -2,6 +2,7 @@ import { corsiaDi, temiDi } from '@shared/derivati'
 import { dataLunga } from '@shared/dates'
 import { Md } from '../utili'
 import { useColore, useStore } from '../store'
+import { Con } from './Icona'
 
 export function Anteprima({ id }: { id: string }) {
   const m = useStore((s) => s.modello)!
@@ -36,7 +37,7 @@ export function Anteprima({ id }: { id: string }) {
           </div>
         )}
         <button className="btn lg on" style={{ width: '100%', marginTop: 15, padding: 10, fontSize: 14 }} onClick={() => imposta({ apertaId: s.id })}>
-          Apri scheda
+          <Con i="esterno">Apri scheda</Con>
         </button>
       </div>
     </aside>

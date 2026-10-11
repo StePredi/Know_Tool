@@ -1,4 +1,5 @@
 import { useStore } from '../store'
+import { Con, Icona } from './Icona'
 
 const Riga = ({ titolo, aiuto, children }: { titolo: string; aiuto?: string; children: React.ReactNode }) => (
   <div style={{ padding: '14px 0', borderTop: '1px solid var(--line2)' }}>
@@ -20,7 +21,7 @@ export function Applicazione() {
       <div style={{ width: '100%', maxWidth: 620, maxHeight: '88vh', display: 'flex', flexDirection: 'column', background: 'var(--surface)', border: '1px solid var(--line)', borderTop: '4px solid var(--focus)', borderRadius: 14, boxShadow: '0 30px 80px rgba(0,0,0,.4)', overflow: 'hidden', animation: 'dcUp .18s ease-out' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderBottom: '1px solid var(--line)', background: 'var(--bg)' }}>
           <strong style={{ flex: 1, fontSize: 18 }}>Applicazione</strong>
-          <button className="btn" aria-label="Chiudi" onClick={() => imposta({ applicazione: false })}>✕</button>
+          <button className="btn" aria-label="Chiudi" onClick={() => imposta({ applicazione: false })}><Icona nome="chiudi" /></button>
         </div>
         <div style={{ overflow: 'auto', padding: '4px 20px 20px' }}>
           <Riga titolo="Tema">
@@ -31,7 +32,7 @@ export function Applicazione() {
           </Riga>
           <Riga titolo={`Dimensione dell'interfaccia · ${Math.round(st.zoomUi * 100)}%`} aiuto="Ingrandisce testo, barre e pulsanti di tutta l'app. Scorciatoie: Ctrl + / Ctrl − / Ctrl 0.">
             <input type="range" min={70} max={200} step={5} value={Math.round(st.zoomUi * 100)} onChange={(e) => prefs({ zoomUi: +e.target.value / 100 })} style={{ width: '100%' }} aria-label="Dimensione dell'interfaccia" />
-            <button className="btn" style={{ marginTop: 6 }} onClick={() => prefs({ zoomUi: 1.15 })}>Ripristina (115%)</button>
+            <button className="btn" style={{ marginTop: 6 }} onClick={() => prefs({ zoomUi: 1.15 })}><Con i="riduci" size={14}>Ripristina (115%)</Con></button>
           </Riga>
           <Riga titolo="Carattere">
             <div style={{ display: 'flex', gap: 6 }}>
@@ -54,8 +55,8 @@ export function Applicazione() {
           </Riga>
           <Riga titolo="Cartella dei dati" aiuto={st.stato?.radice ?? 'Nessuna cartella'}>
             <div style={{ display: 'flex', gap: 6 }}>
-              <button className="btn" onClick={() => void window.api.mostraCartella()}>Apri la cartella dell'autore</button>
-              <button className="btn" onClick={() => { imposta({ applicazione: false }); void st.scegliRadice() }}>Cambia cartella…</button>
+              <button className="btn" onClick={() => void window.api.mostraCartella()}><Con i="cartella">Apri la cartella dell'autore</Con></button>
+              <button className="btn" onClick={() => { imposta({ applicazione: false }); void st.scegliRadice() }}><Con i="cartella">Cambia cartella…</Con></button>
             </div>
           </Riga>
           <p style={{ fontSize: 12.5, color: 'var(--mute)', margin: '10px 0 0' }}>Zoom della mappa: pulsanti − + sopra la mappa o Ctrl + rotella.</p>

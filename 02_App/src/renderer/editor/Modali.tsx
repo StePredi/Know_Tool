@@ -5,6 +5,7 @@ import { useStore } from '../store'
 import { useEditor, type Bozza } from './stato'
 import { applicaFigura, correnteDi, eliminaVoce, rigaDi, salvaVoce, scrivibile, separaDomande, statoEs, useTesto } from './dati'
 import { NOME_EV, rinumera, scriviEsercizi } from './Pannelli'
+import { Con, Icona, type NomeIcona } from '../componenti/Icona'
 import { Area, lbl, Modale, primario, Quadro, Riga, secondario, tratteggiato } from './ui'
 
 const HL: Record<Evidenzia, string> = { concetto: 'var(--hl-c)', definizione: 'var(--hl-d)', dubbio: 'var(--hl-u)' }
@@ -13,16 +14,16 @@ const ETI = { da_svolgere: 'Da svolgere', da_correggere: 'Da correggere', corret
 const COL = { da_svolgere: ['var(--line)', 'var(--surface2)', 'var(--mute)'], da_correggere: ['var(--warn-line)', 'var(--warn-bg)', 'var(--warn-ink)'], corretta: ['var(--par)', 'var(--par-bg)', 'var(--par)'] } as const
 
 const chiudiBtn = (f: () => void): React.ReactNode => (
-  <button type="button" className="hv" onClick={f} aria-label="Chiudi" style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, width: 30, height: 30, fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+  <button type="button" className="hv" onClick={f} aria-label="Chiudi" style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, width: 30, height: 30, fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}><Icona nome="chiudi" size={14} /></button>
 )
 
-/** ◂ ▸ affiancati, come nel prototipo. */
+/** Frecce affiancati, come nel prototipo. */
 function Scorri(props: { etichetta: string; prevOff: boolean; nextOff: boolean; onPrev: () => void; onNext: () => void; nome: string }) {
-  const b: React.CSSProperties = { border: 0, background: 'transparent', width: 32, height: 30, fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }
+  const b: React.CSSProperties = { border: 0, background: 'transparent', width: 32, height: 30, fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0 }
   return (
     <div role="group" aria-label={props.etichetta} style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
-      <button type="button" className="hv" onClick={props.onPrev} disabled={props.prevOff} aria-label={`${props.nome} precedente`} style={{ ...b, borderRight: '1px solid var(--line)' }}>◂</button>
-      <button type="button" className="hv" onClick={props.onNext} disabled={props.nextOff} aria-label={`${props.nome} successiva`} style={b}>▸</button>
+      <button type="button" className="hv" onClick={props.onPrev} disabled={props.prevOff} aria-label={`${props.nome} precedente`} style={{ ...b, borderRight: '1px solid var(--line)' }}><Icona nome="sx" size={15} /></button>
+      <button type="button" className="hv" onClick={props.onNext} disabled={props.nextOff} aria-label={`${props.nome} successiva`} style={b}><Icona nome="dx" size={15} /></button>
     </div>
   )
 }
@@ -84,11 +85,11 @@ export function SchedaAnnotazione() {
   const par = a.span && !rot ? testo.parafrasi.find((p) => p.span && !daSistemare(p.stato) && p.span[0] <= a.span![1] && p.span[1] >= a.span![0]) : undefined
   const liberi = modello.schede.filter((s) => !a.schede.some((x) => x.id === s.id))
   const nomeSch = (id: string): string => modello.schede.find((s) => s.id === id)?.titolo_breve ?? id
-  const tag: { nome: string; sw?: string; icona: string }[] = []
+  const tag: { nome: string; sw?: string; icona: NomeIcona | '' }[] = []
   if (a.evidenzia) tag.push({ nome: NOME_EV[a.evidenzia], sw: HL[a.evidenzia], icona: '' })
-  if (a.sottolinea) tag.push({ nome: 'Sottolineatura', icona: '⎯' })
-  if (a.parola_chiave) tag.push({ nome: 'Parola chiave', icona: '✦' })
-  if (a.flashcard) tag.push({ nome: 'Flashcard', icona: '▣' })
+  if (a.sottolinea) tag.push({ nome: 'Sottolineatura', icona: 'sottolinea' })
+  if (a.parola_chiave) tag.push({ nome: 'Parola chiave', icona: 'stella' })
+  if (a.flashcard) tag.push({ nome: 'Flashcard', icona: 'carte' })
   const bottoneScelta = (on: boolean): React.CSSProperties => ({ display: 'flex', alignItems: 'center', gap: 8, border: `1px solid ${on ? 'var(--ink)' : 'var(--line)'}`, background: on ? 'var(--surface2)' : 'var(--surface)', borderRadius: 9, padding: '0 13px', height: 38, fontSize: 12.5, fontWeight: 700, cursor: 'pointer' })
   const fondoCtx = (dentro: boolean): string => (dentro ? (a.evidenzia ? HL[a.evidenzia] : 'var(--surface2)') : 'transparent')
   const mostraFig = !!fig || edit
@@ -115,16 +116,16 @@ export function SchedaAnnotazione() {
       piede={
         <>
           {edit && (
-            <button type="button" className="hvi" onClick={() => { void eliminaVoce(testo.id, 'annotazioni', a.id); ed.imposta({ annDet: ordinate[i + 1]?.id ?? ordinate[i - 1]?.id ?? null, detEdit: false }) }} style={{ ...secondario, background: 'transparent', color: 'var(--mute)' }}>Elimina</button>
+            <button type="button" className="hvi" onClick={() => { void eliminaVoce(testo.id, 'annotazioni', a.id); ed.imposta({ annDet: ordinate[i + 1]?.id ?? ordinate[i - 1]?.id ?? null, detEdit: false }) }} style={{ ...secondario, background: 'transparent', color: 'var(--mute)' }}><Con i="cestino" size={14}>Elimina</Con></button>
           )}
           <div style={{ flex: 1 }} />
           {!edit ? (
             <>
-              <button type="button" className="hv" onClick={() => ed.imposta({ detEdit: true })} style={secondario}>Modifica</button>
-              <button type="button" className="hvp" onClick={() => { if (a.span && !rot) ed.seleziona(a.span[0], a.span[1]); ed.imposta({ annDet: null, detEdit: false }) }} style={primario}>Vai al testo</button>
+              <button type="button" className="hv" onClick={() => ed.imposta({ detEdit: true })} style={secondario}><Con i="matita" size={14}>Modifica</Con></button>
+              <button type="button" className="hvp" onClick={() => { if (a.span && !rot) ed.seleziona(a.span[0], a.span[1]); ed.imposta({ annDet: null, detEdit: false }) }} style={primario}><Con i="mirino" size={14}>Vai al testo</Con></button>
             </>
           ) : (
-            <button type="button" className="hvp" onClick={() => ed.imposta({ detEdit: false })} style={primario}>Fine</button>
+            <button type="button" className="hvp" onClick={() => ed.imposta({ detEdit: false })} style={primario}><Con i="spunta" size={14}>Fine</Con></button>
           )}
         </>
       }
@@ -145,7 +146,7 @@ export function SchedaAnnotazione() {
           {tag.map((t) => (
             <span key={t.nome} style={{ display: 'flex', alignItems: 'center', gap: 7, border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 999, padding: '5px 12px', fontSize: 12, fontWeight: 700, whiteSpace: 'nowrap' }}>
               {t.sw && <span aria-hidden style={{ width: 13, height: 13, borderRadius: 4, border: '1px solid var(--line)', background: t.sw }} />}
-              <span aria-hidden style={{ fontSize: 12, color: 'var(--mute)' }}>{t.icona}</span>{t.nome}
+              {t.icona && <Icona nome={t.icona} size={13} style={{ color: 'var(--mute)' }} />}{t.nome}
             </span>
           ))}
         </div>
@@ -166,9 +167,9 @@ export function SchedaAnnotazione() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {sezione('Marcature')}
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {([['sottolinea', 'Sottolineatura', '⎯'], ['parola_chiave', 'Parola chiave', '✦'], ['flashcard', 'Flashcard', '▣']] as const).map(([f, nome, ic]) => (
+              {([['sottolinea', 'Sottolineatura', 'sottolinea'], ['parola_chiave', 'Parola chiave', 'stella'], ['flashcard', 'Flashcard', 'carte']] as const).map(([f, nome, ic]) => (
                 <button key={f} type="button" className="hv" aria-pressed={a[f]} onClick={() => salva({ [f]: !a[f] })} style={bottoneScelta(a[f])}>
-                  <span aria-hidden style={{ fontSize: 13 }}>{ic}</span><span style={{ whiteSpace: 'nowrap' }}>{nome}</span>
+                  <Icona nome={ic} size={14} /><span style={{ whiteSpace: 'nowrap' }}>{nome}</span>
                 </button>
               ))}
             </div>
@@ -184,7 +185,7 @@ export function SchedaAnnotazione() {
               <strong style={{ flex: 1, fontSize: 14, color: 'var(--ed)' }}>{fig ? fig.nome : 'Nessuna figura retorica'}</strong>
               <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.06em', color: 'var(--mute)' }}>{fig ? TIPI[fig.tipo] : ''}</span>
               {edit && (
-                <button type="button" className="hv" onClick={() => ed.imposta({ figOpen: true, figQ: '', figPrev: a.figura || 'metafora', figTarget: a.id })} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, padding: '7px 12px', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>{fig ? 'Cambia' : 'Aggiungi'}</button>
+                <button type="button" className="hv" onClick={() => ed.imposta({ figOpen: true, figQ: '', figPrev: a.figura || 'metafora', figTarget: a.id })} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, padding: '7px 12px', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}><Con i="figura" size={14}>{fig ? 'Cambia' : 'Aggiungi'}</Con></button>
               )}
             </div>
             {fig && (
@@ -221,8 +222,8 @@ export function SchedaAnnotazione() {
           {a.schede.map((s, k) => (
             <div key={s.id} style={{ border: '1px solid var(--line2)', borderRadius: 11, padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 7 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-                <button type="button" title="Apri la scheda sulla mappa dell'autore" onClick={() => { ed.imposta({ annDet: null, detEdit: false }); useStore.getState().imposta({ apertaId: s.id, selId: s.id }) }} style={{ flex: 1, minWidth: 0, textAlign: 'left', border: 0, background: 'transparent', color: 'var(--focus)', padding: 0, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>↗ {nomeSch(s.id)}</button>
-                {edit && <Quadro size={26} label="Scollega la scheda" onClick={() => salva({ schede: a.schede.filter((_, j) => j !== k) })}>✕</Quadro>}
+                <button type="button" title="Apri la scheda sulla mappa dell'autore" onClick={() => { ed.imposta({ annDet: null, detEdit: false }); useStore.getState().imposta({ apertaId: s.id, selId: s.id }) }} style={{ flex: 1, minWidth: 0, textAlign: 'left', border: 0, background: 'transparent', color: 'var(--focus)', padding: 0, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}><Con i="esterno" size={13}>{nomeSch(s.id)}</Con></button>
+                {edit && <Quadro size={26} label="Scollega la scheda" onClick={() => salva({ schede: a.schede.filter((_, j) => j !== k) })}><Icona nome="chiudi" size={13} /></Quadro>}
               </div>
               {!edit && s.frase.trim() && <p style={{ margin: 0, fontSize: 12.5, lineHeight: 1.6, color: 'var(--mute)', textWrap: 'pretty' }}>{s.frase}</p>}
               {edit && <Riga label="Perché è collegata" valore={s.frase} salva={(v) => salva({ schede: a.schede.map((x, j) => (j === k ? { id: x.id, frase: v } : x)) })} placeholder="Una riga sul perché di questo collegamento (facoltativa)" style={{ borderRadius: 8, padding: '8px 10px', fontSize: 12.5 }} />}
@@ -231,7 +232,7 @@ export function SchedaAnnotazione() {
           {edit && liberi.length > 0 && (
             <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
               {liberi.map((s) => (
-                <button key={s.id} type="button" className="hvi" onClick={() => salva({ schede: [...a.schede, { id: s.id, frase: '' }] })} style={{ border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 999, padding: '5px 11px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>+ {s.titolo_breve}</button>
+                <button key={s.id} type="button" className="hvi" onClick={() => salva({ schede: [...a.schede, { id: s.id, frase: '' }] })} style={{ border: '1px dashed var(--line)', background: 'transparent', color: 'var(--mute)', borderRadius: 999, padding: '5px 11px', fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}><Con i="piu" size={13}>{s.titolo_breve}</Con></button>
               ))}
             </div>
           )}
@@ -275,14 +276,14 @@ export function SelettoreFigure() {
           <span style={{ fontSize: 12, color: 'var(--mute)', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>su «{target ? target.citato : selTxt}»</span>
           <div style={{ flex: 1, minWidth: 12 }} />
           <label style={{ flex: '0 1 300px', minWidth: 170, display: 'flex', alignItems: 'center', gap: 8, border: '1px solid var(--line)', borderRadius: 8, background: 'var(--bg)', padding: '0 11px' }}>
-            <span aria-hidden style={{ fontSize: 12, color: 'var(--mute)', fontWeight: 700 }}>⌕</span>
+            <span aria-hidden style={{ color: 'var(--mute)', display: 'inline-flex' }}><Icona nome="cerca" size={14} /></span>
             <input type="search" autoFocus value={ed.figQ} onChange={(e) => ed.imposta({ figQ: e.target.value })} placeholder="Cerca una figura…" aria-label="Cerca una figura retorica" style={{ flex: 1, minWidth: 0, border: 0, background: 'transparent', padding: '9px 0', fontSize: 13, outline: 'none' }} />
           </label>
           <div role="group" aria-label="Variante della card" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
-            <button type="button" aria-pressed={ed.figVar === 'A'} onClick={() => ed.imposta({ figVar: 'A' })} style={{ ...seg(ed.figVar === 'A'), borderRight: '1px solid var(--line)' }}>A · griglia</button>
-            <button type="button" aria-pressed={ed.figVar === 'B'} onClick={() => ed.imposta({ figVar: 'B' })} style={seg(ed.figVar === 'B')}>B · elenco</button>
+            <button type="button" aria-pressed={ed.figVar === 'A'} onClick={() => ed.imposta({ figVar: 'A' })} style={{ ...seg(ed.figVar === 'A'), borderRight: '1px solid var(--line)' }}><Con i="griglia" size={14}>Griglia</Con></button>
+            <button type="button" aria-pressed={ed.figVar === 'B'} onClick={() => ed.imposta({ figVar: 'B' })} style={seg(ed.figVar === 'B')}><Con i="elenco" size={14}>Elenco</Con></button>
           </div>
-          <button type="button" className="hv" onClick={chiudi} aria-label="Chiudi" style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, width: 34, height: 34, fontSize: 13, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+          <button type="button" className="hv" onClick={chiudi} aria-label="Chiudi" style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 8, width: 34, height: 34, fontSize: 13, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}><Icona nome="chiudi" size={14} /></button>
         </div>
 
         {ed.figVar === 'A' ? (
@@ -302,7 +303,7 @@ export function SelettoreFigure() {
                       <div key={f.id} style={{ border: `1px solid ${on ? 'var(--ed)' : 'var(--line)'}`, background: on ? 'var(--ed-bg)' : 'var(--surface)', borderRadius: 11, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                         <div style={{ display: 'flex', alignItems: 'stretch' }}>
                           <button type="button" className="hv" onClick={() => scegli(f.id)} style={{ flex: 1, minWidth: 0, textAlign: 'left', border: 0, background: 'transparent', color: on ? 'var(--ed)' : 'var(--ink)', padding: '11px 12px', fontSize: 13.5, fontWeight: 700, cursor: 'pointer', minHeight: 44 }}>{f.nome}</button>
-                          <button type="button" className="hv" aria-expanded={exp} aria-label="Mostra descrizione" onClick={() => ed.imposta({ figExp: exp ? null : f.id })} style={{ flex: 'none', width: 38, border: 0, borderLeft: '1px solid var(--line2)', background: 'transparent', color: 'var(--mute)', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>{exp ? '▴' : '▾'}</button>
+                          <button type="button" className="hv" aria-expanded={exp} aria-label="Mostra descrizione" onClick={() => ed.imposta({ figExp: exp ? null : f.id })} style={{ flex: 'none', width: 38, border: 0, borderLeft: '1px solid var(--line2)', background: 'transparent', color: 'var(--mute)', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}><Icona nome={exp ? 'su' : 'giu'} size={14} /></button>
                         </div>
                         {exp && (
                           <div style={{ borderTop: '1px solid var(--line2)', padding: '10px 12px 12px', display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -339,7 +340,7 @@ export function SelettoreFigure() {
                 <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, textWrap: 'pretty' }}>{prev.descrizione}</p>
                 <p style={{ margin: 0, fontSize: 12.5, lineHeight: 1.55, color: 'var(--mute)', fontStyle: 'italic', textWrap: 'pretty' }}>{prev.esempio}</p>
                 <div style={{ flex: 1 }} />
-                <button type="button" className="hvp" onClick={() => scegli(prev.id)} style={{ ...primario, borderRadius: 9, padding: '11px 14px', fontSize: 13 }}>Applica alla selezione</button>
+                <button type="button" className="hvp" onClick={() => scegli(prev.id)} style={{ ...primario, borderRadius: 9, padding: '11px 14px', fontSize: 13 }}><Con i="spunta" size={14}>Applica alla selezione</Con></button>
               </div>
             )}
           </div>
@@ -349,9 +350,9 @@ export function SelettoreFigure() {
           <span style={{ fontSize: 11.5, color: 'var(--mute)' }}>{nTot} figure su {figure.length} nel dizionario condiviso</span>
           <div style={{ flex: 1 }} />
           {target?.figura && (
-            <button type="button" className="hv" onClick={() => { void applicaFigura(testo, tk, sel, target.id, target.figura); ed.imposta({ figOpen: false }) }} style={{ ...secondario, borderRadius: 8, color: 'var(--mute)' }}>Togli la figura</button>
+            <button type="button" className="hv" onClick={() => { void applicaFigura(testo, tk, sel, target.id, target.figura); ed.imposta({ figOpen: false }) }} style={{ ...secondario, borderRadius: 8, color: 'var(--mute)' }}><Con i="scollega" size={14}>Togli la figura</Con></button>
           )}
-          <button type="button" className="hv" onClick={chiudi} style={{ ...secondario, borderRadius: 8 }}>Chiudi</button>
+          <button type="button" className="hv" onClick={chiudi} style={{ ...secondario, borderRadius: 8 }}><Con i="chiudi" size={13}>Chiudi</Con></button>
         </div>
       </div>
     </div>
@@ -406,21 +407,21 @@ export function SchedaDomanda() {
       corpoStyle={{ padding: '18px 20px 22px', display: 'flex', flexDirection: 'column', gap: 16 }}
       piede={
         <>
-          <button type="button" aria-pressed={e.fatta} onClick={() => salva({ fatta: !e.fatta })} style={{ display: 'flex', alignItems: 'center', gap: 9, border: `2px solid ${e.fatta ? 'var(--par)' : 'var(--line)'}`, background: e.fatta ? 'var(--par)' : 'var(--surface)', color: e.fatta ? 'var(--on)' : 'var(--mute)', borderRadius: 9, padding: '8px 14px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}>✓ {e.fatta ? 'Fatta' : 'Segna come fatta'}</button>
+          <button type="button" aria-pressed={e.fatta} onClick={() => salva({ fatta: !e.fatta })} style={{ display: 'flex', alignItems: 'center', gap: 9, border: `2px solid ${e.fatta ? 'var(--par)' : 'var(--line)'}`, background: e.fatta ? 'var(--par)' : 'var(--surface)', color: e.fatta ? 'var(--on)' : 'var(--mute)', borderRadius: 9, padding: '8px 14px', fontSize: 12.5, fontWeight: 700, cursor: 'pointer' }}><Icona nome="spunta" size={15} />{e.fatta ? 'Fatta' : 'Segna come fatta'}</button>
           <div style={{ flex: 1 }} />
-          <button type="button" className="hvp" disabled={i >= lista.length - 1} onClick={() => vai(1)} style={primario}>Domanda successiva</button>
+          <button type="button" className="hvp" disabled={i >= lista.length - 1} onClick={() => vai(1)} style={primario}><Con i="avanti" size={14} fine>Domanda successiva</Con></button>
         </>
       }
     >
       {!editTesto ? (
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
           <p style={{ flex: 1, margin: 0, fontSize: 17, fontWeight: 700, lineHeight: 1.5, textWrap: 'pretty' }}>{e.testo || 'Domanda senza testo'}</p>
-          <button type="button" className="hv" title="Modifica il testo della domanda" aria-label="Modifica il testo della domanda" onClick={() => ed.imposta({ esTestoEdit: e.id })} style={{ ...piccolo, width: 30, height: 30, fontSize: 12, lineHeight: 1, color: 'var(--mute)' }}>✎</button>
+          <button type="button" className="hv" title="Modifica il testo della domanda" aria-label="Modifica il testo della domanda" onClick={() => ed.imposta({ esTestoEdit: e.id })} style={{ ...piccolo, width: 30, height: 30, fontSize: 12, lineHeight: 1, color: 'var(--mute)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}><Icona nome="matita" size={14} /></button>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <Area label="Testo della domanda" valore={e.testo} salva={(v) => salva({ testo: v })} placeholder="Scrivi qui la domanda." style={{ minHeight: 86, border: '1px solid var(--focus)', borderRadius: 12, padding: '12px 13px', fontSize: 16, fontWeight: 700, lineHeight: 1.55 }} />
-          <button type="button" onClick={() => ed.imposta({ esTestoEdit: null })} style={{ ...primario, alignSelf: 'flex-start', borderRadius: 8, padding: '7px 13px', fontSize: 12 }}>Fine</button>
+          <button type="button" onClick={() => ed.imposta({ esTestoEdit: null })} style={{ ...primario, alignSelf: 'flex-start', borderRadius: 8, padding: '7px 13px', fontSize: 12 }}><Con i="spunta" size={14}>Fine</Con></button>
         </div>
       )}
 
@@ -433,9 +434,9 @@ export function SchedaDomanda() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
           <span style={{ ...lbl, flex: 1 }}>Correzione</span>
           {!editCorr ? (
-            <button type="button" className="hv" onClick={() => ed.imposta({ esEdit: e.id })} style={{ ...piccolo, padding: '7px 12px', fontSize: 12 }}>{hasCorr ? 'Modifica' : 'Scrivi la correzione'}</button>
+            <button type="button" className="hv" onClick={() => ed.imposta({ esEdit: e.id })} style={{ ...piccolo, padding: '7px 12px', fontSize: 12 }}><Con i="matita" size={14}>{hasCorr ? 'Modifica' : 'Scrivi la correzione'}</Con></button>
           ) : (
-            <button type="button" onClick={() => ed.imposta({ esEdit: null })} style={{ ...primario, borderRadius: 8, padding: '7px 12px', fontSize: 12, whiteSpace: 'nowrap' }}>Fine</button>
+            <button type="button" onClick={() => ed.imposta({ esEdit: null })} style={{ ...primario, borderRadius: 8, padding: '7px 12px', fontSize: 12, whiteSpace: 'nowrap' }}><Con i="spunta" size={14}>Fine</Con></button>
           )}
         </div>
         {!editCorr && hasCorr && <p style={{ margin: 0, borderLeft: '3px solid var(--par)', paddingLeft: 12, fontSize: 13.5, lineHeight: 1.7, textWrap: 'pretty', whiteSpace: 'pre-wrap' }}>{e.correzione}</p>}
@@ -445,7 +446,7 @@ export function SchedaDomanda() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, borderTop: '1px dashed var(--line2)', paddingTop: 14 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 9, flexWrap: 'wrap' }}>
           <span style={{ ...lbl, flex: 1 }}>Collegamenti al testo</span>
-          <button type="button" className="hv" disabled={!sel} onClick={() => sel && scriviPassi([...e.passi, { span: [sel[0], sel[1]], citato: citaDa(testo.corpo, tk.token, sel), et: '', stato: 'ok', spanScritto: null }])} style={{ ...piccolo, padding: '6px 11px', fontSize: 11.5, color: 'var(--mute)', opacity: sel ? 1 : 0.45, cursor: sel ? 'pointer' : 'not-allowed' }}>+ Collega la selezione</button>
+          <button type="button" className="hv" disabled={!sel} onClick={() => sel && scriviPassi([...e.passi, { span: [sel[0], sel[1]], citato: citaDa(testo.corpo, tk.token, sel), et: '', stato: 'ok', spanScritto: null }])} style={{ ...piccolo, padding: '6px 11px', fontSize: 11.5, color: 'var(--mute)', opacity: sel ? 1 : 0.45, cursor: sel ? 'pointer' : 'not-allowed' }}><Con i="collega" size={14}>Collega la selezione</Con></button>
         </div>
         {e.passi.length === 0 && (
           <p style={{ margin: 0, border: '1px dashed var(--line)', borderRadius: 11, padding: '11px 13px', fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.55, textWrap: 'pretty' }}>Nessun passo collegato. Seleziona una o più parole nel testo e premi «Collega la selezione»: la domanda comparirà anche accanto a quel verso. Puoi collegarne più d'uno.</p>
@@ -459,21 +460,21 @@ export function SchedaDomanda() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ flex: 'none', width: 22, height: 22, borderRadius: 7, background: 'var(--par-bg)', color: 'var(--par)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700 }}>{pi + 1}</span>
                 <Riga label="Etichetta del passo" valore={p.et} salva={(v) => cambia({ et: v })} placeholder="Etichetta breve (facoltativa)" style={{ flex: 1, minWidth: 0, borderRadius: 8, padding: '7px 10px', fontSize: 12.5, fontWeight: 700 }} />
-                <button type="button" className="hv" title="Vai a questo passo nel testo" onClick={() => { if (p.span) { ed.seleziona(p.span[0], p.span[1]); ed.imposta({ esDet: null }) } }} style={{ ...piccolo, padding: '7px 11px', fontSize: 11.5 }}>Vai</button>
-                <Quadro size={28} label="Togli questo collegamento" onClick={() => scriviPassi(e.passi.filter((_, j) => j !== pi))}>✕</Quadro>
+                <button type="button" className="hv" title="Vai a questo passo nel testo" onClick={() => { if (p.span) { ed.seleziona(p.span[0], p.span[1]); ed.imposta({ esDet: null }) } }} style={{ ...piccolo, padding: '7px 11px', fontSize: 11.5 }}><Con i="mirino" size={14}>Vai</Con></button>
+                <Quadro size={28} label="Togli questo collegamento" onClick={() => scriviPassi(e.passi.filter((_, j) => j !== pi))}><Icona nome="chiudi" size={13} /></Quadro>
               </div>
               {p.stato === 'riagganciata' && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--mute)' }}>
                   <span aria-hidden style={{ flex: 'none', width: 7, height: 7, borderRadius: '50%', background: 'var(--par)' }} />
                   <span style={{ flex: 1 }}>Riagganciato da solo dopo una modifica del testo.</span>
-                  <button type="button" className="hv" onClick={() => cambia({ stato: 'ok' })} style={{ ...piccolo, borderRadius: 6, padding: '3px 9px', fontSize: 11 }}>Ok</button>
+                  <button type="button" className="hv" onClick={() => cambia({ stato: 'ok' })} style={{ ...piccolo, borderRadius: 6, padding: '3px 9px', fontSize: 11 }}><Con i="spunta" size={14}>Ok</Con></button>
                 </div>
               )}
               {rotto && (
                 <div style={{ border: '1px solid var(--warn-line)', background: 'var(--warn-bg)', color: 'var(--warn-ink)', borderRadius: 9, padding: '9px 10px', fontSize: 12, lineHeight: 1.5 }}>
                   <b>Da riagganciare.</b> {p.stato === 'ambigua' ? 'Il passo citato compare più volte nel nuovo testo: scegli tu quale.' : `Le parole citate non si trovano più nel testo: ${p.citato ? `«${p.citato}»` : '—'}`}
                   <div style={{ marginTop: 8, display: 'flex', gap: 7, flexWrap: 'wrap' }}>
-                    <button type="button" disabled={!sel} onClick={() => sel && cambia({ span: [sel[0], sel[1]], citato: citaDa(testo.corpo, tk.token, sel), stato: 'ok' })} style={{ border: '1px solid var(--warn-line)', background: 'transparent', color: 'var(--warn-ink)', borderRadius: 6, padding: '4px 10px', fontSize: 11.5, fontWeight: 700, cursor: sel ? 'pointer' : 'not-allowed', opacity: sel ? 1 : 0.45 }}>Riaggancia sulla selezione</button>
+                    <button type="button" disabled={!sel} onClick={() => sel && cambia({ span: [sel[0], sel[1]], citato: citaDa(testo.corpo, tk.token, sel), stato: 'ok' })} style={{ border: '1px solid var(--warn-line)', background: 'transparent', color: 'var(--warn-ink)', borderRadius: 6, padding: '4px 10px', fontSize: 11.5, fontWeight: 700, cursor: sel ? 'pointer' : 'not-allowed', opacity: sel ? 1 : 0.45 }}><Con i="mirino" size={14}>Riaggancia sulla selezione</Con></button>
                     <span style={{ fontSize: 11.5, alignSelf: 'center' }}>{sel ? (() => { const c = citaDa(testo.corpo, tk.token, sel); return `Userà «${c.slice(0, 28)}${c.length > 28 ? '…' : ''}»` })() : 'Seleziona prima le parole giuste nel testo.'}</span>
                   </div>
                 </div>
@@ -522,16 +523,16 @@ export function ImportaEsercizi() {
           <div style={{ flex: 1, minHeight: 0, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 11 }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <span style={{ ...piccolo, border: '1px solid var(--ink)', background: 'var(--ink)', color: 'var(--surface)' }}>Incolla</span>
-              <button type="button" disabled title="Non ancora disponibile" style={{ ...piccolo, opacity: 0.45, cursor: 'not-allowed' }}>Da file .txt</button>
-              <button type="button" disabled title="Non ancora disponibile" style={{ ...piccolo, opacity: 0.45, cursor: 'not-allowed' }}>Da PDF</button>
+              <button type="button" disabled title="Non ancora disponibile" style={{ ...piccolo, opacity: 0.45, cursor: 'not-allowed' }}><Con i="file" size={14}>Da file .txt</Con></button>
+              <button type="button" disabled title="Non ancora disponibile" style={{ ...piccolo, opacity: 0.45, cursor: 'not-allowed' }}><Con i="file" size={14}>Da PDF</Con></button>
             </div>
             <p style={{ margin: 0, fontSize: 12.5, color: 'var(--mute)', lineHeight: 1.55 }}>{dest}</p>
             <textarea autoFocus aria-label="Domande da importare" value={ed.esImportTesto} onChange={(e) => ed.imposta({ esImportTesto: e.target.value })} spellCheck={false} placeholder={'1. Che funzione ha la siepe?\n2. Individua la gradazione dei versi 5-8.\n3. Perché il cuore «non si spaura»?'} style={{ flex: 1, minHeight: 240, resize: 'none', border: '1px solid var(--line)', background: 'var(--bg)', borderRadius: 11, padding: '12px 13px', fontSize: 13.5, lineHeight: 1.7, outlineOffset: -2 }} />
           </div>
           <div style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', borderTop: '1px solid var(--line2)' }}>
             <div style={{ flex: 1 }} />
-            <button type="button" className="hv" onClick={chiudi} style={secondario}>Annulla</button>
-            <button type="button" className="hvp" disabled={!ed.esImportTesto.trim()} onClick={() => ed.imposta({ esImportFase: 'separa', esBozza: separaDomande(ed.esImportTesto), esCur: {} })} style={{ ...primario, opacity: ed.esImportTesto.trim() ? 1 : 0.45 }}>Separa le domande</button>
+            <button type="button" className="hv" onClick={chiudi} style={secondario}><Con i="chiudi" size={13}>Annulla</Con></button>
+            <button type="button" className="hvp" disabled={!ed.esImportTesto.trim()} onClick={() => ed.imposta({ esImportFase: 'separa', esBozza: separaDomande(ed.esImportTesto), esCur: {} })} style={{ ...primario, opacity: ed.esImportTesto.trim() ? 1 : 0.45 }}><Con i="forbici" size={14}>Separa le domande</Con></button>
           </div>
         </>
       ) : (
@@ -549,7 +550,7 @@ export function ImportaEsercizi() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <span style={{ flex: 'none', width: 24, height: 24, borderRadius: 7, background: 'var(--surface2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11.5, fontWeight: 700 }}>{k + 1}</span>
                     <div style={{ flex: 1 }} />
-                    <button type="button" className="hv" disabled={k >= bozza.length - 1} title="Unisci con la domanda successiva" onClick={() => { const l = bozza.slice(); l[k] = { id: b.id, testo: b.testo + ' ' + l[k + 1]!.testo }; l.splice(k + 1, 1); imposta(l) }} style={{ ...secondario, borderRadius: 7, padding: '5px 9px', fontSize: 11 }}>Unisci</button>
+                    <button type="button" className="hv" disabled={k >= bozza.length - 1} title="Unisci con la domanda successiva" onClick={() => { const l = bozza.slice(); l[k] = { id: b.id, testo: b.testo + ' ' + l[k + 1]!.testo }; l.splice(k + 1, 1); imposta(l) }} style={{ ...secondario, borderRadius: 7, padding: '5px 9px', fontSize: 11 }}><Con i="unisci" size={14}>Unisci</Con></button>
                     <button
                       type="button"
                       className="hv"
@@ -571,7 +572,7 @@ export function ImportaEsercizi() {
                     >
                       Spezza
                     </button>
-                    <Quadro size={26} label="Elimina" onClick={() => imposta(bozza.filter((x) => x.id !== b.id))}>✕</Quadro>
+                    <Quadro size={26} label="Elimina" onClick={() => imposta(bozza.filter((x) => x.id !== b.id))}><Icona nome="chiudi" size={13} /></Quadro>
                   </div>
                   <textarea
                     aria-label={`Domanda ${k + 1}`}
@@ -585,10 +586,10 @@ export function ImportaEsercizi() {
                 </div>
               )
             })}
-            <button type="button" className="hvi" onClick={() => imposta([...bozza, { id: 'b' + bozza.length + '_' + Date.now(), testo: '' }])} style={{ ...tratteggiato, alignSelf: 'flex-start' }}>+ Aggiungi una domanda</button>
+            <button type="button" className="hvi" onClick={() => imposta([...bozza, { id: 'b' + bozza.length + '_' + Date.now(), testo: '' }])} style={{ ...tratteggiato, alignSelf: 'flex-start' }}><Con i="piu" size={14}>Aggiungi una domanda</Con></button>
           </div>
           <div style={{ flex: 'none', display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', borderTop: '1px solid var(--line2)' }}>
-            <button type="button" className="hv" onClick={() => ed.imposta({ esImportFase: 'incolla' })} style={secondario}>Indietro</button>
+            <button type="button" className="hv" onClick={() => ed.imposta({ esImportFase: 'incolla' })} style={secondario}><Con i="indietro" size={14}>Indietro</Con></button>
             <div style={{ flex: 1 }} />
             <button
               type="button"
@@ -600,7 +601,7 @@ export function ImportaEsercizi() {
               }}
               style={primario}
             >
-              Salva esercizi
+              <Con i="spunta" size={14}>Salva esercizi</Con>
             </button>
           </div>
         </>
@@ -652,7 +653,7 @@ export function ModificaTesto() {
       piede={
         <>
           <div style={{ flex: 1 }} />
-          <button type="button" className="hv" onClick={chiudi} style={secondario}>Annulla</button>
+          <button type="button" className="hv" onClick={chiudi} style={secondario}><Con i="chiudi" size={13}>Annulla</Con></button>
           <button
             type="button"
             className="hvp"
@@ -670,7 +671,7 @@ export function ModificaTesto() {
             }}
             style={primario}
           >
-            Applica e riaggancia
+            <Con i="mirino" size={14}>Applica e riaggancia</Con>
           </button>
         </>
       }
@@ -713,7 +714,7 @@ export function NuovoTesto() {
       piede={
         <>
           <div style={{ flex: 1 }} />
-          <button type="button" className="hv" onClick={chiudi} style={secondario}>Annulla</button>
+          <button type="button" className="hv" onClick={chiudi} style={secondario}><Con i="chiudi" size={13}>Annulla</Con></button>
           <button
             type="button"
             className="hvp"
@@ -731,7 +732,7 @@ export function NuovoTesto() {
             }}
             style={{ ...primario, opacity: pronto ? 1 : 0.45, cursor: pronto ? 'pointer' : 'not-allowed' }}
           >
-            Crea il testo
+            <Con i="spunta" size={14}>Crea il testo</Con>
           </button>
         </>
       }
@@ -750,8 +751,8 @@ export function NuovoTesto() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={lbl}>Forma</span>
         <div role="group" aria-label="Forma del testo" style={{ display: 'flex', border: '1px solid var(--line)', borderRadius: 8, overflow: 'hidden' }}>
-          <button type="button" aria-pressed={f.layout === 'verso'} onClick={() => setF({ ...f, layout: 'verso' })} style={{ ...seg(f.layout === 'verso'), borderRight: '1px solid var(--line)' }}>Versi</button>
-          <button type="button" aria-pressed={f.layout === 'prosa'} onClick={() => setF({ ...f, layout: 'prosa' })} style={seg(f.layout === 'prosa')}>Prosa</button>
+          <button type="button" aria-pressed={f.layout === 'verso'} onClick={() => setF({ ...f, layout: 'verso' })} style={{ ...seg(f.layout === 'verso'), borderRight: '1px solid var(--line)' }}><Con i="versi" size={14}>Versi</Con></button>
+          <button type="button" aria-pressed={f.layout === 'prosa'} onClick={() => setF({ ...f, layout: 'prosa' })} style={seg(f.layout === 'prosa')}><Con i="prosa" size={14}>Prosa</Con></button>
         </div>
       </div>
       <label style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
@@ -788,7 +789,7 @@ export function ElencoTesti() {
           <span style={{ fontSize: 11.5, color: 'var(--mute)' }}>{[t.anno, t.opera].filter(Boolean).join(' · ') || '—'} · {t.annotazioni.length} {t.annotazioni.length === 1 ? 'annotazione' : 'annotazioni'}</span>
         </button>
       ))}
-      <button type="button" className="hvi" onClick={() => ed.imposta({ nuovoOpen: true })} style={{ ...tratteggiato, width: '100%', textAlign: 'left', borderRadius: 10, padding: '9px 11px' }}>+ Importa un nuovo testo</button>
+      <button type="button" className="hvi" onClick={() => ed.imposta({ nuovoOpen: true })} style={{ ...tratteggiato, width: '100%', textAlign: 'left', borderRadius: 10, padding: '9px 11px' }}><Con i="aggiungiScheda" size={14}>Importa un nuovo testo</Con></button>
     </Modale>
   )
 }
@@ -802,7 +803,7 @@ export function AvvisoRiancoro() {
   return (
     <div style={{ position: 'fixed', left: '50%', bottom: 22, transform: 'translateX(-50%)', zIndex: 76, display: 'flex', alignItems: 'center', gap: 12, border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 12, boxShadow: '0 16px 40px rgba(0,0,0,.26)', padding: '11px 14px', animation: 'dcUp .16s ease-out' }}>
       <span style={{ fontSize: 12.5, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.ok} {r.ok === 1 ? 'riferimento riagganciato' : 'riferimenti riagganciati'} · {r.ko} da sistemare — annotazioni, parafrasi e passi delle domande</span>
-      <Quadro size={26} label="Chiudi avviso" onClick={() => ed.imposta({ riancoroInfo: null })}>✕</Quadro>
+      <Quadro size={26} label="Chiudi avviso" onClick={() => ed.imposta({ riancoroInfo: null })}><Icona nome="chiudi" size={13} /></Quadro>
     </div>
   )
 }
@@ -810,7 +811,7 @@ export function AvvisoRiancoro() {
 // ------------------------------------------------------------------ popover: selettore, lettura, legenda
 
 const popX = (f: () => void, label: string): React.ReactNode => (
-  <button type="button" onClick={f} aria-label={label} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 6, width: 24, height: 24, fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: 1 }}>✕</button>
+  <button type="button" onClick={f} aria-label={label} style={{ border: '1px solid var(--line)', background: 'var(--surface)', borderRadius: 6, width: 24, height: 24, fontSize: 12, fontWeight: 700, cursor: 'pointer', lineHeight: 1, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}><Icona nome="chiudi" size={14} /></button>
 )
 
 export function PopoverSelettore() {
@@ -825,7 +826,7 @@ export function PopoverSelettore() {
           <span style={{ fontSize: 11.5, color: 'var(--mute)' }}>{[m.autore.nome, t.anno].filter(Boolean).join(' · ') || '—'} · {t.annotazioni.length} {t.annotazioni.length === 1 ? 'annotazione' : 'annotazioni'}</span>
         </button>
       ))}
-      <button type="button" className="hvi" onClick={() => ed.imposta({ nuovoOpen: true, selettoreOpen: false })} style={{ ...tratteggiato, width: '100%', textAlign: 'left', borderRadius: 10, padding: '9px 11px' }}>+ Importa un nuovo testo</button>
+      <button type="button" className="hvi" onClick={() => ed.imposta({ nuovoOpen: true, selettoreOpen: false })} style={{ ...tratteggiato, width: '100%', textAlign: 'left', borderRadius: 10, padding: '9px 11px' }}><Con i="aggiungiScheda" size={14}>Importa un nuovo testo</Con></button>
     </div>
   )
 }
@@ -868,9 +869,9 @@ export function PopoverLegenda() {
   )
   const base: React.CSSProperties = { flex: 'none', width: 54, height: 17, borderRadius: 5 }
   const b = (t: string): React.ReactNode => <b style={{ color: 'var(--ink)' }}>{t}</b>
-  const bolla = (bc: string, bg: string, fg: string, t: string): React.ReactNode => (
+  const bolla = (bc: string, bg: string, fg: string, t: React.ReactNode): React.ReactNode => (
     <span aria-hidden style={{ flex: 'none', width: 54, display: 'flex', justifyContent: 'center' }}>
-      <span style={{ border: `1px solid ${bc}`, background: bg, color: fg, borderRadius: 5, padding: '0 5px', fontSize: 11, fontWeight: 700 }}>{t}</span>
+      <span style={{ border: `1px solid ${bc}`, background: bg, color: fg, borderRadius: 5, padding: '1px 5px', fontSize: 11, fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 3 }}>{t}</span>
     </span>
   )
   return (
@@ -886,8 +887,8 @@ export function PopoverLegenda() {
         {riga(<span aria-hidden style={{ ...base, background: 'var(--hl-c)', backgroundImage: 'linear-gradient(var(--hl-c2),var(--hl-c2)),linear-gradient(var(--hl-c2),var(--hl-c2))', backgroundSize: '100% 2.5px,100% 2.5px', backgroundPosition: 'left bottom 0px,left bottom 4.5px', backgroundRepeat: 'no-repeat' }} />, 'Due annotazioni sulle stesse parole')}
         {riga(<span aria-hidden style={{ ...base, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', borderBottom: '3px solid var(--ink)', borderRadius: 0 }} />, 'Sottolineatura')}
         {riga(<span aria-hidden style={{ flex: 'none', width: 54, textAlign: 'center', color: 'var(--ed)', textDecoration: 'underline wavy var(--ed)', textUnderlineOffset: 3 }}>abc</span>, 'Figura retorica')}
-        {riga(bolla('var(--par)', 'var(--par-bg)', 'var(--par)', '¶'), 'Parafrasi sul verso')}
-        {riga(bolla('var(--line)', 'var(--surface2)', 'var(--mute)', '?3'), 'Domanda sul verso')}
+        {riga(bolla('var(--par)', 'var(--par-bg)', 'var(--par)', <Icona nome="parafrasi" size={11} />), 'Parafrasi sul verso')}
+        {riga(bolla('var(--line)', 'var(--surface2)', 'var(--mute)', <><Icona nome="domanda" size={11} />3</>), 'Domanda sul verso')}
         {riga(<b style={{ flex: 'none', width: 54, textAlign: 'center', color: 'var(--ink)' }}>abc</b>, 'Parola chiave')}
       </div>
       <strong style={{ display: 'block', margin: '14px 0 8px', fontSize: 12.5, textTransform: 'uppercase', letterSpacing: '.06em' }}>Tasti</strong>

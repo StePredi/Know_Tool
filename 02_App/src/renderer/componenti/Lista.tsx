@@ -3,6 +3,7 @@ import { dataBreve } from '@shared/dates'
 import type { Scheda } from '@shared/types'
 import { useColore, useStore } from '../store'
 import { usaFiltro } from '../utili'
+import { Con } from './Icona'
 
 export function Lista() {
   const m = useStore((s) => s.modello)!
@@ -67,7 +68,7 @@ export function Lista() {
                         {temiDi(m, s).map((t) => t.nome).join(' · ')}
                       </span>
                     </span>
-                    <button className="btn" onClick={(e) => { e.stopPropagation(); imposta({ apertaId: s.id }) }}>Apri</button>
+                    <button className="btn" onClick={(e) => { e.stopPropagation(); imposta({ apertaId: s.id }) }}><Con i="esterno">Apri</Con></button>
                   </div>
                 )
               })}

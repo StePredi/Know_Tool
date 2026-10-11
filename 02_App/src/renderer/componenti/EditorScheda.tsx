@@ -5,6 +5,7 @@ import { leggiTabella, scriviTabella } from '@shared/scheda_md'
 import type { SchedaPatch, Tabella } from '@shared/types'
 import { useColore, useStore } from '../store'
 import { Campo } from '../utili'
+import { Con, Icona } from './Icona'
 
 /** Finestra di modifica: ogni cambiamento va subito nel file (dopo una breve pausa o lasciando il campo). */
 export function EditorScheda({ id }: { id: string }) {
@@ -65,8 +66,8 @@ export function EditorScheda({ id }: { id: string }) {
             <span aria-hidden style={{ width: 10, height: 10, borderRadius: '50%', background: col }} />
             {corsiaDi(m, s.corsia).nome}
           </span>
-          <button className="btn lg" onClick={() => imposta({ apertaId: id, editId: null })}>Anteprima</button>
-          <button className="btn lg" aria-label="Chiudi la modifica" onClick={() => imposta({ editId: null })}>✕</button>
+          <button className="btn lg" onClick={() => imposta({ apertaId: id, editId: null })}><Con i="gioca">Anteprima</Con></button>
+          <button className="btn lg" aria-label="Chiudi la modifica" onClick={() => imposta({ editId: null })}><Icona nome="chiudi" /></button>
         </div>
 
         <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'grid', gridTemplateColumns: 'minmax(210px,290px) minmax(360px,1.8fr) minmax(200px,280px)' }}>
@@ -136,14 +137,14 @@ export function EditorScheda({ id }: { id: string }) {
         </div>
 
         <div style={{ flex: 'none', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 8, padding: '10px 16px', borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
-          <button className="btn lg" disabled={pos <= 0} onClick={() => vai(lista[pos - 1]?.id)}>← Precedente</button>
-          <button className="btn lg" disabled={pos >= lista.length - 1} onClick={() => vai(lista[pos + 1]?.id)}>Successiva →</button>
+          <button className="btn lg" disabled={pos <= 0} onClick={() => vai(lista[pos - 1]?.id)}><Con i="indietro">Precedente</Con></button>
+          <button className="btn lg" disabled={pos >= lista.length - 1} onClick={() => vai(lista[pos + 1]?.id)}><Con i="avanti" fine>Successiva</Con></button>
           <span style={{ fontSize: 13, color: 'var(--mute)', fontWeight: 600 }}>{pos + 1} di {lista.length} · i cambiamenti sono già salvati</span>
           <div style={{ flex: 1 }} />
-          <button className="btn lg" onClick={async () => { const r = await window.api.duplicaScheda(id); useStore.getState().applica(r.modello); vai(r.id) }}>Duplica</button>
-          <button className="btn lg" onClick={async () => { const r = await window.api.creaScheda({ corsia: s.corsia }); useStore.getState().applica(r.modello); vai(r.id) }}>+ Nuova scheda</button>
-          <button className="btn lg" style={{ borderColor: 'var(--err-line)', color: 'var(--err-ink)', background: 'var(--err-bg)' }} onClick={() => setConferma(true)}>Elimina…</button>
-          <button className="btn lg ed" onClick={() => imposta({ editId: null })}>Fatto</button>
+          <button className="btn lg" onClick={async () => { const r = await window.api.duplicaScheda(id); useStore.getState().applica(r.modello); vai(r.id) }}><Con i="duplica">Duplica</Con></button>
+          <button className="btn lg" onClick={async () => { const r = await window.api.creaScheda({ corsia: s.corsia }); useStore.getState().applica(r.modello); vai(r.id) }}><Con i="aggiungiScheda">Nuova scheda</Con></button>
+          <button className="btn lg" style={{ borderColor: 'var(--err-line)', color: 'var(--err-ink)', background: 'var(--err-bg)' }} onClick={() => setConferma(true)}><Con i="cestino">Elimina…</Con></button>
+          <button className="btn lg ed" onClick={() => imposta({ editId: null })}><Con i="spunta">Fatto</Con></button>
         </div>
       </div>
       {conferma && (
@@ -170,7 +171,7 @@ export function EditorScheda({ id }: { id: string }) {
                   useStore.getState().mostraToast((e as Error).message)
                 }
                 setConferma(false)
-              }}>Sposta in archivio</button>
+              }}><Con i="cartella">Sposta in archivio</Con></button>
             </div>
           </div>
         </div>

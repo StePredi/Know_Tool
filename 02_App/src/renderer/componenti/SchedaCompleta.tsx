@@ -4,6 +4,7 @@ import { dataBreve, dataLunga } from '@shared/dates'
 import { useColore, useStore } from '../store'
 import { Md, usaFiltro } from '../utili'
 import { useEditor } from '../editor/stato'
+import { Con, Icona } from './Icona'
 
 export function SchedaCompleta({ id }: { id: string }) {
   const m = useStore((s) => s.modello)!
@@ -97,12 +98,12 @@ export function SchedaCompleta({ id }: { id: string }) {
             </div>
             <h2 style={{ margin: '6px 0 0', fontSize: 24, lineHeight: 1.2, fontWeight: 700 }}>{s.titolo || s.titolo_breve}</h2>
           </div>
-          {editando && <button className="btn ed" onClick={() => imposta({ editId: s.id, auto: false })}>Modifica</button>}
-          <button ref={chiudi} className="btn" aria-label="Chiudi" onClick={() => imposta({ apertaId: null, auto: false })}>✕</button>
+          {editando && <button className="btn ed" onClick={() => imposta({ editId: s.id, auto: false })}><Con i="matita">Modifica</Con></button>}
+          <button ref={chiudi} className="btn" aria-label="Chiudi" onClick={() => imposta({ apertaId: null, auto: false })}><Icona nome="chiudi" /></button>
         </div>
         <div ref={corpo} style={{ flex: 1, minHeight: 0, overflow: 'auto', display: 'grid', gridTemplateColumns: '210px minmax(0,1fr) 210px', alignItems: 'start' }}>
           <nav aria-label="Schede collegate prima" style={{ padding: 14, borderRight: '1px solid var(--line2)', alignSelf: 'stretch', background: 'var(--bg)' }}>
-            <h3 className="h3s">← Prima</h3>
+            <h3 className="h3s"><Con i="indietro" size={13}>Prima</Con></h3>
             <Lista items={prima} vuoto="Nessun collegamento precedente." />
           </nav>
           <div style={{ padding: '16px 20px 26px', minWidth: 0 }}>
@@ -154,24 +155,24 @@ export function SchedaCompleta({ id }: { id: string }) {
             )}
           </div>
           <nav aria-label="Schede collegate dopo" style={{ padding: 14, borderLeft: '1px solid var(--line2)', alignSelf: 'stretch', background: 'var(--bg)' }}>
-            <h3 className="h3s">Dopo →</h3>
+            <h3 className="h3s"><Con i="avanti" size={13} fine>Dopo</Con></h3>
             <Lista items={dopo} vuoto="Nessun collegamento successivo." />
           </nav>
         </div>
         <div style={{ flex: 'none', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 8, padding: '10px 16px', borderTop: '1px solid var(--line)', background: 'var(--bg)' }}>
-          <button className="btn" disabled={pos <= 0} onClick={() => vaiSeq(-1)}>← Precedente</button>
-          <button className="btn" disabled={pos >= seq.length - 1} onClick={() => vaiSeq(1)}>Successiva →</button>
+          <button className="btn" disabled={pos <= 0} onClick={() => vaiSeq(-1)}><Con i="indietro">Precedente</Con></button>
+          <button className="btn" disabled={pos >= seq.length - 1} onClick={() => vaiSeq(1)}><Con i="avanti" fine>Successiva</Con></button>
           <span style={{ fontSize: 13, color: 'var(--mute)', fontWeight: 600 }}>{pos + 1} di {seq.length} in ordine cronologico</span>
           <div style={{ flex: 1 }} />
           {testiScheda.map((t) => (
             <button key={t.id} className="btn" onClick={() => { imposta({ apertaId: null, auto: false }); useEditor.getState().imposta({ testoId: t.id, sel: null, anchor: null, testa: null, tab: 'ann', annDet: null, esDet: null }) }}>
-              Apri nell'editor{testiScheda.length > 1 ? ` · ${t.titolo}` : ''}
+              <Con i="libro">Apri nell'editor{testiScheda.length > 1 ? ` · ${t.titolo}` : ''}</Con>
             </button>
           ))}
           <button className={'btn' + (auto ? ' on' : '')} aria-pressed={auto} title="Passa da sola alla scheda successiva (barra spaziatrice)" onClick={() => imposta({ auto: !auto })}>
-            {auto ? '⏸ Pausa' : `▶ Riproduci · ${intervallo} s`}
+            {auto ? <Con i="pausa">Pausa</Con> : <Con i="gioca">{`Riproduci · ${intervallo} s`}</Con>}
           </button>
-          <button className="btn" onClick={() => imposta({ apertaId: null, auto: false })}>Chiudi</button>
+          <button className="btn" onClick={() => imposta({ apertaId: null, auto: false })}><Con i="chiudi">Chiudi</Con></button>
         </div>
       </div>
     </div>

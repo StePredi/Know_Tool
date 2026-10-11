@@ -4,6 +4,7 @@ import type { Annotazione, Esercizio, Evidenzia } from '@shared/types'
 import { useEditor } from './stato'
 import { statoEs, useTesto } from './dati'
 import { larghezzaDx } from './Pannelli'
+import { Icona } from '../componenti/Icona'
 
 const HL: Record<Evidenzia, string> = { concetto: 'var(--hl-c)', definizione: 'var(--hl-d)', dubbio: 'var(--hl-u)' }
 const STRONG: Record<Evidenzia, string> = { concetto: 'var(--hl-c2)', definizione: 'var(--hl-d2)', dubbio: 'var(--hl-u2)' }
@@ -219,11 +220,11 @@ export function TestoCard() {
                     <div style={{ flex: 1, minWidth: 0, fontSize: 0, overflowWrap: 'anywhere' }}>{corpoBlocco(bi)}</div>
                     {eq && (
                       <button type="button" title={`Domanda ${eq.numero} su questo passo`} aria-label={`Domanda ${eq.numero} su questo passo`} onClick={() => ed.imposta({ tab: 'es', esDet: eq.id, esEdit: null })} style={badge(st === 'corretta' ? 'var(--par)' : st === 'da_correggere' ? 'var(--warn-line)' : 'var(--line)', st === 'corretta' ? 'var(--par-bg)' : st === 'da_correggere' ? 'var(--warn-bg)' : 'var(--surface2)', st === 'corretta' ? 'var(--par)' : st === 'da_correggere' ? 'var(--warn-ink)' : 'var(--mute)')}>
-                        ?<span style={{ fontSize: numFs }}>{eq.numero}</span>
+                        <Icona nome="domanda" size={Math.round(numFs)} /><span style={{ fontSize: numFs }}>{eq.numero}</span>
                       </button>
                     )}
                     {haPar && (
-                      <button type="button" title="Questo verso ha una parafrasi collegata" aria-label="Vai alla parafrasi collegata" onClick={() => ed.imposta({ tab: 'par' })} style={badge('var(--par)', 'var(--par-bg)', 'var(--par)')}>¶</button>
+                      <button type="button" title="Questo verso ha una parafrasi collegata" aria-label="Vai alla parafrasi collegata" onClick={() => ed.imposta({ tab: 'par' })} style={badge('var(--par)', 'var(--par-bg)', 'var(--par)')}><Icona nome="parafrasi" size={Math.round(numFs)} /></button>
                     )}
                   </div>
                 )
