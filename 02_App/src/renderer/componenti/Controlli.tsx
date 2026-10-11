@@ -1,4 +1,5 @@
 import { useStore } from '../store'
+import { parseData } from '@shared/dates'
 import { Con, Icona } from './Icona'
 
 /** Pannello dei problemi trovati nei file: l'app li mostra, non li corregge da sola. */
@@ -11,9 +12,15 @@ export function Controlli() {
     <li style={{ padding: '8px 0', borderTop: '1px solid var(--line2)' }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--mute)' }}>{p.file}</div>
       <div style={{ fontSize: 14 }}>{p.messaggio}</div>
-      {p.scheda && (
-        <button className="btn" style={{ marginTop: 4 }} onClick={() => imposta({ apertaId: p.scheda!, controlli: false })}><Con i="esterno">Apri la scheda</Con></button>
-      )}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
+        {p.scheda && p.codice === 'data-ambigua' && (() => {
+          const sc = m.schede.find((x) => x.id === p.scheda)
+          if (!sc || !parseData(sc.data).ambigua) return null
+          const mese = `${sc.data.split('-')[1]!.trim().padStart(2, '0')}/${sc.data.split('-')[0]!.trim()}`
+          return <button className="btn on" onClick={() => void window.api.aggiornaScheda(sc.id, { data: mese }).then((x) => useStore.getState().applica(x))}><Con i="spunta">Correggi in {mese}</Con></button>
+        })()}
+        {p.scheda && <button className="btn" onClick={() => imposta({ apertaId: p.scheda!, controlli: false })}><Con i="esterno">Apri la scheda</Con></button>}
+      </div>
     </li>
   )
   return (

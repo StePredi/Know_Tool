@@ -14,6 +14,7 @@
 - Dati di prova: Leopardi convertito nel formato a file (105 schede, 10 temi, glossario) in `01_Argomenti/italiano/autori/leopardi/`
 - Scheletro dell'app Electron in `02_App/`: legge e valida i file (errori segnalati, mai blocchi), Home con Mappa e Lista, anteprima, scheda completa, modifica con scrittura immediata, aggiornamento automatico quando i file cambiano da fuori, pannello Controlli
 - 39 test automatici (date, validazione, round-trip dei 105 file, scrittura e watcher, testi e riaggancio)
+- Elimina categorie (le schede passano a un'altra) e temi (tolti dalle schede); correzione con un clic delle date ambigue tipo `1809-12` → `12/1809`
 - Elimina testo (archivia in `99_Archivio/testi_eliminati/`); barra in alto della Home su un solo livello; transizioni fluide
 - Icone SVG uniche in tutta l'app (Icona.tsx) al posto dei simboli di testo
 - Home: zoom, riproduzione cronologica, pagina Applicazione, elimina scheda (archivia in `99_Archivio/schede_eliminate/`)
@@ -27,14 +28,12 @@
 - Provare l'editor del testo su Windows e correggere
 - Installer finale (.exe) con electron-builder, a fine app
 - Scheda riassuntiva generata dall'AI
-- Eliminazione di categorie e temi (le schede si eliminano già)
 - Home generale con tutte le materie (design da fare)
 
 ---
 
 ## Punti aperti (da decidere con l'utente)
 
-- Data `1809-12`: oggi solo un avviso; proposta di scrivere il mese come `12/1809`
 - Scheda riassuntiva generata dall'AI
 - Gli altri punti in `specifiche/formato_studio_italiano.md`, sezione "Da decidere con la demo"
 - Dati dell'HTML non ancora convertiti: confronti, ripasso, note su lacune/trappole, testi chiave, luoghi/percorso, 3 voci di glossario extra

@@ -240,6 +240,8 @@ export interface Api {
   duplicaScheda(id: string): Promise<{ id: string; modello: Modello }>
   aggiornaAutore(patch: AutorePatch): Promise<Modello>
   aggiornaTemi(temi: Tema[]): Promise<Modello>
+  eliminaTema(id: string): Promise<{ modello: Modello; schedeToccate: number }>
+  eliminaCorsia(id: string, verso: string | null): Promise<{ modello: Modello; schedeSpostate: number }>
   mostraCartella(): Promise<void>
   /** testi: ogni scrittura restituisce il modello aggiornato */
   creaTesto(nuovo: NuovoTesto): Promise<{ id: string; modello: Modello }>

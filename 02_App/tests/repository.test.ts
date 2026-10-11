@@ -21,6 +21,37 @@ describe.skipIf(!existsSync(sorgente))('Repository', () => {
   }
   const prima = (r: string): string => join(r, '01_Argomenti/italiano/autori/leopardi/schede')
 
+  it('eliminaTema: lo toglie dai temi e da tutte le schede, che restano', async () => {
+    const r = copia()
+    repo = new Repository(r, 'leopardi')
+    await repo.carica()
+    const m0 = repo.modello()
+    const tema = m0.temi.find((t) => m0.schede.some((x) => x.temi.includes(t.id)))!
+    const usate = m0.schede.filter((x) => x.temi.includes(tema.id)).length
+    const out = await repo.eliminaTema(tema.id)
+    expect(out.schedeToccate).toBe(usate)
+    expect(out.modello.schede).toHaveLength(m0.schede.length)
+    expect(out.modello.temi.some((t) => t.id === tema.id)).toBe(false)
+    expect(out.modello.schede.some((x) => x.temi.includes(tema.id))).toBe(false)
+    expect(out.modello.problemi.filter((p) => p.gravita === 'errore')).toEqual([])
+    await expect(repo.eliminaTema(tema.id)).rejects.toThrow()
+  })
+
+  it('eliminaCorsia: sposta le schede nella categoria scelta e non toglie l\'ultima', async () => {
+    const r = copia()
+    repo = new Repository(r, 'leopardi')
+    await repo.carica()
+    const m0 = repo.modello()
+    const [a, b] = [m0.autore.corsie[0]!.id, m0.autore.corsie[1]!.id]
+    const n = m0.schede.filter((x) => x.corsia === a).length
+    await expect(repo.eliminaCorsia(a, null)).rejects.toThrow()
+    const out = await repo.eliminaCorsia(a, b)
+    expect(out.schedeSpostate).toBe(n)
+    expect(out.modello.autore.corsie.some((c) => c.id === a)).toBe(false)
+    expect(out.modello.schede.filter((x) => x.corsia === b).length).toBe(m0.schede.filter((x) => x.corsia === b).length + n)
+    expect(out.modello.problemi.filter((p) => p.gravita === 'errore')).toEqual([])
+  })
+
   it('elenca gli autori e carica il modello', async () => {
     const r = copia()
     expect(await Repository.elencaAutori(r)).toEqual([{ id: 'leopardi', nome: expect.any(String) }])

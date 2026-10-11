@@ -7,6 +7,9 @@ import { useColore, useStore } from '../store'
 import { Campo } from '../utili'
 import { Con, Icona } from './Icona'
 
+/** «1809-12» → «12/1809» */
+const mese = (data: string): string => `${data.split('-')[1]!.trim().padStart(2, '0')}/${data.split('-')[0]!.trim()}`
+
 /** Finestra di modifica: ogni cambiamento va subito nel file (dopo una breve pausa o lasciando il campo). */
 export function EditorScheda({ id }: { id: string }) {
   const m = useStore((s) => s.modello)!
@@ -80,7 +83,10 @@ export function EditorScheda({ id }: { id: string }) {
               <Campo valore={s.data} salva={(v) => salva({ data: v })} invalido={!!d.err} placeholder="gg/mm/aaaa · mm/aaaa · aaaa" className="inp big" style={{ borderColor: d.err ? 'var(--warn-line)' : undefined }} />
             </label>
             {d.err && <p role="alert" className="note" style={{ margin: '-8px 0 0', padding: '8px 10px', fontSize: 13, fontWeight: 700 }}>{d.err}</p>}
-            {d.ambigua && <p className="note" style={{ margin: '-8px 0 0', padding: '8px 10px', fontSize: 13 }}>Questa data si può leggere come intervallo di anni oppure come mese. Per un mese scrivi mm/aaaa.</p>}
+            {d.ambigua && <div className="note" style={{ margin: '-8px 0 0', padding: '8px 10px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span style={{ flex: 1, minWidth: 200 }}>Questa data si può leggere come intervallo di anni ({d.label}) oppure come mese.</span>
+              <button type="button" className="btn" onClick={() => salva({ data: mese(s.data) })}><Con i="spunta">Scrivi come mese: {mese(s.data)}</Con></button>
+            </div>}
             <p style={{ margin: '-4px 0 0', fontSize: 13, color: 'var(--mute)' }}>Letta come <b>{dataLunga(s.data)}</b>.</p>
             <label className="lbl">Categoria
               <select className="inp big" value={s.corsia} onChange={(e) => salva({ corsia: e.target.value })}>

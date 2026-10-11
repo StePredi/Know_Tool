@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { erroreFine } from '@shared/dates'
 import { schedeDelTema } from '@shared/derivati'
 import type { Corsia, Periodo, Tema } from '@shared/types'
@@ -33,6 +33,8 @@ export function Header() {
   const st = useStore()
   const colore = useColore()
   const { imposta, prefs } = st
+  const [elim, setElim] = useState<{ tipo: 'tema' | 'corsia'; id: string } | null>(null)
+  const [verso, setVerso] = useState('')
 
   // un clic fuori chiude i popover
   useEffect(() => {
@@ -120,6 +122,7 @@ export function Header() {
                 <div key={t.id} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                   <Campo valore={t.nome} salva={(v) => aggiornaTemi(m.temi.map((x) => (x.id === t.id ? { ...x, nome: v } : x)))} label="Nome del tema" className="inp" />
                   <span style={{ fontSize: 11.5, color: 'var(--mute)', fontWeight: 700, whiteSpace: 'nowrap' }}>{schedeDelTema(m, t.id).length} schede</span>
+                  <button className="btn" aria-label={`Elimina il tema ${t.nome}`} title="Elimina il tema" onClick={() => setElim({ tipo: 'tema', id: t.id })}><Icona nome="cestino" /></button>
                 </div>
               ))}
               <button className="btn ghost-ed" style={{ alignSelf: 'flex-start' }} onClick={() => {
@@ -154,6 +157,7 @@ export function Header() {
                     <Campo valore={c.sigla} salva={(v) => set({ sigla: v })} label="Sigla" className="inp" style={{ width: 76 }} />
                     <input type="range" min={0} max={355} step={5} value={c.tonalita} onChange={(e) => set({ tonalita: +e.target.value })} aria-label="Colore della categoria" style={{ width: 62 }} />
                     <button className="btn" aria-label="Sposta in su" onClick={su}><Icona nome="su" /></button>
+                    <button className="btn" aria-label={`Elimina la categoria ${c.nome}`} title="Elimina la categoria" disabled={m.autore.corsie.length <= 1} onClick={() => { setVerso(m.autore.corsie.find((x) => x.id !== c.id)?.id ?? ''); setElim({ tipo: 'corsia', id: c.id }) }}><Icona nome="cestino" /></button>
                   </div>
                 )
               })}
@@ -182,6 +186,57 @@ export function Header() {
           </button>
         </div>
       </div>
+      {elim && (() => {
+        const tema = elim.tipo === 'tema' ? m.temi.find((t) => t.id === elim.id) : null
+        const corsia = elim.tipo === 'corsia' ? m.autore.corsie.find((c) => c.id === elim.id) : null
+        const nSchede = tema ? schedeDelTema(m, tema.id).length : m.schede.filter((x) => x.corsia === elim.id).length
+        const nome = tema?.nome ?? corsia?.nome ?? elim.id
+        const serveDest = elim.tipo === 'corsia' && nSchede > 0
+        const chiudi = (): void => setElim(null)
+        return (
+          <div role="alertdialog" aria-label="Conferma eliminazione" className="overlay" style={{ zIndex: 95, alignItems: 'center', padding: 22, background: 'rgba(8,12,18,.6)' }} onMouseDown={(e) => e.target === e.currentTarget && chiudi()}>
+            <div style={{ maxWidth: 500, background: 'var(--surface)', border: '1px solid var(--line)', borderTop: '4px solid var(--err-line)', borderRadius: 14, padding: 20, boxShadow: '0 30px 80px rgba(0,0,0,.4)' }}>
+              <h3 style={{ margin: '0 0 8px', fontSize: 18 }}>Eliminare {elim.tipo === 'tema' ? 'il tema' : 'la categoria'} «{nome}»?</h3>
+              {elim.tipo === 'tema' ? (
+                <p style={{ margin: '0 0 14px', fontSize: 14.5 }}>Lo tolgo da <b>{nSchede}</b> sched{nSchede === 1 ? 'a' : 'e'}. Le schede <b>non</b> vengono eliminate.</p>
+              ) : serveDest ? (
+                <>
+                  <p style={{ margin: '0 0 10px', fontSize: 14.5 }}>Ha <b>{nSchede}</b> sched{nSchede === 1 ? 'a' : 'e'}: non vengono eliminate, passano a un'altra categoria.</p>
+                  <label className="lbl" style={{ marginBottom: 14 }}>Sposta le schede in
+                    <select className="inp big" value={verso} onChange={(e) => setVerso(e.target.value)}>
+                      {m.autore.corsie.filter((c) => c.id !== elim.id).map((c) => <option key={c.id} value={c.id}>{c.nome}</option>)}
+                    </select>
+                  </label>
+                </>
+              ) : (
+                <p style={{ margin: '0 0 14px', fontSize: 14.5 }}>La categoria non ha schede.</p>
+              )}
+              <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+                <button className="btn lg" onClick={chiudi}>Annulla</button>
+                <button className="btn lg" style={{ background: 'var(--err-line)', color: '#fff', borderColor: 'var(--err-line)' }} onClick={async () => {
+                  try {
+                    if (elim.tipo === 'tema') {
+                      const r = await window.api.eliminaTema(elim.id)
+                      st.applica(r.modello)
+                      imposta({ temi: st.temi.filter((x) => x !== elim.id) })
+                      st.mostraToast(`Tema «${nome}» eliminato · tolto da ${r.schedeToccate} schede`)
+                    } else {
+                      const r = await window.api.eliminaCorsia(elim.id, serveDest ? verso : null)
+                      st.applica(r.modello)
+                      const { [elim.id]: _tolta, ...resto } = st.corsieSpente
+                      imposta({ corsieSpente: resto })
+                      st.mostraToast(`Categoria «${nome}» eliminata · ${r.schedeSpostate} schede spostate`)
+                    }
+                  } catch (e) {
+                    st.mostraToast((e as Error).message)
+                  }
+                  chiudi()
+                }}><Con i="cestino">Elimina</Con></button>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
     </header>
   )
 }

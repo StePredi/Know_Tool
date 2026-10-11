@@ -561,6 +561,65 @@ export class Repository {
       return this.modello()
     })
   }
+
+  /** Toglie un tema da temi.md e da tutte le schede che lo usano. Le schede restano. */
+  eliminaTema(id: string): Promise<{ modello: Modello; schedeToccate: number }> {
+    return this.inCoda(async () => {
+      const testo = await this.leggiDisco('temi.md')
+      const doc = leggiDocMd(testo)
+      if (doc.erroreYaml) throw new Error('temi.md ha un frontmatter non valido: correggilo a mano.')
+      const temi = Array.isArray(doc.fm.temi) ? (doc.fm.temi as { id?: unknown }[]) : []
+      if (!temi.some((t) => t && t.id === id)) throw new Error(`Il tema «${id}» non esiste più.`)
+      doc.fm.temi = temi.filter((t) => !(t && t.id === id))
+      await this.scrivi('temi.md', scriviDocMd(doc, { mappeInRiga: true }))
+      let schedeToccate = 0
+      for (const [rel, t] of [...this.cache]) {
+        if (!/^schede\/[^/]+\.md$/.test(rel)) continue
+        const d = leggiDocMd(t)
+        const lista = d.fm.temi
+        if (d.erroreYaml || !Array.isArray(lista) || !lista.includes(id)) continue
+        const resto = lista.filter((x) => x !== id)
+        if (resto.length) d.fm.temi = resto
+        else delete d.fm.temi
+        schedeToccate++
+        await this.scrivi(rel, scriviDocMd(d, { ordine: ORDINE_CAMPI_SCHEDA }))
+      }
+      this.emetti([])
+      return { modello: this.modello(), schedeToccate }
+    })
+  }
+
+  /**
+   * Toglie una categoria (corsia). Le sue schede passano a `verso`: serve se ce ne sono; non si può eliminare l'ultima categoria.
+   */
+  eliminaCorsia(id: string, verso: string | null): Promise<{ modello: Modello; schedeSpostate: number }> {
+    return this.inCoda(async () => {
+      const testo = await this.leggiDisco('autore.md')
+      const doc = leggiDocMd(testo)
+      if (doc.erroreYaml) throw new Error('autore.md ha un frontmatter non valido: correggilo a mano.')
+      const corsie = Array.isArray(doc.fm.corsie) ? (doc.fm.corsie as { id?: unknown }[]) : []
+      if (!corsie.some((c) => c && c.id === id)) throw new Error(`La categoria «${id}» non esiste più.`)
+      if (corsie.length <= 1) throw new Error('Deve restare almeno una categoria.')
+      const sue: string[] = []
+      for (const [rel, t] of this.cache) {
+        if (!/^schede\/[^/]+\.md$/.test(rel)) continue
+        const d = leggiDocMd(t)
+        if (!d.erroreYaml && d.fm.corsia === id) sue.push(rel)
+      }
+      if (sue.length) {
+        if (!verso || verso === id || !corsie.some((c) => c && c.id === verso)) throw new Error('Scegli la categoria in cui spostare le sue schede.')
+        for (const rel of sue) {
+          const d = leggiDocMd(this.cache.get(rel)!)
+          d.fm.corsia = verso
+          await this.scrivi(rel, scriviDocMd(d, { ordine: ORDINE_CAMPI_SCHEDA }))
+        }
+      }
+      doc.fm.corsie = corsie.filter((c) => !(c && c.id === id))
+      await this.scrivi('autore.md', scriviDocMd(doc, { ordine: ['id', 'nome', 'nascita', 'morte', 'corsie', 'periodi'], mappeInRiga: true }))
+      this.emetti([])
+      return { modello: this.modello(), schedeSpostate: sue.length }
+    })
+  }
 }
 
 export { idDaFile }
