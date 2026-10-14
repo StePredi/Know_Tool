@@ -8,6 +8,8 @@
 
 ## Fatto
 
+- Home generale (2026-10-14): schede stile browser, albero stretto, Home a tre fasce, vista cartella griglia/elenco, dettagli, ricerca per nome, crea/rinomina/archivia, preferiti e recenti
+
 - Scheda riassuntiva generata dall'AI (2026-10-11): richiesta da copiare, proposta confronto Ora|Proposta con Applica/Scarta, nuove sezioni nella scheda
 
 - Formato dei file di studio
@@ -30,7 +32,8 @@
 - Provare l'editor del testo su Windows e correggere
 - Installer finale (.exe) con electron-builder, a fine app
 - Provare la scheda riassuntiva su Windows (con una proposta vera scritta da Claude)
-- Home generale con tutte le materie (design da fare)
+- Provare la Home generale su Windows (schede, albero, nuova materia/cartella, rinomina, archivia)
+- Home generale, giri successivi: nuovi tipi di documento da «+ Nuovo», ricerca nei contenuti, spostare con trascinamento, nuovo autore
 
 ---
 

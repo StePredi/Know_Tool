@@ -281,6 +281,11 @@ export interface Api {
   eliminaTema(id: string): Promise<{ modello: Modello; schedeToccate: number }>
   eliminaCorsia(id: string, verso: string | null): Promise<{ modello: Modello; schedeSpostate: number }>
   mostraCartella(): Promise<void>
+  /** Home generale */
+  albero(): Promise<NodoArg[]>
+  creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
+  rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
+  archiviaNodo(rel: string): Promise<RisultatoNodo>
   /** testi: ogni scrittura restituisce il modello aggiornato */
   creaTesto(nuovo: NuovoTesto): Promise<{ id: string; modello: Modello }>
   eliminaTesto(id: string): Promise<{ modello: Modello; archiviato: string }>
@@ -294,4 +299,32 @@ export interface Api {
   /** zoom di tutta l'interfaccia (1 = 100%) */
   zoom(fattore: number): void
   onModello(cb: (e: EventoModello) => void): () => void
+}
+
+// ---- Home generale: l'albero di 01_Argomenti ----
+
+export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo'
+
+/** Una voce dell'albero. `rel` è il percorso dentro 01_Argomenti con "/" (per mappa e testo: quello dell'autore + "#mappa" o "/testi/<id>"). */
+export interface NodoArg {
+  rel: string
+  tipo: TipoNodo
+  nome: string
+  /** cartelle da cui dipende l'app (italiano, autori, le cartelle degli autori): non si spostano né si archiviano */
+  protetto: boolean
+  puoRinominare: boolean
+  puoArchiviare: boolean
+  autoreId?: string
+  testoId?: string
+  /** riga di riepilogo: «12 testi», «105 schede», «Il colle…» */
+  info: string
+  /** ultima modifica in ms */
+  modificato: number
+  figli: NodoArg[]
+}
+
+export interface RisultatoNodo {
+  albero: NodoArg[]
+  /** rel del nodo creato o rinominato */
+  rel?: string
 }

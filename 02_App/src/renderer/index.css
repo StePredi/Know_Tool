@@ -118,3 +118,43 @@ a { color: var(--focus); text-decoration: underline; text-underline-offset: 2px;
 .flut-b { pointer-events: auto; box-shadow: 0 6px 22px rgba(0, 0, 0, .18); background-clip: padding-box; }
 .hd-seg.flut-b { background: var(--surface); }
 @media (max-width: 1340px) { .hd-riga { gap: 10px; } .hd-gruppo { gap: 7px; } }
+
+/* ---- Home generale: schede, albero, cartoline ---- */
+.tabs { flex: none; display: flex; align-items: flex-end; gap: 2px; padding: 6px 8px 0; background: var(--surface2); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { position: relative; display: inline-flex; align-items: center; gap: 7px; height: 34px; max-width: 220px; min-width: 96px; padding: 0 8px 0 11px; border: 1px solid transparent; border-bottom: 0; border-radius: 9px 9px 0 0; background: transparent; color: var(--mute); font-size: 12.5px; font-weight: 700; cursor: pointer; transition: background .12s, color .12s; }
+.tab:hover { background: color-mix(in srgb, var(--surface) 55%, transparent); color: var(--ink); }
+.tab.on { background: var(--bg); border-color: var(--line); color: var(--ink); margin-bottom: -1px; height: 35px; }
+.tab.drop { box-shadow: inset 2px 0 0 var(--focus); }
+.tab-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.tab-x { flex: none; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 5px; background: transparent; color: inherit; cursor: pointer; opacity: .65; }
+.tab-x:hover { background: var(--line2); opacity: 1; }
+.tab-nuova { flex: none; width: 30px; height: 30px; margin: 0 0 2px 4px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: transparent; color: var(--mute); cursor: pointer; }
+.tab-nuova:hover { background: var(--line2); color: var(--ink); }
+
+.alb { flex: none; width: 236px; display: flex; flex-direction: column; border-right: 1px solid var(--line); background: var(--surface); animation: dcSlide .16s ease-out; }
+.alb-r { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 32px; border: 0; background: transparent; border-radius: 7px; padding: 0 8px; font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; text-align: left; transition: background .1s; }
+.alb-r:hover { background: var(--surface2); }
+.alb-r.on { background: color-mix(in srgb, var(--focus) 14%, transparent); color: var(--ink); font-weight: 700; }
+.alb-f { flex: none; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 5px; background: transparent; color: var(--mute); cursor: pointer; }
+.alb-f:hover { background: var(--line2); }
+
+.hm-t-materia { --h: 265; } .hm-t-cartella { --h: 215; } .hm-t-autore { --h: 150; } .hm-t-mappa { --h: 38; } .hm-t-testo { --h: 175; }
+.hm-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: hsl(var(--h) 55% 32%); background: hsl(var(--h) 62% 90%); }
+[data-theme='dark'] .hm-ico { color: hsl(var(--h) 60% 80%); background: hsl(var(--h) 28% 24%); }
+.hm-c { position: relative; display: flex; flex-direction: column; gap: 10px; text-align: left; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 14px; cursor: pointer; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; min-height: 112px; }
+.hm-c:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,.12); border-color: var(--line); }
+.hm-c.sel { border-color: var(--focus); box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus) 30%, transparent); }
+.hm-c.grande { min-height: 150px; }
+.hm-c-v { border-style: dashed; background: transparent; color: var(--mute); align-items: center; justify-content: center; }
+.hm-c-v:hover { color: var(--ink); background: var(--surface); }
+.hm-m { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 7px; background: transparent; color: var(--mute); cursor: pointer; opacity: 0; transition: opacity .1s; }
+.hm-c:hover .hm-m, .hm-c.sel .hm-m, .hm-m:focus-visible { opacity: 1; }
+.hm-m:hover { background: var(--surface2); color: var(--ink); }
+.hm-riga { display: grid; grid-template-columns: minmax(0,1fr) 190px 130px 34px; align-items: center; gap: 12px; width: 100%; padding: 8px 12px; border: 0; border-bottom: 1px solid var(--line2); background: transparent; text-align: left; cursor: pointer; transition: background .1s; }
+.hm-riga:hover { background: var(--surface2); }
+.hm-riga.sel { background: color-mix(in srgb, var(--focus) 12%, transparent); }
+.hm-det { flex: none; width: 300px; border-left: 1px solid var(--line); background: var(--surface); padding: 16px; overflow: auto; animation: dcSlide .16s ease-out; }
+.hm-sez { margin: 0 0 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--mute); }
+.hm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 12px; }
+@media (max-width: 1100px) { .alb { width: 200px; } .hm-det { width: 260px; } }

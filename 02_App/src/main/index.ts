@@ -3,6 +3,7 @@ import { app, BrowserWindow, dialog, ipcMain, Menu, shell } from 'electron'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { archiviaNodo, creaNodo, leggiAlbero, rinominaNodo } from './esplora'
 import { Repository } from './repository'
 import type { StatoApp } from '../shared/types'
 
@@ -151,6 +152,23 @@ function registraIpc(): void {
   ipcMain.handle('proposta:scarta', (_e, id: string) => serve().scartaProposta(id))
   ipcMain.handle('tema:elimina', (_e, id: string) => serve().eliminaTema(id))
   ipcMain.handle('corsia:elimina', (_e, id: string, verso: string | null) => serve().eliminaCorsia(id, verso))
+  const senzaRadice = (): string => {
+    if (!radice) throw new Error('Nessuna cartella aperta.')
+    return radice
+  }
+  ipcMain.handle('albero:leggi', async () => (radice ? leggiAlbero(radice) : []))
+  ipcMain.handle('albero:crea', async (_e, padre: string, nome: string) => {
+    const rel = await creaNodo(senzaRadice(), padre, nome)
+    return { albero: await leggiAlbero(senzaRadice()), rel }
+  })
+  ipcMain.handle('albero:rinomina', async (_e, rel: string, nome: string) => {
+    const nuovo = await rinominaNodo(senzaRadice(), rel, nome)
+    return { albero: await leggiAlbero(senzaRadice()), rel: nuovo }
+  })
+  ipcMain.handle('albero:archivia', async (_e, rel: string) => {
+    await archiviaNodo(senzaRadice(), rel)
+    return { albero: await leggiAlbero(senzaRadice()) }
+  })
   ipcMain.handle('cartella:mostra', async () => {
     if (repo) await shell.openPath(repo.dir)
   })

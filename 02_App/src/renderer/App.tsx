@@ -11,6 +11,9 @@ import { Controlli } from './componenti/Controlli'
 import { Applicazione } from './componenti/Applicazione'
 import { EditorTesti, FinestreEditorHome } from './editor/EditorTesti'
 import { useEditor } from './editor/stato'
+import { BarraSchede } from './home/BarraSchede'
+import { HomeGenerale } from './home/HomeGenerale'
+import { allineaVista, HOME_ID, useHome } from './home/stato'
 
 const FONT = {
   atkinson: "'Atkinson Hyperlegible', system-ui, sans-serif",
@@ -84,6 +87,31 @@ export function App() {
   }, [])
 
   const testoId = useEditor((e) => e.testoId)
+  const attiva = useHome((h) => h.attiva)
+  const tipoAttiva = useHome((h) => h.tabs.find((t) => t.id === h.attiva)?.tipo ?? 'home')
+  const pronto = !!st.modello
+
+  // l'albero serve subito (per togliere le schede di documenti spariti)
+  useEffect(() => {
+    if (pronto) void useHome.getState().carica()
+  }, [pronto])
+
+  // la scheda attiva decide quale autore e quale vista mostrare
+  useEffect(() => {
+    if (pronto) void allineaVista()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attiva, pronto])
+
+  // un testo aperto da altre vie (Nuovo testo, elenco, «Apri nell'editor») compare anche come scheda
+  useEffect(
+    () =>
+      useEditor.subscribe((e, prev) => {
+        if (e.testoId === prev.testoId) return
+        const autore = useStore.getState().stato?.autoreId
+        if (autore) useHome.getState().sincronizzaEditor(autore, e.testoId)
+      }),
+    []
+  )
 
   if (st.caricamento) return <p style={{ padding: 30 }}>Apro la cartella…</p>
 
@@ -100,23 +128,26 @@ export function App() {
     )
   }
 
+  const vistaAutore = testoId ? (
+    <EditorTesti />
+  ) : (
+    <>
+      <Header />
+      <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
+        <BarraLaterale />
+        <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', position: 'relative' }}>
+          {st.vista === 'mappa' ? <Mappa /> : <Lista />}
+          <BarraInferiore />
+        </main>
+        {st.selId && <Anteprima id={st.selId} />}
+      </div>
+    </>
+  )
+
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--bg)' }}>
-      {testoId ? (
-        <EditorTesti />
-      ) : (
-        <>
-          <Header />
-          <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-            <BarraLaterale />
-            <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', position: 'relative' }}>
-              {st.vista === 'mappa' ? <Mappa /> : <Lista />}
-              <BarraInferiore />
-            </main>
-            {st.selId && <Anteprima id={st.selId} />}
-          </div>
-        </>
-      )}
+      <BarraSchede />
+      {attiva === HOME_ID || tipoAttiva === 'home' ? <HomeGenerale /> : <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>{vistaAutore}</div>}
       <FinestreEditorHome />
       {st.apertaId && <SchedaCompleta id={st.apertaId} />}
       {st.editId && <EditorScheda id={st.editId} />}
