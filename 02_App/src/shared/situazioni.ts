@@ -65,6 +65,10 @@ export const schemaIndice = z.object({
   titolo: testo.min(1),
   centro: testo.min(1),
   sottotitolo: testo.default(''),
+  /** come si introduce un commento accanto al codice: «#» (shell, Python, MikroTik) o «//» (C, C++) */
+  prefissoCommento: testo.default('#'),
+  /** esempi mostrati nella casella di ricerca, per esempio «client senza IP, bridge, NAT» */
+  esempiRicerca: testo.default(''),
   rami: z.array(ramo).min(1)
 })
 

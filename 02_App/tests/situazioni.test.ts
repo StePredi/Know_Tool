@@ -68,6 +68,9 @@ describe('Per situazioni: file sbagliati danno messaggi chiari', () => {
   it('indice illeggibile o con colore inesistente', () => {
     expect(leggiIndice('modello: per_situazioni\ntitolo: x\ncentro: y\nrami:\n- id: a\n  nome: A\n  colore: fucsia\n  lato: L\n  voci:\n  - schede: [x]\n').errore).toMatch(/colore/)
     expect(leggiIndice('::: non yaml [').errore).toMatch(/indice\.yaml/)
+    const base = 'modello: per_situazioni\ntitolo: x\ncentro: y\nrami:\n- id: a\n  nome: A\n  colore: red\n  lato: L\n  voci:\n  - schede: [x]\n'
+    expect(leggiIndice(base).indice?.prefissoCommento).toBe('#')
+    expect(leggiIndice(base + 'prefissoCommento: //\nesempiRicerca: timer\n').indice).toMatchObject({ prefissoCommento: '//', esempiRicerca: 'timer' })
   })
   it('scheda con id diverso dal nome del file, o senza fasi', () => {
     const ok = 'id: a\ntipo: ricetta\ntitolo: T\nsigla: S\ncomando: c\nfrase: f\nquando: q\nfasi:\n- nome: n\n  righe:\n  - codice: x\n'

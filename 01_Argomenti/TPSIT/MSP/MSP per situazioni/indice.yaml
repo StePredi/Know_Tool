@@ -2,6 +2,8 @@ modello: per_situazioni
 titolo: MSP, per situazioni
 centro: MSP
 sottotitolo: Parti da quello che devi fare con l'ESP32 e con l'I2C, non dal nome della funzione.
+prefissoCommento: //
+esempiRicerca: LED che non lampeggia, sensore I2C, interrupt, timer
 rami:
 - id: b1
   nome: Preparare l'ESP32

@@ -88,7 +88,7 @@ function Albero({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
       el.scrollLeft = salvata.l
       el.scrollTop = salvata.t
     } else {
-      z.current = Math.max(0.5, Math.min(1, el.clientWidth / lay.W, el.clientHeight / lay.H))
+      z.current = Math.max(ZMIN, Math.min(1, el.clientWidth / lay.W, el.clientHeight / lay.H))
       applica()
       centra()
       ricorda()
@@ -240,7 +240,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
             className="inp big"
             type="search"
             autoComplete="off"
-            placeholder="Cosa vuoi fare? Per esempio: client senza IP, bridge, NAT, backup…"
+            placeholder={dati.indice.esempiRicerca ? `Cosa vuoi fare? Per esempio: ${dati.indice.esempiRicerca}…` : 'Cosa vuoi fare? Scrivi una situazione o un comando…'}
             aria-label="Cerca una situazione"
             value={v.q}
             onChange={(e) => imposta({ q: e.target.value })}

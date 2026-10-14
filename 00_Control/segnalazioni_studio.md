@@ -8,10 +8,10 @@ Quando una segnalazione è stata gestita, la sposto sotto «Fatte» (non la canc
 
 ## Da fare
 
-- 2026-10-14 · Per situazioni · MSP: ho scritto molte righe `codice` su più righe (`\n`, per esempio le funzioni complete) e non ho potuto aprire l'app per vedere come si mostrano: controllare rientro, a capo e blocchi «Prima e dopo» · (idea)
+(nessuna)
 
 ---
 
 ## Fatte
 
-(nessuna)
+- 2026-10-14 · controllato: le righe di codice su più righe si vedono bene (rientro e a capo mantenuti, un numero di riga per blocco, commento sull'ultima riga); anche «Prima e dopo» con più righe. Trovato e corretto: i commenti erano sempre introdotti da «#» (ora `prefissoCommento` in `indice.yaml`, per C/C++ `//`), e gli esempi nella casella di ricerca erano quelli del MikroTik (ora `esempiRicerca`). Entrambi i campi sono facoltativi.

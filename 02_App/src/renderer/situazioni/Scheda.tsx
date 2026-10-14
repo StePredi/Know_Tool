@@ -167,7 +167,7 @@ function Ricetta({ ctx, s }: { ctx: Ctx; s: SchedaRicetta }): ReactNode {
                         <span className={'s-lc' + (rev.has(n) ? ' rev' : '')} onClick={() => v.prova && setRev((o) => new Set(o).add(n))}>
                           <Cod txt={r.codice.trim()} esempi={v.esempi} slots={s.segnaposto} />
                         </span>
-                        {r.commento && <span className="s-cm"> # {r.commento}</span>}
+                        {r.commento && <span className="s-cm"> {ctx.dati.indice.prefissoCommento} {r.commento}</span>}
                         {nota && <span className={'s-mk' + (r.trappola ? ' tp' : '')}>{n}</span>}
                       </span>
                     </div>
