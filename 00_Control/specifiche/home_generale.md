@@ -12,7 +12,7 @@ Stato: **costruita (primo giro)**, da provare su Windows.
 
 - Barra schede in alto: «Home» fissa, poi mappe e testi. Si chiudono, si riordinano, si ricordano alla riapertura. Ctrl+T Home, Ctrl+W chiude, Ctrl+Tab cambia, Ctrl+Maiusc+T riapre l'ultima chiusa.
 - Albero a sinistra: Materie → cartelle → autori → Mappa cronologica e Testi. Si nasconde.
-- Centro: percorso cliccabile, ricerca, Griglia/Elenco, ordinamento, «+ Nuovo». La Home ha tre fasce: Continua da dove eri, Preferiti, Materie.
+- Centro: titolo con il nome della cartella corrente (e «‹» per tornare indietro, niente percorso Home › autore › …), ricerca, Griglia/Elenco, ordinamento, «+ Nuovo». La Home ha tre fasce: Continua da dove eri, Preferiti, Materie.
 - Dettagli: pannello a destra che compare solo quando selezioni (pulsante «…» sulla cartolina o clic destro).
 - I file restano cartelle vere in `01_Argomenti`. Nulla si cancella: archiviare sposta in `99_Archivio`.
 
