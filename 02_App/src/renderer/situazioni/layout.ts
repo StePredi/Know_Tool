@@ -58,16 +58,35 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
   const link: LinkMappa[] = []
   const hb = (x1: number, y1: number, x2: number, y2: number): string => `M${x1} ${y1}C${(x1 + x2) / 2} ${y1},${(x1 + x2) / 2} ${y2},${x2} ${y2}`
   const vb = (x1: number, y1: number, x2: number, y2: number): string => `M${x1} ${y1}C${x1} ${(y1 + y2) / 2},${x2} ${(y1 + y2) / 2},${x2} ${y2}`
-  const lato = (s: string): number[] => indice.rami.map((r, i) => (r.lato === s ? i : -1)).filter((i) => i >= 0)
+  // I rami si dispongono in senso orario partendo da in alto a sinistra: prima l'alto (da sinistra a destra),
+  // poi la destra (dall'alto in basso), il basso (da destra a sinistra) e la sinistra (dal basso in alto).
+  // Il campo «lato» dell'indice non serve più: il lato si ricava dalla posizione del ramo.
+  const n = indice.rami.length
+  const q = Math.floor(n / 4)
+  const cnt: Record<string, number> = { T: q, R: q, B: q, L: q }
+  for (const k of ['R', 'L', 'T', 'B'].slice(0, n - 4 * q)) cnt[k]! += 1
+  const tutti = indice.rami.map((_, i) => i)
+  const dalT = 0
+  const dalR = cnt.T!
+  const dalB = dalR + cnt.R!
+  const dalL = dalB + cnt.B!
+  const lati: Record<string, number[]> = {
+    T: tutti.slice(dalT, dalR),
+    R: tutti.slice(dalR, dalB),
+    B: tutti.slice(dalB, dalL).reverse(),
+    L: tutti.slice(dalL).reverse()
+  }
+  const lato = (s: string): number[] => lati[s]!
 
   nodi.push({ tipo: 'centro', bi: -1, x: -D.CW / 2, y: -D.CH / 2, w: D.CW, h: D.CH })
 
   // ---- alto e basso
   const colsOf = (bi: number): Pagina[] => pagine(indice, bi, esiste, true)
-  const bw = (bi: number): number => {
+  const colsW = (bi: number): number => {
     const n = Math.max(1, colsOf(bi).length)
     return n * D.LW + (n - 1) * D.CG
   }
+  const bw = (bi: number): number => Math.max(colsW(bi), D.BW)
   const rows = { T: lato('T').filter((i) => colsOf(i).length), B: lato('B').filter((i) => colsOf(i).length) }
   let half = D.CW / 2
   for (const k of ['T', 'B'] as const) {
@@ -88,7 +107,7 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
       nodi.push({ tipo: 'ramo', bi, x: bcx - D.BW / 2, y: Math.min(yn, yf), w: D.BW, h: D.BH })
       link.push({ bi, d: vb(0, (s * D.CH) / 2, bcx, yn) })
       colsOf(bi).forEach((c, i) => {
-        const ccx = x + i * (D.LW + D.CG) + D.LW / 2
+        const ccx = x + (w - colsW(bi)) / 2 + i * (D.LW + D.CG) + D.LW / 2
         const sn = yf + s * 40
         const sf = sn + s * D.SH
         const l0 = sf + s * 30

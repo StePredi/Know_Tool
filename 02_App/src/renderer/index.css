@@ -316,3 +316,27 @@ a { color: var(--focus); text-decoration: underline; text-underline-offset: 2px;
 .s-sc .ok { position: absolute; right: 7px; top: 5px; width: 18px; height: 18px; border-radius: 50%; background: var(--c); color: var(--on); display: grid; place-items: center; }
 .s-zoom { position: absolute; right: 14px; bottom: 14px; z-index: 20; display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 4px; box-shadow: 0 8px 24px rgba(10, 15, 40, 0.18); }
 .s-zoom .btn { height: 34px; padding: 0 10px; border: 0; }
+
+/* scelta della disposizione e griglia di riquadri */
+.s-tools { display: flex; align-items: center; gap: 10px; }
+.s-disp { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.s-disp button { border: 0; background: none; padding: 4px 14px; font: inherit; font-size: 13px; font-weight: 600; color: var(--mute); cursor: pointer; }
+.s-disp button[aria-pressed=true] { background: var(--ink); color: var(--surface); }
+.s-gw { flex: 1; min-height: 0; overflow: auto; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg); }
+.s-gg { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; padding: 18px; align-items: start; max-width: 1500px; margin: 0 auto; }
+.s-gc { background: var(--t); border: 2px solid var(--c); border-radius: 18px; padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 10px; transition: opacity 0.2s; }
+.s-gc.dim, .s-gl.dim { opacity: 0.25; }
+.s-gh { display: flex; align-items: center; gap: 9px; width: 100%; padding: 0 12px 0 7px; height: 44px; border: 0; border-radius: 999px; background: var(--c); color: var(--on); font: inherit; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12); }
+.s-gh i { flex: none; width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); color: #151a2e; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 14px; }
+.s-gh span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-gh em { font-style: normal; font-size: 12.5px; opacity: 0.9; }
+.s-gh[aria-pressed=true] { outline: 3px solid var(--ink); outline-offset: 2px; }
+.s-gv { display: flex; flex-direction: column; gap: 6px; }
+.s-gt { align-self: flex-start; background: var(--surface); color: var(--k); border: 2px solid var(--c); border-radius: 999px; padding: 2px 14px; font-size: 14px; font-weight: 600; }
+.s-gl { position: relative; display: flex; flex-direction: column; gap: 4px; text-align: left; border: 0; border-radius: 10px; background: var(--surface); color: var(--k); padding: 7px 28px 7px 11px; font: inherit; cursor: pointer; transition: opacity 0.2s; }
+.s-gl:hover { box-shadow: 0 0 0 2px var(--c); }
+.s-gl .lt { font-size: 15.5px; font-weight: 600; line-height: 1.2; }
+.s-gl .lk { align-self: flex-start; max-width: 100%; font: 11px var(--mono); background: var(--t); color: var(--k); border-radius: 5px; padding: 1px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.s-gl .lw { font-size: 13px; font-style: italic; line-height: 1.3; }
+.s-gl .ok { position: absolute; right: 8px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: var(--c); color: var(--on); display: grid; place-items: center; }
+.sit-mappa .s-top { grid-template-columns: 1fr auto; }

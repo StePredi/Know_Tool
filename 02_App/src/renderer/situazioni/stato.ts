@@ -9,8 +9,10 @@ export interface VistaSit {
   evidenzia: boolean
   fuoco: number | null
   q: string
+  /** come si vedono i rami: albero (mappa concettuale) o griglia di card */
+  disp: 'albero' | 'griglia'
 }
-export const VISTA0: VistaSit = { scheda: null, esempi: false, prova: false, evidenzia: true, fuoco: null, q: '' }
+export const VISTA0: VistaSit = { scheda: null, esempi: false, prova: false, evidenzia: true, fuoco: null, q: '', disp: 'albero' }
 
 interface Sit {
   dati: Record<string, Situazioni>

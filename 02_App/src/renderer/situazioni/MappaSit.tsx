@@ -18,23 +18,24 @@ const VISTE = new Map<string, { z: number; l: number; t: number }>()
 const ZMIN = 0.25
 const ZMAX = 2
 
-export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
-  const { rel, dati, ordine, info, pagliaio } = ctx
-  const v = useSit((x) => x.viste[rel] ?? VISTA0)
-  const imposta = (p: Partial<typeof v>): void => useSit.getState().imposta(rel, p)
-  const [sel, setSel] = useState(0)
+type Props = {
+  ctx: Ctx
+  v: ReturnType<typeof useSit.getState>['viste'][string]
+  imposta: (p: Partial<Props['v']>) => void
+  sfumato: (bi: number, ids?: string[]) => boolean
+  apri: (id: string) => void
+}
+
+function Albero({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
+  const { rel, dati, ordine } = ctx
+  void imposta
   const [pct, setPct] = useState(100)
   const vp = useRef<HTMLDivElement>(null)
   const palco = useRef<HTMLDivElement>(null)
   const sizer = useRef<HTMLDivElement>(null)
   const z = useRef(1)
   const mosso = useRef(false)
-
-  const trovate = useMemo(() => cerca(v.q, ordine, pagliaio), [v.q, ordine, pagliaio])
-  const corrispondenze = useMemo(() => (v.q.trim() ? new Set(trovate) : null), [v.q, trovate])
   const lay = useMemo(() => calcolaMappa(dati.indice, (id) => !!dati.schede[id]), [dati.indice, dati.schede])
-  const idsRamo = useMemo(() => dati.indice.rami.map((r) => r.voci.flatMap((x) => x.schede)), [dati.indice])
-  useEffect(() => setSel(0), [v.q])
 
   const applica = (): void => {
     if (!palco.current || !sizer.current) return
@@ -147,62 +148,8 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lay])
 
-  const apri = (id: string): void => imposta({ scheda: id, q: '' })
-  const sfumato = (bi: number, ids?: string[]): boolean => {
-    if (bi < 0) return false
-    if (v.fuoco != null && bi !== v.fuoco) return true
-    if (corrispondenze) return !(ids ?? idsRamo[bi]!).some((i) => corrispondenze.has(i))
-    return false
-  }
-
   return (
     <>
-      <div className="s-top">
-        <div>
-          <h1>{dati.indice.titolo}</h1>
-          {dati.indice.sottotitolo && <p>{dati.indice.sottotitolo}</p>}
-        </div>
-        <span className="s-count">Ripassate: <b>{dati.ripassate.length}</b> / {ordine.length}</span>
-        <div className="s-search">
-          <input
-            id="s-q"
-            className="inp big"
-            type="search"
-            autoComplete="off"
-            placeholder="Cosa vuoi fare? Per esempio: client senza IP, bridge, NAT, backup…"
-            aria-label="Cerca una situazione"
-            value={v.q}
-            onChange={(e) => imposta({ q: e.target.value })}
-            onKeyDown={(e) => {
-              if (e.key === 'ArrowDown') { e.preventDefault(); setSel((i) => Math.min(i + 1, Math.max(0, Math.min(trovate.length, 8) - 1))) }
-              else if (e.key === 'ArrowUp') { e.preventDefault(); setSel((i) => Math.max(0, i - 1)) }
-              else if (e.key === 'Enter' && trovate[sel]) apri(trovate[sel]!)
-            }}
-          />
-          <span className="s-kbd" aria-hidden="true">/</span>
-          {v.q.trim() && (
-            <div className="s-res" role="listbox">
-              {trovate.length === 0 ? (
-                <div className="s-none">Nessuna situazione trovata.</div>
-              ) : (
-                trovate.slice(0, 8).map((id, i) => (
-                  <button key={id} type="button" role="option" aria-selected={i === sel} className={i === sel ? 'sel' : ''} onMouseEnter={() => setSel(i)} onClick={() => apri(id)}>
-                    <span className="rt">{dati.schede[id]!.sigla}</span>
-                    <span className="rk">{dati.schede[id]!.comando}</span>
-                    <span className="rb" data-c={dati.indice.rami[info[id]!.bi]!.colore}>{dati.indice.rami[info[id]!.bi]!.nome}</span>
-                  </button>
-                ))
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-      {dati.avvisi.length > 0 && (
-        <details className="s-avv">
-          <summary>{dati.avvisi.length} avvisi sui file di questa documentazione</summary>
-          <ul style={{ margin: '6px 0 0', paddingLeft: 18 }}>{dati.avvisi.map((a, i) => <li key={i}>{a}</li>)}</ul>
-        </details>
-      )}
       <div className="s-vpw">
         <div className="s-vp" ref={vp} onScroll={ricorda}>
           <div ref={sizer} className="s-sizer">
@@ -250,6 +197,131 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
         </div>
       </div>
       <p className="s-hint">Clic su un ramo per metterlo a fuoco (<kbd>Esc</kbd> per tornare). Trascina per spostare la mappa; zoom con i pulsanti, <kbd>Ctrl</kbd> + rotella o <kbd>+</kbd> <kbd>−</kbd>. Il numero sul ramo è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>
+    </>
+  )
+}
+
+export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
+  const { rel, dati, ordine, info, pagliaio } = ctx
+  const v = useSit((x) => x.viste[rel] ?? VISTA0)
+  const imposta = (p: Partial<typeof v>): void => useSit.getState().imposta(rel, p)
+  const [sel, setSel] = useState(0)
+  const trovate = useMemo(() => cerca(v.q, ordine, pagliaio), [v.q, ordine, pagliaio])
+  const corrispondenze = useMemo(() => (v.q.trim() ? new Set(trovate) : null), [v.q, trovate])
+  const idsRamo = useMemo(() => dati.indice.rami.map((r) => r.voci.flatMap((x) => x.schede)), [dati.indice])
+  useEffect(() => setSel(0), [v.q])
+  const apri = (id: string): void => imposta({ scheda: id, q: '' })
+  const sfumato = (bi: number, ids?: string[]): boolean => {
+    if (bi < 0) return false
+    if (v.fuoco != null && bi !== v.fuoco) return true
+    if (corrispondenze) return !(ids ?? idsRamo[bi]!).some((i) => corrispondenze.has(i))
+    return false
+  }
+
+  const props: Props = { ctx, v, imposta, sfumato, apri }
+
+  return (
+    <>
+      <div className="s-top">
+        <div>
+          <h1>{dati.indice.titolo}</h1>
+          {dati.indice.sottotitolo && <p>{dati.indice.sottotitolo}</p>}
+        </div>
+        <div className="s-tools">
+          <div className="s-disp" role="group" aria-label="Disposizione">
+            <button type="button" aria-pressed={v.disp === 'albero'} onClick={() => imposta({ disp: 'albero' })}>Albero</button>
+            <button type="button" aria-pressed={v.disp === 'griglia'} onClick={() => imposta({ disp: 'griglia' })}>Griglia</button>
+          </div>
+          <span className="s-count">Ripassate: <b>{dati.ripassate.length}</b> / {ordine.length}</span>
+        </div>
+        <div className="s-search">
+          <input
+            id="s-q"
+            className="inp big"
+            type="search"
+            autoComplete="off"
+            placeholder="Cosa vuoi fare? Per esempio: client senza IP, bridge, NAT, backup…"
+            aria-label="Cerca una situazione"
+            value={v.q}
+            onChange={(e) => imposta({ q: e.target.value })}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowDown') { e.preventDefault(); setSel((i) => Math.min(i + 1, Math.max(0, Math.min(trovate.length, 8) - 1))) }
+              else if (e.key === 'ArrowUp') { e.preventDefault(); setSel((i) => Math.max(0, i - 1)) }
+              else if (e.key === 'Enter' && trovate[sel]) apri(trovate[sel]!)
+            }}
+          />
+          <span className="s-kbd" aria-hidden="true">/</span>
+          {v.q.trim() && (
+            <div className="s-res" role="listbox">
+              {trovate.length === 0 ? (
+                <div className="s-none">Nessuna situazione trovata.</div>
+              ) : (
+                trovate.slice(0, 8).map((id, i) => (
+                  <button key={id} type="button" role="option" aria-selected={i === sel} className={i === sel ? 'sel' : ''} onMouseEnter={() => setSel(i)} onClick={() => apri(id)}>
+                    <span className="rt">{dati.schede[id]!.sigla}</span>
+                    <span className="rk">{dati.schede[id]!.comando}</span>
+                    <span className="rb" data-c={dati.indice.rami[info[id]!.bi]!.colore}>{dati.indice.rami[info[id]!.bi]!.nome}</span>
+                  </button>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      {dati.avvisi.length > 0 && (
+        <details className="s-avv">
+          <summary>{dati.avvisi.length} avvisi sui file di questa documentazione</summary>
+          <ul style={{ margin: '6px 0 0', paddingLeft: 18 }}>{dati.avvisi.map((a, i) => <li key={i}>{a}</li>)}</ul>
+        </details>
+      )}
+      {v.disp === 'albero' ? <Albero {...props} /> : <Griglia {...props} />}
+    </>
+  )
+}
+
+/** Disposizione a griglia: un riquadro per ramo, del colore del ramo, con dentro gli argomenti e le situazioni. */
+function Griglia({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
+  const { dati } = ctx
+  return (
+    <>
+      <div className="s-gw">
+        <div className="s-gg">
+          {dati.indice.rami.map((r, bi) => {
+            const ids = r.voci.flatMap((x) => x.schede).filter((id) => dati.schede[id])
+            const fatte = ids.filter((id) => dati.ripassate.includes(id)).length
+            const dim = sfumato(bi)
+            return (
+              <section key={r.id} className={'s-gc' + (dim ? ' dim' : '')} data-c={r.colore}>
+                <button type="button" className="s-gh" aria-pressed={v.fuoco === bi} title="Metti a fuoco il ramo" onClick={() => imposta({ fuoco: v.fuoco === bi ? null : bi })}>
+                  <i>{bi + 1}</i>
+                  <span>{r.nome}</span>
+                  <em>{fatte}/{ids.length}</em>
+                </button>
+                {r.voci.map((vc, k) => {
+                  const lista = vc.schede.filter((id) => dati.schede[id])
+                  if (!lista.length) return null
+                  return (
+                    <div key={k} className="s-gv">
+                      {vc.gruppo && <div className="s-gt">{vc.gruppo}</div>}
+                      {lista.map((id) => {
+                        const sc = dati.schede[id]!
+                        return (
+                          <button key={id} type="button" className={'s-gl' + (sfumato(bi, [id]) ? ' dim' : '')} title={sc.titolo} onClick={() => apri(id)}>
+                            <span className="lt">{sc.sigla}</span>
+                            {v.fuoco === bi ? <span className="lw">{sc.frase}</span> : <span className="lk">{sc.comando}</span>}
+                            {dati.ripassate.includes(id) && <span className="ok" aria-label="ripassata"><Icona nome="spunta" size={11} /></span>}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )
+                })}
+              </section>
+            )
+          })}
+        </div>
+      </div>
+      <p className="s-hint">Clic sul titolo di un riquadro per metterlo a fuoco (<kbd>Esc</kbd> per tornare). Il numero è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>
     </>
   )
 }
