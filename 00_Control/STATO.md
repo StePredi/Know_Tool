@@ -8,6 +8,8 @@
 
 ## Fatto
 
+- Studio in parallelo (2026-10-14): guida `sessione_studio.md` per una sessione che usa l'app come se fosse finita (solo `01_Argomenti/`), e `segnalazioni_studio.md` dove scrive bug e idee per lo sviluppo
+
 - Modello «Per situazioni» (2026-10-14): documentazione MikroTik (37 situazioni) aperta in una scheda dell'app, con mappa a rami, ricerca, scheda ricetta / prima-e-dopo, ripasso e progresso. Specifica in `specifiche/modello_per_situazioni.md`
 
 - Home generale (2026-10-14): schede stile browser, albero stretto, Home a tre fasce, vista cartella griglia/elenco, dettagli, ricerca per nome, crea/rinomina/archivia, preferiti e recenti
