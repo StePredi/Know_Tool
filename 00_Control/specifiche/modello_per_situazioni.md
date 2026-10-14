@@ -1,6 +1,6 @@
 # Modello «Per situazioni» (linguaggio o strumento)
 
-Stato: **tappe 1–4 costruite per MikroTik (scheda, mappa essenziale, ripasso, progresso)**; restano mappa a quattro lati con zoom, galleria di «+ Nuovo», generazione con Claude, Git e Python, figure.
+Stato: **tappe 1–4 costruite per MikroTik (scheda, mappa essenziale, ripasso, progresso)**; mappa a quattro lati con zoom e trascinamento fatta; restano galleria di «+ Nuovo», generazione con Claude, Git e Python, figure.
 Origine: la «guida documentazione per situazioni» di Ste e tre documentazioni già fatte (Git, Python, MikroTik).
 
 ## 1. A cosa serve
@@ -56,7 +56,7 @@ Git, Python e MikroTik vengono **convertiti** dai tre artifact nei file del §3 
 Niente flashcard, niente quiz. Figure SVG animate (Git `aree`, `head`, `ff`, `merge`, `rebase`): in un secondo passo, con un solo meccanismo comune. Temi diversi per documentazione: no.
 
 ## 8. Tappe di costruzione
-(2026-10-14: fatte 1, 3, 4 e una mappa essenziale a griglia di rami al posto della 2; la mappa a quattro lati con pan/zoom resta da fare.)
+(2026-10-14: fatte 1, 3, 4 e la mappa a quattro lati con pan/zoom (prima una griglia, poi sostituita) al posto della 2.)
 1. Formato file + lettura/validazione + conversione dei tre artifact + test.
 2. Mappa (pan/zoom, fuoco, ricerca).
 3. Scheda ricetta + prima-e-dopo.

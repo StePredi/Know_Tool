@@ -35,7 +35,7 @@
 - Installer finale (.exe) con electron-builder, a fine app
 - Provare la scheda riassuntiva su Windows (con una proposta vera scritta da Claude)
 - Provare la Home generale su Windows (schede, albero, nuova materia/cartella, rinomina, archivia)
-- Provare «Per situazioni» (MikroTik) su Windows; poi: mappa a quattro lati con zoom, Git e Python come documentazioni, galleria di «+ Nuovo», generazione con Claude, figure SVG
+- Provare «Per situazioni» (MikroTik) su Windows; poi: Git e Python come documentazioni, galleria di «+ Nuovo», generazione con Claude, figure SVG
 - Home generale, giri successivi: nuovi tipi di documento da «+ Nuovo», ricerca nei contenuti, spostare con trascinamento, nuovo autore
 
 ---

@@ -44,7 +44,7 @@ export function VistaSituazioni({ rel }: { rel: string }): ReactNode {
   if (!dati || !idx) return <div className="sit"><div className="s-in"><p>Apro la documentazione…</p></div></div>
   const ctx = { rel, dati, ...idx }
   return (
-    <div className="sit">
+    <div className={'sit' + (v.scheda && dati.schede[v.scheda] ? '' : ' sit-mappa')}>
       <div className="s-in">
         {v.scheda && dati.schede[v.scheda] ? <SchedaVista ctx={ctx} id={v.scheda} /> : <MappaSit ctx={ctx} />}
       </div>
