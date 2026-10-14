@@ -290,24 +290,27 @@ a { color: var(--focus); text-decoration: underline; text-underline-offset: 2px;
 .sit-mappa .s-top { margin-bottom: 10px; }
 .sit-mappa .s-hint { margin-top: 8px; margin-bottom: 8px; }
 .s-vpw { position: relative; flex: 1; min-height: 300px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.s-vp { position: absolute; inset: 0; overflow: auto; cursor: grab; background: var(--bg); overscroll-behavior: contain; }
+.s-vp { position: absolute; inset: 0; overflow: auto; display: flex; cursor: grab; background-color: var(--surface); background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 26px 26px; overscroll-behavior: contain; }
+.s-sizer { position: relative; flex: none; margin: auto; }
 .s-vp.drag { cursor: grabbing; user-select: none; }
 .s-stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
 .s-stage svg { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
-.s-lk { fill: none; stroke: var(--c); stroke-width: 2.4; stroke-linecap: round; opacity: 0.9; transition: opacity 0.2s; }
+.s-lk { fill: none; stroke: var(--c); stroke-width: 2.4; stroke-linecap: round; transition: opacity 0.2s; }
+.s-lk.thin { stroke-width: 1.6; }
+.s-lk.neutro { stroke: var(--mute); }
 .s-nd { position: absolute; transition: opacity 0.2s, transform 0.15s; }
 .s-nd.dim, .s-lk.dim { opacity: 0.18; }
 .s-centro { background: var(--ink); color: var(--surface); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; line-height: 1.2; padding: 6px 10px; }
 .s-centro b { font-size: 22px; }
 .s-centro span { font-size: 13px; opacity: 0.8; margin-top: 3px; }
-.s-ramo { display: flex; align-items: center; gap: 9px; padding: 0 14px 0 7px; background: var(--c); color: var(--on); border: 0; border-radius: 999px; font-weight: 700; font-size: 15px; text-align: left; cursor: pointer; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12); }
-.s-ramo i { flex: none; width: 26px; height: 26px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); color: #151a2e; display: grid; place-items: center; font-style: normal; font-size: 14px; }
+.s-ramo { display: flex; align-items: center; gap: 9px; padding: 0 14px 0 7px; background: var(--c); color: var(--on); border: 0; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: left; cursor: pointer; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12); }
+.s-ramo i { flex: none; width: 26px; height: 26px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); color: #151a2e; display: grid; place-items: center; font-style: normal; font-weight: 700; font-size: 14px; }
 .s-ramo span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-ramo[aria-pressed=true] { outline: 3px solid var(--ink); outline-offset: 2px; }
-.s-gr { background: var(--surface); color: var(--k); border: 2px solid var(--c); border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
-.s-sc { background: var(--t); color: var(--k); border: 0; border-radius: 12px; text-align: left; padding: 5px 24px 5px 10px; display: flex; flex-direction: column; justify-content: center; gap: 3px; overflow: hidden; cursor: pointer; }
-.s-sc:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(10, 15, 40, 0.18); }
-.s-sc .lt { font-size: 14.5px; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-gr { background: var(--surface); color: var(--k); border: 2px solid var(--c); border-radius: 999px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; white-space: nowrap; }
+.s-sc { background: var(--t); color: var(--k); border: 0; border-radius: 10px; text-align: left; padding: 6px 24px 6px 10px; display: flex; flex-direction: column; justify-content: center; gap: 4px; overflow: hidden; cursor: pointer; }
+.s-sc:hover { box-shadow: 0 0 0 2px var(--c); }
+.s-sc .lt { font-size: 15.5px; font-weight: 600; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-sc .lk { align-self: flex-start; max-width: 100%; font: 11px var(--mono); background: var(--surface); color: var(--k); border-radius: 5px; padding: 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-sc .lw { font-size: 12.5px; font-style: italic; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .s-sc .ok { position: absolute; right: 7px; top: 5px; width: 18px; height: 18px; border-radius: 50%; background: var(--c); color: var(--on); display: grid; place-items: center; }

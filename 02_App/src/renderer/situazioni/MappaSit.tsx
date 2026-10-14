@@ -60,13 +60,19 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
     el.scrollTop = uy * nz - cy
     ricorda()
   }
+  /** il nodo centrale al centro della finestra */
+  const centra = (): void => {
+    const el = vp.current
+    if (!el) return
+    el.scrollLeft = Math.max(0, (lay.W * z.current - el.clientWidth) / 2)
+    el.scrollTop = Math.max(0, (lay.H * z.current - el.clientHeight) / 2)
+  }
   const tutta = (): void => {
     const el = vp.current
     if (!el) return
     z.current = Math.max(ZMIN, Math.min(1.5, Math.min(el.clientWidth / lay.W, el.clientHeight / lay.H)))
     applica()
-    el.scrollLeft = 0
-    el.scrollTop = 0
+    centra()
     ricorda()
   }
 
@@ -81,10 +87,9 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
       el.scrollLeft = salvata.l
       el.scrollTop = salvata.t
     } else {
-      z.current = Math.max(0.6, Math.min(1, el.clientWidth / lay.W))
+      z.current = Math.max(0.5, Math.min(1, el.clientWidth / lay.W, el.clientHeight / lay.H))
       applica()
-      el.scrollLeft = Math.max(0, (lay.W * z.current - el.clientWidth) / 2)
-      el.scrollTop = Math.max(0, (lay.H * z.current - el.clientHeight) / 2)
+      centra()
       ricorda()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -200,12 +205,14 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
       )}
       <div className="s-vpw">
         <div className="s-vp" ref={vp} onScroll={ricorda}>
-          <div ref={sizer} style={{ position: 'relative' }}>
+          <div ref={sizer} className="s-sizer">
             <div ref={palco} className="s-stage" style={{ width: lay.W, height: lay.H }}>
               <svg width={lay.W} height={lay.H} viewBox={`0 0 ${lay.W} ${lay.H}`} aria-hidden="true">
-                {lay.link.map((l, i) => (
-                  <path key={i} className={'s-lk' + (sfumato(l.bi) ? ' dim' : '')} data-c={dati.indice.rami[l.bi]!.colore} d={l.d} />
-                ))}
+                <g transform={`translate(${lay.ox} ${lay.oy})`}>
+                  {lay.link.map((l, i) => (
+                    <path key={i} className={'s-lk' + (l.sottile ? ' thin' : '') + (l.bi < 0 ? ' neutro' : '') + (sfumato(l.bi) ? ' dim' : '')} data-c={l.bi < 0 ? undefined : dati.indice.rami[l.bi]!.colore} d={l.d} />
+                  ))}
+                </g>
               </svg>
               {lay.nodi.map((n, i) => {
                 const st = { left: n.x, top: n.y, width: n.w, height: n.h }
