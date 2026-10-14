@@ -1,0 +1,29 @@
+id: pin-solo-ingresso
+tipo: ricetta
+titolo: Usare i pin solo ingresso (34, 35, 36, 39)
+sigla: Solo ingresso
+comando: pinMode(34, INPUT)
+frase: pin che non possono uscire
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: regole d''uso'
+parole: solo ingresso input only gpio34 gpio35 gpio36 gpio39 vp vn pullup non funziona analogico adc1
+quando: Quando leggi un sensore analogico o un segnale e vuoi usare uno dei pin VP, VN, D34, D35.
+fasi:
+- nome: Configura
+  righe:
+  - codice: pinMode(«PIN», INPUT);
+    commento: solo INPUT
+    trappola: 'INPUT_PULLUP e INPUT_PULLDOWN non funzionano su questi pin: serve una resistenza esterna.'
+- nome: Leggi
+  righe:
+  - codice: analogRead(«PIN»);
+    commento: 'sono pin ADC1: vanno bene anche con il Wi-Fi acceso'
+    trappola: 'digitalWrite su questi pin non fa niente: sono solo ingressi.'
+segnaposto:
+  PIN:
+    esempio: '34'
+    spiega: uno fra 34, 35, 36, 39
+varianti: []
+vicine:
+- adc-leggi
+- pin-ingresso
+- pin-scegli

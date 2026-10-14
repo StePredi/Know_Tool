@@ -17,9 +17,25 @@ rami:
     - monitor-seriale
     - blink-led
 - id: b2
-  nome: Pin digitali
+  nome: Pin e I/O della scheda
   colore: teal
-  lato: L
+  lato: R
+  voci:
+  - gruppo: Capire i pin
+    schede:
+    - pin-mappa
+    - pin-scegli
+    - pin-solo-ingresso
+  - gruppo: Già sulla scheda
+    schede:
+    - led-integrato
+    - pulsante-boot
+    - riavvia-scheda
+    - sensori-interni
+- id: b3
+  nome: Pin digitali
+  colore: green
+  lato: R
   voci:
   - schede:
     - pin-uscita
@@ -27,26 +43,24 @@ rami:
     - pin-ingresso
   - schede:
     - pullup-pulsante
-- id: b3
+- id: b4
   nome: Interrupt
-  colore: green
-  lato: R
+  colore: yellow
+  lato: T
   voci:
   - gruppo: Sui pin
     schede:
     - interrupt-pin
     - isr-regole
     - interrupt-modo
-  - gruppo: Altri casi
-    schede:
-    - interrupt-touch
+  - schede:
     - interrupt-stacca
   - schede:
     - interrupt-led-esempio
-- id: b4
+- id: b5
   nome: Timer
-  colore: yellow
-  lato: L
+  colore: orange
+  lato: T
   voci:
   - gruppo: Impostare
     schede:
@@ -55,13 +69,43 @@ rami:
     - timer-cambia
   - schede:
     - timer-lampeggio
-- id: b5
+- id: b6
+  nome: Touch
+  colore: pink
+  lato: T
+  voci:
+  - gruppo: Prepararsi
+    schede:
+    - touch-pin
+    - touch-leggi
+    - touch-soglia
+  - gruppo: Reagire al tocco
+    schede:
+    - interrupt-touch
+    - touch-esempio
+- id: b7
+  nome: Analogico, PWM e seriali
+  colore: indigo
+  lato: L
+  voci:
+  - gruppo: Analogico
+    schede:
+    - adc-leggi
+    - dac-scrivi
+  - gruppo: Uscite e comunicazione
+    schede:
+    - pwm-ledc
+    - uart-secondo
+    - spi-pin
+- id: b8
   nome: Sensori I2C
-  colore: orange
-  lato: R
+  colore: violet
+  lato: L
   voci:
   - schede:
     - i2c-indirizzo
+  - schede:
+    - i2c-pin-cambia
   - gruppo: AHT20
     schede:
     - aht20-leggi
@@ -71,10 +115,10 @@ rami:
     - bmp280-leggi
     - bmp280-indirizzo
     - bmp280-modalita
-- id: b6
+- id: b9
   nome: Due schede sul bus
   colore: red
-  lato: T
+  lato: L
   voci:
   - schede:
     - i2c-collega
@@ -86,9 +130,9 @@ rami:
     schede:
     - master-scrive
     - slave-riceve
-- id: b7
+- id: b10
   nome: Capire il bus
-  colore: violet
+  colore: teal
   lato: B
   voci:
   - gruppo: Il segnale
@@ -103,7 +147,7 @@ rami:
     - pullup-valore
     - livelli-tensione
     - slave-lento
-- id: b8
+- id: b11
   nome: Quando non funziona
   colore: slate
   lato: B
@@ -113,8 +157,10 @@ rami:
     - porta-non-vista
     - simboli-strani
     - errore-esp
-  - gruppo: I sensori e il bus
+    - avvio-bloccato
+  - gruppo: Letture e bus
     schede:
     - nessuno-risponde
     - sensore-non-trovato
     - valori-aht20
+    - adc-wifi

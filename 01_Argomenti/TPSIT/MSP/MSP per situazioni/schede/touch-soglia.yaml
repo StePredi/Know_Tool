@@ -1,0 +1,30 @@
+id: touch-soglia
+tipo: ricetta
+titolo: Scegliere la soglia del touch
+sigla: Soglia touch
+comando: Threshold
+frase: un valore fra libero e toccato
+fonte: Slide ESP32 GPIO e timer
+parole: soglia threshold touch scegliere valore 80 libero toccato calibrare tra 60 100
+quando: Quando devi passare un valore a touchAttachInterrupt.
+fasi:
+- nome: Misura
+  righe:
+  - codice: 'libero: valore > 100'
+    commento: senza toccare
+  - codice: 'toccato: valore < 60 circa'
+    commento: con il dito sul pin
+- nome: Scegli
+  righe:
+  - codice: soglia = un valore in mezzo, per esempio «SOGLIA»
+    commento: l'interrupt scatta quando il valore scende sotto la soglia
+    trappola: 'I valori cambiano con scheda e cavo: misura sempre con touchRead, non fidarti solo dei
+      numeri delle slide.'
+segnaposto:
+  SOGLIA:
+    esempio: '80'
+    spiega: fra 60 e 100
+varianti: []
+vicine:
+- touch-leggi
+- interrupt-touch

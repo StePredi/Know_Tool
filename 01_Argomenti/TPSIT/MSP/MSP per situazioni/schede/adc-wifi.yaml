@@ -1,0 +1,21 @@
+id: adc-wifi
+tipo: ricetta
+titolo: analogRead dà valori strani con il Wi-Fi
+sigla: ADC2 e Wi-Fi
+comando: ADC1 invece di ADC2
+frase: il Wi-Fi occupa l'ADC2
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: regole d''uso'
+parole: adc2 wifi analogread valori strani errori zero pin 4 2 15 13 12 14 27 25 26 adc1
+quando: Quando leggi un pin analogico e con il Wi-Fi acceso il valore è sbagliato.
+fasi:
+- nome: Soluzione
+  righe:
+  - codice: sposta il segnale su un pin ADC1
+    commento: GPIO 36 · 39 · 34 · 35 · 32 · 33
+    trappola: Con il Wi-Fi acceso i pin dell'ADC2 (4, 2, 15, 13, 12, 14, 27, 25, 26) non si leggono con
+      analogRead.
+segnaposto: {}
+varianti: []
+vicine:
+- adc-leggi
+- pin-scegli

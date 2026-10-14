@@ -31,6 +31,10 @@ Altre periferiche: sensori Hall, interfaccia SD card, Ethernet.
 
 ---
 
+> Lo schema completo dei pin, il touch e gli I/O già presenti sulla scheda sono in `esp32_pin_touch_io.md`.
+
+---
+
 ## GPIO: ingressi e uscite digitali
 
 Un pin può essere:

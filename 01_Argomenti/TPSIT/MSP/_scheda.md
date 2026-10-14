@@ -9,6 +9,7 @@
 - `fonti/` → slide e PDF del corso (originali, mai modificati)
 - `appunti/` → la **teoria**: IoT, hardware dell'ESP32 e dei sensori, protocollo I2C
 - `pratica/` → la **parte pratica**: ambiente di lavoro, codice, esercizi
+- `schemi/` → schema dei pin (immagini originali e versione cliccabile), schema a blocchi, specifiche
 - `MSP per situazioni/` → la documentazione «Per situazioni» (si apre nell'app)
 
 ---

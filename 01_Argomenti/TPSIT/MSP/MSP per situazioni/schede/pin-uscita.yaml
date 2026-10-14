@@ -36,3 +36,4 @@ varianti: []
 vicine:
 - blink-led
 - pin-ingresso
+- pin-mappa

@@ -1,0 +1,24 @@
+id: avvio-bloccato
+tipo: ricetta
+titolo: La scheda non parte o l'upload fallisce
+sigla: Avvio bloccato
+comando: pin 0 · 2 · 5 · 12 · 15
+frase: qualcosa tiene un pin di avvio
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: regole d''uso'
+parole: avvio bloccato non parte upload fallisce boot gpio12 gpio0 gpio2 gpio15 gpio5 strapping scollega
+quando: Quando con un modulo collegato la scheda non carica il programma o non si avvia.
+fasi:
+- nome: Controlla
+  righe:
+  - codice: scollega tutto dai pin 0 · 2 · 5 · 12 · 15
+    commento: e riprova l'upload
+    trappola: Il livello di questi pin all'accensione influisce sull'avvio; il GPIO12 alto può impedirlo.
+  - codice: tieni premuto BOOT durante la connessione
+    commento: come nell'upload normale
+  - codice: ricollega il modulo e sposta il cavo su un pin tranquillo
+    commento: vedi «Quale pin uso?»
+segnaposto: {}
+varianti: []
+vicine:
+- upload-scheda
+- pin-scegli

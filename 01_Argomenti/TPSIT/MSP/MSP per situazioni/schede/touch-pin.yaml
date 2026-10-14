@@ -1,0 +1,29 @@
+id: touch-pin
+tipo: ricetta
+titolo: Sapere quali pin sono touch
+sigla: Pin touch
+comando: Touch0 … Touch9
+frase: dieci pin sensibili al tocco
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: Touch1'
+parole: touch pin capacitivo touch0 touch2 touch3 touch4 touch5 touch6 touch7 touch8 touch9 gpio4 gpio2
+  gpio15 gpio13 gpio12 gpio14 gpio27 gpio33 gpio32 t0 t9
+quando: Quando vuoi usare un dito (o una placca metallica) al posto di un pulsante.
+fasi:
+- nome: Corrispondenze con i GPIO
+  righe:
+  - codice: Touch0 = GPIO4 · Touch2 = GPIO2 · Touch3 = GPIO15
+    commento: lato destro della scheda
+  - codice: Touch4 = GPIO13 · Touch5 = GPIO12 · Touch6 = GPIO14
+    commento: lato sinistro
+  - codice: Touch7 = GPIO27 · Touch8 = GPIO33 · Touch9 = GPIO32
+    commento: lato sinistro
+    trappola: 'I canali sono 10: il decimo, Touch1, è il GPIO0 (il pulsante BOOT) e non sta sui pin della
+      scheda (nota).'
+segnaposto: {}
+varianti:
+- codice: T0 … T9
+  spiega: costanti del core Arduino-ESP32 al posto del numero GPIO (nota)
+vicine:
+- touch-leggi
+- pin-mappa
+- interrupt-touch

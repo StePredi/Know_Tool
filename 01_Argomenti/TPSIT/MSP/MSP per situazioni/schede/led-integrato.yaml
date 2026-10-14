@@ -1,0 +1,30 @@
+id: led-integrato
+tipo: ricetta
+titolo: Usare il LED già presente sulla scheda
+sigla: LED integrato
+comando: pinMode(2, OUTPUT)
+frase: nessun cablaggio
+fonte: Introduzione ESP32 · TPSIT 2026/27, LED sulla scheda (p. 16)
+parole: led integrato scheda rosso gpio2 on board blink accendere spegnere pin 2 senza resistenza
+quando: Quando vuoi una prova rapida senza collegare nulla.
+fasi:
+- nome: Configura
+  righe:
+  - codice: pinMode(2, OUTPUT);
+    commento: il LED rosso è sul GPIO2
+- nome: Accendi e spegni
+  righe:
+  - codice: digitalWrite(2, HIGH);
+    commento: acceso
+  - codice: digitalWrite(2, LOW);
+    commento: spento
+    trappola: 'Il GPIO2 è anche un pin di avvio e un pin touch: non collegarci altro che lo tenga basso
+      all''accensione.'
+segnaposto: {}
+varianti:
+- codice: '#define LED 2'
+  spiega: per non scrivere il numero ovunque
+vicine:
+- blink-led
+- pin-uscita
+- pulsante-boot

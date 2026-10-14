@@ -1,0 +1,25 @@
+id: spi-pin
+tipo: ricetta
+titolo: Sapere quali pin sono SPI
+sigla: Pin SPI
+comando: VSPI · HSPI
+frase: due gruppi di pin
+fonte: Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14)
+parole: spi pin vspi hspi mosi miso sck clk cs gpio18 gpio19 gpio23 gpio5 gpio14 gpio12 gpio13 gpio15
+quando: Quando devi collegare un modulo SPI (display, SD, radio).
+fasi:
+- nome: Gruppo «V» (VSPI)
+  righe:
+  - codice: SCK = GPIO18 · MISO = GPIO19 · MOSI = GPIO23 · CS = GPIO5
+    commento: l'SPI di default con i nomi Arduino
+    trappola: 'Il CS è il GPIO5, un pin di avvio: non collegarci cose che lo tengono basso all''accensione.'
+- nome: Gruppo «H» (HSPI)
+  righe:
+  - codice: CLK = GPIO14 · MISO (Q) = GPIO12 · MOSI (ID) = GPIO13 · CS = GPIO15
+    commento: il secondo gruppo
+    trappola: 'Nello schema MISO e MOSI si chiamano HSPI_Q e HSPI_ID (nota: Q = MISO, ID = MOSI).'
+segnaposto: {}
+varianti: []
+vicine:
+- pin-mappa
+- pin-scegli

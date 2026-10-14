@@ -1,0 +1,47 @@
+id: touch-esempio
+tipo: ricetta
+titolo: 'Reagire al tocco: esempio completo'
+sigla: Esempio touch
+comando: touchAttachInterrupt(T0, …)
+frase: la ISR alza un flag, il loop stampa
+fonte: Slide ESP32 GPIO e timer · composto dalla sintassi delle slide
+parole: esempio touch interrupt completo flag volatile isr loop serial toccato
+quando: Quando vuoi un modello completo di tocco da copiare e adattare.
+fasi:
+- nome: Variabili e ISR
+  righe:
+  - codice: volatile bool toccato = false;
+    commento: il flag che la ISR cambia
+  - codice: |-
+      void IRAM_ATTR gotTouch() {
+        toccato = true;
+      }
+    commento: 'ISR cortissima: alza solo il flag'
+    trappola: 'Stampare nella ISR è una cattiva idea: la ISR deve essere breve. Si stampa nel loop().'
+- nome: setup e loop
+  righe:
+  - codice: |-
+      void setup() {
+        Serial.begin(115200);
+        touchAttachInterrupt(«PIN», gotTouch, «SOGLIA»);
+      }
+  - codice: |-
+      void loop() {
+        if (toccato) {
+          Serial.println("Toccato");
+          toccato = false;
+        }
+      }
+    commento: il loop controlla il flag
+segnaposto:
+  PIN:
+    esempio: T0
+    spiega: pin touch
+  SOGLIA:
+    esempio: '80'
+    spiega: soglia
+varianti: []
+vicine:
+- interrupt-touch
+- touch-soglia
+- isr-regole

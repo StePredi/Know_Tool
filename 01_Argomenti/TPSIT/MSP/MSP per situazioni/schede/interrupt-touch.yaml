@@ -30,5 +30,7 @@ varianti:
 - codice: touchAttachInterrupt(T0, gotTouch, 80);
   spiega: esempio con soglia 80
 vicine:
+- touch-pin
+- touch-soglia
+- touch-esempio
 - interrupt-pin
-- isr-regole

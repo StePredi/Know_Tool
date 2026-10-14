@@ -35,5 +35,6 @@ segnaposto:
 varianti: []
 vicine:
 - pullup-pulsante
+- pin-solo-ingresso
 - pin-uscita
 - interrupt-pin

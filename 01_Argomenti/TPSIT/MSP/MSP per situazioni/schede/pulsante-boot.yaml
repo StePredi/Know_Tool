@@ -1,0 +1,31 @@
+id: pulsante-boot
+tipo: ricetta
+titolo: Usare il pulsante BOOT come pulsante
+sigla: Pulsante BOOT
+comando: pinMode(0, INPUT_PULLUP)
+frase: un pulsante già pronto
+fonte: Introduzione ESP32 · TPSIT 2026/27, LED sulla scheda (p. 16) · Slide ESP32 GPIO e timer
+parole: boot pulsante gpio0 integrato input_pullup falling interrupt upload premuto
+quando: Quando vuoi un pulsante per provare un interrupt, senza cablare nulla.
+fasi:
+- nome: Configura
+  righe:
+  - codice: pinMode(0, INPUT_PULLUP);
+    commento: 'il BOOT è sul GPIO0: alto a riposo'
+- nome: Leggi
+  righe:
+  - codice: if (digitalRead(0) == LOW) { /* premuto */ }
+    commento: premuto = LOW
+  - codice: attachInterrupt(0, «ISR», FALLING);
+    commento: oppure con un interrupt, come nell'esempio delle slide
+    trappola: 'Il BOOT serve anche per l''upload: se lo tieni premuto all''accensione la scheda non parte
+      con il programma.'
+segnaposto:
+  ISR:
+    esempio: isr
+    spiega: funzione con IRAM_ATTR
+varianti: []
+vicine:
+- interrupt-led-esempio
+- pullup-pulsante
+- upload-scheda

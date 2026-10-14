@@ -1,0 +1,33 @@
+id: adc-leggi
+tipo: ricetta
+titolo: Leggere una tensione analogica
+sigla: ADC
+comando: analogRead
+frase: da tensione a numero
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: risoluzione e campo'
+parole: adc analogread tensione analogico ingresso 12 bit 4095 adc1 adc2 potenziometro trimmer
+quando: Quando devi leggere un valore che cambia con continuità (potenziometro, sensore analogico).
+fasi:
+- nome: Leggi
+  righe:
+  - codice: int v = analogRead(«PIN»);
+    commento: restituisce un numero
+    parti:
+    - voce: 0 … 4095
+      spiega: '12 bit: 0 = 0 V, 4095 = circa 3,3 V (nota)'
+    trappola: 'L''ingresso accetta al massimo 3,3 V: 5 V rovinano il pin.'
+- nome: Scegli il pin
+  righe:
+  - codice: 'ADC1: GPIO 36 · 39 · 34 · 35 · 32 · 33'
+    commento: sempre disponibili
+  - codice: 'ADC2: GPIO 4 · 2 · 15 · 13 · 12 · 14 · 27 · 25 · 26'
+    commento: non leggibili con il Wi-Fi acceso (nota)
+segnaposto:
+  PIN:
+    esempio: '34'
+    spiega: pin ADC
+varianti: []
+vicine:
+- pin-solo-ingresso
+- adc-wifi
+- dac-scrivi

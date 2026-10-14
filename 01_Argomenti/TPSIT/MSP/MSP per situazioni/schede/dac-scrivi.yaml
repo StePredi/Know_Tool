@@ -1,0 +1,29 @@
+id: dac-scrivi
+tipo: ricetta
+titolo: Produrre una tensione analogica
+sigla: DAC
+comando: dacWrite
+frase: da numero a tensione
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: funzione e risoluzione'
+parole: dac dacwrite uscita analogica gpio25 gpio26 dac1 dac2 tensione 8 bit 255
+quando: Quando vuoi una tensione variabile fra 0 e 3,3 V e non solo acceso/spento.
+fasi:
+- nome: Scrivi
+  righe:
+  - codice: dacWrite(«PIN», «VALORE»);
+    commento: genera la tensione
+    parti:
+    - voce: «VALORE»
+      spiega: '0 … 255 (8 bit): 0 = 0 V, 255 = circa 3,3 V (nota)'
+    trappola: 'Funziona solo sui due pin DAC: GPIO25 (DAC1) e GPIO26 (DAC2).'
+segnaposto:
+  PIN:
+    esempio: '25'
+    spiega: 25 oppure 26
+  VALORE:
+    esempio: '128'
+    spiega: circa metà tensione
+varianti: []
+vicine:
+- adc-leggi
+- pwm-ledc

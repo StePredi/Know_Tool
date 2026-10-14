@@ -1,0 +1,38 @@
+id: pin-mappa
+tipo: ricetta
+titolo: Leggere lo schema dei pin
+sigla: Schema dei pin
+comando: GPIO · D· · TX/RX
+frase: dal nome sulla scheda al numero nel codice
+fonte: Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14)
+parole: pinout schema pin gpio serigrafia d23 tx0 rx0 vp vn colori legenda piedini scheda numero 30 pin
+quando: Quando devi collegare qualcosa e non sai quale numero scrivere nel codice.
+fasi:
+- nome: Dal nome sulla scheda al GPIO
+  righe:
+  - codice: D23 → GPIO23
+    commento: le scritte «D» seguono il numero del GPIO
+    trappola: Nel codice si scrive il numero GPIO, non la posizione del pin sulla scheda.
+  - codice: TX0 = GPIO1 · RX0 = GPIO3
+    commento: la seriale usata da USB e monitor
+  - codice: TX2 = GPIO17 · RX2 = GPIO16
+    commento: la seconda seriale
+  - codice: VP = GPIO36 · VN = GPIO39
+    commento: ingressi analogici (chiamati anche SensVP e SensVN)
+- nome: Leggere i colori dello schema
+  righe:
+  - codice: arancione = ADC · giallo = DAC
+    commento: analogico in ingresso e in uscita
+  - codice: verde acqua = touch · verde = UART · blu scuro = SPI
+    commento: gli altri colori delle funzioni
+  - codice: viola = GPIO · rosso = alimentazione · nero = massa
+    commento: pin generici e alimentazione
+  - codice: linea ondulata = PWM
+    commento: uscita PWM disponibile
+    trappola: 'I numeri nei riquadri grigi sono i piedini del modulo, non i GPIO: non servono nel codice.'
+segnaposto: {}
+varianti: []
+vicine:
+- pin-scegli
+- pin-uscita
+- touch-pin

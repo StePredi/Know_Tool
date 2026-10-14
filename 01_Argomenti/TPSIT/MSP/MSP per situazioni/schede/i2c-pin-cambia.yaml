@@ -1,0 +1,30 @@
+id: i2c-pin-cambia
+tipo: ricetta
+titolo: Usare altri pin per l'I2C
+sigla: Pin I2C diversi
+comando: Wire.begin(SDA, SCL)
+frase: non sempre 21 e 22
+fonte: 'Introduzione ESP32 · TPSIT 2026/27 · nota: Wire.begin con i pin'
+parole: i2c pin sda scl cambiare altri pin wire begin gpio21 gpio22 default
+quando: Quando 21 e 22 sono già occupati da altro.
+fasi:
+- nome: Prima, il default
+  righe:
+  - codice: Wire.begin();
+    commento: usa GPIO21 (SDA) e GPIO22 (SCL)
+- nome: Pin diversi
+  righe:
+  - codice: Wire.begin(«SDA», «SCL»);
+    commento: indica tu i pin (nota)
+    trappola: Servono sempre le pull-up sulle due linee.
+segnaposto:
+  SDA:
+    esempio: '21'
+    spiega: pin dei dati
+  SCL:
+    esempio: '22'
+    spiega: pin del clock
+varianti: []
+vicine:
+- i2c-collega
+- pin-mappa

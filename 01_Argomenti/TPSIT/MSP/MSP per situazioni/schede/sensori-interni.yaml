@@ -1,0 +1,31 @@
+id: sensori-interni
+tipo: ricetta
+titolo: Sensori dentro il chip
+sigla: Sensori interni
+comando: temperatura · Hall
+frase: senza pin da collegare
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · Introduzione ESP32 · TPSIT 2026/27
+  · nota: funzioni Arduino'
+parole: sensore temperatura interno hall dentro chip temperatureread hallread sensvp sensvn senza collegare
+quando: Quando vuoi sapere cosa il chip misura da solo.
+fasi:
+- nome: Che cosa c'è
+  righe:
+  - codice: sensore di temperatura nel chip
+    commento: non ha un pin
+  - codice: sensore Hall nel chip
+    commento: non ha un pin, ma usa i pin SensVP e SensVN (GPIO36 e 39)
+- nome: Come si leggono (nota, non dalle slide)
+  righe:
+  - codice: temperatureRead();
+    commento: temperatura del chip in °C, indicativa
+    trappola: 'È la temperatura del chip, non dell''ambiente: per l''ambiente servono AHT20 o BMP280.'
+  - codice: hallRead();
+    commento: valore del sensore Hall
+    trappola: Esiste nel core Arduino-ESP32 2.x e non è più disponibile nel 3.x. Con il Hall in uso, non
+      collegare nulla a GPIO36 e 39.
+segnaposto: {}
+varianti: []
+vicine:
+- aht20-leggi
+- bmp280-leggi

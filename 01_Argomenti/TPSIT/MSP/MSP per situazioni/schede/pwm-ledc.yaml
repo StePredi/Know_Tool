@@ -1,0 +1,48 @@
+id: pwm-ledc
+tipo: ricetta
+titolo: Variare la luminosità con il PWM
+sigla: PWM
+comando: ledcSetup · ledcWrite
+frase: 16 canali di PWM
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: funzioni LEDC'
+parole: pwm ledc ledcsetup ledcattachpin ledcwrite luminosità duty frequenza canale 16 canali
+quando: Quando vuoi dimmerare un LED o comandare un motore in modo graduale.
+fasi:
+- nome: Configura un canale
+  righe:
+  - codice: ledcSetup(«CANALE», «FREQ», «BIT»);
+    commento: canale, frequenza e risoluzione
+    parti:
+    - voce: «CANALE»
+      spiega: uno dei 16 canali PWM
+    - voce: «FREQ»
+      spiega: frequenza in Hz
+    - voce: «BIT»
+      spiega: risoluzione del duty in bit
+  - codice: ledcAttachPin(«PIN», «CANALE»);
+    commento: collega il pin al canale
+- nome: Scrivi il duty
+  righe:
+  - codice: ledcWrite(«CANALE», «DUTY»);
+    commento: da 0 a 2^bit − 1
+    trappola: 'Nota: queste funzioni sono quelle del core Arduino-ESP32 2.x; nel 3.x cambiano (ledcAttach).'
+segnaposto:
+  CANALE:
+    esempio: '0'
+    spiega: da 0 a 15
+  FREQ:
+    esempio: '5000'
+    spiega: Hz
+  BIT:
+    esempio: '8'
+    spiega: con 8 bit il duty va da 0 a 255
+  PIN:
+    esempio: '25'
+    spiega: un pin che può essere uscita
+  DUTY:
+    esempio: '128'
+    spiega: circa metà
+varianti: []
+vicine:
+- dac-scrivi
+- pin-uscita

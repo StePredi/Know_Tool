@@ -1,0 +1,43 @@
+id: uart-secondo
+tipo: ricetta
+titolo: Usare la seconda seriale
+sigla: Serial2
+comando: Serial2.begin
+frase: TX2 e RX2
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: funzione'
+parole: uart serial2 tx2 rx2 gpio16 gpio17 seconda seriale baud collegare modulo gps
+quando: Quando devi parlare con un modulo seriale lasciando libero il monitor seriale.
+fasi:
+- nome: Avvia
+  righe:
+  - codice: Serial2.begin(«BAUD», SERIAL_8N1, «RX», «TX»);
+    commento: velocità e pin
+    parti:
+    - voce: «RX»
+      spiega: GPIO16 (RX2)
+    - voce: «TX»
+      spiega: GPIO17 (TX2)
+    trappola: 'RX va collegato al TX dell''altro dispositivo, e TX all''RX: si incrociano.'
+- nome: Usa
+  righe:
+  - codice: Serial2.print(«DATI»);
+    commento: invia
+  - codice: Serial2.available();
+    commento: quanti byte sono arrivati
+segnaposto:
+  BAUD:
+    esempio: '9600'
+    spiega: velocità del dispositivo
+  RX:
+    esempio: '16'
+    spiega: GPIO16
+  TX:
+    esempio: '17'
+    spiega: GPIO17
+  DATI:
+    esempio: '"ciao"'
+    spiega: quello da inviare
+varianti: []
+vicine:
+- monitor-seriale
+- pin-mappa

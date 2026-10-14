@@ -1,0 +1,28 @@
+id: touch-leggi
+tipo: ricetta
+titolo: Leggere il valore del tocco
+sigla: Valore touch
+comando: touchRead
+frase: quanto vale il dito?
+fonte: 'Slide ESP32 GPIO e timer · nota: touchRead'
+parole: touchread valore touch leggere misurare libero toccato 100 60 stampa monitor seriale
+quando: Quando vuoi vedere i valori reali per scegliere la soglia.
+fasi:
+- nome: Stampa il valore
+  righe:
+  - codice: Serial.begin(«BAUD»);
+    commento: nel setup()
+  - codice: Serial.println(touchRead(«PIN»));
+    commento: nel loop(), poi delay(200)
+    trappola: 'Il valore scende quando ti avvicini: libero > 100, toccato < 60 circa.'
+segnaposto:
+  BAUD:
+    esempio: '115200'
+    spiega: velocità del monitor seriale
+  PIN:
+    esempio: T0
+    spiega: pin touch (T0 o GPIO4)
+varianti: []
+vicine:
+- touch-soglia
+- monitor-seriale

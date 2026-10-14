@@ -1,0 +1,26 @@
+id: riavvia-scheda
+tipo: ricetta
+titolo: Riavviare la scheda e leggere i LED
+sigla: EN e LED di alimentazione
+comando: pulsante EN
+frase: reset e spia di alimentazione
+fonte: Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · Introduzione ESP32 · TPSIT 2026/27,
+  LED sulla scheda (p. 16)
+parole: en reset riavvia riavvio pulsante led alimentazione power spia accesa scheda
+quando: Quando il programma è bloccato o non sai se la scheda è alimentata.
+fasi:
+- nome: Riavvio
+  righe:
+  - codice: premi il pulsante EN
+    commento: riavvia la scheda e rilancia il programma
+    trappola: 'Non cancella il programma: lo fa ripartire da capo.'
+- nome: Alimentazione
+  righe:
+  - codice: LED di alimentazione acceso
+    commento: la scheda riceve corrente
+    trappola: 'Non si comanda dal codice: se è spento controlla il cavo USB.'
+segnaposto: {}
+varianti: []
+vicine:
+- upload-scheda
+- pulsante-boot
