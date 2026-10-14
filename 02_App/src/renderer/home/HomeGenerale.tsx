@@ -227,8 +227,6 @@ export function HomeGenerale() {
   const recenti = h.recenti.map((r) => trova(h.albero, r.rel)).filter((n): n is NodoArg => !!n).slice(0, 4)
   const preferiti = h.preferiti.map((r) => trova(h.albero, r)).filter((n): n is NodoArg => !!n)
 
-  const percorsoSegmenti = attuale ? [...antenati(attuale.rel), attuale.rel] : []
-
   const nuovoTesto = async (): Promise<void> => {
     if (!attuale?.autoreId) return
     const st = useStore.getState()
@@ -296,15 +294,12 @@ export function HomeGenerale() {
       <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <div style={{ flex: 'none', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10, padding: '12px 22px', borderBottom: '1px solid var(--line2)', background: 'var(--bg)' }}>
           {!h.alberoAperto && <button type="button" className="hd-b" aria-label="Mostra l'albero" title="Mostra l'albero" onClick={() => h.imposta({ alberoAperto: true })}><Icona nome="menu" size={16} /></button>}
-          <nav aria-label="Percorso" style={{ display: 'flex', alignItems: 'center', gap: 4, flex: '1 1 260px', minWidth: 0, flexWrap: 'wrap' }}>
-            <button type="button" className="chip" style={{ border: 0, background: 'transparent', fontSize: 17, fontWeight: 700, padding: '4px 6px' }} onClick={() => h.vai('')}>Home</button>
-            {percorsoSegmenti.map((r, i) => (
-              <span key={r} style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <Icona nome="dx" size={14} />
-                <button type="button" className="chip" style={{ border: 0, background: 'transparent', fontSize: 17, fontWeight: i === percorsoSegmenti.length - 1 ? 700 : 600, color: i === percorsoSegmenti.length - 1 ? 'var(--ink)' : 'var(--mute)', padding: '4px 6px' }} onClick={() => h.vai(r)}>{trova(h.albero, r)?.nome ?? r}</button>
-              </span>
-            ))}
-          </nav>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: '1 1 260px', minWidth: 0 }}>
+            {!radice && (
+              <button type="button" className="hd-b" aria-label="Torna alla cartella precedente" title="Indietro" onClick={() => h.vai(antenati(attuale!.rel).slice(-1)[0] ?? '')}><Icona nome="sx" size={16} /></button>
+            )}
+            <h1 style={{ margin: 0, fontSize: 20, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{attuale ? attuale.nome : 'Home'}</h1>
+          </div>
           <label style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
             <span style={{ position: 'absolute', left: 11, color: 'var(--mute)', display: 'inline-flex' }}><Icona nome="cerca" size={15} /></span>
             <input className="inp" type="search" aria-label="Cerca in tutte le materie" placeholder="Cerca in tutte le materie" value={h.query} onChange={(e) => h.imposta({ query: e.target.value })} style={{ width: 250, height: 36, borderRadius: 18, paddingLeft: 34, fontSize: 13.5 }} />
