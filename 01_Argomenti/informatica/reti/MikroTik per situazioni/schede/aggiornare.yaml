@@ -1,0 +1,41 @@
+id: aggiornare
+tipo: ricetta
+titolo: Aggiornare RouterOS e firmware della scheda
+sigla: Aggiornare il router
+comando: package update
+frase: prima il sistema, poi la scheda
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: update upgrade routerboard firmware versione check-for-updates reboot install package aggiornamento
+quando: Quando vuoi l'ultima versione di RouterOS e del firmware, per esempio su un router nuovo.
+fasi:
+- nome: Aggiorna il sistema
+  righe:
+  - codice: /system package update check-for-updates
+    commento: cerca le versioni disponibili
+    parti:
+    - voce: check-for-updates
+      spiega: contatta il server MikroTik e mostra la versione più recente
+  - codice: /system package update install
+    commento: scarica e riavvia
+    trappola: 'Il router scarica da Internet e poi si riavvia da solo: prima verifica che la porta esterna abbia IP e DNS.'
+- nome: Aggiorna il firmware
+  righe:
+  - codice: /system routerboard print
+    commento: confronta le due versioni
+    trappola: Il firmware nuovo è pronto solo se upgrade-firmware è più alto di current-firmware.
+  - codice: /system routerboard upgrade
+    commento: scrive il nuovo firmware
+  - codice: /system reboot
+    commento: lo applica
+    trappola: Il firmware si applica solo dopo un secondo riavvio, che devi dare tu.
+- nome: Controlla
+  righe:
+  - codice: /system resource print
+    commento: mostra la versione in uso
+segnaposto: {}
+varianti:
+- codice: /system package update set channel=long-term
+  spiega: sceglie il canale degli aggiornamenti
+vicine:
+- dhcp-client
+- identity

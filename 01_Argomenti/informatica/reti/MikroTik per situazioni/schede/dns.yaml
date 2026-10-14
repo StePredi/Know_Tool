@@ -1,0 +1,34 @@
+id: dns
+tipo: ricetta
+titolo: Far risolvere i nomi ai client che usano il router come DNS
+sigla: DNS per i client
+comando: ip dns set
+frase: il router fa da DNS
+fonte: Traccia MIK2 DHCP servers · Guida DHCP server MikroTik
+parole: dns allow-remote-requests server dns-server dhcp network client non risolvono nomi open resolver servers
+quando: Quando il DHCP dà ai client l'indirizzo del router come DNS e devono poter risolvere i nomi.
+fasi:
+- nome: Controlla
+  righe:
+  - codice: /ip dns print
+    commento: servers e allow-remote-requests
+    trappola: Con allow-remote-requests=no e il router come DNS dei client, il ping per numero funziona ma per nome no.
+- nome: Abilita
+  righe:
+  - codice: /ip dns set allow-remote-requests=yes
+    commento: il router risponde ai client
+    trappola: 'Con questa opzione attiva e senza regole firewall sull''input il router risponde ai DNS anche da fuori: tieni le regole di input.'
+- nome: Scegli i server
+  righe:
+  - codice: /ip dns set servers=«DNS»
+    commento: DNS usati dal router
+    trappola: 'Se il dhcp-client ha use-peer-dns=yes il router usa già quelli ricevuti: servers aggiunge quelli fissi.'
+segnaposto:
+  DNS:
+    esempio: 8.8.8.8
+    spiega: server DNS pubblico o della tua rete
+varianti: []
+vicine:
+- ping
+- dhcp-server
+- firewall-azzera

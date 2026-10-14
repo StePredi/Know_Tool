@@ -1,0 +1,44 @@
+id: dhcp-controlla
+tipo: ricetta
+titolo: Verificare che il DHCP funzioni e chi ha preso un IP
+sigla: Controllare il DHCP
+comando: dhcp-server lease print
+frase: chi ha preso un IP
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: lease dhcp-server print detail bound mac client assegnato leases flag X I invalid ipconfig renew 169.254
+quando: Quando vuoi verificare che il server DHCP funzioni e vedere a chi ha dato quali indirizzi.
+fasi:
+- nome: Controlla i server
+  righe:
+  - codice: /ip dhcp-server print detail
+    commento: configurazione dei server
+    parti:
+    - voce: flag X
+      spiega: 'disabled: il server è spento'
+    - voce: flag I
+      spiega: 'invalid: il server non può partire'
+    trappola: 'Un server con flag I non parte: di solito manca l''IP sull''interfaccia o l''interfaccia è spenta.'
+  - codice: /ip dhcp-server network print
+    commento: gateway e DNS dati ai client
+- nome: Guarda le lease
+  righe:
+  - codice: /ip dhcp-server lease print
+    commento: indirizzi assegnati e MAC
+    parti:
+    - voce: status bound
+      spiega: la lease è attiva
+    - voce: mac-address
+      spiega: identifica il dispositivo che l'ha ricevuta
+    trappola: 'Nessuna lease: il client non ha chiesto un IP (cavo, porta fuori dal bridge giusto) o il server è spento.'
+- nome: Rinnova sul PC
+  righe:
+  - codice: ipconfig /release
+    commento: 'Windows: lascia l''IP attuale'
+  - codice: ipconfig /renew
+    commento: richiede un nuovo IP
+    trappola: Un indirizzo 169.254.x.x dopo il rinnovo significa che il DHCP non ha risposto.
+segnaposto: {}
+varianti: []
+vicine:
+- dhcp-server
+- client-senza-ip

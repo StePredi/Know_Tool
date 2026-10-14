@@ -1,0 +1,37 @@
+id: scarica-file
+tipo: ricetta
+titolo: Portare i file di export e backup sul PC
+sigla: Scaricare i file
+comando: file print
+frase: dal router al PC
+fonte: Foglio comandi MikroTik
+parole: file print scaricare download winbox files scp copiare backup rsc trasferire
+quando: Quando i file di export e backup sono nel router e li vuoi sul tuo PC.
+fasi:
+- nome: Controlla i file
+  righe:
+  - codice: /file print
+    commento: elenco dei file nel router
+    parti:
+    - voce: name
+      spiega: nome del file con estensione
+    - voce: size
+      spiega: 'dimensione: un file di pochi byte è vuoto o interrotto'
+- nome: Scaricali
+  righe:
+  - codice: WinBox → Files → Download
+    commento: dal pannello Files
+    trappola: 'Se il file appena creato non compare in Files, riapri la lista: può apparire con qualche secondo di ritardo.'
+  - codice: scp admin@«INDIRIZZO»:«NOME».backup .
+    commento: 'dal PC: copia il file qui'
+segnaposto:
+  INDIRIZZO:
+    esempio: 192.168.88.1
+    spiega: indirizzo del router
+  NOME:
+    esempio: router1
+    spiega: nome del file
+varianti: []
+vicine:
+- backup
+- ripristina

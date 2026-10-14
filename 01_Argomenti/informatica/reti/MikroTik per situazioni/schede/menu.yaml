@@ -1,0 +1,51 @@
+id: menu
+tipo: ricetta
+titolo: Muovermi tra i menu di RouterOS
+sigla: Muovermi nei menu
+comando: /ip address print
+frase: percorsi, ?, Tab e print
+fonte: Foglio comandi MikroTik
+parole: menu percorso print detail help tab aiuto bad command name expected end of command where filtrare livello
+quando: Quando non sai in quale menu si trova un comando o come leggere il risultato.
+fasi:
+- nome: Entra nel menu
+  righe:
+  - codice: /ip address
+    commento: entri nel menu ip address
+    parti:
+    - voce: /ip address
+      spiega: 'il percorso: ogni parola è un livello di menu'
+    trappola: 'Nel menu sbagliato ricevi bad command name: leggi il prompt per capire dove sei e usa / per ripartire dalla radice.'
+  - codice: print
+    commento: elenco delle voci
+  - codice: ..
+    commento: sali di un livello
+- nome: Chiedi aiuto
+  righe:
+  - codice: '?'
+    commento: mostra cosa puoi scrivere qui
+    parti:
+    - voce: '?'
+      spiega: elenca i comandi e i parametri disponibili in quel punto
+  - codice: Tab
+    commento: completa o mostra le opzioni
+- nome: Leggi i dettagli
+  righe:
+  - codice: print detail
+    commento: tutti i campi di ogni voce
+    trappola: 'Senza detail la tabella nasconde alcuni campi, per esempio i DNS del dhcp-client: usa detail per leggerli tutti.'
+  - codice: print where «CAMPO»=«VALORE»
+    commento: filtra le voci
+segnaposto:
+  CAMPO:
+    esempio: interface
+    spiega: nome del campo da confrontare
+  VALORE:
+    esempio: ether1
+    spiega: valore da cercare
+varianti:
+- codice: /ip address print
+  spiega: stesso comando da qualsiasi menu, col percorso completo
+vicine:
+- find
+- errori

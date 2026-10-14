@@ -1,0 +1,51 @@
+id: subnet
+tipo: ricetta
+titolo: Calcolare la maschera dal numero di host
+sigla: Dimensione subnet
+comando: 2^n − 2
+frase: da quanti host alla maschera
+fonte: Foglio comandi MikroTik
+parole: subnet maschera prefisso host calcolo bit 2^n 126 30 14 /25 /27 /28 broadcast rete gateway quanti indirizzi
+quando: Quando devi creare una rete che contenga un certo numero di host e non sai quale prefisso scegliere.
+fasi:
+- nome: Conta i bit host
+  righe:
+  - codice: 2^«N» − 2 ≥ «HOST»
+    commento: indirizzi utili = 2^n − 2
+    parti:
+    - voce: − 2
+      spiega: rete e broadcast non si assegnano ai dispositivi
+    trappola: 'Il router occupa un indirizzo (il gateway): se i dispositivi sono 30, 2^5 − 2 = 30 non basta, serve n = 6.'
+- nome: Ricava il prefisso
+  righe:
+  - codice: prefisso = 32 − «N»
+    commento: i bit rimasti alla parte di rete
+    parti:
+    - voce: '32'
+      spiega: bit totali di un indirizzo IPv4
+- nome: Segna gli indirizzi
+  righe:
+  - codice: rete = primo indirizzo del blocco
+    commento: non assegnabile
+  - codice: gateway = rete + 1
+    commento: indirizzo del router
+  - codice: broadcast = ultimo indirizzo
+    commento: non assegnabile
+    trappola: 'Il pool DHCP deve finire un indirizzo prima del broadcast: in una /27 (da .0) l''ultimo utile è .30.'
+segnaposto:
+  N:
+    esempio: '7'
+    spiega: bit lasciati agli host (2^7 − 2 = 126)
+  HOST:
+    esempio: '90'
+    spiega: dispositivi che devono stare nella rete, gateway compreso
+varianti:
+- codice: 90 host → n=7 → /25
+  spiega: 126 indirizzi utili
+- codice: 30 host → n=5 → /27
+  spiega: '30 utili: 29 per i client più il router'
+- codice: 10 host → n=4 → /28
+  spiega: 14 indirizzi utili
+vicine:
+- ip-porta
+- dhcp-multi

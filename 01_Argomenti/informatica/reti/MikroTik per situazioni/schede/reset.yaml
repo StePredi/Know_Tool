@@ -1,0 +1,36 @@
+id: reset
+tipo: ricetta
+titolo: Ripartire con la config di fabbrica o con un router vuoto
+sigla: Ripartire da zero
+comando: reset-configuration
+frase: con o senza config di fabbrica
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: reset factory default no-default configurazione vuota reset totale fabbrica pulsante keep-users
+quando: Quando vuoi ripulire il router per iniziare una configurazione da capo.
+fasi:
+- nome: Guarda la config di fabbrica
+  righe:
+  - codice: /system default-configuration print
+    commento: mostra cosa carica il reset
+    parti:
+    - voce: default-configuration
+      spiega: lo script che RouterOS esegue quando torni ai valori di fabbrica
+- nome: Resetta
+  righe:
+  - codice: /system reset-configuration no-default=yes
+    commento: router completamente vuoto
+    parti:
+    - voce: no-default=yes
+      spiega: 'non carica la config di fabbrica: niente bridge, DHCP o NAT'
+    trappola: 'Il reset riavvia il router e cancella anche l''IP con cui sei collegato: dopo, riconnettiti dal MAC con WinBox.'
+segnaposto: {}
+varianti:
+- codice: /system reset-configuration
+  spiega: senza no-default torna alla configurazione di fabbrica
+- codice: keep-users=yes
+  spiega: mantiene gli utenti e le loro password
+- codice: tasto reset del router
+  spiega: reset fisico all'accensione, se hai perso l'accesso
+vicine:
+- ripristina
+- chiuso-fuori

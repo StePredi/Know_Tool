@@ -1,0 +1,33 @@
+id: spegni-porta
+tipo: ricetta
+titolo: Mettere fuori uso una porta senza cancellare nulla
+sigla: Spegnere una porta
+comando: disable / enable
+frase: senza perdere la config
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: disable enable interface spegnere disabilitare wifi porta flag X riaccendere
+quando: Quando vuoi spegnere una porta o una wifi per un test, mantenendo la sua configurazione.
+fasi:
+- nome: Spegni e riaccendi
+  righe:
+  - codice: /interface disable «INTERFACCIA»
+    commento: spegne la porta
+    trappola: 'Non spegnere la porta da cui sei collegato: perdi la sessione e devi rientrare da un''altra porta o dal MAC.'
+  - codice: /interface enable «INTERFACCIA»
+    commento: la riaccende
+segnaposto:
+  INTERFACCIA:
+    esempio: ether5
+    spiega: nome della porta o della wifi
+  WIFI1:
+    esempio: wlan1
+    spiega: prima wifi
+  WIFI2:
+    esempio: wlan2
+    spiega: seconda wifi
+varianti:
+- codice: /interface wireless disable «WIFI1»,«WIFI2»
+  spiega: più wifi insieme, separate da virgola
+vicine:
+- elenco-porte
+- wifi-ssid

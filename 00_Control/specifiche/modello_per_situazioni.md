@@ -1,6 +1,6 @@
 # Modello «Per situazioni» (linguaggio o strumento)
 
-Stato: **specifica da approvare** — nulla è ancora costruito.
+Stato: **tappe 1–4 costruite per MikroTik (scheda, mappa essenziale, ripasso, progresso)**; restano mappa a quattro lati con zoom, galleria di «+ Nuovo», generazione con Claude, Git e Python, figure.
 Origine: la «guida documentazione per situazioni» di Ste e tre documentazioni già fatte (Git, Python, MikroTik).
 
 ## 1. A cosa serve
@@ -28,12 +28,12 @@ Compare in «+ Nuovo» come modello, tra i «Consigliati» delle materie tecnich
 ```
 <cartella>/<nome>/
   indice.yaml        # titolo, centro (es. «Git»), rami (id, nome, colore, lato, gruppi, schede in ordine)
-  schede/<id>.md     # una scheda: frontmatter + sezioni
+  schede/<id>.yaml   # una scheda (YAML: scelto al posto di .md perché è tutta struttura)
   progresso.json     # schede ripassate, ultima aperta
 ```
 - `indice.yaml`: rami numerati per difficoltà (7–10), 2–8 foglie per ramo, sottorami solo se ≥ 2 foglie; lato `L R T B`.
-- Scheda `r` (ricetta): `titolo, sigla (s), comando (k), frase (w), fonte (src), parole (kw), quando`; poi fasi con righe `{c, m, a[], t}`, `segnaposto`, `varianti`, `vicine`, `figura?`.
-- Scheda `p` (prima e dopo): `prima`, `dopo` con parti segnate ⟦ ⟧, `uso`, `riconoscila`, `parti`, `trappola`, `varianti`, `vicine`.
+- Scheda `ricetta`: `id, titolo, sigla, comando, frase, fonte, parole, quando`; poi `fasi` con `righe` (`codice, commento, parti[{voce,spiega}], trappola`), `segnaposto {NOME: {esempio, spiega}}`, `varianti[{codice,spiega}]`, `vicine[]`.
+- Scheda `prima_dopo`: `prima`, `dopo` con parti segnate ⟦ ⟧, `uso`, `riconoscila`, `parti`, `trappola`, `varianti`, `vicine`.
 - Stesso modello dati della guida (branches + pages), ma scritto in file leggibili e modificabili a mano.
 - Una validazione (zod) controlla campi obbligatori, rami e vicine esistenti, segnaposto dichiarati.
 
@@ -56,6 +56,7 @@ Git, Python e MikroTik vengono **convertiti** dai tre artifact nei file del §3 
 Niente flashcard, niente quiz. Figure SVG animate (Git `aree`, `head`, `ff`, `merge`, `rebase`): in un secondo passo, con un solo meccanismo comune. Temi diversi per documentazione: no.
 
 ## 8. Tappe di costruzione
+(2026-10-14: fatte 1, 3, 4 e una mappa essenziale a griglia di rami al posto della 2; la mappa a quattro lati con pan/zoom resta da fare.)
 1. Formato file + lettura/validazione + conversione dei tre artifact + test.
 2. Mappa (pan/zoom, fuoco, ricerca).
 3. Scheda ricetta + prima-e-dopo.

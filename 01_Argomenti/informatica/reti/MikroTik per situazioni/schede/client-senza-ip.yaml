@@ -1,0 +1,36 @@
+id: client-senza-ip
+tipo: ricetta
+titolo: Il PC collegato non riceve un indirizzo
+sigla: Client senza IP
+comando: 169.254.x.x
+frase: il PC non ha preso l'IP
+fonte: Traccia verifica configurazione base · Guida DHCP server MikroTik
+parole: 169.254 apipa nessun ip dhcp non risponde client lease server dhcp non funziona porta bridge ip statico
+quando: Quando il PC collegato al router non riceve un indirizzo oppure ne ha uno 169.254.x.x.
+fasi:
+- nome: Controlla il router
+  righe:
+  - codice: /ip dhcp-server print
+    commento: il server c'è ed è attivo?
+    trappola: 'Flag X: abilitalo con enable. Flag I: manca l''IP sull''interfaccia.'
+  - codice: /ip address print where interface=«INTERFACCIA»
+    commento: c'è l'IP del gateway?
+  - codice: /interface bridge port print
+    commento: la porta del PC è nel bridge giusto?
+    trappola: Se la porta non sta nel bridge su cui lavora il server, il DHCP non la raggiunge.
+  - codice: /ip dhcp-server lease print
+    commento: il PC compare tra le lease?
+- nome: Controlla il PC
+  righe:
+  - codice: ipconfig /renew
+    commento: richiede un nuovo IP
+    trappola: 'Un PC con IP statico non chiede il DHCP: rimettilo su automatico.'
+segnaposto:
+  INTERFACCIA:
+    esempio: ethLanBridge
+    spiega: bridge o porta su cui lavora il server
+varianti: []
+vicine:
+- dhcp-controlla
+- dhcp-server
+- bridge-controlla

@@ -1,0 +1,40 @@
+id: ripristina
+tipo: ricetta
+titolo: Riportare il router a una configurazione salvata
+sigla: Tornare a una config
+comando: backup load / import
+frase: dopo un reset
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: restore backup load import reset ripristinare configurazione file upload rsc ricaricare
+quando: Quando devi riportare il router a una configurazione salvata, per esempio dopo un reset o su un router di ricambio.
+fasi:
+- nome: Parti da un router vuoto
+  righe:
+  - codice: /system reset-configuration no-default=yes
+    commento: router pulito
+    trappola: 'Dopo il reset il router non ha IP: collegati dal MAC con WinBox e carica il file dal pannello Files.'
+- nome: Ripristina il backup
+  righe:
+  - codice: /system backup load name=«NOME»
+    commento: carica e riavvia
+    trappola: 'Il router si riavvia da solo e la sessione cade: riconnettiti con l''IP della configurazione ripristinata.'
+- nome: Oppure ricarica lo script
+  righe:
+  - codice: /import file-name=«NOME».rsc
+    commento: esegue i comandi del file
+    trappola: 'Su un router non vuoto aggiunge voci o dà errori sui duplicati: parti da un reset senza default per avere lo stesso risultato.'
+- nome: Verifica
+  righe:
+  - codice: /system identity print
+    commento: il nome è quello salvato
+  - codice: /ip address print
+    commento: gli indirizzi sono quelli salvati
+segnaposto:
+  NOME:
+    esempio: router1
+    spiega: nome del file, senza estensione per il backup
+varianti: []
+vicine:
+- reset
+- export
+- backup

@@ -1,0 +1,27 @@
+id: bridge-controlla
+tipo: ricetta
+titolo: Vedere se c'è un bridge e quali porte contiene
+sigla: Vedere il bridge
+comando: bridge port print
+frase: chi è dentro il bridge
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: bridge port print interface bridge hw switch chip flag H porte appartenenza
+quando: Quando vuoi sapere se esiste un bridge e quali porte ne fanno parte.
+fasi:
+- nome: Leggi bridge e porte
+  righe:
+  - codice: /interface bridge print
+    commento: bridge esistenti
+  - codice: /interface bridge port print
+    commento: porte dentro ogni bridge
+    parti:
+    - voce: colonna BRIDGE
+      spiega: bridge a cui la porta è collegata
+    - voce: flag H
+      spiega: 'hardware offload: la porta è gestita dal chip switch'
+    trappola: 'Una porta che non compare in nessun bridge è isolata: serve un IP sulla porta stessa per raggiungere il router.'
+segnaposto: {}
+varianti: []
+vicine:
+- bridge-crea
+- togli-porta

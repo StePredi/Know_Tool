@@ -1,0 +1,27 @@
+id: log
+tipo: ricetta
+titolo: Leggere cosa registra il router
+sigla: Leggere il log
+comando: log print
+frase: cosa dice il router
+fonte: Aggiunta dall'autore (RouterOS)
+parole: log print follow topics dhcp error warning debug messaggi registro
+quando: Quando un servizio (DHCP, wifi, firewall) non fa quello che deve e vuoi vedere cosa registra il router.
+fasi:
+- nome: Leggi i messaggi
+  righe:
+  - codice: /log print
+    commento: messaggi recenti
+    trappola: 'Il log vive in memoria: dopo un riavvio i messaggi precedenti sono persi.'
+  - codice: /log print where topics~"«ARGOMENTO»"
+    commento: solo un argomento
+  - codice: /log print follow
+    commento: segue i nuovi messaggi
+segnaposto:
+  ARGOMENTO:
+    esempio: dhcp
+    spiega: 'argomento: dhcp, wireless, firewall, system'
+varianti: []
+vicine:
+- test-gradini
+- dhcp-controlla

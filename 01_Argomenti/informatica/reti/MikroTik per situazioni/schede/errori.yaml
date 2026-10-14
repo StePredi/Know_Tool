@@ -1,0 +1,46 @@
+id: errori
+tipo: ricetta
+titolo: Cosa significano i messaggi di errore di RouterOS
+sigla: Messaggi di errore
+comando: 'failure: …'
+frase: dal testo dell'errore alla causa
+fonte: Raccolti dalle schede
+parole: errore bad command name expected end of command syntax error invalid value for argument input does not match any value of interface no such item already have such address already have interface with such name failure
+quando: Quando RouterOS risponde con un errore e vuoi sapere cosa lo ha causato.
+fasi:
+- nome: Scritto male
+  righe:
+  - codice: bad command name
+    commento: comando o menu sbagliato
+    trappola: 'Controlla il prompt: sei nel menu giusto? Scrivi il percorso completo o torna alla radice con /.'
+  - codice: expected end of command (line 1 column 25)
+    commento: parametro non valido o spazio
+    trappola: Un valore con spazi va tra virgolette, per esempio ssid="mia rete"; il numero di colonna indica dove il comando si rompe.
+  - codice: syntax error (line 1 column 6)
+    commento: carattere fuori posto
+    trappola: 'Rileggi la riga dalla colonna indicata: spesso manca uno spazio o c''è un carattere in più.'
+  - codice: invalid value for argument address
+    commento: indirizzo scritto male
+    trappola: 'Controlla punti e prefisso: serve il formato 192.168.10.1/24.'
+- nome: Nome non trovato
+  righe:
+  - codice: input does not match any value of interface
+    commento: porta o interfaccia inesistente
+    trappola: 'Il nome non esiste o la porta è stata rinominata: leggi i nomi con /interface print.'
+  - codice: no such item
+    commento: numero di riga inesistente
+    trappola: 'Il numero non c''è più: usa [find …] al posto del numero.'
+- nome: Esiste già
+  righe:
+  - codice: 'failure: already have such address'
+    commento: indirizzo già assegnato
+    trappola: 'Guarda /ip address print: togli o modifica la voce che c''è già.'
+  - codice: 'failure: already have interface with such name'
+    commento: nome già usato
+    trappola: Scegli un altro nome o riusa l'interfaccia che esiste.
+segnaposto: {}
+varianti: []
+vicine:
+- menu
+- find
+- ip-porta

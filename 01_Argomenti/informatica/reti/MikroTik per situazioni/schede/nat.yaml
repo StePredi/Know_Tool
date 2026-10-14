@@ -1,0 +1,45 @@
+id: nat
+tipo: ricetta
+titolo: Far uscire su Internet una LAN privata con un solo IP
+sigla: NAT masquerade
+comando: firewall nat add
+frase: una LAN, un solo IP pubblico
+fonte: Foglio comandi MikroTik · Traccia MIK2 DHCP servers
+parole: nat masquerade srcnat out-interface internet client non navigano source nat condividere ip pubblico src-nat
+quando: Quando i PC di una LAN privata devono uscire su Internet condividendo l'IP della porta esterna.
+fasi:
+- nome: Crea la regola
+  righe:
+  - codice: /ip firewall nat add chain=srcnat out-interface=«PORTA_WAN» action=masquerade
+    commento: maschera gli IP privati in uscita
+    parti:
+    - voce: chain=srcnat
+      spiega: regola applicata ai pacchetti in uscita
+    - voce: out-interface
+      spiega: la porta verso Internet, non quella della LAN
+    - voce: action=masquerade
+      spiega: usa l'IP della porta, qualunque esso sia
+    trappola: Con out-interface sbagliato (la LAN al posto della porta esterna) i client non navigano; se hai rinominato la porta usa il nuovo nome.
+- nome: Verifica
+  righe:
+  - codice: /ip firewall nat print
+    commento: la regola deve comparire
+  - codice: ping 8.8.8.8
+    commento: 'dal PC: se risponde il NAT funziona'
+    trappola: 'Se risponde l''indirizzo ma il nome no, il NAT è a posto: guarda il DNS.'
+segnaposto:
+  PORTA_WAN:
+    esempio: outside
+    spiega: porta verso Internet
+  IP:
+    esempio: 203.0.113.10
+    spiega: IP pubblico fisso (esempio)
+varianti:
+- codice: out-interface-list=WAN
+  spiega: una lista di interfacce al posto del nome singolo
+- codice: action=src-nat to-addresses=«IP»
+  spiega: IP pubblico fisso invece del masquerade
+vicine:
+- dhcp-client
+- dns
+- test-gradini

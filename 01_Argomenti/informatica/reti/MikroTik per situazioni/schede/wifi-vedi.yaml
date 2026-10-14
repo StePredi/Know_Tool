@@ -1,0 +1,27 @@
+id: wifi-vedi
+tipo: ricetta
+titolo: Identificare le interfacce wifi e la loro configurazione
+sigla: Vedere le wifi
+comando: wireless print
+frase: nome, ssid e canale
+fonte: Traccia verifica configurazione base
+parole: wifi wlan1 wlan2 wireless ssid canale frequency band interface wireless print 2.4 5 ghz
+quando: Quando devi identificare le interfacce wifi del router e annotarne nome e configurazione.
+fasi:
+- nome: Elenca le wifi
+  righe:
+  - codice: /interface wireless print
+    commento: elenco con nome e stato
+    parti:
+    - voce: wlan1
+      spiega: di solito la wifi a 2,4 GHz
+    - voce: wlan2
+      spiega: di solito la wifi a 5 GHz
+    trappola: 'Da RouterOS 7 su alcuni modelli il menu si chiama /interface wifi: se wireless non esiste usa quello.'
+  - codice: /interface wireless print detail
+    commento: ssid, banda e canale
+segnaposto: {}
+varianti: []
+vicine:
+- wifi-ssid
+- spegni-porta

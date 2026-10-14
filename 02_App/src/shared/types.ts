@@ -1,6 +1,8 @@
 // Tipi condivisi tra processo principale e interfaccia.
 // Nomi dei campi = nomi dei file (formato_studio_italiano.md), non quelli abbreviati della demo.
 
+import type { Situazioni } from './situazioni'
+
 export type Gravita = 'errore' | 'avviso'
 
 export interface Problema {
@@ -283,6 +285,10 @@ export interface Api {
   mostraCartella(): Promise<void>
   /** Home generale */
   albero(): Promise<NodoArg[]>
+  /** una documentazione «Per situazioni»: indice, schede e progresso */
+  leggiSituazioni(rel: string): Promise<Situazioni>
+  /** segna o toglie «ripassata»; restituisce l'elenco aggiornato */
+  segnaRipassata(rel: string, id: string, ripassata: boolean): Promise<string[]>
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>
@@ -303,7 +309,7 @@ export interface Api {
 
 // ---- Home generale: l'albero di 01_Argomenti ----
 
-export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo'
+export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo' | 'situazioni'
 
 /** Una voce dell'albero. `rel` è il percorso dentro 01_Argomenti con "/" (per mappa e testo: quello dell'autore + "#mappa" o "/testi/<id>"). */
 export interface NodoArg {

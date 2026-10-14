@@ -1,0 +1,92 @@
+id: dhcp-multi
+tipo: ricetta
+titolo: Più reti separate, ognuna con il suo server DHCP
+sigla: Più LAN separate
+comando: un server per rete
+frase: ognuna col suo pool
+fonte: Traccia MIK2 DHCP servers
+parole: più dhcp server reti diverse pool dimensioni host max sottorete bridge porta prefisso limite client due lan
+quando: Quando hai più reti diverse (un bridge e una porta staccata) e ognuna deve avere il suo server DHCP e il suo limite di host.
+fasi:
+- nome: LAN uno
+  righe:
+  - codice: /ip address add address=«GW1»/«PREFISSO1» interface=«IF1»
+    commento: gateway della LAN
+    trappola: 'Le reti devono essere diverse e non sovrapposte, per esempio 10.1.0.0 e 10.2.0.0: reti che si sovrappongono rendono il routing ambiguo.'
+  - codice: /ip pool add name=«POOL1» ranges=«DA1»-«A1»
+    commento: indirizzi di questa LAN
+  - codice: /ip dhcp-server network add address=«RETE1»/«PREFISSO1» gateway=«GW1»
+    commento: parametri per i client
+  - codice: /ip dhcp-server add name=«SERVER1» interface=«IF1» address-pool=«POOL1» disabled=no
+    commento: server di questa LAN
+    trappola: 'Il tetto di host lo decide il pool, non la maschera: per al massimo 90 client il pool ha al massimo 90 indirizzi (il gateway è fuori dal pool).'
+- nome: LAN due
+  righe:
+  - codice: /ip address add address=«GW2»/«PREFISSO2» interface=«IF2»
+    commento: gateway della LAN
+  - codice: /ip pool add name=«POOL2» ranges=«DA2»-«A2»
+    commento: indirizzi di questa LAN
+  - codice: /ip dhcp-server network add address=«RETE2»/«PREFISSO2» gateway=«GW2»
+    commento: parametri per i client
+  - codice: /ip dhcp-server add name=«SERVER2» interface=«IF2» address-pool=«POOL2» disabled=no
+    commento: server di questa LAN
+- nome: Controlla
+  righe:
+  - codice: /ip dhcp-server print
+    commento: tutti i server e il loro stato
+  - codice: /ip pool print
+    commento: dimensione dei pool
+segnaposto:
+  GW1:
+    esempio: 10.1.0.1
+    spiega: indirizzo del router in quella LAN
+  PREFISSO1:
+    esempio: '25'
+    spiega: bit di rete di quella LAN
+  IF1:
+    esempio: bridgeLan
+    spiega: bridge o porta della LAN
+  POOL1:
+    esempio: poolLan
+    spiega: nome del pool
+  DA1:
+    esempio: 10.1.0.2
+    spiega: primo indirizzo da distribuire
+  A1:
+    esempio: 10.1.0.91
+    spiega: ultimo indirizzo da distribuire
+  RETE1:
+    esempio: 10.1.0.0
+    spiega: indirizzo di rete
+  SERVER1:
+    esempio: dhcpLan
+    spiega: nome del server
+  GW2:
+    esempio: 10.2.0.1
+    spiega: indirizzo del router in quella LAN
+  PREFISSO2:
+    esempio: '27'
+    spiega: bit di rete di quella LAN
+  IF2:
+    esempio: ether5
+    spiega: bridge o porta della LAN
+  POOL2:
+    esempio: poolMgmt
+    spiega: nome del pool
+  DA2:
+    esempio: 10.2.0.2
+    spiega: primo indirizzo da distribuire
+  A2:
+    esempio: 10.2.0.30
+    spiega: 'ultimo utile: .31 è il broadcast'
+  RETE2:
+    esempio: 10.2.0.0
+    spiega: indirizzo di rete
+  SERVER2:
+    esempio: dhcpMgmt
+    spiega: nome del server
+varianti: []
+vicine:
+- dhcp-server
+- subnet
+- bridge-unico

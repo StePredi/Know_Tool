@@ -1,0 +1,42 @@
+id: dhcp-client
+tipo: ricetta
+titolo: Far ricevere IP, gateway e DNS alla porta esterna
+sigla: IP dalla rete a monte
+comando: dhcp-client add
+frase: la porta esterna si configura sola
+fonte: Foglio comandi MikroTik · Traccia MIK2 DHCP servers
+parole: dhcp client ether1 outside wan ip gateway dns print detail use-peer-dns add-default-route searching bound
+quando: Quando la porta verso Internet o verso la rete a monte deve ricevere IP, gateway e DNS in automatico.
+fasi:
+- nome: Attiva il client
+  righe:
+  - codice: /ip dhcp-client add interface=«PORTA_WAN» disabled=no
+    commento: chiede un IP al server a monte
+    parti:
+    - voce: interface=«PORTA_WAN»
+      spiega: la porta collegata a monte; se l'hai rinominata usa il nuovo nome
+- nome: Verifica
+  righe:
+  - codice: /ip dhcp-client print detail
+    commento: IP, gateway e DNS ricevuti
+    parti:
+    - voce: status=bound
+      spiega: il client ha ricevuto un indirizzo
+    - voce: gateway
+      spiega: diventa la rotta verso Internet
+    trappola: 'Con status searching... nessun IP arriva: la porta non vede un server DHCP a monte, controlla cavo e rete.'
+  - codice: /ip address print
+    commento: l'IP ricevuto compare con flag D
+segnaposto:
+  PORTA_WAN:
+    esempio: ether1
+    spiega: porta verso Internet o la rete a monte
+varianti:
+- codice: add-default-route=no
+  spiega: non crea la rotta verso Internet
+- codice: use-peer-dns=no
+  spiega: ignora i DNS ricevuti
+vicine:
+- nat
+- dns
+- ping

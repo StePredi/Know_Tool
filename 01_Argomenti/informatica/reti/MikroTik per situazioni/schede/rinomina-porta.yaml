@@ -1,0 +1,33 @@
+id: rinomina-porta
+tipo: ricetta
+titolo: Dare a una porta un nome che ne dica il ruolo
+sigla: Nome alla porta
+comando: ethernet set name
+frase: outside, management, lan…
+fonte: Foglio comandi MikroTik · Traccia MIK2 DHCP servers
+parole: rename rinominare porta ether1 name default-name outside management input does not match any value of interface
+quando: Quando vuoi che una porta si chiami con il suo ruolo, come outside o management.
+fasi:
+- nome: Rinomina
+  righe:
+  - codice: /interface ethernet set «PORTA» name=«NOME»
+    commento: cambia il nome della porta
+    parti:
+    - voce: name=«NOME»
+      spiega: nuovo nome, senza spazi
+    trappola: 'Da ora la porta ha solo il nuovo nome: scrivere ancora quello vecchio dà input does not match any value of interface.'
+  - codice: /interface print
+    commento: verifica il nuovo nome
+segnaposto:
+  PORTA:
+    esempio: ether5
+    spiega: nome attuale della porta
+  NOME:
+    esempio: management
+    spiega: nuovo nome
+varianti:
+- codice: set [find default-name=«PORTA»] name=«NOME»
+  spiega: funziona anche se non ricordi il nome corrente
+vicine:
+- elenco-porte
+- dhcp-client

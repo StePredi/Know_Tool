@@ -1,0 +1,37 @@
+id: togli-porta
+tipo: ricetta
+titolo: Far uscire una porta dal bridge e rimetterla
+sigla: Togliere una porta
+comando: bridge port remove
+frase: esce dalla LAN
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: remove bridge port wlan1 ether5 rimuovere connettività client no such item input does not match any value of bridge
+quando: Quando una porta deve smettere di far parte del bridge, per usarla da sola o per testare la differenza di connettività.
+fasi:
+- nome: Trova la voce
+  righe:
+  - codice: /interface bridge port print
+    commento: cerca la porta da togliere
+- nome: Rimuovi
+  righe:
+  - codice: /interface bridge port remove [find interface=«PORTA»]
+    commento: la porta esce dal bridge
+    trappola: 'Senza bridge il client collegato non raggiunge più le altre porte: perde la LAN finché la porta non ha un IP o rientra nel bridge.'
+- nome: Rimetti la porta
+  righe:
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA»
+    commento: rientra nella LAN
+    trappola: 'Usa il nome letto con print: un nome sbagliato dà input does not match any value of bridge.'
+segnaposto:
+  PORTA:
+    esempio: wlan1
+    spiega: porta da togliere o rimettere
+  BRIDGE:
+    esempio: bridge
+    spiega: 'nome del bridge: nella config di fabbrica è bridge'
+varianti:
+- codice: remove 3
+  spiega: 'col numero di riga preso da print: funziona, ma il numero cambia'
+vicine:
+- find
+- porta-diretta

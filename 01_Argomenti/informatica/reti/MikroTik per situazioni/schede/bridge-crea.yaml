@@ -1,0 +1,50 @@
+id: bridge-crea
+tipo: ricetta
+titolo: Unire più porte in un'unica rete con un bridge
+sigla: Bridge con più porte
+comando: interface bridge add
+frase: una sola LAN logica
+fonte: Foglio comandi MikroTik · Traccia MIK2 DHCP servers
+parole: bridge add port hw=yes switch lan unire porte already have interface with such name ethernet
+quando: Quando più porte fisiche devono comportarsi come un unico switch, nella stessa rete.
+fasi:
+- nome: Crea il bridge
+  righe:
+  - codice: /interface bridge add name=«BRIDGE»
+    commento: crea il bridge vuoto
+    trappola: 'Un nome già usato dà failure: already have interface with such name: scegline un altro.'
+- nome: Aggiungi le porte
+  righe:
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA1» hw=yes
+    commento: prima porta
+    parti:
+    - voce: hw=yes
+      spiega: lascia il bridging al chip switch invece che alla CPU
+    trappola: 'hw=yes vale solo per le porte ethernet sullo stesso chip switch: per le wifi non ha effetto.'
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA2» hw=yes
+    commento: seconda porta
+- nome: Dagli un indirizzo
+  righe:
+  - codice: /ip address add address=«IP»/«PREFISSO» interface=«BRIDGE»
+    commento: l'IP va sul bridge
+    trappola: 'Dopo aver unito una porta al bridge, un IP rimasto sulla porta non serve più: spostalo sul bridge.'
+segnaposto:
+  BRIDGE:
+    esempio: ethLanBridge
+    spiega: nome del bridge
+  PORTA1:
+    esempio: ether3
+    spiega: prima porta da unire
+  PORTA2:
+    esempio: ether4
+    spiega: seconda porta da unire
+  IP:
+    esempio: 192.168.10.1
+    spiega: indirizzo del router in quella LAN
+  PREFISSO:
+    esempio: '24'
+    spiega: bit di rete
+varianti: []
+vicine:
+- bridge-unico
+- dhcp-server

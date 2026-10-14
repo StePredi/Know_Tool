@@ -1,0 +1,119 @@
+modello: per_situazioni
+titolo: MikroTik, per situazioni
+centro: MikroTik
+sottotitolo: Parti da quello che devi fare sul router, non dal nome del comando.
+rami:
+- id: b1
+  nome: Basi
+  colore: blue
+  lato: R
+  voci:
+  - gruppo: Terminale
+    schede:
+    - accesso
+    - menu
+    - find
+  - gruppo: Sistema
+    schede:
+    - reset
+    - aggiornare
+    - identity
+- id: b2
+  nome: Interfacce
+  colore: teal
+  lato: L
+  voci:
+  - gruppo: Porte
+    schede:
+    - elenco-porte
+    - rinomina-porta
+    - spegni-porta
+  - gruppo: Wifi
+    schede:
+    - wifi-vedi
+    - wifi-ssid
+- id: b3
+  nome: Indirizzi IP
+  colore: green
+  lato: R
+  voci:
+  - schede:
+    - ip-controlla
+  - schede:
+    - ip-porta
+  - schede:
+    - subnet
+- id: b4
+  nome: Bridge
+  colore: yellow
+  lato: L
+  voci:
+  - gruppo: Creare
+    schede:
+    - bridge-controlla
+    - bridge-crea
+    - bridge-unico
+  - gruppo: Modificare
+    schede:
+    - togli-porta
+    - porta-diretta
+- id: b5
+  nome: Verso Internet
+  colore: orange
+  lato: R
+  voci:
+  - schede:
+    - ping
+  - schede:
+    - dhcp-client
+  - schede:
+    - dns
+- id: b6
+  nome: Server DHCP
+  colore: red
+  lato: T
+  voci:
+  - schede:
+    - dhcp-controlla
+  - schede:
+    - dhcp-server
+  - schede:
+    - dhcp-multi
+- id: b7
+  nome: Firewall e NAT
+  colore: pink
+  lato: B
+  voci:
+  - schede:
+    - firewall-leggi
+  - schede:
+    - nat
+  - schede:
+    - firewall-azzera
+- id: b8
+  nome: Salvare e ripristinare
+  colore: violet
+  lato: T
+  voci:
+  - gruppo: Salvare
+    schede:
+    - export
+    - backup
+  - gruppo: Riprendere
+    schede:
+    - scarica-file
+    - ripristina
+- id: b9
+  nome: Quando non funziona
+  colore: slate
+  lato: B
+  voci:
+  - gruppo: Capire
+    schede:
+    - test-gradini
+    - log
+    - errori
+  - gruppo: Rimediare
+    schede:
+    - client-senza-ip
+    - chiuso-fuori

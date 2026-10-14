@@ -1,0 +1,38 @@
+id: firewall-azzera
+tipo: ricetta
+titolo: Escludere il firewall per capire se è lui il problema
+sigla: Azzerare il firewall
+comando: filter remove [find]
+frase: per escluderlo dal test
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: firewall remove filter input forward disable test connettività drop azzerare togliere regole
+quando: Quando vuoi sapere se il firewall è la causa di una connessione che non passa.
+fasi:
+- nome: Guarda prima
+  righe:
+  - codice: /ip firewall filter print
+    commento: annota le regole che togli
+- nome: Spegni, non cancellare
+  righe:
+  - codice: /ip firewall filter disable [find chain=«CATENA»]
+    commento: le regole restano ma inattive
+    trappola: 'Senza regole sulla catena input il router accetta connessioni anche dalla porta Internet: riattivale appena finita la prova.'
+- nome: Prova
+  righe:
+  - codice: ping 8.8.8.8
+    commento: la connessione ora passa?
+- nome: Riattiva
+  righe:
+  - codice: /ip firewall filter enable [find chain=«CATENA»]
+    commento: rimette le regole
+segnaposto:
+  CATENA:
+    esempio: input
+    spiega: input = verso il router, forward = attraverso il router
+varianti:
+- codice: remove [find chain=input]
+  spiega: 'cancella davvero: le regole sono perse'
+vicine:
+- find
+- firewall-leggi
+- test-gradini

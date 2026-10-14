@@ -1,0 +1,32 @@
+id: chiuso-fuori
+tipo: ricetta
+titolo: Non perdere l'accesso mentre modifichi, o riprenderlo
+sigla: Chiuso fuori
+comando: Safe Mode / MAC
+frase: ho perso l'accesso
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: safe mode ctrl+x winbox mac perso accesso connessione chiuso fuori modifiche reset annullare
+quando: Quando una modifica può tagliare la connessione con cui configuri il router, o l'hai già tagliata.
+fasi:
+- nome: Prima di modifiche rischiose
+  righe:
+  - codice: Ctrl+X
+    commento: attiva Safe Mode nel terminale
+    parti:
+    - voce: Safe Mode
+      spiega: se la connessione cade, il router annulla le modifiche fatte da quando l'hai attivato
+    trappola: 'Per tenere le modifiche premi di nuovo Ctrl+X: se esci in altro modo vengono annullate.'
+- nome: Se sei già fuori
+  righe:
+  - codice: WinBox → Neighbors → MAC address
+    commento: ti collega senza IP
+    trappola: 'Funziona solo dalla stessa rete locale: niente router in mezzo tra PC e MikroTik.'
+  - codice: tasto reset del router
+    commento: ultima risorsa
+    trappola: 'Cancella la configurazione: usalo solo se hai un .backup o un .rsc da ripristinare.'
+segnaposto: {}
+varianti: []
+vicine:
+- reset
+- ripristina
+- porta-diretta

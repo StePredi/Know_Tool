@@ -1,0 +1,46 @@
+id: ip-porta
+tipo: ricetta
+titolo: Assegnare un indirizzo IP a una porta o a un bridge
+sigla: IP a una porta
+comando: ip address add
+frase: indirizzo e maschera
+fonte: Foglio comandi MikroTik · Traccia MIK2 DHCP servers · Guida DHCP server MikroTik
+parole: ip address add assegnare indirizzo gateway maschera prefisso already have such address netmask ip statico pc
+quando: Quando una porta o un bridge deve avere un indirizzo IP, per esempio come gateway di una LAN.
+fasi:
+- nome: Assegna l'indirizzo
+  righe:
+  - codice: /ip address add address=«IP»/«PREFISSO» interface=«INTERFACCIA»
+    commento: indirizzo del router in quella rete
+    parti:
+    - voce: address=«IP»/«PREFISSO»
+      spiega: indirizzo e numero di bit di rete
+    trappola: 'Un indirizzo già presente dà failure: already have such address; se la porta sta in un bridge assegnalo al bridge.'
+- nome: Controlla
+  righe:
+  - codice: /ip address print
+    commento: l'indirizzo deve comparire
+- nome: Imposta il PC
+  righe:
+  - codice: '# sul PC: IP «IP_PC»/«PREFISSO», gateway «IP»'
+    commento: stessa rete del router
+    trappola: 'Se il PC è in un''altra rete non raggiunge il router: stessa rete significa stessi bit di rete e stessa maschera.'
+segnaposto:
+  IP:
+    esempio: 192.168.10.1
+    spiega: indirizzo del router in quella rete
+  PREFISSO:
+    esempio: '24'
+    spiega: 'bit di rete: 24 equivale a 255.255.255.0'
+  INTERFACCIA:
+    esempio: ether5
+    spiega: porta o bridge che riceve l'indirizzo
+  IP_PC:
+    esempio: 192.168.10.50
+    spiega: indirizzo libero nella stessa rete, diverso dal router
+varianti:
+- codice: address=192.168.10.1 netmask=255.255.255.0
+  spiega: la maschera estesa al posto di /24
+vicine:
+- subnet
+- dhcp-server

@@ -1,0 +1,25 @@
+id: identity
+tipo: ricetta
+titolo: Dare un nome al router
+sigla: Nome del router
+comando: system identity
+frase: per riconoscerlo in rete
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: identity nome hostname router rinominare prompt
+quando: Quando hai più router da distinguere o devi consegnare una configurazione con un nome preciso.
+fasi:
+- nome: Cambia il nome
+  righe:
+  - codice: /system identity set name=«NOME»
+    commento: cambia il nome del router
+    trappola: 'Il nome entra anche nei nomi automatici dei backup: cambialo prima di salvare i file.'
+  - codice: /system identity print
+    commento: verifica il cambio
+segnaposto:
+  NOME:
+    esempio: router-aula
+    spiega: nome senza spazi
+varianti: []
+vicine:
+- backup
+- export

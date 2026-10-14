@@ -1,0 +1,28 @@
+id: find
+tipo: prima_dopo
+titolo: Togliere voci senza usare i numeri di riga
+sigla: Voci senza numeri
+comando: '[find]'
+frase: il numero cambia, il filtro no
+fonte: Foglio comandi MikroTik
+parole: find remove numero riga no such item rimuovere filtro condizione disable enable where
+prima: |-
+  /interface bridge port print
+  /interface bridge port remove ⟦3⟧
+  /ip firewall filter remove ⟦0⟧
+  /ip firewall filter remove ⟦1⟧
+dopo: |-
+  /interface bridge port remove ⟦[find interface=ether5]⟧
+  /ip firewall filter remove ⟦[find chain=input]⟧
+uso: Rimuovere una voce senza leggere prima il numero della riga, che cambia ogni volta che aggiungi o togli qualcosa.
+riconoscila: Hai scritto remove seguito da un numero preso da print, oppure più remove uno dopo l'altro.
+parti:
+- voce: '[find interface=ether5]'
+  spiega: cerca le voci con quel valore e restituisce i loro numeri
+- voce: '[find chain=input]'
+  spiega: puoi filtrare su qualsiasi campo; un solo comando toglie tutte le voci trovate
+trappola: 'Un find troppo largo, come [find] senza condizioni, agisce su tutte le voci del menu: prova prima con print where e solo dopo cambia in remove.'
+varianti: []
+vicine:
+- togli-porta
+- firewall-azzera

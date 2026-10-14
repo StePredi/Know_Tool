@@ -4,6 +4,7 @@ import { existsSync, promises as fs } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { archiviaNodo, creaNodo, leggiAlbero, rinominaNodo } from './esplora'
+import { leggiSituazioni, segnaRipassata } from './situazioni'
 import { Repository } from './repository'
 import type { StatoApp } from '../shared/types'
 
@@ -156,6 +157,8 @@ function registraIpc(): void {
     if (!radice) throw new Error('Nessuna cartella aperta.')
     return radice
   }
+  ipcMain.handle('situazioni:leggi', (_e, rel: string) => leggiSituazioni(senzaRadice(), rel))
+  ipcMain.handle('situazioni:ripassata', (_e, rel: string, id: string, v: boolean) => segnaRipassata(senzaRadice(), rel, id, v))
   ipcMain.handle('albero:leggi', async () => (radice ? leggiAlbero(radice) : []))
   ipcMain.handle('albero:crea', async (_e, padre: string, nome: string) => {
     const rel = await creaNodo(senzaRadice(), padre, nome)

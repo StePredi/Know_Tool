@@ -1,0 +1,36 @@
+id: firewall-leggi
+tipo: ricetta
+titolo: Capire cosa lascia passare o blocca il router
+sigla: Leggere le regole
+comando: firewall filter print
+frase: input, forward e nat
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: firewall filter nat print chain input forward output regole accept drop catena
+quando: Quando vuoi capire cosa lascia passare o blocca il router e come traduce gli indirizzi.
+fasi:
+- nome: Leggi il filtro
+  righe:
+  - codice: /ip firewall filter print
+    commento: regole di filtro
+    parti:
+    - voce: chain=input
+      spiega: traffico diretto al router stesso
+    - voce: chain=forward
+      spiega: traffico che attraversa il router
+    - voce: action
+      spiega: accept lascia passare, drop scarta
+    trappola: 'Le regole si leggono dall''alto: decide la prima che corrisponde, quindi un drop sopra un accept lo rende inutile.'
+- nome: Leggi il NAT
+  righe:
+  - codice: /ip firewall nat print
+    commento: regole di traduzione
+    parti:
+    - voce: chain=srcnat
+      spiega: cambia l'origine dei pacchetti in uscita
+    - voce: action=masquerade
+      spiega: usa l'IP della porta d'uscita
+segnaposto: {}
+varianti: []
+vicine:
+- nat
+- firewall-azzera

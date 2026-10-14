@@ -7,6 +7,7 @@ import { join } from 'node:path'
 import { leggiDocMd } from '../shared/scheda_md'
 import type { NodoArg } from '../shared/types'
 import { spostaCartella } from './repository'
+import { èSituazioni } from './situazioni'
 
 const BASE = '01_Argomenti'
 /** Cartelle che l'app usa per sé: non compaiono come cartelle di studio. */
@@ -105,6 +106,27 @@ async function nodoAutore(radice: string, rel: string, id: string): Promise<Nodo
   }
 }
 
+async function nodoSituazioni(radice: string, rel: string, nome: string): Promise<NodoArg> {
+  const dir = join(radice, BASE, rel)
+  let n = 0
+  try {
+    n = (await fs.readdir(join(dir, 'schede'))).filter((f) => f.endsWith('.yaml')).length
+  } catch {
+    // nessuna scheda
+  }
+  return {
+    rel,
+    tipo: 'situazioni',
+    nome,
+    protetto: false,
+    puoRinominare: true,
+    puoArchiviare: true,
+    info: `${n} situazioni`,
+    modificato: Math.max(await mtime(join(dir, 'indice.yaml')), await mtime(join(dir, 'schede')), await mtime(join(dir, 'progresso.json'))),
+    figli: []
+  }
+}
+
 async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
   const out: NodoArg[] = []
   for (const nome of await elencaDir(join(radice, BASE, rel))) {
@@ -113,6 +135,11 @@ async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
     // un autore è una cartella con autore.md dentro italiano/autori
     if (rel === 'italiano/autori' && (await mtime(join(radice, BASE, r, 'autore.md'))) > 0) {
       out.push(await nodoAutore(radice, r, nome))
+      continue
+    }
+    // una cartella con indice.yaml è una documentazione «Per situazioni»: si apre in una scheda, non si esplora
+    if (await èSituazioni(join(radice, BASE, r))) {
+      out.push(await nodoSituazioni(radice, r, nome))
       continue
     }
     const figli = await figliDi(radice, r)
@@ -135,9 +162,11 @@ async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
 function riepilogo(figli: NodoArg[]): string {
   const c = figli.filter((f) => f.tipo === 'cartella').length
   const a = figli.filter((f) => f.tipo === 'autore').length
+  const d = figli.filter((f) => f.tipo === 'situazioni').length
   const t = figli.reduce((n, f) => n + (f.tipo === 'testo' ? 1 : 0) + (f.tipo === 'autore' ? f.figli.filter((x) => x.tipo === 'testo').length : f.tipo === 'cartella' ? contaTesti(f) : 0), 0)
   const parti: string[] = []
   if (a) parti.push(a === 1 ? '1 autore' : `${a} autori`)
+  if (d) parti.push(d === 1 ? '1 documento' : `${d} documenti`)
   if (c) parti.push(c === 1 ? '1 cartella' : `${c} cartelle`)
   if (t) parti.push(t === 1 ? '1 testo' : `${t} testi`)
   return parti.join(' · ') || 'Vuota'

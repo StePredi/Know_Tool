@@ -5,7 +5,9 @@ import { useEditor } from '../editor/stato'
 
 export interface SchedaApp {
   id: string
-  tipo: 'home' | 'mappa' | 'testo'
+  tipo: 'home' | 'mappa' | 'testo' | 'situazioni'
+  /** per «situazioni»: la cartella del documento dentro 01_Argomenti */
+  rel?: string
   autoreId?: string
   testoId?: string
   titolo: string
@@ -89,9 +91,13 @@ export function tutti(albero: NodoArg[]): NodoArg[] {
   return albero.flatMap((n) => [n, ...tutti(n.figli)])
 }
 
-export function idScheda(n: { tipo: string; autoreId?: string; testoId?: string }): string {
+export function idScheda(n: { tipo: string; rel?: string; autoreId?: string; testoId?: string }): string {
+  if (n.tipo === 'situazioni') return `sit:${n.rel}`
   return n.tipo === 'testo' ? `testo:${n.autoreId}/${n.testoId}` : `mappa:${n.autoreId}`
 }
+
+/** I nodi che si aprono in una scheda (gli altri sono cartelle in cui si entra). */
+export const èDocumento = (n: { tipo: string }): boolean => n.tipo === 'mappa' || n.tipo === 'testo' || n.tipo === 'situazioni'
 
 /** Percorso di cartelle per arrivare a un nodo: i suoi antenati, dalla materia in giù. */
 export function antenati(rel: string): string[] {
@@ -127,7 +133,7 @@ export const useHome = create<Home>((set, get) => {
       const s = get()
       const tabs = s.tabs.filter((t) => {
         if (t.tipo === 'home') return true
-        const rel = t.tipo === 'testo' ? `italiano/autori/${t.autoreId}/testi/${t.testoId}` : `italiano/autori/${t.autoreId}#mappa`
+        const rel = t.tipo === 'situazioni' ? (t.rel ?? '') : t.tipo === 'testo' ? `italiano/autori/${t.autoreId}/testi/${t.testoId}` : `italiano/autori/${t.autoreId}#mappa`
         return !!trova(albero, rel)
       })
       const attiva = tabs.some((t) => t.id === s.attiva) ? s.attiva : HOME_ID
@@ -142,16 +148,16 @@ export const useHome = create<Home>((set, get) => {
     },
     apri(n) {
       const s = get()
-      const doc = n.tipo === 'mappa' || n.tipo === 'testo'
+      const doc = èDocumento(n)
       const recenti = doc ? [{ rel: n.rel, t: Date.now() }, ...s.recenti.filter((r) => r.rel !== n.rel)].slice(0, 12) : s.recenti
       // l'albero si apre sul percorso del documento (e sul documento stesso, se contiene altro)
       const espansi = { ...s.espansi }
       for (const a of antenati(n.rel)) espansi[a] = true
-      if (n.tipo !== 'mappa' && n.tipo !== 'testo') espansi[n.rel] = true
-      if (n.tipo === 'mappa' || n.tipo === 'testo') {
+      if (!doc) espansi[n.rel] = true
+      if (doc) {
         const id = idScheda(n)
         const titolo = n.tipo === 'testo' ? n.nome : (s.albero && trova(s.albero, n.rel.split('#')[0]!)?.nome) || n.nome
-        const tabs = s.tabs.some((t) => t.id === id) ? s.tabs : [...s.tabs, { id, tipo: n.tipo, autoreId: n.autoreId, testoId: n.testoId, titolo }]
+        const tabs = s.tabs.some((t) => t.id === id) ? s.tabs : [...s.tabs, { id, tipo: n.tipo as SchedaApp['tipo'], rel: n.tipo === 'situazioni' ? n.rel : undefined, autoreId: n.autoreId, testoId: n.testoId, titolo }]
         aggiorna({ tabs, attiva: id, recenti, espansi })
       } else {
         aggiorna({ percorso: n.rel, attiva: HOME_ID, sel: null, query: '', recenti, espansi })
@@ -222,7 +228,7 @@ export async function allineaVista(): Promise<void> {
   const ed = useEditor.getState()
   useHome.setState({ occupato: true })
   try {
-    if (t.tipo === 'home') {
+    if (t.tipo === 'home' || t.tipo === 'situazioni') {
       if (ed.testoId) ed.imposta({ testoId: null, sel: null, anchor: null, testa: null, selettoreOpen: false })
       return
     }

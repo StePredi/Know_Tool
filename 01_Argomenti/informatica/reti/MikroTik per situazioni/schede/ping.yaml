@@ -1,0 +1,36 @@
+id: ping
+tipo: ricetta
+titolo: Provare se il router raggiunge Internet
+sigla: Provare Internet
+comando: ping
+frase: per numero e per nome
+fonte: Traccia verifica configurazione base
+parole: ping test internet raggiungibilità timeout traceroute connettività 8.8.8.8 nome dns no route to host
+quando: Quando vuoi capire se il router raggiunge Internet e dove si interrompe il percorso.
+fasi:
+- nome: Prova per numero
+  righe:
+  - codice: /ping «DESTINAZIONE» count=«N»
+    commento: pacchetti di prova
+    trappola: Se tutti i pacchetti vanno in timeout, il problema è prima di quel punto (cavo, gateway, NAT), non nell'indirizzo.
+- nome: Prova per nome
+  righe:
+  - codice: /ping «NOME_SITO» count=«N»
+    commento: stesso test usando il DNS
+    trappola: Se il numero risponde e il nome no, il problema è il DNS, non la connessione.
+segnaposto:
+  DESTINAZIONE:
+    esempio: 8.8.8.8
+    spiega: 'indirizzo numerico: prova la rete senza DNS'
+  N:
+    esempio: '4'
+    spiega: numero di pacchetti
+  NOME_SITO:
+    esempio: google.com
+    spiega: nome da risolvere
+varianti:
+- codice: /tool traceroute 8.8.8.8
+  spiega: mostra il percorso salto per salto
+vicine:
+- test-gradini
+- dns

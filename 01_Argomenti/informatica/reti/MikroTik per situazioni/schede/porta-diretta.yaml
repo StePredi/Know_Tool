@@ -1,0 +1,45 @@
+id: porta-diretta
+tipo: ricetta
+titolo: Usare una porta fuori dal bridge come accesso al router
+sigla: Porta d'accesso
+comando: porta fuori dal bridge
+frase: IP sulla porta e sul PC
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: porta accesso management ip statico pc remove bridge port rete separata gestione router diretto
+quando: Quando vuoi una porta dedicata alla gestione del router, fuori dalla LAN del bridge.
+fasi:
+- nome: Togli la porta dal bridge
+  righe:
+  - codice: /interface bridge port remove [find interface=«PORTA»]
+    commento: non è più una porta dello switch
+- nome: Dai un IP alla porta
+  righe:
+  - codice: /ip address add address=«IP»/«PREFISSO» interface=«PORTA»
+    commento: ora è un accesso diretto a RouterOS
+    trappola: 'Scegli una rete diversa da quelle già usate: reti sovrapposte rendono il routing ambiguo.'
+- nome: Imposta il PC
+  righe:
+  - codice: '# sul PC: IP «IP_PC»/«PREFISSO», gateway «IP»'
+    commento: stessa rete della porta
+- nome: Prova
+  righe:
+  - codice: ping «IP»
+    commento: dal PC verso il router
+    trappola: Se non risponde, controlla che PC e porta abbiano la stessa rete e che il cavo sia nella porta giusta.
+segnaposto:
+  PORTA:
+    esempio: ether5
+    spiega: porta da dedicare alla gestione
+  IP:
+    esempio: 192.168.100.1
+    spiega: indirizzo del router su quella porta
+  PREFISSO:
+    esempio: '24'
+    spiega: bit di rete
+  IP_PC:
+    esempio: 192.168.100.50
+    spiega: indirizzo libero nella stessa rete
+varianti: []
+vicine:
+- togli-porta
+- ip-porta

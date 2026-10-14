@@ -1,0 +1,31 @@
+id: bridge-unico
+tipo: prima_dopo
+titolo: Una LAN con un bridge invece di una rete per porta
+sigla: Bridge, non tante LAN
+comando: un IP per più porte
+frase: stessa rete, un solo server
+fonte: Traccia MIK2 DHCP servers
+parole: bridge porte stessa rete un solo indirizzo un solo server dhcp semplificare reti separate
+prima: |-
+  /ip address add address=192.168.10.1/24 interface=⟦ether3⟧
+  /ip address add address=192.168.20.1/24 interface=⟦ether4⟧
+  ⟦/ip dhcp-server add name=dhcp3 interface=ether3 address-pool=pool3⟧
+  ⟦/ip dhcp-server add name=dhcp4 interface=ether4 address-pool=pool4⟧
+dopo: |-
+  ⟦/interface bridge add name=lanBridge⟧
+  ⟦/interface bridge port add bridge=lanBridge interface=ether3⟧
+  ⟦/interface bridge port add bridge=lanBridge interface=ether4⟧
+  /ip address add address=192.168.10.1/24 interface=⟦lanBridge⟧
+  /ip dhcp-server add name=dhcpLan interface=⟦lanBridge⟧ address-pool=poolLan
+uso: Far stare più porte nella stessa rete con un solo indirizzo e un solo server DHCP, invece di una rete separata per ogni porta.
+riconoscila: Hai più porte con lo stesso ruolo (PC, stampanti) e per ognuna un indirizzo e un server DHCP.
+parti:
+- voce: /interface bridge
+  spiega: crea una LAN logica che unisce le porte
+- voce: interface=lanBridge
+  spiega: indirizzo e server DHCP si legano al bridge, non alle singole porte
+trappola: 'Il bridge fa delle porte una rete sola: se due porte devono restare separate non vanno unite.'
+varianti: []
+vicine:
+- bridge-crea
+- dhcp-multi

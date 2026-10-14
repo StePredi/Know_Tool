@@ -5,9 +5,9 @@ import { Modale, primario, secondario } from '../editor/ui'
 import { useEditor } from '../editor/stato'
 import { useStore } from '../store'
 import { Albero, ICONA_NODO } from './Albero'
-import { antenati, tutti, trova, useHome } from './stato'
+import { antenati, èDocumento, idScheda, tutti, trova, useHome } from './stato'
 
-const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo' }
+const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo', situazioni: 'Per situazioni' }
 
 const norm = (s: string): string => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 
@@ -150,7 +150,7 @@ function Archivia({ n, chiudi, fai }: { n: NodoArg; chiudi: () => void; fai: () 
       piede={<><div style={{ flex: 1 }} /><button type="button" style={secondario} onClick={chiudi}>Annulla</button><button type="button" style={{ ...primario, background: 'var(--err-line)', borderColor: 'var(--err-line)' }} disabled={busy} onClick={() => { setBusy(true); fai().then(chiudi).catch((e: Error) => { setErr(e.message.replace(/^Error invoking remote method '[^']*': (Error: )?/, '')); setBusy(false) }) }}><Con i="cestino">Archivia</Con></button></>}
     >
       <div style={{ padding: 16, fontSize: 14, lineHeight: 1.55 }}>
-        <p style={{ margin: '0 0 8px' }}>{n.tipo === 'testo' ? 'Il testo con annotazioni, parafrasi ed esercizi' : 'La cartella con tutto quello che contiene'} va in <strong>99_Archivio</strong>: non viene cancellato e puoi recuperarlo a mano.</p>
+        <p style={{ margin: '0 0 8px' }}>{n.tipo === 'testo' ? 'Il testo con annotazioni, parafrasi ed esercizi' : n.tipo === 'situazioni' ? 'La documentazione con tutte le sue schede e i progressi' : 'La cartella con tutto quello che contiene'} va in <strong>99_Archivio</strong>: non viene cancellato e puoi recuperarlo a mano.</p>
         {err && <p role="alert" style={{ margin: 0, color: 'var(--err-ink)', background: 'var(--err-bg)', border: '1px solid var(--err-line)', borderRadius: 8, padding: '7px 10px' }}>{err}</p>}
       </div>
     </Modale>
@@ -178,7 +178,7 @@ function Dettagli({ n, azioni }: { n: NodoArg; azioni: { rinomina: () => void; a
         <dt style={{ color: 'var(--mute)' }}>Modificato</dt><dd style={{ margin: 0 }}>{quando(n.modificato)}</dd>
       </dl>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button type="button" className="btn on" onClick={() => apriNodo(n)}><Con i="dx">{n.tipo === 'mappa' || n.tipo === 'testo' ? 'Apri in una scheda' : 'Entra'}</Con></button>
+        <button type="button" className="btn on" onClick={() => apriNodo(n)}><Con i="dx">{èDocumento(n) ? 'Apri in una scheda' : 'Entra'}</Con></button>
         <button type="button" className="btn" aria-pressed={pref} onClick={() => useHome.getState().preferito(n.rel)}><Icona nome="stella" size={15} piena={pref} /> {pref ? 'Togli dai preferiti' : 'Aggiungi ai preferiti'}</button>
         {n.puoRinominare && <button type="button" className="btn" onClick={azioni.rinomina}><Con i="matita">Rinomina</Con></button>}
         {n.puoArchiviare && <button type="button" className="btn" onClick={azioni.archivia}><Con i="cestino">Archivia</Con></button>}
@@ -213,7 +213,7 @@ export function HomeGenerale() {
 
   const figli = useMemo(() => {
     const l = [...(attuale ? attuale.figli : h.albero)]
-    const peso = (n: NodoArg): number => (n.tipo === 'mappa' ? 0 : n.tipo === 'testo' ? 2 : 1)
+    const peso = (n: NodoArg): number => (n.tipo === 'mappa' ? 0 : n.tipo === 'testo' || n.tipo === 'situazioni' ? 2 : 1)
     l.sort((a, b) => peso(a) - peso(b) || (h.ordina === 'recente' ? b.modificato - a.modificato : a.nome.localeCompare(b.nome, 'it')))
     return l
   }, [attuale, h.albero, h.ordina])
@@ -349,6 +349,7 @@ export function HomeGenerale() {
             s.imposta({ percorso: cambia(s.percorso), sel: cambia(s.sel ?? vecchio.rel), preferiti: s.preferiti.map(cambia), recenti: s.recenti.map((x) => ({ ...x, rel: cambia(x.rel) })), espansi: Object.fromEntries(Object.entries(s.espansi).map(([k, v]) => [cambia(k), v])) })
             await s.carica()
           }
+          if (vecchio.tipo === 'situazioni') s.chiudiScheda(idScheda(vecchio))
           // il titolo scritto nelle schede aperte si aggiorna
           const nuovo = nome.trim().replace(/\s+/g, ' ')
           useHome.setState({ tabs: useHome.getState().tabs.map((t) => (vecchio.tipo === 'testo' && t.testoId === vecchio.testoId && t.autoreId === vecchio.autoreId) || (vecchio.tipo === 'autore' && t.tipo === 'mappa' && t.autoreId === vecchio.autoreId) ? { ...t, titolo: nuovo } : t) })

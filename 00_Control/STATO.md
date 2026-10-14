@@ -8,6 +8,8 @@
 
 ## Fatto
 
+- Modello «Per situazioni» (2026-10-14): documentazione MikroTik (37 situazioni) aperta in una scheda dell'app, con mappa a rami, ricerca, scheda ricetta / prima-e-dopo, ripasso e progresso. Specifica in `specifiche/modello_per_situazioni.md`
+
 - Home generale (2026-10-14): schede stile browser, albero stretto, Home a tre fasce, vista cartella griglia/elenco, dettagli, ricerca per nome, crea/rinomina/archivia, preferiti e recenti
 
 - Scheda riassuntiva generata dall'AI (2026-10-11): richiesta da copiare, proposta confronto Ora|Proposta con Applica/Scarta, nuove sezioni nella scheda
@@ -33,6 +35,7 @@
 - Installer finale (.exe) con electron-builder, a fine app
 - Provare la scheda riassuntiva su Windows (con una proposta vera scritta da Claude)
 - Provare la Home generale su Windows (schede, albero, nuova materia/cartella, rinomina, archivia)
+- Provare «Per situazioni» (MikroTik) su Windows; poi: mappa a quattro lati con zoom, Git e Python come documentazioni, galleria di «+ Nuovo», generazione con Claude, figure SVG
 - Home generale, giri successivi: nuovi tipi di documento da «+ Nuovo», ricerca nei contenuti, spostare con trascinamento, nuovo autore
 
 ---

@@ -1,0 +1,32 @@
+id: ip-controlla
+tipo: ricetta
+titolo: Verificare indirizzi IP e porte a cui sono legati
+sigla: Controllare gli IP
+comando: ip address print
+frase: chi ha quale indirizzo
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: ip address print dynamic flag D interface network corrispondenza indirizzi porte bridge
+quando: Quando vuoi sapere quali indirizzi ha il router e su quale porta o bridge sono assegnati.
+fasi:
+- nome: Leggi gli indirizzi
+  righe:
+  - codice: /ip address print
+    commento: indirizzi e interfacce
+    parti:
+    - voce: flag D
+      spiega: 'dynamic: assegnato in automatico, per esempio dal dhcp-client'
+    - voce: colonna NETWORK
+      spiega: indirizzo di rete calcolato dalla maschera
+    - voce: colonna INTERFACE
+      spiega: porta o bridge a cui appartiene l'indirizzo
+    trappola: 'Un IP assegnato a una porta che sta dentro un bridge non serve: l''indirizzo va sul bridge.'
+  - codice: /ip address print where interface=«INTERFACCIA»
+    commento: solo quella interfaccia
+segnaposto:
+  INTERFACCIA:
+    esempio: ether1
+    spiega: porta o bridge da controllare
+varianti: []
+vicine:
+- ip-porta
+- bridge-controlla

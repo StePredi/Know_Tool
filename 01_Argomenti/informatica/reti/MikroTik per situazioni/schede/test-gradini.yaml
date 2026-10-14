@@ -1,0 +1,49 @@
+id: test-gradini
+tipo: ricetta
+titolo: Trovare dove si ferma il percorso verso Internet
+sigla: Test a gradini
+comando: ping per tappe
+frase: da vicino a lontano
+fonte: Traccia verifica configurazione base
+parole: ping gateway internet non funziona diagnosi tappe dns nat raggiungibilità traceroute client non naviga
+quando: Quando i client non navigano e non sai in quale punto si ferma il percorso.
+fasi:
+- nome: Dal router
+  righe:
+  - codice: /ping «GW_MONTE» count=3
+    commento: arrivi al router a monte?
+    trappola: 'Se fallisce qui il problema è sul lato Internet: cavo, dhcp-client o rete a monte.'
+  - codice: /ping «DESTINAZIONE» count=3
+    commento: arrivi a Internet per numero?
+  - codice: /ping «NOME_SITO» count=3
+    commento: il router risolve i nomi?
+    trappola: Numero sì e nome no significa DNS.
+- nome: Dal PC
+  righe:
+  - codice: ping «GW_LAN»
+    commento: il PC vede il router?
+    trappola: Se fallisce guarda IP del PC, cavo, bridge e server DHCP.
+  - codice: ping «DESTINAZIONE»
+    commento: il NAT funziona?
+    trappola: Se il router arriva a Internet e il PC no, manca il NAT o una regola forward blocca.
+  - codice: ping «NOME_SITO»
+    commento: il DNS arriva ai client?
+segnaposto:
+  GW_MONTE:
+    esempio: 192.168.1.1
+    spiega: gateway letto con dhcp-client print detail
+  DESTINAZIONE:
+    esempio: 8.8.8.8
+    spiega: indirizzo numerico di prova
+  NOME_SITO:
+    esempio: google.com
+    spiega: nome da risolvere
+  GW_LAN:
+    esempio: 192.168.10.1
+    spiega: IP del router nella LAN del PC
+varianti: []
+vicine:
+- ping
+- nat
+- dns
+- dhcp-controlla

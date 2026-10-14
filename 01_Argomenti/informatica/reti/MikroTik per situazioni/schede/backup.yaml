@@ -1,0 +1,33 @@
+id: backup
+tipo: ricetta
+titolo: Fare una copia completa del router
+sigla: Backup completo
+comando: system backup save
+frase: copia binaria completa
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: backup save binario password restore stessa versione file backup salvare copia completa
+quando: Quando vuoi una copia completa del router da ripristinare su di lui in caso di guai.
+fasi:
+- nome: Salva il backup
+  righe:
+  - codice: /system backup save name=«NOME»
+    commento: crea il file .backup
+    parti:
+    - voce: name
+      spiega: 'nome del file: l''estensione .backup la aggiunge il router'
+    trappola: Il .backup non si legge né si modifica; si ripristina su MikroTik dello stesso modello e con la stessa versione di RouterOS.
+  - codice: /file print
+    commento: verifica che il file esista
+segnaposto:
+  NOME:
+    esempio: router1
+    spiega: nome del file, senza estensione
+  PASSWORD:
+    esempio: segreta123
+    spiega: password che protegge il file
+varianti:
+- codice: password=«PASSWORD»
+  spiega: protegge il file con una password
+vicine:
+- export
+- scarica-file

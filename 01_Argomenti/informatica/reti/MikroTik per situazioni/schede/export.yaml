@@ -1,0 +1,33 @@
+id: export
+tipo: ricetta
+titolo: Salvare la configurazione in un file di testo
+sigla: Salvare in .rsc
+comando: export file=
+frase: testo leggibile e modificabile
+fonte: Foglio comandi MikroTik · Traccia verifica configurazione base
+parole: export rsc file testo configurazione hide-sensitive show-sensitive script compact leggere
+quando: Quando vuoi una copia leggibile della configurazione, da rileggere, modificare o ricaricare come script.
+fasi:
+- nome: Salva su file
+  righe:
+  - codice: /export file=«NOME»
+    commento: crea il file .rsc nel router
+    trappola: 'Le versioni di RouterOS trattano diversamente password e chiavi: controlla il file prima di condividerlo.'
+  - codice: /file print
+    commento: verifica che il file esista
+- nome: Leggi senza salvare
+  righe:
+  - codice: /export
+    commento: stampa la configurazione a schermo
+segnaposto:
+  NOME:
+    esempio: router1
+    spiega: nome del file, senza estensione
+varianti:
+- codice: /export hide-sensitive
+  spiega: toglie password e chiavi dal file
+- codice: /export show-sensitive
+  spiega: le include (RouterOS 7)
+vicine:
+- backup
+- ripristina

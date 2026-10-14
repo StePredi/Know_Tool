@@ -1,0 +1,36 @@
+id: wifi-ssid
+tipo: ricetta
+titolo: Cambiare il nome della rete wifi e dell'interfaccia
+sigla: Nome della rete wifi
+comando: wireless set ssid
+frase: ssid e nome interfaccia
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: ssid rename wlan1 wlan2 nome rete wifi cambiare name interfaccia wireless set
+quando: Quando vuoi che la wifi si veda con un nome riconoscibile o dare un nome chiaro all'interfaccia.
+fasi:
+- nome: Cambia l'SSID
+  righe:
+  - codice: /interface wireless set «WIFI» ssid=«SSID»
+    commento: nome che vedono i client
+    trappola: 'ssid è il nome della rete per i client, name è il nome dell''interfaccia nel router: sono due campi diversi.'
+  - codice: /interface wireless print
+    commento: verifica il cambio
+- nome: Rinomina l'interfaccia
+  righe:
+  - codice: /interface wireless set «WIFI» name=«NOME_WIFI»
+    commento: cambia il nome nel router
+    trappola: 'Dopo il cambio il nome vecchio non esiste più: nei comandi seguenti usa quello nuovo.'
+segnaposto:
+  WIFI:
+    esempio: wlan1
+    spiega: interfaccia wifi da modificare
+  SSID:
+    esempio: rete_2G
+    spiega: nome visibile ai client
+  NOME_WIFI:
+    esempio: wifi_2G
+    spiega: nome interno dell'interfaccia
+varianti: []
+vicine:
+- wifi-vedi
+- spegni-porta

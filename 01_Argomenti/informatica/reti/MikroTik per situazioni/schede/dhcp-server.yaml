@@ -1,0 +1,88 @@
+id: dhcp-server
+tipo: ricetta
+titolo: Creare un server DHCP completo su una porta o un bridge
+sigla: Server DHCP completo
+comando: dhcp-server add
+frase: i cinque passi da fare
+fonte: Guida DHCP server MikroTik · Traccia MIK2 DHCP servers
+parole: dhcp server pool network address lease-time enable disabled gateway dns creare impostare setup distribuire indirizzi
+quando: Quando i PC collegati a una porta o a un bridge devono ricevere IP, gateway e DNS in automatico.
+fasi:
+- nome: Dai l'IP al router
+  righe:
+  - codice: /ip address add address=«GW»/«PREFISSO» interface=«INTERFACCIA»
+    commento: il router è il gateway della LAN
+    trappola: 'Il server lavora sul bridge, non sulle porte che ne fanno parte: scegli quello come interfaccia.'
+- nome: Crea il pool
+  righe:
+  - codice: /ip pool add name=«POOL» ranges=«DA»-«A»
+    commento: indirizzi da distribuire
+    parti:
+    - voce: ranges
+      spiega: primo e ultimo indirizzo, separati da un trattino
+    trappola: 'Il pool resta dentro la rete e non contiene il gateway: parti dal secondo indirizzo.'
+- nome: Descrivi la rete
+  righe:
+  - codice: /ip dhcp-server network add address=«RETE»/«PREFISSO» gateway=«GW» dns-server=«DNS»
+    commento: cosa ricevono i client
+    parti:
+    - voce: address=«RETE»/«PREFISSO»
+      spiega: indirizzo di rete, quello che finisce con .0
+    - voce: gateway
+      spiega: il router
+    - voce: dns-server
+      spiega: DNS consegnato ai client
+    trappola: Con il router come dns-server serve allow-remote-requests=yes, altrimenti i client non risolvono i nomi.
+- nome: Crea il server
+  righe:
+  - codice: /ip dhcp-server add name=«SERVER» interface=«INTERFACCIA» address-pool=«POOL» lease-time=«DURATA»
+    commento: lega pool e interfaccia
+    parti:
+    - voce: lease-time
+      spiega: per quanto tempo un client tiene l'indirizzo prima di rinnovarlo
+- nome: Attiva il server
+  righe:
+  - codice: /ip dhcp-server enable «SERVER»
+    commento: va abilitato a parte
+    trappola: 'Il server creato con add parte spento (flag X): senza enable non distribuisce niente.'
+segnaposto:
+  GW:
+    esempio: 192.168.10.1
+    spiega: indirizzo del router nella LAN
+  PREFISSO:
+    esempio: '24'
+    spiega: bit di rete
+  INTERFACCIA:
+    esempio: ethLanBridge
+    spiega: bridge o porta su cui lavora il server
+  POOL:
+    esempio: mypool
+    spiega: nome del pool
+  DA:
+    esempio: 192.168.10.2
+    spiega: primo indirizzo da distribuire
+  A:
+    esempio: 192.168.10.100
+    spiega: ultimo indirizzo da distribuire
+  RETE:
+    esempio: 192.168.10.0
+    spiega: indirizzo di rete
+  DNS:
+    esempio: 8.8.8.8
+    spiega: DNS dato ai client
+  SERVER:
+    esempio: myserver
+    spiega: nome del server
+  DURATA:
+    esempio: 10m
+    spiega: validità della lease
+varianti:
+- codice: /ip dhcp-server setup
+  spiega: procedura guidata che crea pool, network e server
+- codice: disabled=no dentro add
+  spiega: server subito attivo, senza enable
+vicine:
+- dhcp-controlla
+- dhcp-multi
+- subnet
+- dns

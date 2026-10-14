@@ -1,0 +1,29 @@
+id: elenco-porte
+tipo: ricetta
+titolo: Vedere porte, nomi e stato dei collegamenti
+sigla: Elenco delle porte
+comando: interface print
+frase: nomi, stato e flag
+fonte: Traccia verifica configurazione base
+parole: interface print ether1 running flag R S X disabled slave porte cavo collegamento stato
+quando: Quando vuoi sapere quali porte ha il router, come si chiamano e se hanno il cavo collegato.
+fasi:
+- nome: Leggi le interfacce
+  righe:
+  - codice: /interface print
+    commento: tutte le interfacce
+    parti:
+    - voce: flag R
+      spiega: 'running: la porta ha il collegamento attivo'
+    - voce: flag X
+      spiega: 'disabled: la porta è spenta'
+    - voce: flag S
+      spiega: 'slave: la porta fa parte di un bridge'
+    trappola: 'Se la porta non è R, controlla prima cavo e switch a monte: senza collegamento non arriva nessun IP.'
+  - codice: /interface ethernet print
+    commento: solo le porte ethernet
+segnaposto: {}
+varianti: []
+vicine:
+- rinomina-porta
+- bridge-controlla

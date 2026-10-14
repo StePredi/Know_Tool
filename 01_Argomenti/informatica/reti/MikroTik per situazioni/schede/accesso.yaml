@@ -1,0 +1,45 @@
+id: accesso
+tipo: ricetta
+titolo: Collegarmi al router con SSH, browser o WinBox
+sigla: Entrare nel router
+comando: ssh / WinBox
+frase: tre modi per arrivarci
+fonte: Traccia verifica configurazione base · Foglio comandi MikroTik
+parole: ssh winbox webfig http accesso login admin mac connessione terminale password REMOTE HOST IDENTIFICATION HAS CHANGED
+quando: Quando devi configurare o controllare un router MikroTik da PC.
+fasi:
+- nome: Collegati via SSH
+  righe:
+  - codice: ssh admin@«INDIRIZZO»
+    commento: apre il terminale del router
+    parti:
+    - voce: admin@«INDIRIZZO»
+      spiega: utente admin sull'indirizzo del router
+    trappola: 'Dopo un reset il router cambia chiave e SSH segnala REMOTE HOST IDENTIFICATION HAS CHANGED: cancella la vecchia voce con ssh-keygen -R sull''indirizzo. Con admin senza password basta premere Invio.'
+  - codice: quit
+    commento: chiude la sessione
+- nome: Apri da browser
+  righe:
+  - codice: http://«INDIRIZZO»
+    commento: WebFig, il pannello web
+    parti:
+    - voce: WebFig
+      spiega: interfaccia grafica nel browser, senza installare nulla
+- nome: Usa WinBox
+  righe:
+  - codice: WinBox → Neighbors → Connect
+    commento: funziona anche senza IP
+    parti:
+    - voce: Neighbors
+      spiega: elenca i router trovati sulla rete locale
+    trappola: 'Se il PC non ha un IP nella rete del router, scegli il MAC address nella lista: SSH e browser invece richiedono l''IP.'
+segnaposto:
+  INDIRIZZO:
+    esempio: 192.168.88.1
+    spiega: 'indirizzo IP del router: quello di fabbrica sulle porte LAN'
+varianti:
+- codice: ssh -l admin «INDIRIZZO»
+  spiega: stessa cosa con l'utente separato
+vicine:
+- menu
+- chiuso-fuori
