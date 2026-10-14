@@ -1,0 +1,44 @@
+id: frame-i2c
+tipo: ricetta
+titolo: Leggere la sequenza di un trasferimento
+sigla: Frame I2C
+comando: S ADDR R/W A DATA A P
+frase: l'ordine dei pezzi
+fonte: Protocollo I2C · Crivellaro · Trasmissione I2C · TPSIT
+parole: frame sequenza start addr rw ack data stop trasferimento scrittura lettura nack bit
+quando: Quando devi capire (o disegnare) cosa viaggia sul bus in una lettura o scrittura.
+fasi:
+- nome: Ordine dei pezzi
+  righe:
+  - codice: S  ADDR  R/W  A  DATA  A  P
+    commento: start, indirizzo, lettura/scrittura, ack, dati, ack, stop
+    parti:
+    - voce: S
+      spiega: START, dal master
+    - voce: ADDR
+      spiega: indirizzo dello slave, 7 bit
+    - voce: R/W
+      spiega: R = 1 (leggi), W = 0 (scrivi)
+    - voce: A
+      spiega: 'ACK: SDA tenuta bassa'
+    - voce: P
+      spiega: STOP, dal master
+    trappola: DATA e il suo ACK si ripetono per più byte.
+- nome: Scrittura (master → slave)
+  righe:
+  - codice: S  ADDR  W  A  DATA  A  …  P
+    commento: dopo ogni byte l'ACK lo manda lo slave
+  - codice: '1 byte in un registro = 3 byte: ADDR+W, numero del registro, valore'
+    commento: il registro si chiama subaddress
+- nome: Lettura (slave → master)
+  righe:
+  - codice: S  ADDR  R  A  DATA  A  …  DATA  N  P
+    commento: dopo ogni byte l'ACK lo manda il master
+    trappola: 'L''ultimo byte si chiude con NACK: così lo slave libera il bus e il master può mandare
+      lo STOP.'
+segnaposto: {}
+varianti: []
+vicine:
+- decodifica-frame
+- start-stop
+- repeated-start

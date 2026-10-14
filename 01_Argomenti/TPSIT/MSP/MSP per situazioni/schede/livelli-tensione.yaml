@@ -1,0 +1,29 @@
+id: livelli-tensione
+tipo: ricetta
+titolo: Collegare dispositivi a 3,3 V e 5 V
+sigla: Livelli di tensione
+comando: adattatore di livello
+frase: tensioni diverse sullo stesso bus
+fonte: Protocollo I2C · Crivellaro
+parole: livello tensione 3.3 5 adattatore mosfet canale n modulo conversione bus alimentazione vdd tollerante
+quando: Quando sul bus ci sono dispositivi con alimentazioni diverse.
+fasi:
+- nome: Se tutti tollerano
+  righe:
+  - codice: collegamento diretto al bus
+    commento: se ogni dispositivo regge la tensione presente
+- nome: Altrimenti
+  righe:
+  - codice: 'adattatore di livello: 2 MOSFET a canale N'
+    commento: uno per linea (SDA e SCL)
+    parti:
+    - voce: VDD1 ≤ VDD2
+      spiega: la tensione del lato basso non supera quella del lato alto
+    trappola: Con VDD1 > VDD2 il diodo del MOS conduce anche a riposo e il circuito non funziona.
+  - codice: oppure un modulo già pronto per la conversione 5–3,3 V
+    commento: in commercio
+segnaposto: {}
+varianti: []
+vicine:
+- i2c-collega
+- pullup-valore

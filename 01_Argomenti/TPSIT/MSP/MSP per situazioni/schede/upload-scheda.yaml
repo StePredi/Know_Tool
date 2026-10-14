@@ -1,0 +1,31 @@
+id: upload-scheda
+tipo: ricetta
+titolo: Caricare il programma sulla scheda
+sigla: Upload
+comando: UPLOAD · BUILD
+frase: compila, poi carica con BOOT premuto
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: upload build compila carica boot pulsante porta seriale device errori warning platformio
+quando: Quando il programma è scritto e vuoi farlo girare sull'ESP32.
+fasi:
+- nome: Compila
+  righe:
+  - codice: BUILD
+    commento: compila e mostra errori e warning con il tipo
+- nome: Collega e controlla la porta
+  righe:
+  - codice: collega la scheda via USB
+    commento: la scheda compare come porta seriale
+  - codice: verifica che la porta seriale sia quella giusta
+    commento: 'se non la vede: scheda «Porta non vista»'
+    trappola: Se la porta non compare o non è quella giusta l'upload fallisce sempre.
+- nome: Carica
+  righe:
+  - codice: UPLOAD
+    commento: carica il file sul device
+    trappola: Durante la connessione alla porta seriale tieni premuto il pulsante BOOT sulla scheda.
+segnaposto: {}
+varianti: []
+vicine:
+- monitor-seriale
+- porta-non-vista

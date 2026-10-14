@@ -1,0 +1,18 @@
+id: errore-esp
+tipo: ricetta
+titolo: Capire un codice d'errore dell'ESP
+sigla: Codici d'errore
+comando: esp_err.h
+frase: dal numero al significato
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: errore esp_err codice esp-idf github interpretare errori programmazione
+quando: Quando il programma stampa un codice d'errore e non sai cosa significa.
+fasi:
+- nome: Cerca il codice
+  righe:
+  - codice: apri esp_err.h su GitHub (ESP-IDF)
+    commento: link nelle note del corso (cartella pratica)
+segnaposto: {}
+varianti: []
+vicine:
+- monitor-seriale

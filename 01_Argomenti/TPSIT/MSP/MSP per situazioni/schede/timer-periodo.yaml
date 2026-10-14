@@ -1,0 +1,69 @@
+id: timer-periodo
+tipo: ricetta
+titolo: Far partire una funzione a intervalli regolari
+sigla: Timer con interrupt
+comando: timerBegin · timerAlarmWrite
+frase: una ISR ogni tot tempo
+fonte: Slide ESP32 GPIO e timer
+parole: timer timerbegin timerattachinterrupt timeralarmwrite timeralarmenable hw_timer_t prescaler contatore
+  intervallo
+quando: Quando una funzione deve partire a intervalli regolari, senza usare delay().
+fasi:
+- nome: Dichiara
+  righe:
+  - codice: hw_timer_t * «TIMER» = NULL;
+    commento: puntatore globale al timer
+- nome: Inizializza
+  righe:
+  - codice: «TIMER» = timerBegin(«NUM», «PRESCALER», true);
+    commento: inizializza il timer
+    parti:
+    - voce: «NUM»
+      spiega: 'numero del timer: 0, 1, 2 o 3'
+    - voce: «PRESCALER»
+      spiega: divisore del clock (80 MHz)
+    - voce: 'true'
+      spiega: il contatore conta in avanti; false = indietro
+- nome: Collega la ISR
+  righe:
+  - codice: timerAttachInterrupt(«TIMER», &«ISR», true);
+    commento: prima di abilitare il timer
+    parti:
+    - voce: '&«ISR»'
+      spiega: indirizzo della funzione di gestione
+    - voce: 'true'
+      spiega: interrupt dal fronte (edge); false = dal livello
+    trappola: La ISR va collegata prima di abilitare il timer.
+- nome: Imposta l'allarme
+  righe:
+  - codice: timerAlarmWrite(«TIMER», «CONTEGGIO», true);
+    commento: valore del contatore a cui scatta l'interrupt
+    parti:
+    - voce: 'true'
+      spiega: 'ricarica automatica: il timer riparte da solo'
+    trappola: 'Il tempo non è in secondi: dipende da prescaler e conteggio (scheda «Calcolare il tempo»).'
+- nome: Abilita
+  righe:
+  - codice: timerAlarmEnable(«TIMER»);
+    commento: da qui il timer gira
+segnaposto:
+  TIMER:
+    esempio: timer0
+    spiega: nome della variabile globale del timer
+  NUM:
+    esempio: '0'
+    spiega: 0, 1, 2 o 3
+  PRESCALER:
+    esempio: '80'
+    spiega: con 80 il contatore va a 1 MHz
+  ISR:
+    esempio: onTimer
+    spiega: funzione con IRAM_ATTR
+  CONTEGGIO:
+    esempio: '1000000'
+    spiega: con prescaler 80 sono 1000000 µs = 1 s
+varianti: []
+vicine:
+- timer-calcolo
+- timer-lampeggio
+- isr-regole

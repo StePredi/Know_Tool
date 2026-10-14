@@ -1,0 +1,51 @@
+id: timer-lampeggio
+tipo: ricetta
+titolo: Far lampeggiare un LED con un timer
+sigla: Esempio completo timer
+comando: timerBegin(0, 80, true)
+frase: il LED cambia ogni secondo
+fonte: Slide ESP32 GPIO e timer
+parole: esempio completo timer led lampeggio ontimer timer0 timerbegin 1000000 setup loop vuoto
+quando: Quando vuoi un modello completo di timer da copiare e adattare.
+fasi:
+- nome: Variabili
+  righe:
+  - codice: '#include <Arduino.h>'
+  - codice: '#define LED «LED_PIN»'
+  - codice: hw_timer_t *timer0 = NULL;
+- nome: ISR
+  righe:
+  - codice: |-
+      void IRAM_ATTR onTimer() {
+        digitalWrite(LED, !digitalRead(LED));
+      }
+    commento: inverte il LED a ogni scatto
+- nome: setup
+  righe:
+  - codice: |-
+      void setup() {
+        pinMode(LED, OUTPUT);
+        timer0 = timerBegin(0, 80, true);
+        timerAttachInterrupt(timer0, &onTimer, true);
+        timerAlarmWrite(timer0, «CONTEGGIO», true);
+        timerAlarmEnable(timer0);
+      }
+    trappola: 'Se non compila su timerBegin: queste funzioni sono quelle del core Arduino-ESP32 2.x, nel
+      3.x l''API è cambiata (nota, non dalle slide).'
+  - codice: |-
+      void loop() {
+
+      }
+    commento: 'vuoto: fa tutto il timer'
+segnaposto:
+  LED_PIN:
+    esempio: '25'
+    spiega: GPIO del LED
+  CONTEGGIO:
+    esempio: '1000000'
+    spiega: 1 s con prescaler 80
+varianti: []
+vicine:
+- timer-periodo
+- interrupt-led-esempio
+- blink-led

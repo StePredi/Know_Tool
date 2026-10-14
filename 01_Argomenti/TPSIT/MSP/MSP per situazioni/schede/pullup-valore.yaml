@@ -1,0 +1,32 @@
+id: pullup-valore
+tipo: ricetta
+titolo: Scegliere le resistenze di pull-up
+sigla: Pull-up
+comando: Rp ≈ 2 kΩ
+frase: né troppo basse né troppo alte
+fonte: Protocollo I2C · Crivellaro
+parole: pull-up resistenza rp capacità bus fili corti open drain collector 2k 2.2k transitorio velocità
+quando: Quando il bus non è affidabile o devi decidere che resistenze mettere.
+fasi:
+- nome: Valore
+  righe:
+  - codice: Rp ≈ 2 kΩ (negli esempi 2,2 kΩ)
+    commento: va bene per la maggior parte dei casi
+    trappola: 'Troppo basso: correnti troppo alte (specie a 5 V). Troppo alto: con bus ad alta capacità
+      il segnale sale troppo lentamente.'
+- nome: Perché serve
+  righe:
+  - codice: uscite open-drain / open-collector
+    commento: i dispositivi sanno solo tirare giù la linea; l'alto lo fa la pull-up
+- nome: Buone pratiche
+  righe:
+  - codice: fili I2C il più corti possibile
+    commento: la capacità del bus cresce con la lunghezza
+  - codice: resistori in serie (es. 300 Ω)
+    commento: proteggono dagli spike di tensione
+    trappola: 'Le pull-up interne di Arduino superano i 20 kΩ: possono impedire alte velocità.'
+segnaposto: {}
+varianti: []
+vicine:
+- i2c-collega
+- velocita-clock

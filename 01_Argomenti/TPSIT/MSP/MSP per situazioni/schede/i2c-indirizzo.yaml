@@ -1,0 +1,36 @@
+id: i2c-indirizzo
+tipo: ricetta
+titolo: Trovare l'indirizzo di un sensore I2C
+sigla: Scanner I2C
+comando: I2C scanner
+frase: chi c'è sul bus?
+fonte: Protocollo I2C · Crivellaro · Protocollo I2C · Bartolo
+parole: scanner i2c indirizzo address esadecimale 0x38 0x76 0x77 trova dispositivi sensore monitor seriale
+quando: Quando devi usare un sensore I2C e non conosci il suo indirizzo, o non sai se risponde.
+fasi:
+- nome: Collega
+  righe:
+  - codice: 'sensore ↔ ESP32: SDA = GPIO 21, SCL = GPIO 22, GND, alimentazione'
+    commento: pin di default della libreria Wire
+- nome: Carica lo scanner
+  righe:
+  - codice: carica sulla scheda il programma «I2C Scanner»
+    commento: il link è nelle fonti (pagina Arduino)
+- nome: Leggi
+  righe:
+  - codice: MONITOR SERIALE
+    commento: compare ogni dispositivo trovato con l'indirizzo in esadecimale
+    trappola: 'Puoi cambiare cavi e dispositivi mentre lo scanner gira: se non appare niente, controlla
+      SDA/SCL e alimentazione.'
+segnaposto: {}
+varianti:
+- codice: AHT20 → 0x38
+  spiega: indirizzo fisso
+- codice: BMP280 → 0x76
+  spiega: con SDO non collegato
+- codice: BMP280 → 0x77
+  spiega: con SDO collegato a 3,3 V
+vicine:
+- sensore-non-trovato
+- bmp280-indirizzo
+- aht20-leggi

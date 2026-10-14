@@ -1,0 +1,23 @@
+id: bmp280-indirizzo
+tipo: prima_dopo
+titolo: Cambiare l'indirizzo I2C del BMP280
+sigla: Indirizzo BMP280
+comando: SDO → 3,3 V
+frase: 0x76 o 0x77
+fonte: Introduzione ESP32 · TPSIT 2026/27 · nota dalla libreria Adafruit
+parole: bmp280 indirizzo 0x76 0x77 sdo pin 6 3.3v due sensori stesso bus begin
+prima: pin 6 (⟦SDO⟧) ⟦non collegato⟧   →   indirizzo ⟦0x76⟧
+dopo: pin 6 (⟦SDO⟧) ⟦collegato a 3,3 V⟧   →   indirizzo ⟦0x77⟧
+uso: Mettere due BMP280 sullo stesso bus, o evitare un conflitto di indirizzi.
+riconoscila: Due dispositivi I2C rispondono allo stesso indirizzo, oppure bmp.begin() non trova il sensore.
+parti:
+- voce: SDO
+  spiega: 'pin 6 del modulo: decide il bit variabile dell''indirizzo'
+- voce: 3,3 V
+  spiega: di solito l'alimentazione Vcc
+trappola: 'Nota (non dalle slide): nella libreria Adafruit begin() senza argomenti cerca 0x77; se il tuo
+  modulo è a 0x76 va indicato, per esempio bmp.begin(0x76).'
+varianti: []
+vicine:
+- i2c-indirizzo
+- bmp280-leggi

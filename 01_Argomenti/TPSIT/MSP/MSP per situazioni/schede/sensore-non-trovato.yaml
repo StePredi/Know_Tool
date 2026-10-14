@@ -1,0 +1,30 @@
+id: sensore-non-trovato
+tipo: ricetta
+titolo: Il sensore I2C non viene trovato
+sigla: Sensore non trovato
+comando: controlli in ordine
+frase: cosa controllare
+fonte: Protocollo I2C · Crivellaro · Introduzione ESP32 · TPSIT 2026/27
+parole: sensore non trovato i2c non risponde indirizzo cavi sda scl pull-up alimentazione scanner 0x76
+  0x77 0x38
+quando: Quando lo scanner non vede il sensore, o la lettura non parte.
+fasi:
+- nome: Controlla in ordine
+  righe:
+  - codice: '1. cavi: SDA = GPIO 21, SCL = GPIO 22, GND'
+    commento: non scambiare SDA e SCL
+  - codice: 2. alimentazione del sensore
+    commento: AHT20 3,3–5 V; BME280/BMP280 1,8–5 V
+  - codice: 3. pull-up su SDA e SCL
+    commento: senza pull-up le linee non salgono
+  - codice: 4. indirizzo giusto
+    commento: AHT20 0x38; BMP280 0x76 o 0x77
+    trappola: Un indirizzo sbagliato nel codice dà lo stesso sintomo di un cavo staccato.
+  - codice: 5. scanner I2C
+    commento: se lo scanner lo vede, il problema è nel codice
+segnaposto: {}
+varianti: []
+vicine:
+- i2c-indirizzo
+- nessuno-risponde
+- bmp280-indirizzo

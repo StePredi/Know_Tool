@@ -1,0 +1,32 @@
+id: decodifica-frame
+tipo: prima_dopo
+titolo: Decodificare i bit di una lettura
+sigla: Decodifica
+comando: S ADDR R A DATA…
+frase: bit → significato
+fonte: Protocollo I2C · Crivellaro
+parole: decodifica esercizio bit sequenza hi h i ascii 0000101 5 ack nack stop lettura analizzatore logico
+prima: S 0000101 1 0 01001000 0 01101001 1 P
+dopo: S ⟦0000101⟧ ⟦1⟧ ⟦0⟧ ⟦01001000⟧ ⟦0⟧ ⟦01101001⟧ ⟦1⟧ P
+uso: 'Capire una sequenza di bit: chi ha mandato cosa.'
+riconoscila: Hai una sequenza di 0 e 1 con S all'inizio e P alla fine.
+parti:
+- voce: '0000101'
+  spiega: 'indirizzo dello slave: 5'
+- voce: '1'
+  spiega: 'R: il master legge'
+- voce: '0'
+  spiega: ACK dello slave
+- voce: '01001000'
+  spiega: 'primo byte (slave): 72 = ''H'' in ASCII'
+- voce: '0'
+  spiega: ACK del master
+- voce: '01101001'
+  spiega: 'secondo byte (slave): 105 = ''i'''
+- voce: '1'
+  spiega: 'NACK del master: non vuole altri dati'
+trappola: Prima parti dai primi 7 bit (indirizzo), poi 1 bit R/W; poi ogni 8 bit di dati c'è 1 bit di
+  ACK/NACK.
+varianti: []
+vicine:
+- frame-i2c

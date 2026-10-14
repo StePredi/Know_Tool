@@ -1,0 +1,35 @@
+id: i2c-collega
+tipo: ricetta
+titolo: Collegare due schede con il bus I2C
+sigla: Collegamento I2C
+comando: SDA · SCL · GND
+frase: due fili più la massa
+fonte: Protocollo I2C · Crivellaro
+parole: collegamento i2c sda scl gnd pull-up 2.2k resistenza master slave due schede ponticelli gpio 21
+  22 a4 a5
+quando: Quando devi far parlare due schede (o una scheda e un sensore) via I2C.
+fasi:
+- nome: Fili
+  righe:
+  - codice: SDA ↔ SDA
+    commento: 'dati. ESP32: GPIO 21 (Arduino UNO: A4)'
+  - codice: SCL ↔ SCL
+    commento: 'clock. ESP32: GPIO 22 (Arduino UNO: A5)'
+  - codice: GND ↔ GND
+    commento: massa comune a tutti
+- nome: Pull-up
+  righe:
+  - codice: resistore da «R_PULLUP» fra SDA e VDD
+    commento: tiene alta la linea dati
+  - codice: resistore da «R_PULLUP» fra SCL e VDD
+    commento: tiene alto il clock
+    trappola: Le pull-up sono una per linea, non una per dispositivo.
+segnaposto:
+  R_PULLUP:
+    esempio: 2,2 kΩ
+    spiega: valori intorno a 2 kΩ vanno bene nella maggior parte dei casi
+varianti: []
+vicine:
+- master-leggi
+- pullup-valore
+- livelli-tensione

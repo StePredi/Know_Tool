@@ -1,0 +1,40 @@
+id: timer-calcolo
+tipo: ricetta
+titolo: Calcolare il valore del contatore dal tempo voluto
+sigla: Tempo del timer
+comando: T = T_timer · contatore
+frase: da secondi a conteggio
+fonte: Slide ESP32 GPIO e timer
+parole: calcolo timer frequenza prescaler periodo contatore 80 mhz microsecondi secondi alarm
+quando: Quando sai ogni quanto vuoi l'interrupt e devi ricavare il numero da passare a timerAlarmWrite.
+fasi:
+- nome: Frequenza del contatore
+  righe:
+  - codice: f_timer = 80 MHz / «PRESCALER»
+    commento: il clock arriva a 80 MHz
+    parti:
+    - voce: 80 MHz
+      spiega: frequenza di clock che entra nel prescaler
+- nome: Periodo di un conteggio
+  righe:
+  - codice: T_timer = 1 / f_timer
+    commento: 'con prescaler 80: 1 µs'
+- nome: Valore da scrivere
+  righe:
+  - codice: contatore = T_voluto / T_timer
+    commento: quanti conteggi servono
+    trappola: 'Il tempo voluto va nella stessa unità di T_timer: con prescaler 80, 1 s = 1 000 000 µs.'
+segnaposto:
+  PRESCALER:
+    esempio: '80'
+    spiega: valore passato a timerBegin
+varianti:
+- codice: 1 s → 1 000 000
+  spiega: 'esempio delle slide: 10⁻⁶ · 1 000 000 = 1 s'
+- codice: 0,5 s → 500 000
+  spiega: con prescaler 80
+- codice: 2 s → 2 000 000
+  spiega: con prescaler 80
+vicine:
+- timer-periodo
+- timer-cambia

@@ -1,0 +1,22 @@
+id: simboli-strani
+tipo: ricetta
+titolo: Il monitor seriale mostra simboli strani
+sigla: Simboli strani
+comando: monitor_speed
+frase: velocità diverse
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: simboli strani caratteri illeggibili monitor seriale monitor_speed 115200 baud platformio.ini
+quando: Quando nel monitor seriale compaiono caratteri senza senso.
+fasi:
+- nome: Correggi
+  righe:
+  - codice: monitor_speed = «BAUD»
+    commento: riga da aggiungere in platformio.ini
+    trappola: Deve coincidere con il numero in Serial.begin() del programma.
+segnaposto:
+  BAUD:
+    esempio: '115200'
+    spiega: velocità del monitor
+varianti: []
+vicine:
+- monitor-seriale

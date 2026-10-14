@@ -1,0 +1,28 @@
+id: bmp280-modalita
+tipo: ricetta
+titolo: Scegliere la modalità del BMP280
+sigla: Modalità BMP280
+comando: SLEEP · NORMAL · FORCED
+frase: quando misura il sensore
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: bmp280 modalità sleep normal forced standby misura singola burst read registri byte
+quando: Quando vuoi risparmiare energia o decidere tu quando il sensore misura.
+fasi:
+- nome: Le tre modalità
+  righe:
+  - codice: SLEEP MODE
+    commento: nessuna misura
+  - codice: NORMAL MODE
+    commento: il sensore alterna da solo misura e pausa (tempo t_standby)
+  - codice: FORCED MODE
+    commento: una sola misura su richiesta, poi torna in sleep
+    trappola: Dopo ogni misura in forced bisogna selezionarlo di nuovo.
+- nome: Leggere i dati
+  righe:
+  - codice: burst read dei registri dati
+    commento: lettura di blocco, non registro per registro
+    trappola: Con letture registro per registro puoi mescolare byte di misure diverse.
+segnaposto: {}
+varianti: []
+vicine:
+- bmp280-leggi

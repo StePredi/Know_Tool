@@ -1,0 +1,34 @@
+id: interrupt-touch
+tipo: ricetta
+titolo: Reagire al tocco su un pin touch
+sigla: Interrupt touch
+comando: touchAttachInterrupt
+frase: il dito come pulsante
+fonte: Slide ESP32 GPIO e timer
+parole: touch tocco capacitivo touchattachinterrupt soglia threshold interrupt sensibile
+quando: Quando vuoi usare un pin sensibile al tocco al posto di un pulsante.
+fasi:
+- nome: Collega la funzione
+  righe:
+  - codice: touchAttachInterrupt(«PIN», «ISR», «SOGLIA»);
+    commento: l'ISR parte quando il valore scende sotto la soglia
+    parti:
+    - voce: «SOGLIA»
+      spiega: valore di tocco a cui scatta l'interrupt
+    trappola: 'Valori tipici: libero > 100, toccato < 60 circa: la soglia va scelta in mezzo.'
+segnaposto:
+  PIN:
+    esempio: T0
+    spiega: un pin touch (solo alcuni GPIO sono sensibili al tocco)
+  ISR:
+    esempio: gotTouch
+    spiega: nome della funzione
+  SOGLIA:
+    esempio: '80'
+    spiega: valore fra 60 e 100
+varianti:
+- codice: touchAttachInterrupt(T0, gotTouch, 80);
+  spiega: esempio con soglia 80
+vicine:
+- interrupt-pin
+- isr-regole

@@ -1,0 +1,21 @@
+id: interrupt-stacca
+tipo: ricetta
+titolo: Smettere di controllare un pin
+sigla: Staccare l'interrupt
+comando: detachInterrupt
+frase: l'ESP32 non lo guarda più
+fonte: Slide ESP32 GPIO e timer
+parole: detachinterrupt stacca disattiva dissociare interrupt gpio
+quando: Quando un pin non deve più generare interrupt.
+fasi:
+- nome: Dissocia
+  righe:
+  - codice: detachInterrupt(«PIN»);
+    commento: da qui il pin non chiama più l'ISR
+segnaposto:
+  PIN:
+    esempio: '0'
+    spiega: il GPIO a cui avevi associato l'interrupt
+varianti: []
+vicine:
+- interrupt-pin

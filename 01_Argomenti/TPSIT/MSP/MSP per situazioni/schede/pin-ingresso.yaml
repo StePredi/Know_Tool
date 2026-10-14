@@ -1,0 +1,39 @@
+id: pin-ingresso
+tipo: ricetta
+titolo: Leggere un ingresso digitale
+sigla: Ingresso digitale
+comando: pinMode · digitalRead
+frase: leggere un pulsante
+fonte: Slide ESP32 GPIO e timer
+parole: ingresso input digitalread pinmode pulsante lettura gpio pullup pulldown
+quando: Quando vuoi sapere se un pulsante (o un altro segnale digitale) è alto o basso.
+fasi:
+- nome: Configura il pin
+  righe:
+  - codice: pinMode(«PIN», «MODO»);
+    commento: il pin diventa ingresso
+    parti:
+    - voce: INPUT
+      spiega: ingresso «libero»
+    - voce: INPUT_PULLUP
+      spiega: ingresso con resistenza di pull-up interna
+    - voce: INPUT_PULLDOWN
+      spiega: ingresso con resistenza di pull-down interna
+- nome: Leggi
+  righe:
+  - codice: digitalRead(«PIN»);
+    commento: restituisce HIGH o LOW
+    trappola: 'Un ingresso INPUT lasciato scollegato «galleggia» e legge valori a caso: usa pull-up o
+      pull-down.'
+segnaposto:
+  PIN:
+    esempio: '22'
+    spiega: numero del GPIO
+  MODO:
+    esempio: INPUT_PULLUP
+    spiega: INPUT, INPUT_PULLUP o INPUT_PULLDOWN
+varianti: []
+vicine:
+- pullup-pulsante
+- pin-uscita
+- interrupt-pin

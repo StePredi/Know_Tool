@@ -1,0 +1,39 @@
+id: aht20-leggi
+tipo: ricetta
+titolo: Leggere temperatura e umidità con l'AHT20
+sigla: AHT20
+comando: Adafruit_AHTX0
+frase: temperatura e umidità con la libreria
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: aht20 aht temperatura umidità relativa adafruit ahtx0 getevent sensors_event_t libreria lettura
+quando: Quando vuoi stampare temperatura e umidità relativa dal sensore AHT20.
+fasi:
+- nome: Libreria
+  righe:
+  - codice: libreria «Adafruit AHTX0»
+    commento: da installare con PlatformIO
+- nome: Dichiara
+  righe:
+  - codice: Adafruit_AHTX0 aht;
+    commento: oggetto globale
+- nome: Nel setup
+  righe:
+  - codice: aht.begin();
+    commento: avvia il sensore (indirizzo 0x38)
+- nome: Nel loop
+  righe:
+  - codice: sensors_event_t humidity, temp;
+    commento: due contenitori per i dati
+  - codice: aht.getEvent(&humidity, &temp);
+    commento: legge i dati aggiornati
+  - codice: Serial.print(temp.temperature);
+    commento: temperatura in °C
+  - codice: Serial.print(humidity.relative_humidity);
+    commento: umidità relativa in %
+    trappola: 'Una misura ogni 2 secondi: misurare troppo spesso riscalda il sensore e falsa i valori.'
+segnaposto: {}
+varianti: []
+vicine:
+- aht20-a-mano
+- valori-aht20
+- bmp280-leggi

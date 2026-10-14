@@ -1,0 +1,27 @@
+id: pullup-pulsante
+tipo: prima_dopo
+titolo: Pulsante letto senza resistenza esterna
+sigla: Pull-up interna
+comando: INPUT → INPUT_PULLUP
+frase: il pulsante verso massa
+fonte: Slide ESP32 GPIO e timer · Introduzione ESP32 · TPSIT 2026/27
+parole: pullup pull-up input_pullup pulsante resistenza interna alto a riposo premuto low
+prima: |-
+  pinMode(⟦BUTTON⟧, ⟦INPUT⟧);
+  if (digitalRead(BUTTON) == HIGH) { /* ? */ }
+dopo: |-
+  pinMode(⟦BUTTON⟧, ⟦INPUT_PULLUP⟧);
+  if (digitalRead(BUTTON) == ⟦LOW⟧) { /* premuto */ }
+uso: Leggere un pulsante collegato fra il pin e la massa senza aggiungere una resistenza esterna.
+riconoscila: Il pulsante legge valori instabili quando non lo premi.
+parti:
+- voce: INPUT_PULLUP
+  spiega: tiene il pin alto quando il pulsante non è premuto
+- voce: == LOW
+  spiega: con la pull-up il pulsante premuto porta il pin a LOW
+trappola: 'Con INPUT_PULLUP la logica si capovolge: a riposo è HIGH, premuto è LOW (per questo l''esempio
+  dell''interrupt usa FALLING).'
+varianti: []
+vicine:
+- pin-ingresso
+- interrupt-led-esempio

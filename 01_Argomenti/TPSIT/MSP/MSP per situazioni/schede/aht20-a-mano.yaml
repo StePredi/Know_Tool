@@ -1,0 +1,41 @@
+id: aht20-a-mano
+tipo: ricetta
+titolo: Parlare con l'AHT20 senza libreria
+sigla: AHT20 a mano
+comando: 0x71 · 0xBE · 0xAC
+frase: la sequenza di comandi
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: aht20 comandi 0x71 0xbe 0xac stato bit calibrazione 40ms 80ms 6 byte trigger misura sequenza
+quando: Quando vuoi capire cosa fa la libreria dentro, o scrivere tu i byte con Wire.
+fasi:
+- nome: Accensione
+  righe:
+  - codice: attendi 40 ms
+    commento: il sensore deve avviarsi
+- nome: Controlla la calibrazione
+  righe:
+  - codice: invia 0x71 → leggi 1 byte di stato
+    commento: la parola di stato
+    parti:
+    - voce: bit 3
+      spiega: 'calibration enable: deve essere 1'
+  - codice: 'se bit 3 ≠ 1: invia 0xBE 0x08 0x00, attendi 10 ms'
+    commento: comando di inizializzazione (due byte di parametro)
+- nome: Misura
+  righe:
+  - codice: invia 0xAC
+    commento: avvia la misura
+  - codice: attendi 80 ms
+    commento: tempo di misura
+  - codice: 'leggi lo stato: bit 7 = 0 → misura finita'
+    commento: altrimenti continua ad aspettare
+    parti:
+    - voce: bit 7
+      spiega: 'busy: 0 = misura completata'
+  - codice: leggi 6 byte di fila
+    commento: contengono SRH (umidità) e ST (temperatura)
+segnaposto: {}
+varianti: []
+vicine:
+- aht20-leggi
+- master-leggi

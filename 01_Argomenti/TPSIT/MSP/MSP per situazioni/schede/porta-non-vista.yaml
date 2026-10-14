@@ -1,0 +1,30 @@
+id: porta-non-vista
+tipo: ricetta
+titolo: Il computer non vede la scheda
+sigla: Porta non vista
+comando: chmod · brltty
+frase: la porta seriale non compare
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: porta seriale non vede esp ttyUSB0 chmod 666 brltty linux permessi upload errore dev
+quando: Quando su Linux la porta seriale dell'ESP non appare o non si apre.
+fasi:
+- nome: Permessi
+  righe:
+  - codice: sudo chmod 666 /dev/ttyUSB0
+    commento: rende la porta leggibile e scrivibile
+- nome: Oppure disattiva brltty
+  righe:
+  - codice: systemctl stop brltty-udev.service
+    commento: ferma il servizio
+  - codice: sudo systemctl mask brltty-udev.service
+    commento: lo maschera
+  - codice: systemctl stop brltty.service
+    commento: ferma brltty
+  - codice: systemctl disable brltty.service
+    commento: lo disattiva
+    trappola: brltty (servizio per i display Braille) può «rubare» la porta seriale dell'ESP.
+segnaposto: {}
+varianti: []
+vicine:
+- upload-scheda
+- simboli-strani

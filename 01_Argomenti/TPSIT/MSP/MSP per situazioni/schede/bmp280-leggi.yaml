@@ -1,0 +1,44 @@
+id: bmp280-leggi
+tipo: ricetta
+titolo: Leggere pressione, temperatura e altitudine con il BMP280
+sigla: BMP280
+comando: Adafruit_BMP280
+frase: pressione, temperatura, altitudine
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: bmp280 bme280 pressione temperatura altitudine altimetro readtemperature readpressure readaltitude
+  1013.25 adafruit
+quando: Quando vuoi leggere la pressione atmosferica (e da lì la quota) con il BMP280.
+fasi:
+- nome: Libreria
+  righe:
+  - codice: libreria «Adafruit BMP280»
+    commento: da installare con PlatformIO
+- nome: Dichiara e avvia
+  righe:
+  - codice: Adafruit_BMP280 bmp;
+    commento: oggetto globale
+  - codice: bmp.begin();
+    commento: nel setup()
+    trappola: 'Il BMP280 può stare a 0x76 o a 0x77: se begin() fallisce controlla l''indirizzo (scheda
+      «Indirizzo del BMP280»).'
+- nome: Nel loop
+  righe:
+  - codice: Serial.print(bmp.readTemperature());
+    commento: temperatura
+  - codice: Serial.print(bmp.readPressure());
+    commento: pressione
+  - codice: Serial.print(bmp.readAltitude(«PRESSIONE_MARE»));
+    commento: altitudine
+    parti:
+    - voce: «PRESSIONE_MARE»
+      spiega: pressione al livello del mare, in hPa
+    trappola: Il valore va regolato con la previsione locale del giorno, altrimenti la quota è sbagliata.
+segnaposto:
+  PRESSIONE_MARE:
+    esempio: '1013.25'
+    spiega: hPa al livello del mare; valore standard
+varianti: []
+vicine:
+- bmp280-indirizzo
+- bmp280-modalita
+- aht20-leggi

@@ -1,0 +1,28 @@
+id: nessuno-risponde
+tipo: ricetta
+titolo: Il master non riceve risposta
+sigla: Nessuna risposta
+comando: NACK · endTransmission
+frase: capire l'errore dal numero
+fonte: Protocollo I2C · Crivellaro
+parole: nack nessuno risponde endtransmission errore codice 2 3 indirizzo slave non collegato bus
+quando: Quando una trasmissione non va a buon fine e vuoi sapere perché.
+fasi:
+- nome: Cosa vede il bus
+  righe:
+  - codice: S  ADDR  R  NACK  P
+    commento: 'nessuno risponde con ACK: il master chiude con uno STOP'
+    trappola: Se nessun dispositivo ha quell'indirizzo, o lo slave è scollegato, è sempre un NACK.
+- nome: Il codice di ritorno
+  righe:
+  - codice: byte stato = Wire.endTransmission();
+    commento: restituisce lo stato della trasmissione
+  - codice: 0 = successo · 1 = dati troppo lunghi · 2 = NACK sull'indirizzo · 3 = NACK sui dati · 4 =
+      altro errore
+    commento: il significato dei valori
+segnaposto: {}
+varianti: []
+vicine:
+- sensore-non-trovato
+- i2c-indirizzo
+- i2c-collega

@@ -1,0 +1,25 @@
+id: velocita-clock
+tipo: ricetta
+titolo: Scegliere la velocità del bus
+sigla: Velocità I2C
+comando: 100 kHz · 400 kHz · 3,4 MHz
+frase: quanto veloce è il clock
+fonte: Protocollo I2C · Crivellaro · Trasmissione I2C · TPSIT · Introduzione ESP32 · TPSIT 2026/27
+parole: velocità clock frequenza standard fast mode high speed 100 khz 400 khz 3.4 mhz bus
+quando: Quando devi sapere quanto può andare veloce il bus, o se il tuo sensore regge la velocità.
+fasi:
+- nome: Le tre modalità
+  righe:
+  - codice: 'Standard: 0–100 kHz'
+    commento: la modalità di base
+  - codice: 'Fast-mode: fino a 400 kHz'
+    commento: introdotta nel 1992
+  - codice: 'High speed: fino a 3,4 MHz'
+    commento: introdotta nel 1998
+    trappola: BMP280 e BME280 arrivano a 3,4 MHz, ma pull-up troppo alte o fili lunghi limitano la frequenza
+      massima in pratica.
+segnaposto: {}
+varianti: []
+vicine:
+- pullup-valore
+- slave-lento

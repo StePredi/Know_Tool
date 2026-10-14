@@ -1,0 +1,25 @@
+id: valori-aht20
+tipo: ricetta
+titolo: I valori dell'AHT20 sono strani
+sigla: Valori AHT20
+comando: misura ogni 2 s
+frase: sensore che si scalda
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: aht20 valori errati strani temperatura alta umidità errore riscaldamento autoriscaldamento frequenza
+  misura 2 secondi
+quando: Quando temperatura o umidità del sensore sembrano sbagliate.
+fasi:
+- nome: Cause possibili
+  righe:
+  - codice: misure troppo frequenti
+    commento: il sensore si riscalda e falsa la misura
+    trappola: 'Per stare sotto 0,1 °C di riscaldamento l''attività deve essere ≤ 10 % del tempo: una misura
+      ogni 2 secondi.'
+  - codice: umidità > 80 % a lungo
+    commento: dopo 60 ore può dare +3 % RH; torna normale in condizioni normali
+  - codice: temperatura di lavoro
+    commento: l'accuratezza dell'umidità dipende dalla temperatura
+segnaposto: {}
+varianti: []
+vicine:
+- aht20-leggi

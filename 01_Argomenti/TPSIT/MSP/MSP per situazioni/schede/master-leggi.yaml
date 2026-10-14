@@ -1,0 +1,47 @@
+id: master-leggi
+tipo: ricetta
+titolo: Il master chiede dati a uno slave
+sigla: Master reader
+comando: Wire.requestFrom
+frase: il master legge
+fonte: Protocollo I2C · Crivellaro · Protocollo I2C · Bartolo
+parole: master reader requestfrom available read wire byte chiedere dati slave sensore lettura
+quando: Quando la tua scheda è il master e deve leggere dati (per esempio da un sensore).
+fasi:
+- nome: Setup
+  righe:
+  - codice: '#include <Wire.h>'
+  - codice: Wire.begin();
+    commento: senza parametri = master
+    trappola: Se metti un numero fra parentesi diventi uno slave.
+- nome: Richiedi
+  righe:
+  - codice: Wire.requestFrom(«INDIRIZZO», «N_BYTE»);
+    commento: chiede N byte allo slave; chiude con uno STOP
+    parti:
+    - voce: «INDIRIZZO»
+      spiega: indirizzo dello slave
+    - voce: «N_BYTE»
+      spiega: quanti byte aspetti
+- nome: Leggi
+  righe:
+  - codice: |-
+      while (Wire.available()) {
+        char c = Wire.read();
+        Serial.print(c);
+      }
+    commento: finché ci sono byte nella coda
+    trappola: 'Lo slave può mandare meno byte di quelli richiesti: per questo si usa while(available())
+      e non un ciclo a numero fisso.'
+segnaposto:
+  INDIRIZZO:
+    esempio: '5'
+    spiega: indirizzo dello slave a 7 bit
+  N_BYTE:
+    esempio: '2'
+    spiega: numero di byte richiesti
+varianti: []
+vicine:
+- slave-risponde
+- nessuno-risponde
+- master-scrive

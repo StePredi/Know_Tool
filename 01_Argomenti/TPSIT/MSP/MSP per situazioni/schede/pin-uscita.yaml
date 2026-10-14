@@ -1,0 +1,38 @@
+id: pin-uscita
+tipo: ricetta
+titolo: Comandare un'uscita digitale
+sigla: Uscita digitale
+comando: pinMode · digitalWrite
+frase: accendere e spegnere un pin
+fonte: Slide ESP32 GPIO e timer
+parole: uscita output digitalwrite pinmode high low led gpio pin comando
+quando: Quando un pin deve comandare qualcosa, per esempio un LED.
+fasi:
+- nome: Configura il pin
+  righe:
+  - codice: pinMode(«PIN», OUTPUT);
+    commento: il pin diventa uscita
+    parti:
+    - voce: OUTPUT
+      spiega: 'il modo: uscita'
+    trappola: Va fatto prima di digitalWrite, di solito nel setup().
+- nome: Imposta lo stato
+  righe:
+  - codice: digitalWrite(«PIN», «STATO»);
+    commento: alto o basso
+    parti:
+    - voce: HIGH
+      spiega: pin alto
+    - voce: LOW
+      spiega: pin basso
+segnaposto:
+  PIN:
+    esempio: '23'
+    spiega: numero del GPIO
+  STATO:
+    esempio: HIGH
+    spiega: HIGH oppure LOW
+varianti: []
+vicine:
+- blink-led
+- pin-ingresso

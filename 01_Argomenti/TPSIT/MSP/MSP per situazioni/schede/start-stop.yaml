@@ -1,0 +1,27 @@
+id: start-stop
+tipo: ricetta
+titolo: Riconoscere START e STOP
+sigla: START e STOP
+comando: SDA cambia con SCL alto
+frase: il cambio con il clock alto
+fonte: Protocollo I2C · Crivellaro · Trasmissione I2C · TPSIT
+parole: start stop condizione sda scl fronte discesa salita alto basso segnale linee
+quando: Quando guardi un diagramma temporale e devi capire dove inizia e finisce un messaggio.
+fasi:
+- nome: Regola base
+  righe:
+  - codice: SDA cambia solo con SCL BASSO
+    commento: 'è un dato: si legge sul fronte di SCL'
+- nome: Eccezioni (non sono dati)
+  righe:
+  - codice: 'START: SDA scende con SCL ALTO'
+    commento: prima le linee sono entrambe alte
+  - codice: 'STOP: SDA sale con SCL ALTO'
+    commento: annuncia che la comunicazione è finita
+    trappola: 'Nel PDF «Trasmissione I2C» c''è scritto SCL=0 per lo stop: è sbagliato, vale SCL alto (come
+      in Crivellaro).'
+segnaposto: {}
+varianti: []
+vicine:
+- frame-i2c
+- decodifica-frame

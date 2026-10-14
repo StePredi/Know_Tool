@@ -1,0 +1,37 @@
+id: isr-regole
+tipo: ricetta
+titolo: Scrivere bene una ISR
+sigla: Regole dell'ISR
+comando: void IRAM_ATTR
+frase: breve, senza parametri, in RAM
+fonte: Slide ESP32 GPIO e timer
+parole: isr routine servizio interrupt iram_attr breve parametri ritorno ram flash
+quando: Quando scrivi la funzione che l'interrupt deve chiamare.
+fasi:
+- nome: Le tre regole
+  righe:
+  - codice: |-
+      void IRAM_ATTR «ISR»() {
+        «ISTRUZIONI»;
+      }
+    commento: la forma corretta
+    parti:
+    - voce: IRAM_ATTR
+      spiega: il codice compilato va nella RAM interna dell'ESP32, non nella Flash (molto più lenta)
+    - voce: ()
+      spiega: nessun parametro
+    - voce: void
+      spiega: non restituisce nulla
+    trappola: 'Una ISR lunga blocca il programma normale: fai solo il necessario (cambiare un LED, alzare
+      un flag).'
+segnaposto:
+  ISR:
+    esempio: isr
+    spiega: nome della funzione
+  ISTRUZIONI:
+    esempio: digitalWrite(LED, !digitalRead(LED))
+    spiega: poche istruzioni
+varianti: []
+vicine:
+- interrupt-pin
+- timer-periodo

@@ -1,0 +1,44 @@
+id: slave-risponde
+tipo: ricetta
+titolo: Lo slave risponde al master
+sigla: Slave sender
+comando: Wire.onRequest
+frase: lo slave manda
+fonte: Protocollo I2C · Crivellaro · Protocollo I2C · Bartolo
+parole: slave sender onrequest write wire begin indirizzo rispondere funzione richiesta master
+quando: Quando la tua scheda è lo slave e deve mandare dati quando il master li chiede.
+fasi:
+- nome: Setup
+  righe:
+  - codice: Wire.begin(«INDIRIZZO»);
+    commento: con il numero = slave con quell'indirizzo
+    trappola: L'indirizzo lo scegli tu, ma deve essere diverso da quelli degli altri dispositivi sul bus.
+  - codice: Wire.onRequest(«FUNZIONE»);
+    commento: dice quale funzione chiamare quando il master chiede dati
+- nome: La funzione
+  righe:
+  - codice: |-
+      void «FUNZIONE»() {
+        Wire.write(«DATI»);
+      }
+    commento: invia i dati al master
+    trappola: Niente parametri e niente valore di ritorno. I byte inviati devono essere quelli che il
+      master si aspetta.
+- nome: Loop
+  righe:
+  - codice: void loop() { delay(100); }
+    commento: 'non fa nulla: lo slave agisce solo su richiesta del master'
+segnaposto:
+  INDIRIZZO:
+    esempio: '5'
+    spiega: indirizzo a 7 bit dello slave
+  FUNZIONE:
+    esempio: requestEvent
+    spiega: nome della funzione
+  DATI:
+    esempio: '"Hi"'
+    spiega: stringa, byte o array
+varianti: []
+vicine:
+- master-leggi
+- slave-riceve

@@ -1,0 +1,21 @@
+id: slave-lento
+tipo: ricetta
+titolo: Quando lo slave è troppo lento
+sigla: Clock stretching
+comando: SCL tenuto basso
+frase: il master aspetta
+fonte: Protocollo I2C · Crivellaro
+parole: slave lento stretching scl basso attesa rallentare master bus
+quando: Quando uno slave ha bisogno di tempo (raccogliere dati, servire un interrupt).
+fasi:
+- nome: Cosa succede
+  righe:
+  - codice: lo slave forza SCL a livello basso
+    commento: il master va in attesa
+  - codice: il master aspetta finché SCL è rilasciato
+    commento: poi riprende
+    trappola: Il master controlla il clock, ma gli slave possono rallentarlo.
+segnaposto: {}
+varianti: []
+vicine:
+- velocita-clock

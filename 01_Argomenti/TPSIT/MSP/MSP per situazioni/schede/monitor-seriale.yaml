@@ -1,0 +1,39 @@
+id: monitor-seriale
+tipo: ricetta
+titolo: Vedere quello che stampa l'ESP32
+sigla: Monitor seriale
+comando: Serial.print
+frase: stampare e leggere sul monitor
+fonte: Introduzione ESP32 · TPSIT 2026/27 · Protocollo I2C · Crivellaro
+parole: monitor seriale serial print println begin 115200 baud stampa debug
+quando: Quando vuoi vedere valori o messaggi del programma, per esempio la lettura di un sensore.
+fasi:
+- nome: Nel programma
+  righe:
+  - codice: Serial.begin(«BAUD»);
+    commento: 'nel setup(): avvia la comunicazione seriale'
+    parti:
+    - voce: «BAUD»
+      spiega: 'velocità in baud: deve coincidere con quella del monitor'
+  - codice: Serial.print(«VALORE»);
+    commento: stampa senza andare a capo
+  - codice: Serial.println();
+    commento: va a capo
+- nome: Nel progetto
+  righe:
+  - codice: monitor_speed = «BAUD»
+    commento: 'in platformio.ini: stessa velocità del programma'
+  - codice: MONITOR SERIALE
+    commento: il pulsante di PlatformIO che mostra l'output
+    trappola: 'Se vedi simboli strani le due velocità non coincidono: vedi «Simboli strani».'
+segnaposto:
+  BAUD:
+    esempio: '115200'
+    spiega: velocità della seriale; 115200 è quella usata per l'ESP32 nel corso
+  VALORE:
+    esempio: temp.temperature
+    spiega: quello che vuoi mostrare
+varianti: []
+vicine:
+- simboli-strani
+- blink-led

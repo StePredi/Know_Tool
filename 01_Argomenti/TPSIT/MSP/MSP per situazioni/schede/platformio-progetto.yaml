@@ -1,0 +1,37 @@
+id: platformio-progetto
+tipo: ricetta
+titolo: Creare un nuovo progetto per l'ESP32
+sigla: Nuovo progetto
+comando: PlatformIO › New Project
+frase: da zero a un progetto che compila
+fonte: Introduzione ESP32 · TPSIT 2026/27
+parole: platformio visual studio code vscode nuovo progetto board doit esp32 devkit v1 framework arduino
+  estensione
+quando: Quando devi iniziare un programma per l'ESP32 e non hai ancora un progetto.
+fasi:
+- nome: Installa PlatformIO
+  righe:
+  - codice: Visual Studio Code → Estensioni → cerca «platformio» → Installa
+    commento: PlatformIO è un plugin di Visual Studio Code
+    trappola: 'PlatformIO Core è scritto in Python: l''estensione lo scarica da sola, la prima apertura
+      può essere lenta.'
+- nome: Crea il progetto
+  righe:
+  - codice: PlatformIO Home → New Project
+    commento: nome e cartella dove salvarlo
+  - codice: 'Name: «NOME_PROGETTO»'
+    commento: nome del progetto
+  - codice: 'Board: DOIT ESP32 DEVKIT V1'
+    commento: la scheda del corso
+  - codice: 'Framework: Arduino'
+    commento: usa le funzioni tipo pinMode e digitalWrite
+    trappola: Senza il framework Arduino le funzioni delle slide (pinMode, attachInterrupt, timerBegin…)
+      non esistono.
+segnaposto:
+  NOME_PROGETTO:
+    esempio: prova_esp32
+    spiega: nome a scelta, senza spazi
+varianti: []
+vicine:
+- upload-scheda
+- blink-led

@@ -1,0 +1,47 @@
+id: slave-riceve
+tipo: ricetta
+titolo: Lo slave riceve dal master
+sigla: Slave receiver
+comando: Wire.onReceive
+frase: lo slave legge
+fonte: Protocollo I2C · Crivellaro
+parole: slave receiver onreceive wire available read howmany ricevere dati master
+quando: Quando la tua scheda è lo slave e deve leggere quello che il master gli manda.
+fasi:
+- nome: Setup
+  righe:
+  - codice: Wire.begin(«INDIRIZZO»);
+    commento: slave con quell'indirizzo
+  - codice: Wire.onReceive(«FUNZIONE»);
+    commento: funzione chiamata quando arrivano dati
+- nome: La funzione
+  righe:
+  - codice: |-
+      void «FUNZIONE»(int howMany) {
+        while (Wire.available() > 1) {
+          char c = Wire.read();
+          Serial.print(c);
+        }
+        int x = Wire.read();
+        Serial.println(x);
+      }
+    commento: legge i byte
+    parti:
+    - voce: int howMany
+      spiega: numero di byte ricevuti dal master
+    - voce: available() > 1
+      spiega: tutti i byte tranne l'ultimo
+    - voce: int x = Wire.read()
+      spiega: l'ultimo byte, letto come numero
+    trappola: A differenza di onRequest, qui la funzione ha un parametro (int).
+segnaposto:
+  INDIRIZZO:
+    esempio: '4'
+    spiega: indirizzo dello slave
+  FUNZIONE:
+    esempio: receiveEvent
+    spiega: nome della funzione
+varianti: []
+vicine:
+- master-scrive
+- slave-risponde

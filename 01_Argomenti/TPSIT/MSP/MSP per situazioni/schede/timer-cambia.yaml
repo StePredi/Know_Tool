@@ -1,0 +1,20 @@
+id: timer-cambia
+tipo: prima_dopo
+titolo: Cambiare l'intervallo del timer
+sigla: Altro intervallo
+comando: timerAlarmWrite(…, N, true)
+frase: si cambia solo il conteggio
+fonte: Slide ESP32 GPIO e timer
+parole: cambia intervallo timer mezzo secondo conteggio alarm write 500000 1000000
+prima: timerAlarmWrite(timer0, ⟦1000000⟧, true);   // 1 s
+dopo: timerAlarmWrite(timer0, ⟦500000⟧, true);    // 0,5 s
+uso: Far scattare l'interrupt più o meno spesso senza cambiare il resto della configurazione.
+riconoscila: Il timer funziona ma il LED cambia troppo piano o troppo veloce.
+parti:
+- voce: '500000'
+  spiega: 'con prescaler 80 ogni conteggio dura 1 µs: 500 000 µs = 0,5 s'
+trappola: 'Se cambi il prescaler cambia anche la durata di ogni conteggio: rifai il calcolo.'
+varianti: []
+vicine:
+- timer-calcolo
+- timer-periodo

@@ -1,0 +1,37 @@
+id: blink-led
+tipo: ricetta
+titolo: Far lampeggiare un LED (prima prova)
+sigla: Blink
+comando: digitalWrite + delay
+frase: il «ciao mondo» dell'ESP32
+fonte: Introduzione ESP32 · TPSIT 2026/27 · Slide ESP32 GPIO e timer
+parole: blink led lampeggia prova test digitalwrite delay pinmode output hello world
+quando: Quando vuoi verificare che scheda, cavo e ambiente funzionino, prima di cose più complicate.
+fasi:
+- nome: Nel setup
+  righe:
+  - codice: pinMode(«PIN_LED», OUTPUT);
+    commento: il pin diventa un'uscita
+    trappola: Senza pinMode il pin resta un ingresso e il LED non si accende.
+- nome: Nel loop
+  righe:
+  - codice: digitalWrite(«PIN_LED», HIGH);
+    commento: acceso
+  - codice: delay(«MS»);
+    commento: aspetta, in millisecondi
+  - codice: digitalWrite(«PIN_LED», LOW);
+    commento: spento
+  - codice: delay(«MS»);
+    commento: aspetta ancora
+    trappola: 'delay() ferma tutto il programma: per fare altro nel frattempo usa un timer (ramo «Timer»).'
+segnaposto:
+  PIN_LED:
+    esempio: '25'
+    spiega: 'numero del pin del LED (nelle slide: 25)'
+  MS:
+    esempio: '1000'
+    spiega: millisecondi di attesa
+varianti: []
+vicine:
+- pin-uscita
+- timer-lampeggio

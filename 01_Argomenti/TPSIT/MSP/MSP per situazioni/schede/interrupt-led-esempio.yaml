@@ -1,0 +1,52 @@
+id: interrupt-led-esempio
+tipo: ricetta
+titolo: Invertire un LED a ogni pressione del pulsante
+sigla: Esempio completo
+comando: attachInterrupt(BUTTON, isr, FALLING)
+frase: pulsante → interrupt → LED
+fonte: Slide ESP32 GPIO e timer
+parole: esempio completo interrupt pulsante led inverti toggle falling input_pullup button isr
+quando: Quando vuoi un modello completo di interrupt da copiare e adattare.
+fasi:
+- nome: Definizioni
+  righe:
+  - codice: '#include <Arduino.h>'
+  - codice: '#define LED «LED_PIN»'
+    commento: il pin del LED
+  - codice: '#define BUTTON «BTN_PIN»'
+    commento: il pin del pulsante
+- nome: ISR
+  righe:
+  - codice: |-
+      void IRAM_ATTR isr() {
+        digitalWrite(LED, !digitalRead(LED));
+      }
+    commento: legge il LED e scrive il contrario
+    parti:
+    - voce: '!digitalRead(LED)'
+      spiega: il contrario dello stato attuale
+- nome: setup e loop
+  righe:
+  - codice: |-
+      void setup() {
+        pinMode(BUTTON, INPUT_PULLUP);
+        pinMode(LED, OUTPUT);
+        attachInterrupt(BUTTON, isr, FALLING);
+      }
+  - codice: |-
+      void loop() {
+
+      }
+    commento: 'vuoto: fa tutto l''interrupt'
+segnaposto:
+  LED_PIN:
+    esempio: '25'
+    spiega: GPIO del LED
+  BTN_PIN:
+    esempio: '0'
+    spiega: GPIO del pulsante
+varianti: []
+vicine:
+- interrupt-pin
+- pullup-pulsante
+- timer-lampeggio

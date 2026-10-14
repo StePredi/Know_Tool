@@ -1,0 +1,36 @@
+id: repeated-start
+tipo: ricetta
+titolo: Fare più operazioni senza liberare il bus
+sigla: Repeated START
+comando: Sr
+frase: un nuovo start senza stop
+fonte: Protocollo I2C · Crivellaro
+parole: repeated start sr restart requestfrom stop false endtransmission false più operazioni
+quando: Quando vuoi scrivere e poi leggere (per esempio scegliere un registro e leggerlo) senza lasciare
+  il bus.
+fasi:
+- nome: Sequenza
+  righe:
+  - codice: S  ADDR (R/W)  DATA  A  Sr  ADDR (R/W)  DATA  A  P
+    commento: Sr al posto di STOP + START
+    parti:
+    - voce: Sr
+      spiega: repeated start
+- nome: Con la libreria Wire
+  righe:
+  - codice: Wire.requestFrom(«INDIRIZZO», «N_BYTE», false);
+    commento: stop = FALSE → restart invece di STOP
+  - codice: Wire.endTransmission(false);
+    commento: stop = FALSE → restart
+    trappola: Con TRUE (o senza argomento) viene inviato lo STOP.
+segnaposto:
+  INDIRIZZO:
+    esempio: '5'
+    spiega: indirizzo dello slave
+  N_BYTE:
+    esempio: '2'
+    spiega: byte richiesti
+varianti: []
+vicine:
+- frame-i2c
+- master-leggi

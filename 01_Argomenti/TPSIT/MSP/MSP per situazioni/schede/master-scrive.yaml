@@ -1,0 +1,36 @@
+id: master-scrive
+tipo: ricetta
+titolo: Il master manda dati a uno slave
+sigla: Master writer
+comando: Wire.beginTransmission
+frase: il master scrive
+fonte: Protocollo I2C · Crivellaro · Protocollo I2C · Bartolo
+parole: master writer begintransmission write endtransmission inviare dati slave wire scrivere
+quando: Quando la tua scheda è il master e deve inviare dati a uno slave.
+fasi:
+- nome: Apri la trasmissione
+  righe:
+  - codice: Wire.beginTransmission(«INDIRIZZO»);
+    commento: serve solo l'indirizzo, non la quantità di dati
+- nome: Metti in coda i byte
+  righe:
+  - codice: Wire.write(«DATI»);
+    commento: uno o più byte
+- nome: Chiudi
+  righe:
+  - codice: Wire.endTransmission();
+    commento: invia i byte in coda e uno STOP
+    trappola: 'Va sempre chiamata, altrimenti gli slave restano bloccati. Non vuole l''indirizzo: il PDF
+      Bartolo scrive endTransmission(indirizzo), la libreria no.'
+segnaposto:
+  INDIRIZZO:
+    esempio: '4'
+    spiega: indirizzo dello slave
+  DATI:
+    esempio: '"x="'
+    spiega: stringa o byte, per esempio 17
+varianti: []
+vicine:
+- slave-riceve
+- master-leggi
+- nessuno-risponde

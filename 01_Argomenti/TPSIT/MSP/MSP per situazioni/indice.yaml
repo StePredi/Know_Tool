@@ -1,0 +1,120 @@
+modello: per_situazioni
+titolo: MSP, per situazioni
+centro: MSP
+sottotitolo: Parti da quello che devi fare con l'ESP32 e con l'I2C, non dal nome della funzione.
+rami:
+- id: b1
+  nome: Preparare l'ESP32
+  colore: blue
+  lato: R
+  voci:
+  - gruppo: Ambiente
+    schede:
+    - platformio-progetto
+    - upload-scheda
+  - gruppo: Prima prova
+    schede:
+    - monitor-seriale
+    - blink-led
+- id: b2
+  nome: Pin digitali
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - pin-uscita
+  - schede:
+    - pin-ingresso
+  - schede:
+    - pullup-pulsante
+- id: b3
+  nome: Interrupt
+  colore: green
+  lato: R
+  voci:
+  - gruppo: Sui pin
+    schede:
+    - interrupt-pin
+    - isr-regole
+    - interrupt-modo
+  - gruppo: Altri casi
+    schede:
+    - interrupt-touch
+    - interrupt-stacca
+  - schede:
+    - interrupt-led-esempio
+- id: b4
+  nome: Timer
+  colore: yellow
+  lato: L
+  voci:
+  - gruppo: Impostare
+    schede:
+    - timer-periodo
+    - timer-calcolo
+    - timer-cambia
+  - schede:
+    - timer-lampeggio
+- id: b5
+  nome: Sensori I2C
+  colore: orange
+  lato: R
+  voci:
+  - schede:
+    - i2c-indirizzo
+  - gruppo: AHT20
+    schede:
+    - aht20-leggi
+    - aht20-a-mano
+  - gruppo: BMP280
+    schede:
+    - bmp280-leggi
+    - bmp280-indirizzo
+    - bmp280-modalita
+- id: b6
+  nome: Due schede sul bus
+  colore: red
+  lato: T
+  voci:
+  - schede:
+    - i2c-collega
+  - gruppo: Il master legge
+    schede:
+    - master-leggi
+    - slave-risponde
+  - gruppo: Il master scrive
+    schede:
+    - master-scrive
+    - slave-riceve
+- id: b7
+  nome: Capire il bus
+  colore: violet
+  lato: B
+  voci:
+  - gruppo: Il segnale
+    schede:
+    - frame-i2c
+    - decodifica-frame
+    - start-stop
+    - repeated-start
+  - gruppo: L'elettrica
+    schede:
+    - velocita-clock
+    - pullup-valore
+    - livelli-tensione
+    - slave-lento
+- id: b8
+  nome: Quando non funziona
+  colore: slate
+  lato: B
+  voci:
+  - gruppo: La scheda
+    schede:
+    - porta-non-vista
+    - simboli-strani
+    - errore-esp
+  - gruppo: I sensori e il bus
+    schede:
+    - nessuno-risponde
+    - sensore-non-trovato
+    - valori-aht20

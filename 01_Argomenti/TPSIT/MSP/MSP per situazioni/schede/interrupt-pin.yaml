@@ -1,0 +1,53 @@
+id: interrupt-pin
+tipo: ricetta
+titolo: Reagire a un cambio di livello su un pin
+sigla: Interrupt su GPIO
+comando: attachInterrupt
+frase: la funzione parte da sola
+fonte: Slide ESP32 GPIO e timer
+parole: interrupt attachinterrupt isr gpio pulsante cambia livello richiesta di interrupt modo falling
+  rising
+quando: Quando vuoi che una funzione parta appena un pin cambia, senza controllarlo in continuazione nel
+  loop().
+fasi:
+- nome: Scrivi la funzione (ISR)
+  righe:
+  - codice: |-
+      void IRAM_ATTR «ISR»() {
+        // poche istruzioni
+      }
+    commento: la funzione chiamata a ogni interrupt
+    parti:
+    - voce: IRAM_ATTR
+      spiega: mette il codice nella RAM interna, più veloce della Flash
+    trappola: Niente parametri e niente valore di ritorno; più breve possibile.
+- nome: Configura il pin
+  righe:
+  - codice: pinMode(«PIN», INPUT_PULLUP);
+    commento: il pin deve essere un ingresso
+- nome: Collega la funzione al pin
+  righe:
+  - codice: attachInterrupt(«PIN», «ISR», «MODO»);
+    commento: da qui l'ISR parte quando il pin cambia
+    parti:
+    - voce: «PIN»
+      spiega: numero del GPIO
+    - voce: «ISR»
+      spiega: nome della funzione
+    - voce: «MODO»
+      spiega: quando scatta
+segnaposto:
+  PIN:
+    esempio: '0'
+    spiega: 'numero del GPIO (nelle slide: 0, il pulsante)'
+  ISR:
+    esempio: isr
+    spiega: nome della funzione di servizio
+  MODO:
+    esempio: FALLING
+    spiega: LOW, HIGH, CHANGE, FALLING o RISING
+varianti: []
+vicine:
+- isr-regole
+- interrupt-modo
+- interrupt-led-esempio
