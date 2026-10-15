@@ -38,6 +38,7 @@
 - Provare la scheda riassuntiva su Windows (con una proposta vera scritta da Claude)
 - Provare la Home generale su Windows (schede, albero, nuova materia/cartella, rinomina, archivia)
 - Provare «Per situazioni» (MikroTik) su Windows; poi: Git e Python come documentazioni, galleria di «+ Nuovo», generazione con Claude, figure SVG
+- Dal controllo di MSP (2026-10-15): (1) leggere gli appunti `.md` dentro l'app (oggi non si vedono: l'albero mostra solo documenti dei tipi noti); (2) figure nei documenti «Per situazioni»: per esempio lo schema dei pin dell'ESP32 come disegno approssimativo della scheda dentro la mappa, con filtri per famiglia (ADC, DAC, touch, SPI, I2C…), clic su un pin = dettagli e schede collegate, ricerca che sfuma i pin; dati ora in `TPSIT/MSP/schemi/esp32_pinout_interattivo.html`
 - Home generale, giri successivi: nuovi tipi di documento da «+ Nuovo», ricerca nei contenuti, spostare con trascinamento, nuovo autore
 
 ---
