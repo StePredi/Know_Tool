@@ -55,6 +55,7 @@ L'app **legge i file dal disco** e si aggiorna da sola: quello che scrivo nelle 
 - Scrivo i file nel formato della specifica, **uno per volta**, e controllo che l'app li legga (nessun avviso nel pannello Controlli o nell'elenco avvisi del documento).
 - Per una nuova documentazione «Per situazioni»: creo la cartella con `indice.yaml` e le schede; ogni scheda ha un `id` uguale al nome del file; ogni scheda citata nell'indice deve esistere; ogni `«SEGNAPOSTO»` usato nel codice va spiegato in `segnaposto`.
 - Il campo `lato` di `indice.yaml` non conta più: i rami si dispongono in senso orario da in alto a sinistra, nell'ordine dell'indice (il primo ramo è il livello 1, il più semplice).
+- Se la fonte ha uno schema di una scheda (pin sui due lati), lo porto come scheda di tipo `figura` (formato in `specifiche/modello_per_situazioni.md`, sezione Figure), non come pagina HTML.
 - Rispetto il compito: faccio la mappa e le schede chieste, non altro.
 - Non invento contenuti: parto da fonti dell'utente (PDF, appunti, link) e le cito in `fonte`.
 - Non cancello mai: se un file non serve lo sposto in `99_Archivio/`.

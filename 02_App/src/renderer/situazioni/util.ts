@@ -14,7 +14,8 @@ export function costruisciIndici(d: Situazioni): { ordine: string[]; info: Recor
   const pagliaio: Record<string, string> = {}
   for (const id of ordine) {
     const s = d.schede[id]!
-    pagliaio[id] = norm([s.sigla, s.comando, s.titolo, s.parole, d.indice.rami[info[id]!.bi]!.nome, info[id]!.gruppo ?? ''].join(' '))
+    const pin = s.tipo === 'figura' ? [...s.disegno.sinistra, ...s.disegno.destra].map((p) => [p.etichetta, p.gpio ? 'gpio' + p.gpio : '', ...p.funzioni].join(' ')).join(' ') : ''
+    pagliaio[id] = norm([s.sigla, s.comando, s.titolo, s.parole, pin, d.indice.rami[info[id]!.bi]!.nome, info[id]!.gruppo ?? ''].join(' '))
   }
   return { ordine, info, pagliaio }
 }

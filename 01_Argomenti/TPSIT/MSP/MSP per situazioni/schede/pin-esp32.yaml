@@ -1,0 +1,458 @@
+id: pin-esp32
+tipo: figura
+titolo: Lo schema dei pin della scheda
+sigla: Schema pin
+comando: ESP32 DevKit V1
+frase: i 30 pin e a cosa servono
+fonte: 'Introduzione ESP32 · TPSIT 2026/27, schema dei pin (p. 14) · nota: spiegazioni segnate «Nota»'
+parole: schema pin pinout disegno scheda esp32 devkit gpio piedini cliccabile famiglie filtro
+quando: Quando devi scegliere un pin o capire a cosa serve uno dei pin della scheda.
+varianti: []
+vicine:
+- pin-mappa
+- pin-scegli
+- pin-solo-ingresso
+disegno:
+  modello: scheda_pin
+  nome: DOIT ESP32 DevKit V1
+  chip: WROOM-32
+  famiglie:
+  - id: alim
+    nome: Alimentazione
+    colore: red
+    schede:
+    - livelli-tensione
+  - id: adc
+    nome: ADC
+    colore: orange
+    schede:
+    - adc-leggi
+  - id: dac
+    nome: DAC
+    colore: yellow
+    schede:
+    - dac-scrivi
+  - id: touch
+    nome: Touch
+    colore: teal
+    schede:
+    - touch-pin
+    - touch-leggi
+  - id: i2c
+    nome: I2C
+    colore: blue
+    schede:
+    - i2c-collega
+    - i2c-pin-cambia
+  - id: spi
+    nome: SPI
+    colore: indigo
+    schede:
+    - spi-pin
+  - id: uart
+    nome: UART
+    colore: green
+    schede:
+    - uart-secondo
+    - monitor-seriale
+  - id: in
+    nome: Solo ingresso
+    colore: violet
+    schede:
+    - pin-solo-ingresso
+  - id: boot
+    nome: Pin di avvio
+    colore: pink
+    schede:
+    - avvio-bloccato
+    - pulsante-boot
+  - id: ctrl
+    nome: Controllo
+    colore: slate
+    schede:
+    - riavvia-scheda
+  sinistra:
+  - etichetta: EN
+    titolo: EN (enable)
+    famiglie:
+    - ctrl
+    funzioni:
+    - EN
+    spiega:
+    - 'Abilita il chip. Portato a massa riavvia la scheda: è il pulsante EN.'
+  - etichetta: VP
+    gpio: '36'
+    titolo: GPIO36 · VP
+    famiglie:
+    - adc
+    - in
+    funzioni:
+    - ADC1_0
+    - SensVP
+    spiega:
+    - Ingresso analogico (ADC1, canale 0).
+    - Nello schema è anche «SensVP».
+    nota: 'È un pin solo ingresso: non si può usare come uscita e non ha pull-up/pull-down interne.'
+  - etichetta: VN
+    gpio: '39'
+    titolo: GPIO39 · VN
+    famiglie:
+    - adc
+    - in
+    funzioni:
+    - ADC1_3
+    - SensVN
+    spiega:
+    - Ingresso analogico (ADC1, canale 3).
+    - Nello schema è anche «SensVN».
+    nota: Solo ingresso, senza pull-up/pull-down interne.
+  - etichetta: D34
+    gpio: '34'
+    titolo: GPIO34
+    famiglie:
+    - adc
+    - in
+    funzioni:
+    - ADC1_6
+    spiega:
+    - Ingresso analogico (ADC1, canale 6).
+    nota: Solo ingresso, senza pull-up/pull-down interne.
+  - etichetta: D35
+    gpio: '35'
+    titolo: GPIO35
+    famiglie:
+    - adc
+    - in
+    funzioni:
+    - ADC1_7
+    spiega:
+    - Ingresso analogico (ADC1, canale 7).
+    nota: Solo ingresso, senza pull-up/pull-down interne.
+  - etichetta: D32
+    gpio: '32'
+    titolo: GPIO32
+    famiglie:
+    - touch
+    - adc
+    funzioni:
+    - Touch9
+    - ADC1_4
+    - XTAL32
+    spiega:
+    - Pin touch (Touch9).
+    - Ingresso analogico (ADC1, canale 4).
+    - Collegato al quarzo a 32 kHz (XTAL32).
+  - etichetta: D33
+    gpio: '33'
+    titolo: GPIO33
+    famiglie:
+    - touch
+    - adc
+    funzioni:
+    - Touch8
+    - ADC1_5
+    - XTAL32
+    spiega:
+    - Pin touch (Touch8).
+    - Ingresso analogico (ADC1, canale 5).
+    - Collegato al quarzo a 32 kHz (XTAL32).
+  - etichetta: D25
+    gpio: '25'
+    titolo: GPIO25
+    famiglie:
+    - dac
+    - adc
+    funzioni:
+    - DAC1
+    - ADC2_8
+    spiega:
+    - Uscita analogica DAC1.
+    - Ingresso analogico (ADC2, canale 8).
+    - Nelle slide è il pin del LED negli esempi.
+    nota: Con il Wi-Fi acceso i pin ADC2 non si leggono con analogRead.
+  - etichetta: D26
+    gpio: '26'
+    titolo: GPIO26
+    famiglie:
+    - dac
+    - adc
+    funzioni:
+    - DAC2
+    - ADC2_9
+    spiega:
+    - Uscita analogica DAC2.
+    - Ingresso analogico (ADC2, canale 9).
+    nota: Con il Wi-Fi acceso i pin ADC2 non si leggono con analogRead.
+  - etichetta: D27
+    gpio: '27'
+    titolo: GPIO27
+    famiglie:
+    - touch
+    - adc
+    funzioni:
+    - Touch7
+    - ADC2_7
+    spiega:
+    - Pin touch (Touch7).
+    - Ingresso analogico (ADC2, canale 7).
+    nota: Con il Wi-Fi acceso i pin ADC2 non si leggono con analogRead.
+  - etichetta: D14
+    gpio: '14'
+    titolo: GPIO14
+    famiglie:
+    - touch
+    - adc
+    - spi
+    funzioni:
+    - Touch6
+    - HSPI_CLK
+    - ADC2_6
+    spiega:
+    - Pin touch (Touch6).
+    - Clock dell'SPI «H» (HSPI_CLK).
+    - Ingresso analogico (ADC2, canale 6).
+    nota: Con il Wi-Fi acceso i pin ADC2 non si leggono con analogRead.
+  - etichetta: D12
+    gpio: '12'
+    titolo: GPIO12
+    famiglie:
+    - touch
+    - adc
+    - spi
+    - boot
+    funzioni:
+    - Touch5
+    - HSPI_Q
+    - ADC2_5
+    spiega:
+    - Pin touch (Touch5).
+    - Dati in uscita dello SPI «H» (HSPI_Q, cioè MISO).
+    - Ingresso analogico (ADC2, canale 5).
+    nota: 'Pin di avvio: se è tenuto alto all''accensione può impedire l''avvio. Non collegarci carichi
+      che lo forzano.'
+  - etichetta: D13
+    gpio: '13'
+    titolo: GPIO13
+    famiglie:
+    - touch
+    - adc
+    - spi
+    funzioni:
+    - Touch4
+    - HSPI_ID
+    - ADC2_4
+    spiega:
+    - Pin touch (Touch4).
+    - Dati in ingresso dello SPI «H» (HSPI_ID, cioè MOSI).
+    - Ingresso analogico (ADC2, canale 4).
+    nota: Con il Wi-Fi acceso i pin ADC2 non si leggono con analogRead.
+  - etichetta: GND
+    titolo: GND
+    famiglie:
+    - alim
+    funzioni:
+    - GND
+    spiega:
+    - Massa. Comune a tutti i dispositivi collegati.
+  - etichetta: VIN
+    titolo: VIN
+    famiglie:
+    - alim
+    funzioni:
+    - VIN
+    spiega:
+    - Alimentazione in ingresso della scheda.
+  destra:
+  - etichetta: D23
+    gpio: '23'
+    titolo: GPIO23
+    famiglie:
+    - spi
+    funzioni:
+    - MOSI
+    - V_SPI_D
+    spiega:
+    - 'SPI «V»: dati dal master verso gli slave (MOSI).'
+  - etichetta: D22
+    gpio: '22'
+    titolo: GPIO22
+    famiglie:
+    - i2c
+    - spi
+    - uart
+    funzioni:
+    - SCL
+    - V_SPI_WP
+    - U0_RTS
+    spiega:
+    - 'Clock I2C (SCL): è il pin di default della libreria Wire.'
+    - Anche V_SPI_WP e U0_RTS.
+  - etichetta: TX0
+    gpio: '1'
+    titolo: GPIO1 · TX0
+    famiglie:
+    - uart
+    funzioni:
+    - CLK3
+    - U0_TXD
+    spiega:
+    - Trasmissione della seriale 0 (UART0).
+    - È la seriale usata da USB e monitor seriale.
+    nota: Usarlo per altro disturba Serial e il monitor seriale.
+    schede:
+    - monitor-seriale
+  - etichetta: RX0
+    gpio: '3'
+    titolo: GPIO3 · RX0
+    famiglie:
+    - uart
+    funzioni:
+    - CLK2
+    - U0_RXD
+    spiega:
+    - Ricezione della seriale 0 (UART0).
+    - È la seriale usata da USB e monitor seriale.
+    nota: Usarlo per altro disturba Serial e il monitor seriale.
+    schede:
+    - monitor-seriale
+  - etichetta: D21
+    gpio: '21'
+    titolo: GPIO21
+    famiglie:
+    - i2c
+    - spi
+    funzioni:
+    - SDA
+    - V_SPI_HD
+    spiega:
+    - 'Dati I2C (SDA): è il pin di default della libreria Wire.'
+  - etichetta: D19
+    gpio: '19'
+    titolo: GPIO19
+    famiglie:
+    - spi
+    - uart
+    funzioni:
+    - MISO
+    - V_SPI_Q
+    - U0_CTS
+    spiega:
+    - 'SPI «V»: dati dallo slave al master (MISO).'
+  - etichetta: D18
+    gpio: '18'
+    titolo: GPIO18
+    famiglie:
+    - spi
+    funzioni:
+    - SCK
+    - V_SPI_CLK
+    spiega:
+    - 'SPI «V»: clock (SCK).'
+  - etichetta: D5
+    gpio: '5'
+    titolo: GPIO5
+    famiglie:
+    - spi
+    - boot
+    funzioni:
+    - V_SPI_CS0
+    spiega:
+    - 'SPI «V»: selezione dello slave (CS).'
+    nota: 'Pin di avvio: il livello che ha all''accensione influisce sull''avvio.'
+  - etichetta: TX2
+    gpio: '17'
+    titolo: GPIO17 · TX2
+    famiglie:
+    - uart
+    funzioni:
+    - U2_TXD
+    spiega:
+    - Trasmissione della seriale 2 (UART2).
+  - etichetta: RX2
+    gpio: '16'
+    titolo: GPIO16 · RX2
+    famiglie:
+    - uart
+    funzioni:
+    - U2_RXD
+    spiega:
+    - Ricezione della seriale 2 (UART2).
+  - etichetta: D4
+    gpio: '4'
+    titolo: GPIO4
+    famiglie:
+    - touch
+    - adc
+    - spi
+    funzioni:
+    - ADC2_0
+    - HSPI_HD
+    - Touch0
+    spiega:
+    - Pin touch (Touch0).
+    - Ingresso analogico (ADC2, canale 0).
+    - Anche HSPI_HD.
+    nota: Con il Wi-Fi acceso i pin ADC2 non si leggono con analogRead.
+  - etichetta: D2
+    gpio: '2'
+    titolo: GPIO2 · LED integrato
+    famiglie:
+    - touch
+    - adc
+    - spi
+    - boot
+    funzioni:
+    - CS
+    - ADC2_2
+    - HSPI_WP
+    - Touch2
+    spiega:
+    - Comanda il LED rosso che è già sulla scheda.
+    - Pin touch (Touch2).
+    - Ingresso analogico (ADC2, canale 2).
+    nota: 'Pin di avvio: il livello che ha all''accensione influisce sull''avvio.'
+    schede:
+    - led-integrato
+  - etichetta: D15
+    gpio: '15'
+    titolo: GPIO15
+    famiglie:
+    - touch
+    - adc
+    - spi
+    - boot
+    funzioni:
+    - ADC2_3
+    - HSPI_CS0
+    - Touch3
+    spiega:
+    - Pin touch (Touch3).
+    - Selezione dello SPI «H» (HSPI_CS0).
+    - Ingresso analogico (ADC2, canale 3).
+    nota: 'Pin di avvio: il livello che ha all''accensione influisce sull''avvio.'
+  - etichetta: GND
+    titolo: GND
+    famiglie:
+    - alim
+    funzioni:
+    - GND
+    spiega:
+    - Massa.
+  - etichetta: 3V3
+    titolo: 3,3 V
+    famiglie:
+    - alim
+    funzioni:
+    - 3.3V
+    spiega:
+    - 'Uscita a 3,3 V: alimenta sensori come AHT20 e BMP280.'
+  componenti:
+  - nome: LED rosso (GPIO2)
+    spiega: Si comanda come un'uscita digitale. Ideale per la prova «blink».
+  - nome: LED di alimentazione
+    spiega: Si accende quando la scheda è alimentata. Non si programma.
+  - nome: Pulsante BOOT (GPIO0)
+    spiega: 'Si tiene premuto durante l''upload. Si legge come pulsante: alto a riposo, basso se premuto.
+      È anche Touch1 (Nota).'
+  - nome: Pulsante EN
+    spiega: Riavvia la scheda.

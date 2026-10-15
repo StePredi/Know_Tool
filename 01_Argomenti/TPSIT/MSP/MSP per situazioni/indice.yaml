@@ -25,6 +25,7 @@ rami:
   voci:
   - gruppo: Capire i pin
     schede:
+    - pin-esp32
     - pin-mappa
     - pin-scegli
     - pin-solo-ingresso

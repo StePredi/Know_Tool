@@ -50,7 +50,42 @@ const primaDopo = z.object({
   parti: z.array(coppiaVoce).default([]),
   trappola: testo.optional()
 })
-export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo])
+
+// Figura: lo schema di una scheda elettronica (pin sui due lati), cliccabile, con famiglie di funzioni da filtrare.
+const pinDisegno = z.object({
+  /** la scritta stampata sulla scheda: D34, TX0, 3V3 */
+  etichetta: testo.min(1),
+  gpio: testo.default(''),
+  titolo: testo.default(''),
+  famiglie: z.array(z.string()).default([]),
+  funzioni: z.array(z.string()).default([]),
+  spiega: z.array(testo).default([]),
+  nota: testo.optional(),
+  schede: z.array(z.string()).default([])
+})
+const famigliaDisegno = z.object({
+  id: z.string().min(1),
+  nome: testo.min(1),
+  colore: z.enum(COLORI_RAMO),
+  schede: z.array(z.string()).default([])
+})
+export const schemaDisegno = z.object({
+  modello: z.literal('scheda_pin'),
+  nome: testo.min(1),
+  chip: testo.default(''),
+  famiglie: z.array(famigliaDisegno).default([]),
+  sinistra: z.array(pinDisegno).min(1),
+  destra: z.array(pinDisegno).min(1),
+  /** parti già presenti sulla scheda (LED, pulsanti…), mostrate sotto il disegno */
+  componenti: z.array(z.object({ nome: testo.min(1), spiega: testo })).default([])
+})
+const figura = z.object({
+  tipo: z.literal('figura'),
+  ...comuni,
+  quando: testo,
+  disegno: schemaDisegno
+})
+export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura])
 
 const voce = z.object({ gruppo: testo.optional(), schede: z.array(z.string()).min(1) })
 const ramo = z.object({
@@ -76,7 +111,10 @@ export type Riga = z.infer<typeof riga>
 export type Fase = z.infer<typeof fase>
 export type SchedaRicetta = z.infer<typeof ricetta>
 export type SchedaPrimaDopo = z.infer<typeof primaDopo>
-export type SchedaSit = SchedaRicetta | SchedaPrimaDopo
+export type SchedaFigura = z.infer<typeof figura>
+export type DisegnoSit = z.infer<typeof schemaDisegno>
+export type PinDisegno = z.infer<typeof pinDisegno>
+export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura
 export type RamoSit = z.infer<typeof ramo>
 export type VoceRamo = z.infer<typeof voce>
 export type IndiceSit = z.infer<typeof schemaIndice>
@@ -138,6 +176,14 @@ export function controllaSituazioni(indice: IndiceSit, schede: Record<string, Sc
   for (const id of Object.keys(schede)) if (!visti.has(id)) av.push(`La scheda «${id}» non è in nessun ramo dell'indice.`)
   for (const s of Object.values(schede)) {
     for (const v of s.vicine) if (!schede[v]) av.push(`«${s.id}»: la scheda vicina «${v}» non esiste.`)
+    if (s.tipo === 'figura') {
+      const fam = new Set(s.disegno.famiglie.map((f) => f.id))
+      for (const f of s.disegno.famiglie) for (const v of f.schede) if (!schede[v]) av.push(`«${s.id}»: la famiglia «${f.id}» cita la scheda «${v}» che non esiste.`)
+      for (const p of [...s.disegno.sinistra, ...s.disegno.destra]) {
+        for (const f of p.famiglie) if (!fam.has(f)) av.push(`«${s.id}»: il pin «${p.etichetta}» ha la famiglia «${f}» che non è dichiarata.`)
+        for (const v of p.schede) if (!schede[v]) av.push(`«${s.id}»: il pin «${p.etichetta}» cita la scheda «${v}» che non esiste.`)
+      }
+    }
     if (s.tipo === 'ricetta') {
       const usati = new Set<string>()
       for (const f of s.fasi) for (const r of f.righe) for (const m of r.codice.matchAll(/«([A-Z0-9_]+)»/g)) usati.add(m[1]!)

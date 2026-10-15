@@ -1,7 +1,8 @@
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import type { SchedaPrimaDopo, SchedaRicetta, Situazioni } from '@shared/situazioni'
+import type { SchedaFigura, SchedaPrimaDopo, SchedaRicetta, Situazioni } from '@shared/situazioni'
 import { useStore } from '../store'
 import { Cod, testoPuro } from './Codice'
+import { DisegnoScheda } from './Figura'
 import { useSit, VISTA0 } from './stato'
 import type { InfoScheda } from './util'
 
@@ -23,7 +24,7 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
   const s = ctx.dati.schede[id]!
   const inf = ctx.info[id]!
   const r = ctx.dati.indice.rami[inf.bi]!
-  const ricetta = s.tipo === 'ricetta'
+  const ricetta = s.tipo !== 'prima_dopo'
   return (
     <>
       <div className="s-bar">
@@ -38,7 +39,7 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
         </div>
         <div className="s-when">
           <b>{ricetta ? 'Quando serve' : 'A cosa serve'}</b>
-          <p>{s.tipo === 'ricetta' ? s.quando : s.uso}</p>
+          <p>{s.tipo === 'prima_dopo' ? s.uso : s.quando}</p>
         </div>
       </div>
     </>
@@ -254,6 +255,22 @@ function PrimaDopo({ ctx, s }: { ctx: Ctx; s: SchedaPrimaDopo }): ReactNode {
   )
 }
 
+function Figura({ ctx, s }: { ctx: Ctx; s: SchedaFigura }): ReactNode {
+  return (
+    <>
+      <Testata ctx={ctx} id={s.id} tipo="Figura" />
+      <DisegnoScheda
+        d={s.disegno}
+        corrente={s.id}
+        schede={ctx.dati.schede}
+        colore={(id) => ctx.dati.indice.rami[ctx.info[id]!.bi]!.colore}
+        apri={(id) => useSit.getState().imposta(ctx.rel, { scheda: id })}
+      />
+      <Piede ctx={ctx} id={s.id} />
+    </>
+  )
+}
+
 export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const s = ctx.dati.schede[id]
   const ref = useRef<HTMLDivElement>(null)
@@ -262,7 +279,7 @@ export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const r = ctx.dati.indice.rami[ctx.info[id]!.bi]!
   return (
     <div ref={ref} data-c={r.colore}>
-      {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} /> : <PrimaDopo key={id} ctx={ctx} s={s} />}
+      {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} /> : s.tipo === 'figura' ? <Figura key={id} ctx={ctx} s={s} /> : <PrimaDopo key={id} ctx={ctx} s={s} />}
     </div>
   )
 }

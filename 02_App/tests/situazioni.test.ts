@@ -88,4 +88,33 @@ describe('Per situazioni: file sbagliati danno messaggi chiari', () => {
     expect(d.avvisi.join('\n')).toMatch(/«HOST»/)
     expect(d.avvisi.join('\n')).toMatch(/«boh»/)
   })
+
+  it('legge una figura (schema dei pin) e segnala famiglie e schede che non esistono', () => {
+    const src = `id: pin
+tipo: figura
+titolo: Schema
+sigla: Pin
+comando: Scheda
+frase: x
+quando: y
+disegno:
+  modello: scheda_pin
+  nome: Scheda
+  famiglie:
+  - {id: adc, nome: ADC, colore: orange, schede: [manca]}
+  sinistra:
+  - {etichetta: D34, gpio: '34', famiglie: [adc, nonesiste], schede: [altra]}
+  destra:
+  - {etichetta: GND}
+`
+    const r = leggiSchedaSit(src, 'pin.yaml')
+    expect(r.errore).toBeUndefined()
+    expect(r.scheda?.tipo).toBe('figura')
+    const idx = leggiIndice('modello: per_situazioni\ntitolo: x\ncentro: y\nrami:\n- id: a\n  nome: A\n  colore: red\n  lato: L\n  voci:\n  - schede: [pin]\n').indice!
+    const av = controllaSituazioni(idx, { pin: r.scheda! })
+    expect(av.join('|')).toMatch(/«manca»/)
+    expect(av.join('|')).toMatch(/nonesiste/)
+    expect(av.join('|')).toMatch(/«altra»/)
+    expect(leggiSchedaSit(src.replace('modello: scheda_pin', 'modello: altro'), 'pin.yaml').errore).toMatch(/modello/)
+  })
 })

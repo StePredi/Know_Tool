@@ -70,3 +70,43 @@ Ogni tappa: provata nel browser con dati veri, poi consegnata e commitata.
 - Le 8 tinte dei rami (Git/Python/MikroTik ne usano 8–11): se un ramo extra serve, si riusano i colori in giro.
 - Dove stanno le documentazioni nella materia (proposta: cartella `Informatica/...` scelta da Ste alla creazione).
 - Tema chiaro/scuro: segue l'app, niente pulsante tema separato.
+
+---
+
+## Figure (2026-10-15)
+
+Una scheda può essere una **figura**: un disegno che si apre dalla mappa come le altre situazioni, ha un posto in un ramo e compare come foglia.
+
+Primo modello di disegno: `scheda_pin`, lo schema di una scheda elettronica (per ora tipo DevKit: pin sui due lati, chip al centro, USB in basso).
+
+Formato (`schede/<id>.yaml`):
+
+```
+tipo: figura
+(id, titolo, sigla, comando, frase, fonte, parole, quando, varianti, vicine: come le altre schede)
+disegno:
+  modello: scheda_pin
+  nome: DOIT ESP32 DevKit V1
+  chip: WROOM-32
+  famiglie:                       # i colori e i filtri
+  - {id: adc, nome: ADC, colore: orange, schede: [adc-leggi]}
+  sinistra:                       # dall'alto in basso, come sulla scheda
+  - etichetta: D34                # la scritta stampata
+    gpio: '34'
+    titolo: GPIO34
+    famiglie: [adc, in]           # id dichiarati sopra
+    funzioni: [ADC1_6]            # come nello schema originale
+    spiega: [Ingresso analogico (ADC1, canale 6).]
+    nota: ...                     # solo ciò che NON sta nelle fonti
+    schede: [pin-solo-ingresso]   # schede collegate in più (si sommano a quelle della famiglia)
+  destra: [...]
+  componenti:                     # LED, pulsanti: schede sotto il disegno
+  - {nome: LED rosso (GPIO2), spiega: ...}
+```
+
+Si usa come le altre schede: filtri per famiglia, ricerca di un pin (nome, GPIO, funzione), clic su un pin = spiegazione e schede collegate. La ricerca della mappa trova la figura anche dai nomi dei pin.
+
+Colori delle famiglie: gli stessi dei rami (red, orange, yellow, green, teal, blue, indigo, violet, pink, slate).
+
+Da fare: figure dentro altre schede (per esempio gli schemi di Git: aree, HEAD, merge) e altri modelli di disegno (SVG libero).
+
