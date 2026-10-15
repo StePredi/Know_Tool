@@ -289,6 +289,10 @@ export interface Api {
   leggiSituazioni(rel: string): Promise<Situazioni>
   /** segna o toglie «ripassata»; restituisce l'elenco aggiornato */
   segnaRipassata(rel: string, id: string, ripassata: boolean): Promise<string[]>
+  /** un appunto .md della sessione di studio, con le immagini che cita (come data URL) */
+  leggiAppunto(rel: string): Promise<Appunto>
+  /** apre con l'app predefinita del sistema un file citato in un appunto (es. `fonti/x.pdf`) */
+  apriFonte(dalAppunto: string, citato: string): Promise<void>
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>
@@ -309,7 +313,7 @@ export interface Api {
 
 // ---- Home generale: l'albero di 01_Argomenti ----
 
-export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo' | 'situazioni'
+export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo' | 'situazioni' | 'appunto'
 
 /** Una voce dell'albero. `rel` è il percorso dentro 01_Argomenti con "/" (per mappa e testo: quello dell'autore + "#mappa" o "/testi/<id>"). */
 export interface NodoArg {
@@ -333,4 +337,16 @@ export interface RisultatoNodo {
   albero: NodoArg[]
   /** rel del nodo creato o rinominato */
   rel?: string
+}
+
+/** Un file di appunti (.md) letto dal disco. */
+export interface Appunto {
+  rel: string
+  /** il testo senza l'intestazione --- */
+  testo: string
+  /** le immagini citate nel testo: percorso come scritto → data URL */
+  immagini: Record<string, string>
+  /** le immagini citate che non si sono trovate */
+  mancanti: string[]
+  modificato: number
 }

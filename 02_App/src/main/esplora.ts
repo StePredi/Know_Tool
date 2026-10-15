@@ -4,6 +4,7 @@
 
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
+import { contaParole, primoTitolo } from '../shared/markdown'
 import { leggiDocMd } from '../shared/scheda_md'
 import type { NodoArg } from '../shared/types'
 import { spostaCartella } from './repository'
@@ -127,6 +128,42 @@ async function nodoSituazioni(radice: string, rel: string, nome: string): Promis
   }
 }
 
+/** I file .md di una cartella di studio (gli appunti della sessione di studio): si leggono nell'app, non si modificano. */
+async function nodiAppunti(radice: string, rel: string): Promise<NodoArg[]> {
+  if (!rel || rel === 'italiano' || rel.startsWith('italiano/autori')) return []
+  const dir = join(radice, BASE, rel)
+  let nomi: string[] = []
+  try {
+    nomi = (await fs.readdir(dir, { withFileTypes: true })).filter((d) => d.isFile() && /\.md$/i.test(d.name) && !NASCOSTE.test(d.name)).map((d) => d.name).sort((a, b) => a.localeCompare(b, 'it'))
+  } catch {
+    return []
+  }
+  const out: NodoArg[] = []
+  for (const f of nomi) {
+    let titolo: string | null = null
+    let parole = 0
+    try {
+      const src = await fs.readFile(join(dir, f), 'utf8')
+      titolo = primoTitolo(src)
+      parole = contaParole(src)
+    } catch {
+      continue
+    }
+    out.push({
+      rel: `${rel}/${f}`,
+      tipo: 'appunto',
+      nome: titolo || f.replace(/\.md$/i, '').replace(/_/g, ' '),
+      protetto: true,
+      puoRinominare: false,
+      puoArchiviare: false,
+      info: `${parole} parole`,
+      modificato: await mtime(join(dir, f)),
+      figli: []
+    })
+  }
+  return out
+}
+
 async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
   const out: NodoArg[] = []
   for (const nome of await elencaDir(join(radice, BASE, rel))) {
@@ -142,7 +179,7 @@ async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
       out.push(await nodoSituazioni(radice, r, nome))
       continue
     }
-    const figli = await figliDi(radice, r)
+    const figli = [...(await figliDi(radice, r)), ...(await nodiAppunti(radice, r))]
     const protetto = PROTETTI.has(r)
     out.push({
       rel: r,
@@ -163,11 +200,13 @@ function riepilogo(figli: NodoArg[]): string {
   const c = figli.filter((f) => f.tipo === 'cartella').length
   const a = figli.filter((f) => f.tipo === 'autore').length
   const d = figli.filter((f) => f.tipo === 'situazioni').length
+  const ap = figli.filter((f) => f.tipo === 'appunto').length
   const t = figli.reduce((n, f) => n + (f.tipo === 'testo' ? 1 : 0) + (f.tipo === 'autore' ? f.figli.filter((x) => x.tipo === 'testo').length : f.tipo === 'cartella' ? contaTesti(f) : 0), 0)
   const parti: string[] = []
   if (a) parti.push(a === 1 ? '1 autore' : `${a} autori`)
   if (d) parti.push(d === 1 ? '1 documento' : `${d} documenti`)
   if (c) parti.push(c === 1 ? '1 cartella' : `${c} cartelle`)
+  if (ap) parti.push(ap === 1 ? '1 appunto' : `${ap} appunti`)
   if (t) parti.push(t === 1 ? '1 testo' : `${t} testi`)
   return parti.join(' · ') || 'Vuota'
 }

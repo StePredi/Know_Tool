@@ -31,3 +31,8 @@ Elenco raccolto il 2026-10-10. Spuntare quando fatto.
 ## Editor del testo — da rivedere dopo la prova su Windows
 - Provato solo nel browser con dati simulati, non in Electron
 - Nell'elenco esercizi il foglio della risposta compare sotto l'elenco (da valutare se spostarlo)
+
+## Lettore appunti (2026-10-15) — da provare su Windows
+- Gli `.md` di `appunti/` e `pratica/` compaiono nell'albero e si aprono in una scheda (sola lettura)
+- Clic su una fonte citata (`fonti/x.pdf`) = si apre con l'app predefinita del sistema (da provare: PDF, pptx, html)
+- Provato solo nel browser con dati simulati, non in Electron

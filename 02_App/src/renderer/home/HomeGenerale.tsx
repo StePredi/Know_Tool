@@ -7,7 +7,7 @@ import { useStore } from '../store'
 import { Albero, ICONA_NODO } from './Albero'
 import { antenati, èDocumento, idScheda, tutti, trova, useHome } from './stato'
 
-const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo', situazioni: 'Per situazioni' }
+const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo', situazioni: 'Per situazioni', appunto: 'Appunti' }
 
 const norm = (s: string): string => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 
@@ -213,7 +213,7 @@ export function HomeGenerale() {
 
   const figli = useMemo(() => {
     const l = [...(attuale ? attuale.figli : h.albero)]
-    const peso = (n: NodoArg): number => (n.tipo === 'mappa' ? 0 : n.tipo === 'testo' || n.tipo === 'situazioni' ? 2 : 1)
+    const peso = (n: NodoArg): number => (n.tipo === 'mappa' ? 0 : n.tipo === 'testo' || n.tipo === 'situazioni' || n.tipo === 'appunto' ? 2 : 1)
     l.sort((a, b) => peso(a) - peso(b) || (h.ordina === 'recente' ? b.modificato - a.modificato : a.nome.localeCompare(b.nome, 'it')))
     return l
   }, [attuale, h.albero, h.ordina])

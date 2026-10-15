@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Icona, type NomeIcona } from '../componenti/Icona'
 import { HOME_ID, useHome, type SchedaApp } from './stato'
 
-const ICONA: Record<SchedaApp['tipo'], NomeIcona> = { home: 'casa', mappa: 'mappa', testo: 'libro', situazioni: 'carte' }
+const ICONA: Record<SchedaApp['tipo'], NomeIcona> = { home: 'casa', mappa: 'mappa', testo: 'libro', situazioni: 'carte', appunto: 'file' }
 
 /** Le schede aperte, come in un browser: Home fissa, poi mappe e testi. Si riordinano trascinandole. */
 export function BarraSchede() {

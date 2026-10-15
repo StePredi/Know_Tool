@@ -15,6 +15,7 @@ import { BarraSchede } from './home/BarraSchede'
 import { HomeGenerale } from './home/HomeGenerale'
 import { allineaVista, HOME_ID, useHome } from './home/stato'
 import { VistaSituazioni } from './situazioni/VistaSituazioni'
+import { VistaAppunto } from './appunti/VistaAppunto'
 
 const FONT = {
   atkinson: "'Atkinson Hyperlegible', system-ui, sans-serif",
@@ -91,6 +92,7 @@ export function App() {
   const attiva = useHome((h) => h.attiva)
   const tipoAttiva = useHome((h) => h.tabs.find((t) => t.id === h.attiva)?.tipo ?? 'home')
   const relSit = useHome((h) => h.tabs.find((t) => t.id === h.attiva && t.tipo === 'situazioni')?.rel)
+  const relApp = useHome((h) => h.tabs.find((t) => t.id === h.attiva && t.tipo === 'appunto')?.rel)
   const pronto = !!st.modello
 
   // l'albero serve subito (per togliere le schede di documenti spariti)
@@ -149,7 +151,7 @@ export function App() {
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--bg)' }}>
       <BarraSchede />
-      {attiva === HOME_ID || tipoAttiva === 'home' ? <HomeGenerale /> : tipoAttiva === 'situazioni' && relSit ? <VistaSituazioni key={relSit} rel={relSit} /> : <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>{vistaAutore}</div>}
+      {attiva === HOME_ID || tipoAttiva === 'home' ? <HomeGenerale /> : tipoAttiva === 'situazioni' && relSit ? <VistaSituazioni key={relSit} rel={relSit} /> : tipoAttiva === 'appunto' && relApp ? <VistaAppunto key={relApp} rel={relApp} /> : <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>{vistaAutore}</div>}
       <FinestreEditorHome />
       {st.apertaId && <SchedaCompleta id={st.apertaId} />}
       {st.editId && <EditorScheda id={st.editId} />}
