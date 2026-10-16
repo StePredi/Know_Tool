@@ -111,3 +111,10 @@ describe('nuovo documento Per situazioni', () => {
     await expect(creaSituazioni(radice, '', 'x')).rejects.toThrow()
   })
 })
+
+describe('nomi delle cartelle', () => {
+  it('le cartelle nuove prendono l\'iniziale maiuscola', async () => {
+    expect(await creaNodo(radice, '', 'fisica')).toBe('Fisica')
+    expect(await creaNodo(radice, 'Fisica', 'ottica geometrica')).toBe('Fisica/Ottica geometrica')
+  })
+})

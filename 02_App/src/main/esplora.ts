@@ -279,7 +279,8 @@ async function esiste(p: string): Promise<boolean> {
 export async function creaNodo(radice: string, padre: string, nome: string): Promise<string> {
   const err = nomeValido(nome)
   if (err) throw new Error(err)
-  const n = nome.trim().replace(/\s+/g, ' ')
+  const pulito = nome.trim().replace(/\s+/g, ' ')
+  const n = pulito.charAt(0).toLocaleUpperCase('it') + pulito.slice(1) // le cartelle hanno l'iniziale maiuscola
   const dirPadre = cartellaDi(radice, padre)
   if (èCartellaAutori(padre)) throw new Error('Gli autori si creano dalla cartella dell\'app, non da qui.')
   if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
