@@ -10,6 +10,7 @@ import { leggiDocMd } from '../shared/scheda_md'
 import type { NodoArg } from '../shared/types'
 import { spostaCartella } from './repository'
 import { èSituazioni } from './situazioni'
+import { archiviaFile } from './modifica'
 
 const BASE = '01_Argomenti'
 /** Cartelle che l'app usa per sé: non compaiono come cartelle di studio. */
@@ -186,9 +187,9 @@ async function nodiMd(radice: string, rel: string): Promise<NodoArg[]> {
       rel: `${rel}/${f}`,
       tipo: 'appunto',
       nome: titolo || f.replace(/\.md$/i, '').replace(/_/g, ' '),
-      protetto: true,
-      puoRinominare: false,
-      puoArchiviare: false,
+      protetto: false,
+      puoRinominare: true,
+      puoArchiviare: true,
       info: `${parole} parole`,
       modificato: await mtime(join(dir, f)),
       figli: []
@@ -284,6 +285,24 @@ export async function creaNodo(radice: string, padre: string, nome: string): Pro
   return padre ? `${padre}/${n}` : n
 }
 
+/** Nuovo appunto: un file `.md` con il titolo, dentro una cartella di studio. Non sovrascrive. */
+export async function creaAppunto(radice: string, padre: string, nome: string): Promise<string> {
+  const err = nomeValido(nome.replace(/\.md$/i, ''))
+  if (err) throw new Error(err)
+  const n = nome.trim().replace(/\.md$/i, '').replace(/\s+/g, ' ')
+  if (!padre || padre === 'italiano' || padre.startsWith('italiano/autori')) throw new Error('Gli appunti si creano dentro una cartella di studio.')
+  const dirPadre = cartellaDi(radice, padre)
+  if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
+  const dest = join(dirPadre, `${n}.md`)
+  try {
+    await fs.writeFile(dest, `# ${n}\n\n`, { encoding: 'utf8', flag: 'wx' })
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'EEXIST') throw new Error(`Esiste già «${n}.md» qui.`)
+    throw e
+  }
+  return `${padre}/${n}.md`
+}
+
 function sostituisciCampo(md: string, chiave: string, valore: string): string {
   const m = md.match(/^(---\r?\n)([\s\S]*?)(\r?\n---)/)
   if (!m) throw new Error('Il file non ha l\'intestazione prevista.')
@@ -298,6 +317,20 @@ export async function rinominaNodo(radice: string, rel: string, nome: string): P
   const err = nomeValido(nome)
   if (err) throw new Error(err)
   const n = nome.trim().replace(/\s+/g, ' ')
+  if (/\.md$/i.test(rel)) {
+    const nuovo = n.replace(/\.md$/i, '')
+    const err2 = nomeValido(nuovo)
+    if (err2) throw new Error(err2)
+    const parti = rel.split('/')
+    const attuale = parti.pop()!
+    const padre = parti.join('/')
+    if (`${nuovo}.md` === attuale) return rel
+    const da = cartellaDi(radice, rel)
+    const a = join(cartellaDi(radice, padre), `${nuovo}.md`)
+    if ((await esiste(a)) && `${nuovo}.md`.toLowerCase() !== attuale.toLowerCase()) throw new Error(`Esiste già «${nuovo}.md» qui.`)
+    await fs.rename(da, a)
+    return `${padre}/${nuovo}.md`
+  }
   const mt = rel.match(/^(italiano\/autori\/[^/]+)\/testi\/([^/]+)$/)
   if (mt) {
     const file = join(cartellaDi(radice, rel), 'testo.md')
@@ -326,6 +359,7 @@ const stamp = (): string => new Date().toISOString().replace(/[-:T]/g, '').slice
 
 /** Archivia: sposta in 99_Archivio (cartelle_archiviate o testi_eliminati), non cancella. Restituisce dove è finita. */
 export async function archiviaNodo(radice: string, rel: string): Promise<string> {
+  if (/\.md$/i.test(rel)) return archiviaFile(radice, rel)
   if (PROTETTI.has(rel) || /^italiano\/autori\/[^/]+$/.test(rel) || rel.includes('#')) {
     throw new Error('Questo elemento serve all\'app: non si può archiviare da qui.')
   }

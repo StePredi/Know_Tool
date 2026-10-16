@@ -27,6 +27,9 @@ function apriFile(a: Appunto, citato: string): void {
   })
 }
 
+/** Appunti appena creati: si aprono già in modifica. */
+export const daModificare = new Set<string>()
+
 /** Un altro appunto citato (es. `appunti/i2c_teoria.md`): lo si cerca accanto e nelle cartelle sopra. */
 function altroAppunto(a: Appunto, citato: string) {
   const parti = a.rel.split('/')
@@ -142,7 +145,7 @@ export function VistaAppunto({ rel }: { rel: string }): ReactNode {
   const [errore, setErrore] = useState<string | null>(null)
   const nodo = useHome((h) => trova(h.albero, rel))
   const sopra = useRef<HTMLDivElement>(null)
-  const [modifica, setModifica] = useState(false)
+  const [modifica, setModifica] = useState(() => daModificare.delete(rel))
   const [giro, setGiro] = useState(0)
 
   useEffect(() => {

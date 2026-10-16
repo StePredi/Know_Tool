@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, writeFile, readFile, access } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { archiviaNodo, creaNodo, leggiAlbero, nomeValido, rinominaNodo } from '../src/main/esplora'
+import { archiviaNodo, creaAppunto, creaNodo, leggiAlbero, nomeValido, rinominaNodo } from '../src/main/esplora'
 
 let radice = ''
 const base = (...p: string[]): string => join(radice, '01_Argomenti', ...p)
@@ -63,5 +63,32 @@ describe('albero di 01_Argomenti', () => {
     await access(join(radice, '99_Archivio', 'testi_eliminati'))
     await expect(archiviaNodo(radice, 'italiano')).rejects.toThrow()
     await expect(archiviaNodo(radice, 'italiano/autori/leopardi')).rejects.toThrow()
+  })
+})
+
+describe('appunti: nuovo, rinomina, archivia', () => {
+  it('crea un appunto con il titolo, senza sovrascrivere né uscire dalle cartelle di studio', async () => {
+    const rel = await creaAppunto(radice, 'inglese/grammatica', 'Verbi irregolari')
+    expect(rel).toBe('inglese/grammatica/Verbi irregolari.md')
+    expect(await readFile(base('inglese', 'grammatica', 'Verbi irregolari.md'), 'utf8')).toBe('# Verbi irregolari\n\n')
+    await expect(creaAppunto(radice, 'inglese/grammatica', 'Verbi irregolari')).rejects.toThrow(/Esiste già/)
+    await expect(creaAppunto(radice, 'italiano/autori', 'x')).rejects.toThrow()
+    await expect(creaAppunto(radice, '', 'x')).rejects.toThrow()
+    await expect(creaAppunto(radice, 'inglese', '../fuori')).rejects.toThrow()
+  })
+  it('rinomina il file e lo archivia senza cancellarlo', async () => {
+    const rel = await creaAppunto(radice, 'inglese/grammatica', 'Uno')
+    const nuovo = await rinominaNodo(radice, rel, 'Due')
+    expect(nuovo).toBe('inglese/grammatica/Due.md')
+    await expect(access(base('inglese', 'grammatica', 'Uno.md'))).rejects.toThrow()
+    await creaAppunto(radice, 'inglese/grammatica', 'Tre')
+    await expect(rinominaNodo(radice, nuovo, 'Tre')).rejects.toThrow(/Esiste già/)
+    const dove = await archiviaNodo(radice, nuovo)
+    expect(dove).toMatch(/99_Archivio\/Archiviati\/inglese\/grammatica\/.*-Due\.md$/)
+    await expect(access(base('inglese', 'grammatica', 'Due.md'))).rejects.toThrow()
+    const alb = await leggiAlbero(radice)
+    const g = alb.find((n) => n.nome === 'inglese')!.figli[0]!
+    expect(g.figli.map((n) => n.tipo)).toEqual(['appunto'])
+    expect(g.figli[0]!.puoRinominare && g.figli[0]!.puoArchiviare).toBe(true)
   })
 })

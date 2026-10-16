@@ -79,7 +79,7 @@ describe('appunti nell\'albero e lettura', () => {
       ['appunto', 'Il protocollo I2C', 'TPSIT/MSP/appunti/i2c_teoria.md'],
       ['appunto', 'senza titolo', 'TPSIT/MSP/appunti/senza_titolo.md']
     ])
-    expect(ap.figli[0]).toMatchObject({ puoArchiviare: false, puoRinominare: false, info: '8 parole' })
+    expect(ap.figli[0]).toMatchObject({ puoArchiviare: true, puoRinominare: true, info: '8 parole' })
   })
   it('legge il testo e le immagini relative; segna quelle mancanti o fuori cartella', async () => {
     const r = await leggiAppunto(radice, 'TPSIT/MSP/appunti/i2c_teoria.md')

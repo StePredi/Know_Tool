@@ -3,7 +3,7 @@ import { app, BrowserWindow, dialog, ipcMain, Menu, shell } from 'electron'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { archiviaNodo, creaNodo, leggiAlbero, rinominaNodo } from './esplora'
+import { archiviaNodo, creaAppunto, creaNodo, leggiAlbero, rinominaNodo } from './esplora'
 import { archiviaFile, creaFile, leggiSorgente, salvaSorgente } from './modifica'
 import { fileApribile, leggiAppunto, trovaFonte } from './appunti'
 import { leggiSituazioni, segnaRipassata } from './situazioni'
@@ -178,6 +178,10 @@ function registraIpc(): void {
   ipcMain.handle('albero:leggi', async () => (radice ? leggiAlbero(radice) : []))
   ipcMain.handle('albero:crea', async (_e, padre: string, nome: string) => {
     const rel = await creaNodo(senzaRadice(), padre, nome)
+    return { albero: await leggiAlbero(senzaRadice()), rel }
+  })
+  ipcMain.handle('albero:creaAppunto', async (_e, padre: string, nome: string) => {
+    const rel = await creaAppunto(senzaRadice(), padre, nome)
     return { albero: await leggiAlbero(senzaRadice()), rel }
   })
   ipcMain.handle('albero:rinomina', async (_e, rel: string, nome: string) => {

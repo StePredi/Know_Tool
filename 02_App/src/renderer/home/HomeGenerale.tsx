@@ -5,6 +5,7 @@ import { Modale, primario, secondario } from '../editor/ui'
 import { useEditor } from '../editor/stato'
 import { useStore } from '../store'
 import { Albero, ICONA_NODO } from './Albero'
+import { daModificare } from '../appunti/VistaAppunto'
 import { antenati, èDocumento, idScheda, tutti, trova, useHome } from './stato'
 
 const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo', situazioni: 'Per situazioni', appunto: 'Appunti', file: 'File' }
@@ -102,7 +103,7 @@ function Vuota({ testo, onClick, icona = 'piu' }: { testo: string; onClick: () =
 
 // ------------------------------------------------------------------ finestre
 
-type Dialogo = { tipo: 'nuova'; padre: string; materia: boolean } | { tipo: 'rinomina'; n: NodoArg } | { tipo: 'archivia'; n: NodoArg } | null
+type Dialogo = { tipo: 'nuova'; padre: string; materia: boolean } | { tipo: 'nuovoAppunto'; padre: string } | { tipo: 'rinomina'; n: NodoArg } | { tipo: 'archivia'; n: NodoArg } | null
 
 function ChiediNome(props: { titolo: string; etichetta: string; iniziale: string; conferma: string; chiudi: () => void; fai: (nome: string) => Promise<void> }) {
   const [v, setV] = useState(props.iniziale)
@@ -227,6 +228,8 @@ export function HomeGenerale() {
   const recenti = h.recenti.map((r) => trova(h.albero, r.rel)).filter((n): n is NodoArg => !!n).slice(0, 4)
   const preferiti = h.preferiti.map((r) => trova(h.albero, r)).filter((n): n is NodoArg => !!n)
 
+  const puoAppunto = !!attuale && attuale.tipo === 'cartella' && !attuale.rel.startsWith('italiano') || (!!attuale && attuale.tipo === 'materia' && attuale.rel !== 'italiano')
+
   const nuovoTesto = async (): Promise<void> => {
     if (!attuale?.autoreId) return
     const st = useStore.getState()
@@ -322,6 +325,7 @@ export function HomeGenerale() {
               <div role="menu" className="pop" style={{ left: 'auto', right: 0, width: 210, padding: 6 }} onMouseLeave={() => setMenuNuovo(false)}>
                 <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38 }} onClick={() => { setMenuNuovo(false); setDlg({ tipo: 'nuova', padre: '', materia: true }) }}><Icona nome="libro" size={15} /> Nuova materia</button>
                 <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38, opacity: attuale && attuale.tipo !== 'autore' && attuale.rel !== 'italiano/autori' ? 1 : 0.45 }} disabled={!attuale || attuale.tipo === 'autore' || attuale.rel === 'italiano/autori'} onClick={() => { setMenuNuovo(false); if (attuale) setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false }) }}><Icona nome="cartella" size={15} /> Nuova cartella qui</button>
+                <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38, opacity: puoAppunto ? 1 : 0.45 }} disabled={!puoAppunto} onClick={() => { setMenuNuovo(false); if (attuale) setDlg({ tipo: 'nuovoAppunto', padre: attuale.rel }) }}><Icona nome="testo" size={15} /> Nuovo appunto qui</button>
                 <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38, opacity: attuale?.tipo === 'autore' ? 1 : 0.45 }} disabled={attuale?.tipo !== 'autore'} onClick={() => { setMenuNuovo(false); void nuovoTesto() }}><Icona nome="testo" size={15} /> Nuovo testo qui</button>
               </div>
             )}
@@ -338,8 +342,19 @@ export function HomeGenerale() {
           if (rel) { useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, ...(dlg.padre ? { [dlg.padre]: true } : {}) } }); useHome.getState().vai(rel) }
         }} />
       )}
+      {dlg?.tipo === 'nuovoAppunto' && (
+        <ChiediNome titolo="Nuovo appunto" etichetta="Nome del file (senza .md)" iniziale="" conferma="Crea" chiudi={() => setDlg(null)} fai={async (nome) => {
+          const rel = await dopo(window.api.creaAppunto(dlg.padre, nome))
+          if (rel) {
+            useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, [dlg.padre]: true } })
+            daModificare.add(rel)
+            const n = trova(useHome.getState().albero, rel)
+            if (n) useHome.getState().apri(n)
+          }
+        }} />
+      )}
       {dlg?.tipo === 'rinomina' && (
-        <ChiediNome titolo="Rinomina" etichetta="Nuovo nome" iniziale={dlg.n.nome} conferma="Rinomina" chiudi={() => setDlg(null)} fai={async (nome) => {
+        <ChiediNome titolo={dlg.n.tipo === 'appunto' ? 'Rinomina il file' : 'Rinomina'} etichetta={dlg.n.tipo === 'appunto' ? 'Nuovo nome del file (senza .md)' : 'Nuovo nome'} iniziale={dlg.n.tipo === 'appunto' ? dlg.n.rel.split('/').pop()!.replace(/\.md$/i, '') : dlg.n.nome} conferma="Rinomina" chiudi={() => setDlg(null)} fai={async (nome) => {
           const vecchio = dlg.n
           const rel = await dopo(window.api.rinominaNodo(vecchio.rel, nome))
           const s = useHome.getState()
@@ -349,7 +364,7 @@ export function HomeGenerale() {
             s.imposta({ percorso: cambia(s.percorso), sel: cambia(s.sel ?? vecchio.rel), preferiti: s.preferiti.map(cambia), recenti: s.recenti.map((x) => ({ ...x, rel: cambia(x.rel) })), espansi: Object.fromEntries(Object.entries(s.espansi).map(([k, v]) => [cambia(k), v])) })
             await s.carica()
           }
-          if (vecchio.tipo === 'situazioni') s.chiudiScheda(idScheda(vecchio))
+          if (vecchio.tipo === 'situazioni' || vecchio.tipo === 'appunto') s.chiudiScheda(idScheda(vecchio))
           // il titolo scritto nelle schede aperte si aggiorna
           const nuovo = nome.trim().replace(/\s+/g, ' ')
           useHome.setState({ tabs: useHome.getState().tabs.map((t) => (vecchio.tipo === 'testo' && t.testoId === vecchio.testoId && t.autoreId === vecchio.autoreId) || (vecchio.tipo === 'autore' && t.tipo === 'mappa' && t.autoreId === vecchio.autoreId) ? { ...t, titolo: nuovo } : t) })

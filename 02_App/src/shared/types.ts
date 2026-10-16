@@ -304,6 +304,8 @@ export interface Api {
   /** sposta un file in 99_Archivio/Archiviati (non cancella) e dice dove è finito */
   archiviaFile(rel: string): Promise<string>
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
+  /** nuovo appunto (.md) in una cartella di studio */
+  creaAppunto(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>
   /** testi: ogni scrittura restituisce il modello aggiornato */
