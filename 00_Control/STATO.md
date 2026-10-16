@@ -40,9 +40,13 @@
 - Provare «Per situazioni» (MikroTik) su Windows; poi: Git e Python come documentazioni, galleria di «+ Nuovo», generazione con Claude, figure SVG
 - Dal controllo di MSP (2026-10-15): (1) leggere gli appunti `.md` dentro l'app (FATTO 2026-10-15: gli `.md` compaiono nell'albero e si aprono in sola lettura; le fonti citate si aprono con l'app predefinita del sistema; resta il pulsante «Verifica fonti»); (2) figure nei documenti «Per situazioni» (FATTO per lo schema dei pin: scheda di tipo `figura`, 2026-10-15; restano le figure dentro altre schede, per Git): per esempio lo schema dei pin dell'ESP32 come disegno approssimativo della scheda dentro la mappa, con filtri per famiglia (ADC, DAC, touch, SPI, I2C…), clic su un pin = dettagli e schede collegate, ricerca che sfuma i pin; dati ora in `TPSIT/MSP/schemi/esp32_pinout_interattivo.html`
 - Home generale, giri successivi: nuovi tipi di documento da «+ Nuovo», ricerca nei contenuti, spostare con trascinamento, nuovo autore
+- Segnalate dall'utente (2026-10-16), dopo il lettore degli appunti:
+  1. **Fonti non visibili**: i file in `fonti/` (pdf, pptx…) non compaiono nell'app; vanno mostrati nell'albero/Home e aperti con l'app predefinita del sistema
+  2. **Rami della mappa «Per situazioni» non si chiudono** come l'utente aveva suggerito: rami comprimibili (clic sul ramo = apre/chiude le sue schede)
+  3. **Modifica di ogni documento/file dell'app**: l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
+  4. **Organizzazione delle cartelle** più pensata, e i nomi delle cartelle con l'iniziale maiuscola (da progettare prima di spostare qualsiasi cosa)
 
 ---
-
 ## Punti aperti (da decidere con l'utente)
 
 - Gli altri punti in `specifiche/formato_studio_italiano.md`, sezione "Da decidere con la demo"
