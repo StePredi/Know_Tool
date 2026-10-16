@@ -52,7 +52,7 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
     })
     return set
   }, [v.aperti, v.fuoco, corrisp, dati.indice])
-  const lay = useMemo(() => calcolaMappa(dati.indice, esiste, aperti), [dati.indice, dati.schede, aperti]) // eslint-disable-line react-hooks/exhaustive-deps
+  const lay = useMemo(() => calcolaMappa(dati.indice, esiste, aperti, (id, bi) => { const sc = dati.schede[id]!; const fr = v.fuoco === bi; return { sigla: sc.sigla, sotto: fr ? sc.frase : sc.comando, frase: fr } }), [dati.indice, dati.schede, aperti, v.fuoco]) // eslint-disable-line react-hooks/exhaustive-deps
   const tutteChiavi = useMemo(() => tutteLeChiavi(dati.indice, esiste), [dati.indice, dati.schede]) // eslint-disable-line react-hooks/exhaustive-deps
   const mostra = useRef<{ k: string; bi: number; ids?: string[] } | null>(null)
   const tuttoAperto = tutteChiavi.length > 0 && tutteChiavi.every((k) => v.aperti.includes(k))
@@ -320,6 +320,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
             <button type="button" aria-pressed={v.disp === 'albero'} onClick={() => imposta({ disp: 'albero' })}>Albero</button>
             <button type="button" aria-pressed={v.disp === 'griglia'} onClick={() => imposta({ disp: 'griglia' })}>Griglia</button>
           </div>
+          <button type="button" className="btn m-vai" title="Modifica la mappa: rami, gruppi, ordine, schede" onClick={() => imposta({ modificaMappa: true })}><Icona nome="matita" size={14} /> Modifica mappa</button>
           <span className="s-count">Ripassate: <b>{dati.ripassate.length}</b> / {ordine.length}</span>
         </div>
         <div className="s-search">

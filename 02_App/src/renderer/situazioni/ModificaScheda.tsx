@@ -50,7 +50,7 @@ function problemi(o: unknown, id: string): string[] {
   return r.data.id === id ? [] : [`L'id deve restare «${id}» (come il nome del file)`]
 }
 
-function Campo({ nome, aiuto, children, largo }: { nome: string; aiuto?: string; children: ReactNode; largo?: boolean }): ReactNode {
+export function Campo({ nome, aiuto, children, largo }: { nome: string; aiuto?: string; children: ReactNode; largo?: boolean }): ReactNode {
   return (
     <label className={'m-f' + (largo ? ' largo' : '')}>
       <span className="m-l">{nome}</span>
@@ -59,17 +59,17 @@ function Campo({ nome, aiuto, children, largo }: { nome: string; aiuto?: string;
     </label>
   )
 }
-function Testo({ v, on, righe = 2, mono }: { v: string; on: (s: string) => void; righe?: number; mono?: boolean }): ReactNode {
+export function Testo({ v, on, righe = 2, mono }: { v: string; on: (s: string) => void; righe?: number; mono?: boolean }): ReactNode {
   const n = Math.max(righe, Math.min(14, (v ?? '').split('\n').length))
   return <textarea className={'inp m-t' + (mono ? ' mono' : '')} rows={n} value={v ?? ''} spellCheck={!mono} onChange={(e) => on(e.target.value)} />
 }
-function Riga1({ v, on, mono, ph }: { v: string; on: (s: string) => void; mono?: boolean; ph?: string }): ReactNode {
+export function Riga1({ v, on, mono, ph }: { v: string; on: (s: string) => void; mono?: boolean; ph?: string }): ReactNode {
   return <input className={'inp' + (mono ? ' mono' : '')} value={v ?? ''} placeholder={ph} spellCheck={!mono} onChange={(e) => on(e.target.value)} />
 }
-function Mini({ nome, onClick, disabled, children }: { nome: string; onClick: () => void; disabled?: boolean; children: ReactNode }): ReactNode {
+export function Mini({ nome, onClick, disabled, children }: { nome: string; onClick: () => void; disabled?: boolean; children: ReactNode }): ReactNode {
   return <button type="button" className="m-mini" aria-label={nome} title={nome} disabled={disabled} onClick={onClick}>{children}</button>
 }
-function Comandi({ i, n, sposta, togli }: { i: number; n: number; sposta: (d: number) => void; togli: () => void }): ReactNode {
+export function Comandi({ i, n, sposta, togli }: { i: number; n: number; sposta: (d: number) => void; togli: () => void }): ReactNode {
   return (
     <span className="m-cmd">
       <Mini nome="Sposta su" disabled={i === 0} onClick={() => sposta(-1)}><Icona nome="su" size={13} /></Mini>
@@ -78,7 +78,7 @@ function Comandi({ i, n, sposta, togli }: { i: number; n: number; sposta: (d: nu
     </span>
   )
 }
-const muovi = (a: any[], i: number, d: number): void => {
+export const muovi = (a: any[], i: number, d: number): void => {
   const j = i + d
   if (j < 0 || j >= a.length) return
   ;[a[i], a[j]] = [a[j], a[i]]

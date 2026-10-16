@@ -15,8 +15,10 @@ export interface VistaSit {
   aperti: string[]
   /** si sta modificando la scheda aperta */
   modifica: boolean
+  /** si sta modificando la mappa (indice.yaml) */
+  modificaMappa: boolean
 }
-export const VISTA0: VistaSit = { scheda: null, esempi: false, prova: false, evidenzia: true, fuoco: null, q: '', disp: 'albero', aperti: [], modifica: false }
+export const VISTA0: VistaSit = { scheda: null, esempi: false, prova: false, evidenzia: true, fuoco: null, q: '', disp: 'albero', aperti: [], modifica: false, modificaMappa: false }
 
 interface Sit {
   dati: Record<string, Situazioni>

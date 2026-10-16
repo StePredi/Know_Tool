@@ -1,6 +1,7 @@
 import { useEffect, useMemo, type ReactNode } from 'react'
 import { MappaSit } from './MappaSit'
 import { SchedaVista } from './Scheda'
+import { ModificaMappa } from './ModificaMappa'
 import { useSit, VISTA0 } from './stato'
 import { costruisciIndici } from './util'
 
@@ -44,9 +45,9 @@ export function VistaSituazioni({ rel }: { rel: string }): ReactNode {
   if (!dati || !idx) return <div className="sit"><div className="s-in"><p>Apro la documentazione…</p></div></div>
   const ctx = { rel, dati, ...idx }
   return (
-    <div className={'sit' + (v.scheda && dati.schede[v.scheda] ? '' : ' sit-mappa')}>
+    <div className={'sit' + (v.scheda && dati.schede[v.scheda] || v.modificaMappa ? '' : ' sit-mappa')}>
       <div className="s-in">
-        {v.scheda && dati.schede[v.scheda] ? <SchedaVista ctx={ctx} id={v.scheda} /> : <MappaSit ctx={ctx} />}
+        {v.scheda && dati.schede[v.scheda] ? <SchedaVista ctx={ctx} id={v.scheda} /> : v.modificaMappa ? <ModificaMappa ctx={ctx} esci={() => useSit.getState().imposta(rel, { modificaMappa: false })} /> : <MappaSit ctx={ctx} />}
       </div>
     </div>
   )
