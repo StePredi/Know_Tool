@@ -7,6 +7,7 @@ import { useStore } from '../store'
 import { Albero, ICONA_NODO } from './Albero'
 import { Galleria } from './Galleria'
 import type { IdModello } from './modelli'
+import { èCartellaAutori } from '@shared/percorsi'
 import { daModificare } from '../appunti/VistaAppunto'
 import { antenati, èDocumento, idScheda, tutti, trova, useHome } from './stato'
 
@@ -288,7 +289,7 @@ export function HomeGenerale() {
       ) : h.vista === 'griglia' ? (
         <div className="hm-grid">
           {figli.map((n) => <Cartolina key={n.rel} n={n} />)}
-          {attuale?.tipo === 'autore' ? <Vuota testo="Nuovo testo" onClick={() => void nuovoTesto()} /> : attuale && attuale.rel !== 'italiano/autori' && <Vuota testo="Nuova cartella" onClick={() => setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false })} />}
+          {attuale?.tipo === 'autore' ? <Vuota testo="Nuovo testo" onClick={() => void nuovoTesto()} /> : attuale && !èCartellaAutori(attuale.rel) && <Vuota testo="Nuova cartella" onClick={() => setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false })} />}
         </div>
       ) : (
         <div style={{ border: '1px solid var(--line)', borderRadius: 12, background: 'var(--surface)', overflow: 'hidden' }}>

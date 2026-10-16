@@ -8,7 +8,7 @@ export interface OpzioniRichiesta {
 
 /** La richiesta da incollare a Claude: tutto ciò che serve per scrivere `proposta_scheda.md` senza toccare altro. */
 export function richiestaPerClaude(m: Modello, t: Testo, o: OpzioniRichiesta): string {
-  const base = `01_Argomenti/italiano/autori/${m.autore.id}`
+  const base = `01_Argomenti/Italiano/Autori/${m.autore.id}`
   const scheda = t.scheda ? m.schede.find((s) => s.id === t.scheda) : undefined
   const sezioni = ['## Riassunto  (2-4 righe)', '## Struttura e metrica  (tipo di strofa, schema delle rime, numero di versi, parti del testo)']
   if (o.contesto) sezioni.push('## Contesto  (quando e dove è stato scritto, a quale raccolta appartiene, perché è importante)')

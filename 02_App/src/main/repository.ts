@@ -19,7 +19,7 @@ import {
 } from '../shared/scheda_md'
 import type { ApplicaProposta, AutorePatch, EsitoRiaggancio, Layout, Modello, NuovaScheda, NuovoTesto, Raccolta, SchedaPatch, Tema, VoceScritta } from '../shared/types'
 
-export const PERCORSO_AUTORI = ['01_Argomenti', 'italiano', 'autori']
+export const PERCORSO_AUTORI = ['01_Argomenti', 'Italiano', 'Autori']
 
 const FILE_NOTI = /^(autore\.md|temi\.md|glossario\.md|schede\/[^/]+\.md|testi\/[^/]+\/(testo\.md|annotazioni\.json|parafrasi\.json|esercizi\.json|proposta_scheda\.md)|\.\.\/\.\.\/_condiviso\/figure_retoriche\.json)$/i
 const TEMPORANEI = /\.tmp-|\.swp$|~$|\.lock$/i

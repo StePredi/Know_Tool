@@ -7,13 +7,13 @@ import { leggiAlbero } from '../src/main/esplora'
 import { leggiSituazioni, segnaRipassata } from '../src/main/situazioni'
 import { controllaSituazioni, leggiIndice, leggiSchedaSit, ordineSchede } from '../src/shared/situazioni'
 
-const REL = 'informatica/reti/MikroTik per situazioni'
+const REL = 'Informatica/Reti/MikroTik/MikroTik per situazioni'
 let radice = ''
 
 beforeEach(async () => {
   radice = await mkdtemp(join(tmpdir(), 'kt-sit-'))
   // copia dei dati veri: i test non toccano mai la cartella dell'utente
-  await cp(resolve(__dirname, '..', '..', '01_Argomenti', 'informatica'), join(radice, '01_Argomenti', 'informatica'), { recursive: true })
+  await cp(resolve(__dirname, '..', '..', '01_Argomenti', 'Informatica'), join(radice, '01_Argomenti', 'Informatica'), { recursive: true })
 })
 
 describe('Per situazioni: dati veri di MikroTik', () => {
@@ -34,8 +34,8 @@ describe('Per situazioni: dati veri di MikroTik', () => {
 
   it('compare nell\'albero come documento che non si esplora', async () => {
     const a = await leggiAlbero(radice)
-    const reti = a.find((n) => n.nome === 'informatica')!.figli.find((n) => n.nome === 'reti')!
-    const doc = reti.figli[0]!
+    const reti = a.find((n) => n.nome === 'Informatica')!.figli.find((n) => n.nome === 'Reti')!
+    const doc = reti.figli.find((n) => n.nome === 'MikroTik')!.figli[0]!
     expect(doc.tipo).toBe('situazioni')
     expect(doc.nome).toBe('MikroTik per situazioni')
     expect(doc.info).toBe('37 situazioni')

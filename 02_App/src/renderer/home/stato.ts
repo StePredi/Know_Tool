@@ -32,7 +32,7 @@ const BASE: Salvato = {
   tabs: [{ id: HOME_ID, tipo: 'home', titolo: 'Home' }],
   attiva: HOME_ID,
   alberoAperto: true,
-  espansi: { italiano: true, 'italiano/autori': true },
+  espansi: { Italiano: true, 'Italiano/Autori': true },
   vista: 'griglia',
   ordina: 'nome',
   preferiti: [],
@@ -134,7 +134,8 @@ export const useHome = create<Home>((set, get) => {
       const s = get()
       const tabs = s.tabs.filter((t) => {
         if (t.tipo === 'home') return true
-        const rel = t.tipo === 'situazioni' || t.tipo === 'appunto' ? (t.rel ?? '') : t.tipo === 'testo' ? `italiano/autori/${t.autoreId}/testi/${t.testoId}` : `italiano/autori/${t.autoreId}#mappa`
+        const autore = t.tipo === 'testo' || t.tipo === 'mappa' ? tutti(albero).find((n) => n.tipo === 'autore' && n.autoreId === t.autoreId) : undefined
+        const rel = t.tipo === 'situazioni' || t.tipo === 'appunto' ? (t.rel ?? '') : !autore ? '' : t.tipo === 'testo' ? `${autore.rel}/testi/${t.testoId}` : `${autore.rel}#mappa`
         return !!trova(albero, rel)
       })
       const attiva = tabs.some((t) => t.id === s.attiva) ? s.attiva : HOME_ID

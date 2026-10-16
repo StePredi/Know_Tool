@@ -70,7 +70,7 @@ async function apri(nuovaRadice: string | null, autorePreferito?: string): Promi
       autori,
       autoreId: null,
       modello: null,
-      errore: 'Nella cartella non ho trovato nessun autore (01_Argomenti/italiano/autori/<autore>/autore.md).'
+      errore: 'Nella cartella non ho trovato nessun autore (01_Argomenti/Italiano/Autori/<autore>/autore.md).'
     }
   }
   const id = autori.find((a) => a.id === autorePreferito)?.id ?? autori[0]!.id

@@ -6,7 +6,7 @@ import { costruisciIndice } from '../src/shared/derivati'
 import { calcolaMappa } from '../src/shared/layout'
 import { leggiDocMd, ORDINE_CAMPI_SCHEDA, scriviDocMd, applicaPatchScheda } from '../src/shared/scheda_md'
 
-const dir = resolve(__dirname, '../../01_Argomenti/italiano/autori/leopardi')
+const dir = resolve(__dirname, '../../01_Argomenti/Italiano/Autori/leopardi')
 const ok = existsSync(dir)
 
 function carica(): Record<string, string> {

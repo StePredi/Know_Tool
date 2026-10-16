@@ -79,9 +79,9 @@ describe('json leggibile', () => {
 })
 
 const sorgente = resolve(__dirname, '../../01_Argomenti')
-const dirInf = (r: string): string => join(r, '01_Argomenti/italiano/autori/leopardi/testi/inf')
+const dirInf = (r: string): string => join(r, '01_Argomenti/Italiano/Autori/leopardi/testi/inf')
 
-describe.skipIf(!existsSync(join(sorgente, 'italiano/autori/leopardi/testi/inf')))("testi: L'infinito", () => {
+describe.skipIf(!existsSync(join(sorgente, 'Italiano/Autori/leopardi/testi/inf')))("testi: L'infinito", () => {
   let repo: Repository | null = null
   afterEach(async () => {
     await repo?.ferma()
@@ -283,7 +283,7 @@ Idillio composto nel 1819.
     const r = copia()
     writeFileSync(join(dirInf(r), 'annotazioni.json'), '[ { rotto')
     const files: Record<string, string> = {}
-    const base = join(r, '01_Argomenti/italiano/autori/leopardi')
+    const base = join(r, '01_Argomenti/Italiano/Autori/leopardi')
     for (const n of ['autore.md', 'temi.md', 'glossario.md']) files[n] = readFileSync(join(base, n), 'utf8')
     for (const n of ['testo.md', 'annotazioni.json', 'parafrasi.json', 'esercizi.json']) files[`testi/inf/${n}`] = readFileSync(join(dirInf(r), n), 'utf8')
     const m = costruisciModello(files, 'leopardi')

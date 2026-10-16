@@ -11,6 +11,7 @@ import type { NodoArg } from '../shared/types'
 import { spostaCartella } from './repository'
 import { èSituazioni } from './situazioni'
 import { archiviaFile } from './modifica'
+import { dentroAutori, èCartellaAutore, èCartellaAutori, èCartellaTesto } from '../shared/percorsi'
 import YAML from 'yaml'
 import { modelloScheda } from '../shared/modelloScheda'
 
@@ -18,6 +19,7 @@ const BASE = '01_Argomenti'
 /** Cartelle che l'app usa per sé: non compaiono come cartelle di studio. */
 const NASCOSTE = /^(_|\.|99_)/
 const PROTETTI = new Set(['italiano', 'italiano/autori'])
+const èProtetto = (rel: string): boolean => PROTETTI.has(rel.toLowerCase())
 const NOME_VIETATO = /[\\/:*?"<>|\u0000-\u001f]/
 
 export function nomeValido(nome: string): string | null {
@@ -139,7 +141,7 @@ async function nodiAppunti(radice: string, rel: string): Promise<NodoArg[]> {
 
 /** I file di una cartella di studio che non sono testo (fonti: pdf, pptx; schemi: immagini, html…): compaiono e si aprono con l'app del sistema. */
 async function nodiFile(radice: string, rel: string): Promise<NodoArg[]> {
-  if (!rel || rel === 'italiano' || rel.startsWith('italiano/autori')) return []
+  if (!rel || rel.toLowerCase() === 'italiano' || dentroAutori(rel)) return []
   const dir = join(radice, BASE, rel)
   let nomi: string[] = []
   try {
@@ -166,7 +168,7 @@ async function nodiFile(radice: string, rel: string): Promise<NodoArg[]> {
 }
 
 async function nodiMd(radice: string, rel: string): Promise<NodoArg[]> {
-  if (!rel || rel === 'italiano' || rel.startsWith('italiano/autori')) return []
+  if (!rel || rel.toLowerCase() === 'italiano' || dentroAutori(rel)) return []
   const dir = join(radice, BASE, rel)
   let nomi: string[] = []
   try {
@@ -206,7 +208,7 @@ async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
     if (NASCOSTE.test(nome)) continue
     const r = rel ? `${rel}/${nome}` : nome
     // un autore è una cartella con autore.md dentro italiano/autori
-    if (rel === 'italiano/autori' && (await mtime(join(radice, BASE, r, 'autore.md'))) > 0) {
+    if (èCartellaAutori(rel) && (await mtime(join(radice, BASE, r, 'autore.md'))) > 0) {
       out.push(await nodoAutore(radice, r, nome))
       continue
     }
@@ -216,7 +218,7 @@ async function figliDi(radice: string, rel: string): Promise<NodoArg[]> {
       continue
     }
     const figli = [...(await figliDi(radice, r)), ...(await nodiAppunti(radice, r))]
-    const protetto = PROTETTI.has(r)
+    const protetto = èProtetto(r)
     out.push({
       rel: r,
       tipo: rel === '' ? 'materia' : 'cartella',
@@ -279,7 +281,7 @@ export async function creaNodo(radice: string, padre: string, nome: string): Pro
   if (err) throw new Error(err)
   const n = nome.trim().replace(/\s+/g, ' ')
   const dirPadre = cartellaDi(radice, padre)
-  if (padre === 'italiano/autori') throw new Error('Gli autori si creano dalla cartella dell\'app, non da qui.')
+  if (èCartellaAutori(padre)) throw new Error('Gli autori si creano dalla cartella dell\'app, non da qui.')
   if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
   const dest = join(dirPadre, n)
   if (await esiste(dest)) throw new Error(`Esiste già «${n}» qui.`)
@@ -292,7 +294,7 @@ export async function creaAppunto(radice: string, padre: string, nome: string): 
   const err = nomeValido(nome.replace(/\.md$/i, ''))
   if (err) throw new Error(err)
   const n = nome.trim().replace(/\.md$/i, '').replace(/\s+/g, ' ')
-  if (!padre || padre === 'italiano' || padre.startsWith('italiano/autori')) throw new Error('Gli appunti si creano dentro una cartella di studio.')
+  if (!padre || padre.toLowerCase() === 'italiano' || dentroAutori(padre)) throw new Error('Gli appunti si creano dentro una cartella di studio.')
   const dirPadre = cartellaDi(radice, padre)
   if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
   const dest = join(dirPadre, `${n}.md`)
@@ -310,7 +312,7 @@ export async function creaSituazioni(radice: string, padre: string, nome: string
   const err = nomeValido(nome)
   if (err) throw new Error(err)
   const n = nome.trim().replace(/\s+/g, ' ')
-  if (!padre || padre === 'italiano' || padre.startsWith('italiano/autori')) throw new Error('Il documento si crea dentro una cartella di studio.')
+  if (!padre || padre.toLowerCase() === 'italiano' || dentroAutori(padre)) throw new Error('Il documento si crea dentro una cartella di studio.')
   const dirPadre = cartellaDi(radice, padre)
   if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
   const dest = join(dirPadre, n)
@@ -357,19 +359,19 @@ export async function rinominaNodo(radice: string, rel: string, nome: string): P
     await fs.rename(da, a)
     return `${padre}/${nuovo}.md`
   }
-  const mt = rel.match(/^(italiano\/autori\/[^/]+)\/testi\/([^/]+)$/)
+  const mt = èCartellaTesto(rel)
   if (mt) {
     const file = join(cartellaDi(radice, rel), 'testo.md')
     await fs.writeFile(file, sostituisciCampo(await fs.readFile(file, 'utf8'), 'titolo', n), 'utf8')
     return rel
   }
-  const ma = rel.match(/^italiano\/autori\/([^/]+)$/)
+  const ma = èCartellaAutore(rel) ? [rel, rel.split('/')[2]!] : null
   if (ma) {
     const file = join(cartellaDi(radice, rel), 'autore.md')
     await fs.writeFile(file, sostituisciCampo(await fs.readFile(file, 'utf8'), 'nome', n), 'utf8')
     return rel
   }
-  if (PROTETTI.has(rel)) throw new Error('Questa cartella serve all\'app: non si può rinominare.')
+  if (èProtetto(rel)) throw new Error('Questa cartella serve all\'app: non si può rinominare.')
   const parti = rel.split('/')
   const attuale = parti.pop()!
   const padre = parti.join('/')
@@ -386,12 +388,12 @@ const stamp = (): string => new Date().toISOString().replace(/[-:T]/g, '').slice
 /** Archivia: sposta in 99_Archivio (cartelle_archiviate o testi_eliminati), non cancella. Restituisce dove è finita. */
 export async function archiviaNodo(radice: string, rel: string): Promise<string> {
   if (/\.md$/i.test(rel)) return archiviaFile(radice, rel)
-  if (PROTETTI.has(rel) || /^italiano\/autori\/[^/]+$/.test(rel) || rel.includes('#')) {
+  if (èProtetto(rel) || èCartellaAutore(rel) || rel.includes('#')) {
     throw new Error('Questo elemento serve all\'app: non si può archiviare da qui.')
   }
   const da = cartellaDi(radice, rel)
   if (!(await esiste(da))) throw new Error('Non esiste più.')
-  const mt = rel.match(/^italiano\/autori\/([^/]+)\/testi\/([^/]+)$/)
+  const mt = rel.match(/^italiano\/autori\/([^/]+)\/testi\/([^/]+)$/i)
   const dir = join(radice, '99_Archivio', mt ? 'testi_eliminati' : 'cartelle_archiviate')
   await fs.mkdir(dir, { recursive: true })
   const nome = mt ? `${mt[1]}_${mt[2]}_${stamp()}` : `${rel.replace(/\//g, '_')}_${stamp()}`

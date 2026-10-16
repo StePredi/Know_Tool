@@ -57,6 +57,29 @@ const APRIBILI = /\.(pdf|pptx?|docx?|xlsx?|html?|png|jpe?g|gif|webp|svg|txt|csv)
 
 /** Un file citato in un appunto (es. `fonti/x.pdf`): si cerca accanto all'appunto e poi nelle cartelle sopra, fino alla materia.
  *  Restituisce il percorso assoluto, pronto da aprire con l'app predefinita del sistema. Solo file di tipo noto dentro 01_Argomenti. */
+/** Cerca `cp` dentro `dir` senza badare alle maiuscole (le cartelle si chiamano Fonti, ma negli appunti si scrive fonti/…). Restituisce i nomi veri, solo se in fondo c'è un file. */
+async function risolviPercorso(dir: string, cp: string[]): Promise<string[] | null> {
+  const reali: string[] = []
+  let cur = dir
+  for (let i = 0; i < cp.length; i++) {
+    let nomi: string[]
+    try {
+      nomi = await fs.readdir(cur)
+    } catch {
+      return null
+    }
+    const nome = nomi.includes(cp[i]!) ? cp[i]! : nomi.find((x) => x.toLowerCase() === cp[i]!.toLowerCase())
+    if (!nome) return null
+    reali.push(nome)
+    cur = join(cur, nome)
+  }
+  try {
+    return (await fs.stat(cur)).isFile() ? reali : null
+  } catch {
+    return null
+  }
+}
+
 export async function trovaFonte(radice: string, dalAppunto: string, citato: string): Promise<{ rel: string; assoluto: string }> {
   const parti = relAppuntoValido(dalAppunto)
   const c = decodeURI(citato.split('#')[0]!.split('?')[0]!).replace(/\\/g, '/')
@@ -64,13 +87,9 @@ export async function trovaFonte(radice: string, dalAppunto: string, citato: str
   const cp = c.split('/').filter((p) => p && p !== '.')
   if (cp.some((p) => p === '..' || /^[_.]|^99_/.test(p))) throw new Error('Percorso non valido.')
   for (let n = parti.length - 1; n >= 1; n--) {
-    const rel = [...parti.slice(0, n), ...cp].join('/')
-    const assoluto = join(radice, BASE, ...rel.split('/'))
-    try {
-      if ((await fs.stat(assoluto)).isFile()) return { rel, assoluto }
-    } catch {
-      // si prova una cartella più in alto
-    }
+    const base = parti.slice(0, n)
+    const reali = await risolviPercorso(join(radice, BASE, ...base), cp)
+    if (reali) return { rel: [...base, ...reali].join('/'), assoluto: join(radice, BASE, ...base, ...reali) }
   }
   throw new Error(`Non trovo «${c}» nella cartella della materia.`)
 }

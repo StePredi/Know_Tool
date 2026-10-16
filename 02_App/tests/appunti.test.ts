@@ -100,6 +100,12 @@ describe('appunti nell\'albero e lettura', () => {
     const r = await trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', 'fonti/i2c.pdf')
     expect(r.rel).toBe('TPSIT/MSP/fonti/i2c.pdf')
     expect(r.assoluto).toBe(base('TPSIT', 'MSP', 'fonti', 'i2c.pdf'))
+    // le cartelle possono avere l'iniziale maiuscola: la citazione «fonti/…» le trova lo stesso
+    await mkdir(base('Altra', 'Prova', 'Fonti'), { recursive: true })
+    await mkdir(base('Altra', 'Prova', 'Appunti'), { recursive: true })
+    await writeFile(base('Altra', 'Prova', 'Fonti', 'Slide.PDF'), 'x')
+    const m = await trovaFonte(radice, 'Altra/Prova/Appunti/a.md', 'fonti/slide.pdf')
+    expect(m.rel).toBe('Altra/Prova/Fonti/Slide.PDF')
     await expect(trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', 'fonti/run.exe')).rejects.toThrow('tipo di file')
     await expect(trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', '../../x.pdf')).rejects.toThrow()
     await expect(trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', 'C:/Windows/a.pdf')).rejects.toThrow()
