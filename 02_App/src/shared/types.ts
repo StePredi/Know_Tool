@@ -293,6 +293,8 @@ export interface Api {
   leggiAppunto(rel: string): Promise<Appunto>
   /** apre con l'app predefinita del sistema un file citato in un appunto (es. `fonti/x.pdf`) */
   apriFonte(dalAppunto: string, citato: string): Promise<void>
+  /** apre con l'app predefinita del sistema un file dell'albero (pdf, pptx, immagine…) */
+  apriFile(rel: string): Promise<void>
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>
@@ -313,7 +315,7 @@ export interface Api {
 
 // ---- Home generale: l'albero di 01_Argomenti ----
 
-export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo' | 'situazioni' | 'appunto'
+export type TipoNodo = 'materia' | 'cartella' | 'autore' | 'mappa' | 'testo' | 'situazioni' | 'appunto' | 'file'
 
 /** Una voce dell'albero. `rel` è il percorso dentro 01_Argomenti con "/" (per mappa e testo: quello dell'autore + "#mappa" o "/testi/<id>"). */
 export interface NodoArg {

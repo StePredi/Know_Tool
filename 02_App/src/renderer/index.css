@@ -428,3 +428,4 @@ button.s-gr { font-family: inherit; cursor: pointer; gap: 8px; padding: 0 8px 0 
 .s-gr .s-ap { background: var(--t); color: var(--k); }
 .s-ap:hover { outline: 2px solid currentColor; }
 .s-nd.s-ramo:not(.open) { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 28%, transparent); }
+.hm-t-file { --h: 25; }

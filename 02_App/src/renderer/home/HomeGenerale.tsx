@@ -7,7 +7,7 @@ import { useStore } from '../store'
 import { Albero, ICONA_NODO } from './Albero'
 import { antenati, èDocumento, idScheda, tutti, trova, useHome } from './stato'
 
-const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo', situazioni: 'Per situazioni', appunto: 'Appunti' }
+const ETICHETTA: Record<TipoNodo, string> = { materia: 'Materia', cartella: 'Cartella', autore: 'Autore', mappa: 'Mappa cronologica', testo: 'Testo', situazioni: 'Per situazioni', appunto: 'Appunti', file: 'File' }
 
 const norm = (s: string): string => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
 
@@ -178,7 +178,7 @@ function Dettagli({ n, azioni }: { n: NodoArg; azioni: { rinomina: () => void; a
         <dt style={{ color: 'var(--mute)' }}>Modificato</dt><dd style={{ margin: 0 }}>{quando(n.modificato)}</dd>
       </dl>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <button type="button" className="btn on" onClick={() => apriNodo(n)}><Con i="dx">{èDocumento(n) ? 'Apri in una scheda' : 'Entra'}</Con></button>
+        <button type="button" className="btn on" onClick={() => apriNodo(n)}><Con i="dx">{n.tipo === 'file' ? 'Apri con l\'app del sistema' : èDocumento(n) ? 'Apri in una scheda' : 'Entra'}</Con></button>
         <button type="button" className="btn" aria-pressed={pref} onClick={() => useHome.getState().preferito(n.rel)}><Icona nome="stella" size={15} piena={pref} /> {pref ? 'Togli dai preferiti' : 'Aggiungi ai preferiti'}</button>
         {n.puoRinominare && <button type="button" className="btn" onClick={azioni.rinomina}><Con i="matita">Rinomina</Con></button>}
         {n.puoArchiviare && <button type="button" className="btn" onClick={azioni.archivia}><Con i="cestino">Archivia</Con></button>}
@@ -213,7 +213,7 @@ export function HomeGenerale() {
 
   const figli = useMemo(() => {
     const l = [...(attuale ? attuale.figli : h.albero)]
-    const peso = (n: NodoArg): number => (n.tipo === 'mappa' ? 0 : n.tipo === 'testo' || n.tipo === 'situazioni' || n.tipo === 'appunto' ? 2 : 1)
+    const peso = (n: NodoArg): number => (n.tipo === 'mappa' ? 0 : n.tipo === 'testo' || n.tipo === 'situazioni' || n.tipo === 'appunto' ? 2 : n.tipo === 'file' ? 3 : 1)
     l.sort((a, b) => peso(a) - peso(b) || (h.ordina === 'recente' ? b.modificato - a.modificato : a.nome.localeCompare(b.nome, 'it')))
     return l
   }, [attuale, h.albero, h.ordina])

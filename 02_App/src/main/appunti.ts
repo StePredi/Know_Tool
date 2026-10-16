@@ -74,3 +74,19 @@ export async function trovaFonte(radice: string, dalAppunto: string, citato: str
   }
   throw new Error(`Non trovo «${c}» nella cartella della materia.`)
 }
+
+export const èFileApribile = (nome: string): boolean => APRIBILI.test(nome)
+
+/** Un file dell'albero (es. `TPSIT/MSP/fonti/x.pdf`) da aprire con l'app del sistema: percorso assoluto, solo se tipo noto e dentro 01_Argomenti. */
+export async function fileApribile(radice: string, rel: string): Promise<string> {
+  const parti = rel.split('/')
+  if (parti.length < 2 || parti.some((p) => !p || p === '.' || p === '..' || p.includes('\\') || p.includes(':') || /^[_.]|^99_/.test(p))) throw new Error('Percorso non valido.')
+  if (!APRIBILI.test(parti[parti.length - 1]!)) throw new Error('Questo tipo di file non si apre da qui.')
+  const assoluto = join(radice, BASE, ...parti)
+  try {
+    if (!(await fs.stat(assoluto)).isFile()) throw new Error()
+  } catch {
+    throw new Error('Questo file non c\'è più.')
+  }
+  return assoluto
+}

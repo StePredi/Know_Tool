@@ -55,6 +55,7 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
   const lay = useMemo(() => calcolaMappa(dati.indice, esiste, aperti), [dati.indice, dati.schede, aperti]) // eslint-disable-line react-hooks/exhaustive-deps
   const tutteChiavi = useMemo(() => tutteLeChiavi(dati.indice, esiste), [dati.indice, dati.schede]) // eslint-disable-line react-hooks/exhaustive-deps
   const mostra = useRef<{ k: string; bi: number; ids?: string[] } | null>(null)
+  const tuttoAperto = tutteChiavi.length > 0 && tutteChiavi.every((k) => v.aperti.includes(k))
   const commuta = (k: string, bi: number, ids?: string[]): void => {
     const apre = !v.aperti.includes(k)
     if (apre) mostra.current = { k, bi, ids }
@@ -265,8 +266,16 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
           <button type="button" className="btn" style={{ minWidth: 60 }} title="Torna al 100%" onClick={() => zoom(1)}>{pct}%</button>
           <button type="button" className="btn" aria-label="Ingrandisci" onClick={() => zoom(z.current * 1.2)}>+</button>
           <button type="button" className="btn" onClick={tutta}>Tutta</button>
-          <button type="button" className="btn" title="Apre tutti i rami e i gruppi" onClick={() => { adatta.current = true; imposta({ aperti: tutteChiavi }) }}>Apri tutto</button>
-          <button type="button" className="btn" title="Chiude i rami: resta il centro con i suoi rami" onClick={() => { adatta.current = true; imposta({ aperti: [], fuoco: null }) }}>Chiudi tutto</button>
+          <button
+            type="button"
+            className="btn"
+            title={tuttoAperto ? 'Chiude tutto: restano il centro e i rami' : 'Apre tutti i rami e i gruppi'}
+            aria-label={tuttoAperto ? 'Chiudi tutto' : 'Apri tutto'}
+            onClick={() => { adatta.current = true; imposta(tuttoAperto ? { aperti: [], fuoco: null } : { aperti: tutteChiavi }) }}
+          >
+            <Icona nome={tuttoAperto ? 'occhioBarrato' : 'occhio'} size={16} />
+            {tuttoAperto ? 'Chiudi tutto' : 'Apri tutto'}
+          </button>
         </div>
       </div>
       <p className="s-hint"><b>Doppio clic</b> su un ramo o un gruppo per aprirlo o chiuderlo (o il <b>+</b> sul nodo). Trascina per spostare la mappa; zoom con i pulsanti, <kbd>Ctrl</kbd> + rotella o <kbd>+</kbd> <kbd>−</kbd>. Il numero sul ramo è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>

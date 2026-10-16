@@ -2,7 +2,7 @@ import { Icona, type NomeIcona } from '../componenti/Icona'
 import type { NodoArg, TipoNodo } from '@shared/types'
 import { èDocumento, HOME_ID, idScheda, useHome } from './stato'
 
-export const ICONA_NODO: Record<TipoNodo, NomeIcona> = { materia: 'libro', cartella: 'cartella', autore: 'file', mappa: 'mappa', testo: 'testo', situazioni: 'carte', appunto: 'file' }
+export const ICONA_NODO: Record<TipoNodo, NomeIcona> = { materia: 'libro', cartella: 'cartella', autore: 'file', mappa: 'mappa', testo: 'testo', situazioni: 'carte', appunto: 'file', file: 'incolla' }
 
 function Riga({ n, livello }: { n: NodoArg; livello: number }) {
   const espanso = useHome((h) => !!h.espansi[n.rel])

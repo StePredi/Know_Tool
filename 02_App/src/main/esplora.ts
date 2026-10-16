@@ -5,6 +5,7 @@
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
 import { contaParole, primoTitolo } from '../shared/markdown'
+import { èFileApribile } from './appunti'
 import { leggiDocMd } from '../shared/scheda_md'
 import type { NodoArg } from '../shared/types'
 import { spostaCartella } from './repository'
@@ -130,6 +131,38 @@ async function nodoSituazioni(radice: string, rel: string, nome: string): Promis
 
 /** I file .md di una cartella di studio (gli appunti della sessione di studio): si leggono nell'app, non si modificano. */
 async function nodiAppunti(radice: string, rel: string): Promise<NodoArg[]> {
+  return [...(await nodiMd(radice, rel)), ...(await nodiFile(radice, rel))]
+}
+
+/** I file di una cartella di studio che non sono testo (fonti: pdf, pptx; schemi: immagini, html…): compaiono e si aprono con l'app del sistema. */
+async function nodiFile(radice: string, rel: string): Promise<NodoArg[]> {
+  if (!rel || rel === 'italiano' || rel.startsWith('italiano/autori')) return []
+  const dir = join(radice, BASE, rel)
+  let nomi: string[] = []
+  try {
+    nomi = (await fs.readdir(dir, { withFileTypes: true })).filter((d) => d.isFile() && èFileApribile(d.name) && !/\.md$/i.test(d.name) && !NASCOSTE.test(d.name)).map((d) => d.name).sort((a, b) => a.localeCompare(b, 'it'))
+  } catch {
+    return []
+  }
+  const out: NodoArg[] = []
+  for (const f of nomi) {
+    let size = 0
+    let modificato = 0
+    try {
+      const st = await fs.stat(join(dir, f))
+      size = st.size
+      modificato = st.mtimeMs
+    } catch {
+      continue
+    }
+    const ext = f.split('.').pop()!.toUpperCase()
+    const peso = size >= 1048576 ? `${(size / 1048576).toFixed(1).replace('.', ',')} MB` : `${Math.max(1, Math.round(size / 1024))} KB`
+    out.push({ rel: `${rel}/${f}`, tipo: 'file', nome: f, protetto: true, puoRinominare: false, puoArchiviare: false, info: `${ext} · ${peso}`, modificato, figli: [] })
+  }
+  return out
+}
+
+async function nodiMd(radice: string, rel: string): Promise<NodoArg[]> {
   if (!rel || rel === 'italiano' || rel.startsWith('italiano/autori')) return []
   const dir = join(radice, BASE, rel)
   let nomi: string[] = []
@@ -201,12 +234,14 @@ function riepilogo(figli: NodoArg[]): string {
   const a = figli.filter((f) => f.tipo === 'autore').length
   const d = figli.filter((f) => f.tipo === 'situazioni').length
   const ap = figli.filter((f) => f.tipo === 'appunto').length
+  const fl = figli.filter((f) => f.tipo === 'file').length
   const t = figli.reduce((n, f) => n + (f.tipo === 'testo' ? 1 : 0) + (f.tipo === 'autore' ? f.figli.filter((x) => x.tipo === 'testo').length : f.tipo === 'cartella' ? contaTesti(f) : 0), 0)
   const parti: string[] = []
   if (a) parti.push(a === 1 ? '1 autore' : `${a} autori`)
   if (d) parti.push(d === 1 ? '1 documento' : `${d} documenti`)
   if (c) parti.push(c === 1 ? '1 cartella' : `${c} cartelle`)
   if (ap) parti.push(ap === 1 ? '1 appunto' : `${ap} appunti`)
+  if (fl) parti.push(fl === 1 ? '1 file' : `${fl} file`)
   if (t) parti.push(t === 1 ? '1 testo' : `${t} testi`)
   return parti.join(' · ') || 'Vuota'
 }

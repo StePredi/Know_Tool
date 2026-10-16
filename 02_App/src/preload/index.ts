@@ -20,6 +20,7 @@ const api: Api = {
   leggiSituazioni: (rel) => ipcRenderer.invoke('situazioni:leggi', rel),
   segnaRipassata: (rel, id, v) => ipcRenderer.invoke('situazioni:ripassata', rel, id, v),
   leggiAppunto: (rel) => ipcRenderer.invoke('appunti:leggi', rel),
+  apriFile: (rel) => ipcRenderer.invoke('appunti:apriFile', rel),
   apriFonte: (dal, citato) => ipcRenderer.invoke('appunti:apri', dal, citato),
   creaNodo: (p, n) => ipcRenderer.invoke('albero:crea', p, n),
   rinominaNodo: (r, n) => ipcRenderer.invoke('albero:rinomina', r, n),

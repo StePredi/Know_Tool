@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { leggiAppunto, trovaFonte } from '../src/main/appunti'
+import { fileApribile, leggiAppunto, trovaFonte } from '../src/main/appunti'
 import { leggiAlbero } from '../src/main/esplora'
 import { contaParole, immaginiCitate, inline, parseMd, primoTitolo, separaIntestazione, testoDi } from '../src/shared/markdown'
 
@@ -104,5 +104,16 @@ describe('appunti nell\'albero e lettura', () => {
     await expect(trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', '../../x.pdf')).rejects.toThrow()
     await expect(trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', 'C:/Windows/a.pdf')).rejects.toThrow()
     await expect(trovaFonte(radice, 'TPSIT/MSP/appunti/i2c_teoria.md', 'fonti/manca.pdf')).rejects.toThrow('Non trovo')
+  })
+  it('i file non di testo (pdf, immagini…) compaiono come «file» e si aprono dal percorso; gli altri no', async () => {
+    await mkdir(base('TPSIT', 'MSP', 'fonti'), { recursive: true })
+    await writeFile(base('TPSIT', 'MSP', 'fonti', 'i2c.pdf'), Buffer.alloc(3000))
+    await writeFile(base('TPSIT', 'MSP', 'fonti', 'prog.exe'), 'x')
+    await writeFile(base('TPSIT', 'MSP', 'fonti', '_nascosto.pdf'), 'x')
+    const fonti = (await leggiAlbero(radice))[0]!.figli[0]!.figli.find((f) => f.nome === 'fonti')!
+    expect(fonti.figli.map((f) => [f.tipo, f.nome, f.info])).toEqual([['file', 'i2c.pdf', 'PDF · 3 KB']])
+    expect(fonti.info).toBe('1 file')
+    expect(await fileApribile(radice, 'TPSIT/MSP/fonti/i2c.pdf')).toBe(base('TPSIT', 'MSP', 'fonti', 'i2c.pdf'))
+    for (const rel of ['TPSIT/MSP/fonti/prog.exe', 'TPSIT/MSP/fonti/_nascosto.pdf', '../x.pdf', 'TPSIT/MSP/fonti/manca.pdf', 'x.pdf']) await expect(fileApribile(radice, rel)).rejects.toThrow()
   })
 })

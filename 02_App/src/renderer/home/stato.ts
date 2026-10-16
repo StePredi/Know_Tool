@@ -149,6 +149,11 @@ export const useHome = create<Home>((set, get) => {
     },
     apri(n) {
       const s = get()
+      if (n.tipo === 'file') {
+        // non è un documento dell'app: lo apre il sistema con il programma predefinito
+        window.api.apriFile(n.rel).catch((e: unknown) => useStore.getState().mostraToast(e instanceof Error ? e.message.replace(/^Error invoking remote method '[^']*': (Error: )?/, '') : String(e)))
+        return
+      }
       const doc = èDocumento(n)
       const recenti = doc ? [{ rel: n.rel, t: Date.now() }, ...s.recenti.filter((r) => r.rel !== n.rel)].slice(0, 12) : s.recenti
       // l'albero si apre sul percorso del documento (e sul documento stesso, se contiene altro)

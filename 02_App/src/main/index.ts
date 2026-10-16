@@ -4,7 +4,7 @@ import { existsSync, promises as fs } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { archiviaNodo, creaNodo, leggiAlbero, rinominaNodo } from './esplora'
-import { leggiAppunto, trovaFonte } from './appunti'
+import { fileApribile, leggiAppunto, trovaFonte } from './appunti'
 import { leggiSituazioni, segnaRipassata } from './situazioni'
 import { Repository } from './repository'
 import type { StatoApp } from '../shared/types'
@@ -160,6 +160,10 @@ function registraIpc(): void {
   }
   ipcMain.handle('situazioni:leggi', (_e, rel: string) => leggiSituazioni(senzaRadice(), rel))
   ipcMain.handle('appunti:leggi', (_e, rel: string) => leggiAppunto(senzaRadice(), rel))
+  ipcMain.handle('appunti:apriFile', async (_e, rel: string) => {
+    const err = await shell.openPath(await fileApribile(senzaRadice(), rel))
+    if (err) throw new Error('Il sistema non ha aperto il file: ' + err)
+  })
   ipcMain.handle('appunti:apri', async (_e, dal: string, citato: string) => {
     const { assoluto } = await trovaFonte(senzaRadice(), dal, citato)
     const err = await shell.openPath(assoluto)
