@@ -299,6 +299,10 @@ export interface Api {
   leggiSorgente(rel: string): Promise<SorgenteFile>
   /** salva con copia di sicurezza; se il file è cambiato sul disco risponde «conflitto» (a meno di `forza`) */
   salvaSorgente(rel: string, testo: string, mtimeAtteso: number, forza?: boolean): Promise<EsitoSalva>
+  /** crea un file nuovo dentro 01_Argomenti (non sovrascrive) */
+  creaFile(rel: string, testo: string): Promise<EsitoSalva>
+  /** sposta un file in 99_Archivio/Archiviati (non cancella) e dice dove è finito */
+  archiviaFile(rel: string): Promise<string>
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>

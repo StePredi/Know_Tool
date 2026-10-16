@@ -7,6 +7,7 @@ import { Con } from '../componenti/Icona'
 import { useStore } from '../store'
 import { useSit } from './stato'
 import { Campo, Comandi, Riga1, muovi } from './ModificaScheda'
+import { idLibero, modelloScheda, type TipoNuova } from '@shared/modelloScheda'
 
 // Modifica della mappa («indice.yaml»): titolo, rami, gruppi, ordine e schede di ogni ramo.
 // Si salva solo se l'indice è valido. La versione precedente resta in 99_Archivio/Versioni.
@@ -69,6 +70,7 @@ export function ModificaMappa({ ctx, esci }: { ctx: { rel: string; dati: Situazi
   const [scarta, setScarta] = useState(false)
   const [salvando, setSalvando] = useState(false)
   const [errSalva, setErrSalva] = useState<string[]>([])
+  const [nuova, setNuova] = useState<{ titolo: string; tipo: TipoNuova; dove: string; err: string[] }>({ titolo: '', tipo: 'ricetta', dove: '', err: [] })
 
   useEffect(() => {
     window.api.leggiSorgente(relFile).then(
@@ -134,6 +136,23 @@ export function ModificaMappa({ ctx, esci }: { ctx: { rel: string; dati: Situazi
       const [id] = c.rami[ri].voci[vi].schede.splice(si, 1)
       c.rami[dr].voci[dv].schede.push(id)
     })
+  }
+
+  const creaScheda = async (): Promise<void> => {
+    const titolo = nuova.titolo.trim()
+    if (!titolo) { setNuova({ ...nuova, err: ['Scrivi il titolo della scheda.'] }); return }
+    const id = idLibero(titolo, Object.keys(ctx.dati.schede))
+    try {
+      const r = await window.api.creaFile(`${ctx.rel}/schede/${id}.yaml`, modelloScheda(nuova.tipo, id, titolo))
+      if (!r.ok) { setNuova({ ...nuova, err: 'errori' in r ? r.errori : ['Non sono riuscito a creare la scheda.'] }); return }
+      if (nuova.dove) {
+        const [dr, dv] = nuova.dove.split(':').map(Number) as [number, number]
+        mut((c) => { c.rami[dr].voci[dv].schede.push(id) })
+      }
+      await useSit.getState().carica(ctx.rel)
+      setNuova({ titolo: '', tipo: nuova.tipo, dove: nuova.dove, err: [] })
+      useStore.getState().mostraToast(`Scheda «${titolo}» creata${nuova.dove ? ': salva la mappa per mostrarla' : ''}. Aprila dalla mappa per compilarla.`)
+    } catch (e) { setNuova({ ...nuova, err: [ERR(e)] }) }
   }
 
   return (
@@ -232,6 +251,28 @@ export function ModificaMappa({ ctx, esci }: { ctx: { rel: string; dati: Situazi
                 for (let n = 1; usati.has(id); n++) id = `nuovo-${n}`
                 c.rami.push({ id: slug(id), nome: 'Nuovo ramo', colore: COLORI_RAMO[c.rami.length % COLORI_RAMO.length], lato: 'R', voci: [{ schede: [] }] })
               })}><Con i="piu">Ramo</Con></button>
+            </section>
+
+            <section className="m-sez">
+              <h2>Nuova scheda</h2>
+              <p className="m-nota">Crea una scheda con un modello da compilare. Poi aprila dalla mappa e usa «Modifica».</p>
+              <div className="m-griglia">
+                <Campo nome="Titolo"><Riga1 v={nuova.titolo} ph="Per esempio: Leggere un sensore I2C" on={(v) => setNuova({ ...nuova, titolo: v, err: [] })} /></Campo>
+                <Campo nome="Tipo">
+                  <select className="inp m-sel" value={nuova.tipo} onChange={(e) => setNuova({ ...nuova, tipo: e.target.value as TipoNuova })}>
+                    <option value="ricetta">Ricetta (passi con codice)</option>
+                    <option value="prima_dopo">Prima e dopo (cosa cambia)</option>
+                  </select>
+                </Campo>
+                <Campo nome="Mettila in" aiuto="Facoltativo: puoi anche aggiungerla dopo.">
+                  <select className="inp m-sel" value={nuova.dove} onChange={(e) => setNuova({ ...nuova, dove: e.target.value })}>
+                    <option value="">Per ora in nessun ramo</option>
+                    {destinazioni.map((d) => <option key={d.v} value={d.v}>{d.t}</option>)}
+                  </select>
+                </Campo>
+              </div>
+              {nuova.err.length > 0 && <p role="alert" className="s-avv">{nuova.err.join(' ')}</p>}
+              <button type="button" className="btn on" onClick={() => void creaScheda()}><Con i="piu">Crea la scheda</Con></button>
             </section>
 
             {libere.length > 0 && (

@@ -11,6 +11,7 @@ import { useSit } from './stato'
 // Si salva solo se la scheda rispetta lo schema. La versione precedente resta in 99_Archivio/Versioni.
 
 type O = Record<string, any>
+const ERR = (e: unknown): string => (e instanceof Error ? e.message.replace(/^Error invoking remote method '[^']*': (Error: )?/, '') : String(e))
 interface Ctx { rel: string; dati: Situazioni }
 
 const ORDINE: Record<string, string[]> = {
@@ -97,6 +98,7 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
   const [salvando, setSalvando] = useState(false)
   const [errSalva, setErrSalva] = useState<string[]>([])
   const [cercaV, setCercaV] = useState('')
+  const [chiediArchivia, setChiediArchivia] = useState(false)
 
   const carica = (): void => {
     window.api.leggiSorgente(relFile).then(
@@ -154,6 +156,27 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
       setErrSalva([e instanceof Error ? e.message.replace(/^Error invoking remote method '[^']*': (Error: )?/, '') : String(e)])
     } finally {
       setSalvando(false)
+    }
+  }
+
+  const archivia = async (): Promise<void> => {
+    try {
+      const ix = await window.api.leggiSorgente(`${ctx.rel}/indice.yaml`)
+      const d = YAML.parse(ix.testo) as O
+      for (const r of d.rami ?? []) {
+        r.voci = (r.voci ?? []).map((v: O) => ({ ...v, schede: (v.schede ?? []).filter((x: string) => x !== id) })).filter((v: O) => v.schede.length)
+        if (!r.voci.length) throw new Error(`«${ctx.dati.schede[id]?.titolo ?? id}» è l'unica scheda del ramo «${r.nome}»: togli prima il ramo o aggiungi un'altra scheda dalla «Modifica mappa».`)
+      }
+      const esito = await window.api.salvaSorgente(`${ctx.rel}/indice.yaml`, YAML.stringify(d, { lineWidth: 0 }), ix.mtime, false)
+      if (!esito.ok) throw new Error('conflitto' in esito ? 'La mappa è cambiata sul disco: riprova.' : esito.errori.join(' '))
+      const dove = await window.api.archiviaFile(relFile)
+      const citata = Object.values(ctx.dati.schede).filter((s) => s.id !== id && (s.vicine ?? []).includes(id)).map((s) => s.sigla)
+      await useSit.getState().carica(ctx.rel)
+      useSit.getState().imposta(ctx.rel, { scheda: null, modifica: false })
+      useStore.getState().mostraToast(`Scheda archiviata in ${dove}.` + (citata.length ? ` Era citata da: ${citata.join(', ')} (da togliere dalle «vicine»).` : ''))
+    } catch (e) {
+      setChiediArchivia(false)
+      setErrSalva([ERR(e)])
     }
   }
 
@@ -224,9 +247,17 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
           <button type="button" role="tab" aria-selected={tab === 'moduli'} disabled={!moduli} onClick={() => cambiaTab('moduli')}>Moduli</button>
           <button type="button" role="tab" aria-selected={tab === 'yaml'} onClick={() => cambiaTab('yaml')}>Testo (YAML)</button>
         </div>
+        <button type="button" className="btn" title="Toglie la scheda dalla mappa e la mette in 99_Archivio" onClick={() => setChiediArchivia(true)}>Archivia</button>
         <button type="button" className="btn on" disabled={!buono || salvando || (!sporco && tab === 'moduli')} title="Salva (Ctrl+S)" onClick={() => void salva()}>{salvando ? 'Salvo…' : 'Salva'}</button>
       </div>
 
+      {chiediArchivia && (
+        <div role="alert" className="s-avv m-banner">
+          Archiviare questa scheda? Sparisce dalla mappa e il file va in 99_Archivio/Archiviati (non viene cancellato).
+          <button type="button" className="btn" onClick={() => void archivia()}>Sì, archivia</button>
+          <button type="button" className="btn" onClick={() => setChiediArchivia(false)}>No</button>
+        </div>
+      )}
       {scarta && (
         <div role="alert" className="s-avv m-banner">
           Ci sono modifiche non salvate.

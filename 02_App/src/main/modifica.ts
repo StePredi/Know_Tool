@@ -76,3 +76,37 @@ export async function salvaSorgente(radice: string, rel: string, testo: string, 
   await fs.rename(tmp, file)
   return { ok: true, mtime: (await fs.stat(file)).mtimeMs }
 }
+
+/** Crea un file nuovo (mai sovrascrive uno esistente). Il contenuto deve rispettare le stesse regole del salvataggio. */
+export async function creaFile(radice: string, rel: string, testo: string): Promise<EsitoSalva> {
+  const p = parti(rel)
+  const errori = controllaSorgente(rel, testo)
+  if (errori.length) return { ok: false, errori }
+  const file = join(radice, BASE, ...p)
+  await fs.mkdir(dirname(file), { recursive: true })
+  try {
+    await fs.writeFile(file, testo.replace(/\r\n?/g, '\n'), { encoding: 'utf8', flag: 'wx' })
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'EEXIST') return { ok: false, errori: ['Esiste già un file con questo nome.'] }
+    throw e
+  }
+  return { ok: true, mtime: (await fs.stat(file)).mtimeMs }
+}
+
+/** Toglie un file dal posto di lavoro senza cancellarlo: finisce in 99_Archivio/Archiviati/<percorso>/<nome>.<data>. */
+export async function archiviaFile(radice: string, rel: string): Promise<string> {
+  const p = parti(rel)
+  if (p[p.length - 1] === 'indice.yaml') throw new Error('L\'indice della mappa non si archivia da qui.')
+  const file = join(radice, BASE, ...p)
+  try {
+    await fs.stat(file)
+  } catch {
+    throw new Error('Questo file non c\'è più.')
+  }
+  const dir = join(radice, '99_Archivio', 'Archiviati', ...p.slice(0, -1))
+  await fs.mkdir(dir, { recursive: true })
+  const nome = p[p.length - 1]!
+  const nuovoNome = `${stamp()}-${nome}`
+  await fs.rename(file, join(dir, nuovoNome))
+  return `99_Archivio/Archiviati/${p.slice(0, -1).join('/')}/${nuovoNome}`
+}

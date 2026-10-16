@@ -53,3 +53,24 @@ describe('modifica dei file', () => {
     await expect(salvaSorgente(radice, 'X/Doc/manca.md', 'x', 0, true)).rejects.toThrow('non c\'è più')
   })
 })
+
+import { archiviaFile, creaFile } from '../src/main/modifica'
+describe('crea e archivia', () => {
+  it('crea una scheda nuova, non sovrascrive e controlla il contenuto', async () => {
+    const t = SCHEDA('Nuova').replace('id: a', 'id: b')
+    expect((await creaFile(radice, 'X/Doc/schede/b.yaml', t)).ok).toBe(true)
+    expect(await readFile(base('X', 'Doc', 'schede', 'b.yaml'), 'utf8')).toContain('Nuova')
+    const r = await creaFile(radice, 'X/Doc/schede/b.yaml', t)
+    expect(r.ok).toBe(false)
+    const male = await creaFile(radice, 'X/Doc/schede/c.yaml', t)
+    expect(male.ok).toBe(false)
+  })
+  it('archivia senza cancellare e rifiuta l\'indice', async () => {
+    const dove = await archiviaFile(radice, 'X/Doc/schede/a.yaml')
+    expect(dove).toMatch(/^99_Archivio\/Archiviati\/X\/Doc\/schede\/.*-a\.yaml$/)
+    expect((await readdir(base('X', 'Doc', 'schede'))).includes('a.yaml')).toBe(false)
+    expect((await readdir(join(radice, '99_Archivio', 'Archiviati', 'X', 'Doc', 'schede'))).length).toBe(1)
+    await writeFile(base('X', 'Doc', 'indice.yaml'), 'x')
+    await expect(archiviaFile(radice, 'X/Doc/indice.yaml')).rejects.toThrow()
+  })
+})
