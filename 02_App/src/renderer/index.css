@@ -421,3 +421,10 @@ a { color: var(--focus); text-decoration: underline; text-underline-offset: 2px;
 .md hr + h2 { border-top: 0; padding-top: 0; margin-top: 8px; }
 .md-fonte { cursor: pointer; color: var(--focus); text-decoration: underline; text-underline-offset: 2px; }
 .md-fonte:hover { background: var(--surface); }
+
+/* mappa: nodi che si aprono e si chiudono */
+button.s-gr { font-family: inherit; cursor: pointer; gap: 8px; padding: 0 8px 0 12px; }
+.s-ap { flex: none; margin-left: auto; font-style: normal; font-weight: 700; font-size: 12px; line-height: 1; min-width: 26px; text-align: center; padding: 4px 7px; border-radius: 999px; background: rgba(255, 255, 255, 0.92); color: #151a2e; cursor: pointer; }
+.s-gr .s-ap { background: var(--t); color: var(--k); }
+.s-ap:hover { outline: 2px solid currentColor; }
+.s-nd.s-ramo:not(.open) { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 28%, transparent); }

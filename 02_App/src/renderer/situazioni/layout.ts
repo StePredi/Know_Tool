@@ -17,6 +17,11 @@ export interface NodoMappa {
   id?: string
   gruppo?: string
   ids?: string[]
+  /** chiave per aprire e chiudere (ramo o gruppo) */
+  chiave?: string
+  /** quante schede stanno sotto (ramo o gruppo) */
+  n?: number
+  aperto?: boolean
 }
 export interface LinkMappa {
   /** ramo di appartenenza; −1 = tratto neutro dal centro */
@@ -53,7 +58,26 @@ function pagine(indice: IndiceSit, bi: number, esiste: (id: string) => boolean, 
   return out
 }
 
-export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean): LayoutMappa {
+export const chiaveRamo = (bi: number): string => `r${bi}`
+export const chiaveGruppo = (bi: number, g: string): string => `g${bi}:${g}`
+
+/** Tutte le chiavi apribili: rami e gruppi che contengono schede. */
+export function tutteLeChiavi(indice: IndiceSit, esiste: (id: string) => boolean): string[] {
+  const out: string[] = []
+  indice.rami.forEach((_, bi) => {
+    const pg = pagine(indice, bi, esiste, false)
+    if (!pg.length) return
+    out.push(chiaveRamo(bi))
+    for (const p of pg) if (p.g) out.push(chiaveGruppo(bi, p.g))
+  })
+  return out
+}
+
+/** `aperti`: rami e gruppi aperti. Il centro e i rami si vedono sempre; il resto compare mano a mano che si apre. */
+export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean, aperti: ReadonlySet<string>): LayoutMappa {
+  const rAp = (bi: number): boolean => aperti.has(chiaveRamo(bi))
+  const gAp = (bi: number, g: string | null): boolean => g === null || aperti.has(chiaveGruppo(bi, g))
+  const conta = (bi: number): number => indice.rami[bi]!.voci.reduce((a, v) => a + v.schede.filter(esiste).length, 0)
   const nodi: NodoMappa[] = []
   const link: LinkMappa[] = []
   const hb = (x1: number, y1: number, x2: number, y2: number): string => `M${x1} ${y1}C${(x1 + x2) / 2} ${y1},${(x1 + x2) / 2} ${y2},${x2} ${y2}`
@@ -81,13 +105,14 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
   nodi.push({ tipo: 'centro', bi: -1, x: -D.CW / 2, y: -D.CH / 2, w: D.CW, h: D.CH })
 
   // ---- alto e basso
-  const colsOf = (bi: number): Pagina[] => pagine(indice, bi, esiste, true)
+  const haSchede = (bi: number): boolean => pagine(indice, bi, esiste, true).length > 0
+  const colsOf = (bi: number): Pagina[] => (rAp(bi) ? pagine(indice, bi, esiste, true) : [])
   const colsW = (bi: number): number => {
     const n = Math.max(1, colsOf(bi).length)
     return n * D.LW + (n - 1) * D.CG
   }
   const bw = (bi: number): number => Math.max(colsW(bi), D.BW)
-  const rows = { T: lato('T').filter((i) => colsOf(i).length), B: lato('B').filter((i) => colsOf(i).length) }
+  const rows = { T: lato('T').filter(haSchede), B: lato('B').filter(haSchede) }
   let half = D.CW / 2
   for (const k of ['T', 'B'] as const) {
     const w = rows[k].reduce((a, i) => a + bw(i), 0) + Math.max(0, rows[k].length - 1) * D.BG
@@ -104,7 +129,7 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
       const bcx = x + w / 2
       const yn = s * (D.CH / 2 + 46)
       const yf = yn + s * D.BH
-      nodi.push({ tipo: 'ramo', bi, x: bcx - D.BW / 2, y: Math.min(yn, yf), w: D.BW, h: D.BH })
+      nodi.push({ tipo: 'ramo', bi, x: bcx - D.BW / 2, y: Math.min(yn, yf), w: D.BW, h: D.BH, chiave: chiaveRamo(bi), n: conta(bi), aperto: rAp(bi) })
       link.push({ bi, d: vb(0, (s * D.CH) / 2, bcx, yn) })
       colsOf(bi).forEach((c, i) => {
         const ccx = x + (w - colsW(bi)) / 2 + i * (D.LW + D.CG) + D.LW / 2
@@ -112,9 +137,10 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
         const sf = sn + s * D.SH
         const l0 = sf + s * 30
         if (c.g) {
-          nodi.push({ tipo: 'gruppo', bi, gruppo: c.g, ids: c.ids, x: ccx - D.SW / 2, y: Math.min(sn, sf), w: D.SW, h: D.SH })
+          nodi.push({ tipo: 'gruppo', bi, gruppo: c.g, ids: c.ids, x: ccx - D.SW / 2, y: Math.min(sn, sf), w: D.SW, h: D.SH, chiave: chiaveGruppo(bi, c.g), n: c.ids.length, aperto: gAp(bi, c.g) })
           link.push({ bi, d: vb(bcx, yf, ccx, sn) })
         } else link.push({ bi, d: vb(bcx, yf, ccx, l0) })
+        if (!gAp(bi, c.g)) return
         c.ids.forEach((id, j) => {
           const near = l0 + s * j * (D.LH + D.LG)
           nodi.push({ tipo: 'scheda', bi, id, x: ccx - D.LW / 2, y: s < 0 ? near - D.LH : near, w: D.LW, h: D.LH })
@@ -131,19 +157,19 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
     const dir = k === 'R' ? 1 : -1
     const blocks = lato(k)
       .map((bi) => {
-        const gs = pagine(indice, bi, esiste, false).map((p) =>
+        const gs = (rAp(bi) ? pagine(indice, bi, esiste, false) : []).map((p) =>
           p.g === null
-            ? { leaf: p.ids[0]!, g: '', ids: [] as string[], h: D.LH }
-            : { leaf: null as string | null, g: p.g, ids: p.ids, h: Math.max(D.SH, p.ids.length * D.LH + (p.ids.length - 1) * D.LG) }
+            ? { leaf: p.ids[0]!, g: '', ids: [] as string[], h: D.LH, ap: true }
+            : { leaf: null as string | null, g: p.g, ids: p.ids, ap: gAp(bi, p.g), h: gAp(bi, p.g) ? Math.max(D.SH, p.ids.length * D.LH + (p.ids.length - 1) * D.LG) : D.SH }
         )
         let h = 0
         gs.forEach((g, i) => {
           if (i) h += gs[i - 1]!.leaf && g.leaf ? D.LG : D.SG
           h += g.h
         })
-        return { bi, gs, h }
+        return { bi, gs, h: Math.max(h, D.BH) }
       })
-      .filter((b) => b.gs.length)
+      .filter((b) => haSchede(b.bi))
     if (!blocks.length) continue
     const total = blocks.reduce((a, x) => a + x.h, 0) + (blocks.length - 1) * D.BG
     let y = -total / 2
@@ -152,7 +178,7 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
     const X = (near: number, w: number): number => (dir > 0 ? near : -(near + w))
     for (const bl of blocks) {
       const by = y + bl.h / 2
-      nodi.push({ tipo: 'ramo', bi: bl.bi, x: X(SO, D.BW), y: by - D.BH / 2, w: D.BW, h: D.BH })
+      nodi.push({ tipo: 'ramo', bi: bl.bi, x: X(SO, D.BW), y: by - D.BH / 2, w: D.BW, h: D.BH, chiave: chiaveRamo(bl.bi), n: conta(bl.bi), aperto: rAp(bl.bi) })
       link.push({ bi: bl.bi, d: hb(xFan, 0, dir * SO, by) })
       const bf = dir * (SO + D.BW)
       const colN = SO + D.BW + 46
@@ -165,9 +191,9 @@ export function calcolaMappa(indice: IndiceSit, esiste: (id: string) => boolean)
         } else {
           const scy = gy + g.h / 2
           const lN = colN + D.SW + 34
-          nodi.push({ tipo: 'gruppo', bi: bl.bi, gruppo: g.g, ids: g.ids, x: X(colN, D.SW), y: scy - D.SH / 2, w: D.SW, h: D.SH })
+          nodi.push({ tipo: 'gruppo', bi: bl.bi, gruppo: g.g, ids: g.ids, x: X(colN, D.SW), y: scy - D.SH / 2, w: D.SW, h: D.SH, chiave: chiaveGruppo(bl.bi, g.g), n: g.ids.length, aperto: g.ap })
           link.push({ bi: bl.bi, d: hb(bf, by, dir * colN, scy) })
-          g.ids.forEach((id, j) => {
+          if (g.ap) g.ids.forEach((id, j) => {
             const ly = gy + j * (D.LH + D.LG)
             nodi.push({ tipo: 'scheda', bi: bl.bi, id, x: X(lN, D.LW), y: ly, w: D.LW, h: D.LH })
             link.push({ bi: bl.bi, d: hb(dir * (colN + D.SW), scy, dir * lN, ly + D.LH / 2), sottile: true })

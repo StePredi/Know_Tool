@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { Situazioni } from '@shared/situazioni'
 import { Icona } from '../componenti/Icona'
-import { calcolaMappa } from './layout'
+import { calcolaMappa, chiaveGruppo, chiaveRamo, tutteLeChiavi } from './layout'
 import { useSit, VISTA0 } from './stato'
 import { cerca, type InfoScheda } from './util'
 
@@ -22,20 +22,46 @@ type Props = {
   ctx: Ctx
   v: ReturnType<typeof useSit.getState>['viste'][string]
   imposta: (p: Partial<Props['v']>) => void
+  corrisp: Set<string> | null
   sfumato: (bi: number, ids?: string[]) => boolean
   apri: (id: string) => void
 }
 
-function Albero({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
+function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
   const { rel, dati, ordine } = ctx
-  void imposta
   const [pct, setPct] = useState(100)
   const vp = useRef<HTMLDivElement>(null)
   const palco = useRef<HTMLDivElement>(null)
   const sizer = useRef<HTMLDivElement>(null)
   const z = useRef(1)
   const mosso = useRef(false)
-  const lay = useMemo(() => calcolaMappa(dati.indice, (id) => !!dati.schede[id]), [dati.indice, dati.schede])
+  const esiste = (id: string): boolean => !!dati.schede[id]
+  // aperti davvero: quelli scelti, più (mentre si cerca o si mette a fuoco) i rami e i gruppi che servono
+  const aperti = useMemo(() => {
+    const set = new Set(v.aperti)
+    dati.indice.rami.forEach((r, bi) => {
+      if (v.fuoco === bi) {
+        set.add(chiaveRamo(bi))
+        r.voci.forEach((x) => x.gruppo && set.add(chiaveGruppo(bi, x.gruppo)))
+      }
+      if (corrisp) {
+        const da = r.voci.filter((x) => x.schede.some((i) => corrisp.has(i)))
+        if (da.length) set.add(chiaveRamo(bi))
+        da.forEach((x) => x.gruppo && set.add(chiaveGruppo(bi, x.gruppo)))
+      }
+    })
+    return set
+  }, [v.aperti, v.fuoco, corrisp, dati.indice])
+  const lay = useMemo(() => calcolaMappa(dati.indice, esiste, aperti), [dati.indice, dati.schede, aperti]) // eslint-disable-line react-hooks/exhaustive-deps
+  const tutteChiavi = useMemo(() => tutteLeChiavi(dati.indice, esiste), [dati.indice, dati.schede]) // eslint-disable-line react-hooks/exhaustive-deps
+  const mostra = useRef<{ k: string; bi: number; ids?: string[] } | null>(null)
+  const commuta = (k: string, bi: number, ids?: string[]): void => {
+    const apre = !v.aperti.includes(k)
+    if (apre) mostra.current = { k, bi, ids }
+    imposta({ aperti: apre ? [...v.aperti, k] : v.aperti.filter((x) => x !== k) })
+  }
+  const adatta = useRef(false)
+  const prima = useRef<{ ox: number; oy: number } | null>(null)
 
   const applica = (): void => {
     if (!palco.current || !sizer.current) return
@@ -82,7 +108,36 @@ function Albero({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
     const el = vp.current
     if (!el) return
     const salvata = VISTE.get(rel)
-    if (salvata) {
+    const p = prima.current
+    prima.current = { ox: lay.ox, oy: lay.oy }
+    const m = mostra.current
+    mostra.current = null
+    if (adatta.current) {
+      adatta.current = false
+      tutta()
+    } else if (m) {
+      // si è aperto un nodo: si porta in vista quello che è comparso (restringendo lo zoom solo se non ci sta)
+      const ns = lay.nodi.filter((n) => n.bi === m.bi && (m.ids ? n.chiave === m.k || (!!n.id && m.ids.includes(n.id)) : true))
+      if (ns.length) {
+        const x0 = Math.min(...ns.map((n) => n.x)) - 50
+        const x1 = Math.max(...ns.map((n) => n.x + n.w)) + 50
+        const y0 = Math.min(...ns.map((n) => n.y)) - 50
+        const y1 = Math.max(...ns.map((n) => n.y + n.h)) + 50
+        z.current = Math.max(ZMIN, Math.min(z.current, el.clientWidth / (x1 - x0), el.clientHeight / (y1 - y0)))
+        applica()
+        el.scrollLeft = ((x0 + x1) / 2) * z.current - el.clientWidth / 2
+        el.scrollTop = ((y0 + y1) / 2) * z.current - el.clientHeight / 2
+        ricorda()
+      }
+    } else if (p && (p.ox !== lay.ox || p.oy !== lay.oy)) {
+      // la mappa è cambiata (un nodo si è aperto o chiuso): resta ferma la parte che si stava guardando, rispetto al centro
+      const dx = (el.scrollLeft + el.clientWidth / 2) / z.current - p.ox
+      const dy = (el.scrollTop + el.clientHeight / 2) / z.current - p.oy
+      applica()
+      el.scrollLeft = (lay.ox + dx) * z.current - el.clientWidth / 2
+      el.scrollTop = (lay.oy + dy) * z.current - el.clientHeight / 2
+      ricorda()
+    } else if (salvata) {
       z.current = salvata.z
       applica()
       el.scrollLeft = salvata.l
@@ -168,14 +223,30 @@ function Albero({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
                 }
                 const r = dati.indice.rami[n.bi]!
                 const dim = sfumato(n.bi, n.ids ?? (n.id ? [n.id] : undefined))
-                if (n.tipo === 'ramo') {
+                if (n.tipo === 'ramo' || n.tipo === 'gruppo') {
+                  const k = n.chiave!
+                  const ramo = n.tipo === 'ramo'
                   return (
-                    <button key={i} type="button" className={'s-nd s-ramo' + (dim ? ' dim' : '')} data-c={r.colore} style={st} aria-pressed={v.fuoco === n.bi} title={`Livello ${n.bi + 1}: ${r.nome}`} onClick={() => { if (!mosso.current) imposta({ fuoco: v.fuoco === n.bi ? null : n.bi }) }}>
-                      <i>{n.bi + 1}</i><span>{r.nome}</span>
+                    <button
+                      key={i}
+                      type="button"
+                      className={'s-nd ' + (ramo ? 's-ramo' : 's-gr') + (dim ? ' dim' : '') + (n.aperto ? ' open' : '')}
+                      data-c={r.colore}
+                      style={st}
+                      aria-expanded={n.aperto}
+                      title={`${ramo ? `Livello ${n.bi + 1}: ${r.nome}` : n.gruppo}: doppio clic per ${n.aperto ? 'chiudere' : 'aprire'} (${n.n} situazioni)`}
+                      onDoubleClick={() => { if (!mosso.current) commuta(k, n.bi, ramo ? undefined : n.ids) }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'ArrowRight' && !n.aperto) { e.preventDefault(); commuta(k, n.bi, ramo ? undefined : n.ids) }
+                        else if (e.key === 'ArrowLeft' && n.aperto) { e.preventDefault(); commuta(k, n.bi, ramo ? undefined : n.ids) }
+                      }}
+                    >
+                      {ramo && <i>{n.bi + 1}</i>}
+                      <span>{ramo ? r.nome : n.gruppo}</span>
+                      <em className="s-ap" role="presentation" onClick={(e) => { e.stopPropagation(); if (!mosso.current) commuta(k, n.bi, ramo ? undefined : n.ids) }} onDoubleClick={(e) => e.stopPropagation()}>{n.aperto ? '−' : `+${n.n}`}</em>
                     </button>
                   )
                 }
-                if (n.tipo === 'gruppo') return <div key={i} className={'s-nd s-gr' + (dim ? ' dim' : '')} data-c={r.colore} style={st}>{n.gruppo}</div>
                 const s = dati.schede[n.id!]!
                 const fatta = dati.ripassate.includes(n.id!)
                 return (
@@ -194,9 +265,11 @@ function Albero({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
           <button type="button" className="btn" style={{ minWidth: 60 }} title="Torna al 100%" onClick={() => zoom(1)}>{pct}%</button>
           <button type="button" className="btn" aria-label="Ingrandisci" onClick={() => zoom(z.current * 1.2)}>+</button>
           <button type="button" className="btn" onClick={tutta}>Tutta</button>
+          <button type="button" className="btn" title="Apre tutti i rami e i gruppi" onClick={() => { adatta.current = true; imposta({ aperti: tutteChiavi }) }}>Apri tutto</button>
+          <button type="button" className="btn" title="Chiude i rami: resta il centro con i suoi rami" onClick={() => { adatta.current = true; imposta({ aperti: [], fuoco: null }) }}>Chiudi tutto</button>
         </div>
       </div>
-      <p className="s-hint">Clic su un ramo per metterlo a fuoco (<kbd>Esc</kbd> per tornare). Trascina per spostare la mappa; zoom con i pulsanti, <kbd>Ctrl</kbd> + rotella o <kbd>+</kbd> <kbd>−</kbd>. Il numero sul ramo è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>
+      <p className="s-hint"><b>Doppio clic</b> su un ramo o un gruppo per aprirlo o chiuderlo (o il <b>+</b> sul nodo). Trascina per spostare la mappa; zoom con i pulsanti, <kbd>Ctrl</kbd> + rotella o <kbd>+</kbd> <kbd>−</kbd>. Il numero sul ramo è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>
     </>
   )
 }
@@ -218,7 +291,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
     return false
   }
 
-  const props: Props = { ctx, v, imposta, sfumato, apri }
+  const props: Props = { ctx, v, imposta, corrisp: corrispondenze, sfumato, apri }
 
   return (
     <>

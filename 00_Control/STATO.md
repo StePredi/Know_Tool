@@ -42,7 +42,7 @@
 - Home generale, giri successivi: nuovi tipi di documento da «+ Nuovo», ricerca nei contenuti, spostare con trascinamento, nuovo autore
 - Segnalate dall'utente (2026-10-16), dopo il lettore degli appunti:
   1. **Fonti non visibili**: i file in `fonti/` (pdf, pptx…) non compaiono nell'app; vanno mostrati nell'albero/Home e aperti con l'app predefinita del sistema
-  2. **Rami della mappa «Per situazioni» non si chiudono** come l'utente aveva suggerito: rami comprimibili (clic sul ramo = apre/chiude le sue schede)
+  2. **Rami della mappa «Per situazioni» che si aprono e chiudono** (FATTO 2026-10-16): il centro e i rami si vedono sempre; doppio clic (o il «+» sul nodo) apre/chiude un ramo o un gruppo; «Apri tutto» / «Chiudi tutto»; il layout si ricalcola; la ricerca apre i rami che contengono i risultati. Il clic sul ramo non mette più a fuoco (il fuoco resta nella Griglia)
   3. **Modifica di ogni documento/file dell'app**: l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
   4. **Organizzazione delle cartelle** più pensata, e i nomi delle cartelle con l'iniziale maiuscola (da progettare prima di spostare qualsiasi cosa)
 
