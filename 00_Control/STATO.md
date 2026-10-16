@@ -19,7 +19,7 @@
 - Formato dei file di studio
 - Design della Home dell'autore
 - Design dell'Editor del testo (annotazioni, parafrasi, esercizi con correzione, archivio testi)
-- Dati di prova: Leopardi convertito nel formato a file (105 schede, 10 temi, glossario) in `01_Argomenti/italiano/autori/leopardi/`
+- Dati di prova: Leopardi convertito nel formato a file (105 schede, 10 temi, glossario) in `01_Argomenti/Italiano/Autori/leopardi/`
 - Scheletro dell'app Electron in `02_App/`: legge e valida i file (errori segnalati, mai blocchi), Home con Mappa e Lista, anteprima, scheda completa, modifica con scrittura immediata, aggiornamento automatico quando i file cambiano da fuori, pannello Controlli
 - 39 test automatici (date, validazione, round-trip dei 105 file, scrittura e watcher, testi e riaggancio)
 - Elimina categorie (le schede passano a un'altra) e temi (tolti dalle schede); correzione con un clic delle date ambigue tipo `1809-12` → `12/1809`
@@ -44,7 +44,7 @@
   1. **Fonti visibili** (FATTO 2026-10-16): i file non di testo delle cartelle di studio (pdf, pptx, docx, xlsx, html, immagini…) compaiono nell'albero e nella Home come «File»; un clic li apre con l'app predefinita del sistema
   2. **Rami della mappa «Per situazioni» che si aprono e chiudono** (FATTO 2026-10-16): il centro e i rami si vedono sempre; doppio clic (o il «+» sul nodo) apre/chiude un ramo o un gruppo; un solo pulsante con l'occhio («Apri tutto» / «Chiudi tutto» a seconda dello stato); il layout si ricalcola; la ricerca apre i rami che contengono i risultati. Il clic sul ramo non mette più a fuoco (il fuoco resta nella Griglia)
   3. **Modifica di ogni documento/file dell'app** (proposta approvata il 2026-10-16: `specifiche/proposta_modifica_e_cartelle.md`; FATTO: schede «Per situazioni» a moduli e YAML con copia di sicurezza; mappa (`indice.yaml`) a moduli e YAML dal pulsante «Modifica mappa»; appunti `.md` con barra di formattazione e anteprima; nuova scheda e archivia scheda; nuovo/rinomina/archivia appunti dalla Home; resta: figure a moduli, importare/spostare file): l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
-  4. **Organizzazione delle cartelle** (approvata, dopo le schede: documenti utili direttamente nella cartella dell'argomento, niente `Mappe/`; vedi `specifiche/proposta_modifica_e_cartelle.md`) più pensata, e i nomi delle cartelle con l'iniziale maiuscola (da progettare prima di spostare qualsiasi cosa)
+  4. **Organizzazione delle cartelle** (FATTO 2026-10-16, commit fcadfba: struttura Materia/Argomento/{Fonti, Appunti, Pratica, Schemi} con nomi maiuscoli; piano in `specifiche/piano_riordino_cartelle.md`; vecchia descrizione: documenti utili direttamente nella cartella dell'argomento, niente `Mappe/`; vedi `specifiche/proposta_modifica_e_cartelle.md`) più pensata, e i nomi delle cartelle con l'iniziale maiuscola )
 
 ---
 ## Punti aperti (da decidere con l'utente)

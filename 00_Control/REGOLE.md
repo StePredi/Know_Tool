@@ -30,10 +30,12 @@ Cartelle principali:
 
 Ogni argomento ha la sua cartella dentro `01_Argomenti/`, con questa struttura interna:
 
-- `fonti/` → PDF, link, video, libri
-- `appunti/` → appunti strutturati
-- `schemi/` → mappe e schemi
-- `pratica/` → esercizi, prove, output
+- `Fonti/` → PDF, link, video, libri
+- `Appunti/` → appunti strutturati
+- `Schemi/` → mappe e schemi
+- `Pratica/` → esercizi, prove, output
+- i documenti utili (per esempio una mappa «Per situazioni») stanno direttamente nella cartella dell'argomento
+- le cartelle hanno l'iniziale maiuscola; quelle tecniche cominciano con `_`
 - `_scheda.md` → tipo di argomento e regole specifiche
 
 Per il tool **Italiano** vale la struttura dati della specifica (`00_Control/specifiche/formato_studio_italiano.md`).

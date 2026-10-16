@@ -22,7 +22,7 @@ Stato: bozza aggiornata con la demo della home dell'autore. Dove differisce, pre
 ## 2. Struttura delle cartelle
 
 ```
-01_Argomenti/italiano/
+01_Argomenti/Italiano/
 ├── _condiviso/
 │   └── figure_retoriche.json        dizionario unico per tutti i testi
 ├── autori/
