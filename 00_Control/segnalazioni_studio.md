@@ -8,7 +8,7 @@ Quando una segnalazione è stata gestita, la sposto sotto «Fatte» (non la canc
 
 ## Da fare
 
-(nessuna)
+- 2026-10-16 · MikroTik · spostato in Telecomunicazioni/Reti/MikroTik: `02_App/tests/situazioni.test.ts` usa ancora il percorso Informatica/Reti (righe 10, 16, 37) e fallirà · (bug)
 
 ---
 
