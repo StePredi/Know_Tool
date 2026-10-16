@@ -11,7 +11,7 @@
   - `configurazione_switch_routervm.docx` → traccia passo passo della configurazione
   - `spiegazione_esperienza_vm.docx` → descrizione dell'esperienza con due VLAN
   - `schema_vlan_vm.drawio.pdf` → schema di rete e consegne
-- `MikroTik per situazioni/` → la documentazione «Per situazioni» (si apre nell'app): 10 rami, 43 schede, dalle basi alle VLAN
+- `MikroTik per situazioni/` → la documentazione «Per situazioni» (si apre nell'app): 10 rami, 43 schede: prima i rami per costruire la rete (dalle Basi alle VLAN), in fondo i due rami trasversali «Salvare e ripristinare» e «Quando non funziona»
 
 ---
 
@@ -20,4 +20,4 @@
 - Le fonti stanno solo in `Fonti/`: le schede le citano nel campo `fonte`, non le copiano.
 - Le cartelle `Appunti/`, `Pratica/` e `Schemi/` si creano solo quando c'è materiale da metterci (stessa struttura di MSP).
 - I comandi vengono sempre dalle fonti. Se aggiungo qualcosa che nelle fonti non c'è, lo segno come «nota».
-- Nuove situazioni: una scheda per volta, nel ramo giusto di `indice.yaml`; nuovi argomenti grandi = nuovo ramo in fondo.
+- Nuove situazioni: una scheda per volta, nel ramo giusto di `indice.yaml`; un argomento nuovo = un nuovo ramo, inserito prima dei due rami trasversali. Un gruppo ha sempre almeno 2 schede.

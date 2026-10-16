@@ -90,6 +90,21 @@ rami:
     - nat
   - schede:
     - firewall-azzera
+- id: b10
+  nome: VLAN
+  colore: indigo
+  lato: R
+  voci:
+  - gruppo: Configurare
+    schede:
+    - vlan-bridge-porte
+    - vlan-tabella
+    - vlan-filtering
+    - vlan-interfaccia
+  - gruppo: Collegare e verificare
+    schede:
+    - vlan-internet
+    - vlan-verifica
 - id: b8
   nome: Salvare e ripristinare
   colore: violet
@@ -117,20 +132,3 @@ rami:
     schede:
     - client-senza-ip
     - chiuso-fuori
-- id: b10
-  nome: VLAN
-  colore: indigo
-  lato: R
-  voci:
-  - gruppo: Costruire
-    schede:
-    - vlan-bridge-porte
-    - vlan-tabella
-    - vlan-filtering
-    - vlan-interfaccia
-  - gruppo: Collegare
-    schede:
-    - vlan-internet
-  - gruppo: Verificare
-    schede:
-    - vlan-verifica
