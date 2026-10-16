@@ -56,10 +56,14 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
   const tutteChiavi = useMemo(() => tutteLeChiavi(dati.indice, esiste), [dati.indice, dati.schede]) // eslint-disable-line react-hooks/exhaustive-deps
   const mostra = useRef<{ k: string; bi: number; ids?: string[] } | null>(null)
   const tuttoAperto = tutteChiavi.length > 0 && tutteChiavi.every((k) => v.aperti.includes(k))
-  const commuta = (k: string, bi: number, ids?: string[]): void => {
-    const apre = !v.aperti.includes(k)
-    if (apre) mostra.current = { k, bi, ids }
-    imposta({ aperti: apre ? [...v.aperti, k] : v.aperti.filter((x) => x !== k) })
+  /** `ora`: com'è adesso il nodo (aperto o no, anche se aperto dal fuoco). Chiudere il ramo a fuoco toglie anche il fuoco. */
+  const commuta = (k: string, bi: number, ora: boolean, ids?: string[]): void => {
+    if (!ora) {
+      mostra.current = { k, bi, ids }
+      imposta({ aperti: v.aperti.includes(k) ? v.aperti : [...v.aperti, k] })
+    } else {
+      imposta({ aperti: v.aperti.filter((x) => x !== k), ...(k === chiaveRamo(bi) && v.fuoco === bi ? { fuoco: null } : {}) })
+    }
   }
   const adatta = useRef(false)
   const prima = useRef<{ ox: number; oy: number } | null>(null)
@@ -227,6 +231,7 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
                 if (n.tipo === 'ramo' || n.tipo === 'gruppo') {
                   const k = n.chiave!
                   const ramo = n.tipo === 'ramo'
+                  const dalFuoco = ramo && v.fuoco === n.bi
                   return (
                     <button
                       key={i}
@@ -235,16 +240,17 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
                       data-c={r.colore}
                       style={st}
                       aria-expanded={n.aperto}
-                      title={`${ramo ? `Livello ${n.bi + 1}: ${r.nome}` : n.gruppo}: doppio clic per ${n.aperto ? 'chiudere' : 'aprire'} (${n.n} situazioni)`}
-                      onDoubleClick={() => { if (!mosso.current) commuta(k, n.bi, ramo ? undefined : n.ids) }}
+                      aria-pressed={ramo ? dalFuoco : undefined}
+                      title={ramo ? `Livello ${n.bi + 1}: ${r.nome} (${n.n} situazioni). Clic: metti a fuoco. ${n.aperto ? '−' : '+'} sul nodo: ${n.aperto ? 'chiudi' : 'apri'}` : `${n.gruppo} (${n.n} situazioni). ${n.aperto ? '−' : '+'} sul nodo: ${n.aperto ? 'chiudi' : 'apri'}`}
+                      onClick={() => { if (ramo && !mosso.current) imposta({ fuoco: dalFuoco ? null : n.bi }) }}
                       onKeyDown={(e) => {
-                        if (e.key === 'ArrowRight' && !n.aperto) { e.preventDefault(); commuta(k, n.bi, ramo ? undefined : n.ids) }
-                        else if (e.key === 'ArrowLeft' && n.aperto) { e.preventDefault(); commuta(k, n.bi, ramo ? undefined : n.ids) }
+                        if (e.key === 'ArrowRight' && !n.aperto) { e.preventDefault(); commuta(k, n.bi, false, ramo ? undefined : n.ids) }
+                        else if (e.key === 'ArrowLeft' && n.aperto) { e.preventDefault(); commuta(k, n.bi, true, ramo ? undefined : n.ids) }
                       }}
                     >
                       {ramo && <i>{n.bi + 1}</i>}
                       <span>{ramo ? r.nome : n.gruppo}</span>
-                      <em className="s-ap" role="presentation" onClick={(e) => { e.stopPropagation(); if (!mosso.current) commuta(k, n.bi, ramo ? undefined : n.ids) }} onDoubleClick={(e) => e.stopPropagation()}>{n.aperto ? '−' : `+${n.n}`}</em>
+                      <em className="s-ap" role="presentation" onClick={(e) => { e.stopPropagation(); if (!mosso.current) commuta(k, n.bi, !!n.aperto, ramo ? undefined : n.ids) }}>{n.aperto ? '−' : `+${n.n}`}</em>
                     </button>
                   )
                 }
@@ -278,7 +284,7 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
           </button>
         </div>
       </div>
-      <p className="s-hint"><b>Doppio clic</b> su un ramo o un gruppo per aprirlo o chiuderlo (o il <b>+</b> sul nodo). Trascina per spostare la mappa; zoom con i pulsanti, <kbd>Ctrl</kbd> + rotella o <kbd>+</kbd> <kbd>−</kbd>. Il numero sul ramo è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>
+      <p className="s-hint">Il <b>+</b> / <b>−</b> sul nodo apre o chiude un ramo o un gruppo; un clic su un ramo lo mette a fuoco (<kbd>Esc</kbd> per tornare). Trascina per spostare la mappa; zoom con i pulsanti, <kbd>Ctrl</kbd> + rotella o <kbd>+</kbd> <kbd>−</kbd>. Il numero sul ramo è il livello: dal più semplice al più complesso. <kbd>/</kbd> per cercare.</p>
     </>
   )
 }

@@ -43,8 +43,8 @@
 - Segnalate dall'utente (2026-10-16), dopo il lettore degli appunti:
   1. **Fonti visibili** (FATTO 2026-10-16): i file non di testo delle cartelle di studio (pdf, pptx, docx, xlsx, html, immagini…) compaiono nell'albero e nella Home come «File»; un clic li apre con l'app predefinita del sistema
   2. **Rami della mappa «Per situazioni» che si aprono e chiudono** (FATTO 2026-10-16): il centro e i rami si vedono sempre; doppio clic (o il «+» sul nodo) apre/chiude un ramo o un gruppo; un solo pulsante con l'occhio («Apri tutto» / «Chiudi tutto» a seconda dello stato); il layout si ricalcola; la ricerca apre i rami che contengono i risultati. Il clic sul ramo non mette più a fuoco (il fuoco resta nella Griglia)
-  3. **Modifica di ogni documento/file dell'app**: l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
-  4. **Organizzazione delle cartelle** più pensata, e i nomi delle cartelle con l'iniziale maiuscola (da progettare prima di spostare qualsiasi cosa)
+  3. **Modifica di ogni documento/file dell'app** (proposta scritta in `specifiche/proposta_modifica_e_cartelle.md`, da approvare): l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
+  4. **Organizzazione delle cartelle** (proposta scritta in `specifiche/proposta_modifica_e_cartelle.md`, da approvare) più pensata, e i nomi delle cartelle con l'iniziale maiuscola (da progettare prima di spostare qualsiasi cosa)
 
 ---
 ## Punti aperti (da decidere con l'utente)
