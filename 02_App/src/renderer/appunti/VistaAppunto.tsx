@@ -3,6 +3,7 @@ import type { Appunto } from '@shared/types'
 import { parseMd, separaIntestazione, type Blocco, type Inline } from '@shared/markdown'
 import { useStore } from '../store'
 import { trova, useHome } from '../home/stato'
+import { ModificaAppunto } from './ModificaAppunto'
 
 /** Un file di appunti (.md) letto nell'app: titoli, elenchi, tabelle, codice, con l'indice a lato. Solo lettura. */
 
@@ -99,7 +100,7 @@ function Codice({ v, lingua }: { v: string; lingua: string }): ReactNode {
   )
 }
 
-function Bl({ b, a }: { b: Blocco; a: Appunto }): ReactNode {
+export function Bl({ b, a }: { b: Blocco; a: Appunto }): ReactNode {
   switch (b.t) {
     case 'h': {
       const H = ('h' + Math.min(6, b.livello)) as 'h1'
@@ -141,6 +142,8 @@ export function VistaAppunto({ rel }: { rel: string }): ReactNode {
   const [errore, setErrore] = useState<string | null>(null)
   const nodo = useHome((h) => trova(h.albero, rel))
   const sopra = useRef<HTMLDivElement>(null)
+  const [modifica, setModifica] = useState(false)
+  const [giro, setGiro] = useState(0)
 
   useEffect(() => {
     let vivo = true
@@ -154,7 +157,7 @@ export function VistaAppunto({ rel }: { rel: string }): ReactNode {
     // se il file cambia mentre è aperto (la sessione di studio lo aggiorna), si rilegge al ritorno nella finestra
     window.addEventListener('focus', carica)
     return () => { vivo = false; window.removeEventListener('focus', carica) }
-  }, [rel])
+  }, [rel, giro])
 
   const blocchi = useMemo(() => (a ? parseMd(a.testo) : []), [a])
   const indice = useMemo(() => blocchi.filter((b): b is Extract<Blocco, { t: 'h' }> => b.t === 'h' && b.livello >= 2 && b.livello <= 3), [blocchi])
@@ -163,6 +166,7 @@ export function VistaAppunto({ rel }: { rel: string }): ReactNode {
 
   if (errore) return <div className="sit"><div className="s-in"><p role="alert" className="s-avv">{errore}</p></div></div>
   if (!a) return <div className="sit"><div className="s-in"><p>Apro gli appunti…</p></div></div>
+  if (modifica) return <ModificaAppunto a={a} esci={(salvato) => { setModifica(false); if (salvato) setGiro((g) => g + 1) }} />
   // se il testo comincia già con il suo titolo (#), non si ripete
   const haH1 = blocchi[0]?.t === 'h' && blocchi[0].livello === 1
   return (
@@ -170,7 +174,7 @@ export function VistaAppunto({ rel }: { rel: string }): ReactNode {
       <div className="s-in md-wrap">
         <article className="md" aria-label={titolo}>
           {!haH1 && <h1>{titolo}</h1>}
-          <p className="md-via">{rel.split('/').slice(0, -1).join(' › ')} · sola lettura</p>
+          <p className="md-via">{rel.split('/').slice(0, -1).join(' › ')} <button type="button" className="btn m-vai ma-vai" title="Modifica questi appunti" onClick={() => setModifica(true)}>Modifica</button></p>
           {a.mancanti.length > 0 && <p role="status" className="s-avv">Immagini non trovate: {a.mancanti.join(', ')}</p>}
           {blocchi.map((b, k) => <Bl key={k} b={b} a={a} />)}
           {!blocchi.length && <p>Il file è vuoto.</p>}

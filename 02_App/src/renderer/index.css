@@ -497,3 +497,15 @@ button.s-gr { font-family: inherit; cursor: pointer; gap: 8px; padding: 0 8px 0 
 .m-sel { width: auto; max-width: 100%; }
 .m-yaml { width: 100%; }
 .s-tools .m-vai { margin-left: 4px; }
+
+/* modifica appunti */
+.ma-wrap { display: block; max-width: 1280px; }
+.ma-barra { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0; position: sticky; top: 0; z-index: 2; background: var(--bg, var(--surface)); padding: 6px 0; }
+.ma-b { min-width: 36px; height: 34px; padding: 0 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; font-weight: 700; font-size: 13px; }
+.ma-b:hover { background: var(--ink); color: var(--surface); }
+.ma-due { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.ma-due.solo { grid-template-columns: minmax(0, 1fr); }
+.ma-ta { font-family: var(--mono, ui-monospace, Consolas, monospace); width: 100%; min-height: 62vh; resize: vertical; font-size: 14px; line-height: 1.55; tab-size: 2; }
+.ma-prev { border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px 18px; background: var(--surface); max-height: 75vh; overflow: auto; }
+.md-via .ma-vai { margin-left: 8px; }
+@media (max-width: 900px) { .ma-due { grid-template-columns: 1fr; } }
