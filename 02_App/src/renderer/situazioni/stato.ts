@@ -13,8 +13,10 @@ export interface VistaSit {
   disp: 'albero' | 'griglia'
   /** rami e gruppi aperti nella mappa ad albero (chiavi di layout.ts) */
   aperti: string[]
+  /** si sta modificando la scheda aperta */
+  modifica: boolean
 }
-export const VISTA0: VistaSit = { scheda: null, esempi: false, prova: false, evidenzia: true, fuoco: null, q: '', disp: 'albero', aperti: [] }
+export const VISTA0: VistaSit = { scheda: null, esempi: false, prova: false, evidenzia: true, fuoco: null, q: '', disp: 'albero', aperti: [], modifica: false }
 
 interface Sit {
   dati: Record<string, Situazioni>

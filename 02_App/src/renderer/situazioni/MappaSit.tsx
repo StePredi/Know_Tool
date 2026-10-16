@@ -298,7 +298,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
   const corrispondenze = useMemo(() => (v.q.trim() ? new Set(trovate) : null), [v.q, trovate])
   const idsRamo = useMemo(() => dati.indice.rami.map((r) => r.voci.flatMap((x) => x.schede)), [dati.indice])
   useEffect(() => setSel(0), [v.q])
-  const apri = (id: string): void => imposta({ scheda: id, q: '' })
+  const apri = (id: string): void => imposta({ scheda: id, q: '', modifica: false })
   const sfumato = (bi: number, ids?: string[]): boolean => {
     if (bi < 0) return false
     if (v.fuoco != null && bi !== v.fuoco) return true

@@ -1,8 +1,10 @@
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { SchedaFigura, SchedaPrimaDopo, SchedaRicetta, Situazioni } from '@shared/situazioni'
+import { Icona } from '../componenti/Icona'
 import { useStore } from '../store'
 import { Cod, testoPuro } from './Codice'
 import { DisegnoScheda } from './Figura'
+import { ModificaScheda } from './ModificaScheda'
 import { useSit, VISTA0 } from './stato'
 import type { InfoScheda } from './util'
 
@@ -30,6 +32,9 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
       <div className="s-bar">
         <button type="button" className="btn" onClick={() => useSit.getState().imposta(ctx.rel, { scheda: null })}>← Mappa</button>
         <span className="s-lvl">Livello {inf.bi + 1}: {r.nome}{inf.gruppo ? ` · ${inf.gruppo}` : ''}</span>
+        <button type="button" className="btn m-vai" title="Modifica questa scheda" onClick={() => useSit.getState().imposta(ctx.rel, { modifica: true })}>
+          <Icona nome="matita" size={14} /> Modifica
+        </button>
       </div>
       <div className="s-head">
         <div>
@@ -274,8 +279,10 @@ function Figura({ ctx, s }: { ctx: Ctx; s: SchedaFigura }): ReactNode {
 export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const s = ctx.dati.schede[id]
   const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => { ref.current?.closest('.sit')?.scrollTo(0, 0) }, [id])
+  const modifica = useSit((x) => (x.viste[ctx.rel] ?? VISTA0).modifica)
+  useEffect(() => { ref.current?.closest('.sit')?.scrollTo(0, 0) }, [id, modifica])
   if (!s) return <p>Questa scheda non c'è più.</p>
+  if (modifica) return <div ref={ref}><ModificaScheda key={id} ctx={ctx} id={id} esci={() => useSit.getState().imposta(ctx.rel, { modifica: false })} /></div>
   const r = ctx.dati.indice.rami[ctx.info[id]!.bi]!
   return (
     <div ref={ref} data-c={r.colore}>

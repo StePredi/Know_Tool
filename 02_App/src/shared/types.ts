@@ -295,6 +295,10 @@ export interface Api {
   apriFonte(dalAppunto: string, citato: string): Promise<void>
   /** apre con l'app predefinita del sistema un file dell'albero (pdf, pptx, immagine…) */
   apriFile(rel: string): Promise<void>
+  /** il testo di un file modificabile (.md, .yaml) e la sua data di modifica */
+  leggiSorgente(rel: string): Promise<SorgenteFile>
+  /** salva con copia di sicurezza; se il file è cambiato sul disco risponde «conflitto» (a meno di `forza`) */
+  salvaSorgente(rel: string, testo: string, mtimeAtteso: number, forza?: boolean): Promise<EsitoSalva>
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>
@@ -352,3 +356,10 @@ export interface Appunto {
   mancanti: string[]
   modificato: number
 }
+
+export interface SorgenteFile {
+  rel: string
+  testo: string
+  mtime: number
+}
+export type EsitoSalva = { ok: true; mtime: number } | { ok: false; conflitto: true } | { ok: false; errori: string[] }

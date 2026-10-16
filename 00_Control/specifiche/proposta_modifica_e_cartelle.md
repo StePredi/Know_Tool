@@ -105,3 +105,26 @@ Da approvare dall'utente prima di toccare codice o cartelle. Punti 3 e 4 dell'el
 - `Mappe/` per le documentazioni «Per situazioni», o le lasciamo accanto agli appunti?
 - I nomi tecnici degli autori (`leopardi`) restano minuscoli? (non si vedono nell'app)
 - Posso partire con l'elenco degli spostamenti (solo elenco, senza muovere niente)?
+
+---
+
+## Decisioni dell'utente (2026-10-16)
+
+1. Editor degli appunti: **con barra di formattazione** (non Markdown puro)
+2. Ordine: **prima le schede a moduli**, poi le cartelle
+3. **Niente cartella `Mappe/`**: i documenti utili (le mappe «Per situazioni») stanno **direttamente nella cartella dell'argomento**, accanto a Fonti, Appunti, Pratica, Schemi
+4. I nomi tecnici (id degli autori, ecc.) li scelgo io
+
+Struttura aggiornata:
+
+```
+Materia/
+  Argomento/
+    <Mappa per situazioni>/     <- documento utile, subito visibile
+    Fonti/  Appunti/  Pratica/  Schemi/
+```
+
+## Stato dei lavori
+
+- FATTO 2026-10-16: modifica delle schede «Per situazioni» a moduli e come testo YAML, con salvataggio sicuro (copia in `99_Archivio/Versioni`, ultime 10; avviso se il file è cambiato sul disco)
+- Da fare: editor degli appunti `.md` con barra di formattazione; modifica di `indice.yaml` (rami, ordine); nuova scheda / elimina; moduli per le figure; poi l'elenco degli spostamenti delle cartelle
