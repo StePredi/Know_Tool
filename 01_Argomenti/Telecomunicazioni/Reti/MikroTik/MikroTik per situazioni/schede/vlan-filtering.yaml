@@ -1,0 +1,33 @@
+id: vlan-filtering
+tipo: ricetta
+titolo: Accendere il filtro delle VLAN sul bridge
+sigla: VLAN filtering
+comando: interface bridge set vlan-filtering=yes
+frase: da bridge semplice a switch con VLAN
+fonte: Traccia configurazione switch VLAN · Vlan Filtering · Schema mikTikVlans
+parole: vlan-filtering yes bridge attivare filtro isolamento switch layer 2 tabella vlan ingress egress pvid
+quando: Quando porte e tabella sono pronte e vuoi che il bridge controlli e separi davvero le VLAN.
+fasi:
+- nome: Attiva
+  righe:
+  - codice: /interface bridge set «BRIDGE» vlan-filtering=yes
+    commento: da qui il bridge guarda i tag
+    parti:
+    - voce: vlan-filtering=yes
+      spiega: il bridge applica la tabella delle VLAN a ogni pacchetto
+    trappola: 'Fallo per ultimo, a porte e tabella già scritte. Nota: se ti colleghi proprio da una porta non ancora in tabella puoi chiuderti fuori: vedi "chiuso-fuori".'
+- nome: Controlla
+  righe:
+  - codice: /interface bridge print
+    commento: la riga del bridge deve avere vlan-filtering=yes
+segnaposto:
+  BRIDGE:
+    esempio: br-vlan20
+    spiega: nome del bridge
+varianti:
+- codice: vlan-filtering=no
+  spiega: tutte le porte tornano un unico dominio di broadcast, senza isolamento tra le VLAN
+vicine:
+- vlan-tabella
+- vlan-interfaccia
+- chiuso-fuori

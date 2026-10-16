@@ -1,0 +1,53 @@
+id: vlan-bridge-porte
+tipo: ricetta
+titolo: Creare il bridge delle VLAN e mettere le porte access e trunk
+sigla: 'Bridge VLAN: porte'
+comando: interface bridge port add pvid
+frase: access con pvid, trunk senza
+fonte: Traccia configurazione switch VLAN · Vlan Filtering · Schema mikTikVlans
+parole: vlan bridge port pvid access trunk untagged tagged switch porta accesso ether4 ether2 ether3 frame
+quando: 'Quando devi fare di un router uno switch con più VLAN: una porta verso l''altro switch (trunk) e porte verso i PC (access).'
+fasi:
+- nome: Crea il bridge
+  righe:
+  - codice: /interface bridge add name=«BRIDGE»
+    commento: il bridge che farà da switch
+- nome: Aggiungi il trunk
+  righe:
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«TRUNK»
+    commento: porta verso l'altro switch, senza pvid
+    trappola: 'Il trunk non ha pvid: i frame arrivano già con il tag e il bridge li accetta solo se la VLAN è nella tabella.'
+- nome: Aggiungi le porte access
+  righe:
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA_A» pvid=«VLAN_A»
+    commento: PC della prima VLAN
+    parti:
+    - voce: pvid=«VLAN_A»
+      spiega: tag che il bridge mette ai frame senza tag in ingresso su questa porta
+    trappola: 'Nota: senza pvid i frame senza tag finiscono nella VLAN 1 (valore predefinito), non in quella che volevi.'
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA_B» pvid=«VLAN_B»
+    commento: PC della seconda VLAN
+segnaposto:
+  BRIDGE:
+    esempio: br-vlan20
+    spiega: nome del bridge
+  TRUNK:
+    esempio: ether4
+    spiega: porta verso l'altro switch, che porta più VLAN
+  PORTA_A:
+    esempio: ether2
+    spiega: porta access della prima VLAN
+  VLAN_A:
+    esempio: '20'
+    spiega: numero della prima VLAN
+  PORTA_B:
+    esempio: ether3
+    spiega: porta access della seconda VLAN
+  VLAN_B:
+    esempio: '30'
+    spiega: numero della seconda VLAN
+varianti: []
+vicine:
+- bridge-crea
+- vlan-tabella
+- vlan-filtering

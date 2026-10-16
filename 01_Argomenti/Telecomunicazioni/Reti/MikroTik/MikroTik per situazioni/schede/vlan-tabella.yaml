@@ -1,0 +1,53 @@
+id: vlan-tabella
+tipo: ricetta
+titolo: Dire quali VLAN passano su quali porte del bridge
+sigla: Tabella delle VLAN
+comando: interface bridge vlan add
+frase: tagged tiene il tag, untagged lo toglie
+fonte: Traccia configurazione switch VLAN · Vlan Filtering · Schema mikTikVlans
+parole: vlan bridge vlan tagged untagged vlan-ids tabella cpu livello 3 trunk access appartenenza tag
+quando: Quando le porte sono già nel bridge e devi stabilire, per ogni VLAN, dove viaggia con il tag e dove senza.
+fasi:
+- nome: Prima VLAN (arriva al router)
+  righe:
+  - codice: /interface bridge vlan add bridge=«BRIDGE» tagged=«TRUNK»,«BRIDGE» untagged=«PORTA_A» vlan-ids=«VLAN_A»
+    commento: il trunk e il bridge tagged, la porta access untagged
+    parti:
+    - voce: tagged=«TRUNK»,«BRIDGE»
+      spiega: 'escono con il tag: il trunk verso l''altro switch e il bridge verso il livello 3'
+    - voce: untagged=«PORTA_A»
+      spiega: il tag viene tolto prima di uscire verso il PC
+    - voce: vlan-ids=«VLAN_A»
+      spiega: numero della VLAN a cui si riferisce la riga
+    trappola: 'Il bridge deve stare tra i tagged: senza, la VLAN non arriva al router e non puoi mettere IP né DHCP su quella VLAN.'
+- nome: Seconda VLAN (solo transito)
+  righe:
+  - codice: /interface bridge vlan add bridge=«BRIDGE» tagged=«TRUNK» untagged=«PORTA_B» vlan-ids=«VLAN_B»
+    commento: 'qui il bridge non serve: il livello 3 lo fa l''altro router'
+    trappola: 'Una riga per ogni VLAN: una VLAN che manca dalla tabella viene scartata sul trunk.'
+segnaposto:
+  BRIDGE:
+    esempio: br-vlan20
+    spiega: nome del bridge
+  TRUNK:
+    esempio: ether4
+    spiega: porta trunk
+  PORTA_A:
+    esempio: ether2
+    spiega: porta access della prima VLAN
+  VLAN_A:
+    esempio: '20'
+    spiega: numero della prima VLAN
+  PORTA_B:
+    esempio: ether3
+    spiega: porta access della seconda VLAN
+  VLAN_B:
+    esempio: '30'
+    spiega: numero della seconda VLAN
+varianti:
+- codice: /interface bridge vlan print
+  spiega: 'Nota: mostra la tabella per controllare cosa hai scritto'
+vicine:
+- vlan-bridge-porte
+- vlan-filtering
+- vlan-interfaccia

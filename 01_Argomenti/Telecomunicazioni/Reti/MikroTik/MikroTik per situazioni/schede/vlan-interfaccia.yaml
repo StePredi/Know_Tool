@@ -1,0 +1,48 @@
+id: vlan-interfaccia
+tipo: ricetta
+titolo: Dare un indirizzo IP a una VLAN per farla passare al livello 3
+sigla: Interfaccia VLAN
+comando: interface vlan add
+frase: dal livello 2 al livello 3
+fonte: Traccia configurazione switch VLAN · Vlan Filtering · Schema mikTikVlans
+parole: vlan interface vlan ip address gateway livello 3 routing dhcp server bridge vlan-id 192.168
+quando: Quando i PC di una VLAN devono avere un gateway sul router (per DHCP, routing, Internet).
+fasi:
+- nome: Crea l'interfaccia virtuale
+  righe:
+  - codice: /interface vlan add name=«NOME_VLAN» interface=«BRIDGE» vlan-id=«VLAN_A»
+    commento: l'ingresso della VLAN nel router
+    trappola: interface è il bridge, non una porta; e il bridge deve essere tra i tagged di quella VLAN nella tabella.
+- nome: Dalle un indirizzo
+  righe:
+  - codice: /ip address add address=«IP»/«PREFISSO» interface=«NOME_VLAN»
+    commento: sarà il gateway dei PC della VLAN
+    trappola: L'IP va sull'interfaccia VLAN, non sulle porte né sul bridge.
+- nome: Distribuisci gli indirizzi
+  righe:
+  - codice: '# server DHCP su «NOME_VLAN»: vedi la scheda "dhcp-server" (pool di almeno 16 indirizzi, gateway = «IP»)'
+- nome: Controlla
+  righe:
+  - codice: /ip address print
+    commento: l'indirizzo deve comparire sull'interfaccia VLAN
+segnaposto:
+  NOME_VLAN:
+    esempio: vlan20
+    spiega: nome dell'interfaccia VLAN
+  BRIDGE:
+    esempio: br-vlan20
+    spiega: nome del bridge
+  VLAN_A:
+    esempio: '20'
+    spiega: numero della VLAN
+  IP:
+    esempio: 192.168.21.254
+    spiega: 'gateway della VLAN: 192.168.(20+N).254, con N il tuo numero di registro'
+  PREFISSO:
+    esempio: '24'
+    spiega: bit di rete
+varianti: []
+vicine:
+- vlan-tabella
+- ip-porta
+- dhcp-server

@@ -1,0 +1,48 @@
+id: vlan-verifica
+tipo: ricetta
+titolo: Verificare che le VLAN funzionino e siano separate
+sigla: Test delle VLAN
+comando: ping tra VLAN
+frase: stessa VLAN sì, altra VLAN no, Internet sì
+fonte: Traccia configurazione switch VLAN · Vlan Filtering · Schema mikTikVlans
+parole: vlan test ping isolamento separazione stessa vlan altra vlan internet verifica dhcp lease
+quando: Quando hai finito di configurare e vuoi essere sicuro che ogni VLAN faccia solo quello che deve.
+fasi:
+- nome: Nella stessa VLAN
+  righe:
+  - codice: ping «IP_STESSA_VLAN»
+    commento: dal PC verso un altro PC della stessa VLAN
+    trappola: 'Se non risponde: controlla pvid della porta, riga della VLAN nella tabella e vlan-filtering.'
+- nome: Tra VLAN diverse
+  righe:
+  - codice: ping «IP_ALTRA_VLAN»
+    commento: non deve rispondere
+    trappola: 'Se risponde le VLAN non sono separate: guarda vlan-filtering=yes e che le porte siano nelle tabelle giuste.'
+- nome: Verso Internet
+  righe:
+  - codice: ping 8.8.8.8
+    commento: prima per numero
+    trappola: 'Se il numero va e il nome no, il NAT è a posto: guarda il DNS.'
+  - codice: ping «NOME_SITO»
+    commento: poi per nome
+- nome: Sul router
+  righe:
+  - codice: /ip dhcp-server lease print
+    commento: i PC devono avere un indirizzo della loro VLAN
+    trappola: 'Nota: un PC con indirizzo di un''altra rete è finito nella VLAN sbagliata: controlla il pvid della sua porta.'
+segnaposto:
+  IP_STESSA_VLAN:
+    esempio: 192.168.21.10
+    spiega: indirizzo di un altro PC della stessa VLAN
+  IP_ALTRA_VLAN:
+    esempio: 192.168.31.10
+    spiega: indirizzo di un PC dell'altra VLAN
+  NOME_SITO:
+    esempio: google.com
+    spiega: nome da risolvere
+varianti: []
+vicine:
+- test-gradini
+- vlan-internet
+- export
+- backup

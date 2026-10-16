@@ -117,3 +117,20 @@ rami:
     schede:
     - client-senza-ip
     - chiuso-fuori
+- id: b10
+  nome: VLAN
+  colore: indigo
+  lato: R
+  voci:
+  - gruppo: Costruire
+    schede:
+    - vlan-bridge-porte
+    - vlan-tabella
+    - vlan-filtering
+    - vlan-interfaccia
+  - gruppo: Collegare
+    schede:
+    - vlan-internet
+  - gruppo: Verificare
+    schede:
+    - vlan-verifica

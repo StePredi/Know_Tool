@@ -9,6 +9,7 @@ Quando una segnalazione è stata gestita, la sposto sotto «Fatte» (non la canc
 ## Da fare
 
 - 2026-10-16 · MikroTik · spostato in Telecomunicazioni/Reti/MikroTik: `02_App/tests/situazioni.test.ts` usa ancora il percorso Informatica/Reti (righe 10, 16, 37) e fallirà · (bug)
+- 2026-10-16 · MikroTik VLAN · lo schema di rete del laboratorio (VM, router, switch, trunk, ether1-4 del PDF mikTikVlansvm.drawio.pdf) non si può mostrare: le figure supportano solo lo schema pin di una scheda elettronica; serve un modello di disegno per schemi di rete · (manca)
 
 ---
 

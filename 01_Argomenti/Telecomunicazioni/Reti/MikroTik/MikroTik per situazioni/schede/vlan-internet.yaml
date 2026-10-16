@@ -1,0 +1,45 @@
+id: vlan-internet
+tipo: ricetta
+titolo: 'Far navigare la VLAN: IP verso la scuola, SNAT e route di default'
+sigla: VLAN verso Internet
+comando: ip route add 0.0.0.0/0
+frase: porta fissa, NAT, strada
+fonte: Traccia configurazione switch VLAN · Vlan Filtering · Schema mikTikVlans
+parole: vlan internet snat nat route default gateway ether1 192.168.24 uscita navigare rete scuola
+quando: Quando le VLAN funzionano e i loro PC devono raggiungere Internet passando dalla rete della scuola.
+fasi:
+- nome: Indirizzo fisso verso la scuola
+  righe:
+  - codice: /ip address add address=«IP_WAN»/«PREFISSO» interface=«PORTA_WAN»
+    commento: IP del router sulla rete della scuola
+- nome: SNAT sulla porta verso Internet
+  righe:
+  - codice: /ip firewall nat add chain=srcnat out-interface=«PORTA_WAN» action=src-nat to-addresses=«IP_WAN»
+    commento: gli IP privati escono con l'IP del router
+    trappola: out-interface è la porta verso la scuola, non la VLAN.
+- nome: Strada verso Internet
+  righe:
+  - codice: /ip route add dst-address=0.0.0.0/0 gateway=«GW»
+    commento: route di default verso il router della scuola
+    trappola: 'Senza la route di default il router non sa dove mandare i pacchetti: i PC non navigano anche se NAT e IP sono giusti.'
+segnaposto:
+  IP_WAN:
+    esempio: 192.168.24.11
+    spiega: 'IP fisso sulla rete della scuola: 192.168.24.(10+N) per Bob, 192.168.24.(80+N) per Alice'
+  PREFISSO:
+    esempio: '24'
+    spiega: bit di rete
+  PORTA_WAN:
+    esempio: ether1
+    spiega: porta verso la rete della scuola
+  GW:
+    esempio: 192.168.24.1
+    spiega: router della scuola
+varianti:
+- codice: action=masquerade
+  spiega: 'usa l''IP della porta qualunque sia: vedi la scheda "nat"'
+vicine:
+- nat
+- dns
+- test-gradini
+- vlan-verifica
