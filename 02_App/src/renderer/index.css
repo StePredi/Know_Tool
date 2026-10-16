@@ -509,3 +509,16 @@ button.s-gr { font-family: inherit; cursor: pointer; gap: 8px; padding: 0 8px 0 
 .ma-prev { border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px 18px; background: var(--surface); max-height: 75vh; overflow: auto; }
 .md-via .ma-vai { margin-left: 8px; }
 @media (max-width: 900px) { .ma-due { grid-template-columns: 1fr; } }
+
+/* galleria «+ Nuovo» */
+.gal { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.gal h3 { margin: 4px 0 8px; font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--mute); }
+.gal-g { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.gal-c { display: flex; gap: 12px; text-align: left; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); cursor: pointer; font: inherit; color: inherit; }
+.gal-c:hover:not(:disabled), .gal-c:focus-visible { border-color: var(--ink); box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+.gal-c:disabled { opacity: .55; cursor: not-allowed; }
+.gal-i { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--line2, #eef0f3); }
+.gal-t { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.gal-t strong { font-size: 14.5px; }
+.gal-t span { font-size: 13px; line-height: 1.4; color: var(--mute); }
+.gal-t em { font-size: 12.5px; font-style: normal; color: var(--warn-ink, #8a5a00); }

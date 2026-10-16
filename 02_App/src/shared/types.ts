@@ -306,6 +306,8 @@ export interface Api {
   creaNodo(padre: string, nome: string): Promise<RisultatoNodo>
   /** nuovo appunto (.md) in una cartella di studio */
   creaAppunto(padre: string, nome: string): Promise<RisultatoNodo>
+  /** nuovo documento «Per situazioni» (cartella con indice e una scheda) */
+  creaSituazioni(padre: string, nome: string): Promise<RisultatoNodo>
   rinominaNodo(rel: string, nome: string): Promise<RisultatoNodo>
   archiviaNodo(rel: string): Promise<RisultatoNodo>
   /** testi: ogni scrittura restituisce il modello aggiornato */

@@ -92,3 +92,22 @@ describe('appunti: nuovo, rinomina, archivia', () => {
     expect(g.figli[0]!.puoRinominare && g.figli[0]!.puoArchiviare).toBe(true)
   })
 })
+
+import { creaSituazioni } from '../src/main/esplora'
+import { leggiIndice, leggiSchedaSit } from '../src/shared/situazioni'
+describe('nuovo documento Per situazioni', () => {
+  it('crea indice e scheda validi, si riconosce come documento, non sovrascrive', async () => {
+    const rel = await creaSituazioni(radice, 'inglese/grammatica', 'Tempi verbali')
+    expect(rel).toBe('inglese/grammatica/Tempi verbali')
+    const ix = leggiIndice(await readFile(base('inglese', 'grammatica', 'Tempi verbali', 'indice.yaml'), 'utf8'))
+    expect(ix.errore).toBeUndefined()
+    expect(ix.indice?.rami[0]?.voci[0]?.schede).toEqual(['primo-passo'])
+    const s = leggiSchedaSit(await readFile(base('inglese', 'grammatica', 'Tempi verbali', 'schede', 'primo-passo.yaml'), 'utf8'), 'primo-passo.yaml')
+    expect(s.errore).toBeUndefined()
+    const alb = await leggiAlbero(radice)
+    const g = alb.find((n) => n.nome === 'inglese')!.figli[0]!
+    expect(g.figli.map((n) => n.tipo)).toContain('situazioni')
+    await expect(creaSituazioni(radice, 'inglese/grammatica', 'Tempi verbali')).rejects.toThrow(/Esiste già/)
+    await expect(creaSituazioni(radice, '', 'x')).rejects.toThrow()
+  })
+})

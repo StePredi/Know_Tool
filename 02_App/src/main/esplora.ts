@@ -11,6 +11,8 @@ import type { NodoArg } from '../shared/types'
 import { spostaCartella } from './repository'
 import { èSituazioni } from './situazioni'
 import { archiviaFile } from './modifica'
+import YAML from 'yaml'
+import { modelloScheda } from '../shared/modelloScheda'
 
 const BASE = '01_Argomenti'
 /** Cartelle che l'app usa per sé: non compaiono come cartelle di studio. */
@@ -301,6 +303,30 @@ export async function creaAppunto(radice: string, padre: string, nome: string): 
     throw e
   }
   return `${padre}/${n}.md`
+}
+
+/** Nuovo documento «Per situazioni»: una cartella con indice.yaml (un ramo) e una scheda da compilare. Non sovrascrive. */
+export async function creaSituazioni(radice: string, padre: string, nome: string): Promise<string> {
+  const err = nomeValido(nome)
+  if (err) throw new Error(err)
+  const n = nome.trim().replace(/\s+/g, ' ')
+  if (!padre || padre === 'italiano' || padre.startsWith('italiano/autori')) throw new Error('Il documento si crea dentro una cartella di studio.')
+  const dirPadre = cartellaDi(radice, padre)
+  if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
+  const dest = join(dirPadre, n)
+  if (await esiste(dest)) throw new Error(`Esiste già «${n}» qui.`)
+  await fs.mkdir(join(dest, 'schede'), { recursive: true })
+  const indice = {
+    modello: 'per_situazioni',
+    titolo: n,
+    centro: n.length > 18 ? n.slice(0, 17).trimEnd() + '…' : n,
+    sottotitolo: '',
+    prefissoCommento: '#',
+    rami: [{ id: 'primo-ramo', nome: 'Primo ramo', colore: 'blue', lato: 'R', voci: [{ schede: ['primo-passo'] }] }]
+  }
+  await fs.writeFile(join(dest, 'indice.yaml'), YAML.stringify(indice, { lineWidth: 0 }), 'utf8')
+  await fs.writeFile(join(dest, 'schede', 'primo-passo.yaml'), modelloScheda('ricetta', 'primo-passo', 'Primo passo'), 'utf8')
+  return `${padre}/${n}`
 }
 
 function sostituisciCampo(md: string, chiave: string, valore: string): string {

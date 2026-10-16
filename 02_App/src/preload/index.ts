@@ -26,6 +26,7 @@ const api: Api = {
   archiviaFile: (rel) => ipcRenderer.invoke('modifica:archivia', rel),
   apriFile: (rel) => ipcRenderer.invoke('appunti:apriFile', rel),
   apriFonte: (dal, citato) => ipcRenderer.invoke('appunti:apri', dal, citato),
+  creaSituazioni: (p, n) => ipcRenderer.invoke('albero:creaSituazioni', p, n),
   creaAppunto: (p, n) => ipcRenderer.invoke('albero:creaAppunto', p, n),
   creaNodo: (p, n) => ipcRenderer.invoke('albero:crea', p, n),
   rinominaNodo: (r, n) => ipcRenderer.invoke('albero:rinomina', r, n),

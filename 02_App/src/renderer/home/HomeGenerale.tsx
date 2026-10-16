@@ -5,6 +5,8 @@ import { Modale, primario, secondario } from '../editor/ui'
 import { useEditor } from '../editor/stato'
 import { useStore } from '../store'
 import { Albero, ICONA_NODO } from './Albero'
+import { Galleria } from './Galleria'
+import type { IdModello } from './modelli'
 import { daModificare } from '../appunti/VistaAppunto'
 import { antenati, èDocumento, idScheda, tutti, trova, useHome } from './stato'
 
@@ -103,7 +105,7 @@ function Vuota({ testo, onClick, icona = 'piu' }: { testo: string; onClick: () =
 
 // ------------------------------------------------------------------ finestre
 
-type Dialogo = { tipo: 'nuova'; padre: string; materia: boolean } | { tipo: 'nuovoAppunto'; padre: string } | { tipo: 'rinomina'; n: NodoArg } | { tipo: 'archivia'; n: NodoArg } | null
+type Dialogo = { tipo: 'nuova'; padre: string; materia: boolean } | { tipo: 'nuovaSit'; padre: string } | { tipo: 'nuovoAppunto'; padre: string } | { tipo: 'rinomina'; n: NodoArg } | { tipo: 'archivia'; n: NodoArg } | null
 
 function ChiediNome(props: { titolo: string; etichetta: string; iniziale: string; conferma: string; chiudi: () => void; fai: (nome: string) => Promise<void> }) {
   const [v, setV] = useState(props.iniziale)
@@ -195,7 +197,7 @@ export function HomeGenerale() {
   const h = useHome()
   const modello = useStore((s) => s.modello)
   const [dlg, setDlg] = useState<Dialogo>(null)
-  const [menuNuovo, setMenuNuovo] = useState(false)
+  const [galleria, setGalleria] = useState(false)
   const attuale = h.percorso ? trova(h.albero, h.percorso) : null
   const radice = !h.percorso
   const sel = h.sel ? trova(h.albero, h.sel) : null
@@ -228,7 +230,14 @@ export function HomeGenerale() {
   const recenti = h.recenti.map((r) => trova(h.albero, r.rel)).filter((n): n is NodoArg => !!n).slice(0, 4)
   const preferiti = h.preferiti.map((r) => trova(h.albero, r)).filter((n): n is NodoArg => !!n)
 
-  const puoAppunto = !!attuale && attuale.tipo === 'cartella' && !attuale.rel.startsWith('italiano') || (!!attuale && attuale.tipo === 'materia' && attuale.rel !== 'italiano')
+  const scegliModello = (id: IdModello): void => {
+    setGalleria(false)
+    if (id === 'materia') setDlg({ tipo: 'nuova', padre: '', materia: true })
+    else if (id === 'cartella' && attuale) setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false })
+    else if (id === 'appunti' && attuale) setDlg({ tipo: 'nuovoAppunto', padre: attuale.rel })
+    else if (id === 'situazioni' && attuale) setDlg({ tipo: 'nuovaSit', padre: attuale.rel })
+    else if (id === 'testo') void nuovoTesto()
+  }
 
   const nuovoTesto = async (): Promise<void> => {
     if (!attuale?.autoreId) return
@@ -319,17 +328,7 @@ export function HomeGenerale() {
               </select>
             </>
           )}
-          <div style={{ position: 'relative' }}>
-            <button type="button" className="hd-b on" aria-haspopup="menu" aria-expanded={menuNuovo} onClick={() => setMenuNuovo((v) => !v)}><Con i="piu">Nuovo</Con></button>
-            {menuNuovo && (
-              <div role="menu" className="pop" style={{ left: 'auto', right: 0, width: 210, padding: 6 }} onMouseLeave={() => setMenuNuovo(false)}>
-                <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38 }} onClick={() => { setMenuNuovo(false); setDlg({ tipo: 'nuova', padre: '', materia: true }) }}><Icona nome="libro" size={15} /> Nuova materia</button>
-                <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38, opacity: attuale && attuale.tipo !== 'autore' && attuale.rel !== 'italiano/autori' ? 1 : 0.45 }} disabled={!attuale || attuale.tipo === 'autore' || attuale.rel === 'italiano/autori'} onClick={() => { setMenuNuovo(false); if (attuale) setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false }) }}><Icona nome="cartella" size={15} /> Nuova cartella qui</button>
-                <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38, opacity: puoAppunto ? 1 : 0.45 }} disabled={!puoAppunto} onClick={() => { setMenuNuovo(false); if (attuale) setDlg({ tipo: 'nuovoAppunto', padre: attuale.rel }) }}><Icona nome="testo" size={15} /> Nuovo appunto qui</button>
-                <button role="menuitem" type="button" className="alb-r" style={{ minHeight: 38, opacity: attuale?.tipo === 'autore' ? 1 : 0.45 }} disabled={attuale?.tipo !== 'autore'} onClick={() => { setMenuNuovo(false); void nuovoTesto() }}><Icona nome="testo" size={15} /> Nuovo testo qui</button>
-              </div>
-            )}
-          </div>
+          <button type="button" className="hd-b on" aria-haspopup="dialog" onClick={() => setGalleria(true)}><Con i="piu">Nuovo</Con></button>
         </div>
         <div className="ed-scroll" style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: '20px 22px 40px' }} onMouseDown={(e) => { if (e.target === e.currentTarget && h.sel) h.imposta({ sel: null }) }}>
           {contenuto}
@@ -340,6 +339,17 @@ export function HomeGenerale() {
         <ChiediNome titolo={dlg.materia ? 'Nuova materia' : 'Nuova cartella'} etichetta="Nome" iniziale="" conferma="Crea" chiudi={() => setDlg(null)} fai={async (nome) => {
           const rel = await dopo(window.api.creaNodo(dlg.padre, nome))
           if (rel) { useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, ...(dlg.padre ? { [dlg.padre]: true } : {}) } }); useHome.getState().vai(rel) }
+        }} />
+      )}
+      {galleria && <Galleria contesto={{ tipo: attuale?.tipo ?? null, rel: attuale?.rel ?? '' }} dove={attuale?.nome ?? ''} scegli={scegliModello} chiudi={() => setGalleria(false)} />}
+      {dlg?.tipo === 'nuovaSit' && (
+        <ChiediNome titolo="Nuovo documento «Per situazioni»" etichetta="Nome del documento" iniziale="" conferma="Crea" chiudi={() => setDlg(null)} fai={async (nome) => {
+          const rel = await dopo(window.api.creaSituazioni(dlg.padre, nome))
+          if (rel) {
+            useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, [dlg.padre]: true } })
+            const n = trova(useHome.getState().albero, rel)
+            if (n) useHome.getState().apri(n)
+          }
         }} />
       )}
       {dlg?.tipo === 'nuovoAppunto' && (
