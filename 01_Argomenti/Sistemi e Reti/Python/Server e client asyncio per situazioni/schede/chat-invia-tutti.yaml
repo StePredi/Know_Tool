@@ -19,8 +19,13 @@ fasi:
                       await writer.drain()
                   except ConnectionError:         # quel client si è appena disconnesso
                       pass
-    commento: il try/except evita che un client caduto fermi l'invio agli altri
+    commento: Per ogni writer diverso dal mittente scrive il messaggio. Se un client è appena caduto, ConnectionError viene ignorato così gli altri ricevono comunque.
     trappola: 'Nota: durante l''await del drain un altro client può uscire e modificare la lista clienti mentre la stai scorrendo; per sicurezza si può scorrere una copia: for writer in list(clienti).'
+    parti:
+    - voce: writer is not mittente
+      spiega: non rimandare il messaggio a chi lo ha scritto
+    - voce: 'except ConnectionError: pass'
+      spiega: ignora il client caduto
 segnaposto: {}
 varianti: []
 vicine:

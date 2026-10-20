@@ -16,7 +16,12 @@ fasi:
           print(f"Risultato: {risultato}")
       except asyncio.TimeoutError:
           print("Operazione troppo lenta! Timeout raggiunto.")
-    commento: se passano 2 secondi senza finire, parte l'except
+    commento: wait_for dà un tempo massimo. Se l'operazione non finisce in tempo, solleva TimeoutError e viene interrotta.
+    parti:
+    - voce: wait_for(op(), timeout=2.0)
+      spiega: al massimo 2 secondi
+    - voce: except asyncio.TimeoutError
+      spiega: scaduto il tempo
 segnaposto: {}
 varianti: []
 vicine:

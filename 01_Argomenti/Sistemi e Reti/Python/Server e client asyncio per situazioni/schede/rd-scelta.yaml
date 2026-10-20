@@ -11,16 +11,31 @@ fasi:
 - nome: In base ai dati
   righe:
   - codice: await reader.readline()
-    commento: messaggi a righe (fino a \n)
+    commento: 'Messaggi a righe: la scelta più comune.'
+    parti:
+    - voce: readline()
+      spiega: fino a \n
   - codice: await reader.readuntil(b";")
-    commento: messaggi che finiscono con un separatore tuo
+    commento: Se i messaggi finiscono con un carattere speciale.
+    parti:
+    - voce: readuntil(sep)
+      spiega: fino al separatore
   - codice: await reader.readexactly(n)
-    commento: messaggi di lunghezza fissa
+    commento: Se ogni messaggio ha lunghezza nota.
+    parti:
+    - voce: readexactly(n)
+      spiega: n byte precisi
   - codice: await reader.read(n)
-    commento: quello che è arrivato, fino a n byte
+    commento: Per leggere quello che c'è senza aspettare.
+    parti:
+    - voce: read(n)
+      spiega: fino a n byte
   - codice: await reader.read()
-    commento: tutto fino alla chiusura
+    commento: Per leggere tutto fino alla fine della connessione.
     trappola: 'Nota: il client sceglie la lettura che corrisponde a come il server manda i dati.'
+    parti:
+    - voce: read()
+      spiega: fino alla chiusura
 segnaposto: {}
 varianti: []
 vicine:

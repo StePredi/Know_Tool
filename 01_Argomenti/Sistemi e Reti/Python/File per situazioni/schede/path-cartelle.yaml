@@ -11,8 +11,13 @@ fasi:
 - nome: Crea
   righe:
   - codice: Path("log/2026").mkdir(parents=True, exist_ok=True)
-    commento: parents=True crea anche le cartelle intermedie; exist_ok=True non dà errore se c'è già
+    commento: mkdir crea la cartella. Le due opzioni evitano gli errori più comuni.
     trappola: Senza exist_ok=True, una cartella già esistente dà FileExistsError.
+    parti:
+    - voce: parents=True
+      spiega: crea anche le cartelle mancanti sopra (log/ e 2026/)
+    - voce: exist_ok=True
+      spiega: nessun errore se esiste già
 segnaposto: {}
 varianti: []
 vicine:

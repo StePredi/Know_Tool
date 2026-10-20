@@ -11,7 +11,10 @@ fasi:
 - nome: Convenzione
   righe:
   - codice: self._cache = {}
-    commento: un solo underscore = "uso interno, può cambiare senza preavviso"
+    commento: Per convenzione il nome che comincia con un underscore dice "non usarlo da fuori".
+    parti:
+    - voce: self._cache
+      spiega: attributo interno
 - nome: Name mangling
   righe:
   - codice: |-
@@ -25,8 +28,15 @@ fasi:
                   self.items_list.append(item)
 
           __update = update
-    commento: '__update diventa _Mapping__update: una sottoclasse può cambiare update() senza rompere __init__'
+    commento: 'Con due underscore Python cambia il nome (name mangling): __update diventa _Mapping__update. Così una sottoclasse può ridefinire update() senza rompere __init__.'
     trappola: 'Non è una vera protezione: si può comunque accedere all''attributo con il nome modificato.'
+    parti:
+    - voce: self.__update(iterable)
+      spiega: chiama la copia privata
+    - voce: def update
+      spiega: metodo pubblico, che le sottoclassi possono cambiare
+    - voce: __update = update
+      spiega: copia privata di update
 segnaposto: {}
 varianti: []
 vicine:

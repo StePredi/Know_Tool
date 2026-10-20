@@ -19,7 +19,14 @@ fasi:
           else:
               print(arg, 'has', len(f.readlines()), 'lines')
               f.close()
-    commento: 'il codice nell''else non è protetto dal try: non cattura per sbaglio errori che non erano previsti'
+    commento: Se open() va a buon fine si esegue l'else; altrimenti l'except. Nell'else stanno le istruzioni da fare solo con successo.
+    parti:
+    - voce: 'except OSError:'
+      spiega: il file non si apre
+    - voce: 'else:'
+      spiega: solo se il try è andato bene
+    - voce: len(f.readlines())
+      spiega: numero di righe del file
 - nome: 'finally: in ogni caso'
   righe:
   - codice: |-
@@ -32,8 +39,15 @@ fasi:
               print("result is", result)
           finally:
               print("executing finally clause")
-    commento: il finally gira sempre, con o senza errore
+    commento: 'Tre rami diversi: errore previsto (except), nessun errore (else), e il finally che gira sempre.'
     trappola: Se l'errore non è gestito, il finally gira comunque e poi l'errore viene rilanciato.
+    parti:
+    - voce: 'except ZeroDivisionError:'
+      spiega: divisione per zero
+    - voce: 'else:'
+      spiega: solo se non c'è stato errore
+    - voce: 'finally:'
+      spiega: sempre, anche con un errore non gestito
 segnaposto: {}
 varianti: []
 vicine:

@@ -11,19 +11,30 @@ fasi:
 - nome: Unire e ripetere
   righe:
   - codice: 3 * 'un' + 'ium'
-    commento: '* ripete, + unisce: ''unununium'''
+    commento: + unisce due stringhe, * le ripete.
+    parti:
+    - voce: 3 * 'un'
+      spiega: '''ununun'''
+    - voce: + 'ium'
+      spiega: si attacca alla fine
   - codice: |-
       prefix = 'Py'
       prefix + 'thon'
-    commento: con una variabile serve il +
+    commento: Con una variabile devi usare il +.
     trappola: Due testi scritti per esteso uno accanto all'altro ('Py' 'thon') si uniscono da soli; con una variabile, prefix 'thon' dà SyntaxError.
+    parti:
+    - voce: prefix + 'thon'
+      spiega: '''Python'''
 - nome: Cambiare un carattere
   righe:
   - codice: |-
       word = 'Python'
       'J' + word[1:]
-    commento: 'costruisci una stringa nuova: ''Jython'''
+    commento: 'Le stringhe non si modificano: per cambiarle ne costruisci una nuova.'
     trappola: 'word[0] = ''J'' dà TypeError: le stringhe sono immutabili e non si cambiano sul posto.'
+    parti:
+    - voce: '''J'' + word[1:]'
+      spiega: '''J'' più tutto da ''y'' in poi'
 segnaposto: {}
 varianti: []
 vicine:

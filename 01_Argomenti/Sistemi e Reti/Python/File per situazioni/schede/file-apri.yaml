@@ -11,12 +11,22 @@ fasi:
 - nome: Apri
   righe:
   - codice: f = open("filename", "w", encoding="utf-8")
-    commento: il primo argomento è il nome, il secondo il modo, poi la codifica
+    commento: open() collega il programma a un file sul disco e restituisce un oggetto file (qui f) su cui leggere o scrivere.
     trappola: 'Senza encoding la codifica dipende dalla piattaforma: per i file di testo conviene scrivere encoding="utf-8".'
+    parti:
+    - voce: '"filename"'
+      spiega: nome o percorso del file
+    - voce: '"w"'
+      spiega: 'modo: scrittura (vedi scheda Modi)'
+    - voce: encoding="utf-8"
+      spiega: come trasformare i caratteri in byte
 - nome: Chiudi
   righe:
   - codice: f.close()
-    commento: libera le risorse; meglio usare with (vedi scheda dedicata)
+    commento: Chiudere libera il file; se ti dimentichi, i dati scritti possono non essere salvati. Con with lo fai senza pensarci.
+    parti:
+    - voce: f.close()
+      spiega: chiude il file
 segnaposto: {}
 varianti: []
 vicine:

@@ -13,15 +13,31 @@ fasi:
   - codice: |-
       dati = await reader.readline()
       testo = dati.decode().strip()
-    commento: da byte a stringa, senza lo \n finale
+    commento: 'I dati arrivano come byte: decode() li trasforma in testo, strip() toglie lo spazio e il \n finali.'
+    parti:
+    - voce: dati
+      spiega: byte (es. b"ciao\n")
+    - voce: .decode()
+      spiega: da byte a stringa
+    - voce: .strip()
+      spiega: toglie spazi e a capo
 - nome: Rispondi
   righe:
   - codice: |-
       risposta = testo.upper() + "\n"
       writer.write(risposta.encode())     # stringa -> bytes, messi nel buffer
       await writer.drain()                # aspetta che i dati partano davvero
-    commento: encode() torna a byte; drain() aspetta che il buffer si svuoti
+    commento: 'Si risponde in tre mosse: si prepara il testo, si trasforma in byte, si manda. Il drain() aspetta che i dati siano partiti davvero.'
     trappola: 'write() da solo non è un await: mette i dati nel buffer. Il drain() è il punto in cui la coroutine può sospendersi.'
+    parti:
+    - voce: testo.upper()
+      spiega: maiuscolo
+    - voce: + "\n"
+      spiega: serve al client che legge con readline
+    - voce: .encode()
+      spiega: da stringa a byte
+    - voce: await writer.drain()
+      spiega: attende lo svuotamento del buffer
 segnaposto: {}
 varianti: []
 vicine:

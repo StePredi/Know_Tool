@@ -16,16 +16,29 @@ fasi:
       def lavoro():
           while not stop.is_set():
               ...
-    commento: il ciclo continua finché l'evento non è impostato
+    commento: 'Il thread controlla l''evento ad ogni giro del ciclo: finché non è impostato, continua a lavorare.'
+    parti:
+    - voce: threading.Event()
+      spiega: interruttore condiviso, all'inizio spento
+    - voce: stop.is_set()
+      spiega: True se qualcuno ha chiamato set()
 - nome: Il main ferma
   righe:
   - codice: |-
       stop.set()
       t.join()
-    commento: set() alza il segnale, join() aspetta che il thread finisca
+    commento: Il main alza il segnale e aspetta che il thread finisca.
+    parti:
+    - voce: stop.set()
+      spiega: dà il segnale
+    - voce: t.join()
+      spiega: aspetta la fine del thread
   - codice: t.is_alive()
-    commento: True se il thread sta ancora girando
+    commento: Per sapere se il thread sta ancora girando.
     trappola: 'Se dentro il ciclo il thread resta bloccato (per esempio su una coda), non vede il segnale: usa un timeout.'
+    parti:
+    - voce: t.is_alive()
+      spiega: True/False
 segnaposto: {}
 varianti: []
 vicine:

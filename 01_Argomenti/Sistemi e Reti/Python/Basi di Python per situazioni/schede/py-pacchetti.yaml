@@ -19,20 +19,41 @@ fasi:
           effects/
               __init__.py
               echo.py
-    commento: ogni cartella-pacchetto ha un __init__.py, anche vuoto
+    commento: Un pacchetto è una cartella con dentro moduli e un file __init__.py (che può restare vuoto). Le sottocartelle sono sotto-pacchetti.
+    parti:
+    - voce: sound/
+      spiega: pacchetto principale
+    - voce: __init__.py
+      spiega: segna la cartella come pacchetto
+    - voce: formats/ effects/
+      spiega: sotto-pacchetti con i loro moduli
 - nome: Importare
   righe:
   - codice: |-
       import sound.effects.echo
       from sound.effects import echo
       from sound.effects.echo import echofilter
-    commento: tre modi, dal più lungo al più corto
+    commento: 'Tre modi di importare lo stesso modulo: più si accorcia il prefisso, meno scrivi dopo.'
+    parti:
+    - voce: import sound.effects.echo
+      spiega: poi serve il nome completo
+    - voce: from sound.effects import echo
+      spiega: poi basta echo.…
+    - voce: from sound.effects.echo import echofilter
+      spiega: poi basta echofilter(…)
   - codice: |-
       from . import echo
       from .. import formats
       from ..filters import equalizer
-    commento: 'import relativi: . = questo pacchetto, .. = quello sopra'
+    commento: 'Dentro un pacchetto si può importare in modo relativo: il punto parte dalla cartella del file corrente.'
     trappola: 'Gli import relativi funzionano solo dentro un pacchetto: il modulo principale deve usare import assoluti.'
+    parti:
+    - voce: from . import echo
+      spiega: dalla stessa cartella
+    - voce: from .. import formats
+      spiega: dalla cartella sopra
+    - voce: from ..filters import equalizer
+      spiega: da un pacchetto vicino
 segnaposto: {}
 varianti: []
 vicine:

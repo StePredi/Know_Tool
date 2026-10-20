@@ -16,8 +16,13 @@ fasi:
       print("Disconnesso:", indirizzo)
       writer.close()                          # chiude la connessione
       await writer.wait_closed()
-    commento: close() avvia la chiusura, wait_closed() aspetta che sia completata
+    commento: 'Chiusura in due tempi: close() avvia la chiusura, wait_closed() aspetta che sia completata.'
     trappola: 'Nota: nel chat server (04_chat_server.py) c''è solo writer.close(), senza wait_closed().'
+    parti:
+    - voce: writer.close()
+      spiega: chiude il socket
+    - voce: await writer.wait_closed()
+      spiega: attende il termine
 segnaposto: {}
 varianti: []
 vicine:

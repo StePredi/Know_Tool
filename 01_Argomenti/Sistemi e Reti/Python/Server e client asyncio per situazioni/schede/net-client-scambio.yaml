@@ -18,13 +18,25 @@ fasi:
 
           risposta = await reader.readline()
           print("Server:", risposta.decode().strip())
-    commento: il "\n" serve perché il server legge con readline
+    commento: Il client manda un messaggio e aspetta la risposta, uno alla volta.
+    parti:
+    - voce: writer.write(...encode())
+      spiega: mette il messaggio nel buffer
+    - voce: await writer.drain()
+      spiega: lo fa partire
+    - voce: await reader.readline()
+      spiega: aspetta la risposta
 - nome: Chiudi
   righe:
   - codice: |-
       writer.close()
       await writer.wait_closed()
-    commento: alla fine chiudi la connessione
+    commento: Alla fine chiudi la connessione.
+    parti:
+    - voce: close()
+      spiega: chiude
+    - voce: wait_closed()
+      spiega: aspetta
 segnaposto: {}
 varianti: []
 vicine:

@@ -11,22 +11,41 @@ fasi:
 - nome: Trasformare
   righe:
   - codice: squares = [x**2 for x in range(10)]
-    commento: equivale a un for con append
+    commento: 'Costruisce una lista in una riga: per ogni x da 0 a 9 mette x al quadrato.'
+    parti:
+    - voce: x**2
+      spiega: il valore che va nella lista
+    - voce: for x in range(10)
+      spiega: da dove vengono gli x
   - codice: |-
       vec = [-4, -2, 0, 2, 4]
       [abs(x) for x in vec]
-    commento: una funzione su ogni elemento
+    commento: Applichi una funzione a ogni elemento.
+    parti:
+    - voce: abs(x)
+      spiega: valore assoluto
 - nome: Filtrare
   righe:
   - codice: '[x for x in vec if x >= 0]'
-    commento: tiene solo gli elementi che rispettano la condizione
+    commento: Con if tieni solo gli elementi che rispettano la condizione.
+    parti:
+    - voce: if x >= 0
+      spiega: filtro
 - nome: Coppie e liste annidate
   righe:
   - codice: '[(x, x**2) for x in range(6)]'
-    commento: se l'espressione è una tupla va tra parentesi
+    commento: Per ogni numero crei una coppia (numero, quadrato).
     trappola: '[x, x**2 for x in range(6)] è un SyntaxError: la tupla (x, x**2) vuole le parentesi.'
+    parti:
+    - voce: (x, x**2)
+      spiega: 'tupla: serve la parentesi'
   - codice: '[num for elem in [[1,2,3], [4,5,6]] for num in elem]'
-    commento: 'due for di seguito: appiattisce una lista di liste'
+    commento: 'Due for di fila: il primo scorre le liste, il secondo i numeri dentro ciascuna. Il risultato è una lista unica.'
+    parti:
+    - voce: for elem in [...]
+      spiega: prima lista, poi seconda
+    - voce: for num in elem
+      spiega: elementi della lista corrente
 segnaposto: {}
 varianti: []
 vicine:

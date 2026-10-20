@@ -15,8 +15,13 @@ fasi:
           dati = json.loads(testo)
       except json.JSONDecodeError as e:
           print("JSON non valido:", e)
-    commento: si ferma solo questa parte; il resto del programma continua
+    commento: loads/load sollevano JSONDecodeError se il testo non è JSON valido (file vuoto, virgole mancanti, testo tagliato).
     trappola: 'Nota: JSONDecodeError è una sottoclasse di ValueError, quindi anche except ValueError lo cattura.'
+    parti:
+    - voce: except json.JSONDecodeError as e
+      spiega: prende solo gli errori di JSON
+    - voce: e
+      spiega: il messaggio dice dove è il problema
 segnaposto: {}
 varianti: []
 vicine:

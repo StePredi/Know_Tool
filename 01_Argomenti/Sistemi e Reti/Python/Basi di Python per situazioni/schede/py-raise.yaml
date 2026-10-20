@@ -11,7 +11,12 @@ fasi:
 - nome: Sollevare
   righe:
   - codice: raise ValueError('valore non valido')
-    commento: si può scrivere la classe (raise ValueError) o un'istanza con un messaggio
+    commento: raise interrompe il programma con un errore e un messaggio.
+    parti:
+    - voce: ValueError
+      spiega: tipo di errore
+    - voce: '''valore non valido'''
+      spiega: messaggio
 - nome: Rilanciare
   righe:
   - codice: |-
@@ -20,12 +25,20 @@ fasi:
       except NameError:
           print('An exception flew by!')
           raise
-    commento: raise da solo dentro un except fa continuare l'errore
+    commento: 'Dentro un except, raise da solo rilancia l''errore appena preso: lo vedi, lo registri, lo fai proseguire.'
+    parti:
+    - voce: 'except NameError:'
+      spiega: prende l'errore
+    - voce: raise
+      spiega: lo rilancia
 - nome: Indicare la causa
   righe:
   - codice: raise RuntimeError from exc
-    commento: collega il nuovo errore a quello che lo ha provocato
+    commento: from collega il nuovo errore a quello che lo ha causato, per capire la catena.
     trappola: from None elimina il collegamento al primo errore.
+    parti:
+    - voce: raise A from exc
+      spiega: A è stato causato da exc
 segnaposto: {}
 varianti: []
 vicine:

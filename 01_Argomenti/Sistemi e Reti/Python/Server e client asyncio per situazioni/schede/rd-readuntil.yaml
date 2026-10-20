@@ -14,7 +14,12 @@ fasi:
       for i in range(3):
           colore = await reader.readuntil(b";")
           print("readuntil(b';')   ->", colore)
-    commento: 'il server manda b"rosso;verde;blu;": tre chiamate, tre pezzi (con il ; in fondo)'
+    commento: readuntil funziona come readline ma il carattere finale lo scegli tu.
+    parti:
+    - voce: b";"
+      spiega: separatore (byte)
+    - voce: range(3)
+      spiega: 'tre chiamate: rosso; verde; blu;'
 segnaposto: {}
 varianti: []
 vicine:

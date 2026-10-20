@@ -13,14 +13,26 @@ fasi:
   - codice: |-
       with open("misure.jsonl", "a", encoding="utf-8") as f:
           f.write(json.dumps(misura) + "\n")
-    commento: una misura per riga, in fondo al file
+    commento: 'Ogni misura diventa una riga JSON: aggiungere dati è solo una riga in più in fondo al file.'
     trappola: 'Nota: formato non descritto nella documentazione di json; qui è la combinazione di dumps, modo "a" e fine riga.'
+    parti:
+    - voce: json.dumps(misura)
+      spiega: la misura come testo
+    - voce: + "\n"
+      spiega: una riga per misura
+    - voce: '"a"'
+      spiega: non cancella le righe già presenti
 - nome: Rileggi
   righe:
   - codice: |-
       with open("misure.jsonl", encoding="utf-8") as f:
           misure = [json.loads(riga) for riga in f]
-    commento: una riga = un json.loads
+    commento: Per rileggere, trasformi ogni riga in un oggetto con json.loads.
+    parti:
+    - voce: for riga in f
+      spiega: una riga per volta
+    - voce: json.loads(riga)
+      spiega: da testo a dizionario
 segnaposto: {}
 varianti: []
 vicine:

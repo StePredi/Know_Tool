@@ -13,12 +13,20 @@ fasi:
   - codice: |-
       import json
       json.dumps([1, "simple", "list"])
-    commento: '''[1, "simple", "list"]'''
+    commento: dumps trasforma un oggetto Python in testo JSON (s = string).
+    parti:
+    - voce: json.dumps(x)
+      spiega: da Python a stringa JSON
 - nome: Da testo a Python
   righe:
   - codice: 'json.loads(''["foo", {"bar": ["baz", null, 1.0, 2]}]'')'
-    commento: 'torna una lista: [''foo'', {''bar'': [''baz'', None, 1.0, 2]}]'
+    commento: loads fa il contrario. Il testo JSON diventa lista, dizionario, numeri.
     trappola: Il null di JSON diventa None; true e false diventano True e False.
+    parti:
+    - voce: json.loads(s)
+      spiega: da stringa JSON a Python
+    - voce: 'null'
+      spiega: diventa None
 segnaposto: {}
 varianti: []
 vicine:

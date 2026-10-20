@@ -13,14 +13,24 @@ fasi:
   - codice: |-
       task_a = asyncio.create_task(operazione_a())
       task_b = asyncio.create_task(operazione_b())
-    commento: le coroutine sono schedulate, ma non partono ancora
+    commento: 'create_task() avvolge la coroutine in un task e la mette in coda nell''event loop. Non la esegue ancora: serve un punto in cui il loop è libero.'
+    parti:
+    - voce: create_task(...)
+      spiega: restituisce il task
+    - voce: task_a, task_b
+      spiega: due compiti in coda
 - nome: Aspetta i risultati
   righe:
   - codice: |-
       ris_b = await task_b
       ris_a = await task_a
-    commento: con due sleep(2) il totale è 2 secondi, non 4
+    commento: 'Il primo await dà il controllo al loop: A e B partono e restano in attesa insieme. In 2 secondi sono finiti entrambi.'
     trappola: I task partono solo quando l'event loop ha un momento libero, cioè al primo await del chiamante.
+    parti:
+    - voce: await task_b
+      spiega: sospende main finché B finisce
+    - voce: await task_a
+      spiega: 'A è già finito: risultato immediato'
 segnaposto: {}
 varianti: []
 vicine:

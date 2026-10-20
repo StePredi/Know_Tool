@@ -13,14 +13,24 @@ fasi:
   - codice: |-
       task_b = asyncio.create_task(operazione_lunga("Task-B"))
       risultato_a = await operazione_lunga("Coroutine-A")
-    commento: Coroutine-A inizia per prima, anche se il task è stato creato prima
+    commento: 'Il task è in coda ma non gira finché il main non si sospende: così la coroutine A inizia per prima, anche se il task è stato creato prima.'
+    parti:
+    - voce: create_task(...)
+      spiega: il task entra in coda
+    - voce: await operazione_lunga("Coroutine-A")
+      spiega: A parte subito
 - nome: La soluzione
   righe:
   - codice: |-
       task_b = asyncio.create_task(operazione_lunga("Task-B"))
       await asyncio.sleep(0)
-    commento: 'sleep(0) cede il controllo: l''event loop esegue i task in coda, quindi Task-B inizia per primo'
+    commento: 'sleep(0) non aspetta niente: serve solo a cedere il controllo, e il loop avvia i task in coda.'
     trappola: 'Il task entra in coda: parte solo quando il codice che lo ha creato si sospende.'
+    parti:
+    - voce: await asyncio.sleep(0)
+      spiega: '"respiro" per l''event loop'
+    - voce: Task-B
+      spiega: ora parte prima di A
 segnaposto: {}
 varianti: []
 vicine:

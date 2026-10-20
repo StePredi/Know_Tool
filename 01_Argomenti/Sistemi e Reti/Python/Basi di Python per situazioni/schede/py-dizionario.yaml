@@ -14,10 +14,22 @@ fasi:
       tel = {'jack': 4098, 'sape': 4139}
       tel['guido'] = 4127
       tel['jack']
-    commento: si aggiunge o si cambia assegnando a una chiave
+    commento: Un dizionario associa chiavi a valori. Assegnando a una chiave nuova la aggiungi; leggendola con le parentesi quadre ottieni il valore.
+    parti:
+    - voce: '{''jack'': 4098, ...}'
+      spiega: 'chiave: valore'
+    - voce: tel['guido'] = 4127
+      spiega: aggiunge (o cambia) la chiave guido
+    - voce: tel['jack']
+      spiega: 'legge il valore: 4098'
   - codice: tel.get('irv')
-    commento: restituisce None (o un valore a scelta) se la chiave non c'è
+    commento: 'get() è il modo sicuro per leggere: se la chiave manca non dà errore.'
     trappola: 'tel[''irv''] dà KeyError se la chiave manca: usa get() oppure controlla prima con ''irv'' in tel.'
+    parti:
+    - voce: tel.get('irv')
+      spiega: None se la chiave non c'è
+    - voce: tel.get('irv', 0)
+      spiega: oppure un valore di riserva a tua scelta
 - nome: Togliere e controllare
   righe:
   - codice: |-
@@ -25,13 +37,26 @@ fasi:
       'guido' in tel
       list(tel)
       sorted(tel)
-    commento: del toglie, in controlla le chiavi, list e sorted elencano le chiavi
+    commento: del toglie una chiave; in controlla se una chiave c'è; list() e sorted() danno l'elenco delle chiavi.
+    parti:
+    - voce: del tel['sape']
+      spiega: elimina la chiave e il suo valore
+    - voce: '''guido'' in tel'
+      spiega: True/False sulle chiavi
+    - voce: sorted(tel)
+      spiega: chiavi in ordine alfabetico
 - nome: Costruire
   righe:
   - codice: '{x: x**2 for x in (2, 4, 6)}'
-    commento: comprehension di dizionario
+    commento: Come per le liste, una comprehension costruisce un dizionario in una riga.
+    parti:
+    - voce: '{x: x**2 for x in (2, 4, 6)}'
+      spiega: 'chiave x, valore x al quadrato → {2: 4, 4: 16, 6: 36}'
   - codice: dict(sape=4139, guido=4127, jack=4098)
-    commento: con chiavi che sono parole semplici
+    commento: dict(...) con parole semplici come chiavi evita le virgolette.
+    parti:
+    - voce: dict(sape=4139, ...)
+      spiega: 'le chiavi diventano stringhe: ''sape'', ''guido'', ''jack'''
 segnaposto: {}
 varianti: []
 vicine:

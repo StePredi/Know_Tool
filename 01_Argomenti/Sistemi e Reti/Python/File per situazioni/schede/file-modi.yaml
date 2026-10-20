@@ -11,19 +11,34 @@ fasi:
 - nome: Le lettere
   righe:
   - codice: open(nome, "r")
-    commento: solo lettura (è il modo predefinito)
+    commento: 'Il modo è una stringa breve: dice cosa vuoi fare con il file.'
+    parti:
+    - voce: '"r"'
+      spiega: 'read: leggere (predefinito); errore se il file non esiste'
   - codice: open(nome, "w")
-    commento: 'solo scrittura: un file esistente viene cancellato e riscritto'
+    commento: 'Attenzione: "w" azzera il file se esiste già.'
     trappola: Con "w" il contenuto precedente sparisce.
+    parti:
+    - voce: '"w"'
+      spiega: 'write: crea o svuota e riscrive'
   - codice: open(nome, "a")
-    commento: 'aggiunta: i dati vanno in fondo al file'
+    commento: '"a" non tocca il contenuto già presente.'
+    parti:
+    - voce: '"a"'
+      spiega: 'append: scrive in fondo; crea il file se non c''è'
   - codice: open(nome, "r+")
-    commento: lettura e scrittura insieme
+    commento: '"r+" apre senza svuotare e permette entrambe le operazioni.'
+    parti:
+    - voce: '"r+"'
+      spiega: read + write
 - nome: Testo o binario
   righe:
   - codice: open(nome, "rb")
-    commento: con b il file è letto come byte, non come testo
+    commento: Aggiungendo b si lavora con i byte invece che con il testo.
     trappola: Il modo binario si usa per file che non sono testo, come le immagini.
+    parti:
+    - voce: '"rb"'
+      spiega: 'read binary: niente codifica, restituisce bytes'
 segnaposto: {}
 varianti: []
 vicine:

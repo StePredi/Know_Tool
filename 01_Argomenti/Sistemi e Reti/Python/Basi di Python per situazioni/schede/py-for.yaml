@@ -14,18 +14,32 @@ fasi:
       words = ['cat', 'window', 'defenestrate']
       for w in words:
           print(w, len(w))
-    commento: w prende a turno ogni elemento
+    commento: 'Il for scorre una lista: ad ogni giro w contiene l''elemento successivo.'
+    parti:
+    - voce: 'for w in words:'
+      spiega: w = un elemento per giro
+    - voce: len(w)
+      spiega: lunghezza della parola
 - nome: Un certo numero di volte
   righe:
   - codice: |-
       for i in range(5):
           print(i)
-    commento: 0, 1, 2, 3, 4
+    commento: range(5) produce i numeri da 0 a 4, utile quando ti serve solo ripetere n volte.
+    parti:
+    - voce: range(5)
+      spiega: 0, 1, 2, 3, 4
   - codice: list(range(5, 10))
-    commento: 'con due numeri: da 5 a 9'
+    commento: Con due numeri range parte dal primo e arriva al secondo escluso. list() serve per vedere i valori.
+    parti:
+    - voce: range(5, 10)
+      spiega: 5, 6, 7, 8, 9
   - codice: list(range(0, 10, 3))
-    commento: 'con tre numeri: il terzo è il passo (0, 3, 6, 9)'
+    commento: Il terzo numero è il passo.
     trappola: 'L''estremo finale non fa mai parte della sequenza: range(10) genera 10 valori, da 0 a 9.'
+    parti:
+    - voce: range(0, 10, 3)
+      spiega: 0, 3, 6, 9
 segnaposto: {}
 varianti: []
 vicine:

@@ -13,23 +13,41 @@ fasi:
   - codice: |-
       def concat(*args, sep="/"):
           return sep.join(args)
-    commento: args è una tupla con tutti gli argomenti in più
+    commento: '*args raccoglie in una tupla tutti gli argomenti posizionali in più. Qui concat("a","b","c") li unisce con il separatore.'
     trappola: 'I parametri dopo *args si possono dare solo per nome: concat("a", "b", sep=".").'
+    parti:
+    - voce: '*args'
+      spiega: tupla con tutti i valori passati senza nome
+    - voce: sep="/"
+      spiega: 'dopo *args: si può dare solo per nome'
+    - voce: sep.join(args)
+      spiega: unisce le stringhe mettendo sep in mezzo
 - nome: Argomenti per nome in più
   righe:
   - codice: |-
       def cheeseshop(kind, *arguments, **keywords):
           ...
-    commento: '**keywords è un dizionario con gli argomenti per nome non previsti'
+    commento: Una funzione può avere argomenti normali, *arguments per quelli posizionali in più e **keywords per quelli con nome non previsti.
     parti:
-    - voce: '*name'
-      spiega: deve venire prima di **name
+    - voce: kind
+      spiega: argomento normale, obbligatorio
+    - voce: '*arguments'
+      spiega: tupla dei posizionali in più
+    - voce: '**keywords'
+      spiega: dizionario nome → valore degli argomenti per nome in più
 - nome: Forzare il modo di passarli
   righe:
   - codice: |-
       def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
           ...
-    commento: prima di / solo per posizione, dopo * solo per nome
+    commento: 'Con / e * si decide come si può passare ogni argomento: solo per posizione, in entrambi i modi, solo per nome.'
+    parti:
+    - voce: pos1, pos2, /
+      spiega: 'prima della barra: solo per posizione'
+    - voce: pos_or_kwd
+      spiega: 'tra / e *: per posizione o per nome'
+    - voce: '*, kwd1, kwd2'
+      spiega: 'dopo l''asterisco: solo per nome'
 segnaposto: {}
 varianti: []
 vicine:

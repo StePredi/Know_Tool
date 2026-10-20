@@ -17,8 +17,15 @@ fasi:
               break
           except ValueError:
               print("Oops!  That was no valid number.  Try again...")
-    commento: se int() fallisce si stampa un messaggio e si riprova
+    commento: 'Un ciclo che ripete la domanda finché l''utente scrive un numero valido: se int() fallisce si va nell''except, altrimenti break.'
     trappola: Un SyntaxError si vede prima di far partire il programma; le eccezioni (come ZeroDivisionError) arrivano mentre gira.
+    parti:
+    - voce: 'try:'
+      spiega: prova a eseguire
+    - voce: 'except ValueError:'
+      spiega: se c'è questo errore, fai questo
+    - voce: break
+      spiega: esce dal while quando va bene
 - nome: Più tipi di errore
   righe:
   - codice: |-
@@ -32,13 +39,25 @@ fasi:
       except Exception as err:
           print(f"Unexpected {err=}, {type(err)=}")
           raise
-    commento: si esegue solo il primo except che corrisponde; l'ultimo prende tutto il resto e rilancia con raise
+    commento: 'Si eseguono in ordine gli except: vale il primo che corrisponde al tipo di errore. L''ultimo, con Exception, prende tutto il resto.'
     trappola: 'Metti prima gli errori specifici e poi quelli generici: una classe base cattura anche le sue derivate. Meglio sempre essere il più precisi possibile.'
+    parti:
+    - voce: except OSError as err
+      spiega: file non trovato, permessi...; err contiene il messaggio
+    - voce: except ValueError
+      spiega: testo non convertibile in numero
+    - voce: except Exception as err
+      spiega: qualunque altro errore
+    - voce: raise
+      spiega: rilancia l'errore dopo averlo stampato
   - codice: |-
       except (RuntimeError, TypeError, NameError):
           pass
-    commento: più tipi nello stesso except, tra parentesi
+    commento: Più tipi di errore nello stesso except, in una tupla.
     trappola: 'Nota: il tutorial più recente scrive questa riga senza le parentesi; con le parentesi funziona in tutte le versioni.'
+    parti:
+    - voce: (RuntimeError, TypeError, NameError)
+      spiega: uno qualsiasi di questi tre
 segnaposto: {}
 varianti: []
 vicine:

@@ -11,11 +11,17 @@ fasi:
 - nome: Cosa succede
   righe:
   - codice: risultato = await task
-    commento: se il task è già finito, restituisce subito il risultato senza sospendere la coroutine
+    commento: 'Aspettare un task già terminato non sospende niente: ottieni subito il risultato.'
+    parti:
+    - voce: await task
+      spiega: istantaneo se il task è finito
   - codice: |-
       risultato2 = await task
       risultato3 = await task
-    commento: 'puoi ripetere l''await: ottieni sempre lo stesso risultato'
+    commento: Puoi farlo quante volte vuoi, il risultato è sempre lo stesso.
+    parti:
+    - voce: await task (di nuovo)
+      spiega: stesso risultato
 segnaposto: {}
 varianti: []
 vicine:

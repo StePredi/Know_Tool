@@ -11,7 +11,10 @@ fasi:
 - nome: Il problema con Lock
   righe:
   - codice: lock = threading.Lock()
-    commento: se lo stesso thread lo prende due volte di fila, rimane bloccato per sempre (deadlock)
+    commento: Con un Lock normale, un thread che lo riprende mentre ce l'ha già resta bloccato per sempre.
+    parti:
+    - voce: threading.Lock()
+      spiega: non rientrante
 - nome: La soluzione
   righe:
   - codice: |-
@@ -20,8 +23,13 @@ fasi:
       with lock:
           with lock:
               ...
-    commento: lo stesso thread può prenderlo più volte; ogni acquire richiede il suo release
+    commento: 'RLock tiene il conto: lo stesso thread può riprenderlo più volte, e va rilasciato altrettante volte.'
     trappola: Solo il thread che lo ha preso può rilasciarlo, e deve rilasciarlo tante volte quante lo ha preso.
+    parti:
+    - voce: threading.RLock()
+      spiega: rientrante
+    - voce: 'with lock: with lock:'
+      spiega: 'due acquisizioni dello stesso thread: nessun blocco'
 segnaposto: {}
 varianti: []
 vicine:

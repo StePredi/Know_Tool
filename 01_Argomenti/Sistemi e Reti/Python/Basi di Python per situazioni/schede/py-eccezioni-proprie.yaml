@@ -13,16 +13,28 @@ fasi:
   - codice: |-
       class SogliaFuoriRange(Exception):
           pass
-    commento: una classe che deriva da Exception
+    commento: 'Un errore tuo è una classe che deriva da Exception: basta anche solo pass, il nome basta a distinguerlo.'
     trappola: 'Nota: codice di esempio scritto qui. Secondo il tutorial le eccezioni derivano da Exception e il nome di solito finisce con "Error" (per esempio SogliaFuoriRangeError).'
+    parti:
+    - voce: 'class SogliaFuoriRange(Exception):'
+      spiega: nuovo tipo di errore, figlio di Exception
+    - voce: pass
+      spiega: nessun contenuto extra
 - nome: Usa
   righe:
   - codice: |-
-      raise SogliaFuoriRange('valore fuori range')
-      # ...
+      try:
+          raise SogliaFuoriRange('valore fuori range')
       except SogliaFuoriRange as e:
           print(e)
-    commento: si solleva con raise e si prende con except
+    commento: Lo sollevi con raise e lo prendi con except, come un errore normale di Python.
+    parti:
+    - voce: raise SogliaFuoriRange(...)
+      spiega: crea l'errore con un messaggio e interrompe il flusso
+    - voce: 'except SogliaFuoriRange as e:'
+      spiega: prende solo questo tipo di errore
+    - voce: print(e)
+      spiega: stampa il messaggio
 segnaposto: {}
 varianti: []
 vicine:

@@ -11,20 +11,34 @@ fasi:
 - nome: Apici dentro il testo
   righe:
   - codice: '''doesn\''t'''
-    commento: con l'apice singolo si fa l'escape con \
+    commento: Se il testo contiene un apice puoi scriverlo con \ davanti.
+    parti:
+    - voce: \'
+      spiega: apice dentro il testo
   - codice: '"doesn''t"'
-    commento: oppure si usano le virgolette doppie
+    commento: Oppure racchiudi il testo tra virgolette doppie.
+    parti:
+    - voce: '"..."'
+      spiega: così l'apice non dà problemi
 - nome: A capo
   righe:
   - codice: |-
       s = 'First line.\nSecond line.'
       print(s)
-    commento: '\n è l''a capo: lo vedi solo con print()'
+    commento: \n significa a capo. Nell'interprete lo vedi come \n, con print() come vera riga nuova.
+    parti:
+    - voce: \n
+      spiega: a capo
+    - voce: print(s)
+      spiega: lo mostra
 - nome: Backslash nei percorsi
   righe:
   - codice: print(r'C:\this\name')
-    commento: con la r davanti (stringa grezza) i backslash restano così come sono
+    commento: 'r davanti al testo: raw. I backslash non vengono interpretati, utile per i percorsi Windows.'
     trappola: Senza la r, \t diventa una tabulazione e \n un a capo. Una stringa grezza non può finire con un numero dispari di backslash.
+    parti:
+    - voce: r'...'
+      spiega: stringa grezza
 - nome: Più righe
   righe:
   - codice: |-
@@ -32,7 +46,12 @@ fasi:
       Usage: thingy [OPTIONS]
            -h    Display this usage message
       """)
-    commento: il testo tra tre virgolette va a capo come è scritto; il \ finale toglie il primo a capo
+    commento: Tre virgolette per testo su più righe. Il \ finale toglie il primo a capo.
+    parti:
+    - voce: '"""...."""'
+      spiega: più righe
+    - voce: \
+      spiega: 'a fine riga: non andare a capo'
 segnaposto: {}
 varianti: []
 vicine:

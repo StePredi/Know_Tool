@@ -13,16 +13,30 @@ fasi:
   - codice: |-
       def ask_ok(prompt, retries=4, reminder='Please try again!'):
           ...
-    commento: retries e reminder valgono 4 e il messaggio se non li passi
+    commento: 'retries e reminder sono parametri con un valore predefinito: se chi chiama la funzione non li scrive, Python usa questi. Quelli senza valore (prompt) sono obbligatori.'
     trappola: 'I valori predefiniti sono calcolati una volta sola, alla definizione: con liste e dizionari è una trappola (vedi la scheda sul default mutabile).'
+    parti:
+    - voce: retries=4
+      spiega: se non lo passi, vale 4
+    - voce: reminder='Please try again!'
+      spiega: se non lo passi, vale questo testo
+    - voce: prompt
+      spiega: 'nessun valore predefinito: devi passarlo sempre'
 - nome: Chiamate valide
   righe:
   - codice: |-
       parrot(1000)
       parrot(voltage=1000000, action='VOOOOOM')
       parrot('a thousand', state='pushing up the daisies')
-    commento: si può passare per posizione, per nome, o mescolare
+    commento: 'Tre modi di chiamare la stessa funzione: solo con l''argomento obbligatorio, con argomenti per nome, o mescolando posizione e nome.'
     trappola: 'Dopo un argomento per nome non possono più venirne di posizionali: parrot(voltage=5.0, ''dead'') è un errore.'
+    parti:
+    - voce: parrot(1000)
+      spiega: solo voltage, gli altri hanno il loro valore predefinito
+    - voce: voltage=1000000, action='VOOOOOM'
+      spiega: 'per nome: l''ordine non conta più'
+    - voce: '''a thousand'', state=''pushing up the daisies'''
+      spiega: il primo per posizione, il secondo per nome
 segnaposto: {}
 varianti: []
 vicine:

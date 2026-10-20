@@ -14,7 +14,14 @@ fasi:
       task_lungo = asyncio.create_task(operazione_lunga())
       risultato_veloce = await operazione_veloce()
       risultato_lungo = await task_lungo
-    commento: l'operazione lunga procede mentre completi quella veloce; la aspetti solo alla fine
+    commento: Il task lungo parte in background mentre il main fa altro; lo aspetti solo quando serve il risultato.
+    parti:
+    - voce: create_task(operazione_lunga())
+      spiega: parte (appena il loop è libero)
+    - voce: await operazione_veloce()
+      spiega: nel frattempo il main fa questo
+    - voce: await task_lungo
+      spiega: ora aspetta il resto
 segnaposto: {}
 varianti: []
 vicine:

@@ -15,8 +15,15 @@ fasi:
       while a < n:
           print(a, end=' ')
           a, b = b, a+b
-    commento: si ripete finché a < n; dentro il ciclo a cambia
+    commento: 'Il while ripete il blocco finché la condizione è vera. Qui costruisce la serie di Fibonacci: ad ogni giro a e b avanzano di un passo.'
     trappola: 'Nota: se la condizione non cambia mai il ciclo non finisce; con while True si esce solo con break o con Ctrl+C.'
+    parti:
+    - voce: 'while a < n:'
+      spiega: 'condizione: si ripete finché è vera'
+    - voce: print(a, end=' ')
+      spiega: stampa sulla stessa riga
+    - voce: a, b = b, a+b
+      spiega: aggiorna i due valori insieme
 segnaposto: {}
 varianti: []
 vicine:

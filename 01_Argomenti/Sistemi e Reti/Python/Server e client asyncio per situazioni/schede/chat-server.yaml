@@ -20,7 +20,14 @@ fasi:
               await invia_a_tutti(f"[{nome}] {testo}\n", writer)
       except ConnectionError:
           pass                                 # il client è caduto all'improvviso
-    commento: il messaggio viene mandato con il nome davanti, [ip:porta] testo
+    commento: Il gestore legge righe finché il client resta collegato e le inoltra agli altri con il nome del mittente.
+    parti:
+    - voce: invia_a_tutti(...)
+      spiega: inoltra ai client
+    - voce: f"[{nome}] {testo}\n"
+      spiega: messaggio con mittente
+    - voce: except ConnectionError
+      spiega: client caduto all'improvviso
 segnaposto: {}
 varianti: []
 vicine:

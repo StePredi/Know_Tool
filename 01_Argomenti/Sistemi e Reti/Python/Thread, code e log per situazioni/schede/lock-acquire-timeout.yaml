@@ -18,15 +18,26 @@ fasi:
               lock.release()
       else:
           print("lock occupato")
-    commento: True se l'ha preso, False se scade il tempo
+    commento: acquire() prende il lock; con timeout aspetta al massimo quel numero di secondi. Restituisce True se ce l'ha fatta.
     trappola: 'Il release() va fatto solo se l''acquire è riuscito, e in un finally: altrimenti il lock resta preso.'
+    parti:
+    - voce: acquire(timeout=2)
+      spiega: aspetta fino a 2 secondi
+    - voce: 'finally: lock.release()'
+      spiega: rilascia il lock sempre
 - nome: Senza attendere
   righe:
   - codice: lock.acquire(blocking=False)
-    commento: ritorna subito True o False
+    commento: 'Senza attesa: o lo prendi subito o niente.'
+    parti:
+    - voce: blocking=False
+      spiega: non aspettare
   - codice: lock.release()
-    commento: su un lock non preso dà RuntimeError
+    commento: release() rilascia il lock; va chiamato solo se lo hai preso.
     trappola: 'Nota: with lock: fa acquire e release da solo, ed è la forma più sicura.'
+    parti:
+    - voce: lock.release()
+      spiega: su un lock non preso dà RuntimeError
 segnaposto: {}
 varianti: []
 vicine:

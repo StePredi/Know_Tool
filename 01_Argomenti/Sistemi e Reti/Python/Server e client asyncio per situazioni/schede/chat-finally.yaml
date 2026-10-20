@@ -15,8 +15,15 @@ fasi:
           clienti.remove(writer)               # in ogni caso lo togliamo dalla lista
           print(nome, "è uscito")
           writer.close()
-    commento: il finally gira sempre, anche dopo ConnectionError
+    commento: 'Il finally toglie sempre il writer dalla lista: sia per uscita normale sia per errore. Senza, la lista conterrebbe client morti.'
     trappola: Senza il finally, un client caduto resterebbe nell'elenco e gli invii successivi darebbero errore.
+    parti:
+    - voce: 'finally:'
+      spiega: si esegue sempre
+    - voce: clienti.remove(writer)
+      spiega: toglie il client
+    - voce: writer.close()
+      spiega: chiude la connessione
 segnaposto: {}
 varianti: []
 vicine:

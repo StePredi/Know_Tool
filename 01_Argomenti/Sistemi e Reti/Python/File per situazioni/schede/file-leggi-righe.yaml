@@ -13,18 +13,33 @@ fasi:
   - codice: |-
       for line in f:
           print(line, end="")
-    commento: 'il modo più semplice: efficiente in memoria e veloce'
+    commento: 'Il modo più semplice e comune: il file stesso è scorribile riga per riga.'
+    parti:
+    - voce: 'for line in f:'
+      spiega: una riga per giro, con il suo \n
+    - voce: end=""
+      spiega: print non aggiunge un secondo a capo
 - nome: Una riga per volta a mano
   righe:
   - codice: f.readline()
-    commento: legge una riga, con il \n finale; stringa vuota "" a fine file
+    commento: readline() legge una riga per volta, chiamandola tu.
     trappola: Una riga vuota nel file si vede come "\n", non come "".
+    parti:
+    - voce: f.readline()
+      spiega: prossima riga
+    - voce: '""'
+      spiega: file finito
 - nome: Tutte in una lista
   righe:
   - codice: |-
       list(f)
       f.readlines()
-    commento: due modi per avere tutte le righe in una lista
+    commento: Se ti serve la lista di tutte le righe.
+    parti:
+    - voce: list(f)
+      spiega: lista delle righe
+    - voce: f.readlines()
+      spiega: stessa cosa
 segnaposto: {}
 varianti: []
 vicine:

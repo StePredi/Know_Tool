@@ -16,7 +16,14 @@ fasi:
               if n % x == 0:
                   print(f"{n} equals {x} * {n//x}")
                   break
-    commento: break esce dal ciclo più interno
+    commento: 'Cerca i divisori di n: appena ne trova uno stampa la scomposizione ed esce dal ciclo interno con break, senza provare gli altri.'
+    parti:
+    - voce: range(2, n)
+      spiega: i numeri da 2 a n-1 da provare come divisori
+    - voce: n % x == 0
+      spiega: x divide n se il resto è 0
+    - voce: break
+      spiega: interrompe il for più interno e ripartono i giri di quello esterno
 - nome: Saltare
   righe:
   - codice: |-
@@ -25,7 +32,12 @@ fasi:
               print(f"Found an even number {num}")
               continue
           print(f"Found an odd number {num}")
-    commento: continue passa subito al giro successivo
+    commento: 'continue salta il resto del giro: per i numeri pari stampa e passa subito al successivo, per i dispari arriva alla seconda print.'
+    parti:
+    - voce: num % 2 == 0
+      spiega: vero per i numeri pari
+    - voce: continue
+      spiega: salta le istruzioni sotto e riparte dal giro dopo
 - nome: Sapere se non ci sono stati break
   righe:
   - codice: |-
@@ -35,8 +47,13 @@ fasi:
                   break
           else:
               print(n, 'is a prime number')
-    commento: l'else del for parte solo se il ciclo finisce senza break
+    commento: 'L''else appartiene al for: gira solo se il ciclo finisce da solo, cioè nessun divisore trovato: il numero è primo.'
     trappola: Se il ciclo viene interrotto da un break, l'else NON viene eseguito.
+    parti:
+    - voce: for ... else
+      spiega: l'else si esegue se il for finisce senza break
+    - voce: print(n, 'is a prime number')
+      spiega: qui arrivi solo se nessun x ha diviso n
 segnaposto: {}
 varianti: []
 vicine:

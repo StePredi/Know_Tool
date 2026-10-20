@@ -19,8 +19,15 @@ fasi:
               writer.write((testo + "\n").encode())
               await writer.drain()
           writer.close()
-    commento: 'input() è bloccante: eseguita in un thread non ferma l''event loop'
+    commento: 'input() blocca finché non si preme Invio, quindi la lanci in un thread con to_thread: l''event loop resta libero di ricevere messaggi.'
     trappola: Un input() diretto fermerebbe anche la ricezione dei messaggi.
+    parti:
+    - voce: asyncio.to_thread(input)
+      spiega: esegue input() in un altro thread
+    - voce: '"/quit"'
+      spiega: comando per uscire
+    - voce: writer.close()
+      spiega: chiude alla fine
 segnaposto: {}
 varianti: []
 vicine:

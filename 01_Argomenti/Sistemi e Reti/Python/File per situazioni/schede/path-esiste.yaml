@@ -11,7 +11,14 @@ fasi:
 - nome: Controlla
   righe:
   - codice: p.exists()
-    commento: esiste (file o cartella)
+    commento: Tre domande al percorso, sempre con risposta True/False.
+    parti:
+    - voce: exists()
+      spiega: c'è qualcosa
+    - voce: is_file()
+      spiega: è un file
+    - voce: is_dir()
+      spiega: è una cartella
   - codice: p.is_file()
     commento: esiste ed è un file
   - codice: p.is_dir()

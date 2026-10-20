@@ -13,15 +13,26 @@ fasi:
   - codice: |-
       async def scarica_file(nome):
           ...
-    commento: 1. scrivi le coroutine dei compiti concorrenti
+    commento: 'Primo passo: scrivi le coroutine dei compiti che devono andare insieme.'
+    parti:
+    - voce: async def scarica_file(nome)
+      spiega: un compito
   - codice: |-
       async def main():
           task1 = asyncio.create_task(scarica_file("file1.txt"))
           task2 = asyncio.create_task(scarica_file("file2.txt"))
           risultati = await asyncio.gather(task1, task2)
-    commento: 2. una coroutine principale crea i task e li aspetta
+    commento: 'Secondo passo: una coroutine main crea un task per ogni compito e li aspetta con gather.'
+    parti:
+    - voce: create_task(...)
+      spiega: mette il compito in coda
+    - voce: gather(task1, task2)
+      spiega: aspetta che finiscano tutti
   - codice: asyncio.run(main())
-    commento: 3. avvia l'event loop con la principale
+    commento: 'Terzo passo: avvii l''event loop con main.'
+    parti:
+    - voce: asyncio.run(main())
+      spiega: 'solo in un programma; nel notebook: await main()'
 segnaposto: {}
 varianti: []
 vicine:

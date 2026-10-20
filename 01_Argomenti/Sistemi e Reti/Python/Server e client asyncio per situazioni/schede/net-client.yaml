@@ -11,7 +11,12 @@ fasi:
 - nome: Connetti
   righe:
   - codice: reader, writer = await asyncio.open_connection("127.0.0.1", 8888)
-    commento: restituisce la stessa coppia (reader, writer) che riceve il server
+    commento: Il client ottiene reader e writer con open_connection, come il server li riceve nel gestore.
+    parti:
+    - voce: open_connection(host, porta)
+      spiega: si collega al server
+    - voce: reader, writer
+      spiega: le due metà della connessione
 segnaposto: {}
 varianti: []
 vicine:

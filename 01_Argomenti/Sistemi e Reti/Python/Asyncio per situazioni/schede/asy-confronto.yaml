@@ -14,7 +14,12 @@ fasi:
       dati1 = await scarica_file("file1.txt", 2)
       dati2 = await scarica_file("file2.txt", 2)
       dati3 = await scarica_file("file3.txt", 2)
-    commento: 'tre download da 2 secondi, uno dopo l''altro: 6 secondi'
+    commento: 'Tre await uno dopo l''altro: ogni download aspetta la fine del precedente.'
+    parti:
+    - voce: await scarica_file(...)
+      spiega: esecuzione sequenziale
+    - voce: 2 + 2 + 2
+      spiega: 6 secondi
 - nome: Concorrente
   righe:
   - codice: |-
@@ -24,7 +29,12 @@ fasi:
       dati1 = await task1
       dati2 = await task2
       dati3 = await task3
-    commento: 'gli stessi tre download partono insieme: 2 secondi'
+    commento: 'Tre task creati subito, poi aspettati: durante l''attesa di uno, il loop fa partire gli altri.'
+    parti:
+    - voce: create_task x3
+      spiega: tutti in coda
+    - voce: await task1 task2 task3
+      spiega: tempo totale = il più lungo = 2 secondi
 segnaposto: {}
 varianti: []
 vicine:

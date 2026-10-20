@@ -11,18 +11,31 @@ fasi:
 - nome: Un altro nome (non una copia)
   righe:
   - codice: rgba = rgb
-    commento: 'rgba e rgb sono la STESSA lista: cambiare una cambia anche l''altra'
+    commento: 'rgba = rgb non copia niente: crea un secondo nome per la stessa lista. Se modifichi una, cambia anche l''altra.'
     trappola: 'L''assegnazione non copia: dà solo un secondo nome allo stesso oggetto.'
+    parti:
+    - voce: rgba = rgb
+      spiega: due nomi, un solo oggetto
 - nome: Una copia vera
   righe:
   - codice: |-
       correct_rgba = rgba[:]
       correct_rgba = rgba.copy()
-    commento: una fetta completa o copy() creano una copia (superficiale)
+    commento: 'Per avere una copia vera usa una fetta completa oppure copy(). È una copia "superficiale": copia la lista, non gli oggetti dentro.'
+    parti:
+    - voce: rgba[:]
+      spiega: fetta dall'inizio alla fine = nuova lista
+    - voce: rgba.copy()
+      spiega: stesso risultato, più esplicito
   - codice: |-
       x = [a, n]
       x[0][1]
-    commento: 'liste dentro liste: la copia superficiale condivide ancora le liste interne'
+    commento: 'Se la lista contiene altre liste, la copia superficiale le condivide: modificare una lista interna cambia entrambe le copie.'
+    parti:
+    - voce: x = [a, n]
+      spiega: lista che contiene la lista a
+    - voce: x[0][1]
+      spiega: secondo elemento della lista interna a
 segnaposto: {}
 varianti: []
 vicine:

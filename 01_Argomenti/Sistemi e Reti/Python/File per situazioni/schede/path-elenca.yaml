@@ -13,14 +13,25 @@ fasi:
   - codice: |-
       for x in p.iterdir():
           print(x)
-    commento: ogni file e sottocartella, in ordine non garantito
+    commento: iterdir() restituisce tutto quello che c'è dentro la cartella, un percorso alla volta.
+    parti:
+    - voce: p.iterdir()
+      spiega: file e sottocartelle
 - nome: Solo alcuni
   righe:
   - codice: sorted(p.glob("*.py"))
-    commento: i file .py della cartella
+    commento: 'glob filtra con un pattern: * significa qualsiasi testo.'
+    parti:
+    - voce: glob("*.py")
+      spiega: solo i .py della cartella
+    - voce: sorted(...)
+      spiega: mette in ordine il risultato
   - codice: sorted(p.rglob("*.py"))
-    commento: anche nelle sottocartelle
+    commento: rglob cerca anche nelle sottocartelle.
     trappola: 'Nota: l''ordine non è garantito, per questo si usa sorted().'
+    parti:
+    - voce: rglob("*.py")
+      spiega: ricorsivo
 segnaposto: {}
 varianti: []
 vicine:

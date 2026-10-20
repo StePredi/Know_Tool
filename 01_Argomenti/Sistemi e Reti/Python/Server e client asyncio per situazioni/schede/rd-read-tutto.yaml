@@ -14,7 +14,12 @@ fasi:
       print("read() in attesa della chiusura...")
       resto = await reader.read()
       print("read()            ->", resto)
-    commento: termina quando il server chiude la connessione (nell'esempio dopo 2 secondi)
+    commento: 'read() senza numero continua a leggere finché il server non chiude: restituisce tutto quello che arriva fino ad allora.'
+    parti:
+    - voce: read()
+      spiega: tutto fino alla chiusura
+    - voce: resto
+      spiega: b"secondo pezzo, ultimi dati"
 segnaposto: {}
 varianti: []
 vicine:

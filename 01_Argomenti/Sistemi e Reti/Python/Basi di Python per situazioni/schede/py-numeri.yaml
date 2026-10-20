@@ -11,16 +11,28 @@ fasi:
 - nome: Le divisioni
   righe:
   - codice: 8 / 5
-    commento: 'divisione: dà sempre un numero con la virgola (1.6)'
+    commento: / divide e dà sempre un numero con decimali.
+    parti:
+    - voce: 8 / 5
+      spiega: '1.6'
   - codice: 17 // 3
-    commento: 'divisione intera: scarta i decimali (5)'
+    commento: '// è la divisione intera: tiene solo la parte intera.'
+    parti:
+    - voce: 17 // 3
+      spiega: '5'
   - codice: 17 % 3
-    commento: resto della divisione (2)
+    commento: '% dà il resto: utile per capire se un numero è pari (n % 2 == 0).'
+    parti:
+    - voce: 17 % 3
+      spiega: '2'
 - nome: Le potenze
   righe:
   - codice: 5 ** 2
-    commento: 5 alla seconda (25)
+    commento: '** è la potenza.'
     trappola: '** ha la precedenza sul meno: -3**2 vale -9. Per avere 9 scrivi (-3)**2.'
+    parti:
+    - voce: 5 ** 2
+      spiega: '25'
 segnaposto: {}
 varianti: []
 vicine:

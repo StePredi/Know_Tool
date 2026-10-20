@@ -20,8 +20,17 @@ fasi:
           print('Single')
       else:
           print('More')
-    commento: si esegue il primo blocco la cui condizione è vera
+    commento: Python controlla le condizioni dall'alto in basso e si ferma alla prima vera. L'else prende tutto il resto.
     trappola: Possono esserci zero o più elif, e l'else è facoltativo. I blocchi si riconoscono dall'indentazione.
+    parti:
+    - voce: 'if x < 0:'
+      spiega: prima condizione
+    - voce: 'elif x == 0:'
+      spiega: altrimenti, se questa è vera
+    - voce: 'else:'
+      spiega: se nessuna è vera
+    - voce: == e <
+      spiega: == confronta, = assegna
 segnaposto: {}
 varianti: []
 vicine:

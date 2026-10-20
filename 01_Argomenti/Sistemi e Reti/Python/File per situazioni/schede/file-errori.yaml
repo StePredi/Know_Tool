@@ -18,8 +18,15 @@ fasi:
       else:
           print(arg, "has", len(f.readlines()), "lines")
           f.close()
-    commento: il programma continua anche se il file non si apre
+    commento: Se il file non si apre, open() solleva un OSError (FileNotFoundError se manca). Il try permette al programma di continuare con un messaggio.
     trappola: 'Nota: FileNotFoundError è un caso di OSError; se vuoi trattarlo a parte, mettilo prima nell''except.'
+    parti:
+    - voce: 'except OSError:'
+      spiega: file mancante, permessi negati, ecc.
+    - voce: 'else:'
+      spiega: lo esegui solo se open è andato bene
+    - voce: f.close()
+      spiega: chiusura manuale (con with non servirebbe)
 segnaposto: {}
 varianti: []
 vicine:

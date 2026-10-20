@@ -11,12 +11,20 @@ fasi:
 - nome: In un programma
   righe:
   - codice: asyncio.run(main())
-    commento: crea il loop, esegue main(), restituisce il risultato e poi chiude il loop
+    commento: asyncio.run crea l'event loop, esegue la coroutine principale fino in fondo e poi chiude il loop. Si usa una volta sola, alla fine del file.
+    parti:
+    - voce: main()
+      spiega: coroutine principale
+    - voce: asyncio.run(...)
+      spiega: avvia tutto
 - nome: In un notebook
   righe:
   - codice: await main()
-    commento: 'il notebook ha già un event loop: si scrive solo await'
+    commento: 'Nei notebook (Jupyter, Colab) il loop esiste già: basta scrivere await davanti alla coroutine.'
     trappola: asyncio.run() dentro un notebook non va bene perché il loop esiste già.
+    parti:
+    - voce: await main()
+      spiega: vale solo nel notebook
 segnaposto: {}
 varianti: []
 vicine:

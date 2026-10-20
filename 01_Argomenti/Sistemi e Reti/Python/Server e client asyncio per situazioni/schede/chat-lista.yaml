@@ -17,7 +17,14 @@ fasi:
       nome = f"{ip}:{porta}"
       clienti.append(writer)
       print(nome, "è entrato")
-    commento: il nome è ip:porta del client
+    commento: Il server tiene una lista globale con il writer di ogni client collegato. Quando arriva un messaggio la usa per inoltrarlo.
+    parti:
+    - voce: clienti = []
+      spiega: lista condivisa tra tutti i gestori
+    - voce: append(writer)
+      spiega: registra il client
+    - voce: f"{ip}:{porta}"
+      spiega: nome del client
 segnaposto: {}
 varianti: []
 vicine:

@@ -13,8 +13,13 @@ fasi:
   - codice: |-
       pezzo = await reader.read(100)
       print("read(100)         ->", pezzo, f"({len(pezzo)} byte)")
-    commento: 'il server ha mandato solo "primo pezzo" (11 byte) e poi aspetta 2 secondi: read restituisce subito quegli 11 byte'
+    commento: 'read(n) non aspetta di averne n: restituisce subito quello che c''è (al massimo n). Qui sono 11 byte di "primo pezzo".'
     trappola: 'read(n) legge FINO A n byte: non aspetta di arrivare a n.'
+    parti:
+    - voce: read(100)
+      spiega: fino a 100 byte
+    - voce: len(pezzo)
+      spiega: quanti ne sono arrivati davvero
 segnaposto: {}
 varianti: []
 vicine:

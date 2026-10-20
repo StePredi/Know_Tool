@@ -11,12 +11,24 @@ fasi:
 - nome: Posizione
   righe:
   - codice: f.tell()
-    commento: numero della posizione attuale nel file
+    commento: Il file ha una posizione corrente (cursore) che avanza leggendo o scrivendo. tell() la restituisce.
+    parti:
+    - voce: f.tell()
+      spiega: posizione in byte dall'inizio
 - nome: Spostati
   righe:
   - codice: f.seek(offset, whence)
-    commento: 'whence: 0 inizio, 1 posizione corrente, 2 fine; se manca, vale 0'
+    commento: seek() sposta il cursore. Dopo aver letto tutto puoi tornare all'inizio con seek(0).
     trappola: Nei file di testo sono permessi solo spostamenti dall'inizio (e seek(0, 2) per la fine).
+    parti:
+    - voce: offset
+      spiega: di quanto spostarsi
+    - voce: whence 0
+      spiega: dall'inizio
+    - voce: whence 1
+      spiega: dalla posizione attuale
+    - voce: whence 2
+      spiega: dalla fine
 segnaposto: {}
 varianti: []
 vicine:

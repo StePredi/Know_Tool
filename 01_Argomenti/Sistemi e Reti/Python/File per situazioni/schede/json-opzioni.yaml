@@ -11,19 +11,34 @@ fasi:
 - nome: Opzioni
   righe:
   - codice: json.dumps(dati, indent=4)
-    commento: a capo e rientro di 4 spazi
+    commento: 'indent: il JSON esce su più righe con rientro, più facile da leggere.'
+    parti:
+    - voce: indent=4
+      spiega: 4 spazi per ogni livello
   - codice: json.dumps(dati, sort_keys=True)
-    commento: chiavi in ordine alfabetico
+    commento: 'sort_keys: chiavi in ordine alfabetico, utile per confrontare due file.'
+    parti:
+    - voce: sort_keys=True
+      spiega: ordina le chiavi
   - codice: json.dumps(dati, ensure_ascii=False)
-    commento: le lettere accentate restano così come sono invece di diventare sequenze \\u
+    commento: 'ensure_ascii=False: le lettere accentate restano come sono.'
     trappola: Con ensure_ascii=False apri il file con encoding="utf-8".
+    parti:
+    - voce: ensure_ascii=False
+      spiega: altrimenti la é diventa una sequenza \u
 - nome: Cosa cambia nei tipi
   righe:
   - codice: 'json.dumps({1: "a"})'
-    commento: 'le chiavi diventano sempre stringhe: ''{"1": "a"}'''
+    commento: Il JSON ha meno tipi di Python, quindi alcuni dati cambiano nel viaggio.
+    parti:
+    - voce: '{1: "a"}'
+      spiega: chiave 1 → "1"
   - codice: json.dumps((1, 2))
-    commento: 'una tupla diventa un array: tornando indietro è una lista'
+    commento: Le tuple esistono solo in Python.
     trappola: 'Nota: per questo dati salvati e riletti non sono sempre identici agli originali.'
+    parti:
+    - voce: (1, 2)
+      spiega: diventa [1, 2] nel JSON, e lista quando lo rileggi
 segnaposto: {}
 varianti: []
 vicine:

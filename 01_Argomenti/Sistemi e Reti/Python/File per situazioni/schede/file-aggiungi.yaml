@@ -13,8 +13,13 @@ fasi:
   - codice: |-
       with open("log.txt", "a", encoding="utf-8") as f:
           f.write("nuova riga\n")
-    commento: ogni scrittura va in fondo; il contenuto precedente resta
+    commento: 'Con "a" ogni esecuzione aggiunge in fondo, senza perdere quello che c''era: utile per i log.'
     trappola: 'Nota: esempio scritto qui; il modo "a" è nella documentazione di open().'
+    parti:
+    - voce: '"a"'
+      spiega: append
+    - voce: '"nuova riga\n"'
+      spiega: il \n finale tiene separate le righe
 segnaposto: {}
 varianti: []
 vicine:

@@ -19,12 +19,26 @@ fasi:
               result.append(a)
               a, b = b, a+b
           return result
-    commento: 'la prima riga in virgolette è la docstring: descrive la funzione'
+    commento: La funzione costruisce la serie di Fibonacci fino a n e restituisce la lista dei valori trovati.
     trappola: return senza valore, o arrivare in fondo alla funzione, restituisce None.
+    parti:
+    - voce: 'def fib2(n):'
+      spiega: definisce la funzione con un parametro
+    - voce: '"""Return a list..."""'
+      spiega: 'docstring: descrive cosa fa la funzione'
+    - voce: a, b = 0, 1
+      spiega: assegna due variabili insieme
+    - voce: result.append(a)
+      spiega: aggiunge il valore alla lista
+    - voce: return result
+      spiega: restituisce la lista a chi ha chiamato
 - nome: Usa
   righe:
   - codice: fib2(100)
-    commento: il risultato si può mettere in una variabile
+    commento: 'Chiami la funzione con un valore e usi il risultato: puoi stamparlo o metterlo in una variabile.'
+    parti:
+    - voce: fib2(100)
+      spiega: lista dei numeri di Fibonacci minori di 100
 segnaposto: {}
 varianti: []
 vicine:

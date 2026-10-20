@@ -11,12 +11,18 @@ fasi:
 - nome: Leggi
   righe:
   - codice: p.read_text(encoding="utf-8")
-    commento: restituisce tutto il testo
+    commento: 'Per file piccoli: una riga che apre, legge e chiude.'
+    parti:
+    - voce: p.read_text(encoding="utf-8")
+      spiega: restituisce il testo
 - nome: Scrivi
   righe:
   - codice: p.write_text("ciao", encoding="utf-8")
-    commento: scrive il testo; se il file esiste, lo sostituisce
+    commento: Scrive il testo e chiude il file. Se c'era qualcosa, viene sostituito.
     trappola: 'Per aggiungere in fondo devi usare open(p, "a"): write_text sostituisce.'
+    parti:
+    - voce: p.write_text("ciao", ...)
+      spiega: sovrascrive il file
 segnaposto: {}
 varianti: []
 vicine:

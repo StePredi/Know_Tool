@@ -18,8 +18,17 @@ fasi:
               await server.serve_forever()
 
       asyncio.run(main())
-    commento: apre la porta e chiama gestisci_client per ogni nuovo client
+    commento: start_server apre la porta e per ogni client che si collega crea un task che esegue gestisci_client. Così più client sono serviti insieme, in un solo thread.
     trappola: 'serve_forever() non finisce mai: il server resta attivo finché non lo fermi.'
+    parti:
+    - voce: '"127.0.0.1", 8888'
+      spiega: indirizzo (solo questo PC) e porta
+    - voce: 'async with server:'
+      spiega: chiude il server in modo pulito alla fine
+    - voce: serve_forever()
+      spiega: accetta client senza mai finire
+    - voce: asyncio.run(main())
+      spiega: avvia l'event loop
 segnaposto: {}
 varianti: []
 vicine:

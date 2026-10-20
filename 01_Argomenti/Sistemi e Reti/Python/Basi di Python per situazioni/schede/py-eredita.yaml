@@ -13,20 +13,40 @@ fasi:
   - codice: |-
       class DerivedClassName(BaseClassName):
           ...
-    commento: se un attributo non c'è nella classe, Python lo cerca nella classe base, e così via
+    commento: 'Scrivi il nome della classe base tra parentesi: la nuova classe eredita tutti i suoi attributi e metodi.'
+    parti:
+    - voce: DerivedClassName
+      spiega: la classe nuova (figlia)
+    - voce: (BaseClassName)
+      spiega: la classe da cui eredita (base)
+    - voce: '...'
+      spiega: qui aggiungi o cambi solo quello che serve
 - nome: Cambiare un metodo
   righe:
   - codice: '# nella classe derivata: scrivi un metodo con lo stesso nome'
-    commento: la versione della figlia sostituisce quella della base (override)
+    commento: 'Se la figlia scrive un metodo con lo stesso nome della base, vale quello della figlia: si chiama override.'
+    parti:
+    - voce: stesso nome del metodo
+      spiega: la ricerca si ferma alla prima classe che lo ha, partendo dalla figlia
   - codice: BaseClassName.methodname(self, arguments)
-    commento: per estendere il metodo della base invece di sostituirlo
+    commento: Per aggiungere qualcosa al metodo della base, invece di sostituirlo, lo richiami esplicitamente dentro il nuovo.
     trappola: 'Nota: nel codice moderno si usa di solito super() (come in super().__init__(...) dei thread); il tutorial qui mostra BaseClassName.methodname(self, ...).'
+    parti:
+    - voce: BaseClassName.methodname
+      spiega: il metodo della base
+    - voce: self, arguments
+      spiega: l'oggetto e gli argomenti da passargli
 - nome: Controllare il tipo
   righe:
   - codice: |-
       isinstance(obj, int)
       issubclass(bool, int)
-    commento: isinstance è vero anche per le classi derivate; issubclass confronta due classi
+    commento: 'Due funzioni per controllare i tipi: la prima su un oggetto, la seconda su due classi.'
+    parti:
+    - voce: isinstance(obj, int)
+      spiega: True se obj è un int o un tipo derivato
+    - voce: issubclass(bool, int)
+      spiega: 'True: bool è figlia di int'
 segnaposto: {}
 varianti: []
 vicine:

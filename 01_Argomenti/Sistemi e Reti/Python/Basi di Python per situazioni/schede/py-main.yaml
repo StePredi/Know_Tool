@@ -14,12 +14,24 @@ fasi:
       if __name__ == "__main__":
           import sys
           fib(int(sys.argv[1]))
-    commento: il blocco gira solo se il file è eseguito direttamente
+    commento: Ogni file ha una variabile __name__. Se lo avvii direttamente vale "__main__"; se lo importi vale il nome del modulo. Così il blocco parte solo da programma.
     trappola: Se il modulo viene importato __name__ vale il nome del modulo e il blocco non parte.
+    parti:
+    - voce: __name__
+      spiega: nome del modulo in esecuzione
+    - voce: '"__main__"'
+      spiega: valore quando il file è avviato direttamente
+    - voce: sys.argv[1]
+      spiega: primo argomento scritto dopo il nome del file
 - nome: Lancialo dal terminale
   righe:
   - codice: python fibo.py 50
-    commento: sys.argv[1] contiene "50", cioè gli argomenti dopo il nome del file
+    commento: 'Da terminale: python, il nome del file e gli argomenti. Il programma riceve "50" come testo, per questo c''è int().'
+    parti:
+    - voce: fibo.py
+      spiega: file da eseguire
+    - voce: '50'
+      spiega: 'argomento: sys.argv[1]'
 segnaposto: {}
 varianti: []
 vicine:

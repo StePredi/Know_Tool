@@ -11,10 +11,20 @@ fasi:
 - nome: Cartella dello script
   righe:
   - codice: BASE = Path(__file__).resolve().parent
-    commento: la cartella che contiene il file .py
+    commento: __file__ è il percorso del file .py in esecuzione. Partendo da lì il programma trova i suoi file anche se lo lanci da un'altra cartella.
+    parti:
+    - voce: __file__
+      spiega: percorso dello script
+    - voce: .resolve()
+      spiega: lo rende assoluto
+    - voce: .parent
+      spiega: la cartella dove sta lo script
   - codice: config = BASE / "config.json"
-    commento: da qui costruisci i percorsi dei file
+    commento: Con la / costruisci il percorso di un file vicino allo script.
     trappola: 'Nota: __file__ non esiste nel notebook e nella shell interattiva.'
+    parti:
+    - voce: BASE / "config.json"
+      spiega: file config.json accanto allo script
 segnaposto: {}
 varianti: []
 vicine:

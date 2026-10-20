@@ -11,12 +11,21 @@ fasi:
 - nome: I tre comandi
   righe:
   - codice: e.set()
-    commento: 'il flag diventa True: chi aspettava con wait() riparte'
+    commento: 'set() alza il flag: chi aspettava con wait() riparte.'
+    parti:
+    - voce: e.set()
+      spiega: flag a True
   - codice: e.clear()
-    commento: 'il flag torna False: wait() ricomincia a bloccare'
+    commento: 'clear() lo abbassa: wait() torna a bloccare.'
+    parti:
+    - voce: e.clear()
+      spiega: flag a False
   - codice: e.is_set()
-    commento: dice se il flag è True
+    commento: is_set() legge il flag senza aspettare.
     trappola: Un Event all'inizio è False.
+    parti:
+    - voce: e.is_set()
+      spiega: True/False
 segnaposto: {}
 varianti: []
 vicine:

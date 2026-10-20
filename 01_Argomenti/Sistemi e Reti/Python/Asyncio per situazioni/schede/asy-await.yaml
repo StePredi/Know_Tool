@@ -16,12 +16,26 @@ fasi:
           risultato = await operazione_lenta()
           print("3. Riprendo dopo l'attesa")
           return risultato
-    commento: la coroutine si ferma, l'event loop esegue altro, poi riprende dalla riga dopo l'await
+    commento: Quando incontra await la coroutine si ferma e restituisce il controllo all'event loop, che può eseguire altro. Quando l'operazione ha finito, riparte dalla riga dopo.
+    parti:
+    - voce: print("1. Inizio")
+      spiega: prima della pausa
+    - voce: await operazione_lenta()
+      spiega: qui la coroutine si sospende
+    - voce: print("3. Riprendo...")
+      spiega: dopo l'attesa
 - nome: Regole
   righe:
   - codice: await oggetto
-    commento: 'si usa solo dentro una funzione async e solo su qualcosa di "awaitable": coroutine, Task o Future'
+    commento: 'await ha due regole: solo dentro async def, e solo su oggetti awaitable.'
     trappola: Nei thread decide il sistema operativo quando cambiare; qui decidi tu, con await.
+    parti:
+    - voce: coroutine
+      spiega: awaitable
+    - voce: Task
+      spiega: awaitable
+    - voce: Future
+      spiega: awaitable
 segnaposto: {}
 varianti: []
 vicine:

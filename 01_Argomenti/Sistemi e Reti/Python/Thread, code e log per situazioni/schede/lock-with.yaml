@@ -11,14 +11,22 @@ fasi:
 - nome: Crea il lock una volta
   righe:
   - codice: lock = threading.Lock()
-    commento: un solo lock, condiviso da tutti i thread che toccano quei dati
+    commento: 'Un Lock è un "lucchetto": un solo thread alla volta può tenerlo. Va creato una volta sola, fuori dai thread.'
+    parti:
+    - voce: threading.Lock()
+      spiega: crea il lucchetto
 - nome: Proteggi il pezzo di codice
   righe:
   - codice: |-
       with lock:
           stato["contatore"] += 1
-    commento: chi arriva dopo aspetta che il primo esca dal blocco
+    commento: Dentro with lock entra un thread alla volta; gli altri aspettano fuori. All'uscita il lock viene rilasciato da solo, anche in caso di errore.
     trappola: 'Il lock deve essere lo stesso oggetto per tutti i thread: se ognuno ne crea uno suo, non protegge nulla.'
+    parti:
+    - voce: 'with lock:'
+      spiega: acquisisce il lock ed entra
+    - voce: stato["contatore"] += 1
+      spiega: operazione che non deve essere interrotta da un altro thread
 segnaposto: {}
 varianti: []
 vicine:

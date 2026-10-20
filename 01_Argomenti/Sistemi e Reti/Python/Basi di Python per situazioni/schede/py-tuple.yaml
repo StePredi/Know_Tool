@@ -13,18 +13,32 @@ fasi:
   - codice: |-
       t = 12345, 54321, 'hello!'
       x, y, z = t
-    commento: le variabili a sinistra devono essere tante quanti gli elementi
+    commento: Una tupla raggruppa valori. Spacchettare significa assegnarli a più variabili in un colpo solo.
+    parti:
+    - voce: t = 12345, 54321, 'hello!'
+      spiega: tupla di 3 elementi
+    - voce: x, y, z = t
+      spiega: x=12345, y=54321, z='hello!'
   - codice: a, b = b, a+b
-    commento: spacchettare serve anche per assegnare più variabili insieme
+    commento: La stessa idea serve per scambiare o aggiornare due variabili insieme.
+    parti:
+    - voce: a, b = b, a+b
+      spiega: a prende il vecchio b, b prende la somma
 - nome: Casi particolari
   righe:
   - codice: |-
       singleton = 'hello',
       len(singleton)
-    commento: una tupla di un elemento vuole la virgola finale (qui vale 1)
+    commento: Una tupla di un solo elemento richiede la virgola, altrimenti sono solo parentesi o un valore normale.
     trappola: 'Le tuple non si modificano: t[0] = 88888 dà TypeError.'
+    parti:
+    - voce: '''hello'','
+      spiega: tupla con un elemento
   - codice: 0, *x, 4
-    commento: 'con * si inseriscono gli elementi di una lista: (0, 1, 2, 3, 4)'
+    commento: L'asterisco in una tupla inserisce uno per uno gli elementi di un'altra sequenza.
+    parti:
+    - voce: '*x'
+      spiega: spacchetta la lista x al suo posto
 segnaposto: {}
 varianti: []
 vicine:

@@ -16,14 +16,26 @@ fasi:
           await asyncio.sleep(2)
           print(f"Completato download di {nome}")
           return f"Contenuto di {nome}"
-    commento: async def trasforma la funzione in una coroutine; dentro dovrebbe usare await almeno una volta
+    commento: 'async def crea una coroutine: una funzione che può fermarsi con await e riprendere dopo. Qui simula un download di 2 secondi.'
+    parti:
+    - voce: async def
+      spiega: trasforma la funzione in coroutine
+    - voce: await asyncio.sleep(2)
+      spiega: pausa di 2 secondi che NON blocca il programma
+    - voce: return
+      spiega: il valore arriva a chi aspetta la coroutine
 - nome: Chiamala
   righe:
   - codice: |-
       coro = scarica_file("documento.pdf")
       print(type(coro))
-    commento: 'non stampa niente dalla funzione: ottieni solo un oggetto coroutine'
+    commento: 'Chiamare la coroutine come una funzione normale non esegue il codice: restituisce un oggetto coroutine, una "promessa" di esecuzione.'
     trappola: 'Una coroutine chiamata non parte: la deve eseguire l''event loop (vedi asy-run).'
+    parti:
+    - voce: scarica_file("documento.pdf")
+      spiega: 'nessun print: il corpo non è partito'
+    - voce: type(coro)
+      spiega: <class 'coroutine'>
 segnaposto: {}
 varianti: []
 vicine:

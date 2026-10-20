@@ -13,12 +13,20 @@ fasi:
   - codice: |-
       while not stop.wait(timeout=1.0):
           ...
-    commento: wait ritorna False dopo 1 secondo (si fa un altro giro) e True appena l'evento è impostato (il ciclo termina)
+    commento: 'wait(timeout) fa da pausa: se l''evento scatta, torna subito True; se scade il tempo torna False. Il ciclo continua finché è False.'
     trappola: 'Nota: con time.sleep(1) il thread non può essere svegliato prima; con wait sì.'
+    parti:
+    - voce: stop.wait(timeout=1.0)
+      spiega: aspetta fino a 1 secondo
+    - voce: while not ...
+      spiega: continua se è scaduto il tempo senza segnale
 - nome: Aspetta e basta
   righe:
   - codice: evento.wait()
-    commento: si blocca finché un altro thread non chiama set()
+    commento: Senza timeout aspetta finché un altro thread chiama set().
+    parti:
+    - voce: evento.wait()
+      spiega: si ferma qui
 segnaposto: {}
 varianti: []
 vicine:

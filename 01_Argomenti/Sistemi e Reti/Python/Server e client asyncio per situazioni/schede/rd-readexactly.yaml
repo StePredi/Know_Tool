@@ -13,8 +13,13 @@ fasi:
   - codice: |-
       blocco1 = await reader.readexactly(4)
       blocco2 = await reader.readexactly(4)
-    commento: 'dal b"12345678" del server: b"1234" poi b"5678"'
+    commento: readexactly(n) aspetta finché non ha ricevuto n byte. Utile per messaggi con lunghezza fissa.
     trappola: Aspetta finché ha ricevuto tutti i byte richiesti.
+    parti:
+    - voce: readexactly(4)
+      spiega: esattamente 4 byte
+    - voce: blocco1, blocco2
+      spiega: b"1234" e b"5678"
 segnaposto: {}
 varianti: []
 vicine:

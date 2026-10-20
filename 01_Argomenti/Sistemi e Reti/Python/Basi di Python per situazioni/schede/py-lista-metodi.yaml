@@ -11,22 +11,44 @@ fasi:
 - nome: Aggiungere
   righe:
   - codice: fruits.append('grape')
-    commento: in fondo alla lista
+    commento: append mette un elemento alla fine.
+    parti:
+    - voce: append(x)
+      spiega: in fondo
   - codice: fruits.insert(0, 'kiwi')
-    commento: prima della posizione indicata (0 = in testa)
+    commento: insert sceglie la posizione.
+    parti:
+    - voce: insert(0, 'kiwi')
+      spiega: all'indice 0, cioè in testa
   - codice: fruits.extend(['fig', 'lime'])
-    commento: aggiunge tutti gli elementi di un altro iterabile
+    commento: extend aggiunge uno per uno gli elementi di un'altra lista.
+    parti:
+    - voce: extend([...])
+      spiega: a differenza di append, non annida la lista
 - nome: Togliere
   righe:
   - codice: fruits.remove('apple')
-    commento: toglie il primo elemento uguale
+    commento: remove cerca il valore e toglie la prima occorrenza.
     trappola: ValueError se non c'è. Lo stesso per index().
+    parti:
+    - voce: remove('apple')
+      spiega: per valore
   - codice: fruits.pop()
-    commento: toglie e restituisce l'ultimo; con un indice, quello alla posizione indicata
+    commento: pop toglie un elemento e te lo restituisce.
+    parti:
+    - voce: pop()
+      spiega: l'ultimo
+    - voce: pop(0)
+      spiega: il primo
   - codice: |-
       del fruits[0]
       del fruits[2:4]
-    commento: toglie per posizione o per fetta, senza restituire niente
+    commento: del toglie per posizione o per fetta.
+    parti:
+    - voce: del fruits[0]
+      spiega: il primo
+    - voce: del fruits[2:4]
+      spiega: gli elementi 2 e 3
 - nome: Ordinare e contare
   righe:
   - codice: |-
@@ -34,8 +56,17 @@ fasi:
       fruits.reverse()
       fruits.count('apple')
       fruits.index('banana')
-    commento: sort e reverse cambiano la lista; count e index la interrogano
+    commento: Quattro metodi di uso comune.
     trappola: 'I metodi che modificano la lista restituiscono None: fruits = fruits.sort() la cancella.'
+    parti:
+    - voce: sort()
+      spiega: mette in ordine la lista
+    - voce: reverse()
+      spiega: la rovescia
+    - voce: count(x)
+      spiega: quante volte c'è x
+    - voce: index(x)
+      spiega: posizione di x
 segnaposto: {}
 varianti: []
 vicine:

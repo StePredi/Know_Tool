@@ -13,14 +13,25 @@ fasi:
   - codice: |-
       i = 256*256
       print('The value of i is', i)
-    commento: print mette uno spazio tra gli elementi (e va a capo)
+    commento: print accetta più valori separati da virgola e li stampa con uno spazio in mezzo.
+    parti:
+    - voce: print(a, b)
+      spiega: a e b separati da uno spazio
   - codice: print(a, end=',')
-    commento: end= cambia quello che viene stampato alla fine, al posto dell'a capo
+    commento: Con end= scegli cosa stampare alla fine, per esempio una virgola invece dell'a capo.
+    parti:
+    - voce: end=','
+      spiega: niente a capo, ma una virgola
 - nome: Leggere
   righe:
   - codice: 'x = int(input("Please enter a number: "))'
-    commento: 'input() restituisce un testo: int() lo trasforma in numero'
+    commento: input() mostra una domanda e restituisce sempre testo. Per avere un numero lo converti.
     trappola: 'Se l''utente scrive qualcosa che non è un numero, int() dà ValueError: vedi la scheda su try/except.'
+    parti:
+    - voce: input("...")
+      spiega: mostra il messaggio e aspetta Invio
+    - voce: int(...)
+      spiega: da testo a numero intero
 segnaposto: {}
 varianti: []
 vicine:

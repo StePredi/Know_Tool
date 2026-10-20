@@ -15,10 +15,20 @@ fasi:
           read_data = f.read()
 
       f.closed
-    commento: 'alla fine del blocco il file è chiuso: f.closed è True'
+    commento: Alla fine del blocco with il file si chiude da solo. Dopo, f esiste ancora ma è chiuso.
+    parti:
+    - voce: 'with open(...) as f:'
+      spiega: apre e assegna il file a f
+    - voce: read_data = f.read()
+      spiega: legge dentro il blocco
+    - voce: f.closed
+      spiega: True se il file è chiuso
   - codice: f.read()
-    commento: 'dopo il blocco dà ValueError: I/O operation on closed file.'
+    commento: Usare il file dopo il blocco è un errore.
     trappola: 'Il tutorial indica with come il modo consigliato: è più corto di try/finally e chiude anche in caso di errore.'
+    parti:
+    - voce: f.read()
+      spiega: 'ValueError: I/O operation on closed file.'
 segnaposto: {}
 varianti: []
 vicine:

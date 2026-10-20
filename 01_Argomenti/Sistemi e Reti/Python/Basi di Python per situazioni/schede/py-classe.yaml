@@ -15,14 +15,26 @@ fasi:
           def __init__(self, realpart, imagpart):
               self.r = realpart
               self.i = imagpart
-    commento: __init__ parte da sola quando crei un oggetto
+    commento: '__init__ è il costruttore: Python lo chiama da solo ogni volta che crei un oggetto, e serve a dargli i valori iniziali.'
     trappola: self è solo una convenzione per il nome del primo parametro, ma tutti i metodi lo devono avere.
+    parti:
+    - voce: 'class Complex:'
+      spiega: crea un nuovo tipo chiamato Complex
+    - voce: def __init__(self, realpart, imagpart)
+      spiega: self è l'oggetto che si sta creando; gli altri sono i dati passati
+    - voce: self.r = realpart
+      spiega: salva il dato dentro l'oggetto, come attributo
 - nome: Usa
   righe:
   - codice: |-
       x = Complex(3.0, -4.5)
       x.r, x.i
-    commento: 'si crea come una funzione, senza passare self: (3.0, -4.5)'
+    commento: Per creare un oggetto chiami la classe come una funzione. Gli attributi si leggono con il punto.
+    parti:
+    - voce: Complex(3.0, -4.5)
+      spiega: chiama __init__ con realpart=3.0 e imagpart=-4.5 (self lo mette Python)
+    - voce: x.r, x.i
+      spiega: legge gli attributi dell'oggetto x
 - nome: Metodi che usano altri metodi
   righe:
   - codice: |-
@@ -36,8 +48,15 @@ fasi:
           def addtwice(self, x):
               self.add(x)
               self.add(x)
-    commento: dentro la classe si chiamano gli altri metodi con self.
+    commento: Un metodo può chiamare un altro metodo dello stesso oggetto scrivendo self.nome(...).
     trappola: 'x.f() è identico a MyClass.f(x): l''oggetto viene passato come primo argomento.'
+    parti:
+    - voce: self.data = []
+      spiega: ogni Bag ha la sua lista
+    - voce: def add(self, x)
+      spiega: 'metodo: il primo parametro è sempre l''oggetto'
+    - voce: self.add(x)
+      spiega: addtwice riusa add due volte
 segnaposto: {}
 varianti: []
 vicine:

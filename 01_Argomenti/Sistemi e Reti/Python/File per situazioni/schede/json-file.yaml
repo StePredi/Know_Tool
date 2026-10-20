@@ -13,14 +13,24 @@ fasi:
   - codice: |-
       with open("dati.json", "w", encoding="utf-8") as f:
           json.dump(dati, f)
-    commento: scrive l'oggetto nel file come JSON
+    commento: dump scrive direttamente su un file aperto.
+    parti:
+    - voce: open(..., "w")
+      spiega: file in scrittura
+    - voce: json.dump(dati, f)
+      spiega: scrive il JSON nel file
 - nome: Carica
   righe:
   - codice: |-
       with open("dati.json", "r", encoding="utf-8") as f:
           dati = json.load(f)
-    commento: legge il file e restituisce il dizionario o la lista
+    commento: load legge il file e ricostruisce l'oggetto Python.
     trappola: 'Nota: json.dump e json.load hanno lo stesso nome senza la s di json.dumps e json.loads.'
+    parti:
+    - voce: open(..., "r")
+      spiega: file in lettura
+    - voce: json.load(f)
+      spiega: da file a oggetto Python
 segnaposto: {}
 varianti: []
 vicine:

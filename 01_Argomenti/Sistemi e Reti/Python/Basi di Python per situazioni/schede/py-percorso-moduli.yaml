@@ -13,14 +13,25 @@ fasi:
   - codice: |-
       import sys
       print(sys.path)
-    commento: elenco delle cartelle in cui Python cerca, in ordine; la prima è quella dello script
+    commento: Quando scrivi import x, Python cerca x nelle cartelle di sys.path, nell'ordine. La prima è quella dello script.
     trappola: Un tuo file con lo stesso nome di un modulo della libreria (per esempio un file socket.py o json.py) viene importato al posto di quello vero.
+    parti:
+    - voce: sys.path
+      spiega: lista di cartelle
+    - voce: print(...)
+      spiega: la mostri per capire da dove viene un import
   - codice: sys.path.append('/ufs/guido/lib/python')
-    commento: aggiunge una cartella alla ricerca, solo per questo programma
+    commento: Puoi aggiungere una cartella, ma vale solo finché il programma gira.
+    parti:
+    - voce: sys.path.append(...)
+      spiega: aggiunge un percorso in fondo
 - nome: Vedere cosa contiene un modulo
   righe:
   - codice: dir(fibo)
-    commento: 'elenco ordinato dei nomi definiti nel modulo: [''__name__'', ''fib'', ''fib2'']'
+    commento: 'dir() elenca i nomi definiti in un modulo: utile per vedere cosa contiene.'
+    parti:
+    - voce: dir(fibo)
+      spiega: nomi in ordine alfabetico
 segnaposto: {}
 varianti: []
 vicine:

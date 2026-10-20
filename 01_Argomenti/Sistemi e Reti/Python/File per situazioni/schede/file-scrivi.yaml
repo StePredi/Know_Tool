@@ -11,13 +11,23 @@ fasi:
 - nome: Scrivi una stringa
   righe:
   - codice: f.write("This is a test\n")
-    commento: 'restituisce il numero di caratteri scritti: 15'
+    commento: write() scrive una stringa e restituisce quanti caratteri ha scritto. Non aggiunge l'a capo.
+    parti:
+    - voce: f.write("...\n")
+      spiega: scrive il testo, con \n per andare a capo
+    - voce: '15'
+      spiega: numero di caratteri scritti
   - codice: |-
       value = ("the answer", 42)
       s = str(value)
       f.write(s)
-    commento: altri tipi vanno prima convertiti in stringa (o in byte, nel modo binario)
+    commento: Per scrivere qualcosa che non è testo (numero, tupla) prima lo converti con str().
     trappola: 'Per fine riga devi aggiungere tu \n: write() non lo mette.'
+    parti:
+    - voce: str(value)
+      spiega: da tupla a testo
+    - voce: f.write(s)
+      spiega: scrive il testo
 segnaposto: {}
 varianti: []
 vicine:

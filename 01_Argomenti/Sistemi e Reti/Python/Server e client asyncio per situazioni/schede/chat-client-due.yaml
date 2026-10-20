@@ -15,7 +15,10 @@ fasi:
       print("Connesso alla chat. Scrivi /quit per uscire.")
 
       await asyncio.gather(ricevi(reader, writer), invia(writer))
-    commento: le due coroutine girano in parallelo
+    commento: 'gather fa girare insieme ricevi() e invia(): il client mostra i messaggi mentre l''utente scrive.'
+    parti:
+    - voce: gather(ricevi(...), invia(...))
+      spiega: due coroutine in parallelo
 - nome: Ricevi
   righe:
   - codice: |-
@@ -28,7 +31,12 @@ fasi:
                       writer.close()
                   break
               print(dati.decode().strip())
-    commento: se il server chiude, chiudi anche tu
+    commento: ricevi() stampa quello che arriva; se il server chiude, esce e chiude anche il client.
+    parti:
+    - voce: if not dati
+      spiega: il server ha chiuso
+    - voce: writer.is_closing()
+      spiega: evita di chiudere due volte
 segnaposto: {}
 varianti: []
 vicine:

@@ -11,12 +11,20 @@ fasi:
 - nome: Tutto
   righe:
   - codice: f.read()
-    commento: 'restituisce tutto il file come una stringa (in modo binario: byte)'
+    commento: read() senza argomenti legge tutto il file in una volta.
     trappola: 'Se il file è più grande della memoria, è un problema tuo: leggilo a righe.'
+    parti:
+    - voce: f.read()
+      spiega: tutto il contenuto
 - nome: Un pezzo
   righe:
   - codice: f.read(size)
-    commento: legge al massimo size caratteri; alla fine del file restituisce una stringa vuota ""
+    commento: Con un numero legge solo una parte; il cursore avanza di quel tanto.
+    parti:
+    - voce: f.read(size)
+      spiega: al massimo size caratteri
+    - voce: '""'
+      spiega: risultato quando il file è finito
 segnaposto: {}
 varianti: []
 vicine:

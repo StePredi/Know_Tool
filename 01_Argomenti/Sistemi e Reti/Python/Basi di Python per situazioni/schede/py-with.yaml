@@ -14,8 +14,17 @@ fasi:
       with open("myfile.txt") as f:
           for line in f:
               print(line, end="")
-    commento: alla fine del blocco il file è sempre chiuso, anche se c'è stato un problema
+    commento: with apre il file e lo chiude da solo alla fine del blocco, anche in caso di errore. Dentro puoi leggere riga per riga con un for.
     trappola: Senza with il file resta aperto per un tempo indeterminato.
+    parti:
+    - voce: open("myfile.txt")
+      spiega: apre il file
+    - voce: as f
+      spiega: il file si chiama f dentro il blocco
+    - voce: for line in f
+      spiega: legge una riga alla volta
+    - voce: end=""
+      spiega: le righe hanno già il loro a capo
 segnaposto: {}
 varianti: []
 vicine:

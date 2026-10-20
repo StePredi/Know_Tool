@@ -13,21 +13,41 @@ fasi:
   - codice: |-
       word = 'Python'
       word[0]
-    commento: 'primo carattere: ''P'''
+    commento: 'Una stringa è una sequenza di caratteri numerati da 0: word[0] è il primo.'
+    parti:
+    - voce: word[0]
+      spiega: 'carattere in posizione 0: ''P'''
   - codice: word[-1]
-    commento: 'indice negativo = dalla fine: ''n'''
+    commento: 'Con numeri negativi si conta dalla fine: -1 è l''ultimo, -2 il penultimo.'
+    parti:
+    - voce: word[-1]
+      spiega: 'ultimo carattere: ''n'''
   - codice: len(word)
-    commento: numero di caratteri (6)
+    commento: 'len() dà la lunghezza: i caratteri vanno da 0 a len-1.'
+    parti:
+    - voce: len(word)
+      spiega: 6 caratteri
 - nome: Un tratto (fetta)
   righe:
   - codice: word[0:2]
-    commento: 'dalla posizione 0 (inclusa) alla 2 (esclusa): ''Py'''
+    commento: Una fetta è [da:a]. Si parte dal primo indice (incluso) e ci si ferma prima del secondo.
     trappola: 'L''ultimo indice è escluso: word[2:5] dà ''tho''.'
+    parti:
+    - voce: word[0:2]
+      spiega: posizioni 0 e 1 → 'Py'
   - codice: word[:2] + word[2:]
-    commento: senza indici si va dall'inizio o fino alla fine; insieme riformano la stringa
+    commento: Se ometti un indice si intende l'inizio o la fine. Le due fette insieme ricostruiscono la stringa.
+    parti:
+    - voce: word[:2]
+      spiega: dall'inizio alla posizione 2 esclusa
+    - voce: word[2:]
+      spiega: dalla posizione 2 alla fine
   - codice: word[4:]
-    commento: 'dalla posizione 4 alla fine: ''on'''
+    commento: Con l'inizio a 4 e senza fine ottieni gli ultimi caratteri.
     trappola: 'word[42] dà IndexError, ma le fette tollerano indici fuori misura: word[4:42] dà ''on'' e word[42:] dà ''''.'
+    parti:
+    - voce: word[4:]
+      spiega: '''on'''
 segnaposto: {}
 varianti: []
 vicine:

@@ -14,14 +14,23 @@ fasi:
       # operazioni I/O-bound: rete, database, file
       # molte connessioni simultanee
       # download/upload multipli, chiamate API concorrenti
-    commento: un solo thread che passa da un compito all'altro quando c'è un'attesa
+    commento: 'Con asyncio un solo thread passa da un compito all''altro quando uno è in attesa: è ideale quando il programma passa il tempo ad aspettare.'
+    parti:
+    - voce: I/O-bound
+      spiega: il tempo è speso ad aspettare rete, disco, database
 - nome: Non va bene per
   righe:
   - codice: '# calcoli pesanti (CPU-intensive)'
-    commento: si usa multiprocessing
+    commento: 'Per i calcoli pesanti la CPU lavora sempre: asyncio non aiuta, servono più processi.'
+    parti:
+    - voce: CPU-bound
+      spiega: multiprocessing
   - codice: '# codice semplice sequenziale'
-    commento: non serve concorrenza
+    commento: Se il programma è semplice e sequenziale non serve complicarlo.
     trappola: Con i thread la gestione è del sistema operativo e ha un costo; con asyncio le coroutine cedono il controllo da sole.
+    parti:
+    - voce: codice sequenziale
+      spiega: niente asyncio
 segnaposto: {}
 varianti: []
 vicine:

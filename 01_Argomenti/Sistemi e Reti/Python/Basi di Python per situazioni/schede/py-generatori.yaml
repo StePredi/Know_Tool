@@ -17,7 +17,14 @@ fasi:
 
       for char in reverse('golf'):
           print(char)
-    commento: 'ogni yield restituisce un valore e sospende la funzione: f l o g'
+    commento: 'Un generatore è una funzione con yield: ad ogni yield restituisce un valore e si ferma, poi riparte da lì quando il for chiede il successivo.'
+    parti:
+    - voce: range(len(data)-1, -1, -1)
+      spiega: indici dall'ultimo al primo
+    - voce: yield data[index]
+      spiega: restituisce un carattere e si sospende
+    - voce: for char in reverse('golf')
+      spiega: chiede un valore alla volta
 - nome: Con una classe (stesso risultato)
   righe:
   - codice: |-
@@ -32,8 +39,15 @@ fasi:
                   raise StopIteration
               self.index = self.index - 1
               return self.data[self.index]
-    commento: __iter__ e __next__ sono quelli che il generatore crea da solo
+    commento: 'Lo stesso risultato scritto a mano: una classe iteratore. Il generatore fa tutto questo per te.'
     trappola: 'Il generatore è più corto: __iter__() e __next__() si creano automaticamente.'
+    parti:
+    - voce: __iter__
+      spiega: restituisce l'iteratore (qui self)
+    - voce: __next__
+      spiega: dà il prossimo valore
+    - voce: raise StopIteration
+      spiega: segnala che i valori sono finiti
 segnaposto: {}
 varianti: []
 vicine:

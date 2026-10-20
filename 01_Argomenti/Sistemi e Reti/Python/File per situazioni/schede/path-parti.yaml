@@ -16,12 +16,24 @@ fasi:
       p.stem
       p.suffix
       p.parent
-    commento: misure.json  ·  misure  ·  .json  ·  /home/utente/dati
+    commento: Ogni parte del percorso è una proprietà.
+    parti:
+    - voce: p.name
+      spiega: nome del file con estensione
+    - voce: p.stem
+      spiega: nome senza estensione
+    - voce: p.suffix
+      spiega: estensione, con il punto
+    - voce: p.parent
+      spiega: cartella che lo contiene
 - nome: Percorso assoluto
   righe:
   - codice: Path("dati").resolve()
-    commento: trasforma un percorso relativo in assoluto
+    commento: resolve() trasforma un percorso relativo in assoluto (e risolve ..).
     trappola: Un percorso relativo dipende dalla cartella da cui avvii il programma.
+    parti:
+    - voce: .resolve()
+      spiega: percorso completo dalla radice
 segnaposto: {}
 varianti: []
 vicine:
