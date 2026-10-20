@@ -1,0 +1,25 @@
+id: esponenziale
+tipo: regola
+titolo: Esponenziale
+sigla: Esponenziale
+comando: e^x -> e^x
+vedo: "La x è in alto (esponente) e la base è un numero: e^x, 2^x."
+formula:
+  - (e^x)' = e^x
+  - (a^x)' = a^x*ln(a)
+adatto:
+  - Con e la funzione resta uguale.
+  - Con un'altra base a compare `ln(a)`.
+  - Se in alto non c'è solo x, vedi «Esponenziale di g».
+esempi:
+  - da: 2^x
+    passi:
+      - "Base 2: compare `ln(2)`"
+    ris: 2^x*ln(2)
+    verifica: derivata
+errore: "Usare la regola della potenza (`x*a^(x-1)`): qui la x non è la base."
+confondi:
+  - scheda: potenza
+    differenza: La x in alto è l'esponenziale, la x in basso è la potenza.
+perche: e è la base per cui la pendenza della curva è uguale all'altezza.
+parole: esponenziale x in alto e alla x

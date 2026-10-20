@@ -1,0 +1,23 @@
+id: arcoseno-arcotangente
+tipo: regola
+titolo: Arcoseno, arcotangente
+sigla: Arcoseno, arcotangente
+comando: arctan x -> 1/(1+x^2)
+vedo: arcsin x, arccos x, arctan x.
+formula:
+  - (arcsin x)' = frac(1|sqrt(1-x^2))
+  - (arctan x)' = frac(1|1+x^2)
+adatto:
+  - arccos x ha lo stesso risultato di arcsin con il segno meno.
+  - Con qualcosa dentro moltiplica per g′.
+esempi:
+  - da: 4*arctan x
+    passi: []
+    ris: frac(4|1+x^2)
+    verifica: derivata
+errore: "Pensare che arcsin x sia 1/sin x: è la funzione inversa, non il reciproco."
+confondi:
+  - scheda: seno-e-coseno
+    differenza: sin x e arcsin x sono funzioni diverse (inverse).
+perche: "Sono le inverse di sin e tan: le loro derivate si ricavano da quelle di sin e tan."
+parole: arcoseno arcotangente inversa arcsin arctan

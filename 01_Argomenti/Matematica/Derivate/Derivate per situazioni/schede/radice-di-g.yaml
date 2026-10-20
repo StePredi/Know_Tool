@@ -1,0 +1,22 @@
+id: radice-di-g
+tipo: regola
+titolo: Radice di g
+sigla: Radice di g
+comando: g'/(2*sqrt(g))
+vedo: "Una radice con dentro più di x: √(x²+1)."
+formula: (sqrt(g))' = frac(g'|2*sqrt(g))
+adatto:
+  - "Sopra: derivata di quello che c'è sotto la radice."
+  - "Sotto: 2 per la radice stessa."
+esempi:
+  - da: sqrt(x^2+1)
+    passi:
+      - "`g = x^2+1`, `g' = 2x`"
+    ris: frac(x|sqrt(x^2+1))
+    verifica: derivata
+errore: Dimenticare g′ al numeratore.
+confondi:
+  - scheda: radice
+    differenza: Con la sola x sotto, il numeratore è 1.
+perche: Catena su x^(1/2).
+parole: radice di funzione sotto radice

@@ -1,0 +1,25 @@
+id: prodotto
+tipo: regola
+titolo: Prodotto
+sigla: Prodotto
+comando: f'g + fg'
+vedo: "Due pezzi con la x che si moltiplicano: `x^2*sin x`, `e^x*ln(x)`."
+formula: (f*g)' = f'*g + f*g'
+adatto:
+  - Deriva il primo lasciando il secondo, più il primo per il secondo derivato.
+  - "Un numero che moltiplica non è un fattore: usa «Somma e costante»."
+  - Alla fine raccogli per semplificare.
+esempi:
+  - da: x^2*sin x
+    passi:
+      - "`f = x^2`, `f' = 2x`"
+      - "`g = sin x`, `g' = cos x`"
+      - "`f'g + fg'`"
+    ris: 2x*sin x + x^2*cos x
+    verifica: derivata
+errore: "Derivare i due fattori e moltiplicare `f'*g'`: è sbagliato."
+confondi:
+  - scheda: somma-e-costante
+    differenza: Con il + si deriva pezzo per pezzo; con il × serve questa regola.
+perche: "Pensa all'area di un rettangolo f per g: se cambiano entrambi i lati, l'area cambia per due strisce."
+parole: prodotto per moltiplicazione

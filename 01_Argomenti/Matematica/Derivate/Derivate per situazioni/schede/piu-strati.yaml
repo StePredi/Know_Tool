@@ -1,0 +1,31 @@
+id: piu-strati
+tipo: regola
+titolo: Più strati
+sigla: Più strati
+comando: dal fuori al dentro
+vedo: "Una funzione dentro una funzione dentro un'altra: ln(sin 3x), sin²x."
+formula: "[f(g(h))]' = f'(g(h))*g'(h)*h'"
+adatto:
+  - "Elenca gli strati dal più esterno: ln( sin( 3x ) )."
+  - Deriva uno strato per volta e moltiplica i pezzi.
+  - "`sin^2 x` vuol dire `(sin x)^2`: parentesi elevata a un numero."
+esempi:
+  - da: ln(sin(3x))
+    passi:
+      - "Strato 1, ln: `1/sin(3x)`"
+      - "Strato 2, sin: `cos(3x)`"
+      - "Strato 3: `3`"
+    ris: frac(3*cos(3x)|sin(3x))
+    verifica: derivata
+  - da: sin^2 x
+    passi:
+      - "`(sin x)^2`"
+      - "`2*sin x*cos x`"
+    ris: 2*sin x*cos x
+    verifica: derivata
+errore: Fermarsi al primo strato.
+confondi:
+  - scheda: funzione-composta
+    differenza: È la stessa regola ripetuta più volte.
+perche: Con tre ingranaggi collegati le velocità si moltiplicano tutte.
+parole: più strati composte multiple

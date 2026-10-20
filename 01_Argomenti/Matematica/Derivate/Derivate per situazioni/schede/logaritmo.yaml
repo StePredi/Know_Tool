@@ -1,0 +1,30 @@
+id: logaritmo
+tipo: regola
+titolo: Logaritmo
+sigla: Logaritmo
+comando: ln(x) -> 1/x
+vedo: ln x, log x, log in base a.
+formula:
+  - (ln(x))' = frac(1|x)
+  - (log_a(x))' = frac(1|x*ln(a))
+adatto:
+  - ln è il logaritmo in base e.
+  - In base a compare `ln(a)` sotto. Controlla se nel tuo libro «log» senza base vuol dire ln.
+esempi:
+  - da: 5*ln(x)
+    passi:
+      - Il 5 resta
+    ris: frac(5|x)
+    verifica: derivata
+  - da: log_2(x)
+    passi: []
+    ris: frac(1|x*ln(2))
+    verifica: derivata
+errore: Confondere 1/x (derivata di ln x) con la derivata di 1/x.
+confondi:
+  - scheda: reciproco
+    differenza: La derivata di 1/x è −1/x².
+  - scheda: logaritmo-di-g
+    differenza: Con qualcosa dentro il logaritmo serve g′.
+perche: "Il logaritmo cresce sempre più piano: a x grande la pendenza è piccola, 1/x."
+parole: logaritmo ln log

@@ -1,0 +1,26 @@
+id: quoziente
+tipo: regola
+titolo: Quoziente
+sigla: Quoziente
+comando: (f'g - fg')/g^2
+vedo: Una frazione con la x sia sopra sia sotto.
+formula: (frac(f|g))' = frac(f'*g - f*g'|g^2)
+adatto:
+  - "Sopra: derivata del sopra per il sotto, MENO il sopra per la derivata del sotto."
+  - "Sotto: tutto il denominatore al quadrato."
+  - "Se sotto c'è solo un numero, è una costante: non serve."
+  - Se sopra c'è solo un numero, prova «Reciproco» o riscrivi come potenza.
+esempi:
+  - da: frac(x^2|x+1)
+    passi:
+      - "`f = x^2`, `f' = 2x`"
+      - "`g = x+1`, `g' = 1`"
+      - "Sopra: `2x(x+1) - x^2*1 = x^2+2x`"
+    ris: frac(x^2+2x|(x+1)^2)
+    verifica: derivata
+errore: Scambiare l'ordine sopra (cambia il segno) o dimenticare il quadrato sotto.
+confondi:
+  - scheda: prodotto
+    differenza: Il quoziente ha un meno nel numeratore e un quadrato sotto.
+perche: Si ricava dal prodotto f · (1/g) usando la catena sul reciproco.
+parole: quoziente frazione divisione fratto

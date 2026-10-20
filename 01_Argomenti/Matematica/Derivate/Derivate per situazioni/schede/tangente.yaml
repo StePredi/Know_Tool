@@ -1,0 +1,21 @@
+id: tangente
+tipo: regola
+titolo: Tangente
+sigla: Tangente
+comando: tan x -> 1/cos^2 x
+vedo: tan x con solo x dentro.
+formula: (tan x)' = frac(1|cos^2 x) = 1 + tan^2 x
+adatto:
+  - "Le due forme sono uguali: usa quella che semplifica meglio."
+  - "Con qualcosa dentro: `g'/cos^2 g`."
+esempi:
+  - da: 2*tan x
+    passi: []
+    ris: frac(2|cos^2 x)
+    verifica: derivata
+errore: "Scrivere `1/cos x`: manca il quadrato."
+confondi:
+  - scheda: goniometriche-di-g
+    differenza: Con qualcosa dentro serve anche g′.
+perche: Si ricava dal quoziente sin/cos.
+parole: tangente tan

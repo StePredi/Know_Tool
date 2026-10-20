@@ -106,7 +106,7 @@ function Vuota({ testo, onClick, icona = 'piu' }: { testo: string; onClick: () =
 
 // ------------------------------------------------------------------ finestre
 
-type Dialogo = { tipo: 'nuova'; padre: string; materia: boolean } | { tipo: 'nuovaSit'; padre: string } | { tipo: 'nuovoAppunto'; padre: string } | { tipo: 'rinomina'; n: NodoArg } | { tipo: 'archivia'; n: NodoArg } | null
+type Dialogo = { tipo: 'nuova'; padre: string; materia: boolean } | { tipo: 'rinomina'; n: NodoArg } | { tipo: 'archivia'; n: NodoArg } | null
 
 function ChiediNome(props: { titolo: string; etichetta: string; iniziale: string; conferma: string; chiudi: () => void; fai: (nome: string) => Promise<void> }) {
   const [v, setV] = useState(props.iniziale)
@@ -231,19 +231,10 @@ export function HomeGenerale() {
   const recenti = h.recenti.map((r) => trova(h.albero, r.rel)).filter((n): n is NodoArg => !!n).slice(0, 4)
   const preferiti = h.preferiti.map((r) => trova(h.albero, r)).filter((n): n is NodoArg => !!n)
 
-  const scegliModello = (id: IdModello): void => {
-    setGalleria(false)
-    if (id === 'materia') setDlg({ tipo: 'nuova', padre: '', materia: true })
-    else if (id === 'cartella' && attuale) setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false })
-    else if (id === 'appunti' && attuale) setDlg({ tipo: 'nuovoAppunto', padre: attuale.rel })
-    else if (id === 'situazioni' && attuale) setDlg({ tipo: 'nuovaSit', padre: attuale.rel })
-    else if (id === 'testo') void nuovoTesto()
-  }
-
-  const nuovoTesto = async (): Promise<void> => {
-    if (!attuale?.autoreId) return
+  const nuovoTesto = async (autoreId: string | undefined): Promise<void> => {
+    if (!autoreId) return
     const st = useStore.getState()
-    if (st.stato?.autoreId !== attuale.autoreId) await st.scegliAutore(attuale.autoreId)
+    if (st.stato?.autoreId !== autoreId) await st.scegliAutore(autoreId)
     useEditor.getState().imposta({ nuovoOpen: true })
   }
 
@@ -252,6 +243,27 @@ export function HomeGenerale() {
     useHome.setState({ albero: r.albero })
     await useHome.getState().carica()
     return r.rel
+  }
+
+  /** Crea quello che la galleria ha chiesto: il file nasce nella cartella scelta nella finestra e, se è un documento, si apre. */
+  const creaDaGalleria = async (id: IdModello, padre: string, nome: string): Promise<void> => {
+    const hs = useHome.getState()
+    const espandi = (): void => { if (padre) hs.imposta({ espansi: { ...useHome.getState().espansi, [padre]: true } }) }
+    if (id === 'testo') {
+      await nuovoTesto(trova(hs.albero, padre)?.autoreId)
+      return
+    }
+    if (id === 'materia' || id === 'cartella') {
+      const rel = await dopo(window.api.creaNodo(padre, nome))
+      if (rel) { espandi(); useHome.getState().vai(rel) }
+      return
+    }
+    const rel = await dopo(id === 'appunti' ? window.api.creaAppunto(padre, nome) : id === 'matematica' ? window.api.creaMatematica(padre, nome) : window.api.creaSituazioni(padre, nome))
+    if (!rel) return
+    espandi()
+    if (id === 'appunti') daModificare.add(rel)
+    const n = trova(useHome.getState().albero, rel)
+    if (n) useHome.getState().apri(n)
   }
 
   const contenuto = (
@@ -289,7 +301,7 @@ export function HomeGenerale() {
       ) : h.vista === 'griglia' ? (
         <div className="hm-grid">
           {figli.map((n) => <Cartolina key={n.rel} n={n} />)}
-          {attuale?.tipo === 'autore' ? <Vuota testo="Nuovo testo" onClick={() => void nuovoTesto()} /> : attuale && !èCartellaAutori(attuale.rel) && <Vuota testo="Nuova cartella" onClick={() => setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false })} />}
+          {attuale?.tipo === 'autore' ? <Vuota testo="Nuovo testo" onClick={() => void nuovoTesto(attuale.autoreId)} /> : attuale && !èCartellaAutori(attuale.rel) && <Vuota testo="Nuova cartella" onClick={() => setDlg({ tipo: 'nuova', padre: attuale.rel, materia: false })} />}
         </div>
       ) : (
         <div style={{ border: '1px solid var(--line)', borderRadius: 12, background: 'var(--surface)', overflow: 'hidden' }}>
@@ -342,28 +354,7 @@ export function HomeGenerale() {
           if (rel) { useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, ...(dlg.padre ? { [dlg.padre]: true } : {}) } }); useHome.getState().vai(rel) }
         }} />
       )}
-      {galleria && <Galleria contesto={{ tipo: attuale?.tipo ?? null, rel: attuale?.rel ?? '' }} dove={attuale?.nome ?? ''} scegli={scegliModello} chiudi={() => setGalleria(false)} />}
-      {dlg?.tipo === 'nuovaSit' && (
-        <ChiediNome titolo="Nuovo documento «Per situazioni»" etichetta="Nome del documento" iniziale="" conferma="Crea" chiudi={() => setDlg(null)} fai={async (nome) => {
-          const rel = await dopo(window.api.creaSituazioni(dlg.padre, nome))
-          if (rel) {
-            useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, [dlg.padre]: true } })
-            const n = trova(useHome.getState().albero, rel)
-            if (n) useHome.getState().apri(n)
-          }
-        }} />
-      )}
-      {dlg?.tipo === 'nuovoAppunto' && (
-        <ChiediNome titolo="Nuovo appunto" etichetta="Nome del file (senza .md)" iniziale="" conferma="Crea" chiudi={() => setDlg(null)} fai={async (nome) => {
-          const rel = await dopo(window.api.creaAppunto(dlg.padre, nome))
-          if (rel) {
-            useHome.getState().imposta({ espansi: { ...useHome.getState().espansi, [dlg.padre]: true } })
-            daModificare.add(rel)
-            const n = trova(useHome.getState().albero, rel)
-            if (n) useHome.getState().apri(n)
-          }
-        }} />
-      )}
+      {galleria && <Galleria contesto={{ tipo: attuale?.tipo ?? null, rel: attuale?.rel ?? '' }} albero={h.albero} crea={creaDaGalleria} chiudi={() => setGalleria(false)} />}
       {dlg?.tipo === 'rinomina' && (
         <ChiediNome titolo={dlg.n.tipo === 'appunto' ? 'Rinomina il file' : 'Rinomina'} etichetta={dlg.n.tipo === 'appunto' ? 'Nuovo nome del file (senza .md)' : 'Nuovo nome'} iniziale={dlg.n.tipo === 'appunto' ? dlg.n.rel.split('/').pop()!.replace(/\.md$/i, '') : dlg.n.nome} conferma="Rinomina" chiudi={() => setDlg(null)} fai={async (nome) => {
           const vecchio = dlg.n

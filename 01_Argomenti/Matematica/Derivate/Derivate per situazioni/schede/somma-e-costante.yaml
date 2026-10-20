@@ -1,0 +1,26 @@
+id: somma-e-costante
+tipo: regola
+titolo: Somma e costante
+sigla: Somma e costante
+comando: (f+g)' = f'+g'
+vedo: Pezzi separati da + o −; oppure un numero che moltiplica.
+formula:
+  - (f + g)' = f' + g'
+  - (k*f)' = k*f'
+adatto:
+  - Deriva ogni pezzo da solo e rimetti i segni.
+  - "Il numero davanti resta: `(3x^2)' = 3*2x = 6x`."
+esempi:
+  - da: 3x^2 + 5x - 7
+    passi:
+      - "`(3x^2)' = 6x`"
+      - "`(5x)' = 5`"
+      - "`(7)' = 0`"
+    ris: 6x + 5
+    verifica: derivata
+errore: "Usare questa regola su un prodotto o una frazione: quelli non si derivano pezzo per pezzo."
+confondi:
+  - scheda: prodotto
+    differenza: Se i pezzi si moltiplicano, serve la regola del prodotto.
+perche: La pendenza di una somma è la somma delle pendenze.
+parole: somma differenza più meno numero davanti

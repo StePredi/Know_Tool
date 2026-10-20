@@ -1,0 +1,23 @@
+id: reciproco
+tipo: regola
+titolo: Reciproco
+sigla: Reciproco
+comando: 1/x -> -1/x^2
+vedo: 1 fratto x (o numero fratto x, 1/x²).
+formula: (frac(1|x))' = -frac(1|x^2)
+adatto:
+  - "È `x^(-1)`: scendo con −1."
+  - "`1/x^2 = x^(-2)` → `-2/x^3`."
+esempi:
+  - da: frac(3|x)
+    passi:
+      - "`3*x^(-1)`"
+      - "`3*(-1)*x^(-2)`"
+    ris: -frac(3|x^2)
+    verifica: derivata
+errore: Dimenticare il meno.
+confondi:
+  - scheda: logaritmo
+    differenza: 1/x è la derivata di ln x; la derivata di 1/x è −1/x².
+perche: Caso particolare della potenza con n = −1.
+parole: reciproco frazione uno fratto x

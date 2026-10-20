@@ -2,7 +2,7 @@
 
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
-import { controllaSituazioni, leggiIndice, leggiSchedaSit, type SchedaSit, type Situazioni } from '../shared/situazioni'
+import { controllaEsercizi, controllaSituazioni, leggiEsercizi, leggiIndice, leggiSchedaSit, type EserciziSit, type SchedaSit, type Situazioni } from '../shared/situazioni'
 
 const BASE = '01_Argomenti'
 
@@ -54,8 +54,18 @@ export async function leggiSituazioni(radice: string, rel: string): Promise<Situ
     else if (r.errore) avvisi.push(r.errore)
   }
   avvisi.push(...controllaSituazioni(indice, schede))
+  let esercizi: EserciziSit | undefined
+  try {
+    const re = leggiEsercizi(await fs.readFile(join(dir, 'esercizi.yaml'), 'utf8'))
+    if (re.esercizi) {
+      esercizi = re.esercizi
+      avvisi.push(...controllaEsercizi(esercizi, schede))
+    } else if (re.errore) avvisi.push(re.errore)
+  } catch {
+    /* esercizi.yaml è facoltativo */
+  }
   const ripassate = (await leggiRipassate(dir)).filter((id) => schede[id])
-  return { rel, indice, schede, ripassate, avvisi }
+  return { rel, indice, schede, esercizi, ripassate, avvisi }
 }
 
 /** Segna o toglie «ripassata» e restituisce l'elenco aggiornato. Scrive in modo sicuro (file temporaneo + rinomina). */

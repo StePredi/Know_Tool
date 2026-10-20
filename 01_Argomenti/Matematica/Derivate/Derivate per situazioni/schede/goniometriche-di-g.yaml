@@ -1,0 +1,26 @@
+id: goniometriche-di-g
+tipo: regola
+titolo: Goniometriche di g
+sigla: Goniometriche di g
+comando: sin(g) -> cos(g)*g'
+vedo: "Goniometrica con dentro più della sola x: cos(5x), sin(x²)."
+formula:
+  - (sin g)' = cos g*g'
+  - (cos g)' = -sin g*g'
+  - (tan g)' = frac(g'|cos^2 g)
+adatto:
+  - Deriva la goniometrica lasciando il dentro uguale.
+  - Poi moltiplica per g′.
+esempi:
+  - da: cos(5x)
+    passi:
+      - "`-sin(5x)`"
+      - "`g' = 5`"
+    ris: -5*sin(5x)
+    verifica: derivata
+errore: Dimenticare il meno nel coseno o il g′.
+confondi:
+  - scheda: seno-e-coseno
+    differenza: Con la sola x dentro, g′ = 1.
+perche: Catena su sin, cos, tan.
+parole: seno coseno di funzione sin cos tan composta

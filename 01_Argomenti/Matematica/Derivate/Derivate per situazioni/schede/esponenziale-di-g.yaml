@@ -1,0 +1,29 @@
+id: esponenziale-di-g
+tipo: regola
+titolo: Esponenziale di g
+sigla: Esponenziale di g
+comando: e^g -> e^g*g'
+vedo: "Esponenziale con in alto più della sola x: e^(x²), 3^(2x)."
+formula:
+  - (e^g)' = e^g*g'
+  - (a^g)' = a^g*ln(a)*g'
+adatto:
+  - Riscrivi la stessa funzione e moltiplica per la derivata dell'esponente.
+  - Con base diversa da e aggiungi `ln(a)`.
+esempi:
+  - da: e^(x^2)
+    passi:
+      - Esponente `x^2`, derivata `2x`
+    ris: 2x*e^(x^2)
+    verifica: derivata
+  - da: 3^(2x)
+    passi:
+      - "`ln(3)` e derivata di `2x` = 2"
+    ris: 2*ln(3)*3^(2x)
+    verifica: derivata
+errore: "Scrivere `e^(2x)` → `e^(2x)`: manca il 2 davanti."
+confondi:
+  - scheda: esponenziale
+    differenza: Con solo x in alto, nessun fattore extra.
+perche: Catena sull'esponenziale.
+parole: esponenziale di funzione e alla

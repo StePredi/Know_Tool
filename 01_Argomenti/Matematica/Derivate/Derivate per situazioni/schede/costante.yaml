@@ -1,0 +1,26 @@
+id: costante
+tipo: regola
+titolo: Costante
+sigla: Costante
+comando: k -> 0
+vedo: Un numero solo, senza x (anche π, e, √2, ln 2).
+formula: (k)' = 0
+adatto:
+  - "Anche `pi`, `ln(2)` o `e^2` sono numeri: la derivata è 0."
+  - "Un numero che moltiplica una funzione non sparisce: vedi «Somma e costante»."
+esempi:
+  - da: "7"
+    passi: []
+    ris: "0"
+    verifica: derivata
+  - da: ln(2)
+    passi:
+      - È un numero, non dipende da x.
+    ris: "0"
+    verifica: derivata
+errore: "Derivare `ln(2)` come `1/2`: è un numero, non `ln(x)`."
+confondi:
+  - scheda: somma-e-costante
+    differenza: "k·f non è una costante: la k resta e si deriva f."
+perche: "Una costante non cambia al variare di x: la pendenza è zero."
+parole: numero costante zero

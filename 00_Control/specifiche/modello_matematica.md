@@ -1,85 +1,90 @@
-# Modello «Matematica» — specifica (bozza 1)
+# Matematica dentro «Per situazioni» (PROPOSTA, da approvare)
 
-> **PROVVISORIA (2026-10-20).** Nata dalla schermata e senza materiale dell'utente; non rispetta `procedura_nuovi_documenti.md`. La progettazione riparte dal materiale vero; questo file resta come storico dei prototipi e non va seguito per nuovo codice.
+Stato: bozza del 2026-10-20. Sostituisce la vecchia spec provvisoria (spostata in `_storico/`).
+Procedura seguita: `00_Control/procedura_nuovi_documenti.md`. Nessun codice dell'app prima dell'approvazione.
 
-Stato: **fase 1 e 2 fatte** (2026-10-20): motore, schermata e collegamento all'app sono scritti e testati in copia di prova; **non ancora provati in Electron/Windows**. Progettato e provato su prototipi interattivi in chat (non salvati) su due argomenti noti a Ste: **Scomposizione dei polinomi** e **Disequazioni e sistemi**. Elenco completo argomenti: `matematica_argomenti.md`.
+## 1. Il problema (parole di Ste)
+Davanti a un esercizio non riconosco **quale strumento** usare e non ricordo **la formula vera** né come adattarla.
+Capisco la teoria, ma serve ripescarla in fretta: prima una **tabella/schema da usare durante gli esercizi**, poi la teoria approfondita dietro.
 
-## 1. Problema da risolvere
-Ste non ricorda/riconosce la teoria e, davanti a un esercizio, non sa **cosa fare**; usa formulari sparsi. Il tool parte quindi **dall'esercizio** («cosa vedo → cosa faccio»), non dall'indice della teoria. Tre usi: capire la teoria, allenarsi sugli esercizi, ripassare prima delle verifiche.
+## 2. Decisione di struttura
+Niente motore Matematica separato. Si riusa **l'albero di Per situazioni** (mappa a rami, schede, ricerca, modifica sicura, gallery).
 
-## 2. Principi
-1. Il **riconoscitore**: ogni argomento risponde a «cosa vedo?» e porta alla regola giusta.
-2. Formule scritte con la **tastiera normale** (testo semplice, niente LaTeX), mostrate in forma leggibile.
-3. **Grafici** dove servono, motore proprio leggero (nessuna libreria pesante).
-4. I file restano la fonte di verità; mai cancellare dati (archivio in `99_Archivio/`); salvataggio sicuro come in `main/modifica.ts`.
-5. Dentro Know_Tool, come nuovo modello della galleria «+ Nuovo» (`home/modelli.ts`).
-6. Argomenti solo economici per ultimi. Nessuna fonte esterna: si parte da teoria standard scritta da Claude e **corretta da Ste**.
+- App: **Materia (Matematica) → un documento per argomento**.
+- Disco: `01_Argomenti/Matematica/<Argomento>/<Argomento> per situazioni/` con `indice.yaml` + `schede/*.yaml` (+ `esercizi.yaml`).
+- `centro` = l'argomento (es. «Derivate»). I **rami** sono le famiglie di casi, nell'ordine in cui si riconosce l'esercizio.
+- Cartelle `Fonti / Appunti / Pratica / Schemi` dell'argomento restano come ora.
 
-## 3. Notazione delle formule (testo → resa)
-| Si scrive | Si vede |
+## 3. Cosa si aggiunge al modello esistente (il minimo)
+1. **Nuovo tipo di scheda `regola`** (oltre a ricetta / prima_dopo / figura).
+2. **Due campi opzionali in `indice.yaml`**: `ingresso` (come si riconosce l'esercizio, 1 frase) e `guida` (la domanda da farsi: «qual è l'ultima operazione?»). Mostrati sopra la mappa.
+3. **`esercizi.yaml`** nella cartella del documento: esercizi reali con il «piano» (sequenza di schede).
+4. **Quattro aggiunte** emerse dalla prova su 28 argomenti (vedi `03_Demo/matematica_per_situazioni/materia_matematica.html`, filtro per aggiunta): (+1) `ordine: true` sul ramo → pill numerate, per le procedure; (+2) `vedo` facoltativo, per le formule da ricordare; (+3) tipo di figura per grafici (rimandata dopo Derivate e Limiti); (+4) `passi` degli esempi come `{dice, perche, scheda}`, per le dimostrazioni.
+5. Formule: stesso rendering del demo (notazione testuale, tra apici inversi nei testi). Si valuta se riusare `formula.ts` / `FormulaVista` già scritti dall'altra sessione.
+
+Tutto il resto (rami, colori, voci, ricerca, mappa comprimibile, salvataggio con backup) è invariato.
+
+## 4. Scheda `regola` — modello dati (conoscenza, non presentazione)
+Campi comuni già esistenti: `id` (= nome file), `tipo: regola`, `titolo`, `sigla` (nome breve sulla foglia), `comando` (la formula in una riga, mostrata sulla foglia), `frase` (quando si usa, 1 riga), `fonte`, `parole` (ricerca), `varianti`, `vicine`.
+
+Campi propri:
+| campo | contenuto |
 |---|---|
-| `x^2`, `x_1` | apice, pedice |
-| `sqrt(x)` | radice con barra |
-| `(a)/(b)` | frazione impilata |
-| `pi`, `>=`, `<=`, `->`, `!=`, `+-`, `inf` | π, ≥, ≤, →, ≠, ±, ∞ |
-- Una barra di **simboli** nell'editor inserisce questi testi con un clic (per chi non ricorda la sintassi).
-- Parser unico (TypeScript, con test) usato da: resa grafica, Radiografia, grafici, allenamento (controllo risposte).
-- Per ora: variabile `x`, polinomi, frazioni algebriche, funzioni elementari. Più variabili/parametri nelle fasi successive.
+| `vedo` | cosa vedo nell'esercizio (il segnale di riconoscimento) |
+| `formula` | testo o lista di formule (la regola vera) |
+| `adatto` | lista di casi/adattamenti («se c'è una costante…», «se la base non è e…») |
+| `esempi` | lista di `{da, passi[], ris}` svolti |
+| `errore` | l'errore tipico |
+| `confondi` | lista di `{scheda, differenza}`: con cosa la confondo e come le distinguo |
+| `perche` | la teoria breve (perché funziona) |
 
-## 4. Le tre viste di un argomento
-1. **Scheda di regola** (una per regola/caso): *Come la riconosci* · *Cosa fai* · *Formula* · *Esempio svolto* · *Errore tipico* · *Da non confondere con* · figura/grafico interattivo se serve.
-2. **Riconoscitore** dell'argomento: la forma sceglie come si presenta (vedi §5).
-3. **Ripasso**: scheda con formula sfocata da svelare; elenco di «da non confondere»; ordine per ciò che si sbaglia.
+Una cosa, un posto: la formula sta solo in `formula`; la foglia mostra `comando`, che deve coincidere con la prima formula (controllo automatico).
 
-Modalità: *Radiografia* (incolli un'espressione → scatole annidate, l'operazione più esterna decide la regola, «piano d'attacco» da fuori a dentro), *Tavola delle forme* (tutte le forme a colpo d'occhio), *Allenamento a riconoscere* (vedi espressione, scegli il passo), *Ripasso*.
+Esempio (derivata del prodotto):
+```yaml
+id: prodotto
+tipo: regola
+titolo: Derivata di un prodotto
+sigla: Prodotto
+comando: (f·g)' = f'·g + f·g'
+frase: l'ultima operazione è una moltiplicazione tra due funzioni con x
+vedo: due fattori che dipendono entrambi da x
+formula: "`(f*g)' = f'*g + f*g'`"
+adatto:
+  - se un fattore è costante, esce fuori: `(k*f)' = k*f'`
+esempi:
+  - da: "`x^2 * sin(x)`"
+    passi: ["`f = x^2, g = sin(x)`", "`2x*sin(x) + x^2*cos(x)`"]
+    ris: "`2x*sin(x) + x^2*cos(x)`"
+errore: derivare i due fattori e moltiplicare le derivate
+confondi:
+  - { scheda: quoziente, differenza: il quoziente ha il meno e il denominatore al quadrato }
+perche: la variazione del prodotto ha un contributo da ciascun fattore
+```
 
-## 5. Forme del riconoscitore (validate)
-| Ingresso | Forma | Argomento di prova |
-|---|---|---|
-| E espressione/equazione | **lista di controllo in ordine**: domande fisse, ✓/✗ con motivo, si evidenzia «fai questo» (primo passo valido), poi si ripete sui fattori | Scomposizione |
-| E con regione | **linea dei segni** costruita un fattore alla volta: riga per fattore (continua = positivo, tratteggiata = negativo), frase del perché, riga risultato, soluzione come disuguaglianze unite da ∨; punti pieni/vuoti, denominatore sempre escluso | Disequazioni |
-| E generico | a scatole annidate (Radiografia) | Derivate, espressioni |
-| T testo problema | a domande guida | Combinatorio, probabilità, percentuali (da provare) |
-| F figura | figura con elementi cliccabili | Geometria euclidea (da provare) |
-| D dati | a dati | Statistica (da provare) |
-| P / R | parametri / regione nel piano | Programmazione lineare (da provare) |
-Esito prove: la **stessa scheda** regge forme diverse, cambia solo il pezzo centrale. Feedback di Ste: la lista di controllo «sì, da provare»; la tabella dei segni era **troppo fitta** → sostituita dalla linea dei segni passo per passo (da riconfermare). Il grafico delle disequazioni sta in un pulsante a parte, non in vista.
+## 5. Prova a mano su più argomenti (già fatta nel demo)
+Lo stesso modello regge **cinque argomenti** senza cambiare forma: Derivate (schema = ultima operazione), Limiti (cosa esce sostituendo), Scomposizione (fattore comune, poi numero di termini), Disequazioni (zero, fattori, segni, intervalli), Calcolo combinatorio (domande guida: conta l'ordine? ripetizioni? tutti o alcuni?). Differisce solo il contenuto di `ingresso`/`guida` e i rami. Demo: `03_Demo/matematica_per_situazioni/matematica_per_situazioni.html`.
 
-### Regole logiche già collaudate (da riscrivere in TS con test)
-- Scomposizione, ordine: raccoglimento totale → differenza di quadrati → somma/differenza di cubi → trinomio 2º grado (Δ quadrato perfetto) → raccoglimento parziale → Ruffini; si ripete sui fattori. Esempi: `6x^3-12x^2+6x → 6x(x-1)^2`; `x^4-16 → (x-2)(x+2)(x^2+4)`; `x^3-6x^2+11x-6 → (x-1)(x-2)(x-3)`.
-- Disequazioni: secondo membro deve essere 0 (altrimenti «porta tutto a sinistra»); fattori fino al 2º grado; numeratore/denominatore; `(x^2-4)/(x-1)>=0 → −2 ≤ x < 1 ∨ x ≥ 2`; `(x-2)^2<=0 → x = 2`; `x^2+1>0 → per ogni x`.
+## 6. Verifica
+- **Strutturale** (zod, come ora): campi obbligatori, `id` = nome file, `comando` = prima formula, link `vicine`/`confondi`/`piano` verso schede esistenti (`controllaSituazioni`).
+- **Formule**: ogni formula si legge con il parser (nessuna notazione non riconosciuta).
+- **Esempi contro motore** (da decidere, §8): per Derivate/Limiti, controllo numerico del risultato di ogni esempio.
+- Test: esempio YAML della spec = file reale nei test.
 
-## 6. File (come sono fatti davvero)
-Una cartella per argomento in `01_Argomenti/Matematica/<Argomento>/` (qualsiasi cartella di studio, non Italiano):
-- `argomento.yaml` — `modello: matematica`, `titolo`, `introduzione`, `motore` (`scomposizione` | `disequazioni`, facoltativo), `ordine` (id delle regole), `esempi` (da provare con un clic), `bozza` (true = scritto da Claude, da correggere).
-- `regole/<id>.yaml` — `id` (= nome del file), `nome`, `riconosci`, `fai`, `formula`, `esempi` (`da`, `passi`, `risultato`), `errore`, `confondi` (`con`, `differenza`), `controllo` (quale controllo del calcolatore è questa regola).
-- `progresso.json` — `{ "ripassate": [id…] }`, scritto in modo sicuro (file temporaneo + rinomina).
-Le formule nel testo stanno tra apici inversi (`` `x^2-9` ``) e vengono disegnate. Lettura con zod (`shared/matematica.ts`), errori leggibili, avvisi che non bloccano l'apertura (regola citata e mancante, regola fuori ordine, id diverso dal nome del file).
+## 6bis. Dimostrazioni di geometria
+Si parte dalla **tesi**, non dalla teoria: rami «voglio segmenti/angoli uguali», «rette parallele/perpendicolari», «triangoli congruenti/simili», più un ramo a passi «scheletro» (ipotesi, tesi, figura, costruzione) e uno di teoremi da citare. Ogni strategia è una scheda `regola` (formula = criterio). Gli esempi sono dimostrazioni con passi `{dice, perche, scheda}`, dove `scheda` è un link controllato. Non insegna a trovare l'idea da zero.
 
-## 6b. Schermata
-Si apre in una scheda dell'app come «Per situazioni» (icona Σ). Tre viste: **Riconosci** (con `motore`: lista di controllo per la scomposizione, linea dei segni passo per passo per le disequazioni, con grafico a richiesta; senza: elenco «cosa vedo → cosa faccio»), **Regole** (scheda completa con formula, esempi, errore tipico, «da non confondere con»), **Ripasso** (formula sfocata da svelare, «L'ho ricordata» salva il progresso). Voce «Matematica» nella galleria «+ Nuovo» (consigliata dentro la materia Matematica).
-Dati di prova scritti da Claude (bozza): `Scomposizione dei polinomi` (6 regole) e `Disequazioni e sistemi` (7 regole).
-
-**Regola tecnica:** niente file che differiscono solo per maiuscole nella stessa cartella (`formula.ts` e `Formula.tsx` sulla stessa cartella): su Windows l'import sbaglia file. Logica in `formula.ts`, componente in `FormulaVista.tsx`.
-
-## 7. Fasi di costruzione
-1. ~~Motore~~ **fatto**: parser, resa formule, grafico, scomposizione, disequazioni; test vitest.
-2. ~~Scheda + Riconoscitore + Ripasso~~ **fatto** con due argomenti d'esempio e voce nella galleria (da provare in Electron).
-3. **Allenamento** (esercizio → scegli la regola/il passo → verifica) e sistemi di disequazioni.
-4. Barra simboli nell'editor `.md`; proposte di schede da Claude (revisione di Ste).
-5. Prove delle forme T/D/F su argomenti noti (percentuali, statistica descrittiva, Pitagora/Talete/Euclide), poi gli altri; economici per ultimi.
+## 7. Cosa NON fa
+- Non risolve esercizi né inventa dimostrazioni né sostituisce il libro.
+- Non ha un motore grafico/algebrico proprio (niente grafici, niente editor di formule).
+- Non migra in automatico i contenuti dell'altra sessione.
+- Nessuna UI nuova oltre al rendering della scheda `regola` e delle due righe `ingresso`/`guida`.
 
 ## 8. Da decidere con Ste
-- Conferma della linea dei segni al posto della tabella.
-- Quanto sia grande il «Ripasso» a regola vs a argomento.
-- Come rappresentare le soluzioni dei **sistemi** di disequazioni (intersezione di più linee).
-- Dove stanno le schede nell'albero (una voce «Matematica» già esistente o nuova).
+1. Va bene `regola` come unico nuovo tipo (e `esercizi.yaml` separato)?
+2. Verifica numerica degli esempi: sì per Derivate/Limiti, o solo controllo strutturale?
+3. Il codice Matematica non committato dell'altra sessione (`matematica.ts`, `renderer/matematica/*`, `01_Argomenti/Matematica/*`): archiviarlo in `99_Archivio/Obsoleti/<data>/`, tenendo solo `formula.ts`/`FormulaVista` se compatibili?
+4. Primo documento da costruire in app: Derivate, poi Limiti?
 
-
-## 9. Schermata v2 (dopo la prova di Ste, 2026-10-20)
-
-- Griglia di regole (una card colorata per regola, formula in grande) → dentro la regola una **bento grid** di 4 card espandibili: **Capisci** (da zero, in ordine, con disegno animato dove serve), **Riconosci** (domande, ognuna con il suo disegno: figure `pezzi`, `quadrati`, `segno`, `fattori`, `nessuna`), **Fai e prova** (esempio svolto + esercizi a scelta con il perché di ogni errore), **Ripassa** (formula sfocata, errore tipico, da non confondere).
-- Colori con significato: fase (verde acqua / blu / verde / rosa), tipo di informazione (formula viola, errore rosso, da non confondere ambra), regola (un colore ciascuna, campo `colore` opzionale).
-- Campi regola nuovi (tutti opzionali, le regole vecchie funzionano): `colore`, `capisci[]`, `animazione`, `riconosciEsempi[]`, `esercizi[]`.
-- Il calcolatore (checklist, linea dei segni) resta nella scheda «Prova su un esercizio».
-- Da fare: vista a griglia di tutti gli argomenti, regole restanti nel nuovo formato, sistemi di disequazioni, Allenamento.
+## 9. Tappe
+1. Approvazione di questa spec. 2. Schema zod + test (`regola`, `ingresso`/`guida`, `esercizi.yaml`). 3. Contenuto reale Derivate (dal demo → YAML). 4. Rendering minimo scheda. 5. Prova su Windows. 6. Limiti, poi gli altri argomenti.

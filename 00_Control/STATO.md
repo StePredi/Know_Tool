@@ -2,7 +2,7 @@
 
 ## Fase attuale
 
-**Pulizia fatta (2026-10-20). Matematica: progettazione riaperta secondo `procedura_nuovi_documenti.md`. L'app non è ancora stata provata su Windows (`npm run dev`).**
+**Matematica rifatta dentro «Per situazioni» (2026-10-21): Derivate pronto, Formulario nell'app. L'app non è ancora stata provata a fondo su Windows (`npm run dev`).**
 
 ---
 
@@ -61,5 +61,5 @@
 ## In attesa
 
 - Inglese, Storia e altre materie (un tool alla volta, quando servono)
-- **Matematica — progettazione da rifare (2026-10-20).** Il codice (motore polinomi/disequazioni, formule, grafico, schermata v2 con 2 regole su 13) e `specifiche/modello_matematica.md` sono nati dalla schermata, con dati scritti da Claude e senza materiale dell'utente. Si fermano. Prossimo: l'utente porta indice del libro e 5-10 esercizi con dove si blocca → specifica nuova (`procedura_nuovi_documenti.md`) → test che confronta gli esempi col motore → solo dopo la schermata. Cartella `01_Argomenti/Matematica/Prova/` è un segnaposto.
+- **Matematica (2026-10-21).** Spec approvata, schema e vista scheda `regola`, Formulario, Derivate (22 schede, 10 esercizi, esempi controllati coi numeri). Il vecchio codice è in `99_Archivio/Obsoleti/2026-10-21/`. Prossimo: Limiti e gli altri argomenti dalla sessione di studio; figure per i grafici (aggiunta 3) e passi con motivazione per le dimostrazioni (aggiunta 4) quando servono.
 - Sistemi e Reti: argomento `Python` creato (fonti e `_scheda.md`), documenti da fare dopo la scelta dei moduli.

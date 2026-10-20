@@ -1,9 +1,12 @@
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import type { SchedaFigura, SchedaPrimaDopo, SchedaRicetta, Situazioni } from '@shared/situazioni'
+import type { SchedaFigura, SchedaPrimaDopo, SchedaRegola, SchedaRicetta, Situazioni } from '@shared/situazioni'
 import { Icona } from '../componenti/Icona'
 import { useStore } from '../store'
 import { Cod, testoPuro } from './Codice'
+import { codiceDaCopiare, righeCodice } from './righe'
 import { DisegnoScheda } from './Figura'
+import { Comando, TestoMat } from './Formula'
+import { Regola } from './Regola'
 import { ModificaScheda } from './ModificaScheda'
 import { useSit, VISTA0 } from './stato'
 import type { InfoScheda } from './util'
@@ -40,11 +43,11 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
         <div>
           <div className="s-kind">{tipo}{s.fonte ? ` · ${s.fonte}` : ''}</div>
           <h1>{s.titolo}</h1>
-          <span className="s-cn">{s.comando}</span>
+          {s.tipo === 'regola' ? <span className="s-cn rg-cn"><Comando s={s} /></span> : <span className="s-cn">{s.comando}</span>}
         </div>
         <div className="s-when">
-          <b>{ricetta ? 'Quando serve' : 'A cosa serve'}</b>
-          <p>{s.tipo === 'prima_dopo' ? s.uso : s.quando}</p>
+          <b>{s.tipo === 'regola' ? 'Cosa vedo' : ricetta ? 'Quando serve' : 'A cosa serve'}</b>
+          <p>{s.tipo === 'prima_dopo' ? s.uso : s.tipo === 'regola' ? <TestoMat s={s.frase} /> : s.quando}</p>
         </div>
       </div>
     </>
@@ -80,7 +83,7 @@ function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
           <div className="s-rels">
             {s.vicine.filter((v) => ctx.dati.schede[v]).map((v) => (
               <button key={v} type="button" className="s-chip" data-c={ctx.dati.indice.rami[ctx.info[v]!.bi]!.colore} onClick={() => apri(v)}>
-                {ctx.dati.schede[v]!.sigla}<small>{ctx.dati.schede[v]!.comando}</small>
+                {ctx.dati.schede[v]!.sigla}<small><Comando s={ctx.dati.schede[v]!} /></small>
               </button>
             ))}
           </div>
@@ -126,7 +129,7 @@ function Ricetta({ ctx, s }: { ctx: Ctx; s: SchedaRicetta }): ReactNode {
     return { fasi, trappole, nRighe: n }
   }, [s])
 
-  const testoFase = (i: number): string => s.fasi[i]!.righe.map((r) => testoPuro(r.codice.trim(), v.esempi, s.segnaposto)).join('\n')
+  const testoFase = (i: number): string => s.fasi[i]!.righe.map((r) => testoPuro(codiceDaCopiare(r.codice), v.esempi, s.segnaposto)).join('\n')
   const vai = (n: number): void => {
     document.getElementById(`L${n}`)?.scrollIntoView({ block: 'center', behavior: 'smooth' })
     setFlash(n)
@@ -165,16 +168,25 @@ function Ricetta({ ctx, s }: { ctx: Ctx; s: SchedaRicetta }): ReactNode {
             <div className={'s-pg' + (note.length ? '' : ' solo')}>
               <div className="s-code">
                 {f.righe.map(({ n, r, nota }) => {
-                  const ind = r.codice.match(/^ */)![0].length
+                  const { ind, righe } = righeCodice(r.codice)
+                  const extra = (
+                    <>
+                      {r.commento && <span className="s-cm"> {ctx.dati.indice.prefissoCommento} {r.commento}</span>}
+                      {nota && <span className={'s-mk' + (r.trappola ? ' tp' : '')}>{n}</span>}
+                    </>
+                  )
+                  const codice = (t: string): ReactNode => (
+                    <span className={'s-lc' + (rev.has(n) ? ' rev' : '')} onClick={() => v.prova && setRev((o) => new Set(o).add(n))}>
+                      <Cod txt={t} esempi={v.esempi} slots={s.segnaposto} />
+                    </span>
+                  )
                   return (
                     <div key={n} id={`L${n}`} className={'s-ln' + (hot === n ? ' hl' : '') + (flash === n ? ' flash' : '')} data-n={n} style={{ ['--ind' as string]: ind }}>
                       <span className="no">{n}</span>
                       <span className="lt">
-                        <span className={'s-lc' + (rev.has(n) ? ' rev' : '')} onClick={() => v.prova && setRev((o) => new Set(o).add(n))}>
-                          <Cod txt={r.codice.trim()} esempi={v.esempi} slots={s.segnaposto} />
-                        </span>
-                        {r.commento && <span className="s-cm"> {ctx.dati.indice.prefissoCommento} {r.commento}</span>}
-                        {nota && <span className={'s-mk' + (r.trappola ? ' tp' : '')}>{n}</span>}
+                        {righe.length > 1
+                          ? righe.map((x, k) => <span key={k} className="s-bl" style={{ ['--rel' as string]: x.rel }}>{codice(x.t || ' ')}{k === righe.length - 1 && extra}</span>)
+                          : <>{codice(righe[0]?.t ?? '')}{extra}</>}
                       </span>
                     </div>
                   )
@@ -276,6 +288,16 @@ function Figura({ ctx, s }: { ctx: Ctx; s: SchedaFigura }): ReactNode {
   )
 }
 
+function RegolaScheda({ ctx, s }: { ctx: Ctx; s: SchedaRegola }): ReactNode {
+  return (
+    <>
+      <Testata ctx={ctx} id={s.id} tipo="Regola" />
+      <Regola rel={ctx.rel} dati={ctx.dati} s={s} />
+      <Piede ctx={ctx} id={s.id} />
+    </>
+  )
+}
+
 export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const s = ctx.dati.schede[id]
   const ref = useRef<HTMLDivElement>(null)
@@ -286,7 +308,7 @@ export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const r = ctx.dati.indice.rami[ctx.info[id]!.bi]!
   return (
     <div ref={ref} data-c={r.colore}>
-      {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} /> : s.tipo === 'figura' ? <Figura key={id} ctx={ctx} s={s} /> : <PrimaDopo key={id} ctx={ctx} s={s} />}
+      {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} /> : s.tipo === 'figura' ? <Figura key={id} ctx={ctx} s={s} /> : s.tipo === 'regola' ? <RegolaScheda key={id} ctx={ctx} s={s} /> : <PrimaDopo key={id} ctx={ctx} s={s} />}
     </div>
   )
 }

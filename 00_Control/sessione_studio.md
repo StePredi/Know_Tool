@@ -103,3 +103,16 @@ Una riga sola, concreta: cosa stavo facendo, cosa è successo, cosa mi aspettavo
 ## 7. Log
 
 A fine lavoro aggiungo una riga a `LOG.md` con la data, cosa ho creato o cambiato e dove.
+
+## Matematica: come si scrive un argomento (2026-10-21)
+Specifica: `specifiche/modello_matematica.md`. Esempio completo da copiare: `01_Argomenti/Matematica/Derivate/Derivate per situazioni/`.
+
+- **Dove:** `01_Argomenti/Matematica/<Argomento>/<Argomento> per situazioni/` con `indice.yaml`, `schede/<id>.yaml` (tipo `regola`) e, se serve, `esercizi.yaml`. Dall'app: «+ Nuovo → Matematica» crea la struttura.
+- **Materiale:** si parte dagli esercizi e dai punti in cui Ste si blocca, non da un programma inventato. Formule e risultati si controllano sul libro di Ste.
+- **Mappa:** un ramo = una famiglia di casi, nell'ordine in cui si riconosce l'esercizio. Per le procedure (scomposizione, disequazioni, studio di funzione) il ramo ha `ordine: true`: le schede sono i passi 1, 2, 3. L'indice ha `ingresso` (cosa guardo) e `guida` (la domanda da farsi).
+- **Scheda `regola`:** `vedo` (segnale di riconoscimento), `formula` (testo o lista), `adatto` (come adattarla), `esempi` (`da`, `passi`, `ris`, `verifica`), `errore`, `confondi` (`scheda` + `differenza`), `perche`. `comando` è la riga corta sulla foglia della mappa (se manca si usa la prima formula).
+- **Formule:** notazione testuale. In `formula`, `da`, `ris`, `comando` senza apici inversi; negli altri testi tra apici inversi. Segni: `^` apice, `_` pedice (un carattere o tra parentesi), `frac(a|b)`, `sqrt(x)`, `->`, `>=`, `<=`, `!=`, `+-`, `inf`, `pi`, `*`. Funzioni: sin cos tan cot arcsin arccos arctan ln log exp. `f` e `g` sono sempre le due funzioni generiche.
+- **Controllo con i numeri:** negli esempi di derivate scrivi `verifica: derivata` (`ris` è la derivata di `da`); per la scomposizione `verifica: scomposizione`. Il test calcola i due lati in sei punti e segnala gli esempi che non tornano.
+- **Prima di consegnare:** `cd 02_App && npm test`. `tests/regola.test.ts` legge da solo tutti i documenti in `01_Argomenti/Matematica`: indice, schede, collegamenti (`confondi`, `vicine`, passi con scheda, `esercizi.yaml`) e formule.
+- **Non si fa:** scrivere interfaccia o codice dell'app (tocca alla sessione di controllo); inventare formule a memoria senza controllo; mettere nei testi parole dentro le formule (`in x = 2`): le lettere vengono lette come variabili.
+- **Dimostrazioni di geometria:** si parte dalla tesi. Rami per tipo di tesi, un ramo a passi per lo scheletro. Negli esempi, passi `{dice, perche, scheda}` con la scheda del criterio che li giustifica.

@@ -1,0 +1,24 @@
+id: funzione-composta
+tipo: regola
+titolo: Funzione composta
+sigla: Funzione composta
+comando: f'(g)*g'
+vedo: "Una funzione con dentro qualcosa di più di x: sin(3x²), ln(x+1)."
+formula: "[f(g(x))]' = f'(g(x))*g'(x)"
+adatto:
+  - Deriva la funzione «fuori» lasciando il «dentro» com'è.
+  - Moltiplica per la derivata del «dentro».
+  - Le schede qui sotto sono casi già pronti di questa regola.
+esempi:
+  - da: sin(3x^2)
+    passi:
+      - "Fuori: sin → `cos(3x^2)`"
+      - "Dentro: `(3x^2)' = 6x`"
+    ris: 6x*cos(3x^2)
+    verifica: derivata
+errore: Dimenticare di moltiplicare per la derivata del dentro.
+confondi:
+  - scheda: prodotto
+    differenza: "Composta: una funzione dentro l'altra. Prodotto: due funzioni moltiplicate."
+perche: "Due ingranaggi collegati: la velocità finale è il prodotto delle due velocità."
+parole: composta catena dentro fuori

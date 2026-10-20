@@ -1,6 +1,9 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { Situazioni } from '@shared/situazioni'
 import { Icona } from '../componenti/Icona'
+import { Comando } from './Formula'
+import { Formulario } from './Formulario'
+import { haFormule } from './dati_formulario'
 import { calcolaMappa, chiaveGruppo, chiaveRamo, tutteLeChiavi } from './layout'
 import { useSit, VISTA0 } from './stato'
 import { cerca, type InfoScheda } from './util'
@@ -258,8 +261,8 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
                 const fatta = dati.ripassate.includes(n.id!)
                 return (
                   <button key={i} type="button" className={'s-nd s-sc' + (dim ? ' dim' : '')} data-c={r.colore} style={st} title={s.titolo} onClick={() => { if (!mosso.current) apri(n.id!) }}>
-                    <span className="lt">{s.sigla}</span>
-                    {v.fuoco === n.bi ? <span className="lw">{s.frase}</span> : <span className="lk">{s.comando}</span>}
+                    <span className="lt">{r.ordine && <i className="s-pas">{passo(dati, n.bi, n.id!)}</i>}{s.sigla}</span>
+                    {v.fuoco === n.bi ? <span className="lw">{s.frase}</span> : <span className="lk"><Comando s={s} /></span>}
                     {fatta && <span className="ok" aria-label="ripassata"><Icona nome="spunta" size={11} /></span>}
                   </button>
                 )
@@ -289,6 +292,11 @@ function Albero({ ctx, v, imposta, corrisp, sfumato, apri }: Props): ReactNode {
   )
 }
 
+/** Numero di una scheda dentro il suo ramo (per i rami a passi in ordine). */
+function passo(dati: Situazioni, bi: number, id: string): number {
+  return dati.indice.rami[bi]!.voci.flatMap((x) => x.schede).indexOf(id) + 1
+}
+
 export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
   const { rel, dati, ordine, info, pagliaio } = ctx
   const v = useSit((x) => x.viste[rel] ?? VISTA0)
@@ -306,6 +314,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
     return false
   }
 
+  const conFormule = useMemo(() => haFormule(dati), [dati])
   const props: Props = { ctx, v, imposta, corrisp: corrispondenze, sfumato, apri }
 
   return (
@@ -319,6 +328,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
           <div className="s-disp" role="group" aria-label="Disposizione">
             <button type="button" aria-pressed={v.disp === 'albero'} onClick={() => imposta({ disp: 'albero' })}>Albero</button>
             <button type="button" aria-pressed={v.disp === 'griglia'} onClick={() => imposta({ disp: 'griglia' })}>Griglia</button>
+            {conFormule && <button type="button" aria-pressed={v.disp === 'formulario'} onClick={() => imposta({ disp: 'formulario' })}>Formulario</button>}
           </div>
           <button type="button" className="btn m-vai" title="Modifica la mappa: rami, gruppi, ordine, schede" onClick={() => imposta({ modificaMappa: true })}><Icona nome="matita" size={14} /> Modifica mappa</button>
           <span className="s-count">Ripassate: <b>{dati.ripassate.length}</b> / {ordine.length}</span>
@@ -348,7 +358,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
                 trovate.slice(0, 8).map((id, i) => (
                   <button key={id} type="button" role="option" aria-selected={i === sel} className={i === sel ? 'sel' : ''} onMouseEnter={() => setSel(i)} onClick={() => apri(id)}>
                     <span className="rt">{dati.schede[id]!.sigla}</span>
-                    <span className="rk">{dati.schede[id]!.comando}</span>
+                    <span className="rk"><Comando s={dati.schede[id]!} /></span>
                     <span className="rb" data-c={dati.indice.rami[info[id]!.bi]!.colore}>{dati.indice.rami[info[id]!.bi]!.nome}</span>
                   </button>
                 ))
@@ -363,7 +373,7 @@ export function MappaSit({ ctx }: { ctx: Ctx }): ReactNode {
           <ul style={{ margin: '6px 0 0', paddingLeft: 18 }}>{dati.avvisi.map((a, i) => <li key={i}>{a}</li>)}</ul>
         </details>
       )}
-      {v.disp === 'albero' ? <Albero {...props} /> : <Griglia {...props} />}
+      {v.disp === 'formulario' && conFormule ? <Formulario dati={dati} corrisp={corrispondenze} apri={apri} /> : v.disp === 'albero' ? <Albero {...props} /> : <Griglia {...props} />}
     </>
   )
 }
@@ -396,8 +406,8 @@ function Griglia({ ctx, v, imposta, sfumato, apri }: Props): ReactNode {
                         const sc = dati.schede[id]!
                         return (
                           <button key={id} type="button" className={'s-gl' + (sfumato(bi, [id]) ? ' dim' : '')} title={sc.titolo} onClick={() => apri(id)}>
-                            <span className="lt">{sc.sigla}</span>
-                            {v.fuoco === bi ? <span className="lw">{sc.frase}</span> : <span className="lk">{sc.comando}</span>}
+                            <span className="lt">{dati.indice.rami[bi]!.ordine && <i className="s-pas">{passo(dati, bi, id)}</i>}{sc.sigla}</span>
+                            {v.fuoco === bi ? <span className="lw">{sc.frase}</span> : <span className="lk"><Comando s={sc} /></span>}
                             {dati.ripassate.includes(id) && <span className="ok" aria-label="ripassata"><Icona nome="spunta" size={11} /></span>}
                           </button>
                         )

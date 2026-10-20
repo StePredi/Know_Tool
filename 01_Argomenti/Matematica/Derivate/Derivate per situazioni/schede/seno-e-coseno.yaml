@@ -1,0 +1,25 @@
+id: seno-e-coseno
+tipo: regola
+titolo: Seno e coseno
+sigla: Seno e coseno
+comando: sin -> cos, cos -> -sin
+vedo: sin x o cos x con solo x dentro.
+formula:
+  - (sin x)' = cos x
+  - (cos x)' = -sin x
+adatto:
+  - Il coseno ha il segno meno.
+  - "Se dentro c'è più di x: vedi «Goniometriche di g»."
+esempi:
+  - da: 3*sin x + cos x
+    passi:
+      - "`(3*sin x)' = 3*cos x`"
+      - "`(cos x)' = -sin x`"
+    ris: 3*cos x - sin x
+    verifica: derivata
+errore: Dimenticare il meno nella derivata del coseno.
+confondi:
+  - scheda: goniometriche-di-g
+    differenza: Con qualcosa di diverso da x dentro, moltiplica per g′.
+perche: "Ciclo da ricordare: sin → cos → −sin → −cos → sin. Dopo quattro derivate torni al punto di partenza."
+parole: seno coseno sin cos goniometrica

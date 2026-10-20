@@ -16,7 +16,7 @@ Per ogni parte del progetto, qual è il file che vale.
 | Galleria «+ Nuovo» | `specifiche/galleria_modelli.md` | — |
 | Modello «Per situazioni» | `specifiche/modello_per_situazioni.md` | — |
 | Scheda riassuntiva dell'AI | `specifiche/scheda_riassuntiva_ai.md` | — |
-| Matematica | `specifiche/modello_matematica.md` (**in rifacimento**: vedi sotto) e `specifiche/matematica_argomenti.md` (elenco del programma) | — |
+| Matematica | `specifiche/modello_matematica.md` (approvata 2026-10-20: Matematica dentro «Per situazioni») e `specifiche/matematica_argomenti.md` (elenco del programma) | Mockup in `03_Demo/matematica_per_situazioni/` |
 | Cartelle e nomi | `REGOLE.md` §3 e §5 | — |
 | Lavoro di sviluppo / di studio | `sessione_controllo.md` / `sessione_studio.md` | — |
 
@@ -30,6 +30,6 @@ Per ogni parte del progetto, qual è il file che vale.
 
 ---
 
-## Matematica: stato (2026-10-20)
+## Matematica: stato (2026-10-21)
 
-La progettazione è stata riaperta: la schermata è arrivata prima del modello dei dati e senza materiale dell'utente. Finché non c'è la specifica nuova (secondo `procedura_nuovi_documenti.md`) **non si scrive altra interfaccia per Matematica**. Il codice e i dati esistenti restano, ma sono provvisori.
+Decisione di Ste: Materia (Matematica) → un documento «Per situazioni» per argomento, con lo stesso albero degli altri. Aggiunte al modello: scheda `regola`, rami a passi (`ordine`), `ingresso`/`guida`, `esercizi.yaml`, disposizione **Formulario**, controllo numerico degli esempi. Derivate è il documento di riferimento. Il resto degli argomenti lo scrive una sessione di studio (vedi `sessione_studio.md`, sezione Matematica). Il primo codice Matematica (motore polinomi, schermata dedicata) è archiviato in `99_Archivio/Obsoleti/2026-10-21/matematica_prima_versione/`.

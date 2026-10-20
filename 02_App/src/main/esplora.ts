@@ -332,6 +332,31 @@ export async function creaSituazioni(radice: string, padre: string, nome: string
   return `${padre}/${n}`
 }
 
+/** Nuovo documento di matematica: un «Per situazioni» con una scheda «regola» da compilare. Non sovrascrive. */
+export async function creaMatematica(radice: string, padre: string, nome: string): Promise<string> {
+  const err = nomeValido(nome)
+  if (err) throw new Error(err)
+  const n = nome.trim().replace(/\s+/g, ' ')
+  if (!padre || padre.toLowerCase() === 'italiano' || dentroAutori(padre)) throw new Error('L\'argomento si crea dentro una cartella di studio.')
+  const dirPadre = cartellaDi(radice, padre)
+  if (!(await esiste(dirPadre))) throw new Error('La cartella non esiste più.')
+  const dest = join(dirPadre, `${n} per situazioni`)
+  if (await esiste(dest)) throw new Error(`Esiste già «${n} per situazioni» qui.`)
+  await fs.mkdir(join(dest, 'schede'), { recursive: true })
+  const indice = {
+    modello: 'per_situazioni',
+    titolo: `${n}, per situazioni`,
+    centro: n.length > 18 ? n.slice(0, 17).trimEnd() + '…' : n,
+    sottotitolo: '',
+    ingresso: 'Cosa vedo',
+    guida: 'Che cosa mi chiede l\'esercizio?',
+    rami: [{ id: 'primo-ramo', nome: 'Primo ramo', colore: 'blue', voci: [{ schede: ['prima-regola'] }] }]
+  }
+  await fs.writeFile(join(dest, 'indice.yaml'), YAML.stringify(indice, { lineWidth: 0 }), 'utf8')
+  await fs.writeFile(join(dest, 'schede', 'prima-regola.yaml'), modelloScheda('regola', 'prima-regola', 'Prima regola'), 'utf8')
+  return `${padre}/${n} per situazioni`
+}
+
 function sostituisciCampo(md: string, chiave: string, valore: string): string {
   const m = md.match(/^(---\r?\n)([\s\S]*?)(\r?\n---)/)
   if (!m) throw new Error('Il file non ha l\'intestazione prevista.')

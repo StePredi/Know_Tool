@@ -1,0 +1,22 @@
+id: logaritmo-di-g
+tipo: regola
+titolo: Logaritmo di g
+sigla: Logaritmo di g
+comando: ln(g) -> g'/g
+vedo: "ln con dentro più della sola x: ln(x²+1)."
+formula: (ln(g))' = frac(g'|g)
+adatto:
+  - "Risultato sempre una frazione: derivata del dentro, fratto il dentro."
+  - "Se dentro c'è un prodotto o una potenza, prima usa le proprietà: `ln(x^2) = 2*ln(x)`."
+esempi:
+  - da: ln(x^2+1)
+    passi:
+      - Dentro `g = x^2+1`, `g' = 2x`
+    ris: frac(2x|x^2+1)
+    verifica: derivata
+errore: Scrivere solo 1/g senza g′.
+confondi:
+  - scheda: logaritmo
+    differenza: Con la sola x dentro, g′ = 1 e resta 1/x.
+perche: Catena su ln.
+parole: logaritmo di funzione ln di

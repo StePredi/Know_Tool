@@ -1,0 +1,504 @@
+<title>Derivate per situazioni</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mappa a rami (centro «Derivata», 2 rami a sinistra, 2 a destra) + pannello con la scheda del nodo scelto. Sotto i 760px diventa un elenco. */
+:root {
+  --bg: #f3f6f8;
+  --surface: #ffffff;
+  --ink: #15212b;
+  --muted: #566774;
+  --line: #d5dee5;
+  --accent: #2457d6;
+  --accent-soft: #e4ecfd;
+  --warn: #b3261e;
+  --warn-soft: #fdeceb;
+  --ok-soft: #e7f5ee;
+  --b-base: #0b7f73;
+  --b-oper: #6d42c4;
+  --b-comp: #c4620f;
+  --b-spec: #b82a52;
+  --on-branch: #ffffff;
+  --font-ui: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-math: 'STIX Two Text', 'Cambria Math', 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151b; --surface: #16202a; --ink: #e6eef4; --muted: #9aabb9; --line: #29374380;
+    --accent: #7ea4ff; --accent-soft: #1d2b4a; --warn: #ff9a92; --warn-soft: #3a1f1f; --ok-soft: #173326;
+    --b-base: #3cc4b4; --b-oper: #a98cf2; --b-comp: #f0a257; --b-spec: #f07fa0; --on-branch: #0e151b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151b; --surface: #16202a; --ink: #e6eef4; --muted: #9aabb9; --line: #29374380;
+  --accent: #7ea4ff; --accent-soft: #1d2b4a; --warn: #ff9a92; --warn-soft: #3a1f1f; --ok-soft: #173326;
+  --b-base: #3cc4b4; --b-oper: #a98cf2; --b-comp: #f0a257; --b-spec: #f07fa0; --on-branch: #0e151b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 15px; line-height: 1.5;
+  padding-block: 20px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1480px; margin: 0 auto; display: grid; gap: 16px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+header { display: grid; gap: 6px; }
+h1 { font-size: clamp(22px, 3vw, 30px); line-height: 1.15; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.sub { color: var(--muted); max-width: 70ch; margin: 0; }
+.bozza { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); background: var(--surface);
+  border: 1px dashed var(--line); border-radius: 6px; padding: 4px 10px; width: fit-content; max-width: 100%; }
+
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.search { flex: 1 1 240px; min-width: 0; display: flex; }
+.search input { width: 100%; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 8px 14px; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+.tool { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 8px 14px; font-weight: 500; }
+
+.prova { display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.prova h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0; font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 5px 14px; font-family: var(--font-math); font-size: 17px; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+.stage { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1100px) { .stage { grid-template-columns: minmax(0, 1fr) 420px; } .pannello { position: sticky; top: 12px; } }
+
+.mappa-box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; overflow: hidden; }
+.mappa-sizer { position: relative; width: 100%; }
+.mappa { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.mappa svg { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.nodo { position: absolute; border-radius: 10px; text-align: left; }
+.foglia { background: var(--surface); border: 1.5px solid color-mix(in srgb, var(--c) 60%, var(--line)); padding: 4px 10px; display: grid; align-content: center; gap: 0; }
+.foglia .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12.5px; font-weight: 600; color: var(--c); line-height: 1.25; }
+.foglia .fm { font-family: var(--font-math); font-size: 15px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.foglia:hover { background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
+.ramo { background: var(--c); color: var(--on-branch); border: 0; font-weight: 700; font-size: 14px; text-align: center; padding: 4px 10px; line-height: 1.2; }
+.ramo small { display: block; font-weight: 500; font-size: 11px; opacity: 0.9; }
+.centro { background: var(--ink); color: var(--bg); border: 0; text-align: center; font-weight: 700; font-size: 18px; display: grid; align-content: center; cursor: default; }
+.centro small { font-weight: 500; font-size: 11.5px; opacity: 0.8; }
+.nodo.dim { opacity: 0.28; }
+.nodo.sel { box-shadow: 0 0 0 3px var(--accent); }
+.badge { position: absolute; top: -9px; left: -9px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--bg); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.conn { fill: none; stroke-width: 2; }
+
+.elenco { display: none; gap: 10px; }
+.er { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
+.er > .eh { width: 100%; text-align: left; border: 0; background: var(--c); color: var(--on-branch); padding: 10px 14px; font-weight: 700; display: flex; justify-content: space-between; gap: 8px; }
+.er > .eh span { font-weight: 500; opacity: 0.9; font-size: 13px; }
+.er .rows { display: grid; }
+.row { display: grid; gap: 0; text-align: left; border: 0; border-top: 1px solid var(--line); background: transparent; padding: 8px 14px; position: relative; }
+.row .nm { font-weight: 600; font-size: 14px; color: var(--c); }
+.row .fm { font-family: var(--font-math); font-size: 16px; }
+.row.sel { background: var(--accent-soft); }
+.row.dim { opacity: 0.3; }
+.row .badge { top: 8px; left: auto; right: 12px; }
+.row.hide { display: none; }
+
+body.vista-elenco .mappa-box { display: none; }
+body.vista-elenco .elenco { display: grid; }
+@media (max-width: 759px) { .mappa-box { display: none; } .elenco { display: grid; } .seg { display: none; } .tool.mappa-only { display: none; } }
+
+.pannello { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 14px; min-width: 0; }
+.pannello h2 { margin: 0; font-size: 20px; line-height: 1.2; text-wrap: balance; }
+.pannello h3 { margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.pannello p, .pannello ul { margin: 0; }
+.pannello ul { padding-left: 18px; display: grid; gap: 4px; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; color: var(--on-branch); background: var(--c); border-radius: 5px; padding: 1px 8px; margin-bottom: 6px; }
+.big { font-family: var(--font-math); font-size: 22px; padding: 12px 14px; background: var(--accent-soft); border-radius: 8px; overflow-x: auto; display: grid; gap: 6px; }
+.big > div { white-space: nowrap; }
+.es { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 4px; }
+.es .da { font-family: var(--font-math); font-size: 19px; }
+.es .pa { font-size: 14px; color: var(--muted); }
+.es .ris { font-family: var(--font-math); font-size: 19px; }
+.es .ris::before { content: '= '; color: var(--muted); }
+.err { background: var(--warn-soft); border-radius: 8px; padding: 10px 12px; }
+.err h3 { color: var(--warn); }
+.conf { display: grid; gap: 6px; }
+.conf button { text-align: left; border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 6px 10px; }
+.conf button b { color: var(--accent); }
+.perche { background: var(--ok-soft); border-radius: 8px; padding: 10px 12px; }
+.vuoto { color: var(--muted); display: grid; gap: 10px; }
+.legenda { display: grid; gap: 6px; font-size: 14px; }
+.legenda div { display: flex; gap: 8px; align-items: baseline; }
+.dot { width: 10px; height: 10px; border-radius: 3px; background: var(--c); flex: none; transform: translateY(1px); }
+
+.piano { border: 1px solid var(--accent); border-radius: 10px; padding: 12px; display: grid; gap: 8px; background: var(--accent-soft); }
+.piano h3 { color: var(--accent); }
+.piano .ex { font-family: var(--font-math); font-size: 22px; }
+.piano ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; counter-reset: p; }
+.piano li button { width: 100%; text-align: left; display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: baseline; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 6px 10px; }
+.piano li button[aria-current="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.piano .n { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 12px; display: grid; place-items: center; }
+.piano .t b { font-weight: 600; }
+.piano .t span { color: var(--muted); font-size: 13.5px; display: block; }
+.piano .fin { font-family: var(--font-math); font-size: 20px; }
+.piano .fin::before { content: 'Risultato:  '; font-family: var(--font-ui); font-size: 13px; color: var(--muted); }
+
+.fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 0.12em; line-height: 1.15; }
+.fr > .n { border-bottom: 1px solid currentColor; padding: 0 0.25em; }
+.fr > .d { padding: 0 0.25em; }
+.rd { border-top: 1px solid currentColor; padding: 0 0.08em; }
+sup, sub { font-size: 0.68em; line-height: 0; }
+@media (prefers-reduced-motion: no-preference) { .nodo { transition: opacity .15s, box-shadow .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Derivate per situazioni</h1>
+    <p class="sub">Guarda l'ultima operazione che faresti per calcolare l'espressione: quella dice quale regola usare. Tocca un nodo per la scheda, oppure scegli un esercizio e segui il piano.</p>
+    <div class="bozza">Demo fuori dall'app · contenuto scritto da Claude, da controllare sul tuo libro</div>
+  </header>
+
+  <div class="bar">
+    <label class="search"><input id="cerca" type="search" placeholder="Cerca: radice, frazione, x in alto, seno…" aria-label="Cerca una regola"></label>
+    <div class="seg" role="group" aria-label="Vista">
+      <button id="v-mappa" aria-pressed="true">Mappa</button>
+      <button id="v-elenco" aria-pressed="false">Elenco</button>
+    </div>
+    <button class="tool mappa-only" id="tutto">Chiudi tutto</button>
+  </div>
+
+  <section class="prova">
+    <h2>Prova con un esercizio</h2>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <div class="stage">
+    <div>
+      <div class="mappa-box"><div class="mappa-sizer" id="sizer"><div class="mappa" id="mappa"></div></div></div>
+      <div class="elenco" id="elenco"></div>
+    </div>
+    <aside class="pannello" id="pannello" aria-live="polite"></aside>
+  </div>
+</div>
+
+<script>
+(function () {
+  var P = '′';
+  var S = function (t) { return '<sup>' + t + '</sup>'; };
+  var B = function (t) { return '<sub>' + t + '</sub>'; };
+  var fr = function (n, d) { return '<span class="fr"><span class="n">' + n + '</span><span class="d">' + d + '</span></span>'; };
+  var w = function (t) { return /^[A-Za-z0-9′]+$/.test(t.replace(/<[^>]+>/g, '')) ? t : '(' + t + ')'; };
+  var sl = function (n, d) { return w(n) + '/' + w(d); };
+  var rd = function (t) { return '√<span class="rd">' + t + '</span>'; };
+
+  var RAMI = [
+    { id: 'base', nome: 'Pezzi base', sotto: 'una sola funzione', col: 'var(--b-base)', lato: 'L', nodi: ['k', 'pot', 'rad', 'rec', 'exp', 'log', 'sc', 'tan', 'inv'] },
+    { id: 'spec', nome: 'Casi particolari', sotto: 'prima o dopo', col: 'var(--b-spec)', lato: 'L', nodi: ['fg', 'semp', 'punto'] },
+    { id: 'oper', nome: 'Più pezzi insieme', sotto: '+, −, ×, ÷', col: 'var(--b-oper)', lato: 'R', nodi: ['som', 'pro', 'quo'] },
+    { id: 'comp', nome: 'Qualcosa dentro', sotto: 'funzioni composte', col: 'var(--b-comp)', lato: 'R', nodi: ['cat', 'potf', 'radf', 'expf', 'logf', 'scf', 'piu'] }
+  ];
+
+  var N = {
+    k: { nome: 'Costante', breve: 'k → 0', vedo: 'Un numero solo, senza x (anche π, e, √2, ln 2).', formula: '(k)' + P + ' = 0',
+      adatto: ['Anche π, ln 2 o e² sono numeri: la derivata è 0.', 'Un numero che moltiplica una funzione non sparisce: vedi «Somma e costante».'],
+      esempi: [{ da: '7', passi: [], ris: '0' }, { da: 'ln 2', passi: ['È un numero, non dipende da x'], ris: '0' }],
+      errore: 'Derivare ln 2 come 1/2: è un numero, non ln x.', confondi: [{ id: 'som', diff: 'k·f non è una costante: la k resta e si deriva f.' }],
+      perche: 'Una costante non cambia al variare di x: la pendenza è zero.', chiavi: 'numero costante zero' },
+    pot: { nome: 'Potenza', breve: 'x' + S('n') + ' → n·x' + S('n−1'), vedo: 'La x è in basso e l\'esponente è un numero (x², x⁵, x⁻³).', formula: '(x' + S('n') + ')' + P + ' = n·x' + S('n−1'),
+      adatto: ['Scendi con l\'esponente davanti, poi togli 1 all\'esponente.', 'Un numero davanti resta: (5x⁴)′ = 20x³.', 'Esponente negativo: −3 − 1 = −4.'],
+      esempi: [{ da: '5x⁴', passi: ['L\'esponente 4 scende: 5·4·x³'], ris: '20x³' }, { da: fr('1', 'x' + S('3')), passi: ['Riscrivo: x⁻³', 'Scendo con −3 e tolgo 1: −3·x⁻⁴'], ris: '−' + fr('3', 'x' + S('4')) }],
+      errore: 'Dimenticare di togliere 1, o con esponente negativo scrivere x⁻² invece di x⁻⁴.',
+      confondi: [{ id: 'exp', diff: 'x^n ha la x in basso; a^x ha la x in alto.' }],
+      perche: 'Se x cresce di poco, x^n cresce n volte x^(n−1) per quel poco: l\'esponente scende e la pendenza si moltiplica.', chiavi: 'potenza esponente x alla' },
+    rad: { nome: 'Radice', breve: rd('x') + ' → ' + sl('1', '2' + rd('x')), vedo: 'Una radice con solo x sotto (√x, ∛x).', formula: '(' + rd('x') + ')' + P + ' = ' + fr('1', '2' + rd('x')),
+      adatto: ['Riscrivi come potenza: √x = x^(1/2), ∛x = x^(1/3), e usa la regola della potenza.', 'Radice cubica: (∛x)′ = 1/(3·∛x²).'],
+      esempi: [{ da: rd('x'), passi: ['x^(1/2)', 'Scendo con 1/2 e tolgo 1: ½·x^(−1/2)'], ris: fr('1', '2' + rd('x')) }],
+      errore: 'Scrivere 1/√x: manca il 2.', confondi: [{ id: 'radf', diff: 'Se sotto la radice c\'è più della sola x, serve anche la catena.' }],
+      perche: 'È la regola della potenza con esponente 1/2.', chiavi: 'radice quadrata cubica' },
+    rec: { nome: 'Reciproco', breve: sl('1', 'x') + ' → −' + sl('1', 'x' + S('2')), vedo: '1 fratto x (o numero fratto x, 1/x²).', formula: '(' + fr('1', 'x') + ')' + P + ' = −' + fr('1', 'x' + S('2')),
+      adatto: ['È x⁻¹: scendo con −1.', '1/x² = x⁻² → −2/x³.'],
+      esempi: [{ da: fr('3', 'x'), passi: ['3·x⁻¹', '3·(−1)·x⁻²'], ris: '−' + fr('3', 'x' + S('2')) }],
+      errore: 'Dimenticare il meno.', confondi: [{ id: 'log', diff: '1/x è la derivata di ln x; la derivata di 1/x è −1/x².' }],
+      perche: 'Caso particolare della potenza con n = −1.', chiavi: 'reciproco frazione uno fratto x' },
+    exp: { nome: 'Esponenziale', breve: 'e' + S('x') + ' → e' + S('x'), vedo: 'La x è in alto (esponente) e la base è un numero: e^x, 2^x.', formula: '(e' + S('x') + ')' + P + ' = e' + S('x') + '<br>(a' + S('x') + ')' + P + ' = a' + S('x') + '·ln a',
+      adatto: ['Con e la funzione resta uguale.', 'Con un\'altra base a compare ln a.', 'Se in alto non c\'è solo x, vedi «Esponenziale di una funzione».'],
+      esempi: [{ da: '2' + S('x'), passi: ['Base 2: 2^x·ln 2'], ris: '2' + S('x') + '·ln 2' }],
+      errore: 'Usare la regola della potenza (x·a^(x−1)): qui la x non è la base.', confondi: [{ id: 'pot', diff: 'La x in alto è l\'esponenziale, la x in basso è la potenza.' }],
+      perche: 'e è la base per cui la pendenza della curva è uguale all\'altezza.', chiavi: 'esponenziale x in alto e alla x' },
+    log: { nome: 'Logaritmo', breve: 'ln x → ' + sl('1', 'x'), vedo: 'ln x, log x, log in base a.', formula: '(ln x)' + P + ' = ' + fr('1', 'x') + '<br>(log' + B('a') + ' x)' + P + ' = ' + fr('1', 'x·ln a'),
+      adatto: ['ln è il logaritmo in base e.', 'In base a compare ln a sotto. Controlla se nel tuo libro «log» senza base vuol dire ln.'],
+      esempi: [{ da: '5 ln x', passi: ['Il 5 resta'], ris: fr('5', 'x') }, { da: 'log' + B('2') + ' x', passi: [], ris: fr('1', 'x·ln 2') }],
+      errore: 'Confondere 1/x (derivata di ln x) con la derivata di 1/x.', confondi: [{ id: 'rec', diff: 'La derivata di 1/x è −1/x².' }, { id: 'logf', diff: 'Con qualcosa dentro il logaritmo serve g′.' }],
+      perche: 'Il logaritmo cresce sempre più piano, e a x grande la pendenza è piccola: 1/x.', chiavi: 'logaritmo ln log' },
+    sc: { nome: 'Seno e coseno', breve: 'sin → cos, cos → −sin', vedo: 'sin x o cos x con solo x dentro.', formula: '(sin x)' + P + ' = cos x<br>(cos x)' + P + ' = −sin x',
+      adatto: ['Il coseno ha il segno meno.', 'Se dentro c\'è più di x: vedi «Goniometriche di una funzione».'],
+      esempi: [{ da: '3 sin x + cos x', passi: ['(3 sin x)′ = 3 cos x', '(cos x)′ = −sin x'], ris: '3 cos x − sin x' }],
+      errore: 'Dimenticare il meno nella derivata del coseno.', confondi: [{ id: 'scf', diff: 'Con qualcosa di diverso da x dentro, moltiplica per g′.' }],
+      perche: 'Ciclo da ricordare: sin → cos → −sin → −cos → sin. Dopo quattro derivate torni al punto di partenza.', chiavi: 'seno coseno sin cos goniometrica' },
+    tan: { nome: 'Tangente', breve: 'tan x → ' + sl('1', 'cos' + S('2') + 'x'), vedo: 'tan x con solo x dentro.', formula: '(tan x)' + P + ' = ' + fr('1', 'cos' + S('2') + ' x') + ' = 1 + tan' + S('2') + ' x',
+      adatto: ['Le due forme sono uguali: usa quella che semplifica meglio.', 'Con qualcosa dentro: g′/cos²g.'],
+      esempi: [{ da: '2 tan x', passi: [], ris: fr('2', 'cos' + S('2') + ' x') }],
+      errore: 'Scrivere 1/cos x: manca il quadrato.', confondi: [{ id: 'scf', diff: 'Con qualcosa dentro serve anche g′.' }],
+      perche: 'Si ricava dal quoziente sin/cos.', chiavi: 'tangente tan' },
+    inv: { nome: 'Arcoseno, arcotangente', breve: 'arctan x → ' + sl('1', '1+x' + S('2')), vedo: 'arcsin x, arccos x, arctan x.', formula: '(arcsin x)' + P + ' = ' + fr('1', rd('1−x' + S('2'))) + '<br>(arctan x)' + P + ' = ' + fr('1', '1+x' + S('2')),
+      adatto: ['arccos x ha lo stesso risultato di arcsin con il segno meno.', 'Con qualcosa dentro moltiplica per g′.'],
+      esempi: [{ da: '4 arctan x', passi: [], ris: fr('4', '1+x' + S('2')) }],
+      errore: 'Pensare che arcsin x sia 1/sin x: è la funzione inversa, non il reciproco.', confondi: [{ id: 'sc', diff: 'sin x e arcsin x sono funzioni diverse (inverse).' }],
+      perche: 'Sono le inverse di sin e tan: le loro derivate si ricavano da quelle di sin e tan.', chiavi: 'arcoseno arcotangente inversa arcsin arctan' },
+
+    som: { nome: 'Somma e costante', breve: '(f+g)' + P + ' = f' + P + '+g' + P, vedo: 'Pezzi separati da + o −; oppure un numero che moltiplica.', formula: '(f ± g)' + P + ' = f' + P + ' ± g' + P + '<br>(k·f)' + P + ' = k·f' + P,
+      adatto: ['Deriva ogni pezzo da solo e rimetti i segni.', 'Il numero davanti resta: (3x²)′ = 3·2x = 6x.'],
+      esempi: [{ da: '3x² + 5x − 7', passi: ['(3x²)′ = 6x', '(5x)′ = 5', '(7)′ = 0'], ris: '6x + 5' }],
+      errore: 'Usare questa regola su un prodotto o una frazione: quelli non si derivano pezzo per pezzo.', confondi: [{ id: 'pro', diff: 'Se i pezzi si moltiplicano, serve la regola del prodotto.' }],
+      perche: 'La pendenza di una somma è la somma delle pendenze.', chiavi: 'somma differenza più meno numero davanti' },
+    pro: { nome: 'Prodotto', breve: 'f' + P + 'g + fg' + P, vedo: 'Due pezzi con la x che si moltiplicano: x²·sin x, e^x·ln x.', formula: '(f·g)' + P + ' = f' + P + '·g + f·g' + P,
+      adatto: ['Deriva il primo lasciando il secondo, più il primo per il secondo derivato.', 'Un numero che moltiplica non è un fattore: usa «Somma e costante».', 'Alla fine raccogli per semplificare.'],
+      esempi: [{ da: 'x²·sin x', passi: ['f = x², f′ = 2x', 'g = sin x, g′ = cos x', 'f′g + fg′'], ris: '2x·sin x + x²·cos x' }],
+      errore: 'Derivare i due fattori e moltiplicare f′·g′: è sbagliato.', confondi: [{ id: 'som', diff: 'Con il + si deriva pezzo per pezzo; con il × serve questa regola.' }],
+      perche: 'Pensa all\'area di un rettangolo f per g: se cambiano entrambi i lati, l\'area cambia per due strisce.', chiavi: 'prodotto per moltiplicazione' },
+    quo: { nome: 'Quoziente', breve: sl('f' + P + 'g − fg' + P, 'g' + S('2')), vedo: 'Una frazione con la x sia sopra sia sotto.', formula: '(' + fr('f', 'g') + ')' + P + ' = ' + fr('f' + P + '·g − f·g' + P, 'g' + S('2')),
+      adatto: ['Sopra: derivata del sopra per il sotto, MENO il sopra per la derivata del sotto.', 'Sotto: tutto il denominatore al quadrato.', 'Se sotto c\'è solo un numero, è una costante: non serve.', 'Se sopra c\'è solo un numero, prova «Reciproco» o riscrivi come potenza.'],
+      esempi: [{ da: fr('x' + S('2'), 'x+1'), passi: ['f = x², f′ = 2x', 'g = x+1, g′ = 1', 'Sopra: 2x(x+1) − x²·1 = x² + 2x'], ris: fr('x' + S('2') + '+2x', '(x+1)' + S('2')) }],
+      errore: 'Scambiare l\'ordine sopra (cambia il segno) o dimenticare il quadrato sotto.', confondi: [{ id: 'pro', diff: 'Il quoziente ha un meno nel numeratore e un quadrato sotto.' }],
+      perche: 'Si ricava dal prodotto f · (1/g) usando la catena sul reciproco.', chiavi: 'quoziente frazione divisione fratto' },
+
+    cat: { nome: 'Funzione composta', breve: 'f' + P + '(g)·g' + P, vedo: 'Una funzione con dentro qualcosa di più di x: sin(3x²), ln(x+1).', formula: '[f(g(x))]' + P + ' = f' + P + '(g(x))·g' + P + '(x)',
+      adatto: ['Deriva la funzione «fuori» lasciando il «dentro» com\'è.', 'Moltiplica per la derivata del «dentro».', 'Le schede qui sotto sono casi già pronti di questa regola.'],
+      esempi: [{ da: 'sin(3x²)', passi: ['Fuori: sin → cos(3x²)', 'Dentro: (3x²)′ = 6x'], ris: '6x·cos(3x²)' }],
+      errore: 'Dimenticare di moltiplicare per la derivata del dentro.', confondi: [{ id: 'pro', diff: 'Composta: una funzione dentro l\'altra. Prodotto: due funzioni moltiplicate.' }],
+      perche: 'Due ingranaggi collegati: la velocità finale è il prodotto delle due velocità.', chiavi: 'composta catena dentro fuori' },
+    potf: { nome: 'Potenza di una funzione', breve: 'n·g' + S('n−1') + '·g' + P, vedo: 'Una parentesi elevata a un numero: (x²+1)⁵.', formula: '(g' + S('n') + ')' + P + ' = n·g' + S('n−1') + '·g' + P,
+      adatto: ['Scendi con l\'esponente, tolgo 1 e lascio la parentesi.', 'Poi moltiplica per la derivata della parentesi.'],
+      esempi: [{ da: '(x²+1)' + S('5'), passi: ['5·(x²+1)⁴', 'Derivata della parentesi: 2x'], ris: '10x·(x²+1)' + S('4') }],
+      errore: 'Derivare solo la parentesi o solo l\'esponente.', confondi: [{ id: 'pot', diff: 'Se dentro c\'è solo x, è la potenza semplice.' }],
+      perche: 'Caso di catena: fuori «elevato a n», dentro g.', chiavi: 'parentesi elevata potenza di funzione' },
+    radf: { nome: 'Radice di una funzione', breve: sl('g' + P, '2' + rd('g')), vedo: 'Una radice con dentro più di x: √(x²+1).', formula: '(' + rd('g') + ')' + P + ' = ' + fr('g' + P, '2' + rd('g')),
+      adatto: ['Sopra: derivata di quello che c\'è sotto la radice.', 'Sotto: 2 per la radice stessa.'],
+      esempi: [{ da: rd('x' + S('2') + '+1'), passi: ['g = x²+1, g′ = 2x'], ris: fr('2x', '2' + rd('x' + S('2') + '+1')) + ' = ' + fr('x', rd('x' + S('2') + '+1')) }],
+      errore: 'Dimenticare g′ al numeratore.', confondi: [{ id: 'rad', diff: 'Con la sola x sotto, il numeratore è 1.' }],
+      perche: 'Catena su x^(1/2).', chiavi: 'radice di funzione sotto radice' },
+    expf: { nome: 'Esponenziale di una funzione', breve: 'e' + S('g') + ' → e' + S('g') + '·g' + P, vedo: 'Esponenziale con in alto più della sola x: e^(x²), 3^(2x).', formula: '(e' + S('g') + ')' + P + ' = e' + S('g') + '·g' + P + '<br>(a' + S('g') + ')' + P + ' = a' + S('g') + '·ln a·g' + P,
+      adatto: ['Riscrivi la stessa funzione e moltiplica per la derivata dell\'esponente.', 'Con base diversa da e aggiungi ln a.'],
+      esempi: [{ da: 'e' + S('x²'), passi: ['Esponente x², derivata 2x'], ris: '2x·e' + S('x²') }, { da: '3' + S('2x'), passi: ['ln 3 e derivata di 2x = 2'], ris: '2·ln 3·3' + S('2x') }],
+      errore: 'Scrivere e^(2x) → e^(2x): manca il 2 davanti.', confondi: [{ id: 'exp', diff: 'Con solo x in alto, nessun fattore extra.' }],
+      perche: 'Catena sull\'esponenziale.', chiavi: 'esponenziale di funzione e alla' },
+    logf: { nome: 'Logaritmo di una funzione', breve: 'ln g → ' + sl('g' + P, 'g'), vedo: 'ln con dentro più della sola x: ln(x²+1).', formula: '(ln g)' + P + ' = ' + fr('g' + P, 'g'),
+      adatto: ['Risultato sempre una frazione: derivata del dentro, fratto il dentro.', 'Se dentro c\'è un prodotto o una potenza, prima usa le proprietà: ln(x²) = 2 ln x.'],
+      esempi: [{ da: 'ln(x²+1)', passi: ['Dentro g = x²+1, g′ = 2x'], ris: fr('2x', 'x' + S('2') + '+1') }],
+      errore: 'Scrivere solo 1/g senza g′.', confondi: [{ id: 'log', diff: 'Con la sola x dentro, g′ = 1 e resta 1/x.' }],
+      perche: 'Catena su ln.', chiavi: 'logaritmo di funzione ln di' },
+    scf: { nome: 'Goniometriche di una funzione', breve: 'sin g → cos g·g' + P, vedo: 'Goniometrica con dentro più della sola x: cos(5x), sin(x²).', formula: '(sin g)' + P + ' = cos g·g' + P + '<br>(cos g)' + P + ' = −sin g·g' + P + '<br>(tan g)' + P + ' = ' + fr('g' + P, 'cos' + S('2') + ' g'),
+      adatto: ['Deriva la goniometrica lasciando il dentro uguale.', 'Poi moltiplica per g′.'],
+      esempi: [{ da: 'cos(5x)', passi: ['−sin(5x)', 'g′ = 5'], ris: '−5·sin(5x)' }],
+      errore: 'Dimenticare il meno nel coseno o il g′.', confondi: [{ id: 'sc', diff: 'Con la sola x dentro, g′ = 1.' }],
+      perche: 'Catena su sin, cos, tan.', chiavi: 'seno coseno di funzione sin cos tan composta' },
+    piu: { nome: 'Più strati', breve: 'dal fuori al dentro', vedo: 'Una funzione dentro una funzione dentro un\'altra: ln(sin 3x), sin²x.', formula: '[f(g(h))]' + P + ' = f' + P + '(g(h))·g' + P + '(h)·h' + P,
+      adatto: ['Elenca gli strati dal più esterno: ln( sin( 3x ) ).', 'Deriva uno strato per volta e moltiplica i pezzi.', 'sin²x vuol dire (sin x)²: parentesi elevata a un numero.'],
+      esempi: [{ da: 'ln(sin 3x)', passi: ['Strato 1, ln: 1/sin 3x', 'Strato 2, sin: cos 3x', 'Strato 3: 3'], ris: fr('3·cos 3x', 'sin 3x') }, { da: 'sin' + S('2') + ' x', passi: ['(sin x)²', '2·sin x · cos x'], ris: '2·sin x·cos x' }],
+      errore: 'Fermarsi al primo strato.', confondi: [{ id: 'cat', diff: 'È la stessa regola ripetuta più volte.' }],
+      perche: 'Con tre ingranaggi collegati le velocità si moltiplicano tutte.', chiavi: 'più strati composte multiple' },
+
+    fg: { nome: 'Funzione alla funzione', breve: 'f' + S('g') + ' → e' + S('g·ln f'), vedo: 'La x è sia nella base sia nell\'esponente: x^x, (sin x)^x.', formula: '(f' + S('g') + ')' + P + ' = f' + S('g') + '·(g' + P + '·ln f + g·' + fr('f' + P, 'f') + ')',
+      adatto: ['Il modo più sicuro: riscrivi f^g = e^(g·ln f) e deriva come composta.', 'Non vale né la regola della potenza né quella dell\'esponenziale.'],
+      esempi: [{ da: 'x' + S('x'), passi: ['x^x = e^(x·ln x)', 'Esponente: (x·ln x)′ = ln x + 1'], ris: 'x' + S('x') + '·(ln x + 1)' }],
+      errore: 'Usare la regola della potenza: la x è anche in alto.', confondi: [{ id: 'exp', diff: 'Nell\'esponenziale la base è un numero.' }],
+      perche: 'Ogni numero positivo può scriversi come potenza di e: a^b = e^(b·ln a).', chiavi: 'x alla x variabile in alto e in basso' },
+    semp: { nome: 'Semplifica prima', breve: 'riscrivi, poi deriva', vedo: 'Frazioni, radici o logaritmi che si possono riscrivere più corti.', formula: fr('x' + S('3') + '+x', 'x') + ' = x' + S('2') + ' + 1',
+      adatto: ['ln(x²) = 2 ln x · ln(ab) = ln a + ln b.', 'Se sotto c\'è un solo termine, spezza la frazione: (x³+x)/x = x²+1.', '1/x³ = x⁻³, √x·x = x^(3/2).'],
+      esempi: [{ da: fr('x' + S('3') + '+x', 'x'), passi: ['Semplifico: x² + 1 (per x ≠ 0)'], ris: '2x' }],
+      errore: 'Usare il quoziente quando la frazione si poteva semplificare: funziona, ma i conti sono lunghi.', confondi: [{ id: 'quo', diff: 'Se non si semplifica, serve il quoziente.' }],
+      perche: 'Meno passaggi = meno errori.', chiavi: 'semplifica riscrivi prima proprietà' },
+    punto: { nome: 'Derivata in un punto', breve: 'f' + P + '(a)', vedo: '«Calcola la pendenza in x = a», «retta tangente», «derivata in…».', formula: 'y − f(a) = f' + P + '(a)·(x − a)',
+      adatto: ['Prima trova f′(x) con la regola giusta, poi sostituisci x = a.', 'La retta tangente: valore f(a) e pendenza f′(a).'],
+      esempi: [{ da: 'f(x) = x³ in x = 2', passi: ['f′(x) = 3x²', 'f′(2) = 12', 'f(2) = 8'], ris: 'y = 12x − 16' }],
+      errore: 'Sostituire x = 2 prima di derivare: la derivata di un numero è 0.', confondi: [{ id: 'k', diff: 'Una costante ha derivata 0, ma f(a) è solo un numero da usare nella retta.' }],
+      perche: 'La derivata in un punto è la pendenza della tangente lì.', chiavi: 'punto tangente retta pendenza' }
+  };
+
+  var ES = [
+    { f: '3x² + 5x − 7', ris: '6x + 5', piano: [['som', 'Ultima operazione: somma e differenza.'], ['pot', 'Pezzi 3x² e 5x.'], ['k', 'Il −7 sparisce.']] },
+    { f: 'x²·sin x', ris: '2x·sin x + x²·cos x', piano: [['pro', 'Ultima operazione: due fattori che si moltiplicano.'], ['pot', 'Primo fattore x².'], ['sc', 'Secondo fattore sin x.']] },
+    { f: fr('x²', 'x+1'), ris: fr('x²+2x', '(x+1)²'), piano: [['quo', 'Ultima operazione: frazione con x sopra e sotto.'], ['pot', 'Derivata del sopra: x².'], ['som', 'Derivata del sotto: x+1.']] },
+    { f: 'sin(3x²)', ris: '6x·cos(3x²)', piano: [['scf', 'Fuori c\'è sin: dentro c\'è 3x².'], ['pot', 'Derivata del dentro: (3x²)′.']] },
+    { f: 'ln(x²+1)', ris: fr('2x', 'x²+1'), piano: [['logf', 'Fuori c\'è ln: dentro x²+1.'], ['som', 'Derivata del dentro, a pezzi.'], ['pot', 'Il pezzo x².']] },
+    { f: 'e<sup>x²</sup>·cos x', ris: 'e<sup>x²</sup>·(2x·cos x − sin x)', piano: [['pro', 'Ultima operazione: due fattori.'], ['expf', 'Primo fattore: e con x² in alto.'], ['pot', 'Derivata dell\'esponente x².'], ['sc', 'Secondo fattore cos x.']] },
+    { f: rd('x²+1'), ris: fr('x', rd('x²+1')), piano: [['radf', 'Fuori c\'è la radice: dentro x²+1.'], ['som', 'Derivata del dentro.'], ['pot', 'Il pezzo x².']] },
+    { f: '(x²+1)<sup>5</sup>', ris: '10x·(x²+1)<sup>4</sup>', piano: [['potf', 'Una parentesi elevata a 5.'], ['som', 'Derivata della parentesi.'], ['pot', 'Il pezzo x².']] },
+    { f: 'x<sup>x</sup>', ris: 'x<sup>x</sup>·(ln x + 1)', piano: [['fg', 'La x è nella base e nell\'esponente.'], ['log', 'Compare ln x.'], ['pro', 'Derivata di x·ln x.']] },
+    { f: 'ln(sin 3x)', ris: fr('3·cos 3x', 'sin 3x'), piano: [['piu', 'Tre strati: ln, sin, 3x.'], ['logf', 'Strato 1: ln.'], ['scf', 'Strato 2: sin.'], ['som', 'Strato 3: 3x.']] }
+  ];
+
+  var el = function (id) { return document.getElementById(id); };
+  var plain = function (h) { return h.replace(/<[^>]+>/g, ' ').toLowerCase(); };
+  var ramoDi = {}; RAMI.forEach(function (r) { r.nodi.forEach(function (id) { ramoDi[id] = r; }); });
+  var state = { sel: null, ex: null, step: 0, q: '', chiusi: {}, vista: 'mappa' };
+
+  function badgeMap() {
+    var m = {};
+    if (state.ex === null) return m;
+    ES[state.ex].piano.forEach(function (p, i) { if (!(p[0] in m)) m[p[0]] = i + 1; });
+    return m;
+  }
+  function matcha(id) {
+    if (!state.q) return true;
+    var n = N[id];
+    var t = plain(n.nome + ' ' + n.vedo + ' ' + n.breve + ' ' + (n.chiavi || ''));
+    return state.q.toLowerCase().split(/\s+/).every(function (w) { return t.indexOf(w) >= 0; });
+  }
+  function acceso(id) {
+    if (state.ex !== null) return id in badgeMap();
+    return matcha(id);
+  }
+
+  var LW = 200, LH = 46, PITCH = 52, BW = 130, BH = 52, CW = 140, CH = 64, GAP = 40, GRP = 30;
+  var X = { lf: 0, bl: LW + GAP, c: LW + GAP + BW + GAP, br: LW + GAP + BW + GAP + CW + GAP, rf: LW + GAP + BW + GAP + CW + GAP + BW + GAP };
+  var W = X.rf + LW;
+
+  function layout() {
+    var cols = { L: [], R: [] }, h = { L: 0, R: 0 };
+    RAMI.forEach(function (r) {
+      var n = state.chiusi[r.id] ? 0 : r.nodi.length;
+      var hh = Math.max(n * PITCH - (n ? 6 : 0), BH);
+      cols[r.lato].push({ r: r, y: h[r.lato], h: hh });
+      h[r.lato] += hh + GRP;
+    });
+    h.L -= GRP; h.R -= GRP;
+    var H = Math.max(h.L, h.R, CH);
+    ['L', 'R'].forEach(function (s) { var off = (H - h[s]) / 2; cols[s].forEach(function (c) { c.y += off; }); });
+    return { cols: cols, H: H };
+  }
+
+  function nodeBtn(cls, style, html, attrs) {
+    return '<button class="nodo ' + cls + '" style="' + style + '" ' + (attrs || '') + '>' + html + '</button>';
+  }
+
+  function renderMappa() {
+    var lay = layout(), bm = badgeMap(), html = '', paths = '';
+    var cy = lay.H / 2;
+    html += '<div class="nodo centro" style="left:' + X.c + 'px;top:' + (cy - CH / 2) + 'px;width:' + CW + 'px;height:' + CH + 'px">Derivata<small>cosa vedo → cosa faccio</small></div>';
+    ['L', 'R'].forEach(function (s) {
+      lay.cols[s].forEach(function (c) {
+        var r = c.r, by = c.y + c.h / 2 - BH / 2;
+        var bx = s === 'L' ? X.bl : X.br;
+        var x1 = s === 'L' ? X.c : X.c + CW, x2 = s === 'L' ? bx + BW : bx;
+        var col = r.col;
+        paths += '<path class="conn" stroke="' + col + '" d="M' + x1 + ' ' + cy + ' C' + (x1 + x2) / 2 + ' ' + cy + ' ' + (x1 + x2) / 2 + ' ' + (by + BH / 2) + ' ' + x2 + ' ' + (by + BH / 2) + '"/>';
+        var cl = state.chiusi[r.id];
+        html += nodeBtn('ramo', '--c:' + col + ';left:' + bx + 'px;top:' + by + 'px;width:' + BW + 'px;height:' + BH + 'px', r.nome + '<small>' + (cl ? '+ ' + r.nodi.length + ' regole' : r.sotto) + '</small>', 'data-ramo="' + r.id + '" aria-expanded="' + (!cl) + '"');
+        if (!cl) r.nodi.forEach(function (id, i) {
+          var ly = c.y + i * PITCH, lx = s === 'L' ? X.lf : X.rf;
+          var fx1 = s === 'L' ? bx : bx + BW, fx2 = s === 'L' ? lx + LW : lx;
+          paths += '<path class="conn" stroke="' + col + '" opacity=".55" d="M' + fx1 + ' ' + (by + BH / 2) + ' C' + (fx1 + fx2) / 2 + ' ' + (by + BH / 2) + ' ' + (fx1 + fx2) / 2 + ' ' + (ly + LH / 2) + ' ' + fx2 + ' ' + (ly + LH / 2) + '"/>';
+          html += nodeBtn('foglia' + (state.sel === id ? ' sel' : '') + (acceso(id) ? '' : ' dim'), '--c:' + col + ';left:' + lx + 'px;top:' + ly + 'px;width:' + LW + 'px;height:' + LH + 'px',
+            '<span class="nm">' + N[id].nome + '</span><span class="fm">' + N[id].breve + '</span>' + (bm[id] ? '<span class="badge">' + bm[id] + '</span>' : ''), 'data-id="' + id + '"');
+        });
+      });
+    });
+    var m = el('mappa');
+    m.style.width = W + 'px'; m.style.height = lay.H + 'px';
+    m.innerHTML = '<svg width="' + W + '" height="' + lay.H + '">' + paths + '</svg>' + html;
+    fit();
+  }
+  function fit() {
+    var box = el('sizer'), m = el('mappa');
+    var k = Math.min(1, box.clientWidth / W);
+    m.style.transform = 'scale(' + k + ')';
+    box.style.height = (parseFloat(m.style.height) * k) + 'px';
+  }
+
+  function renderElenco() {
+    var bm = badgeMap(), h = '';
+    RAMI.forEach(function (r) {
+      var cl = state.chiusi[r.id];
+      h += '<div class="er" style="--c:' + r.col + '"><button class="eh" data-ramo="' + r.id + '" aria-expanded="' + (!cl) + '">' + r.nome + '<span>' + r.sotto + '</span></button>';
+      if (!cl) {
+        h += '<div class="rows">';
+        r.nodi.forEach(function (id) {
+          var vis = acceso(id);
+          h += '<button class="row' + (state.sel === id ? ' sel' : '') + (vis ? '' : (state.ex !== null ? ' dim' : ' hide')) + '" data-id="' + id + '"><span class="nm">' + N[id].nome + '</span><span class="fm">' + N[id].breve + '</span>' + (bm[id] ? '<span class="badge">' + bm[id] + '</span>' : '') + '</button>';
+        });
+        h += '</div>';
+      }
+      h += '</div>';
+    });
+    el('elenco').innerHTML = h;
+  }
+
+  function schedaHTML(id) {
+    var n = N[id], r = ramoDi[id];
+    var h = '<div><span class="tag" style="--c:' + r.col + '">' + r.nome + '</span><h2>' + n.nome + '</h2></div>';
+    h += '<div><h3>Come lo riconosci</h3><p>' + n.vedo + '</p></div>';
+    h += '<div><h3>Formula</h3><div class="big">' + n.formula.split('<br>').map(function (x) { return '<div>' + x + '</div>'; }).join('') + '</div></div>';
+    h += '<div><h3>Come la adatto</h3><ul>' + n.adatto.map(function (a) { return '<li>' + a + '</li>'; }).join('') + '</ul></div>';
+    h += '<div><h3>Esempio svolto</h3>' + n.esempi.map(function (e) {
+      return '<div class="es"><div class="da">' + e.da + '</div>' + (e.passi.length ? '<div class="pa">' + e.passi.join(' → ') + '</div>' : '') + '<div class="ris">' + e.ris + '</div></div>';
+    }).join('') + '</div>';
+    h += '<div class="err"><h3>Errore tipico</h3><p>' + n.errore + '</p></div>';
+    if (n.confondi.length) h += '<div><h3>Da non confondere con</h3><div class="conf">' + n.confondi.map(function (c) {
+      return '<button data-id="' + c.id + '"><b>' + N[c.id].nome + '</b> · ' + c.diff + '</button>';
+    }).join('') + '</div></div>';
+    if (n.perche) h += '<div class="perche"><h3>Perché funziona</h3><p>' + n.perche + '</p></div>';
+    return h;
+  }
+
+  function renderPannello() {
+    var h = '';
+    if (state.ex !== null) {
+      var e = ES[state.ex];
+      h += '<div class="piano"><h3>Piano d\'attacco, da fuori a dentro</h3><div class="ex">' + e.f + '</div><ol>' + e.piano.map(function (p, i) {
+        return '<li><button data-step="' + i + '"' + (state.step === i ? ' aria-current="true"' : '') + '><span class="n">' + (i + 1) + '</span><span class="t"><b>' + N[p[0]].nome + '</b><span>' + p[1] + '</span></span></button></li>';
+      }).join('') + '</ol><div class="fin">' + e.ris + '</div></div>';
+    }
+    if (state.sel) h += schedaHTML(state.sel);
+    else if (state.ex === null) {
+      h += '<div class="vuoto"><h2>Come si usa</h2><p>1. Guarda l\'espressione e trova <b>l\'ultima operazione</b> che faresti per calcolarla.</p><p>2. Cerca quel caso nella mappa e apri la scheda.</p><p>3. Se dentro c\'è qualcosa di più di x, ripeti sullo strato interno.</p>' +
+        '<div class="legenda">' + RAMI.map(function (r) { return '<div style="--c:' + r.col + '"><span class="dot"></span><span><b>' + r.nome + '</b>: ' + r.sotto + '</span></div>'; }).join('') + '</div></div>';
+    }
+    el('pannello').innerHTML = h;
+  }
+
+  function renderChips() {
+    el('chips').innerHTML = ES.map(function (e, i) {
+      return '<button class="chip" data-ex="' + i + '" aria-pressed="' + (state.ex === i) + '">' + e.f + '</button>';
+    }).join('');
+  }
+
+  function render() {
+    document.body.classList.toggle('vista-elenco', state.vista === 'elenco');
+    el('v-mappa').setAttribute('aria-pressed', state.vista === 'mappa');
+    el('v-elenco').setAttribute('aria-pressed', state.vista === 'elenco');
+    el('tutto').textContent = Object.keys(state.chiusi).some(function (k) { return state.chiusi[k]; }) ? 'Apri tutto' : 'Chiudi tutto';
+    renderChips(); renderMappa(); renderElenco(); renderPannello();
+  }
+
+  function scegli(id) {
+    state.sel = id;
+    if (state.ex !== null) {
+      var i = ES[state.ex].piano.findIndex(function (p) { return p[0] === id; });
+      if (i >= 0) state.step = i;
+    }
+    var r = ramoDi[id]; if (state.chiusi[r.id]) state.chiusi[r.id] = false;
+    render();
+    if (window.innerWidth < 1100) el('pannello').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('button'); if (!t) return;
+    if (t.dataset.id) scegli(t.dataset.id);
+    else if (t.dataset.ramo) { state.chiusi[t.dataset.ramo] = !state.chiusi[t.dataset.ramo]; render(); }
+    else if (t.dataset.ex !== undefined) {
+      var i = +t.dataset.ex;
+      if (state.ex === i) { state.ex = null; state.sel = null; } else { state.ex = i; state.step = 0; state.sel = ES[i].piano[0][0]; RAMI.forEach(function (r) { state.chiusi[r.id] = false; }); }
+      render();
+    }
+    else if (t.dataset.step !== undefined) { state.step = +t.dataset.step; state.sel = ES[state.ex].piano[state.step][0]; render(); }
+    else if (t.id === 'v-mappa') { state.vista = 'mappa'; render(); }
+    else if (t.id === 'v-elenco') { state.vista = 'elenco'; render(); }
+    else if (t.id === 'tutto') {
+      var any = Object.keys(state.chiusi).some(function (k) { return state.chiusi[k]; });
+      RAMI.forEach(function (r) { state.chiusi[r.id] = !any; }); render();
+    }
+  });
+  el('cerca').addEventListener('input', function (ev) {
+    state.q = ev.target.value.trim(); if (state.q) { state.ex = null; }
+    render();
+  });
+  window.addEventListener('resize', fit);
+  render();
+})();
+</script>

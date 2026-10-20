@@ -1,0 +1,23 @@
+id: derivata-in-un-punto
+tipo: regola
+titolo: Derivata in un punto
+sigla: Derivata in un punto
+comando: f'(a)
+vedo: «Calcola la pendenza in x = a», «retta tangente», «derivata in…».
+formula: y - f(a) = f'(a)*(x - a)
+adatto:
+  - Prima trova `f'(x)` con la regola giusta, poi sostituisci x = a.
+  - La retta tangente usa il valore `f(a)` e la pendenza `f'(a)`.
+esempi:
+  - da: f(x) = x^3, x = 2
+    passi:
+      - "`f'(x) = 3x^2`"
+      - "`f'(2) = 12`"
+      - "`f(2) = 8`"
+    ris: y = 12x - 16
+errore: "Sostituire x = 2 prima di derivare: la derivata di un numero è 0."
+confondi:
+  - scheda: costante
+    differenza: Una costante ha derivata 0, ma f(a) è solo un numero da usare nella retta.
+perche: La derivata in un punto è la pendenza della tangente lì.
+parole: punto tangente retta pendenza

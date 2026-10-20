@@ -282,6 +282,7 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
       {tab === 'yaml' || !moduli || !o ? (
         <>
           {!moduli && tipo === 'figura' && <p className="m-nota">Le figure (disegno della scheda con i pin) si modificano come testo: i moduli arriveranno dopo.</p>}
+          {!moduli && tipo === 'regola' && <p className="m-nota">Le regole di matematica si modificano come testo YAML: formule in notazione testuale, per esempio (f*g)&apos; = f&apos;*g + f*g&apos;.</p>}
           <textarea className="inp m-yaml mono" aria-label="Testo YAML della scheda" spellCheck={false} value={testo} onChange={(e) => { setTesto(e.target.value); setSporco(true); setErrSalva([]) }} />
         </>
       ) : (

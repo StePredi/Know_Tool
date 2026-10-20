@@ -1,0 +1,23 @@
+id: potenza-di-g
+tipo: regola
+titolo: Potenza di g
+sigla: Potenza di g
+comando: n*g^(n-1)*g'
+vedo: "Una parentesi elevata a un numero: (x²+1)⁵."
+formula: (g^n)' = n*g^(n-1)*g'
+adatto:
+  - Scendi con l'esponente, togli 1 e lascia la parentesi.
+  - Poi moltiplica per la derivata della parentesi.
+esempi:
+  - da: (x^2+1)^5
+    passi:
+      - "`5*(x^2+1)^4`"
+      - "Derivata della parentesi: `2x`"
+    ris: 10x*(x^2+1)^4
+    verifica: derivata
+errore: Derivare solo la parentesi o solo l'esponente.
+confondi:
+  - scheda: potenza
+    differenza: Se dentro c'è solo x, è la potenza semplice.
+perche: "Caso di catena: fuori «elevato a n», dentro g."
+parole: parentesi elevata potenza di funzione

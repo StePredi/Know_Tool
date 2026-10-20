@@ -1,0 +1,23 @@
+id: radice
+tipo: regola
+titolo: Radice
+sigla: Radice
+comando: sqrt(x) -> 1/(2*sqrt(x))
+vedo: Una radice con solo x sotto (√x, ∛x).
+formula: (sqrt(x))' = frac(1|2*sqrt(x))
+adatto:
+  - "Riscrivi come potenza: `sqrt(x) = x^(1/2)`, e usa la regola della potenza."
+  - "Radice cubica: `(x^(1/3))' = frac(1|3*x^(2/3))`."
+esempi:
+  - da: sqrt(x)
+    passi:
+      - "`x^(1/2)`"
+      - "Scendo con 1/2 e tolgo 1: `(1/2)*x^(-1/2)`"
+    ris: frac(1|2*sqrt(x))
+    verifica: derivata
+errore: "Scrivere `1/sqrt(x)`: manca il 2."
+confondi:
+  - scheda: radice-di-g
+    differenza: Se sotto la radice c'è più della sola x, serve anche la catena.
+perche: È la regola della potenza con esponente 1/2.
+parole: radice quadrata cubica

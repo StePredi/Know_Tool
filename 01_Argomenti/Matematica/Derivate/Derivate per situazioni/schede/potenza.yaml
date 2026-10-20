@@ -1,0 +1,29 @@
+id: potenza
+tipo: regola
+titolo: Potenza
+sigla: Potenza
+comando: x^n -> n*x^(n-1)
+vedo: La x è in basso e l'esponente è un numero (x², x⁵, x⁻³).
+formula: (x^n)' = n*x^(n-1)
+adatto:
+  - Scendi con l'esponente davanti, poi togli 1 all'esponente.
+  - "Un numero davanti resta: `(5x^4)' = 20x^3`."
+  - "Esponente negativo: −3 − 1 = −4."
+esempi:
+  - da: 5x^4
+    passi:
+      - "L'esponente 4 scende: `5*4*x^3`"
+    ris: 20x^3
+    verifica: derivata
+  - da: frac(1|x^3)
+    passi:
+      - "Riscrivo: `x^(-3)`"
+      - "Scendo con −3 e tolgo 1: `-3*x^(-4)`"
+    ris: -frac(3|x^4)
+    verifica: derivata
+errore: Dimenticare di togliere 1, o con esponente negativo scrivere `x^(-2)` invece di `x^(-4)`.
+confondi:
+  - scheda: esponenziale
+    differenza: x^n ha la x in basso; a^x ha la x in alto.
+perche: "Se x cresce di poco, x^n cresce n volte x^(n−1) per quel poco: l'esponente scende e la pendenza si moltiplica."
+parole: potenza esponente x alla

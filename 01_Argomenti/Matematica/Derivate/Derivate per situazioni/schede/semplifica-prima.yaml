@@ -1,0 +1,23 @@
+id: semplifica-prima
+tipo: regola
+titolo: Semplifica prima
+sigla: Semplifica prima
+comando: riscrivi, poi deriva
+vedo: Frazioni, radici o logaritmi che si possono riscrivere più corti.
+formula: frac(x^3+x|x) = x^2 + 1
+adatto:
+  - "`ln(x^2) = 2*ln(x)`, `ln(a*b) = ln(a) + ln(b)`."
+  - Se sotto c'è un solo termine, spezza la frazione.
+  - "`1/x^3 = x^(-3)`, `x*sqrt(x) = x^(3/2)`."
+esempi:
+  - da: frac(x^3+x|x)
+    passi:
+      - "Semplifico: `x^2 + 1` (per x ≠ 0)"
+    ris: 2x
+    verifica: derivata
+errore: "Usare il quoziente quando la frazione si poteva semplificare: funziona, ma i conti sono lunghi."
+confondi:
+  - scheda: quoziente
+    differenza: Se non si semplifica, serve il quoziente.
+perche: Meno passaggi, meno errori.
+parole: semplifica riscrivi prima proprietà

@@ -1,0 +1,93 @@
+esercizi:
+  - testo: 3x^2 + 5x - 7
+    risultato: 6x + 5
+    piano:
+      - scheda: somma-e-costante
+        nota: "Ultima operazione: somma e differenza."
+      - scheda: potenza
+        nota: Pezzi `3x^2` e `5x`.
+      - scheda: costante
+        nota: Il `-7` sparisce.
+  - testo: x^2*sin x
+    risultato: 2x*sin x + x^2*cos x
+    piano:
+      - scheda: prodotto
+        nota: "Ultima operazione: due fattori che si moltiplicano."
+      - scheda: potenza
+        nota: Primo fattore `x^2`.
+      - scheda: seno-e-coseno
+        nota: Secondo fattore `sin x`.
+  - testo: frac(x^2|x+1)
+    risultato: frac(x^2+2x|(x+1)^2)
+    piano:
+      - scheda: quoziente
+        nota: "Ultima operazione: frazione con x sopra e sotto."
+      - scheda: potenza
+        nota: "Derivata del sopra: `x^2`."
+      - scheda: somma-e-costante
+        nota: "Derivata del sotto: `x+1`."
+  - testo: sin(3x^2)
+    risultato: 6x*cos(3x^2)
+    piano:
+      - scheda: goniometriche-di-g
+        nota: Fuori c'è sin, dentro `3x^2`.
+      - scheda: potenza
+        nota: "Derivata del dentro: `(3x^2)'`."
+  - testo: ln(x^2+1)
+    risultato: frac(2x|x^2+1)
+    piano:
+      - scheda: logaritmo-di-g
+        nota: Fuori c'è ln, dentro `x^2+1`.
+      - scheda: somma-e-costante
+        nota: Derivata del dentro, a pezzi.
+      - scheda: potenza
+        nota: Il pezzo `x^2`.
+  - testo: e^(x^2)*cos x
+    risultato: e^(x^2)*(2x*cos x - sin x)
+    piano:
+      - scheda: prodotto
+        nota: "Ultima operazione: due fattori."
+      - scheda: esponenziale-di-g
+        nota: "Primo fattore: e con `x^2` in alto."
+      - scheda: potenza
+        nota: Derivata dell'esponente `x^2`.
+      - scheda: seno-e-coseno
+        nota: Secondo fattore `cos x`.
+  - testo: sqrt(x^2+1)
+    risultato: frac(x|sqrt(x^2+1))
+    piano:
+      - scheda: radice-di-g
+        nota: Fuori c'è la radice, dentro `x^2+1`.
+      - scheda: somma-e-costante
+        nota: Derivata del dentro.
+      - scheda: potenza
+        nota: Il pezzo `x^2`.
+  - testo: (x^2+1)^5
+    risultato: 10x*(x^2+1)^4
+    piano:
+      - scheda: potenza-di-g
+        nota: Una parentesi elevata a 5.
+      - scheda: somma-e-costante
+        nota: Derivata della parentesi.
+      - scheda: potenza
+        nota: Il pezzo `x^2`.
+  - testo: x^x
+    risultato: x^x*(ln(x) + 1)
+    piano:
+      - scheda: funzione-alla-funzione
+        nota: La x è nella base e nell'esponente.
+      - scheda: logaritmo
+        nota: Compare `ln(x)`.
+      - scheda: prodotto
+        nota: Derivata di `x*ln(x)`.
+  - testo: ln(sin(3x))
+    risultato: frac(3*cos(3x)|sin(3x))
+    piano:
+      - scheda: piu-strati
+        nota: "Tre strati: ln, sin, 3x."
+      - scheda: logaritmo-di-g
+        nota: "Strato 1: ln."
+      - scheda: goniometriche-di-g
+        nota: "Strato 2: sin."
+      - scheda: somma-e-costante
+        nota: "Strato 3: `3x`."

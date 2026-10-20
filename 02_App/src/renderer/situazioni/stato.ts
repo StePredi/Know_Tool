@@ -10,7 +10,7 @@ export interface VistaSit {
   fuoco: number | null
   q: string
   /** come si vedono i rami: albero (mappa concettuale) o griglia di card */
-  disp: 'albero' | 'griglia'
+  disp: 'albero' | 'griglia' | 'formulario'
   /** rami e gruppi aperti nella mappa ad albero (chiavi di layout.ts) */
   aperti: string[]
   /** si sta modificando la scheda aperta */

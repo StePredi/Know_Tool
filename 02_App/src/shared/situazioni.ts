@@ -85,14 +85,48 @@ const figura = z.object({
   quando: testo,
   disegno: schemaDisegno
 })
-export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura])
+
+// Regola di matematica (modello_matematica.md): riconosci, formula, adattamenti, esempi svolti, errore, confusioni.
+const passoRegola = z.union([
+  testo,
+  /** passo con motivazione (dimostrazioni): dice = cosa affermo, perche = a parole, scheda = la regola che lo giustifica */
+  z.object({ dice: testo.min(1), perche: testo.optional(), scheda: z.string().optional() })
+])
+export const VERIFICHE = ['derivata', 'scomposizione'] as const
+const esempioRegola = z.object({
+  da: testo.min(1),
+  passi: z.array(passoRegola).default([]),
+  ris: testo.min(1),
+  /** come il test controlla l'esempio con i numeri; assente = nessun controllo automatico */
+  verifica: z.enum(VERIFICHE).optional()
+})
+const formule = z.union([testo.min(1), z.array(testo.min(1)).min(1)])
+const regola = z.object({
+  tipo: z.literal('regola'),
+  ...comuni,
+  /** se manca si usa «vedo» */
+  frase: testo.default(''),
+  /** sulla foglia della mappa: se manca si usa la prima formula */
+  comando: testo.default(''),
+  /** cosa vedo nell'esercizio; facoltativo per le formule da ricordare */
+  vedo: testo.optional(),
+  formula: formule,
+  adatto: z.array(testo).default([]),
+  esempi: z.array(esempioRegola).default([]),
+  errore: testo.optional(),
+  confondi: z.array(z.object({ scheda: z.string(), differenza: testo })).default([]),
+  perche: testo.optional()
+})
+export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura, regola])
 
 const voce = z.object({ gruppo: testo.optional(), schede: z.array(z.string()).min(1) })
 const ramo = z.object({
   id: z.string().min(1),
   nome: testo.min(1),
   colore: z.enum(COLORI_RAMO),
-  lato: z.enum(LATI),
+  lato: z.enum(LATI).default('R'),
+  /** true = i passi vanno fatti in ordine (pill numerate 1, 2, 3…) */
+  ordine: z.boolean().default(false),
   voci: z.array(voce).min(1)
 })
 export const schemaIndice = z.object({
@@ -104,6 +138,9 @@ export const schemaIndice = z.object({
   prefissoCommento: testo.default('#'),
   /** esempi mostrati nella casella di ricerca, per esempio «client senza IP, bridge, NAT» */
   esempiRicerca: testo.default(''),
+  /** matematica: come si riconosce l'esercizio (una frase) e la domanda da farsi */
+  ingresso: testo.default(''),
+  guida: testo.default(''),
   rami: z.array(ramo).min(1)
 })
 
@@ -114,16 +151,42 @@ export type SchedaPrimaDopo = z.infer<typeof primaDopo>
 export type SchedaFigura = z.infer<typeof figura>
 export type DisegnoSit = z.infer<typeof schemaDisegno>
 export type PinDisegno = z.infer<typeof pinDisegno>
-export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura
+export type SchedaRegola = z.infer<typeof regola>
+export type EsempioRegola = z.infer<typeof esempioRegola>
+export type PassoRegola = z.infer<typeof passoRegola>
+export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura | SchedaRegola
 export type RamoSit = z.infer<typeof ramo>
 export type VoceRamo = z.infer<typeof voce>
 export type IndiceSit = z.infer<typeof schemaIndice>
+
+// esercizi.yaml: esercizi veri con il «piano» (le schede da usare, in ordine).
+export const schemaEsercizi = z.object({
+  esercizi: z.array(z.object({
+    testo: testo.min(1),
+    risultato: testo.default(''),
+    piano: z.array(z.object({ scheda: z.string().min(1), nota: testo.default('') })).min(1)
+  })).default([])
+})
+export type EserciziSit = z.infer<typeof schemaEsercizi>
+
+export function leggiEsercizi(src: string): { esercizi?: EserciziSit; errore?: string } {
+  let dati: unknown
+  try {
+    dati = YAML.parse(src)
+  } catch (e) {
+    return { errore: `esercizi.yaml non si legge: ${(e as Error).message}` }
+  }
+  const r = schemaEsercizi.safeParse(dati)
+  return r.success ? { esercizi: r.data } : { errore: `esercizi.yaml: ${messaggio(r.error)}` }
+}
 
 /** Tutto quello che serve per aprire una documentazione. */
 export interface Situazioni {
   rel: string
   indice: IndiceSit
   schede: Record<string, SchedaSit>
+  /** esercizi veri con il piano (solo matematica) */
+  esercizi?: EserciziSit
   /** id delle schede segnate come ripassate */
   ripassate: string[]
   /** problemi trovati leggendo (file che non si leggono, collegamenti rotti…): non bloccano l'apertura */
@@ -155,6 +218,8 @@ export function leggiSchedaSit(src: string, nomeFile: string): { scheda?: Scheda
   const r = schemaScheda.safeParse(dati)
   if (!r.success) return { errore: `${nomeFile}: ${messaggio(r.error)}` }
   if (`${r.data.id}.yaml` !== nomeFile) return { errore: `${nomeFile}: l'id «${r.data.id}» non corrisponde al nome del file` }
+  if (r.data.tipo === 'regola' && !r.data.frase) r.data.frase = r.data.vedo ?? ''
+  if (r.data.tipo === 'regola' && !r.data.comando) r.data.comando = Array.isArray(r.data.formula) ? r.data.formula[0]! : r.data.formula
   return { scheda: r.data }
 }
 
@@ -184,11 +249,24 @@ export function controllaSituazioni(indice: IndiceSit, schede: Record<string, Sc
         for (const v of p.schede) if (!schede[v]) av.push(`«${s.id}»: il pin «${p.etichetta}» cita la scheda «${v}» che non esiste.`)
       }
     }
+    if (s.tipo === 'regola') {
+      for (const c of s.confondi) if (!schede[c.scheda]) av.push(`«${s.id}»: «confondi» cita la scheda «${c.scheda}» che non esiste.`)
+      for (const e of s.esempi) for (const p of e.passi) if (typeof p !== 'string' && p.scheda && !schede[p.scheda]) av.push(`«${s.id}»: un passo cita la scheda «${p.scheda}» che non esiste.`)
+    }
     if (s.tipo === 'ricetta') {
       const usati = new Set<string>()
       for (const f of s.fasi) for (const r of f.righe) for (const m of r.codice.matchAll(/«([A-Z0-9_]+)»/g)) usati.add(m[1]!)
       for (const u of usati) if (!s.segnaposto[u]) av.push(`«${s.id}»: il segnaposto «${u}» non è spiegato in segnaposto.`)
     }
   }
+  return av
+}
+
+/** Controlli su esercizi.yaml: ogni passo del piano deve citare una scheda che esiste. */
+export function controllaEsercizi(esercizi: EserciziSit, schede: Record<string, SchedaSit>): string[] {
+  const av: string[] = []
+  esercizi.esercizi.forEach((e, i) => {
+    for (const p of e.piano) if (!schede[p.scheda]) av.push(`Esercizio ${i + 1}: il piano cita la scheda «${p.scheda}» che non esiste.`)
+  })
   return av
 }

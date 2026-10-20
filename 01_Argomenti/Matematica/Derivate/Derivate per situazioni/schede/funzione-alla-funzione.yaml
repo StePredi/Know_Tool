@@ -1,0 +1,23 @@
+id: funzione-alla-funzione
+tipo: regola
+titolo: Funzione alla funzione
+sigla: Funzione alla funzione
+comando: f^g -> e^(g*ln f)
+vedo: "La x è sia nella base sia nell'esponente: x^x, (sin x)^x."
+formula: (f^g)' = f^g*(g'*ln(f) + g*frac(f'|f))
+adatto:
+  - "Il modo più sicuro: riscrivi `f^g = e^(g*ln(f))` e deriva come composta."
+  - Non vale né la regola della potenza né quella dell'esponenziale.
+esempi:
+  - da: x^x
+    passi:
+      - "`x^x = e^(x*ln(x))`"
+      - "Esponente: `(x*ln(x))' = ln(x) + 1`"
+    ris: x^x*(ln(x) + 1)
+    verifica: derivata
+errore: "Usare la regola della potenza: la x è anche in alto."
+confondi:
+  - scheda: esponenziale
+    differenza: Nell'esponenziale la base è un numero.
+perche: "Ogni numero positivo può scriversi come potenza di e: `a^b = e^(b*ln(a))`."
+parole: x alla x variabile in alto e in basso
