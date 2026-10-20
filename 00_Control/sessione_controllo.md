@@ -117,3 +117,12 @@ Tutto lo sviluppo recente è provato **solo nel browser e con i test** (97 test,
 ## 7. Messaggio da incollare per cominciare
 
 > Sei la sessione di controllo di Know_Tool. Leggi `00_Control/sessione_controllo.md` e segui l'ordine di lettura del §2. Poi dimmi in poche righe a che punto siamo e cosa propone il §6, e aspetta il mio via.
+
+---
+
+## Aggiunta 2026-10-20
+
+- Per ogni nuovo modello di documento segui `00_Control/procedura_nuovi_documenti.md` (prima il contenuto e il modello dei file, la schermata per ultima).
+- **Matematica è ferma**: nessun'altra interfaccia finché non c'è la specifica nuova approvata.
+- Mai committare lavoro non provato insieme a quello provato; committa a piccoli passi.
+- Pacchetti e file temporanei vanno in `99_Archivio/Obsoleti/<data>/`, non nella radice del repository.

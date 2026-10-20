@@ -2,11 +2,13 @@
 
 ## Fase attuale
 
-**Italiano — implementazione: app (02_App/) con Home dell'autore ed Editor del testo. Editor da provare su Windows (`npm run dev`).**
+**Pulizia fatta (2026-10-20). Matematica: progettazione riaperta secondo `procedura_nuovi_documenti.md`. L'app non è ancora stata provata su Windows (`npm run dev`).**
 
 ---
 
 ## Fatto
+
+- «+ Nuovo» rifatto (2026-10-16): una finestra con modelli a sinistra e, a destra, cosa crea, nome e cartella di destinazione; niente carte spente; tolta la carta «Mappa cronologica». Da provare su Windows
 
 - Sessione di controllo (2026-10-16): guida `sessione_controllo.md` per una nuova sessione che lavora sull'app (ordine di lettura, mappa del codice, regole, cosa non è provato, elenco di cose da fare, messaggio di avvio)
 
@@ -45,8 +47,8 @@
 - Segnalate dall'utente (2026-10-16), dopo il lettore degli appunti:
   1. **Fonti visibili** (FATTO 2026-10-16): i file non di testo delle cartelle di studio (pdf, pptx, docx, xlsx, html, immagini…) compaiono nell'albero e nella Home come «File»; un clic li apre con l'app predefinita del sistema
   2. **Rami della mappa «Per situazioni» che si aprono e chiudono** (FATTO 2026-10-16): il centro e i rami si vedono sempre; doppio clic (o il «+» sul nodo) apre/chiude un ramo o un gruppo; un solo pulsante con l'occhio («Apri tutto» / «Chiudi tutto» a seconda dello stato); il layout si ricalcola; la ricerca apre i rami che contengono i risultati. Il clic sul ramo non mette più a fuoco (il fuoco resta nella Griglia)
-  3. **Modifica di ogni documento/file dell'app** (proposta approvata il 2026-10-16: `specifiche/proposta_modifica_e_cartelle.md`; FATTO: schede «Per situazioni» a moduli e YAML con copia di sicurezza; mappa (`indice.yaml`) a moduli e YAML dal pulsante «Modifica mappa»; appunti `.md` con barra di formattazione e anteprima; nuova scheda e archivia scheda; nuovo/rinomina/archivia appunti dalla Home; resta: figure a moduli, importare/spostare file): l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
-  4. **Organizzazione delle cartelle** (FATTO 2026-10-16, commit fcadfba: struttura Materia/Argomento/{Fonti, Appunti, Pratica, Schemi} con nomi maiuscoli; piano in `specifiche/piano_riordino_cartelle.md`; vecchia descrizione: documenti utili direttamente nella cartella dell'argomento, niente `Mappe/`; vedi `specifiche/proposta_modifica_e_cartelle.md`) più pensata, e i nomi delle cartelle con l'iniziale maiuscola )
+  3. **Modifica di ogni documento/file dell'app** (proposta approvata il 2026-10-16: `specifiche/_storico/proposta_modifica_e_cartelle.md`; FATTO: schede «Per situazioni» a moduli e YAML con copia di sicurezza; mappa (`indice.yaml`) a moduli e YAML dal pulsante «Modifica mappa»; appunti `.md` con barra di formattazione e anteprima; nuova scheda e archivia scheda; nuovo/rinomina/archivia appunti dalla Home; resta: figure a moduli, importare/spostare file): l'utente deve poter lavorare anche lui sui contenuti (appunti, schede, indice…) dall'app, non solo la sessione di studio
+  4. **Organizzazione delle cartelle** (FATTO 2026-10-16, commit fcadfba: struttura Materia/Argomento/{Fonti, Appunti, Pratica, Schemi} con nomi maiuscoli; piano in `specifiche/_storico/piano_riordino_cartelle.md`; vecchia descrizione: documenti utili direttamente nella cartella dell'argomento, niente `Mappe/`; vedi `specifiche/_storico/proposta_modifica_e_cartelle.md`) più pensata, e i nomi delle cartelle con l'iniziale maiuscola )
 
 ---
 ## Punti aperti (da decidere con l'utente)
@@ -58,4 +60,6 @@
 
 ## In attesa
 
-- Inglese, Sistemi e Reti, Matematica, Storia e altre materie (un tool alla volta, quando servono)
+- Inglese, Storia e altre materie (un tool alla volta, quando servono)
+- **Matematica — progettazione da rifare (2026-10-20).** Il codice (motore polinomi/disequazioni, formule, grafico, schermata v2 con 2 regole su 13) e `specifiche/modello_matematica.md` sono nati dalla schermata, con dati scritti da Claude e senza materiale dell'utente. Si fermano. Prossimo: l'utente porta indice del libro e 5-10 esercizi con dove si blocca → specifica nuova (`procedura_nuovi_documenti.md`) → test che confronta gli esempi col motore → solo dopo la schermata. Cartella `01_Argomenti/Matematica/Prova/` è un segnaposto.
+- Sistemi e Reti: argomento `Python` creato (fonti e `_scheda.md`), documenti da fare dopo la scelta dei moduli.

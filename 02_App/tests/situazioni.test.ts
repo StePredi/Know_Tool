@@ -7,22 +7,22 @@ import { leggiAlbero } from '../src/main/esplora'
 import { leggiSituazioni, segnaRipassata } from '../src/main/situazioni'
 import { controllaSituazioni, leggiIndice, leggiSchedaSit, ordineSchede } from '../src/shared/situazioni'
 
-const REL = 'Informatica/Reti/MikroTik/MikroTik per situazioni'
+const REL = 'Telecomunicazioni/MikroTik/MikroTik per situazioni'
 let radice = ''
 
 beforeEach(async () => {
   radice = await mkdtemp(join(tmpdir(), 'kt-sit-'))
   // copia dei dati veri: i test non toccano mai la cartella dell'utente
-  await cp(resolve(__dirname, '..', '..', '01_Argomenti', 'Informatica'), join(radice, '01_Argomenti', 'Informatica'), { recursive: true })
+  await cp(resolve(__dirname, '..', '..', '01_Argomenti', 'Telecomunicazioni'), join(radice, '01_Argomenti', 'Telecomunicazioni'), { recursive: true })
 })
 
 describe('Per situazioni: dati veri di MikroTik', () => {
-  it('legge tutte le 37 schede senza avvisi e con 9 rami', async () => {
+  it('legge tutte le 43 schede senza avvisi e con 10 rami', async () => {
     const d = await leggiSituazioni(radice, REL)
     expect(d.avvisi).toEqual([])
-    expect(Object.keys(d.schede)).toHaveLength(37)
-    expect(d.indice.rami).toHaveLength(9)
-    expect(ordineSchede(d.indice)).toHaveLength(37)
+    expect(Object.keys(d.schede)).toHaveLength(43)
+    expect(d.indice.rami).toHaveLength(10)
+    expect(ordineSchede(d.indice)).toHaveLength(43)
     expect(d.schede['bridge-unico']!.tipo).toBe('prima_dopo')
     expect(d.schede['dhcp-server']!.tipo).toBe('ricetta')
   })
@@ -34,11 +34,11 @@ describe('Per situazioni: dati veri di MikroTik', () => {
 
   it('compare nell\'albero come documento che non si esplora', async () => {
     const a = await leggiAlbero(radice)
-    const reti = a.find((n) => n.nome === 'Informatica')!.figli.find((n) => n.nome === 'Reti')!
-    const doc = reti.figli.find((n) => n.nome === 'MikroTik')!.figli[0]!
+    const mikrotik = a.find((n) => n.nome === 'Telecomunicazioni')!.figli.find((n) => n.nome === 'MikroTik')!
+    const doc = mikrotik.figli.find((n) => n.tipo === 'situazioni')!
     expect(doc.tipo).toBe('situazioni')
     expect(doc.nome).toBe('MikroTik per situazioni')
-    expect(doc.info).toBe('37 situazioni')
+    expect(doc.info).toBe('43 situazioni')
     expect(doc.figli).toEqual([])
     expect(doc.puoRinominare && doc.puoArchiviare).toBe(true)
   })

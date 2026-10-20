@@ -25,7 +25,8 @@ Cartelle principali:
 
 - `00_Control/` → regole, log e stato del progetto
 - `01_Argomenti/` → una cartella per ogni argomento
-- `03_Demo/` → demo dei design
+- `02_App/` → il codice dell'app
+- `03_Demo/` → demo dei design (solo storico)
 - `99_Archivio/` → materiale vecchio o concluso
 
 Ogni argomento ha la sua cartella dentro `01_Argomenti/`, con questa struttura interna:
@@ -47,19 +48,18 @@ Se un file non ha una collocazione chiara, **chiedo prima di salvarlo**.
 ## 4. Cancellazione
 
 - **Non cancello mai file senza chiedere** e ottenere conferma esplicita.
-- Se qualcosa non serve più, propongo di spostarlo in `99_Archivio/`.
+- Se qualcosa non serve più, lo **sposto** in `99_Archivio/` (pacchetti e file temporanei in `99_Archivio/Obsoleti/<data>/`) e lo scrivo nel LOG. L'utente decide quando cancellare.
 
 ---
 
-## 5. Nomi dei file
+## 5. Nomi dei file e delle cartelle
 
-Regole generali: tutto minuscolo, parole separate da underscore `_`, niente spazi né accenti.
-
-- La data `YYYY-MM-DD` va **solo negli appunti di lezione**.
-  Esempio: `2026-09-30_derivate.md`
-- Per tutti gli altri file: nome descrittivo **senza data**.
-  Esempio: `riassunto_libro_cap3.md`
+- **Cartelle di studio** (materie, argomenti, `Fonti`, `Appunti`, `Pratica`, `Schemi`): iniziale **maiuscola**, spazi permessi (`Sistemi e Reti`). Quelle tecniche cominciano con `_`.
+- **File che crei tu per un argomento** (appunti, pratica): minuscolo con underscore, niente accenti (`esp32_pin_touch_io.md`). I file di fonte (pdf, pptx, docx) si rinominano così solo se serve.
+- I documenti strutturati (`indice.yaml`, `schede/<id>.yaml`, `argomento.yaml`) hanno nomi fissi dal loro modello.
+- La data `YYYY-MM-DD` va **solo negli appunti di lezione** (`2026-09-30_derivate.md`).
 - Il nome della materia non serve nel file: è già nella cartella.
+- Niente due nomi che differiscono solo per maiuscole (su Windows sono lo stesso file).
 
 ---
 
@@ -87,3 +87,9 @@ Regole generali: tutto minuscolo, parole separate da underscore `_`, niente spaz
 ## 9. Prima di lavorare sull'italiano
 
 - Prima di lavorare su italiano, mappa dell'autore o editor dei testi, leggo `00_Control/DECISIONI.md`.
+
+---
+
+## 10. Prima di progettare un nuovo tipo di documento
+
+- Prima di disegnare o scrivere codice per un nuovo modello (per esempio Matematica), leggo e seguo `00_Control/procedura_nuovi_documenti.md`: prima il contenuto e i problemi reali dell'utente, poi il modello dei file, solo alla fine la schermata.

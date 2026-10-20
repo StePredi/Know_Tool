@@ -35,7 +35,7 @@ Poi guardo gli ultimi punti di `00_Control/LOG.md`.
 | Tipo di contenuto | Dove sta | Specifica |
 |---|---|---|
 | Autore di italiano (mappa, testi, glossario) | `01_Argomenti/Italiano/Autori/<autore>/` | `specifiche/formato_studio_italiano.md`, `DECISIONI.md` |
-| Documentazione «Per situazioni» (lingua o strumento tecnico) | una cartella con `indice.yaml` + `schede/*.yaml`, per esempio `01_Argomenti/Informatica/Reti/MikroTik/MikroTik per situazioni/` | `specifiche/modello_per_situazioni.md` |
+| Documentazione «Per situazioni» (lingua o strumento tecnico) | una cartella con `indice.yaml` + `schede/*.yaml`, per esempio `01_Argomenti/Telecomunicazioni/MikroTik/MikroTik per situazioni/` | `specifiche/modello_per_situazioni.md` |
 
 L'app **legge i file dal disco** e si aggiorna da sola: quello che scrivo nelle cartelle compare nell'app.
 
@@ -51,7 +51,7 @@ L'app **legge i file dal disco** e si aggiorna da sola: quello che scrivo nelle 
     _scheda.md                    tipo di argomento e regole (nascosta all'app)
 ```
 
-- Le cartelle hanno **l'iniziale maiuscola** (Informatica, Reti, MikroTik, Fonti, Appunti, Pratica, Schemi). Le cartelle tecniche cominciano con `_` e non compaiono nell'app. I nomi dei file e dei documenti sono liberi.
+- Le cartelle hanno **l'iniziale maiuscola** (Telecomunicazioni, MikroTik, Fonti, Appunti, Pratica, Schemi). Le cartelle tecniche cominciano con `_` e non compaiono nell'app. I nomi dei file e dei documenti sono liberi.
 - Italiano è a parte: `Italiano/Autori/<autore>/` (id dell'autore sempre minuscolo), `Italiano/Fonti/`, `Italiano/_condiviso/`.
 - Gli appunti citano le fonti come `fonti/x.pdf`: l'app le trova anche se la cartella è `Fonti/` (le maiuscole non contano).
 - Un nuovo argomento: creo la cartella `Materia/Argomento/` con le sottocartelle che servono (Fonti, Appunti, Pratica, Schemi) e `_scheda.md`; il documento «Per situazioni» sta accanto, non dentro `Pratica/`.
