@@ -1,0 +1,35 @@
+id: frame-usa-server
+tipo: ricetta
+titolo: Usare FrameSocket in un server
+sigla: Server con FrameSocket
+comando: FrameSocket accept recv send
+frase: come socket, ma con i frame
+fonte: frameserver.py · framesocket.py
+parole: framesocket server bind listen accept recv send frame thread eco echo 5000
+quando: Quando vuoi un server che riceva messaggi interi, di qualunque lunghezza, senza contare i byte a mano.
+fasi:
+- nome: Metti in ascolto
+  righe:
+  - codice: |-
+      server = FrameSocket()
+      server.bind(('', 5000))
+      server.listen()
+    commento: stesse chiamate del socket normale
+    trappola: 'Nota: l''indirizzo vuoto '''' fa ascoltare il server su tutte le interfacce.'
+- nome: Accetta e rispondi
+  righe:
+  - codice: conn, addr = server.accept()
+    commento: conn è già un FrameSocket, non un socket normale
+    trappola: 'accept() di FrameSocket restituisce un altro FrameSocket: su conn si usa recv() senza argomenti.'
+  - codice: |-
+      data = conn.recv()
+      if not data:
+          conn.close()
+      conn.send(data)
+    commento: recv() restituisce il messaggio intero o None se il client ha chiuso
+segnaposto: {}
+varianti: []
+vicine:
+- frame-usa-client
+- client-thread-funzione
+- frame-ricevi

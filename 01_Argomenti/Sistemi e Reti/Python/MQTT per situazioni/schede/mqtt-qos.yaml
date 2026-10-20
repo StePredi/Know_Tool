@@ -1,0 +1,28 @@
+id: mqtt-qos
+tipo: ricetta
+titolo: Scegliere la QoS per ogni tipo di messaggio
+sigla: QoS
+comando: qos=0 o qos=1
+frase: dati leggeri, eventi sicuri
+fonte: gateway.py · controller.py
+parole: mqtt qos quality of service 0 1 dati alert stato comandi configurazione affidabilità consegna
+quando: Quando devi decidere quanto un messaggio deve essere garantito.
+fasi:
+- nome: 'Dati ripetuti: QoS 0'
+  righe:
+  - codice: self.client.publish_message(TOPIC_DATI, dato, qos=0)
+    commento: 'arriva un nuovo campione tra poco: se uno si perde non è grave'
+- nome: 'Eventi, stato, comandi, configurazione: QoS 1'
+  righe:
+  - codice: |-
+      self.client.publish_message(TOPIC_ALERT, dato, qos=1)
+      self.client.publish_message(TOPIC_CMD, payload, qos=1)
+      self.client.publish_message(TOPIC_CONFIG, payload, qos=1, retain=True)
+    commento: ognuno di questi messaggi conta e non si ripete da solo
+    trappola: 'QoS 1 può consegnare lo stesso messaggio più di una volta: chi riceve deve poterlo gestire.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-iscriviti
+- mqtt-retain
+- mqtt-publish

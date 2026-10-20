@@ -1,0 +1,45 @@
+id: server-tcp
+tipo: ricetta
+titolo: Mettere un server TCP in ascolto e rispondere a un client
+sigla: Server TCP
+comando: socket bind listen accept
+frase: un client alla volta, eco
+fonte: server_simple_socket.py
+parole: server tcp socket bind listen accept recv send eco echo localhost porta 5000 backlog conn addr un solo client
+quando: Quando devi scrivere un server che riceve un messaggio da un client e lo rimanda indietro.
+fasi:
+- nome: Crea il socket e mettilo in ascolto
+  righe:
+  - codice: server_sock = socket.socket()
+    commento: socket TCP, pronto ma non ancora legato a nessun indirizzo
+  - codice: server_sock.bind(«INDIRIZZO»)
+    commento: lega il socket a indirizzo e porta
+    trappola: 'Nota: con ''localhost'' il server si raggiunge solo dallo stesso computer; con '''' (come in frameserver.py) ascolta su tutte le interfacce.'
+  - codice: server_sock.listen(5)
+    commento: inizia ad ascoltare; 5 è il numero di connessioni che possono restare in attesa
+- nome: Aspetta un client
+  righe:
+  - codice: conn, addr = server_sock.accept()
+    commento: si ferma finché arriva un client; conn è il socket per parlarci, addr il suo indirizzo
+    trappola: 'accept() è bloccante e questo server serve un solo client: gli altri aspettano finché il primo non ha finito. Per più client vedi la scheda sui thread.'
+- nome: Rispondi finché il client resta connesso
+  righe:
+  - codice: |-
+      while True:
+          data = conn.recv(1024)
+          if not data:
+              break
+          conn.send(data)
+    commento: riceve fino a 1024 byte e li rimanda indietro
+    trappola: 'recv() restituisce byte vuoti quando il client chiude: senza il controllo "if not data" il ciclo non finirebbe mai.'
+  - codice: conn.close()
+    commento: chiude la connessione con quel client
+segnaposto:
+  INDIRIZZO:
+    esempio: ('localhost', 5000)
+    spiega: tupla (indirizzo, porta) su cui il server ascolta
+varianti: []
+vicine:
+- client-tcp
+- fine-connessione
+- client-thread-funzione

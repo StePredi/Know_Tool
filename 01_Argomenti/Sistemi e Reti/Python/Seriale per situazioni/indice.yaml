@@ -1,0 +1,42 @@
+modello: per_situazioni
+titolo: Seriale, per situazioni
+centro: Seriale
+sottotitolo: Parti da quello che devi far fare alla porta seriale, non dal nome della funzione.
+esempiRicerca: porta che non si apre, riga corrotta, comando da inviare, leggere senza bloccarsi
+rami:
+- id: b1
+  nome: Aprire e chiudere
+  colore: blue
+  lato: R
+  voci:
+  - schede:
+    - serial-apri
+  - schede:
+    - serial-chiudi
+- id: b2
+  nome: Leggere e scrivere
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - serial-leggi
+  - schede:
+    - serial-scrivi
+- id: b3
+  nome: Dati e comandi
+  colore: yellow
+  lato: R
+  voci:
+  - schede:
+    - serial-decodifica
+  - schede:
+    - serial-ciclo
+- id: b4
+  nome: Quando non funziona
+  colore: slate
+  lato: L
+  voci:
+  - schede:
+    - serial-non-si-apre
+  - schede:
+    - serial-errore-lettura

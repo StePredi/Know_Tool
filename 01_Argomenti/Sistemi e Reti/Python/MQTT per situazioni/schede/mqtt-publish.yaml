@@ -1,0 +1,26 @@
+id: mqtt-publish
+tipo: ricetta
+titolo: Pubblicare un messaggio in JSON, solo se connessi
+sigla: Pubblicare
+comando: publish(topic, json.dumps(...))
+frase: controlla prima di inviare
+fonte: controller.py
+parole: mqtt publish json dumps payload qos retain is_connected pubblicare messaggio wrapper
+quando: Quando devi mandare un dizionario su un topic senza rischiare di farlo a connessione chiusa.
+fasi:
+- nome: Funzione di invio
+  righe:
+  - codice: |-
+      def publish_message(self, topic, payload, qos=0, retain=False):
+          if self.is_connected:
+              self.publish(topic, payload=json.dumps(payload), qos=qos, retain=retain)
+          else:
+              self.logger.warning("impossibile pubblicare — non connesso")
+    commento: json.dumps() trasforma il dizionario in testo prima dell'invio
+    trappola: 'Nota: se non sei ancora connesso il messaggio viene scartato, non messo in coda.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-qos
+- mqtt-retain
+- mqtt-non-pubblica

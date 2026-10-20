@@ -1,0 +1,26 @@
+id: mqtt-on-disconnect
+tipo: ricetta
+titolo: Accorgersi di una disconnessione
+sigla: on_disconnect
+comando: on_disconnect
+frase: rc != 0 = caduta
+fonte: controller.py
+parole: mqtt on_disconnect callback disconnessione inaspettata rc warning is_connected
+quando: Quando vuoi sapere se la connessione è caduta da sola o l'hai chiusa tu.
+fasi:
+- nome: La callback
+  righe:
+  - codice: |-
+      def on_disconnect(self, client, userdata, disconnect_flags, rc, properties=None):
+          self.is_connected = False
+          if rc != 0:
+              self.logger.warning(f"disconnessione inaspettata, result code: {rc}")
+          else:
+              self.logger.info("disconnesso dal broker")
+    commento: rc diverso da 0 = disconnessione non voluta
+    trappola: 'Segna is_connected = False qui: altrimenti publish_message crederebbe ancora di essere connesso.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-on-connect
+- mqtt-chiudi

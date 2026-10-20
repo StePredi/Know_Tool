@@ -1,0 +1,19 @@
+id: fix-join
+tipo: prima_dopo
+titolo: 'Errore: punto di troppo in b''''.join'
+sigla: join senza punto
+comando: b''.join(data)
+frase: join(data), non join.(data)
+fonte: framesocket.py
+parole: join bytes punto sintassi syntaxerror unire blocchi recv_exactly
+prima: return ⟦b''.join.(data)⟧
+dopo: return ⟦b''.join(data)⟧
+uso: Unire in un solo bytes la lista dei blocchi ricevuti.
+riconoscila: 'Il programma non parte nemmeno: SyntaxError sulla riga del return.'
+parti:
+- voce: b''.join(data)
+  spiega: 'join è un metodo: la lista si passa tra parentesi, senza punto prima'
+trappola: 'Nota: b''''.join(data) funziona solo se data contiene bytes, non stringhe.'
+varianti: []
+vicine:
+- frame-recv-exactly

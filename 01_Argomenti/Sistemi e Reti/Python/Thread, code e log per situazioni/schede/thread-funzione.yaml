@@ -1,0 +1,37 @@
+id: thread-funzione
+tipo: ricetta
+titolo: Far girare una funzione in un thread
+sigla: Thread con target
+comando: threading.Thread(target=...)
+frase: una funzione, un thread
+fonte: socketserver.ipynb · frameserver.py
+parole: thread target args funzione start daemon current_thread name serve_forever parallelo
+quando: Quando basta una funzione e non serve scrivere una classe.
+fasi:
+- nome: Crea e avvia
+  righe:
+  - codice: |-
+      t = threading.Thread(target=«FUNZIONE», args=(«ARG1», «ARG2»), daemon=True)
+      t.start()
+    commento: target è la funzione (senza parentesi), args la tupla dei suoi argomenti
+    trappola: 'target=funzione, non target=funzione(): con le parentesi la funzione verrebbe eseguita subito nel thread principale.'
+- nome: Sapere in quale thread sei
+  righe:
+  - codice: |-
+      thread = threading.current_thread()
+      print(f"[SERVER] ricevuto: {data.decode()} nel thread: {thread.name}")
+    commento: current_thread().name dà il nome del thread che sta eseguendo il codice
+segnaposto:
+  FUNZIONE:
+    esempio: gestisci_client
+    spiega: funzione da eseguire nel thread
+  ARG1:
+    esempio: conn
+    spiega: primo argomento della funzione
+  ARG2:
+    esempio: addr
+    spiega: secondo argomento della funzione
+varianti: []
+vicine:
+- thread-classe
+- thread-main-vivo

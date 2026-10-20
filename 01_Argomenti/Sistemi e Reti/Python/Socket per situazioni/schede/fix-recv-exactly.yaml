@@ -1,0 +1,33 @@
+id: fix-recv-exactly
+tipo: prima_dopo
+titolo: 'Errore: contare i blocchi invece dei byte'
+sigla: Contare i byte
+comando: ricevuti += len(blocco)
+frase: len(data) conta i blocchi
+fonte: framesocket.py
+parole: recv exactly len data blocchi byte contatore ciclo while errore frame
+prima: |-
+  data = []
+  while ⟦len(data) < n⟧:
+      byte_mancanti = ⟦n - len(data)⟧
+      byte_received = self.sock.recv(min(byte_mancanti, 1024))
+      data.append(byte_received)
+dopo: |-
+  data = []
+  ⟦ricevuti = 0⟧
+  while ⟦ricevuti < n⟧:
+      byte_mancanti = ⟦n - ricevuti⟧
+      byte_received = self.sock.recv(min(byte_mancanti, 1024))
+      data.append(byte_received)
+      ⟦ricevuti += len(byte_received)⟧
+uso: Contare quanti byte sono arrivati, quando si raccolgono in una lista di blocchi.
+riconoscila: 'La ricezione dei frame si sballa: il ciclo legge troppo o resta in attesa, soprattutto con messaggi lunghi.'
+parti:
+- voce: ricevuti
+  spiega: somma dei byte arrivati finora
+- voce: len(data)
+  spiega: 'numero di blocchi nella lista: non è il numero di byte'
+trappola: 'Nota: ogni recv() può restituire un numero qualsiasi di byte fino al massimo chiesto, quindi blocchi e byte non coincidono.'
+varianti: []
+vicine:
+- frame-recv-exactly

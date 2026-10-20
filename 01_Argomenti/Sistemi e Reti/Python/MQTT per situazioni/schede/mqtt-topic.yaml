@@ -1,0 +1,25 @@
+id: mqtt-topic
+tipo: ricetta
+titolo: Dare un nome ai topic
+sigla: Nomi dei topic
+comando: area/tipo/sigla
+frase: una gerarchia con /
+fonte: gateway.py
+parole: mqtt topic nome gerarchia slash allarme dati alert stato cmd config schema
+quando: Quando devi decidere i topic del tuo sistema.
+fasi:
+- nome: Costanti in testa al file
+  righe:
+  - codice: |-
+      TOPIC_DATI   = 'allarme/dati/sp'
+      TOPIC_ALERT  = 'allarme/alert/sp'
+      TOPIC_STATO  = 'allarme/stato/sp'
+      TOPIC_CMD    = 'allarme/cmd/sp'
+      TOPIC_CONFIG = 'allarme/config/sp'
+    commento: primo livello = sistema, secondo = tipo di messaggio, terzo fisso
+    trappola: 'Nota: i topic sono scritti in più file (gateway, controller, monitor): tenerli come costanti uguali ovunque evita refusi che fanno "non arrivare" i messaggi.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-payload
+- mqtt-iscriviti

@@ -1,0 +1,23 @@
+id: serial-chiudi
+tipo: ricetta
+titolo: Chiudere la porta seriale
+sigla: Chiudere la seriale
+comando: port.close()
+frase: solo se è aperta
+fonte: gateway.py
+parole: serial close is_open chiudere porta seriale fine programma
+quando: Quando il programma termina e la porta va liberata.
+fasi:
+- nome: Chiudi se serve
+  righe:
+  - codice: |-
+      def chiudi(self):
+          if self.port and self.port.is_open:
+              self.port.close()
+              self.logger.info("porta seriale chiusa")
+    commento: controlla prima che la porta esista e sia aperta
+    trappola: 'port può essere None se l''apertura è fallita: senza il controllo si avrebbe un errore proprio in chiusura.'
+segnaposto: {}
+varianti: []
+vicine:
+- serial-apri

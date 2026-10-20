@@ -1,0 +1,28 @@
+id: thread-main-vivo
+tipo: ricetta
+titolo: Tenere vivo il programma mentre i thread lavorano
+sigla: Programma principale
+comando: daemon + sleep + KeyboardInterrupt
+frase: il main non deve finire
+fonte: gateway.py
+parole: daemon thread main sleep keyboardinterrupt chiudi programma termina ctrl c ciclo principale
+quando: Quando tutto il lavoro è nei thread daemon e il programma principale non deve terminare subito.
+fasi:
+- nome: Avvia e aspetta
+  righe:
+  - codice: |-
+      gateway = Gateway()
+      gateway.start()
+      try:
+          while True:
+              time.sleep(1)
+      except KeyboardInterrupt:
+          gateway.chiudi()
+          logging.info("programma terminato")
+    commento: il ciclo con sleep tiene vivo il main, Ctrl+C chiude in modo ordinato
+    trappola: 'I thread daemon finiscono insieme al programma principale: se il main arriva in fondo, il lavoro si interrompe.'
+segnaposto: {}
+varianti: []
+vicine:
+- thread-classe
+- thread-chiudi

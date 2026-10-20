@@ -1,0 +1,33 @@
+id: mqtt-coda-uscita
+tipo: ricetta
+titolo: 'Non elaborare nella callback: metti il messaggio in una coda'
+sigla: Callback e coda
+comando: coda.put dentro on_message
+frase: la callback resta veloce
+fonte: gateway.py
+parole: mqtt callback coda queue put on_message thread comandi seriale mqtt_out pubblica
+quando: Quando un messaggio MQTT deve provocare un lavoro fatto da un altro thread (per esempio scrivere sulla seriale).
+fasi:
+- nome: La callback mette in coda
+  righe:
+  - codice: |-
+      if cmd:
+          self.coda_mqtt_out.put(cmd + '\n')
+          self.logger.debug(f"Comando in coda: {cmd}")
+    commento: la callback prepara il comando e lo lascia a chi lo deve eseguire
+    trappola: 'La callback gira nel thread di rete di paho: non deve fare operazioni lente, altrimenti i messaggi si accumulano.'
+- nome: Un altro thread pubblica quello che trova in coda
+  righe:
+  - codice: |-
+      while True:
+          try:
+              dato = self.coda_mqtt.get(timeout=1)
+              self.pubblica(dato)
+          except queue.Empty:
+              pass
+    commento: 'stesso schema ma al contrario: dalla coda a MQTT'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-smista-topic
+- mqtt-loop-start

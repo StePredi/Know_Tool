@@ -1,0 +1,39 @@
+id: frame-costruisci
+tipo: ricetta
+titolo: Costruire e inviare un frame completo
+sigla: Inviare un frame
+comando: struct.pack + send in ciclo
+frase: header di 4 byte, poi tutto
+fonte: framesocket.py
+parole: frame send struct pack header payload lunghezza big endian unsigned int ciclo invio completo chunk
+quando: Quando devi spedire un messaggio con la lunghezza davanti e assicurarti che parta tutto.
+fasi:
+- nome: Costruisci il frame
+  righe:
+  - codice: payload_length = len(payload)
+    commento: lunghezza del messaggio in byte
+  - codice: header = struct.pack("!I", payload_length)
+    commento: 4 byte con la lunghezza
+    parti:
+    - voce: '"!I"'
+      spiega: '! = big-endian (ordine di rete), I = intero senza segno a 4 byte'
+  - codice: frame = header + payload
+    commento: il payload deve essere già in byte
+    trappola: 'payload è bytes: con una stringa si fa prima payload.encode().'
+- nome: Invia tutto
+  righe:
+  - codice: |-
+      bytes_sent = 0
+      while bytes_sent < HEADER_SIZE + payload_length:
+          chunk = frame[:1024]
+          n = self.sock.send(chunk)
+          bytes_sent += n
+          frame = frame[n:]
+    commento: ripete finché ogni byte è partito
+    trappola: 'send() può inviare meno di quanto chiesto e restituisce quanti byte ha mandato davvero: per questo si toglie dal frame solo n byte e si riprova.'
+segnaposto: {}
+varianti: []
+vicine:
+- frame-ricevi
+- frame-recv-exactly
+- framing-perche

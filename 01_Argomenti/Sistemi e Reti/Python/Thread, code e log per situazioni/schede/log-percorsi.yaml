@@ -1,0 +1,28 @@
+id: log-percorsi
+tipo: ricetta
+titolo: Mettere i file di log e di dati in cartelle del progetto
+sigla: Percorsi dei log
+comando: pathlib.Path(__file__)
+frase: relativo al programma
+fonte: gateway.py · monitor.py
+parole: pathlib path file resolve parent logs data cartella percorso log file jsonl root progetto
+quando: Quando i file di log e dati devono stare in cartelle accanto al programma, qualunque sia la cartella da cui lo lanci.
+fasi:
+- nome: Parti dalla posizione del file
+  righe:
+  - codice: |-
+      _ROOT     = Path(__file__).resolve().parent.parent
+      LOG_FILE  = _ROOT / 'logs' / 'gateway.log'
+      DATA_FILE = _ROOT / 'data' / 'log.jsonl'
+    commento: la radice del progetto è la cartella sopra quella dello script
+    parti:
+    - voce: Path(__file__).resolve()
+      spiega: percorso assoluto del file che sta girando
+    - voce: .parent.parent
+      spiega: 'due cartelle più in alto: dalla cartella dello script alla radice'
+    trappola: 'Nota: le cartelle logs e data devono già esistere: FileHandler e open() non le creano e il programma si ferma con un errore.'
+segnaposto: {}
+varianti: []
+vicine:
+- log-config
+- thread-scrittura-file

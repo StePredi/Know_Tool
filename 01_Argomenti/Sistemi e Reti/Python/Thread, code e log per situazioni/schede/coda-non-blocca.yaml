@@ -1,0 +1,25 @@
+id: coda-non-blocca
+tipo: ricetta
+titolo: Controllare la coda senza aspettare
+sigla: get_nowait
+comando: get_nowait + queue.Empty
+frase: guarda e prosegui
+fonte: gateway.py
+parole: get_nowait queue empty non bloccante controllare coda senza attendere comandi seriale
+quando: Quando un thread ha un altro lavoro da fare (per esempio leggere la seriale) e vuole solo dare un'occhiata alla coda.
+fasi:
+- nome: Prendi se c'è
+  righe:
+  - codice: |-
+      try:
+          cmd = self.coda_mqtt_out.get_nowait()
+          self.port.write(cmd.encode('ascii'))
+      except queue.Empty:
+          pass
+    commento: se la coda è vuota va avanti subito
+    trappola: 'get_nowait() non aspetta mai: dentro un ciclo che non ha altre pause va a girare a vuoto.'
+segnaposto: {}
+varianti: []
+vicine:
+- coda-attesa
+- coda-per-direzione

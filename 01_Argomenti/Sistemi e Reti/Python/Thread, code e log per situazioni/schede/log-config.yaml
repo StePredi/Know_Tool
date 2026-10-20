@@ -1,0 +1,35 @@
+id: log-config
+tipo: ricetta
+titolo: Impostare il logging su file e console
+sigla: Configurare il log
+comando: logging.basicConfig
+frase: livello, formato, destinazioni
+fonte: gateway.py
+parole: logging basicconfig level format datefmt handlers filehandler streamhandler console file debug formato
+quando: Quando vuoi che il programma scriva cosa sta facendo, su file e sullo schermo.
+fasi:
+- nome: Una sola configurazione, all'avvio
+  righe:
+  - codice: |-
+      logging.basicConfig(
+          level=logging.DEBUG,
+          format="[%(asctime)s] [%(name)s] %(levelname)s: %(message)s",
+          datefmt="%H:%M:%S",
+          handlers=[
+              logging.FileHandler(LOG_FILE),
+              logging.StreamHandler()
+          ]
+      )
+    commento: scrive su file e sulla console, con ora, nome e livello
+    parti:
+    - voce: '%(name)s'
+      spiega: nome del logger che ha scritto il messaggio
+    - voce: handlers
+      spiega: 'le destinazioni: file e console'
+    trappola: basicConfig va chiamata una volta sola, nel main, prima di usare i logger.
+segnaposto: {}
+varianti: []
+vicine:
+- log-livelli
+- log-classe
+- log-percorsi

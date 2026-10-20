@@ -1,0 +1,33 @@
+id: frame-ricevi
+tipo: ricetta
+titolo: 'Ricevere un frame: prima l''header, poi il payload'
+sigla: Ricevere un frame
+comando: struct.unpack + recv_exactly
+frase: leggi 4 byte, poi N
+fonte: framesocket.py
+parole: frame recv header payload struct unpack lunghezza ricevere frame completo none chiusura
+quando: Quando devi leggere un messaggio mandato con il frame (header di 4 byte con la lunghezza).
+fasi:
+- nome: Leggi l'header
+  righe:
+  - codice: |-
+      header = self.recv_exactly(HEADER_SIZE)
+      if not header:
+          return None
+    commento: se l'altro lato ha chiuso non c'è niente da leggere
+    trappola: 'recv() restituisce None quando la connessione è chiusa: chi lo usa deve controllarlo (nel server: "if not data").'
+- nome: Leggi il payload
+  righe:
+  - codice: |-
+      payload_length = struct.unpack("!I", header)[0]
+      return self.recv_exactly(payload_length)
+    commento: 'unpack restituisce una tupla: il primo elemento è la lunghezza'
+    parti:
+    - voce: '[0]'
+      spiega: struct.unpack restituisce sempre una tupla, anche con un solo valore
+segnaposto: {}
+varianti: []
+vicine:
+- frame-recv-exactly
+- frame-costruisci
+- frame-usa-server

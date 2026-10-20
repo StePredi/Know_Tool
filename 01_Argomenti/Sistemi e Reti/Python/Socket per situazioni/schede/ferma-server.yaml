@@ -1,0 +1,27 @@
+id: ferma-server
+tipo: ricetta
+titolo: Fermare il server con Ctrl+C e chiudere il socket
+sigla: Fermare il server
+comando: KeyboardInterrupt
+frase: chiudi il socket
+fonte: frameserver.py · server_medium_socket.py
+parole: ferma server ctrl c keyboardinterrupt close chiudere socket arresto try except
+quando: Quando il server gira in un ciclo infinito e vuoi poterlo fermare chiudendo il socket.
+fasi:
+- nome: Racchiudi il ciclo in try
+  righe:
+  - codice: |-
+      try:
+          while True:
+              conn, addr = server.accept()
+              ...
+      except KeyboardInterrupt:
+          server.close()
+    commento: Ctrl+C interrompe il ciclo e chiude il socket
+    trappola: 'La chiamata va scritta con le parentesi: server_sock.close(). Nella fonte server_medium_socket.py c''è solo "server_sock", che non fa niente (vedi la scheda sull''errore di chiusura).'
+segnaposto: {}
+varianti: []
+vicine:
+- client-thread-funzione
+- ss-avvia-ferma
+- fix-chiusura

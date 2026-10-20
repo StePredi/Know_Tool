@@ -1,0 +1,29 @@
+id: mqtt-smista-topic
+tipo: ricetta
+titolo: Capire da quale topic arriva il messaggio
+sigla: Smistare per topic
+comando: message.topic
+frase: un if per topic
+fonte: gateway.py · monitor.py
+parole: mqtt message topic smistare if elif cmd config dati alert stato get payload
+quando: Quando la stessa callback riceve da più topic e ognuno va trattato in modo diverso.
+fasi:
+- nome: Confronta il topic
+  righe:
+  - codice: |-
+      payload = json.loads(message.payload.decode('utf-8'))
+      if message.topic == TOPIC_CMD:
+          cmd = payload.get('cmd')
+          if cmd:
+              ...
+      elif message.topic == TOPIC_CONFIG:
+          th = payload.get('th')
+          if th is not None:
+              ...
+    commento: message.topic dice da dove arriva, payload.get() legge i campi
+    trappola: 'Si usa get() e non payload["cmd"]: se il campo manca restituisce None invece di dare errore.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-on-message
+- mqtt-coda-uscita

@@ -1,0 +1,26 @@
+id: serial-non-si-apre
+tipo: ricetta
+titolo: La porta seriale non si apre
+sigla: Porta non disponibile
+comando: port is None
+frase: leggi il log all'avvio
+fonte: gateway.py
+parole: serial non si apre porta occupata errore apertura porta non disponibile thread terminato com sbagliata
+quando: Quando il programma parte ma dalla seriale non arriva niente.
+fasi:
+- nome: Cerca nel log
+  righe:
+  - codice: 'self.logger.error(f"Errore apertura porta: {e}")'
+    commento: compare se Serial(...) non è riuscito ad aprire la porta
+    trappola: 'Nota: cause comuni sono il numero COM sbagliato, il dispositivo non collegato, o la porta già aperta da un altro programma.'
+  - codice: |-
+      if self.port is None:
+          self.logger.error("porta non disponibile — thread terminato")
+          return
+    commento: 'in questo caso il thread seriale termina subito: il resto del programma continua ma senza dati'
+    trappola: 'Il programma non si ferma da solo: se manca l''avviso nel log, può sembrare che funzioni ma non arrivano dati.'
+segnaposto: {}
+varianti: []
+vicine:
+- serial-apri
+- serial-errore-lettura

@@ -1,0 +1,38 @@
+id: ss-thread
+tipo: ricetta
+titolo: Servire più client con ThreadingMixIn
+sigla: ThreadingMixIn
+comando: ThreadingMixIn + TCPServer
+frase: un thread per richiesta
+fonte: socketserver.ipynb
+parole: threadingmixin forkingmixin mixin thread concorrenza socketserver tcpserver più client ordine classi allow_reuse_address
+quando: Quando il server socketserver deve gestire più client nello stesso momento.
+fasi:
+- nome: Aggiungi la mix-in al server
+  righe:
+  - codice: |-
+      class threadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+          allow_reuse_address = True
+    commento: la mix-in avvia un thread per ogni richiesta
+    trappola: 'ThreadingMixIn va scritta prima di TCPServer: sovrascrive un suo metodo e Python cerca i metodi da sinistra a destra.'
+- nome: Scrivi l'handler con un ciclo
+  righe:
+  - codice: |-
+      class threadedEchoRequestHandler(socketserver.BaseRequestHandler):
+
+          def handle(self):
+              while True:
+                  data = self.request.recv(1024)
+                  if not data:
+                      break
+                  self.request.sendall(data)
+    commento: resta sul client finché non chiude
+    trappola: 'Il ciclo con "if not data" è lo stesso del server con i socket normali: cambia solo chi crea i thread.'
+segnaposto: {}
+varianti:
+- codice: threading.current_thread().name
+  spiega: nome del thread che sta servendo il client, utile per stamparlo
+vicine:
+- ss-handler
+- ss-avvia-ferma
+- client-thread-classe

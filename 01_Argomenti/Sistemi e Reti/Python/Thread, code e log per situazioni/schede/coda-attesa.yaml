@@ -1,0 +1,26 @@
+id: coda-attesa
+tipo: ricetta
+titolo: Aspettare un dato senza bloccarsi per sempre
+sigla: get con timeout
+comando: get(timeout=1) + queue.Empty
+frase: aspetta un po', poi riprova
+fonte: gateway.py
+parole: queue get timeout empty attesa ciclo while true thread coda vuota ignorare
+quando: Quando un thread deve restare in attesa di dati ma deve anche poter fare altro o fermarsi.
+fasi:
+- nome: Il ciclo del consumatore
+  righe:
+  - codice: |-
+      while True:
+          try:
+              record = self.coda_seriale.get(timeout=1)
+              self.gestisci_record(record)
+          except queue.Empty:
+              pass
+    commento: se per un secondo non arriva niente, si ignora e si riprova
+    trappola: 'queue.Empty non è un errore vero: significa solo "coda vuota, nessun dato in questo secondo".'
+segnaposto: {}
+varianti: []
+vicine:
+- coda-crea
+- coda-non-blocca

@@ -1,0 +1,30 @@
+id: mqtt-loop-start
+tipo: ricetta
+titolo: Lasciare la rete a un thread e fare altro nel programma
+sigla: loop_start
+comando: client.loop_start()
+frase: la rete gira da sola
+fonte: monitor.py
+parole: mqtt loop_start loop_forever thread dashboard ciclo principale sleep programma continua
+quando: Quando il programma ha altro da fare (disegnare una dashboard, mostrare un menu) mentre i messaggi arrivano.
+fasi:
+- nome: Avvia e continua
+  righe:
+  - codice: |-
+      self.client.connect_to_broker()
+      self.client.loop_start()
+      try:
+          while True:
+              self.stampa_dashboard()
+              time.sleep(0.5)
+      except KeyboardInterrupt:
+          pass
+      finally:
+          self.client.disconnect_from_broker()
+    commento: le callback girano nel thread di paho, il main ridisegna
+    trappola: 'Nota: le callback aggiornano i dati mentre il main li legge: per dati semplici va bene, per strutture complesse servirebbero protezioni.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-connetti
+- mqtt-coda-uscita

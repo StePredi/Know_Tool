@@ -1,0 +1,38 @@
+id: serial-apri
+tipo: ricetta
+titolo: Aprire la porta seriale con pyserial
+sigla: Aprire la seriale
+comando: serial.Serial(porta, baud)
+frase: se non si apre, non fermarti
+fonte: gateway.py
+parole: serial pyserial serialexception aprire porta com baud timeout seriale connessione
+quando: Quando il programma deve parlare con un dispositivo collegato a una porta seriale (USB/COM).
+fasi:
+- nome: Prova ad aprirla
+  righe:
+  - codice: |-
+      try:
+          self.port = serial.Serial(«PORTA», «BAUD», timeout=1)
+          self.logger.info(f"Connesso su {«PORTA»}")
+      except serial.SerialException as e:
+          self.logger.error(f"Errore apertura porta: {e}")
+          self.port = None
+    commento: se fallisce registra l'errore e lascia port a None
+    parti:
+    - voce: timeout=1
+      spiega: una lettura aspetta al massimo 1 secondo
+    - voce: «BAUD»
+      spiega: 'velocità: deve essere la stessa del dispositivo'
+    trappola: 'Nota: su Windows la porta si chiama COM e un numero; su Linux è del tipo /dev/ttyUSB0.'
+segnaposto:
+  PORTA:
+    esempio: '''COM12'''
+    spiega: nome della porta seriale
+  BAUD:
+    esempio: '9600'
+    spiega: velocità in baud
+varianti: []
+vicine:
+- serial-chiudi
+- serial-leggi
+- serial-non-si-apre

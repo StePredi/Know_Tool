@@ -1,0 +1,69 @@
+modello: per_situazioni
+titolo: MQTT, per situazioni
+centro: MQTT
+sottotitolo: Parti da quello che devi far fare ai messaggi, non dal nome della funzione.
+esempiRicerca: messaggio che non parte, iscriversi a un topic, stato vuoto, QoS
+rami:
+- id: b1
+  nome: Collegarsi
+  colore: blue
+  lato: R
+  voci:
+  - gruppo: Aprire e chiudere
+    schede:
+    - mqtt-client
+    - mqtt-connetti
+    - mqtt-chiudi
+  - gruppo: Callback di connessione
+    schede:
+    - mqtt-on-connect
+    - mqtt-on-disconnect
+- id: b2
+  nome: Ricevere
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - mqtt-iscriviti
+  - schede:
+    - mqtt-on-message
+  - schede:
+    - mqtt-smista-topic
+- id: b3
+  nome: Pubblicare
+  colore: green
+  lato: R
+  voci:
+  - schede:
+    - mqtt-publish
+  - schede:
+    - mqtt-qos
+  - schede:
+    - mqtt-retain
+- id: b4
+  nome: Progettare i messaggi
+  colore: yellow
+  lato: L
+  voci:
+  - schede:
+    - mqtt-topic
+  - schede:
+    - mqtt-payload
+- id: b5
+  nome: Dentro un programma più grande
+  colore: orange
+  lato: T
+  voci:
+  - schede:
+    - mqtt-loop-start
+  - schede:
+    - mqtt-coda-uscita
+- id: b6
+  nome: Quando non funziona
+  colore: slate
+  lato: B
+  voci:
+  - schede:
+    - mqtt-non-pubblica
+  - schede:
+    - mqtt-non-ricevi

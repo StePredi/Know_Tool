@@ -1,0 +1,27 @@
+id: serial-scrivi
+tipo: ricetta
+titolo: Mandare un comando al dispositivo
+sigla: Scrivere sulla seriale
+comando: port.write(...encode())
+frase: byte, con l'a capo
+fonte: gateway.py
+parole: serial write encode ascii comando invio tx dispositivo newline
+quando: Quando devi mandare un comando di testo al dispositivo.
+fasi:
+- nome: Prepara il comando
+  righe:
+  - codice: self.coda_mqtt_out.put(cmd + '\n')
+    commento: 'il comando termina con a capo: il dispositivo lo legge una riga alla volta'
+    trappola: 'Nota: senza il \n finale il dispositivo non capisce dove finisce il comando.'
+- nome: Scrivi
+  righe:
+  - codice: |-
+      self.port.write(cmd.encode('ascii'))
+      self.logger.debug(f"TX -> {cmd.strip()}")
+    commento: write() vuole byte, non stringhe
+    trappola: 'Nota: i comandi sono stringhe come "ALARM:ON" o "SET:TH:30"; il formato lo decide il programma sul dispositivo.'
+segnaposto: {}
+varianti: []
+vicine:
+- serial-leggi
+- serial-ciclo

@@ -1,0 +1,54 @@
+modello: per_situazioni
+titolo: Thread, code e log, per situazioni
+centro: Thread
+sottotitolo: Parti da quello che devi far fare al programma, non dal nome della classe.
+esempiRicerca: thread che non si ferma, passare dati tra thread, log sulla console, coda vuota
+rami:
+- id: b1
+  nome: Thread
+  colore: blue
+  lato: R
+  voci:
+  - schede:
+    - thread-classe
+  - schede:
+    - thread-funzione
+  - schede:
+    - thread-main-vivo
+- id: b2
+  nome: Code
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - coda-crea
+  - schede:
+    - coda-attesa
+  - schede:
+    - coda-non-blocca
+  - schede:
+    - coda-per-direzione
+- id: b3
+  nome: Più thread insieme
+  colore: yellow
+  lato: R
+  voci:
+  - schede:
+    - thread-avvia-tutti
+  - schede:
+    - thread-scrittura-file
+  - schede:
+    - thread-chiudi
+- id: b4
+  nome: Log
+  colore: violet
+  lato: L
+  voci:
+  - schede:
+    - log-config
+  - schede:
+    - log-livelli
+  - schede:
+    - log-classe
+  - schede:
+    - log-percorsi

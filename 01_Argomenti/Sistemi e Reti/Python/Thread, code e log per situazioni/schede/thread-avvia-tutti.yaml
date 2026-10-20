@@ -1,0 +1,29 @@
+id: thread-avvia-tutti
+tipo: ricetta
+titolo: Avviare più thread da un coordinatore
+sigla: Coordinatore
+comando: start() di ogni thread
+frase: uno smista, gli altri lavorano
+fonte: gateway.py
+parole: gateway coordinatore start thread seriale mqtt scrittura ciclo smista coda
+quando: Quando il programma ha più compiti paralleli e un thread principale che li coordina.
+fasi:
+- nome: Avvia i thread di lavoro
+  righe:
+  - codice: |-
+      def run(self):
+          self.seriale.start()
+          self.mqtt.start()
+          self.scrittura.start()
+    commento: ognuno parte e lavora per conto suo
+- nome: Poi smista
+  righe:
+  - codice: "    while True:\n        try:\n            record = self.coda_seriale.get(timeout=1)\n            self.gestisci_record(record)\n        except queue.Empty:\n            pass"
+    commento: il coordinatore legge dalla coda e mette i dati nelle code degli altri
+    trappola: 'Nota: lo stato condiviso (self.stato) è un normale dizionario senza blocchi di protezione; qui lo usa un solo thread, ma con più thread che lo cambiano servirebbe un Lock.'
+segnaposto: {}
+varianti: []
+vicine:
+- thread-classe
+- coda-per-direzione
+- thread-chiudi

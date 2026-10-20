@@ -1,0 +1,35 @@
+id: thread-scrittura-file
+tipo: ricetta
+titolo: Scrivere su file i record che arrivano da una coda
+sigla: Thread di scrittura
+comando: open(..., "a") + json.dumps
+frase: un record per riga
+fonte: gateway.py
+parole: scrittura file thread jsonl json dumps append coda log record ioerror
+quando: Quando vuoi salvare i dati su file senza rallentare il resto del programma.
+fasi:
+- nome: Il ciclo di scrittura
+  righe:
+  - codice: |-
+      while True:
+          try:
+              record = self.coda_log.get(timeout=1)
+              try:
+                  with open(self.log_file, 'a') as f:
+                      f.write(json.dumps(record) + '\n')
+              except IOError as e:
+                  self.logger.error(f"errore scrittura: {e}")
+          except queue.Empty:
+              pass
+    commento: un record JSON per riga, in coda al file
+    parti:
+    - voce: '''a'''
+      spiega: 'append: aggiunge in fondo senza cancellare quello che c''è'
+    - voce: json.dumps(record) + '\n'
+      spiega: una riga di testo JSON per ogni record
+    trappola: 'Il file si apre e si chiude a ogni record: più lento, ma ogni riga è già salvata quando il programma si interrompe.'
+segnaposto: {}
+varianti: []
+vicine:
+- coda-attesa
+- log-percorsi

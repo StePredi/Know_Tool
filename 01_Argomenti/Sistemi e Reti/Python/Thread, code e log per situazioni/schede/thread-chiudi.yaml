@@ -1,0 +1,24 @@
+id: thread-chiudi
+tipo: ricetta
+titolo: Chiudere i thread in modo ordinato
+sigla: Chiudere i thread
+comando: chiudi() di ogni parte
+frase: prima le risorse, poi esci
+fonte: gateway.py
+parole: chiudi chiusura thread gateway seriale mqtt disconnect close ordinato fine programma
+quando: Quando il programma si ferma e le risorse (porta seriale, connessione al broker) vanno chiuse prima di uscire.
+fasi:
+- nome: Chiama chiudi su ogni parte
+  righe:
+  - codice: |-
+      def chiudi(self):
+          self.logger.info("chiusura gateway")
+          self.seriale.chiudi()
+          self.mqtt.chiudi()
+    commento: ogni classe sa chiudere le proprie risorse
+    trappola: 'Nota: i thread daemon non si "chiudono" ma si fermano col programma; chiudi() serve per liberare porta seriale e connessione.'
+segnaposto: {}
+varianti: []
+vicine:
+- thread-main-vivo
+- thread-avvia-tutti

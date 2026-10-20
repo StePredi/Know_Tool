@@ -1,0 +1,26 @@
+id: serial-leggi
+tipo: ricetta
+titolo: Leggere una riga dalla seriale senza bloccarsi
+sigla: Leggere una riga
+comando: in_waiting + readline
+frase: prima controlla se c'è qualcosa
+fonte: gateway.py
+parole: serial readline in_waiting decode ascii errors ignore leggere riga dati ricevuti rx
+quando: Quando il dispositivo manda righe di testo e vuoi leggerle man mano.
+fasi:
+- nome: Se ci sono dati, leggi
+  righe:
+  - codice: |-
+      if self.port.is_open and self.port.in_waiting > 0:
+          riga = self.port.readline().decode('ascii', errors='ignore')
+    commento: in_waiting dice quanti byte sono già arrivati; readline() legge fino al carattere di a capo
+    parti:
+    - voce: errors='ignore'
+      spiega: i byte che non sono ASCII vengono saltati invece di dare errore
+    trappola: 'readline() restituisce byte: serve decode() per ottenere una stringa.'
+segnaposto: {}
+varianti: []
+vicine:
+- serial-decodifica
+- serial-scrivi
+- serial-ciclo

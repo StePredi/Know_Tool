@@ -1,0 +1,40 @@
+id: client-thread-classe
+tipo: ricetta
+titolo: Servire più client insieme con una classe Thread
+sigla: Thread per client (classe)
+comando: threading.Thread
+frase: un thread per ogni client
+fonte: server_medium_socket.py
+parole: thread classe gestore client threading daemon run super init accept più client contemporanei server concorrente
+quando: Quando il server deve parlare con più client nello stesso momento e vuoi una classe che gestisce un client.
+fasi:
+- nome: Scrivi la classe del gestore
+  righe:
+  - codice: |-
+      class Gestore_Client(threading.Thread):
+          def __init__(self, conn, addr):
+              super().__init__(daemon=True)
+              self.conn = conn
+              self.addr = addr
+    commento: salva connessione e indirizzo del client
+    parti:
+    - voce: daemon=True
+      spiega: il thread si ferma da solo quando il programma principale termina
+    trappola: 'Si scrive super().__init__(...) con le parentesi: nella fonte mancano e dà errore (vedi la scheda sull''errore di super).'
+  - codice: "    def run(self):\n        while True:\n            data = self.conn.recv(1024)\n            if not data:\n                break\n            self.conn.send(data)\n        self.conn.close()"
+    commento: 'il lavoro del thread: eco finché il client resta'
+- nome: Un thread per ogni client che arriva
+  righe:
+  - codice: |-
+      while True:
+          conn, addr = server_sock.accept()
+          t = Gestore_Client(conn, addr)
+          t.start()
+    commento: accept() nel ciclo principale, il resto lo fa il thread
+    trappola: 'Si chiama start(), non run(): run() eseguirebbe il lavoro nel thread principale, bloccando gli altri client.'
+segnaposto: {}
+varianti: []
+vicine:
+- client-thread-funzione
+- fine-connessione
+- fix-super

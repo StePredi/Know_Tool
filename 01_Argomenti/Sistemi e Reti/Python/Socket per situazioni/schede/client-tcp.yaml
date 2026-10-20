@@ -1,0 +1,50 @@
+id: client-tcp
+tipo: ricetta
+titolo: Collegarsi a un server TCP e scambiare messaggi
+sigla: Client TCP
+comando: socket connect send recv
+frase: connetti, scrivi, leggi
+fonte: client_simple.py
+parole: client tcp socket connect send recv encode decode input messaggio q uscire close indirizzo ip porta
+quando: Quando devi scrivere un client che manda un messaggio a un server e ne legge la risposta.
+fasi:
+- nome: Collegati
+  righe:
+  - codice: sock = socket.socket()
+    commento: socket TCP del client
+  - codice: sock.connect((«IP», «PORTA»))
+    commento: si collega al server; doppie parentesi perché connect vuole una tupla
+    trappola: 'Il server deve essere già in ascolto: altrimenti connect() fallisce con un errore di connessione rifiutata.'
+- nome: Scambia messaggi finché vuoi
+  righe:
+  - codice: |-
+      while True:
+          messaggio = input("inserisci un messaggio per il server (q per uscire)")
+          if messaggio == "q":
+              break
+          sock.send(messaggio.encode())
+          data = sock.recv(1024)
+          print(f"messaggio di ritorno {data}")
+    commento: invia e aspetta la risposta
+    parti:
+    - voce: messaggio.encode()
+      spiega: 'send() vuole byte, non stringhe: encode() converte il testo in byte'
+    trappola: 'Nota: recv() restituisce byte, quindi la stampa mostra b''...''; con data.decode() si vede il testo.'
+- nome: Chiudi
+  righe:
+  - codice: sock.close()
+    commento: chiude la connessione
+segnaposto:
+  IP:
+    esempio: '"192.168.14.77"'
+    spiega: indirizzo del computer dove gira il server (come stringa)
+  PORTA:
+    esempio: '5173'
+    spiega: porta su cui il server ascolta
+varianti:
+- codice: 'with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:'
+  spiega: 'forma con with: chiude da solo il socket alla fine (usata nel notebook socketserver)'
+vicine:
+- server-tcp
+- fine-connessione
+- framing-perche

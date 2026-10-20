@@ -1,0 +1,37 @@
+id: udp-server-ss
+tipo: ricetta
+titolo: Un server UDP con socketserver
+sigla: Server UDP
+comando: UDPServer + handler
+frase: request = (dati, socket)
+fonte: socketserver.ipynb
+parole: udp udpserver socketserver handler sendto datagramma request dati socket client_address eco
+quando: Quando i messaggi sono datagrammi UDP, senza connessione.
+fasi:
+- nome: Handler UDP
+  righe:
+  - codice: |-
+      class echoUDPRequestHandler(socketserver.BaseRequestHandler):
+
+          def handle(self):
+              data, sock = self.request
+              sock.sendto(data.upper(), self.client_address)
+    commento: risponde all'indirizzo da cui è arrivato il datagramma
+    trappola: 'Con UDP self.request è una coppia (dati, socket), non il socket: per rispondere si usa sendto() con client_address.'
+- nome: Server
+  righe:
+  - codice: |-
+      server = socketserver.UDPServer((«HOST», «PORTA»), echoUDPRequestHandler)
+      server.serve_forever()
+    commento: stessa struttura del server TCP
+segnaposto:
+  HOST:
+    esempio: '''127.0.0.1'''
+    spiega: indirizzo su cui ascoltare
+  PORTA:
+    esempio: '50017'
+    spiega: porta del server
+varianti: []
+vicine:
+- udp-client
+- ss-handler

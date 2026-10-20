@@ -1,0 +1,28 @@
+id: mqtt-non-pubblica
+tipo: ricetta
+titolo: 'Il messaggio non parte: "impossibile pubblicare"'
+sigla: Non pubblica
+comando: is_connected a False
+frase: controlla connessione e callback
+fonte: controller.py
+parole: mqtt non pubblica impossibile pubblicare non connesso is_connected errore connessione broker host porta
+quando: Quando nel log compare "impossibile pubblicare — non connesso" o i messaggi non partono.
+fasi:
+- nome: Controlla il log di connessione
+  righe:
+  - codice: 'self.logger.error(f"connessione fallita, result code: {rc}")'
+    commento: 'se compare questo, la connessione non è riuscita: guarda il result code'
+    trappola: 'Nota: controlla broker, porta e rete (BROKER_HOST e BROKER_PORT) prima di cercare errori nel codice.'
+  - codice: 'self.logger.error(f"errore connessione: {e}")'
+    commento: compare se connect() stesso fallisce
+- nome: Non pubblicare troppo presto
+  righe:
+  - codice: |-
+      self.client.connect_to_broker()
+      time.sleep(0.5)
+    commento: 'is_connected diventa True solo quando scatta on_connect: pubblicare subito dopo connect() può essere troppo presto'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-on-connect
+- mqtt-publish

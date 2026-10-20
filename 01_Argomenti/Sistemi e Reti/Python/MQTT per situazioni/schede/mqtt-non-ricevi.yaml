@@ -1,0 +1,26 @@
+id: mqtt-non-ricevi
+tipo: ricetta
+titolo: Non arrivano messaggi
+sigla: Non ricevi
+comando: topic, iscrizione, retain
+frase: chi pubblica e chi ascolta devono coincidere
+fonte: monitor.py · controller.py
+parole: mqtt non ricevi nessun messaggio topic diverso subscribe on_message debug stato vuoto non ancora ricevuto
+quando: Quando il programma resta con lo stato vuoto o la dashboard non si aggiorna.
+fasi:
+- nome: Guarda cosa arriva davvero
+  righe:
+  - codice: self.logger.debug(f"messaggio ricevuto su {message.topic}")
+    commento: 'mette nel log ogni messaggio e il suo topic: se non compare, non sta arrivando'
+    trappola: 'Nota: il topic di chi pubblica e di chi si iscrive deve essere identico, lettera per lettera.'
+- nome: Controlla l'iscrizione e il retain
+  righe:
+  - codice: self.subscribe(TOPIC_STATO, qos=1)
+    commento: l'iscrizione deve esserci per ogni topic che ti serve
+    trappola: Il messaggio più recente arriva subito solo se chi pubblica ha usato retain=True; altrimenti si aspetta il prossimo.
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-retain
+- mqtt-iscriviti
+- mqtt-topic

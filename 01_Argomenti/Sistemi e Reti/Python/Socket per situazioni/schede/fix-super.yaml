@@ -1,0 +1,27 @@
+id: fix-super
+tipo: prima_dopo
+titolo: 'Errore: super senza parentesi nel costruttore del thread'
+sigla: super() con le parentesi
+comando: super().__init__()
+frase: super.__init__ non funziona
+fonte: server_medium_socket.py
+parole: super init thread errore typeerror parentesi costruttore sottoclasse gestore
+prima: |-
+  class Gestore_Client(threading.Thread):
+      def __init__(self, conn, addr):
+          ⟦super.__init__(daemon = True)⟧
+          self.conn = conn
+dopo: |-
+  class Gestore_Client(threading.Thread):
+      def __init__(self, conn, addr):
+          ⟦super().__init__(daemon=True)⟧
+          self.conn = conn
+uso: Inizializzare la classe base Thread nel costruttore di una sottoclasse.
+riconoscila: Errore TypeError quando si crea il thread, cioè appena si connette il primo client.
+parti:
+- voce: super()
+  spiega: 'restituisce l''oggetto che dà accesso alla classe base: senza parentesi si usa la classe super stessa'
+trappola: 'Nota: dopo super().__init__() il thread è pronto; solo allora si salvano gli attributi della sottoclasse.'
+varianti: []
+vicine:
+- client-thread-classe

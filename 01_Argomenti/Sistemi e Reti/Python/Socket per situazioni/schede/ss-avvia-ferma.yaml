@@ -1,0 +1,34 @@
+id: ss-avvia-ferma
+tipo: ricetta
+titolo: Avviare un server socketserver in un thread e fermarlo bene
+sigla: Avviare e fermare
+comando: serve_forever shutdown server_close
+frase: arresto controllato
+fonte: socketserver.ipynb
+parole: serve_forever shutdown server_close daemon thread allow_reuse_address fermare server notebook arresto
+quando: Quando il server deve girare in background (per esempio in un notebook) e poi fermarsi senza riavviare tutto.
+fasi:
+- nome: Prima di creare il server
+  righe:
+  - codice: socketserver.TCPServer.allow_reuse_address = True
+    commento: 'equivalente di SO_REUSEADDR: si può riusare subito la stessa porta'
+    trappola: Va impostato prima di creare il server.
+- nome: Avvia in un thread
+  righe:
+  - codice: |-
+      server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+      server_thread.start()
+    commento: 'serve_forever() è bloccante: in un thread lascia libero il programma principale'
+- nome: Ferma
+  righe:
+  - codice: |-
+      server.shutdown()
+      server.server_close()
+    commento: shutdown() ferma il ciclo, server_close() chiude il socket
+    trappola: 'shutdown() va chiamato dal thread principale: dice a serve_forever() di fermarsi e aspetta che lo faccia.'
+segnaposto: {}
+varianti: []
+vicine:
+- ss-handler
+- ss-thread
+- ferma-server

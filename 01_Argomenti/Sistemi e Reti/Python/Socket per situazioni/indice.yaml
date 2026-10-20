@@ -1,0 +1,77 @@
+modello: per_situazioni
+titolo: Socket, per situazioni
+centro: Socket
+sottotitolo: Parti da quello che devi fare in rete, non dal nome della funzione.
+esempiRicerca: client che si disconnette, più client insieme, messaggio spezzato, server che non si ferma
+rami:
+- id: b1
+  nome: Basi TCP
+  colore: blue
+  lato: R
+  voci:
+  - schede:
+    - server-tcp
+  - schede:
+    - client-tcp
+  - schede:
+    - fine-connessione
+- id: b2
+  nome: Più client
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - client-thread-classe
+  - schede:
+    - client-thread-funzione
+  - schede:
+    - ferma-server
+- id: b3
+  nome: Messaggi completi
+  colore: yellow
+  lato: R
+  voci:
+  - gruppo: Dentro FrameSocket
+    schede:
+    - framing-perche
+    - frame-costruisci
+    - frame-ricevi
+    - frame-recv-exactly
+  - gruppo: Usarlo
+    schede:
+    - frame-usa-server
+    - frame-usa-client
+- id: b4
+  nome: socketserver
+  colore: green
+  lato: L
+  voci:
+  - gruppo: Scrivere il server
+    schede:
+    - ss-handler
+    - ss-stream
+  - gruppo: Concorrenza e arresto
+    schede:
+    - ss-thread
+    - ss-avvia-ferma
+    - ss-verify
+- id: b5
+  nome: UDP
+  colore: orange
+  lato: T
+  voci:
+  - schede:
+    - udp-server-ss
+  - schede:
+    - udp-client
+- id: b6
+  nome: Errori nel codice
+  colore: slate
+  lato: B
+  voci:
+  - gruppo: Errori trovati nelle fonti
+    schede:
+    - fix-super
+    - fix-join
+    - fix-recv-exactly
+    - fix-chiusura

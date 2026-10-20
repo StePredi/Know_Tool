@@ -1,0 +1,28 @@
+id: mqtt-retain
+tipo: ricetta
+titolo: Far vedere subito l'ultimo valore a chi si collega dopo
+sigla: Retain
+comando: retain=True
+frase: il broker ricorda l'ultimo messaggio
+fonte: gateway.py · controller.py
+parole: mqtt retain retained ultimo valore stato configurazione nuovo iscritto attesa messaggio conservato
+quando: Quando chi si collega adesso deve conoscere subito lo stato o la configurazione corrente, senza aspettare il prossimo messaggio.
+fasi:
+- nome: Pubblica con retain
+  righe:
+  - codice: self.client.publish_message(TOPIC_STATO, dato, qos=1, retain=True)
+    commento: il broker conserva questo messaggio e lo consegna a chi si iscrive dopo
+    trappola: 'Il retain tiene solo l''ultimo messaggio di ogni topic: quello nuovo sostituisce il precedente.'
+- nome: Chi riceve deve aspettare un attimo
+  righe:
+  - codice: |-
+      self.client.connect_to_broker()
+      time.sleep(0.5)  # attende retained message da TOPIC_STATO
+    commento: il messaggio conservato arriva subito dopo l'iscrizione, non nello stesso istante
+    trappola: Senza questa pausa lo stato risulta ancora vuoto ("non ancora ricevuto").
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-qos
+- mqtt-publish
+- mqtt-non-ricevi

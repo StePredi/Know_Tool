@@ -1,0 +1,30 @@
+id: framing-perche
+tipo: ricetta
+titolo: Mandare messaggi lunghi in modo che arrivino interi
+sigla: Perché serve il frame
+comando: header + payload
+frase: la lunghezza davanti
+fonte: framesocket.py · frameclient.py
+parole: frame framing header payload lunghezza messaggio lungo recv 1024 spezzato tcp flusso confini messaggi
+quando: Quando un messaggio può essere più lungo di una singola recv() e chi riceve deve sapere dove finisce.
+fasi:
+- nome: Idea del frame
+  righe:
+  - codice: '# frame = HEADER (4 byte) + payload'
+    commento: l'header contiene la lunghezza del payload, il payload è il messaggio vero e proprio
+  - codice: '# chi riceve: legge 4 byte -> sa quanti byte aspettarsi -> legge esattamente quelli'
+    commento: così il messaggio è completo anche se arriva a pezzi
+    trappola: 'Nota: TCP è un flusso di byte e non conserva i confini dei messaggi: una send() può arrivare in più recv(), e più send() in una sola.'
+- nome: Esempio dalle fonti
+  righe:
+  - codice: |-
+      payload = "hello world " * 10000
+      s.send(payload.encode())
+      data = s.recv()
+    commento: 120000 byte spediti e ricevuti in un colpo solo, grazie al frame
+segnaposto: {}
+varianti: []
+vicine:
+- frame-costruisci
+- frame-ricevi
+- frame-usa-client

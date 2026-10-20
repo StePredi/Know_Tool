@@ -1,0 +1,28 @@
+id: log-livelli
+tipo: ricetta
+titolo: Mandare sulla console solo gli avvisi importanti
+sigla: Livelli per destinazione
+comando: handler.setLevel
+frase: tutto nel file, poco a schermo
+fonte: controller.py
+parole: logging livello setlevel warning debug console file handler menu dashboard proteggere schermo
+quando: Quando il programma disegna un menu o una dashboard e i messaggi di log la rovinerebbero.
+fasi:
+- nome: Due handler, due livelli
+  righe:
+  - codice: |-
+      file_handler = logging.FileHandler(LOG_FILE)
+      file_handler.setLevel(logging.DEBUG)
+      console_handler = logging.StreamHandler()
+      console_handler.setLevel(logging.WARNING)  # protegge il menu
+    commento: nel file va tutto, sulla console solo WARNING e peggio
+    trappola: 'Il livello generale di basicConfig deve essere abbastanza basso (DEBUG): ogni handler poi filtra con il suo.'
+  - codice: logging.basicConfig(level=logging.DEBUG, handlers=[file_handler, console_handler])
+    commento: passa i due handler a basicConfig
+segnaposto: {}
+varianti:
+- codice: logging.FileHandler(LOG_FILE, encoding='utf-8')
+  spiega: 'solo su file (come nel monitor): la console resta libera per la dashboard'
+vicine:
+- log-config
+- log-classe

@@ -1,0 +1,23 @@
+id: fix-chiusura
+tipo: prima_dopo
+titolo: 'Errore: il socket del server non viene chiuso'
+sigla: Chiudere il socket
+comando: server_sock.close()
+frase: il nome da solo non fa niente
+fonte: server_medium_socket.py
+parole: close chiusura server socket keyboardinterrupt parentesi chiamata funzione
+prima: |-
+  except KeyboardInterrupt:
+      ⟦server_sock⟧
+dopo: |-
+  except KeyboardInterrupt:
+      ⟦server_sock.close()⟧
+uso: Chiudere il socket del server quando lo si ferma con Ctrl+C.
+riconoscila: 'Il server si ferma ma il socket non viene chiuso: la riga con il solo nome non esegue niente.'
+parti:
+- voce: server_sock.close()
+  spiega: 'la chiamata vuole le parentesi: senza, Python valuta il nome e basta'
+trappola: 'Nota: se la porta resta occupata dopo l''arresto, il socket non è stato chiuso.'
+varianti: []
+vicine:
+- ferma-server

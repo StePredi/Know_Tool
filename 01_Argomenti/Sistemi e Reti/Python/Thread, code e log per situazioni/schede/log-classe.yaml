@@ -1,0 +1,28 @@
+id: log-classe
+tipo: ricetta
+titolo: Scrivere i messaggi di log da una classe
+sigla: Logger per classe
+comando: logging.getLogger
+frase: un nome per ogni parte
+fonte: controller.py · gateway.py
+parole: logger getlogger info debug warning error messaggio classe nome livello f-string
+quando: Quando vuoi capire quale parte del programma ha scritto un messaggio.
+fasi:
+- nome: Un logger per classe
+  righe:
+  - codice: self.logger = logging.getLogger("Controller")
+    commento: il nome compare nel formato del log (%(name)s)
+- nome: Scegli il livello giusto
+  righe:
+  - codice: |-
+      self.logger.debug(f"pubblicato su {topic}: {payload}")
+      self.logger.info("connesso al broker")
+      self.logger.warning("impossibile pubblicare — non connesso")
+      self.logger.error(f"connessione fallita, result code: {rc}")
+    commento: dal più dettagliato al più grave
+    trappola: 'Nota: debug per i dettagli utili solo a chi cerca un errore, info per i fatti normali, warning per i problemi che il programma supera, error per quelli che non supera.'
+segnaposto: {}
+varianti: []
+vicine:
+- log-config
+- log-livelli

@@ -1,0 +1,23 @@
+id: mqtt-chiudi
+tipo: ricetta
+titolo: Disconnettersi dal broker
+sigla: Chiudere il client
+comando: loop_stop + disconnect
+frase: prima ferma il ciclo
+fonte: controller.py
+parole: mqtt disconnect loop_stop chiudere disconnettere broker fine programma
+quando: Quando il programma termina e vuoi chiudere bene la connessione.
+fasi:
+- nome: Ferma e chiudi
+  righe:
+  - codice: |-
+      def disconnect_from_broker(self):
+          self.loop_stop()
+          self.disconnect()
+    commento: loop_stop() ferma il thread di rete, disconnect() chiude la connessione
+    trappola: 'Si chiama in un finally: così lo si fa anche se il programma si ferma con Ctrl+C.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-connetti
+- mqtt-on-disconnect

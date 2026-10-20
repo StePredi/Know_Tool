@@ -12,6 +12,12 @@
   - `socketserver.ipynb` → il modulo `socketserver` (teoria, esempi, 5 esercizi)
   - `gateway.py`, `controller.py`, `monitor.py` → codice con MQTT (paho), thread, code, seriale, logging
 
+- Documenti «Per situazioni» (si aprono nell'app), uno per area tematica:
+  - `Socket per situazioni/` → socket TCP/UDP, più client, framing, `socketserver`, errori (6 rami, 23 schede)
+  - `Thread, code e log per situazioni/` → thread, `queue`, coordinamento, logging (4 rami, 14 schede)
+  - `MQTT per situazioni/` → client paho, ricevere, pubblicare, topic e messaggi (6 rami, 17 schede)
+  - `Seriale per situazioni/` → pyserial: aprire, leggere, scrivere, decodificare (4 rami, 8 schede)
+
 ---
 
 ## Regole specifiche

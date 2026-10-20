@@ -1,0 +1,28 @@
+id: mqtt-payload
+tipo: ricetta
+titolo: Decidere cosa contiene il messaggio
+sigla: Contenuto in JSON
+comando: dizionario → json.dumps
+frase: campi con nome
+fonte: controller.py · gateway.py
+parole: mqtt payload json dizionario cmd from th interval campi comando configurazione evento
+quando: Quando devi stabilire i campi dei messaggi di comandi, configurazione ed eventi.
+fasi:
+- nome: Un comando
+  righe:
+  - codice: |-
+      payload = {'cmd': cmd, 'from': 'controllerSP'}
+      self.client.publish_message(TOPIC_CMD, payload, qos=1)
+    commento: cmd dice cosa fare, from chi lo manda
+- nome: Una configurazione
+  righe:
+  - codice: |-
+      payload = {'th': valore}
+      self.client.publish_message(TOPIC_CONFIG, payload, qos=1, retain=True)
+    commento: un campo per ogni impostazione (qui th; altrove interval)
+    trappola: 'Chi riceve legge con get() e controlla se il campo c''è: un messaggio può portare solo alcune impostazioni.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-topic
+- mqtt-on-message

@@ -1,0 +1,26 @@
+id: mqtt-on-message
+tipo: ricetta
+titolo: Leggere un messaggio ricevuto
+sigla: on_message
+comando: on_message + json.loads
+frase: da byte a dizionario
+fonte: controller.py
+parole: mqtt on_message payload decode json loads jsondecodeerror messaggio ricevuto topic
+quando: Quando arriva un messaggio e vuoi trasformarlo in un dizionario Python.
+fasi:
+- nome: La callback
+  righe:
+  - codice: |-
+      def on_message(self, client, userdata, message):
+          try:
+              self.stato_sistema = json.loads(message.payload.decode('utf-8'))
+          except json.JSONDecodeError as e:
+              self.logger.error(f"errore parsing JSON: {e}")
+    commento: 'payload è in byte: decode() lo trasforma in testo, json.loads() in dizionario'
+    trappola: 'Un messaggio che non è JSON valido non deve fermare il programma: si registra l''errore e si va avanti.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-smista-topic
+- mqtt-payload
+- mqtt-iscriviti

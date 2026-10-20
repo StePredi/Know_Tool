@@ -1,0 +1,28 @@
+id: coda-per-direzione
+tipo: ricetta
+titolo: Collegare i thread con una coda per ogni flusso
+sigla: Una coda per flusso
+comando: queue.Queue passata al costruttore
+frase: chi parla con chi
+fonte: gateway.py
+parole: code queue flusso direzione costruttore passare coda thread seriale mqtt log scrittura gateway
+quando: Quando più thread devono scambiarsi dati in direzioni diverse e vuoi che resti chiaro chi scrive e chi legge.
+fasi:
+- nome: Una coda per ogni flusso
+  righe:
+  - codice: |-
+      self.coda_seriale = queue.Queue()   # dalla seriale al gateway
+      self.coda_mqtt = queue.Queue()      # dal gateway a MQTT
+      self.coda_mqtt_out = queue.Queue()  # da MQTT alla seriale (comandi)
+      self.coda_log = queue.Queue()       # dal gateway alla scrittura su file
+    commento: il nome della coda dice da dove a dove vanno i dati
+- nome: Passa le code ai thread
+  righe:
+  - codice: self.seriale = SerialeComunicazione(SERIAL_PORT, SERIAL_BAUD, self.coda_seriale, self.coda_mqtt_out)
+    commento: il thread riceve le code nel costruttore e le tiene come attributi
+    trappola: 'Una coda per direzione: così un thread legge solo dalle sue code e non rischia di prendere dati destinati a un altro.'
+segnaposto: {}
+varianti: []
+vicine:
+- coda-crea
+- thread-classe

@@ -1,0 +1,28 @@
+id: mqtt-on-connect
+tipo: ricetta
+titolo: 'Reagire alla connessione: iscriversi ai topic'
+sigla: on_connect
+comando: on_connect + subscribe
+frase: iscriviti qui dentro
+fonte: controller.py · gateway.py
+parole: mqtt on_connect callback subscribe rc result code iscrizione topic qos connessione riuscita
+quando: Quando il programma deve iscriversi ai topic appena la connessione al broker riesce.
+fasi:
+- nome: La callback
+  righe:
+  - codice: |-
+      def on_connect(self, client, userdata, flags, rc, properties=None):
+          if rc == 0:
+              self.is_connected = True
+              self.logger.info("connesso al broker")
+              self.subscribe(TOPIC_STATO, qos=1)
+          else:
+              self.logger.error(f"connessione fallita, result code: {rc}")
+    commento: rc == 0 = connessione riuscita; solo allora si sottoscrive
+    trappola: 'Nota: iscriversi dentro on_connect significa rifare le iscrizioni anche dopo una riconnessione automatica.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-iscriviti
+- mqtt-on-disconnect
+- mqtt-non-pubblica

@@ -1,0 +1,29 @@
+id: udp-client
+tipo: ricetta
+titolo: Un client UDP
+sigla: Client UDP
+comando: sendto recvfrom
+frase: senza connect
+fonte: socketserver.ipynb
+parole: udp client sendto recvfrom datagramma sock_dgram senza connessione
+quando: Quando devi mandare un datagramma UDP a un server e leggere la risposta.
+fasi:
+- nome: Invia e ricevi
+  righe:
+  - codice: |-
+      with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+          s.sendto(b"messaggio UDP", («HOST», «PORTA»))
+          risposta, _ = s.recvfrom(1024)
+    commento: recvfrom restituisce i dati e l'indirizzo di chi ha risposto
+    trappola: 'UDP non ha connect(): ogni datagramma porta con sé l''indirizzo; può perdersi o arrivare fuori ordine.'
+segnaposto:
+  HOST:
+    esempio: '''127.0.0.1'''
+    spiega: indirizzo del server
+  PORTA:
+    esempio: '50017'
+    spiega: porta del server
+varianti: []
+vicine:
+- udp-server-ss
+- client-tcp

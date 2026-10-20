@@ -1,0 +1,30 @@
+id: mqtt-connetti
+tipo: ricetta
+titolo: Collegarsi al broker e restare in ascolto
+sigla: Connettersi
+comando: connect + loop_start
+frase: la rete gira in un thread
+fonte: controller.py
+parole: mqtt connect loop_start broker keepalive thread rete connessione try except errore
+quando: Quando devi aprire la connessione al broker senza bloccare il programma.
+fasi:
+- nome: Connetti e avvia il ciclo di rete
+  righe:
+  - codice: |-
+      def connect_to_broker(self):
+          try:
+              self.connect(self.broker, self.port, keepalive=60)
+              self.loop_start()
+          except Exception as e:
+              self.logger.error(f"errore connessione: {e}")
+    commento: connect() apre la connessione, loop_start() fa gestire la rete a un thread di paho
+    parti:
+    - voce: keepalive=60
+      spiega: 'secondi massimi di silenzio: paho manda un piccolo messaggio per tenere viva la connessione'
+    trappola: 'Dopo connect() non sei ancora connesso: lo sei quando scatta on_connect (vedi la scheda sulla callback).'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-client
+- mqtt-on-connect
+- mqtt-loop-start

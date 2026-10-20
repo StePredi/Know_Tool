@@ -1,0 +1,29 @@
+id: coda-crea
+tipo: ricetta
+titolo: Passare dati da un thread a un altro con una coda
+sigla: Queue
+comando: queue.Queue put get
+frase: i thread non si passano le variabili
+fonte: gateway.py
+parole: queue coda put get thread produttore consumatore fifo condividere dati tra thread
+quando: Quando un thread produce dati e un altro li deve elaborare, senza condividere variabili a mano.
+fasi:
+- nome: Crea la coda
+  righe:
+  - codice: 'self.coda_seriale = queue.Queue()  # record ricevuti dalla seriale'
+    commento: una coda vuota, in cui si entra e si esce in ordine (FIFO)
+- nome: Chi produce
+  righe:
+  - codice: self.coda_seriale.put(record)
+    commento: mette un elemento in coda, senza aspettare
+- nome: Chi consuma
+  righe:
+  - codice: record = self.coda_seriale.get(timeout=1)
+    commento: prende il primo elemento; se non ce ne sono, aspetta fino a 1 secondo
+    trappola: Senza timeout get() aspetta per sempre; con il timeout, se la coda resta vuota, lancia queue.Empty (vedi la scheda sull'attesa).
+segnaposto: {}
+varianti: []
+vicine:
+- coda-attesa
+- coda-non-blocca
+- coda-per-direzione

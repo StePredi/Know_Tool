@@ -1,0 +1,28 @@
+id: fine-connessione
+tipo: ricetta
+titolo: Accorgersi che il client ha chiuso la connessione
+sigla: Client disconnesso
+comando: recv restituisce byte vuoti
+frase: 'if not data: break'
+fonte: server_medium_socket.py · server_simple_socket.py
+parole: disconnesso disconnessione chiuso client recv vuoto not data break close fine connessione ciclo infinito
+quando: Quando il server deve smettere di servire un client che se n'è andato, senza restare in un ciclo infinito.
+fasi:
+- nome: Controlla ogni lettura
+  righe:
+  - codice: |-
+      data = self.conn.recv(1024)
+      if not data:
+          print(f"client {self.addr} disconesso")
+          break
+    commento: byte vuoti = l'altro lato ha chiuso
+    trappola: 'Nota: dopo la chiusura recv() continua a restituire subito byte vuoti: senza questo controllo il ciclo gira all''infinito.'
+- nome: Libera la connessione
+  righe:
+  - codice: self.conn.close()
+    commento: chiude il socket di quel client
+segnaposto: {}
+varianti: []
+vicine:
+- server-tcp
+- client-thread-classe

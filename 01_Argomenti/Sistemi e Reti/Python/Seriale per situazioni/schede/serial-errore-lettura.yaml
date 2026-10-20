@@ -1,0 +1,31 @@
+id: serial-errore-lettura
+tipo: ricetta
+titolo: Righe strane o errori durante la lettura
+sigla: Errori di lettura
+comando: except SerialException / ValueError
+frase: non fermare tutto per una riga
+fonte: gateway.py
+parole: serial errore lettura riga malformata valueerror serialexception break cavo scollegato parsing
+quando: Quando il log segnala "Riga malformata", "errore parsing" o "errore seriale".
+fasi:
+- nome: 'Riga sbagliata: scartala'
+  righe:
+  - codice: |-
+      except ValueError as e:
+          self.logger.error(f"errore parsing: {e}")
+          return None
+    commento: una riga corrotta non deve interrompere il programma
+    trappola: 'Nota: righe a metà possono capitare se si inizia a leggere mentre il dispositivo sta già trasmettendo.'
+- nome: 'Errore della porta: fermati'
+  righe:
+  - codice: |-
+      except serial.SerialException as e:
+          self.logger.error(f"errore seriale: {e}")
+          break
+    commento: se la porta si guasta il ciclo termina
+    trappola: 'Nota: succede per esempio se il cavo viene scollegato mentre il programma gira.'
+segnaposto: {}
+varianti: []
+vicine:
+- serial-decodifica
+- serial-non-si-apre

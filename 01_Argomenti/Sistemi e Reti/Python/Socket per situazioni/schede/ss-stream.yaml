@@ -1,0 +1,30 @@
+id: ss-stream
+tipo: ricetta
+titolo: Leggere e scrivere sul socket come su un file
+sigla: StreamRequestHandler
+comando: rfile.readline e wfile.write
+frase: il socket come file
+fonte: socketserver.ipynb
+parole: streamrequesthandler rfile wfile readline write file-like newline socketserver stream
+quando: Quando i messaggi sono righe di testo e vuoi usare readline() invece di recv().
+fasi:
+- nome: Handler a stream
+  righe:
+  - codice: |-
+      class echoRequestHandler(socketserver.StreamRequestHandler):
+
+          def handle(self):
+              data = self.rfile.readline().strip()
+              self.wfile.write(data)
+    commento: rfile per leggere, wfile per rispondere
+    parti:
+    - voce: rfile
+      spiega: oggetto simile a un file, per ricevere
+    - voce: wfile
+      spiega: oggetto simile a un file, per rispondere
+    trappola: 'readline() aspetta il carattere di a capo: il client deve terminare il messaggio con \n, altrimenti il server resta in attesa.'
+segnaposto: {}
+varianti: []
+vicine:
+- ss-handler
+- ss-thread

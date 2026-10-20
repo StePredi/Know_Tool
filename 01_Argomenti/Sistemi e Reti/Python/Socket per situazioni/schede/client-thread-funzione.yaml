@@ -1,0 +1,36 @@
+id: client-thread-funzione
+tipo: ricetta
+titolo: Servire più client insieme con una funzione e un thread
+sigla: Thread per client (funzione)
+comando: threading.Thread target args
+frase: una funzione per client
+fonte: frameserver.py
+parole: thread funzione target args daemon gestisci client threading start accept server concorrente
+quando: Quando preferisci una semplice funzione a una classe per gestire ogni client.
+fasi:
+- nome: Scrivi la funzione del client
+  righe:
+  - codice: |-
+      def gestisci_client(conn, addr):
+          print(f"[SERVER] new client @{addr} connected!")
+          while True:
+              data = conn.recv()
+              if not data:
+                  conn.close()
+                  return
+              conn.send(data)
+    commento: esce dalla funzione quando il client chiude
+    trappola: 'Nota: qui conn.recv() senza argomenti è quello di FrameSocket; con un socket normale serve recv(1024).'
+- nome: Avvia un thread per ogni connessione
+  righe:
+  - codice: |-
+      t = threading.Thread(target=gestisci_client, args=(conn, addr), daemon=True)
+      t.start()
+    commento: target è la funzione, args la tupla dei suoi argomenti
+    trappola: 'args è una tupla: con un solo argomento serve la virgola finale, per esempio args=(conn,).'
+segnaposto: {}
+varianti: []
+vicine:
+- client-thread-classe
+- server-tcp
+- ferma-server

@@ -1,0 +1,35 @@
+id: serial-ciclo
+tipo: ricetta
+titolo: Leggere e scrivere sulla seriale nello stesso thread
+sigla: Ciclo seriale
+comando: in_waiting + get_nowait
+frase: un ciclo che fa tutti e due
+fonte: gateway.py
+parole: serial thread ciclo lettura scrittura in_waiting get_nowait coda comandi record seriale run
+quando: Quando un solo thread deve ricevere dati dal dispositivo e mandargli comandi.
+fasi:
+- nome: Il ciclo del thread
+  righe:
+  - codice: |-
+      while True:
+          try:
+              if self.port.is_open and self.port.in_waiting > 0:
+                  riga = self.port.readline().decode('ascii', errors='ignore')
+                  record = self.decodifica_riga(riga)
+                  if record:
+                      self.coda_seriale.put(record)
+              try:
+                  cmd = self.coda_mqtt_out.get_nowait()
+                  self.port.write(cmd.encode('ascii'))
+              except queue.Empty:
+                  pass
+          except serial.SerialException as e:
+              self.logger.error(f"errore seriale: {e}")
+              break
+    commento: ogni giro legge se c'è qualcosa, poi invia se c'è un comando in coda
+    trappola: 'Nota: questo ciclo non ha pause e può occupare molto processore; una breve pausa a ogni giro lo alleggerisce.'
+segnaposto: {}
+varianti: []
+vicine:
+- serial-leggi
+- serial-scrivi

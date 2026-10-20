@@ -1,0 +1,40 @@
+id: frame-recv-exactly
+tipo: ricetta
+titolo: Ricevere esattamente N byte, anche se arrivano a pezzi
+sigla: recv_exactly
+comando: recv in ciclo
+frase: finché non ne hai N
+fonte: framesocket.py
+parole: recv exactly esattamente byte ciclo join mancanti blocchi pezzi chunk none chiusa
+quando: Quando sai quanti byte devi leggere (per esempio la lunghezza dell'header) e una sola recv() potrebbe non bastare.
+fasi:
+- nome: Prepara il conteggio
+  righe:
+  - codice: |-
+      data = []
+      ricevuti = 0
+    commento: data raccoglie i blocchi, ricevuti conta i byte
+    trappola: 'Nota: nella fonte il ciclo confronta len(data) con n, ma len(data) conta i blocchi, non i byte (vedi la scheda sull''errore di conteggio).'
+- nome: Ripeti finché non bastano
+  righe:
+  - codice: |-
+      while ricevuti < n:
+          byte_mancanti = n - ricevuti
+          blocco = self.sock.recv(min(byte_mancanti, 1024))
+          if not blocco:
+              return None
+          data.append(blocco)
+          ricevuti += len(blocco)
+    commento: chiede solo quello che manca, al massimo 1024 byte alla volta
+    trappola: 'Se blocco è vuoto l''altro lato ha chiuso: si esce con None, altrimenti il ciclo resterebbe in attesa per sempre.'
+- nome: Rimetti insieme
+  righe:
+  - codice: return b''.join(data)
+    commento: unisce i blocchi in un unico bytes
+    trappola: Si scrive b''.join(data), senza il punto prima della parentesi (vedi la scheda sull'errore del join).
+segnaposto: {}
+varianti: []
+vicine:
+- frame-ricevi
+- fix-recv-exactly
+- fix-join

@@ -1,0 +1,34 @@
+id: mqtt-client
+tipo: ricetta
+titolo: Creare un client MQTT con paho
+sigla: Client MQTT
+comando: mqtt.Client + CallbackAPIVersion
+frase: una classe che estende il client
+fonte: gateway.py · controller.py · monitor.py
+parole: mqtt paho client classe callbackapiversion version2 broker port init super sottoclasse
+quando: Quando il programma deve parlare con un broker MQTT e vuoi tenere in una classe connessione, callback e invio.
+fasi:
+- nome: Scrivi la classe
+  righe:
+  - codice: |-
+      import paho.mqtt.client as mqtt
+
+      class Client_MQTT(mqtt.Client):
+          def __init__(self, broker, port):
+              super().__init__(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
+              self.broker = broker
+              self.port = port
+              self.is_connected = False
+    commento: estende mqtt.Client e salva broker, porta e uno stato di connessione
+    parti:
+    - voce: VERSION2
+      spiega: 'versione 2 delle callback di paho: le funzioni on_* hanno i parametri come negli esempi di queste schede'
+    - voce: is_connected
+      spiega: 'flag tuo: lo si imposta nelle callback di connessione'
+    trappola: 'Nota: is_connected non esiste in paho, lo aggiungi tu per sapere se puoi pubblicare.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-connetti
+- mqtt-on-connect
+- mqtt-chiudi

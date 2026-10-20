@@ -1,0 +1,29 @@
+id: mqtt-iscriviti
+tipo: ricetta
+titolo: Iscriversi ai topic scegliendo la QoS
+sigla: Iscriversi
+comando: subscribe(topic, qos=...)
+frase: un topic, una QoS
+fonte: monitor.py · gateway.py
+parole: mqtt subscribe topic qos iscrizione dati alert stato cmd config
+quando: Quando devi decidere a quali messaggi arrivare e con quale garanzia di consegna.
+fasi:
+- nome: Una subscribe per topic
+  righe:
+  - codice: |-
+      self.subscribe(TOPIC_DATI,  qos=0)
+      self.subscribe(TOPIC_ALERT, qos=1)
+      self.subscribe(TOPIC_STATO, qos=1)
+    commento: dati ripetuti con QoS 0, eventi e stato con QoS 1
+    parti:
+    - voce: qos=0
+      spiega: 'al massimo una volta: se un messaggio si perde pazienza'
+    - voce: qos=1
+      spiega: 'almeno una volta: il broker rimanda finché non è confermato'
+    trappola: 'Nota: la QoS effettiva è la più bassa fra quella di chi pubblica e quella di chi si iscrive.'
+segnaposto: {}
+varianti: []
+vicine:
+- mqtt-qos
+- mqtt-on-message
+- mqtt-on-connect

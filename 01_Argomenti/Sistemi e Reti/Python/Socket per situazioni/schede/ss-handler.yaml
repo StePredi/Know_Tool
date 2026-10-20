@@ -1,0 +1,44 @@
+id: ss-handler
+tipo: ricetta
+titolo: Scrivere un server TCP con socketserver
+sigla: Server con socketserver
+comando: BaseRequestHandler + TCPServer
+frase: scrivi solo handle()
+fonte: socketserver.ipynb
+parole: socketserver tcpserver baserequesthandler handle request handler server serve_forever echo eco
+quando: 'Quando vuoi un server senza scrivere bind, listen e accept: ci pensa la classe server, tu scrivi solo il protocollo.'
+fasi:
+- nome: Scrivi il request handler
+  righe:
+  - codice: |-
+      class echoRequestHandler(socketserver.BaseRequestHandler):
+
+          def handle(self):
+              data = self.request.recv(1024)
+              self.request.sendall(data)
+    commento: handle() è l'unico metodo obbligatorio
+    parti:
+    - voce: self.request
+      spiega: per TCP è il socket connesso al client
+    - voce: sendall
+      spiega: manda tutti i byte, ripetendo send() se serve
+    trappola: 'Nota: questo handler legge una volta sola, quindi risponde a un solo messaggio per connessione; per più messaggi serve un ciclo come nella scheda su ThreadingMixIn.'
+- nome: Crea e avvia il server
+  righe:
+  - codice: |-
+      server = socketserver.TCPServer((«HOST», «PORTA»), echoRequestHandler)
+      server.serve_forever()
+    commento: la classe server fa bind, listen e accept da sola
+    trappola: 'Alla classe server si passa la classe dell''handler, senza parentesi: viene istanziata dal server per ogni richiesta.'
+segnaposto:
+  HOST:
+    esempio: '''127.0.0.1'''
+    spiega: indirizzo su cui ascoltare
+  PORTA:
+    esempio: '50014'
+    spiega: porta del server (nel notebook 50000+)
+varianti: []
+vicine:
+- ss-stream
+- ss-thread
+- ss-avvia-ferma
