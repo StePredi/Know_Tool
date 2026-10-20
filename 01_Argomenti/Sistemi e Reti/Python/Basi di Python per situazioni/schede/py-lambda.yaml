@@ -1,0 +1,31 @@
+id: py-lambda
+tipo: ricetta
+titolo: 'Una funzione piccola in una riga: lambda'
+sigla: lambda
+comando: 'lambda x: ...'
+frase: una sola espressione
+fonte: Documentazione ufficiale Python · Tutorial · 4.9 Espressioni lambda
+parole: lambda funzione anonima key sort ordinare incrementor espressione
+quando: Quando ti serve una funzioncina da passare a un altro metodo, per esempio per ordinare.
+fasi:
+- nome: Come chiave di ordinamento
+  righe:
+  - codice: |-
+      pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+      pairs.sort(key=lambda pair: pair[1])
+    commento: ordina per il secondo elemento di ogni coppia
+    trappola: 'Una lambda può contenere una sola espressione: se serve altro, scrivi una def.'
+- nome: Funzione che ne crea un'altra
+  righe:
+  - codice: |-
+      def make_incrementor(n):
+          return lambda x: x + n
+
+      f = make_incrementor(42)
+      f(1)
+    commento: f(1) vale 43
+segnaposto: {}
+varianti: []
+vicine:
+- py-def
+- py-lista-metodi

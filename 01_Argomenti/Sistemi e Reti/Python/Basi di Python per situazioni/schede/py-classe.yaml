@@ -1,0 +1,46 @@
+id: py-classe
+tipo: ricetta
+titolo: Scrivere una classe con attributi e metodi
+sigla: Classe
+comando: class  __init__  self
+frase: self è l'oggetto su cui lavori
+fonte: Documentazione ufficiale Python · Tutorial · 9. Classi
+parole: classe class init self metodo attributo istanza oggetto costruttore
+quando: Quando vuoi raggruppare dati e funzioni che lavorano su quei dati.
+fasi:
+- nome: Definisci
+  righe:
+  - codice: |-
+      class Complex:
+          def __init__(self, realpart, imagpart):
+              self.r = realpart
+              self.i = imagpart
+    commento: __init__ parte da sola quando crei un oggetto
+    trappola: self è solo una convenzione per il nome del primo parametro, ma tutti i metodi lo devono avere.
+- nome: Usa
+  righe:
+  - codice: |-
+      x = Complex(3.0, -4.5)
+      x.r, x.i
+    commento: 'si crea come una funzione, senza passare self: (3.0, -4.5)'
+- nome: Metodi che usano altri metodi
+  righe:
+  - codice: |-
+      class Bag:
+          def __init__(self):
+              self.data = []
+
+          def add(self, x):
+              self.data.append(x)
+
+          def addtwice(self, x):
+              self.add(x)
+              self.add(x)
+    commento: dentro la classe si chiamano gli altri metodi con self.
+    trappola: 'x.f() è identico a MyClass.f(x): l''oggetto viene passato come primo argomento.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-eredita
+- py-attributo-condiviso
+- py-privati

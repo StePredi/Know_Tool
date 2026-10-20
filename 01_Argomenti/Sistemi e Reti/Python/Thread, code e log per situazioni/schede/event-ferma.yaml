@@ -1,0 +1,34 @@
+id: event-ferma
+tipo: ricetta
+titolo: Dire a un thread di fermarsi
+sigla: Event per fermare
+comando: stop.set()  while not stop.is_set()
+frase: un interruttore tra thread
+fonte: Documentazione ufficiale Python · Libreria standard · threading · Event Objects
+parole: event set is_set stop fermare thread ciclo while join is_alive
+quando: Quando un thread gira in un ciclo e devi poterlo fermare da fuori.
+fasi:
+- nome: Il thread controlla
+  righe:
+  - codice: |-
+      stop = threading.Event()
+
+      def lavoro():
+          while not stop.is_set():
+              ...
+    commento: il ciclo continua finché l'evento non è impostato
+- nome: Il main ferma
+  righe:
+  - codice: |-
+      stop.set()
+      t.join()
+    commento: set() alza il segnale, join() aspetta che il thread finisca
+  - codice: t.is_alive()
+    commento: True se il thread sta ancora girando
+    trappola: 'Se dentro il ciclo il thread resta bloccato (per esempio su una coda), non vede il segnale: usa un timeout.'
+segnaposto: {}
+varianti: []
+vicine:
+- event-wait
+- event-set-clear
+- thread-chiudi

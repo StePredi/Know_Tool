@@ -1,0 +1,26 @@
+id: file-chiudi-prima-dopo
+tipo: prima_dopo
+titolo: 'Errore: scrivere senza chiudere il file'
+sigla: Senza close
+comando: with open(...)
+frase: i dati possono non arrivare sul disco
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: close non chiuso file scrittura dati persi flush with
+prima: |-
+  f = ⟦open("risultati.txt", "w", encoding="utf-8")⟧
+  f.write("risultato")
+  # il programma finisce o si interrompe
+dopo: |-
+  with ⟦open("risultati.txt", "w", encoding="utf-8")⟧ as f:
+      f.write("risultato")
+uso: Essere sicuro che il file venga chiuso e i dati scritti.
+riconoscila: Il file resta aperto e il contenuto può non essere scritto del tutto.
+parti:
+- voce: open(...) da solo
+  spiega: il file resta aperto finché non lo chiudi
+- voce: with open(...) as f
+  spiega: alla fine del blocco il file si chiude da solo
+trappola: 'Nota: il tutorial avverte che se non chiudi il file con with o con f.close(), le parti scritte possono non essere salvate del tutto sul disco.'
+varianti: []
+vicine:
+- file-chiudi

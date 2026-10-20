@@ -1,0 +1,24 @@
+id: path-esiste
+tipo: ricetta
+titolo: Controllare se esiste
+sigla: exists / is_file / is_dir
+comando: p.exists()  p.is_file()  p.is_dir()
+frase: True o False
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib exists is_file is_dir esiste file cartella controllo
+quando: Quando vuoi sapere se un file o una cartella ci sono prima di usarli.
+fasi:
+- nome: Controlla
+  righe:
+  - codice: p.exists()
+    commento: esiste (file o cartella)
+  - codice: p.is_file()
+    commento: esiste ed è un file
+  - codice: p.is_dir()
+    commento: esiste ed è una cartella
+    trappola: 'Nota: tra il controllo e l''uso il file può comunque sparire; per questo serve anche il try/except.'
+segnaposto: {}
+varianti: []
+vicine:
+- path-cartelle
+- file-errori

@@ -1,0 +1,45 @@
+id: py-cicli-utili
+tipo: ricetta
+titolo: Scorrere liste e dizionari con enumerate, zip e sorted
+sigla: Cicli utili
+comando: enumerate  zip  items()  sorted
+frase: il ciclo giusto per ogni caso
+fonte: Documentazione ufficiale Python · Tutorial · 5.6 Tecniche di ciclo
+parole: enumerate zip items sorted reversed ciclo dizionario indice coppie scorrere
+quando: Quando ti servono l'indice, due liste insieme, le coppie chiave-valore o un ordine diverso.
+fasi:
+- nome: Chiavi e valori
+  righe:
+  - codice: |-
+      for k, v in knights.items():
+          print(k, v)
+    commento: items() dà le coppie chiave-valore di un dizionario
+- nome: Indice e valore
+  righe:
+  - codice: |-
+      for i, v in enumerate(['tic', 'tac', 'toe']):
+          print(i, v)
+    commento: enumerate dà 0 tic, 1 tac, 2 toe
+- nome: Due liste insieme
+  righe:
+  - codice: |-
+      for q, a in zip(questions, answers):
+          print(f'What is your {q}?  It is {a}.')
+    commento: zip accoppia gli elementi in posizione
+- nome: In un altro ordine
+  righe:
+  - codice: |-
+      for i in reversed(range(1, 10, 2)):
+          print(i)
+    commento: 'al contrario: 9 7 5 3 1'
+  - codice: |-
+      for i in sorted(basket):
+          print(i)
+    commento: in ordine, senza cambiare la lista di partenza
+    trappola: sorted() restituisce una lista nuova; list.sort() invece modifica quella esistente.
+segnaposto: {}
+varianti: []
+vicine:
+- py-for
+- py-dizionario
+- py-lista-metodi

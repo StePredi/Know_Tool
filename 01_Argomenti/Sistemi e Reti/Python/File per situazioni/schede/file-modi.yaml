@@ -1,0 +1,32 @@
+id: file-modi
+tipo: ricetta
+titolo: 'Scegliere il modo: leggere, scrivere, aggiungere'
+sigla: Modi
+comando: r  w  a  r+  b
+frase: una lettera per scopo
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: modo r w a r+ b binario testo append sovrascrivere
+quando: Quando non sai quale modo passare a open().
+fasi:
+- nome: Le lettere
+  righe:
+  - codice: open(nome, "r")
+    commento: solo lettura (è il modo predefinito)
+  - codice: open(nome, "w")
+    commento: 'solo scrittura: un file esistente viene cancellato e riscritto'
+    trappola: Con "w" il contenuto precedente sparisce.
+  - codice: open(nome, "a")
+    commento: 'aggiunta: i dati vanno in fondo al file'
+  - codice: open(nome, "r+")
+    commento: lettura e scrittura insieme
+- nome: Testo o binario
+  righe:
+  - codice: open(nome, "rb")
+    commento: con b il file è letto come byte, non come testo
+    trappola: Il modo binario si usa per file che non sono testo, come le immagini.
+segnaposto: {}
+varianti: []
+vicine:
+- file-apri
+- file-scrivi
+- file-aggiungi

@@ -1,0 +1,28 @@
+id: py-percorso-moduli
+tipo: ricetta
+titolo: Capire dove Python cerca i moduli
+sigla: Percorso dei moduli
+comando: sys.path  dir()
+frase: la cartella dello script viene per prima
+fonte: Documentazione ufficiale Python · Tutorial · 6.1.2 Il percorso di ricerca · 6.3 dir()
+parole: sys path modulo cerca percorso pythonpath nome file stesso nome libreria dir shadowing
+quando: Quando import non trova un modulo o ne importa uno diverso da quello che pensavi.
+fasi:
+- nome: Dove cerca
+  righe:
+  - codice: |-
+      import sys
+      print(sys.path)
+    commento: elenco delle cartelle in cui Python cerca, in ordine; la prima è quella dello script
+    trappola: Un tuo file con lo stesso nome di un modulo della libreria (per esempio un file socket.py o json.py) viene importato al posto di quello vero.
+  - codice: sys.path.append('/ufs/guido/lib/python')
+    commento: aggiunge una cartella alla ricerca, solo per questo programma
+- nome: Vedere cosa contiene un modulo
+  righe:
+  - codice: dir(fibo)
+    commento: 'elenco ordinato dei nomi definiti nel modulo: [''__name__'', ''fib'', ''fib2'']'
+segnaposto: {}
+varianti: []
+vicine:
+- py-import
+- py-pacchetti

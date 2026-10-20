@@ -1,0 +1,24 @@
+id: json-errore
+tipo: ricetta
+titolo: Il testo non è JSON valido
+sigla: JSONDecodeError
+comando: except json.JSONDecodeError
+frase: un caso di ValueError
+fonte: Documentazione ufficiale Python · Libreria standard · json
+parole: json errore decode jsondecodeerror valueerror testo non valido
+quando: Quando il testo letto potrebbe non essere JSON (file vuoto, messaggio rovinato).
+fasi:
+- nome: Prendi l'errore
+  righe:
+  - codice: |-
+      try:
+          dati = json.loads(testo)
+      except json.JSONDecodeError as e:
+          print("JSON non valido:", e)
+    commento: si ferma solo questa parte; il resto del programma continua
+    trappola: 'Nota: JSONDecodeError è una sottoclasse di ValueError, quindi anche except ValueError lo cattura.'
+segnaposto: {}
+varianti: []
+vicine:
+- json-stringa
+- file-errori

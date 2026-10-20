@@ -1,0 +1,32 @@
+id: py-tuple
+tipo: ricetta
+titolo: 'Raggruppare valori che non cambiano: le tuple'
+sigla: Tuple
+comando: t = a, b, c  x, y, z = t
+frase: impacchetta e spacchetta
+fonte: Documentazione ufficiale Python · Tutorial · 5.3 Tuple e sequenze
+parole: tuple impacchettare spacchettare unpacking packing immutabile virgola singleton star
+quando: Quando vuoi restituire o passare più valori insieme, o scambiare due variabili.
+fasi:
+- nome: Impacchettare e spacchettare
+  righe:
+  - codice: |-
+      t = 12345, 54321, 'hello!'
+      x, y, z = t
+    commento: le variabili a sinistra devono essere tante quanti gli elementi
+  - codice: a, b = b, a+b
+    commento: spacchettare serve anche per assegnare più variabili insieme
+- nome: Casi particolari
+  righe:
+  - codice: |-
+      singleton = 'hello',
+      len(singleton)
+    commento: una tupla di un elemento vuole la virgola finale (qui vale 1)
+    trappola: 'Le tuple non si modificano: t[0] = 88888 dà TypeError.'
+  - codice: 0, *x, 4
+    commento: 'con * si inseriscono gli elementi di una lista: (0, 1, 2, 3, 4)'
+segnaposto: {}
+varianti: []
+vicine:
+- py-lista-metodi
+- py-dizionario

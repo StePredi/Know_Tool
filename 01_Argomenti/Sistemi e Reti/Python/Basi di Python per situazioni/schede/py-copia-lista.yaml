@@ -1,0 +1,30 @@
+id: py-copia-lista
+tipo: ricetta
+titolo: Copiare una lista (e non solo il suo nome)
+sigla: Copiare una lista
+comando: rgba = rgb[:]
+frase: due nomi per la stessa lista
+fonte: Documentazione ufficiale Python · Tutorial · 3. Introduzione · 5. Strutture dati
+parole: copia lista alias riferimento slice copy shallow nested annidata modifica
+quando: Quando vuoi una lista indipendente e non un altro nome per la stessa lista.
+fasi:
+- nome: Un altro nome (non una copia)
+  righe:
+  - codice: rgba = rgb
+    commento: 'rgba e rgb sono la STESSA lista: cambiare una cambia anche l''altra'
+    trappola: 'L''assegnazione non copia: dà solo un secondo nome allo stesso oggetto.'
+- nome: Una copia vera
+  righe:
+  - codice: |-
+      correct_rgba = rgba[:]
+      correct_rgba = rgba.copy()
+    commento: una fetta completa o copy() creano una copia (superficiale)
+  - codice: |-
+      x = [a, n]
+      x[0][1]
+    commento: 'liste dentro liste: la copia superficiale condivide ancora le liste interne'
+segnaposto: {}
+varianti: []
+vicine:
+- py-lista-metodi
+- py-fette

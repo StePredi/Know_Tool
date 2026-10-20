@@ -1,0 +1,26 @@
+id: file-scrivi
+tipo: ricetta
+titolo: Scrivere nel file
+sigla: write()
+comando: f.write(testo)
+frase: solo stringhe
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: write scrivere stringa file str converte numero tupla
+quando: Quando vuoi salvare testo in un file.
+fasi:
+- nome: Scrivi una stringa
+  righe:
+  - codice: f.write("This is a test\n")
+    commento: 'restituisce il numero di caratteri scritti: 15'
+  - codice: |-
+      value = ("the answer", 42)
+      s = str(value)
+      f.write(s)
+    commento: altri tipi vanno prima convertiti in stringa (o in byte, nel modo binario)
+    trappola: 'Per fine riga devi aggiungere tu \n: write() non lo mette.'
+segnaposto: {}
+varianti: []
+vicine:
+- file-aggiungi
+- file-modi
+- json-file

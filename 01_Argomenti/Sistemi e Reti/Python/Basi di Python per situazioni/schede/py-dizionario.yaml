@@ -1,0 +1,40 @@
+id: py-dizionario
+tipo: ricetta
+titolo: 'Associare chiavi e valori: i dizionari'
+sigla: Dizionari
+comando: '{chiave: valore}  get()'
+frase: get non dà errore se manca la chiave
+fonte: Documentazione ufficiale Python · Tutorial · 5.5 Dizionari
+parole: dizionario dict chiave valore get keyerror del in comprehension items aggiungere
+quando: Quando devi cercare un valore a partire da un nome.
+fasi:
+- nome: Creare e leggere
+  righe:
+  - codice: |-
+      tel = {'jack': 4098, 'sape': 4139}
+      tel['guido'] = 4127
+      tel['jack']
+    commento: si aggiunge o si cambia assegnando a una chiave
+  - codice: tel.get('irv')
+    commento: restituisce None (o un valore a scelta) se la chiave non c'è
+    trappola: 'tel[''irv''] dà KeyError se la chiave manca: usa get() oppure controlla prima con ''irv'' in tel.'
+- nome: Togliere e controllare
+  righe:
+  - codice: |-
+      del tel['sape']
+      'guido' in tel
+      list(tel)
+      sorted(tel)
+    commento: del toglie, in controlla le chiavi, list e sorted elencano le chiavi
+- nome: Costruire
+  righe:
+  - codice: '{x: x**2 for x in (2, 4, 6)}'
+    commento: comprehension di dizionario
+  - codice: dict(sape=4139, guido=4127, jack=4098)
+    commento: con chiavi che sono parole semplici
+segnaposto: {}
+varianti: []
+vicine:
+- py-cicli-utili
+- py-list-comprehension
+- py-tuple

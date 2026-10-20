@@ -1,0 +1,28 @@
+id: path-elenca
+tipo: ricetta
+titolo: Elencare i file di una cartella
+sigla: iterdir / glob
+comando: p.iterdir()  p.glob("*.py")
+frase: un percorso alla volta
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib iterdir glob rglob elenco file cartella ricerca estensione
+quando: Quando devi elaborare tutti i file di un certo tipo.
+fasi:
+- nome: Tutto il contenuto
+  righe:
+  - codice: |-
+      for x in p.iterdir():
+          print(x)
+    commento: ogni file e sottocartella, in ordine non garantito
+- nome: Solo alcuni
+  righe:
+  - codice: sorted(p.glob("*.py"))
+    commento: i file .py della cartella
+  - codice: sorted(p.rglob("*.py"))
+    commento: anche nelle sottocartelle
+    trappola: 'Nota: l''ordine non è garantito, per questo si usa sorted().'
+segnaposto: {}
+varianti: []
+vicine:
+- path-cartelle
+- path-leggi-scrivi

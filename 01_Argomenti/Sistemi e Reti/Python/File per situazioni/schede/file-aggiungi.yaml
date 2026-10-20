@@ -1,0 +1,23 @@
+id: file-aggiungi
+tipo: ricetta
+titolo: Aggiungere righe in fondo
+sigla: Aggiungere
+comando: open(nome, "a")
+frase: senza cancellare
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: append aggiungere fondo log riga file modo a
+quando: Quando il file esiste già e vuoi aggiungere dati nuovi.
+fasi:
+- nome: Modo a
+  righe:
+  - codice: |-
+      with open("log.txt", "a", encoding="utf-8") as f:
+          f.write("nuova riga\n")
+    commento: ogni scrittura va in fondo; il contenuto precedente resta
+    trappola: 'Nota: esempio scritto qui; il modo "a" è nella documentazione di open().'
+segnaposto: {}
+varianti: []
+vicine:
+- file-modi
+- file-scrivi
+- json-lines

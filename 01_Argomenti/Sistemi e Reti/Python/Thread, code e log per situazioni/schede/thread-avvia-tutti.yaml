@@ -27,3 +27,4 @@ vicine:
 - thread-classe
 - coda-per-direzione
 - thread-chiudi
+- lock-stato

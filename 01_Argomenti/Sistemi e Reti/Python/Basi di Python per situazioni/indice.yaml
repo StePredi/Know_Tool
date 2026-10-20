@@ -1,0 +1,107 @@
+modello: per_situazioni
+titolo: Basi di Python, per situazioni
+centro: Python
+sottotitolo: Parti da quello che devi scrivere nel programma, non dal nome della parola chiave.
+esempiRicerca: ciclo che non finisce, lista che cambia da sola, errore int(), import che non trova
+rami:
+- id: b1
+  nome: Numeri e testo
+  colore: blue
+  lato: R
+  voci:
+  - gruppo: Numeri e testo
+    schede:
+    - py-numeri
+    - py-stringhe
+    - py-stringhe-operazioni
+    - py-fette
+  - gruppo: Scrivere e leggere
+    schede:
+    - py-fstring
+    - py-print-input
+- id: b2
+  nome: Decidere e ripetere
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - py-if
+  - schede:
+    - py-for
+  - schede:
+    - py-while
+  - schede:
+    - py-break-continue
+  - schede:
+    - py-pass
+- id: b3
+  nome: Funzioni
+  colore: green
+  lato: R
+  voci:
+  - gruppo: Scrivere una funzione
+    schede:
+    - py-def
+    - py-argomenti
+    - py-args-kwargs
+  - gruppo: Casi particolari
+    schede:
+    - py-lambda
+    - py-default-mutabile
+- id: b4
+  nome: Moduli
+  colore: yellow
+  lato: L
+  voci:
+  - schede:
+    - py-import
+  - schede:
+    - py-main
+  - schede:
+    - py-percorso-moduli
+  - schede:
+    - py-pacchetti
+- id: b5
+  nome: Liste e dizionari
+  colore: orange
+  lato: T
+  voci:
+  - gruppo: Liste
+    schede:
+    - py-lista-metodi
+    - py-list-comprehension
+    - py-copia-lista
+    - py-cicli-utili
+  - gruppo: Tuple, set e dizionari
+    schede:
+    - py-tuple
+    - py-set
+    - py-dizionario
+- id: b6
+  nome: Classi
+  colore: pink
+  lato: B
+  voci:
+  - gruppo: Scrivere una classe
+    schede:
+    - py-classe
+    - py-eredita
+    - py-privati
+  - gruppo: Casi particolari
+    schede:
+    - py-attributo-condiviso
+    - py-generatori
+- id: b7
+  nome: Errori ed eccezioni
+  colore: red
+  lato: T
+  voci:
+  - gruppo: Gestire
+    schede:
+    - py-try-except
+    - py-else-finally
+    - py-with
+  - gruppo: Sollevare
+    schede:
+    - py-raise
+    - py-eccezioni-proprie

@@ -1,0 +1,45 @@
+id: py-break-continue
+tipo: ricetta
+titolo: Uscire da un ciclo o saltare un giro
+sigla: break, continue, else
+comando: break  continue  else
+frase: l'else del ciclo non parte dopo un break
+fonte: Documentazione ufficiale Python · Tutorial · 4.4 break e continue · 4.5 else nei cicli
+parole: break continue else ciclo uscire saltare numero primo pari dispari
+quando: Quando un ciclo deve fermarsi prima della fine, saltare un elemento o sapere se è finito senza interruzioni.
+fasi:
+- nome: Fermare
+  righe:
+  - codice: |-
+      for n in range(2, 10):
+          for x in range(2, n):
+              if n % x == 0:
+                  print(f"{n} equals {x} * {n//x}")
+                  break
+    commento: break esce dal ciclo più interno
+- nome: Saltare
+  righe:
+  - codice: |-
+      for num in range(2, 10):
+          if num % 2 == 0:
+              print(f"Found an even number {num}")
+              continue
+          print(f"Found an odd number {num}")
+    commento: continue passa subito al giro successivo
+- nome: Sapere se non ci sono stati break
+  righe:
+  - codice: |-
+      for n in range(2, 10):
+          for x in range(2, n):
+              if n % x == 0:
+                  break
+          else:
+              print(n, 'is a prime number')
+    commento: l'else del for parte solo se il ciclo finisce senza break
+    trappola: Se il ciclo viene interrotto da un break, l'else NON viene eseguito.
+segnaposto: {}
+varianti: []
+vicine:
+- py-for
+- py-while
+- py-pass

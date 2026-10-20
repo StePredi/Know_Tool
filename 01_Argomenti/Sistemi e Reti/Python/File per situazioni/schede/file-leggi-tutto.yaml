@@ -1,0 +1,24 @@
+id: file-leggi-tutto
+tipo: ricetta
+titolo: Leggere tutto il contenuto
+sigla: read()
+comando: f.read()
+frase: una stringa sola
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: read leggere tutto contenuto stringa size file
+quando: Quando il file è piccolo e ti serve tutto il testo.
+fasi:
+- nome: Tutto
+  righe:
+  - codice: f.read()
+    commento: 'restituisce tutto il file come una stringa (in modo binario: byte)'
+    trappola: 'Se il file è più grande della memoria, è un problema tuo: leggilo a righe.'
+- nome: Un pezzo
+  righe:
+  - codice: f.read(size)
+    commento: legge al massimo size caratteri; alla fine del file restituisce una stringa vuota ""
+segnaposto: {}
+varianti: []
+vicine:
+- file-leggi-righe
+- file-seek

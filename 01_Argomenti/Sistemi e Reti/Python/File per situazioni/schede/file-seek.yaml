@@ -1,0 +1,24 @@
+id: file-seek
+tipo: ricetta
+titolo: Spostarsi dentro il file
+sigla: seek / tell
+comando: f.tell()  f.seek(offset, whence)
+frase: il cursore nel file
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: seek tell posizione cursore inizio fine file
+quando: Quando devi tornare indietro nel file o sapere dove sei.
+fasi:
+- nome: Posizione
+  righe:
+  - codice: f.tell()
+    commento: numero della posizione attuale nel file
+- nome: Spostati
+  righe:
+  - codice: f.seek(offset, whence)
+    commento: 'whence: 0 inizio, 1 posizione corrente, 2 fine; se manca, vale 0'
+    trappola: Nei file di testo sono permessi solo spostamenti dall'inizio (e seek(0, 2) per la fine).
+segnaposto: {}
+varianti: []
+vicine:
+- file-leggi-tutto
+- file-leggi-righe

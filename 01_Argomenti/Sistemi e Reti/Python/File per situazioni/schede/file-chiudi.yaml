@@ -1,0 +1,27 @@
+id: file-chiudi
+tipo: ricetta
+titolo: Chiudere il file in automatico con with
+sigla: with open
+comando: 'with open(...) as f:'
+frase: si chiude da solo
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: with open chiudere file close automatico errore
+quando: 'Quando apri un file: sempre.'
+fasi:
+- nome: Usa with
+  righe:
+  - codice: |-
+      with open("workfile", encoding="utf-8") as f:
+          read_data = f.read()
+
+      f.closed
+    commento: 'alla fine del blocco il file è chiuso: f.closed è True'
+  - codice: f.read()
+    commento: 'dopo il blocco dà ValueError: I/O operation on closed file.'
+    trappola: 'Il tutorial indica with come il modo consigliato: è più corto di try/finally e chiude anche in caso di errore.'
+segnaposto: {}
+varianti: []
+vicine:
+- file-chiudi-prima-dopo
+- file-apri
+- file-errori

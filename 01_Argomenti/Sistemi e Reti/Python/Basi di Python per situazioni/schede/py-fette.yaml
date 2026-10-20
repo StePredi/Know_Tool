@@ -1,0 +1,35 @@
+id: py-fette
+tipo: ricetta
+titolo: Prendere un pezzo di una stringa o di una lista
+sigla: Indici e fette
+comando: s[i]  s[a:b]  len()
+frase: dentro il primo, fuori l'ultimo
+fonte: Documentazione ufficiale Python · Tutorial · Introduzione
+parole: indici slicing fetta stringa lista len indice negativo ultimo carattere indexerror sottostringa
+quando: Quando ti serve un carattere, un elemento o un tratto di una stringa o di una lista.
+fasi:
+- nome: Un elemento
+  righe:
+  - codice: |-
+      word = 'Python'
+      word[0]
+    commento: 'primo carattere: ''P'''
+  - codice: word[-1]
+    commento: 'indice negativo = dalla fine: ''n'''
+  - codice: len(word)
+    commento: numero di caratteri (6)
+- nome: Un tratto (fetta)
+  righe:
+  - codice: word[0:2]
+    commento: 'dalla posizione 0 (inclusa) alla 2 (esclusa): ''Py'''
+    trappola: 'L''ultimo indice è escluso: word[2:5] dà ''tho''.'
+  - codice: word[:2] + word[2:]
+    commento: senza indici si va dall'inizio o fino alla fine; insieme riformano la stringa
+  - codice: word[4:]
+    commento: 'dalla posizione 4 alla fine: ''on'''
+    trappola: 'word[42] dà IndexError, ma le fette tollerano indici fuori misura: word[4:42] dà ''on'' e word[42:] dà ''''.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-stringhe-operazioni
+- py-lista-metodi

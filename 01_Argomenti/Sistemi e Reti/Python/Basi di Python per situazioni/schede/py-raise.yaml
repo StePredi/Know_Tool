@@ -1,0 +1,33 @@
+id: py-raise
+tipo: ricetta
+titolo: Segnalare un errore con raise
+sigla: raise
+comando: raise Errore(...)
+frase: da solo rilancia l'errore corrente
+fonte: Documentazione ufficiale Python · Tutorial · 8.4 Sollevare eccezioni · 8.5 Concatenamento
+parole: raise sollevare eccezione rilanciare from chain valueerror nameerror
+quando: Quando il tuo codice trova una situazione che non può gestire e deve avvisare chi lo chiama.
+fasi:
+- nome: Sollevare
+  righe:
+  - codice: raise ValueError('valore non valido')
+    commento: si può scrivere la classe (raise ValueError) o un'istanza con un messaggio
+- nome: Rilanciare
+  righe:
+  - codice: |-
+      try:
+          raise NameError('HiThere')
+      except NameError:
+          print('An exception flew by!')
+          raise
+    commento: raise da solo dentro un except fa continuare l'errore
+- nome: Indicare la causa
+  righe:
+  - codice: raise RuntimeError from exc
+    commento: collega il nuovo errore a quello che lo ha provocato
+    trappola: from None elimina il collegamento al primo errore.
+segnaposto: {}
+varianti: []
+vicine:
+- py-try-except
+- py-eccezioni-proprie

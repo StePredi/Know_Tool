@@ -1,0 +1,34 @@
+id: py-list-comprehension
+tipo: ricetta
+titolo: Costruire una lista da un'altra in una riga
+sigla: List comprehension
+comando: '[espressione for x in ...]'
+frase: un ciclo dentro le parentesi quadre
+fonte: Documentazione ufficiale Python · Tutorial · 5.1.3 Comprensioni di liste
+parole: list comprehension lista comprensione for if filtro quadrati nested tuple parentesi
+quando: Quando devi trasformare o filtrare gli elementi di una sequenza.
+fasi:
+- nome: Trasformare
+  righe:
+  - codice: squares = [x**2 for x in range(10)]
+    commento: equivale a un for con append
+  - codice: |-
+      vec = [-4, -2, 0, 2, 4]
+      [abs(x) for x in vec]
+    commento: una funzione su ogni elemento
+- nome: Filtrare
+  righe:
+  - codice: '[x for x in vec if x >= 0]'
+    commento: tiene solo gli elementi che rispettano la condizione
+- nome: Coppie e liste annidate
+  righe:
+  - codice: '[(x, x**2) for x in range(6)]'
+    commento: se l'espressione è una tupla va tra parentesi
+    trappola: '[x, x**2 for x in range(6)] è un SyntaxError: la tupla (x, x**2) vuole le parentesi.'
+  - codice: '[num for elem in [[1,2,3], [4,5,6]] for num in elem]'
+    commento: 'due for di seguito: appiattisce una lista di liste'
+segnaposto: {}
+varianti: []
+vicine:
+- py-lista-metodi
+- py-dizionario

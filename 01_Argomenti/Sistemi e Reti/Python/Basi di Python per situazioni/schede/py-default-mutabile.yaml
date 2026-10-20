@@ -1,0 +1,37 @@
+id: py-default-mutabile
+tipo: prima_dopo
+titolo: 'Errore: una lista come valore predefinito'
+sigla: Default mutabile
+comando: L=None
+frase: il default si calcola una volta
+fonte: Documentazione ufficiale Python · Tutorial · 4.9.1 Valori predefiniti
+parole: default mutabile lista predefinita funzione accumula chiamate none errore
+prima: |-
+  def f(a, ⟦L=[]⟧):
+      L.append(a)
+      return L
+
+  print(f(1))
+  print(f(2))
+  print(f(3))
+dopo: |-
+  def f(a, ⟦L=None⟧):
+      ⟦if L is None:
+          L = []⟧
+      L.append(a)
+      return L
+
+  print(f(1))
+  print(f(2))
+  print(f(3))
+uso: Dare a una funzione una lista (o un dizionario) predefinita che parte vuota a ogni chiamata.
+riconoscila: 'Chiami la funzione più volte e la lista si riempie di valori delle chiamate precedenti: [1], [1, 2], [1, 2, 3].'
+parti:
+- voce: L=[]
+  spiega: la lista viene creata una volta sola, quando la funzione è definita, ed è la stessa a ogni chiamata
+- voce: L=None
+  spiega: il valore predefinito è sicuro; la lista nuova si crea dentro la funzione
+trappola: 'Il valore predefinito è calcolato una sola volta: con liste, dizionari o set condivide lo stesso oggetto tra tutte le chiamate.'
+varianti: []
+vicine:
+- py-argomenti

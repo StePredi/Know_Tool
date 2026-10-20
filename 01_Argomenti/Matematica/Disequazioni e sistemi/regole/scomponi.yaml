@@ -1,0 +1,14 @@
+id: scomponi
+nome: Scomponi
+riconosci: A sinistra c'è un polinomio e a destra 0, oppure una frazione con numeratore e denominatore.
+fai: Scomponi numeratore e denominatore in fattori di 1º e 2º grado (vedi Scomposizione dei polinomi). Un prodotto è positivo o negativo secondo i segni dei suoi fattori.
+formula: A(x)·B(x) > 0
+esempi:
+  - da: x^2-5x+6 < 0
+    passi:
+      - "Scompongo: `(x-2)(x-3) < 0`"
+    risultato: (x-2)(x-3) < 0
+errore: "Dimenticare di scomporre il denominatore: anche i suoi fattori vanno sulla linea."
+confondi:
+  - con: Scomposizione dei polinomi
+    differenza: Lì la scomposizione è lo scopo; qui è solo il primo passo per studiare i segni.

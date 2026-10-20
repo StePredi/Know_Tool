@@ -1,0 +1,29 @@
+id: json-file
+tipo: ricetta
+titolo: Salvare e caricare un file JSON
+sigla: dump / load
+comando: json.dump(x, f)  json.load(f)
+frase: senza la s lavorano sui file
+fonte: Documentazione ufficiale Python · Libreria standard · json
+parole: json dump load file salvare caricare configurazione
+quando: Quando vuoi salvare dati strutturati in un file e rileggerli.
+fasi:
+- nome: Salva
+  righe:
+  - codice: |-
+      with open("dati.json", "w", encoding="utf-8") as f:
+          json.dump(dati, f)
+    commento: scrive l'oggetto nel file come JSON
+- nome: Carica
+  righe:
+  - codice: |-
+      with open("dati.json", "r", encoding="utf-8") as f:
+          dati = json.load(f)
+    commento: legge il file e restituisce il dizionario o la lista
+    trappola: 'Nota: json.dump e json.load hanno lo stesso nome senza la s di json.dumps e json.loads.'
+segnaposto: {}
+varianti: []
+vicine:
+- json-stringa
+- json-opzioni
+- json-errore

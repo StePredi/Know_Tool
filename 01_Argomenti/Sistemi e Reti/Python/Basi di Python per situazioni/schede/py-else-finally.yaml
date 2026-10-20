@@ -1,0 +1,41 @@
+id: py-else-finally
+tipo: ricetta
+titolo: Eseguire codice solo se va tutto bene, o sempre
+sigla: else e finally
+comando: try ... else ... finally
+frase: finally gira sempre
+fonte: Documentazione ufficiale Python · Tutorial · 8.3 else e finally
+parole: else finally try except pulizia sempre eseguito divisione file chiudere
+quando: Quando serve distinguere il caso "nessun errore" e fare pulizia in ogni caso.
+fasi:
+- nome: 'else: solo se non ci sono errori'
+  righe:
+  - codice: |-
+      for arg in sys.argv[1:]:
+          try:
+              f = open(arg, 'r')
+          except OSError:
+              print('cannot open', arg)
+          else:
+              print(arg, 'has', len(f.readlines()), 'lines')
+              f.close()
+    commento: 'il codice nell''else non è protetto dal try: non cattura per sbaglio errori che non erano previsti'
+- nome: 'finally: in ogni caso'
+  righe:
+  - codice: |-
+      def divide(x, y):
+          try:
+              result = x / y
+          except ZeroDivisionError:
+              print("division by zero!")
+          else:
+              print("result is", result)
+          finally:
+              print("executing finally clause")
+    commento: il finally gira sempre, con o senza errore
+    trappola: Se l'errore non è gestito, il finally gira comunque e poi l'errore viene rilanciato.
+segnaposto: {}
+varianti: []
+vicine:
+- py-try-except
+- py-with

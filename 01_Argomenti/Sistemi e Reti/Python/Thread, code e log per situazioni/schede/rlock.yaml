@@ -1,0 +1,29 @@
+id: rlock
+tipo: ricetta
+titolo: Lo stesso thread deve riprendere il lock
+sigla: RLock
+comando: threading.RLock()
+frase: rientrante
+fonte: Documentazione ufficiale Python · Libreria standard · threading · RLock Objects
+parole: rlock lock rientrante deadlock stesso thread metodo chiama metodo
+quando: Quando un metodo con il lock ne chiama un altro che prende lo stesso lock.
+fasi:
+- nome: Il problema con Lock
+  righe:
+  - codice: lock = threading.Lock()
+    commento: se lo stesso thread lo prende due volte di fila, rimane bloccato per sempre (deadlock)
+- nome: La soluzione
+  righe:
+  - codice: |-
+      lock = threading.RLock()
+
+      with lock:
+          with lock:
+              ...
+    commento: lo stesso thread può prenderlo più volte; ogni acquire richiede il suo release
+    trappola: Solo il thread che lo ha preso può rilasciarlo, e deve rilasciarlo tante volte quante lo ha preso.
+segnaposto: {}
+varianti: []
+vicine:
+- lock-with
+- lock-acquire-timeout

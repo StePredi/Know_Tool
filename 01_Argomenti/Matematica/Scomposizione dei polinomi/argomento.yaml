@@ -1,0 +1,20 @@
+modello: matematica
+titolo: Scomposizione dei polinomi
+introduzione: Davanti a un polinomio provi i controlli sempre nello stesso ordine e ti fermi al primo che funziona. Poi ripeti su ogni fattore.
+motore: scomposizione
+esempi:
+  - 6x^3-12x^2+6x
+  - x^4-16
+  - x^2-5x+6
+  - x^3+x^2-4x-4
+  - x^3-6x^2+11x-6
+  - 2x^2+5x+3
+  - x^3-8
+bozza: true
+ordine:
+  - raccoglimento-totale
+  - differenza-quadrati
+  - somma-cubi
+  - trinomio
+  - raccoglimento-parziale
+  - ruffini

@@ -1,0 +1,26 @@
+id: event-wait
+tipo: ricetta
+titolo: Aspettare un evento, al massimo per un po'
+sigla: Event wait
+comando: stop.wait(timeout)
+frase: True se è scattato, False se è scaduto
+fonte: Documentazione ufficiale Python · Libreria standard · threading · Event Objects
+parole: event wait timeout attesa sleep fermare pausa interrompibile
+quando: Quando vuoi una pausa tra due giri del ciclo che si interrompe subito alla richiesta di stop.
+fasi:
+- nome: Pausa interrompibile
+  righe:
+  - codice: |-
+      while not stop.wait(timeout=1.0):
+          ...
+    commento: wait ritorna False dopo 1 secondo (si fa un altro giro) e True appena l'evento è impostato (il ciclo termina)
+    trappola: 'Nota: con time.sleep(1) il thread non può essere svegliato prima; con wait sì.'
+- nome: Aspetta e basta
+  righe:
+  - codice: evento.wait()
+    commento: si blocca finché un altro thread non chiama set()
+segnaposto: {}
+varianti: []
+vicine:
+- event-ferma
+- event-set-clear

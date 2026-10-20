@@ -1,0 +1,24 @@
+id: event-set-clear
+tipo: ricetta
+titolo: Alzare, abbassare e controllare l'evento
+sigla: set / clear / is_set
+comando: set()  clear()  is_set()
+frase: un flag interno
+fonte: Documentazione ufficiale Python · Libreria standard · threading · Event Objects
+parole: event set clear is_set flag segnale thread
+quando: Quando un thread deve avvisare un altro che è successo qualcosa.
+fasi:
+- nome: I tre comandi
+  righe:
+  - codice: e.set()
+    commento: 'il flag diventa True: chi aspettava con wait() riparte'
+  - codice: e.clear()
+    commento: 'il flag torna False: wait() ricomincia a bloccare'
+  - codice: e.is_set()
+    commento: dice se il flag è True
+    trappola: Un Event all'inizio è False.
+segnaposto: {}
+varianti: []
+vicine:
+- event-ferma
+- event-wait

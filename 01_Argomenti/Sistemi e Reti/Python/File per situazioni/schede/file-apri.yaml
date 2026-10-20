@@ -1,0 +1,25 @@
+id: file-apri
+tipo: ricetta
+titolo: Aprire un file
+sigla: Aprire
+comando: open(nome, modo, encoding=)
+frase: restituisce un oggetto file
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: open aprire file modo encoding utf-8 testo binario
+quando: Quando devi leggere o scrivere un file.
+fasi:
+- nome: Apri
+  righe:
+  - codice: f = open("filename", "w", encoding="utf-8")
+    commento: il primo argomento è il nome, il secondo il modo, poi la codifica
+    trappola: 'Senza encoding la codifica dipende dalla piattaforma: per i file di testo conviene scrivere encoding="utf-8".'
+- nome: Chiudi
+  righe:
+  - codice: f.close()
+    commento: libera le risorse; meglio usare with (vedi scheda dedicata)
+segnaposto: {}
+varianti: []
+vicine:
+- file-modi
+- file-chiudi
+- file-errori

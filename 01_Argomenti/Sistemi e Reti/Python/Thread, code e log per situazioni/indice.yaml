@@ -40,9 +40,33 @@ rami:
   - schede:
     - thread-chiudi
 - id: b4
+  nome: Proteggere i dati condivisi
+  colore: orange
+  lato: L
+  voci:
+  - schede:
+    - lock-with
+  - schede:
+    - lock-acquire-timeout
+  - schede:
+    - rlock
+  - schede:
+    - lock-stato
+- id: b5
+  nome: Fermare e segnalare
+  colore: red
+  lato: T
+  voci:
+  - schede:
+    - event-ferma
+  - schede:
+    - event-wait
+  - schede:
+    - event-set-clear
+- id: b6
   nome: Log
   colore: violet
-  lato: L
+  lato: B
   voci:
   - schede:
     - log-config

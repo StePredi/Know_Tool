@@ -1,0 +1,32 @@
+id: py-def
+tipo: ricetta
+titolo: Scrivere una funzione che restituisce un valore
+sigla: Funzione
+comando: 'def nome(...):  return'
+frase: senza return restituisce None
+fonte: Documentazione ufficiale Python · Tutorial · 4.8 Definire funzioni
+parole: funzione def return docstring none restituire valore parametri fibonacci
+quando: Quando un pezzo di codice va riusato o ha un risultato da restituire.
+fasi:
+- nome: Definisci
+  righe:
+  - codice: |-
+      def fib2(n):
+          """Return a list containing the Fibonacci series up to n."""
+          result = []
+          a, b = 0, 1
+          while a < n:
+              result.append(a)
+              a, b = b, a+b
+          return result
+    commento: 'la prima riga in virgolette è la docstring: descrive la funzione'
+    trappola: return senza valore, o arrivare in fondo alla funzione, restituisce None.
+- nome: Usa
+  righe:
+  - codice: fib2(100)
+    commento: il risultato si può mettere in una variabile
+segnaposto: {}
+varianti: []
+vicine:
+- py-argomenti
+- py-args-kwargs

@@ -1,0 +1,37 @@
+id: py-args-kwargs
+tipo: ricetta
+titolo: Funzioni con un numero qualsiasi di argomenti
+sigla: '*args e **kwargs'
+comando: '*args  **kwargs'
+frase: tupla e dizionario
+fonte: Documentazione ufficiale Python · Tutorial · 4.9 Argomenti
+parole: args kwargs numero variabile argomenti asterisco tupla dizionario keyword-only slash posizionali
+quando: Quando non sai quanti argomenti riceverà la funzione.
+fasi:
+- nome: Una lista di argomenti
+  righe:
+  - codice: |-
+      def concat(*args, sep="/"):
+          return sep.join(args)
+    commento: args è una tupla con tutti gli argomenti in più
+    trappola: 'I parametri dopo *args si possono dare solo per nome: concat("a", "b", sep=".").'
+- nome: Argomenti per nome in più
+  righe:
+  - codice: |-
+      def cheeseshop(kind, *arguments, **keywords):
+          ...
+    commento: '**keywords è un dizionario con gli argomenti per nome non previsti'
+    parti:
+    - voce: '*name'
+      spiega: deve venire prima di **name
+- nome: Forzare il modo di passarli
+  righe:
+  - codice: |-
+      def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
+          ...
+    commento: prima di / solo per posizione, dopo * solo per nome
+segnaposto: {}
+varianti: []
+vicine:
+- py-argomenti
+- py-lambda

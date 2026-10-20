@@ -1,0 +1,28 @@
+id: path-crea
+tipo: ricetta
+titolo: Creare un percorso
+sigla: Path
+comando: Path("cartella") / "file.txt"
+frase: la / unisce
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib path percorso crea slash unire cwd home
+quando: Quando vuoi scrivere un percorso senza preoccuparti di / e \.
+fasi:
+- nome: Crea
+  righe:
+  - codice: |-
+      from pathlib import Path
+      p = Path("dati")
+      q = p / "misure.json"
+    commento: 'la / aggiunge un pezzo al percorso: dati/misure.json'
+  - codice: |-
+      Path.cwd()
+      Path.home()
+    commento: cartella di lavoro e cartella dell'utente
+    trappola: 'Path non apre il file: costruisce solo il percorso.'
+segnaposto: {}
+varianti: []
+vicine:
+- path-parti
+- path-esiste
+- path-leggi-scrivi

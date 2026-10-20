@@ -1,0 +1,38 @@
+id: py-attributo-condiviso
+tipo: prima_dopo
+titolo: 'Errore: una lista come attributo di classe'
+sigla: Attributo condiviso
+comando: self.tricks = []
+frase: una lista di classe è di tutti
+fonte: Documentazione ufficiale Python · Tutorial · 9.3 Variabili di classe e di istanza
+parole: attributo classe istanza condiviso lista mutabile dog tricks init errore
+prima: |-
+  class Dog:
+
+      ⟦tricks = []⟧             # attributo di classe
+
+      def __init__(self, name):
+          self.name = name
+
+      def add_trick(self, trick):
+          self.tricks.append(trick)
+dopo: |-
+  class Dog:
+
+      def __init__(self, name):
+          self.name = name
+          ⟦self.tricks = []⟧    # una lista nuova per ogni cane
+
+      def add_trick(self, trick):
+          self.tricks.append(trick)
+uso: Dare a ogni oggetto una propria lista (o dizionario).
+riconoscila: 'Aggiungi un''informazione a un oggetto e la ritrovi anche negli altri: d.add_trick(''roll over''), e.add_trick(''play dead'') e d.tricks mostra entrambi.'
+parti:
+- voce: tricks = []
+  spiega: 'creata una volta sola, nella classe: la usano tutte le istanze'
+- voce: self.tricks = []
+  spiega: 'creata in __init__: una per ogni istanza'
+trappola: Gli attributi di classe vanno bene per valori condivisi (come kind = 'canine'), non per liste o dizionari che ogni oggetto deve avere per sé.
+varianti: []
+vicine:
+- py-classe

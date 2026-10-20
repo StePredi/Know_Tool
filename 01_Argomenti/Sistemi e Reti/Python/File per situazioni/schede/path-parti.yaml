@@ -1,0 +1,29 @@
+id: path-parti
+tipo: ricetta
+titolo: Estrarre nome, estensione, cartella
+sigla: name / suffix / parent
+comando: p.name  p.stem  p.suffix  p.parent
+frase: il percorso a pezzi
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib name stem suffix parent resolve nome estensione cartella assoluto
+quando: Quando da un percorso ti serve solo una parte.
+fasi:
+- nome: Parti
+  righe:
+  - codice: |-
+      p = Path("/home/utente/dati/misure.json")
+      p.name
+      p.stem
+      p.suffix
+      p.parent
+    commento: misure.json  ·  misure  ·  .json  ·  /home/utente/dati
+- nome: Percorso assoluto
+  righe:
+  - codice: Path("dati").resolve()
+    commento: trasforma un percorso relativo in assoluto
+    trappola: Un percorso relativo dipende dalla cartella da cui avvii il programma.
+segnaposto: {}
+varianti: []
+vicine:
+- path-crea
+- path-script

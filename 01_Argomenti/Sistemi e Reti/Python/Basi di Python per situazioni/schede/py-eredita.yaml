@@ -1,0 +1,34 @@
+id: py-eredita
+tipo: ricetta
+titolo: Costruire una classe a partire da un'altra
+sigla: Ereditarietà
+comando: class Derivata(Base)
+frase: la classe figlia riusa e cambia
+fonte: Documentazione ufficiale Python · Tutorial · 9.5 Ereditarietà
+parole: ereditarietà classe derivata base override super isinstance issubclass metodo sovrascrivere
+quando: Quando una classe è una versione più specifica di un'altra.
+fasi:
+- nome: Derivare
+  righe:
+  - codice: |-
+      class DerivedClassName(BaseClassName):
+          ...
+    commento: se un attributo non c'è nella classe, Python lo cerca nella classe base, e così via
+- nome: Cambiare un metodo
+  righe:
+  - codice: '# nella classe derivata: scrivi un metodo con lo stesso nome'
+    commento: la versione della figlia sostituisce quella della base (override)
+  - codice: BaseClassName.methodname(self, arguments)
+    commento: per estendere il metodo della base invece di sostituirlo
+    trappola: 'Nota: nel codice moderno si usa di solito super() (come in super().__init__(...) dei thread); il tutorial qui mostra BaseClassName.methodname(self, ...).'
+- nome: Controllare il tipo
+  righe:
+  - codice: |-
+      isinstance(obj, int)
+      issubclass(bool, int)
+    commento: isinstance è vero anche per le classi derivate; issubclass confronta due classi
+segnaposto: {}
+varianti: []
+vicine:
+- py-classe
+- py-privati

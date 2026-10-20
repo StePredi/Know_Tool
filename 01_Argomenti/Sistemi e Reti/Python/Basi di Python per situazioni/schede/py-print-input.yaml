@@ -1,0 +1,28 @@
+id: py-print-input
+tipo: ricetta
+titolo: 'Mostrare e leggere dati: print e input'
+sigla: print e input
+comando: print()  input()
+frase: input restituisce sempre testo
+fonte: Documentazione ufficiale Python · Tutorial · Introduzione · Gestione degli errori
+parole: print input end sep stampare leggere tastiera int conversione valueerror numero utente
+quando: Quando il programma deve scrivere a schermo e chiedere qualcosa all'utente.
+fasi:
+- nome: Stampare
+  righe:
+  - codice: |-
+      i = 256*256
+      print('The value of i is', i)
+    commento: print mette uno spazio tra gli elementi (e va a capo)
+  - codice: print(a, end=',')
+    commento: end= cambia quello che viene stampato alla fine, al posto dell'a capo
+- nome: Leggere
+  righe:
+  - codice: 'x = int(input("Please enter a number: "))'
+    commento: 'input() restituisce un testo: int() lo trasforma in numero'
+    trappola: 'Se l''utente scrive qualcosa che non è un numero, int() dà ValueError: vedi la scheda su try/except.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-fstring
+- py-try-except

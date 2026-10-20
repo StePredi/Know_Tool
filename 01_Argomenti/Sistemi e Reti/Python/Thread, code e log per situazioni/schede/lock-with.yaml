@@ -1,0 +1,27 @@
+id: lock-with
+tipo: ricetta
+titolo: Far entrare un thread alla volta in un pezzo di codice
+sigla: Lock con with
+comando: 'with lock:'
+frase: un solo thread per volta
+fonte: Documentazione ufficiale Python · Libreria standard · threading · Lock Objects
+parole: lock with acquire release mutex dati condivisi thread sezione critica threading
+quando: Quando più thread leggono e modificano gli stessi dati.
+fasi:
+- nome: Crea il lock una volta
+  righe:
+  - codice: lock = threading.Lock()
+    commento: un solo lock, condiviso da tutti i thread che toccano quei dati
+- nome: Proteggi il pezzo di codice
+  righe:
+  - codice: |-
+      with lock:
+          stato["contatore"] += 1
+    commento: chi arriva dopo aspetta che il primo esca dal blocco
+    trappola: 'Il lock deve essere lo stesso oggetto per tutti i thread: se ognuno ne crea uno suo, non protegge nulla.'
+segnaposto: {}
+varianti: []
+vicine:
+- lock-acquire-timeout
+- lock-stato
+- rlock

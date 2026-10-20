@@ -1,0 +1,29 @@
+id: py-if
+tipo: ricetta
+titolo: Fare una scelta con if, elif ed else
+sigla: if
+comando: if / elif / else
+frase: una sola strada viene eseguita
+fonte: Documentazione ufficiale Python · Tutorial · 4.1 if
+parole: if elif else condizione scelta confronto indentazione ramo
+quando: Quando il programma deve fare cose diverse a seconda di una condizione.
+fasi:
+- nome: Le condizioni in ordine
+  righe:
+  - codice: |-
+      if x < 0:
+          x = 0
+          print('Negative changed to zero')
+      elif x == 0:
+          print('Zero')
+      elif x == 1:
+          print('Single')
+      else:
+          print('More')
+    commento: si esegue il primo blocco la cui condizione è vera
+    trappola: Possono esserci zero o più elif, e l'else è facoltativo. I blocchi si riconoscono dall'indentazione.
+segnaposto: {}
+varianti: []
+vicine:
+- py-for
+- py-while

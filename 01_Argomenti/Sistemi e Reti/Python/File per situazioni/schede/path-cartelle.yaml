@@ -1,0 +1,20 @@
+id: path-cartelle
+tipo: ricetta
+titolo: Creare una cartella
+sigla: mkdir
+comando: p.mkdir(parents=True, exist_ok=True)
+frase: non dà errore se c'è già
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib mkdir parents exist_ok creare cartella
+quando: Quando devi essere sicuro che la cartella ci sia prima di scrivere.
+fasi:
+- nome: Crea
+  righe:
+  - codice: Path("log/2026").mkdir(parents=True, exist_ok=True)
+    commento: parents=True crea anche le cartelle intermedie; exist_ok=True non dà errore se c'è già
+    trappola: Senza exist_ok=True, una cartella già esistente dà FileExistsError.
+segnaposto: {}
+varianti: []
+vicine:
+- path-esiste
+- path-elenca

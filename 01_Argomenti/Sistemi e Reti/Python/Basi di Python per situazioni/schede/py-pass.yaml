@@ -1,0 +1,26 @@
+id: py-pass
+tipo: ricetta
+titolo: Lasciare un blocco vuoto per ora
+sigla: pass
+comando: pass
+frase: segnaposto che non fa niente
+fonte: Documentazione ufficiale Python · Tutorial · 4.6 pass
+parole: pass blocco vuoto classe funzione da implementare segnaposto
+quando: Quando la sintassi vuole un blocco ma non hai ancora niente da scrivere.
+fasi:
+- nome: Blocco che non fa nulla
+  righe:
+  - codice: |-
+      class MyEmptyClass:
+          pass
+    commento: una classe vuota
+  - codice: |-
+      def initlog(*args):
+          pass   # Remember to implement this!
+    commento: una funzione da completare
+    trappola: 'pass non fa niente: serve solo perché un blocco non può restare vuoto.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-if
+- py-classe

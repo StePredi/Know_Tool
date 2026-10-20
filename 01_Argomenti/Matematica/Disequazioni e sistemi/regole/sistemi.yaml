@@ -1,0 +1,16 @@
+id: sistemi
+nome: Sistemi di disequazioni
+riconosci: "Più disequazioni legate da una graffa: devono valere tutte insieme."
+fai: Risolvi ogni disequazione da sola. Poi disegna le soluzioni su rette una sotto l'altra e tieni solo dove sono tutte vere (intersezione).
+formula: S = S_1 ∩ S_2
+esempi:
+  - da: x^2-4 > 0 e x-1 < 0
+    passi:
+      - "Prima: `x < -2` oppure `x > 2`"
+      - "Seconda: `x < 1`"
+      - "Intersezione: dove valgono entrambe"
+    risultato: x < -2
+errore: "Fare l'unione invece dell'intersezione: nel sistema vale «e», non «oppure»."
+confondi:
+  - con: linea-segni
+    differenza: Con più fattori in una sola disequazione si usa la linea dei segni; con più disequazioni separate, il sistema.

@@ -1,0 +1,32 @@
+id: file-leggi-righe
+tipo: ricetta
+titolo: Leggere una riga alla volta
+sigla: Righe
+comando: readline  for line in f
+frase: è veloce e usa poca memoria
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: readline righe linea for iterare readlines lista file
+quando: Quando il file ha più righe da elaborare.
+fasi:
+- nome: Ciclo for
+  righe:
+  - codice: |-
+      for line in f:
+          print(line, end="")
+    commento: 'il modo più semplice: efficiente in memoria e veloce'
+- nome: Una riga per volta a mano
+  righe:
+  - codice: f.readline()
+    commento: legge una riga, con il \n finale; stringa vuota "" a fine file
+    trappola: Una riga vuota nel file si vede come "\n", non come "".
+- nome: Tutte in una lista
+  righe:
+  - codice: |-
+      list(f)
+      f.readlines()
+    commento: due modi per avere tutte le righe in una lista
+segnaposto: {}
+varianti: []
+vicine:
+- file-leggi-tutto
+- file-seek

@@ -1,0 +1,33 @@
+id: py-set
+tipo: ricetta
+titolo: 'Togliere i doppioni e confrontare insiemi: set'
+sigla: Set
+comando: set  &  |  -  ^
+frase: nessun duplicato, ricerca veloce
+fonte: Documentazione ufficiale Python · Tutorial · 5.4 Set
+parole: set insieme duplicati unione intersezione differenza appartenenza vuoto comprehension
+quando: Quando ti servono elementi senza ripetizioni o operazioni tra insiemi.
+fasi:
+- nome: Creare e controllare
+  righe:
+  - codice: |-
+      basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+      'orange' in basket
+    commento: i doppioni spariscono; in è molto veloce
+    trappola: 'Un insieme vuoto si crea con set(): {} crea un dizionario vuoto.'
+- nome: Operazioni
+  righe:
+  - codice: |-
+      a = set('abracadabra')
+      b = set('alacazam')
+      a - b
+      a & b
+      a ^ b
+    commento: 'a - b: solo in a · a & b: in entrambi · a ^ b: in uno solo dei due'
+  - codice: '{x for x in ''abracadabra'' if x not in ''abc''}'
+    commento: anche i set hanno la comprehension
+segnaposto: {}
+varianti: []
+vicine:
+- py-lista-metodi
+- py-dizionario

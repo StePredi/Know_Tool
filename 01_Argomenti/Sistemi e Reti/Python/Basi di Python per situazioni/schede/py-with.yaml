@@ -1,0 +1,23 @@
+id: py-with
+tipo: ricetta
+titolo: Aprire e chiudere una risorsa con with
+sigla: with
+comando: 'with ... as ...:'
+frase: si chiude da solo
+fonte: Documentazione ufficiale Python · Tutorial · 8.7 Azioni di pulizia
+parole: with context manager file chiudere automaticamente risorsa pulizia open lock
+quando: Quando una risorsa (un file, un lock) va sempre rilasciata, anche se c'è un errore.
+fasi:
+- nome: Il with
+  righe:
+  - codice: |-
+      with open("myfile.txt") as f:
+          for line in f:
+              print(line, end="")
+    commento: alla fine del blocco il file è sempre chiuso, anche se c'è stato un problema
+    trappola: Senza with il file resta aperto per un tempo indeterminato.
+segnaposto: {}
+varianti: []
+vicine:
+- py-try-except
+- py-else-finally

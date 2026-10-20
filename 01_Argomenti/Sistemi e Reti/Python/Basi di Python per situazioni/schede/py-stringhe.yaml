@@ -1,0 +1,40 @@
+id: py-stringhe
+tipo: ricetta
+titolo: 'Scrivere testo: apici, a capo e percorsi'
+sigla: Stringhe
+comando: '''...'' "..." r''...'' """..."""'
+frase: apici, escape e stringhe grezze
+fonte: Documentazione ufficiale Python · Tutorial · Introduzione
+parole: stringhe apici virgolette escape a capo newline raw string percorso windows backslash triple quotes
+quando: Quando devi scrivere testo con apici, a capo, backslash o su più righe.
+fasi:
+- nome: Apici dentro il testo
+  righe:
+  - codice: '''doesn\''t'''
+    commento: con l'apice singolo si fa l'escape con \
+  - codice: '"doesn''t"'
+    commento: oppure si usano le virgolette doppie
+- nome: A capo
+  righe:
+  - codice: |-
+      s = 'First line.\nSecond line.'
+      print(s)
+    commento: '\n è l''a capo: lo vedi solo con print()'
+- nome: Backslash nei percorsi
+  righe:
+  - codice: print(r'C:\this\name')
+    commento: con la r davanti (stringa grezza) i backslash restano così come sono
+    trappola: Senza la r, \t diventa una tabulazione e \n un a capo. Una stringa grezza non può finire con un numero dispari di backslash.
+- nome: Più righe
+  righe:
+  - codice: |-
+      print("""\
+      Usage: thingy [OPTIONS]
+           -h    Display this usage message
+      """)
+    commento: il testo tra tre virgolette va a capo come è scritto; il \ finale toglie il primo a capo
+segnaposto: {}
+varianti: []
+vicine:
+- py-stringhe-operazioni
+- py-fstring

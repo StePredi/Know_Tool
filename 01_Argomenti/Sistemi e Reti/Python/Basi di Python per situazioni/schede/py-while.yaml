@@ -1,0 +1,24 @@
+id: py-while
+tipo: ricetta
+titolo: 'Ripetere finché una condizione è vera: while'
+sigla: while
+comando: 'while condizione:'
+frase: la condizione deve cambiare
+fonte: Documentazione ufficiale Python · Tutorial · 4.8 Definire funzioni (esempio di Fibonacci)
+parole: while ciclo condizione finché ripetere infinito true fibonacci
+quando: Quando non sai in anticipo quante volte ripetere.
+fasi:
+- nome: Il ciclo
+  righe:
+  - codice: |-
+      a, b = 0, 1
+      while a < n:
+          print(a, end=' ')
+          a, b = b, a+b
+    commento: si ripete finché a < n; dentro il ciclo a cambia
+    trappola: 'Nota: se la condizione non cambia mai il ciclo non finisce; con while True si esce solo con break o con Ctrl+C.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-for
+- py-break-continue

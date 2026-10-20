@@ -1,0 +1,17 @@
+id: scegli-intervalli
+nome: Scegli gli intervalli
+riconosci: La riga del risultato è completa.
+fai: Con `> 0` tieni gli intervalli positivi, con `< 0` quelli negativi. Il punto è incluso (pallino pieno) solo con `>=` o `<=` e solo se annulla il numeratore; il denominatore resta sempre escluso. Scrivi la soluzione con le disuguaglianze.
+formula: x < a  oppure  x > b
+esempi:
+  - da: (x^2-4)/(x-1) >= 0
+    passi:
+      - "Fattori: `x-2` e `x+2` sopra, `x-1` sotto"
+      - "Punti: `-2`, `1`, `2`"
+      - "Intervalli positivi: tra `-2` e `1`, e dopo `2`"
+      - "`-2` e `2` annullano il numeratore: inclusi. `1` annulla il denominatore: escluso"
+    risultato: -2 <= x < 1  oppure  x >= 2
+errore: "Includere il punto che annulla il denominatore: mai, la frazione non esiste lì."
+confondi:
+  - con: sistemi
+    differenza: Qui «oppure» unisce gli intervalli di una sola disequazione; nel sistema le disequazioni valgono insieme («e»).

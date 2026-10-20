@@ -1,0 +1,26 @@
+id: file-encoding
+tipo: ricetta
+titolo: Scrivere e leggere con la stessa codifica
+sigla: Codifica
+comando: encoding="utf-8"
+frase: lettere accentate senza guai
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: encoding utf-8 codifica accenti testo piattaforma
+quando: Quando nel file ci sono lettere accentate o simboli.
+fasi:
+- nome: Indica la codifica
+  righe:
+  - codice: |-
+      with open("dati.txt", "w", encoding="utf-8") as f:
+          f.write("perché")
+    commento: scrivendo
+  - codice: |-
+      with open("dati.txt", "r", encoding="utf-8") as f:
+          testo = f.read()
+    commento: 'leggendo: usa la stessa codifica'
+    trappola: Il tutorial dice che la codifica predefinita dipende dalla piattaforma e consiglia utf-8.
+segnaposto: {}
+varianti: []
+vicine:
+- file-apri
+- file-leggi-tutto

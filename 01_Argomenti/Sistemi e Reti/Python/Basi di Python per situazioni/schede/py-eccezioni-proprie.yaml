@@ -1,0 +1,30 @@
+id: py-eccezioni-proprie
+tipo: ricetta
+titolo: Creare un tipo di errore tutto tuo
+sigla: Eccezioni proprie
+comando: class MioErrore(Exception)
+frase: derivano da Exception
+fonte: Documentazione ufficiale Python · Tutorial · 8.6 Eccezioni definite dall'utente
+parole: eccezione personalizzata exception classe derivata error nome attributi
+quando: Quando vuoi che chi usa il tuo codice possa prendere un errore specifico.
+fasi:
+- nome: Definisci
+  righe:
+  - codice: |-
+      class SogliaFuoriRange(Exception):
+          pass
+    commento: una classe che deriva da Exception
+    trappola: 'Nota: codice di esempio scritto qui. Secondo il tutorial le eccezioni derivano da Exception e il nome di solito finisce con "Error" (per esempio SogliaFuoriRangeError).'
+- nome: Usa
+  righe:
+  - codice: |-
+      raise SogliaFuoriRange('valore fuori range')
+      # ...
+      except SogliaFuoriRange as e:
+          print(e)
+    commento: si solleva con raise e si prende con except
+segnaposto: {}
+varianti: []
+vicine:
+- py-raise
+- py-classe

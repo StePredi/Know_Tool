@@ -1,0 +1,18 @@
+id: ruffini
+nome: Ruffini
+riconosci: Polinomio di grado 3 o più che non si scompone con i controlli precedenti (`x^3-6x^2+11x-6`).
+fai: "Prova come radici i divisori del termine noto (con il segno più e meno). Se `p(a) = 0`, dividi per `(x-a)` con la regola di Ruffini: il quoto è il secondo fattore."
+formula: p(a)=0 => p(x) = (x-a)q(x)
+esempi:
+  - da: x^3-6x^2+11x-6
+    passi:
+      - "Divisori di `-6`: `+-1, +-2, +-3, +-6`"
+      - "`p(1) = 1-6+11-6 = 0`, quindi `(x-1)` è un fattore"
+      - "Divido: il quoto è `x^2-5x+6`"
+      - "`x^2-5x+6` è un trinomio: `(x-2)(x-3)`"
+    risultato: (x-1)(x-2)(x-3)
+errore: "Dimenticare i divisori negativi: prova sia `a` che `-a`. Il calcolatore di questa scheda cerca solo radici intere."
+confondi:
+  - con: trinomio
+    differenza: Ruffini vale dal 3º grado; per il 2º grado bastano somma e prodotto o `Delta`.
+controllo: ruffini

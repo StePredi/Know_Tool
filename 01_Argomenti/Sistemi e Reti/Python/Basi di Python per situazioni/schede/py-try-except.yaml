@@ -1,0 +1,47 @@
+id: py-try-except
+tipo: ricetta
+titolo: Gestire un errore senza far fermare il programma
+sigla: try / except
+comando: 'try: ... except ErrType:'
+frase: prendi solo gli errori che sai gestire
+fonte: Documentazione ufficiale Python · Tutorial · 8. Errori ed eccezioni
+parole: try except exception errore valueerror syntaxerror eccezione gestire catch raise as
+quando: Quando un'operazione può fallire (un numero scritto male, un file che non c'è) e vuoi continuare comunque.
+fasi:
+- nome: Un errore preciso
+  righe:
+  - codice: |-
+      while True:
+          try:
+              x = int(input("Please enter a number: "))
+              break
+          except ValueError:
+              print("Oops!  That was no valid number.  Try again...")
+    commento: se int() fallisce si stampa un messaggio e si riprova
+    trappola: Un SyntaxError si vede prima di far partire il programma; le eccezioni (come ZeroDivisionError) arrivano mentre gira.
+- nome: Più tipi di errore
+  righe:
+  - codice: |-
+      try:
+          f = open('myfile.txt')
+          i = int(f.readline().strip())
+      except OSError as err:
+          print("OS error:", err)
+      except ValueError:
+          print("Could not convert data to an integer.")
+      except Exception as err:
+          print(f"Unexpected {err=}, {type(err)=}")
+          raise
+    commento: si esegue solo il primo except che corrisponde; l'ultimo prende tutto il resto e rilancia con raise
+    trappola: 'Metti prima gli errori specifici e poi quelli generici: una classe base cattura anche le sue derivate. Meglio sempre essere il più precisi possibile.'
+  - codice: |-
+      except (RuntimeError, TypeError, NameError):
+          pass
+    commento: più tipi nello stesso except, tra parentesi
+    trappola: 'Nota: il tutorial più recente scrive questa riga senza le parentesi; con le parentesi funziona in tutte le versioni.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-else-finally
+- py-raise
+- py-with

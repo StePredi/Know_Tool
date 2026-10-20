@@ -1,0 +1,44 @@
+id: py-lista-metodi
+tipo: ricetta
+titolo: Aggiungere, togliere e ordinare elementi di una lista
+sigla: Metodi delle liste
+comando: append  insert  remove  pop  sort
+frase: la lista si modifica sul posto
+fonte: Documentazione ufficiale Python · Tutorial · 5. Strutture dati
+parole: lista append extend insert remove pop sort reverse index count clear copy del metodi
+quando: Quando devi cambiare il contenuto di una lista.
+fasi:
+- nome: Aggiungere
+  righe:
+  - codice: fruits.append('grape')
+    commento: in fondo alla lista
+  - codice: fruits.insert(0, 'kiwi')
+    commento: prima della posizione indicata (0 = in testa)
+  - codice: fruits.extend(['fig', 'lime'])
+    commento: aggiunge tutti gli elementi di un altro iterabile
+- nome: Togliere
+  righe:
+  - codice: fruits.remove('apple')
+    commento: toglie il primo elemento uguale
+    trappola: ValueError se non c'è. Lo stesso per index().
+  - codice: fruits.pop()
+    commento: toglie e restituisce l'ultimo; con un indice, quello alla posizione indicata
+  - codice: |-
+      del fruits[0]
+      del fruits[2:4]
+    commento: toglie per posizione o per fetta, senza restituire niente
+- nome: Ordinare e contare
+  righe:
+  - codice: |-
+      fruits.sort()
+      fruits.reverse()
+      fruits.count('apple')
+      fruits.index('banana')
+    commento: sort e reverse cambiano la lista; count e index la interrogano
+    trappola: 'I metodi che modificano la lista restituiscono None: fruits = fruits.sort() la cancella.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-list-comprehension
+- py-copia-lista
+- py-cicli-utili

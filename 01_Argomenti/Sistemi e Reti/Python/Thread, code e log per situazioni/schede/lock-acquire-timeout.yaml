@@ -1,0 +1,34 @@
+id: lock-acquire-timeout
+tipo: ricetta
+titolo: Provare a prendere il lock senza bloccarsi
+sigla: acquire / release
+comando: lock.acquire(timeout=...)
+frase: restituisce True o False
+fonte: Documentazione ufficiale Python · Libreria standard · threading · Lock Objects
+parole: lock acquire release timeout blocking true false tentare bloccare
+quando: Quando non vuoi aspettare per sempre che il lock si liberi.
+fasi:
+- nome: Con attesa massima
+  righe:
+  - codice: |-
+      if lock.acquire(timeout=2):
+          try:
+              ...
+          finally:
+              lock.release()
+      else:
+          print("lock occupato")
+    commento: True se l'ha preso, False se scade il tempo
+    trappola: 'Il release() va fatto solo se l''acquire è riuscito, e in un finally: altrimenti il lock resta preso.'
+- nome: Senza attendere
+  righe:
+  - codice: lock.acquire(blocking=False)
+    commento: ritorna subito True o False
+  - codice: lock.release()
+    commento: su un lock non preso dà RuntimeError
+    trappola: 'Nota: with lock: fa acquire e release da solo, ed è la forma più sicura.'
+segnaposto: {}
+varianti: []
+vicine:
+- lock-with
+- rlock

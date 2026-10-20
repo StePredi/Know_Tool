@@ -1,0 +1,25 @@
+id: path-leggi-scrivi
+tipo: ricetta
+titolo: Leggere e scrivere un file con Path
+sigla: read_text / write_text
+comando: p.read_text()  p.write_text(s)
+frase: apre e chiude da solo
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib read_text write_text leggere scrivere file breve
+quando: Quando il file è piccolo e vuoi leggerlo o scriverlo in una riga.
+fasi:
+- nome: Leggi
+  righe:
+  - codice: p.read_text(encoding="utf-8")
+    commento: restituisce tutto il testo
+- nome: Scrivi
+  righe:
+  - codice: p.write_text("ciao", encoding="utf-8")
+    commento: scrive il testo; se il file esiste, lo sostituisce
+    trappola: 'Per aggiungere in fondo devi usare open(p, "a"): write_text sostituisce.'
+segnaposto: {}
+varianti: []
+vicine:
+- path-crea
+- file-leggi-tutto
+- file-scrivi

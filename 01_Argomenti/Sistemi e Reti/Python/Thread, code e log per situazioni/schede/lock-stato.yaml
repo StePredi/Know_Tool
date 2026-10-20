@@ -1,0 +1,36 @@
+id: lock-stato
+tipo: prima_dopo
+titolo: 'Errore: più thread cambiano lo stesso dizionario'
+sigla: Stato senza lock
+comando: 'with lock:'
+frase: dati condivisi non protetti
+fonte: Documentazione ufficiale Python · Libreria standard · threading · Lock Objects
+parole: stato condiviso dizionario thread lock race condition contatore gateway
+prima: |-
+  class Gateway:
+      def __init__(self):
+          self.stato = {}
+
+      def aggiorna(self, chiave, valore):
+          ⟦self.stato[chiave] = valore⟧
+dopo: |-
+  class Gateway:
+      def __init__(self):
+          self.stato = {}
+          self.lock = threading.Lock()
+
+      def aggiorna(self, chiave, valore):
+          ⟦with self.lock:
+              self.stato[chiave] = valore⟧
+uso: Proteggere un dizionario modificato da più thread.
+riconoscila: Un dato condiviso cambia da più thread (per esempio il dizionario stato) e i valori risultano incoerenti.
+parti:
+- voce: self.stato[chiave] = valore
+  spiega: due thread possono modificarlo nello stesso momento
+- voce: 'with self.lock:'
+  spiega: dentro il blocco entra un thread alla volta
+trappola: 'Nota: struttura riassunta dal dizionario self.stato di gateway.py; il codice della fonte non usa lock. L''uso del Lock è dalla documentazione di threading.'
+varianti: []
+vicine:
+- lock-with
+- thread-avvia-tutti

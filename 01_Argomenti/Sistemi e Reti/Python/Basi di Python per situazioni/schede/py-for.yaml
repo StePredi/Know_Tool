@@ -1,0 +1,34 @@
+id: py-for
+tipo: ricetta
+titolo: 'Ripetere per ogni elemento: for e range'
+sigla: for e range
+comando: for x in ...  range()
+frase: il fine non è incluso
+fonte: Documentazione ufficiale Python · Tutorial · 4.2 for · 4.3 range
+parole: for ciclo range elemento lista scorrere ripetere n volte indice start stop step
+quando: Quando devi fare qualcosa per ogni elemento di una lista, o un certo numero di volte.
+fasi:
+- nome: Su una sequenza
+  righe:
+  - codice: |-
+      words = ['cat', 'window', 'defenestrate']
+      for w in words:
+          print(w, len(w))
+    commento: w prende a turno ogni elemento
+- nome: Un certo numero di volte
+  righe:
+  - codice: |-
+      for i in range(5):
+          print(i)
+    commento: 0, 1, 2, 3, 4
+  - codice: list(range(5, 10))
+    commento: 'con due numeri: da 5 a 9'
+  - codice: list(range(0, 10, 3))
+    commento: 'con tre numeri: il terzo è il passo (0, 3, 6, 9)'
+    trappola: 'L''estremo finale non fa mai parte della sequenza: range(10) genera 10 valori, da 0 a 9.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-while
+- py-break-continue
+- py-cicli-utili

@@ -1,0 +1,20 @@
+modello: matematica
+titolo: Disequazioni e sistemi
+introduzione: Porta tutto a sinistra, scomponi, disegna i segni di ogni fattore su una linea e scegli gli intervalli giusti.
+motore: disequazioni
+esempi:
+  - (x-1)(x+3) > 0
+  - x^2-5x+6 < 0
+  - (x^2-4)/(x-1) >= 0
+  - x/(x-1) <= 0
+  - (x-2)^2 <= 0
+  - x^2+1 > 0
+bozza: true
+ordine:
+  - porta-a-sinistra
+  - scomponi
+  - segno-fattore
+  - linea-segni
+  - scegli-intervalli
+  - quadrati
+  - sistemi

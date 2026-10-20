@@ -1,0 +1,41 @@
+id: py-import
+tipo: ricetta
+titolo: 'Usare il codice di un altro file: import'
+sigla: import
+comando: import  from ... import
+frase: quattro modi di importare
+fonte: Documentazione ufficiale Python · Tutorial · 6. Moduli
+parole: import from as modulo importare fibo namespace asterisco reload importlib
+quando: Quando vuoi usare funzioni scritte in un altro file o nella libreria standard.
+fasi:
+- nome: I modi di importare
+  righe:
+  - codice: |-
+      import fibo
+      fibo.fib(1000)
+    commento: 'importi il modulo: le sue funzioni si usano con il prefisso fibo.'
+  - codice: |-
+      from fibo import fib, fib2
+      fib(500)
+    commento: importi solo i nomi che ti servono, senza prefisso
+  - codice: |-
+      import fibo as fib
+      fib.fib(500)
+    commento: importi il modulo con un nome più corto
+  - codice: |-
+      from fibo import fib as fibonacci
+      fibonacci(500)
+    commento: importi un nome e lo rinomini
+    trappola: 'from fibo import * importa tutti i nomi che non iniziano con _, ma rende il codice poco leggibile: meglio evitarlo (si usa al più in console).'
+- nome: Se modifichi il modulo
+  righe:
+  - codice: |-
+      import importlib
+      importlib.reload(fibo)
+    commento: 'un modulo viene importato una volta sola per sessione: per rileggerlo serve reload'
+segnaposto: {}
+varianti: []
+vicine:
+- py-main
+- py-percorso-moduli
+- py-pacchetti

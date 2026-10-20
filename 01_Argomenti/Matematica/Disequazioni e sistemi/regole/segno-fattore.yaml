@@ -1,0 +1,15 @@
+id: segno-fattore
+nome: Segno di ogni fattore
+riconosci: Hai i fattori già scomposti.
+fai: Per ogni fattore trova dove si annulla e dove è positivo. `ax+b > 0` vale a destra della radice se `a > 0`, a sinistra se `a < 0`. Un fattore di 2º grado con `a > 0` è positivo fuori dalle radici e negativo in mezzo; se non ha radici (`Delta < 0`) ha sempre il segno di `a`.
+formula: x-a > 0 => x > a
+esempi:
+  - da: -x+3 > 0
+    passi:
+      - Si annulla in `x = 3`
+      - "Il coefficiente di `x` è `-1`: positivo a sinistra di 3"
+    risultato: x < 3
+errore: "Dimenticare il segno del coefficiente: `-x+3 > 0` vale per `x < 3`, non per `x > 3`."
+confondi:
+  - con: quadrati
+    differenza: "Un quadrato non cambia segno: va trattato a parte."

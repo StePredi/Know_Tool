@@ -1,0 +1,29 @@
+id: json-lines
+tipo: ricetta
+titolo: Un oggetto JSON per riga
+sigla: JSON Lines
+comando: json.dumps(x) + "\n"
+frase: file di log che cresce
+fonte: Documentazione ufficiale Python · Libreria standard · json
+parole: json lines jsonl riga log messaggi append loads righe
+quando: Quando aggiungi dati uno alla volta (letture, messaggi) e li rileggi dopo.
+fasi:
+- nome: Scrivi una riga
+  righe:
+  - codice: |-
+      with open("misure.jsonl", "a", encoding="utf-8") as f:
+          f.write(json.dumps(misura) + "\n")
+    commento: una misura per riga, in fondo al file
+    trappola: 'Nota: formato non descritto nella documentazione di json; qui è la combinazione di dumps, modo "a" e fine riga.'
+- nome: Rileggi
+  righe:
+  - codice: |-
+      with open("misure.jsonl", encoding="utf-8") as f:
+          misure = [json.loads(riga) for riga in f]
+    commento: una riga = un json.loads
+segnaposto: {}
+varianti: []
+vicine:
+- file-aggiungi
+- json-stringa
+- file-leggi-righe

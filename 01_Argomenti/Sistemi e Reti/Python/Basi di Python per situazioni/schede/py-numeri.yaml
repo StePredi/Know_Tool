@@ -1,0 +1,28 @@
+id: py-numeri
+tipo: ricetta
+titolo: 'Fare calcoli: divisione, resto e potenza'
+sigla: Operatori numerici
+comando: /  //  %  **
+frase: quattro operatori oltre a + - *
+fonte: Documentazione ufficiale Python · Tutorial · Introduzione
+parole: numeri operatori divisione intera resto potenza float modulo precedenza meno
+quando: Quando ti servono divisioni, resti o potenze.
+fasi:
+- nome: Le divisioni
+  righe:
+  - codice: 8 / 5
+    commento: 'divisione: dà sempre un numero con la virgola (1.6)'
+  - codice: 17 // 3
+    commento: 'divisione intera: scarta i decimali (5)'
+  - codice: 17 % 3
+    commento: resto della divisione (2)
+- nome: Le potenze
+  righe:
+  - codice: 5 ** 2
+    commento: 5 alla seconda (25)
+    trappola: '** ha la precedenza sul meno: -3**2 vale -9. Per avere 9 scrivi (-3)**2.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-stringhe
+- py-fstring

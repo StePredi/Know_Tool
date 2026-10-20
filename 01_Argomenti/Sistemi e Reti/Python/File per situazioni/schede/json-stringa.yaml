@@ -1,0 +1,27 @@
+id: json-stringa
+tipo: ricetta
+titolo: Trasformare dati Python in testo JSON e viceversa
+sigla: dumps / loads
+comando: json.dumps(x)  json.loads(s)
+frase: con s sta per stringa
+fonte: Documentazione ufficiale Python · Libreria standard · json
+parole: json dumps loads stringa serializzare deserializzare lista dizionario
+quando: Quando devi inviare o salvare un dizionario/lista come testo.
+fasi:
+- nome: Da Python a testo
+  righe:
+  - codice: |-
+      import json
+      json.dumps([1, "simple", "list"])
+    commento: '''[1, "simple", "list"]'''
+- nome: Da testo a Python
+  righe:
+  - codice: 'json.loads(''["foo", {"bar": ["baz", null, 1.0, 2]}]'')'
+    commento: 'torna una lista: [''foo'', {''bar'': [''baz'', None, 1.0, 2]}]'
+    trappola: Il null di JSON diventa None; true e false diventano True e False.
+segnaposto: {}
+varianti: []
+vicine:
+- json-file
+- json-opzioni
+- json-errore

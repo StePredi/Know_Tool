@@ -1,0 +1,40 @@
+id: py-pacchetti
+tipo: ricetta
+titolo: 'Organizzare i moduli in cartelle: i pacchetti'
+sigla: Pacchetti
+comando: __init__.py  from . import
+frase: una cartella con __init__.py
+fonte: Documentazione ufficiale Python · Tutorial · 6.4 Pacchetti
+parole: pacchetto package init sottocartella import relativo punto all __all__ struttura cartelle
+quando: Quando i moduli sono tanti e vuoi tenerli in cartelle.
+fasi:
+- nome: La struttura
+  righe:
+  - codice: |-
+      sound/
+          __init__.py
+          formats/
+              __init__.py
+              wavread.py
+          effects/
+              __init__.py
+              echo.py
+    commento: ogni cartella-pacchetto ha un __init__.py, anche vuoto
+- nome: Importare
+  righe:
+  - codice: |-
+      import sound.effects.echo
+      from sound.effects import echo
+      from sound.effects.echo import echofilter
+    commento: tre modi, dal più lungo al più corto
+  - codice: |-
+      from . import echo
+      from .. import formats
+      from ..filters import equalizer
+    commento: 'import relativi: . = questo pacchetto, .. = quello sopra'
+    trappola: 'Gli import relativi funzionano solo dentro un pacchetto: il modulo principale deve usare import assoluti.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-import
+- py-percorso-moduli

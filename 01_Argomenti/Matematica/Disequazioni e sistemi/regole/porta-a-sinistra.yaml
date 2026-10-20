@@ -1,0 +1,14 @@
+id: porta-a-sinistra
+nome: Tutto a sinistra, zero a destra
+riconosci: Il secondo membro non è 0 (`x^2 > 3x-2`).
+fai: "Sposta tutto a sinistra cambiando i segni, così a destra resta 0. Non moltiplicare mai per un'incognita: non ne conosci il segno."
+formula: A > B => A-B > 0
+esempi:
+  - da: x^2 > 3x-2
+    passi:
+      - "Sposto `3x-2` a sinistra: `x^2-3x+2 > 0`"
+    risultato: x^2-3x+2 > 0
+errore: "Moltiplicare o dividere per un numero negativo cambia il verso (`>` diventa `<`). Spostare un termine da una parte all'altra no: cambia solo il segno del termine."
+confondi:
+  - con: Equazioni
+    differenza: In un'equazione la soluzione è un numero; qui è un insieme di intervalli.

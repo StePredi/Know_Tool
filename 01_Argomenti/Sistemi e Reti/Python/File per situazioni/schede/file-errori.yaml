@@ -1,0 +1,28 @@
+id: file-errori
+tipo: ricetta
+titolo: Il file non c'è o non si apre
+sigla: FileNotFoundError / OSError
+comando: except OSError
+frase: gli errori di open()
+fonte: Documentazione ufficiale Python · Tutorial · 7.2 Lettura e scrittura di file
+parole: filenotfounderror oserror permissionerror file non esiste errore open try except
+quando: Quando il file potrebbe mancare o non essere accessibile.
+fasi:
+- nome: Prendi l'errore
+  righe:
+  - codice: |-
+      try:
+          f = open(arg, "r")
+      except OSError:
+          print("cannot open", arg)
+      else:
+          print(arg, "has", len(f.readlines()), "lines")
+          f.close()
+    commento: il programma continua anche se il file non si apre
+    trappola: 'Nota: FileNotFoundError è un caso di OSError; se vuoi trattarlo a parte, mettilo prima nell''except.'
+segnaposto: {}
+varianti: []
+vicine:
+- file-chiudi
+- path-esiste
+- json-errore

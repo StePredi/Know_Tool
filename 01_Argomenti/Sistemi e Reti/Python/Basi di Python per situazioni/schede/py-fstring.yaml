@@ -1,0 +1,44 @@
+id: py-fstring
+tipo: ricetta
+titolo: Mettere valori dentro un testo con le f-string
+sigla: f-string
+comando: f"...{valore}..."
+frase: espressioni tra graffe
+fonte: Documentazione ufficiale Python · Tutorial · Input e output
+parole: f-string formattare stampa valore graffe format precisione decimali larghezza repr debugging
+quando: Quando devi costruire un testo a partire da variabili e numeri.
+fasi:
+- nome: Valori nel testo
+  righe:
+  - codice: |-
+      year = 2016
+      event = 'Referendum'
+      f'Results of the {year} {event}'
+    commento: una f davanti al testo e le espressioni tra { }
+- nome: Numeri formattati
+  righe:
+  - codice: |-
+      import math
+      print(f'The value of pi is approximately {math.pi:.3f}.')
+    commento: :.3f = tre cifre dopo la virgola
+    parti:
+    - voce: :.3f
+      spiega: 'formato: .3 = tre decimali, f = numero con la virgola'
+  - codice: |-
+      for name, phone in table.items():
+          print(f'{name:10} ==> {phone:10d}')
+    commento: un numero dopo i due punti = larghezza minima della colonna
+    trappola: Il testo non viene troncato se è più lungo della larghezza.
+- nome: Per controllare
+  righe:
+  - codice: print(f'Debugging {bugs=} {count=}')
+    commento: '{x=} stampa il nome e il valore: bugs=''roaches'' count=13'
+  - codice: print(f'My hovercraft is full of {animals!r}.')
+    commento: '!r mostra il valore come lo scriveresti nel codice, con gli apici'
+segnaposto: {}
+varianti:
+- codice: '"{} e {}".format(a, b)'
+  spiega: 'modo più vecchio: str.format(), ancora molto usato'
+vicine:
+- py-print-input
+- py-stringhe

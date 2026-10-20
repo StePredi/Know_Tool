@@ -22,3 +22,4 @@ varianti: []
 vicine:
 - thread-main-vivo
 - thread-avvia-tutti
+- event-ferma

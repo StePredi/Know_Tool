@@ -1,0 +1,31 @@
+id: py-argomenti
+tipo: ricetta
+titolo: Dare valori predefiniti e passare argomenti per nome
+sigla: Argomenti
+comando: def f(x, y=4)  f(y=2)
+frase: posizione o nome
+fonte: Documentazione ufficiale Python · Tutorial · 4.9 Argomenti
+parole: argomenti default valore predefinito keyword nome parametri chiamata posizionali
+quando: Quando una funzione ha parametri facoltativi o ne ha molti e vuoi chiamarla in modo chiaro.
+fasi:
+- nome: Valori predefiniti
+  righe:
+  - codice: |-
+      def ask_ok(prompt, retries=4, reminder='Please try again!'):
+          ...
+    commento: retries e reminder valgono 4 e il messaggio se non li passi
+    trappola: 'I valori predefiniti sono calcolati una volta sola, alla definizione: con liste e dizionari è una trappola (vedi la scheda sul default mutabile).'
+- nome: Chiamate valide
+  righe:
+  - codice: |-
+      parrot(1000)
+      parrot(voltage=1000000, action='VOOOOOM')
+      parrot('a thousand', state='pushing up the daisies')
+    commento: si può passare per posizione, per nome, o mescolare
+    trappola: 'Dopo un argomento per nome non possono più venirne di posizionali: parrot(voltage=5.0, ''dead'') è un errore.'
+segnaposto: {}
+varianti: []
+vicine:
+- py-def
+- py-default-mutabile
+- py-args-kwargs

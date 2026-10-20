@@ -1,0 +1,78 @@
+modello: per_situazioni
+titolo: File, per situazioni
+centro: File
+sottotitolo: 'Parti da quello che devi fare con il file: aprirlo, leggerlo, scriverlo, salvare dati o trovare il percorso.'
+esempiRicerca: file non trovato, accenti rovinati, dati persi, percorso sbagliato
+rami:
+- id: b1
+  nome: Aprire e chiudere
+  colore: blue
+  lato: R
+  voci:
+  - schede:
+    - file-apri
+  - schede:
+    - file-modi
+  - schede:
+    - file-encoding
+  - schede:
+    - file-chiudi
+  - schede:
+    - file-chiudi-prima-dopo
+- id: b2
+  nome: Leggere
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - file-leggi-tutto
+  - schede:
+    - file-leggi-righe
+  - schede:
+    - file-seek
+- id: b3
+  nome: Scrivere
+  colore: green
+  lato: R
+  voci:
+  - schede:
+    - file-scrivi
+  - schede:
+    - file-aggiungi
+- id: b4
+  nome: JSON
+  colore: yellow
+  lato: L
+  voci:
+  - gruppo: Testo e file
+    schede:
+    - json-stringa
+    - json-file
+    - json-lines
+  - gruppo: Opzioni ed errori
+    schede:
+    - json-opzioni
+    - json-errore
+- id: b5
+  nome: Percorsi (pathlib)
+  colore: orange
+  lato: T
+  voci:
+  - gruppo: Costruire
+    schede:
+    - path-crea
+    - path-parti
+    - path-script
+  - gruppo: Controllare e cercare
+    schede:
+    - path-esiste
+    - path-cartelle
+    - path-elenca
+    - path-leggi-scrivi
+- id: b6
+  nome: Quando va male
+  colore: red
+  lato: B
+  voci:
+  - schede:
+    - file-errori

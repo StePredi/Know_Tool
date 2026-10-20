@@ -1,0 +1,22 @@
+id: path-script
+tipo: ricetta
+titolo: Trovare un file rispetto allo script
+sigla: __file__
+comando: Path(__file__).resolve().parent
+frase: non dipende da dove avvii
+fonte: Documentazione ufficiale Python · Libreria standard · pathlib
+parole: pathlib __file__ script cartella percorso relativo parent configurazione
+quando: Quando il file da aprire sta vicino al programma, qualunque sia la cartella di lavoro.
+fasi:
+- nome: Cartella dello script
+  righe:
+  - codice: BASE = Path(__file__).resolve().parent
+    commento: la cartella che contiene il file .py
+  - codice: config = BASE / "config.json"
+    commento: da qui costruisci i percorsi dei file
+    trappola: 'Nota: __file__ non esiste nel notebook e nella shell interattiva.'
+segnaposto: {}
+varianti: []
+vicine:
+- path-parti
+- path-crea
