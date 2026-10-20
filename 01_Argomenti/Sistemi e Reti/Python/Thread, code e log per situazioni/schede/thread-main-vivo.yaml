@@ -10,17 +10,16 @@ quando: Quando tutto il lavoro è nei thread daemon e il programma principale no
 fasi:
 - nome: Avvia e aspetta
   righe:
-  - codice: |-
-      gateway = Gateway()
-      gateway.start()
-      try:
-          while True:
-              time.sleep(1)
-      except KeyboardInterrupt:
-          gateway.chiudi()
-          logging.info("programma terminato")
+  - codice: gateway = Gateway()
     commento: il ciclo con sleep tiene vivo il main, Ctrl+C chiude in modo ordinato
     trappola: 'I thread daemon finiscono insieme al programma principale: se il main arriva in fondo, il lavoro si interrompe.'
+  - codice: gateway.start()
+  - codice: 'try:'
+  - codice: '    while True:'
+  - codice: '        time.sleep(1)'
+  - codice: 'except KeyboardInterrupt:'
+  - codice: '    gateway.chiudi()'
+  - codice: '    logging.info("programma terminato")'
 segnaposto: {}
 varianti: []
 vicine:

@@ -14,12 +14,11 @@ fasi:
     commento: 'arriva un nuovo campione tra poco: se uno si perde non è grave'
 - nome: 'Eventi, stato, comandi, configurazione: QoS 1'
   righe:
-  - codice: |-
-      self.client.publish_message(TOPIC_ALERT, dato, qos=1)
-      self.client.publish_message(TOPIC_CMD, payload, qos=1)
-      self.client.publish_message(TOPIC_CONFIG, payload, qos=1, retain=True)
+  - codice: self.client.publish_message(TOPIC_ALERT, dato, qos=1)
     commento: ognuno di questi messaggi conta e non si ripete da solo
     trappola: 'QoS 1 può consegnare lo stesso messaggio più di una volta: chi riceve deve poterlo gestire.'
+  - codice: self.client.publish_message(TOPIC_CMD, payload, qos=1)
+  - codice: self.client.publish_message(TOPIC_CONFIG, payload, qos=1, retain=True)
 segnaposto: {}
 varianti: []
 vicine:

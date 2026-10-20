@@ -10,15 +10,14 @@ quando: Quando un thread deve restare in attesa di dati ma deve anche poter fare
 fasi:
 - nome: Il ciclo del consumatore
   righe:
-  - codice: |-
-      while True:
-          try:
-              record = self.coda_seriale.get(timeout=1)
-              self.gestisci_record(record)
-          except queue.Empty:
-              pass
+  - codice: 'while True:'
     commento: se per un secondo non arriva niente, si ignora e si riprova
     trappola: 'queue.Empty non è un errore vero: significa solo "coda vuota, nessun dato in questo secondo".'
+  - codice: '    try:'
+  - codice: '        record = self.coda_seriale.get(timeout=1)'
+  - codice: '        self.gestisci_record(record)'
+  - codice: '    except queue.Empty:'
+  - codice: '        pass'
 segnaposto: {}
 varianti: []
 vicine:

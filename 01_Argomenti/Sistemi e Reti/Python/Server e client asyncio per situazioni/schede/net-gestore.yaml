@@ -10,32 +10,32 @@ quando: Quando serve una funzione chiamata a ogni connessione.
 fasi:
 - nome: Firma
   righe:
-  - codice: |-
-      async def gestisci_client(reader, writer):
-          indirizzo = writer.get_extra_info("peername")   # (ip, porta) del client
-          print("Connesso:", indirizzo)
+  - codice: 'async def gestisci_client(reader, writer):'
     commento: Il gestore riceve reader (per leggere) e writer (per scrivere) già collegati al client. peername dà l'indirizzo del client.
     parti:
     - voce: reader
       spiega: legge dati dal client
     - voce: writer
       spiega: scrive dati al client
+  - codice: '    indirizzo = writer.get_extra_info("peername")   # (ip, porta) del client'
+    parti:
     - voce: get_extra_info("peername")
       spiega: (ip, porta) del client
+  - codice: '    print("Connesso:", indirizzo)'
 - nome: Ciclo di lavoro
   righe:
-  - codice: |-
-      while True:
-          dati = await reader.readline()
-          if not dati:
-              break
+  - codice: 'while True:'
     commento: 'Ciclo tipico: leggi finché arrivano dati. Quando il client chiude, la lettura restituisce vuoto e il ciclo finisce.'
     trappola: L'await sulla lettura permette agli altri client di andare avanti mentre questo aspetta.
+  - codice: '    dati = await reader.readline()'
     parti:
     - voce: await reader.readline()
       spiega: aspetta una riga, senza bloccare gli altri client
+  - codice: '    if not dati:'
+    parti:
     - voce: 'if not dati: break'
       spiega: b"" = client disconnesso
+  - codice: '        break'
 segnaposto: {}
 varianti: []
 vicine:

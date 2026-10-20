@@ -10,14 +10,13 @@ quando: Quando devi mandare un dizionario su un topic senza rischiare di farlo a
 fasi:
 - nome: Funzione di invio
   righe:
-  - codice: |-
-      def publish_message(self, topic, payload, qos=0, retain=False):
-          if self.is_connected:
-              self.publish(topic, payload=json.dumps(payload), qos=qos, retain=retain)
-          else:
-              self.logger.warning("impossibile pubblicare — non connesso")
+  - codice: 'def publish_message(self, topic, payload, qos=0, retain=False):'
     commento: json.dumps() trasforma il dizionario in testo prima dell'invio
     trappola: 'Nota: se non sei ancora connesso il messaggio viene scartato, non messo in coda.'
+  - codice: '    if self.is_connected:'
+  - codice: '        self.publish(topic, payload=json.dumps(payload), qos=qos, retain=retain)'
+  - codice: '    else:'
+  - codice: '        self.logger.warning("impossibile pubblicare — non connesso")'
 segnaposto: {}
 varianti: []
 vicine:

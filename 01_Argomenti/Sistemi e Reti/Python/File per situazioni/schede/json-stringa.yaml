@@ -10,10 +10,9 @@ quando: Quando devi inviare o salvare un dizionario/lista come testo.
 fasi:
 - nome: Da Python a testo
   righe:
-  - codice: |-
-      import json
-      json.dumps([1, "simple", "list"])
+  - codice: import json
     commento: dumps trasforma un oggetto Python in testo JSON (s = string).
+  - codice: json.dumps([1, "simple", "list"])
     parti:
     - voce: json.dumps(x)
       spiega: da Python a stringa JSON

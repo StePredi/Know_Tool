@@ -10,27 +10,28 @@ quando: Quando il programma deve fare cose diverse a seconda di una condizione.
 fasi:
 - nome: Le condizioni in ordine
   righe:
-  - codice: |-
-      if x < 0:
-          x = 0
-          print('Negative changed to zero')
-      elif x == 0:
-          print('Zero')
-      elif x == 1:
-          print('Single')
-      else:
-          print('More')
+  - codice: 'if x < 0:'
     commento: Python controlla le condizioni dall'alto in basso e si ferma alla prima vera. L'else prende tutto il resto.
     trappola: Possono esserci zero o più elif, e l'else è facoltativo. I blocchi si riconoscono dall'indentazione.
     parti:
     - voce: 'if x < 0:'
       spiega: prima condizione
-    - voce: 'elif x == 0:'
-      spiega: altrimenti, se questa è vera
-    - voce: 'else:'
-      spiega: se nessuna è vera
     - voce: == e <
       spiega: == confronta, = assegna
+  - codice: '    x = 0'
+  - codice: '    print(''Negative changed to zero'')'
+  - codice: 'elif x == 0:'
+    parti:
+    - voce: 'elif x == 0:'
+      spiega: altrimenti, se questa è vera
+  - codice: '    print(''Zero'')'
+  - codice: 'elif x == 1:'
+  - codice: '    print(''Single'')'
+  - codice: 'else:'
+    parti:
+    - voce: 'else:'
+      spiega: se nessuna è vera
+  - codice: '    print(''More'')'
 segnaposto: {}
 varianti: []
 vicine:

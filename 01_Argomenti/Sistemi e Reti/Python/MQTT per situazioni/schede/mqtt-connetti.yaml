@@ -10,18 +10,17 @@ quando: Quando devi aprire la connessione al broker senza bloccare il programma.
 fasi:
 - nome: Connetti e avvia il ciclo di rete
   righe:
-  - codice: |-
-      def connect_to_broker(self):
-          try:
-              self.connect(self.broker, self.port, keepalive=60)
-              self.loop_start()
-          except Exception as e:
-              self.logger.error(f"errore connessione: {e}")
+  - codice: 'def connect_to_broker(self):'
     commento: connect() apre la connessione, loop_start() fa gestire la rete a un thread di paho
+    trappola: 'Dopo connect() non sei ancora connesso: lo sei quando scatta on_connect (vedi la scheda sulla callback).'
+  - codice: '    try:'
+  - codice: '        self.connect(self.broker, self.port, keepalive=60)'
     parti:
     - voce: keepalive=60
       spiega: 'secondi massimi di silenzio: paho manda un piccolo messaggio per tenere viva la connessione'
-    trappola: 'Dopo connect() non sei ancora connesso: lo sei quando scatta on_connect (vedi la scheda sulla callback).'
+  - codice: '        self.loop_start()'
+  - codice: '    except Exception as e:'
+  - codice: '        self.logger.error(f"errore connessione: {e}")'
 segnaposto: {}
 varianti: []
 vicine:

@@ -10,44 +10,45 @@ quando: Quando vuoi scorrere una sequenza di valori senza costruirla tutta in me
 fasi:
 - nome: Con una funzione generatore
   righe:
-  - codice: |-
-      def reverse(data):
-          for index in range(len(data)-1, -1, -1):
-              yield data[index]
-
-      for char in reverse('golf'):
-          print(char)
+  - codice: 'def reverse(data):'
     commento: 'Un generatore è una funzione con yield: ad ogni yield restituisce un valore e si ferma, poi riparte da lì quando il for chiede il successivo.'
+  - codice: '    for index in range(len(data)-1, -1, -1):'
     parti:
     - voce: range(len(data)-1, -1, -1)
       spiega: indici dall'ultimo al primo
+  - codice: '        yield data[index]'
+    parti:
     - voce: yield data[index]
       spiega: restituisce un carattere e si sospende
+  - codice: 'for char in reverse(''golf''):'
+    parti:
     - voce: for char in reverse('golf')
       spiega: chiede un valore alla volta
+  - codice: '    print(char)'
 - nome: Con una classe (stesso risultato)
   righe:
-  - codice: |-
-      class Reverse:
-          def __init__(self, data):
-              self.data = data
-              self.index = len(data)
-          def __iter__(self):
-              return self
-          def __next__(self):
-              if self.index == 0:
-                  raise StopIteration
-              self.index = self.index - 1
-              return self.data[self.index]
+  - codice: 'class Reverse:'
     commento: 'Lo stesso risultato scritto a mano: una classe iteratore. Il generatore fa tutto questo per te.'
     trappola: 'Il generatore è più corto: __iter__() e __next__() si creano automaticamente.'
+  - codice: '    def __init__(self, data):'
+  - codice: '        self.data = data'
+  - codice: '        self.index = len(data)'
+  - codice: '    def __iter__(self):'
     parti:
     - voce: __iter__
       spiega: restituisce l'iteratore (qui self)
+  - codice: '        return self'
+  - codice: '    def __next__(self):'
+    parti:
     - voce: __next__
       spiega: dà il prossimo valore
+  - codice: '        if self.index == 0:'
+  - codice: '            raise StopIteration'
+    parti:
     - voce: raise StopIteration
       spiega: segnala che i valori sono finiti
+  - codice: '        self.index = self.index - 1'
+  - codice: '        return self.data[self.index]'
 segnaposto: {}
 varianti: []
 vicine:

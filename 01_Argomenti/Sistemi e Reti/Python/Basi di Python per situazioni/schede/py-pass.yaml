@@ -10,18 +10,16 @@ quando: Quando la sintassi vuole un blocco ma non hai ancora niente da scrivere.
 fasi:
 - nome: Blocco che non fa nulla
   righe:
-  - codice: |-
-      class MyEmptyClass:
-          pass
+  - codice: 'class MyEmptyClass:'
     commento: pass riempie un blocco che deve esistere ma per ora non fa nulla.
+  - codice: '    pass'
     parti:
     - voce: pass
       spiega: istruzione che non fa niente
-  - codice: |-
-      def initlog(*args):
-          pass   # Remember to implement this!
+  - codice: 'def initlog(*args):'
     commento: Utile come segnaposto per una funzione che scriverai dopo.
     trappola: 'pass non fa niente: serve solo perché un blocco non può restare vuoto.'
+  - codice: '    pass   # Remember to implement this!'
     parti:
     - voce: '# Remember to implement this!'
       spiega: promemoria per te

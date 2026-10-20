@@ -10,24 +10,23 @@ quando: Quando un solo thread deve ricevere dati dal dispositivo e mandargli com
 fasi:
 - nome: Il ciclo del thread
   righe:
-  - codice: |-
-      while True:
-          try:
-              if self.port.is_open and self.port.in_waiting > 0:
-                  riga = self.port.readline().decode('ascii', errors='ignore')
-                  record = self.decodifica_riga(riga)
-                  if record:
-                      self.coda_seriale.put(record)
-              try:
-                  cmd = self.coda_mqtt_out.get_nowait()
-                  self.port.write(cmd.encode('ascii'))
-              except queue.Empty:
-                  pass
-          except serial.SerialException as e:
-              self.logger.error(f"errore seriale: {e}")
-              break
+  - codice: 'while True:'
     commento: ogni giro legge se c'è qualcosa, poi invia se c'è un comando in coda
     trappola: 'Nota: questo ciclo non ha pause e può occupare molto processore; una breve pausa a ogni giro lo alleggerisce.'
+  - codice: '    try:'
+  - codice: '        if self.port.is_open and self.port.in_waiting > 0:'
+  - codice: '            riga = self.port.readline().decode(''ascii'', errors=''ignore'')'
+  - codice: '            record = self.decodifica_riga(riga)'
+  - codice: '            if record:'
+  - codice: '                self.coda_seriale.put(record)'
+  - codice: '        try:'
+  - codice: '            cmd = self.coda_mqtt_out.get_nowait()'
+  - codice: '            self.port.write(cmd.encode(''ascii''))'
+  - codice: '        except queue.Empty:'
+  - codice: '            pass'
+  - codice: '    except serial.SerialException as e:'
+  - codice: '        self.logger.error(f"errore seriale: {e}")'
+  - codice: '        break'
 segnaposto: {}
 varianti: []
 vicine:

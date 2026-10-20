@@ -10,22 +10,23 @@ quando: Quando devi usare una funzione bloccante (come input()) dentro una corou
 fasi:
 - nome: Invia
   righe:
-  - codice: |-
-      async def invia(writer):
-          while True:
-              testo = await asyncio.to_thread(input)   # input() gira in un thread separato
-              if testo == "/quit" or writer.is_closing():
-                  break
-              writer.write((testo + "\n").encode())
-              await writer.drain()
-          writer.close()
+  - codice: 'async def invia(writer):'
     commento: 'input() blocca finché non si preme Invio, quindi la lanci in un thread con to_thread: l''event loop resta libero di ricevere messaggi.'
     trappola: Un input() diretto fermerebbe anche la ricezione dei messaggi.
+  - codice: '    while True:'
+  - codice: '        testo = await asyncio.to_thread(input)   # input() gira in un thread separato'
     parti:
     - voce: asyncio.to_thread(input)
       spiega: esegue input() in un altro thread
+  - codice: '        if testo == "/quit" or writer.is_closing():'
+    parti:
     - voce: '"/quit"'
       spiega: comando per uscire
+  - codice: '            break'
+  - codice: '        writer.write((testo + "\n").encode())'
+  - codice: '        await writer.drain()'
+  - codice: '    writer.close()'
+    parti:
     - voce: writer.close()
       spiega: chiude alla fine
 segnaposto: {}

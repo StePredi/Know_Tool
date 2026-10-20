@@ -10,25 +10,24 @@ quando: Quando più operazioni possono andare insieme.
 fasi:
 - nome: Crea i task
   righe:
-  - codice: |-
-      task_a = asyncio.create_task(operazione_a())
-      task_b = asyncio.create_task(operazione_b())
+  - codice: task_a = asyncio.create_task(operazione_a())
     commento: 'create_task() avvolge la coroutine in un task e la mette in coda nell''event loop. Non la esegue ancora: serve un punto in cui il loop è libero.'
     parti:
     - voce: create_task(...)
       spiega: restituisce il task
     - voce: task_a, task_b
       spiega: due compiti in coda
+  - codice: task_b = asyncio.create_task(operazione_b())
 - nome: Aspetta i risultati
   righe:
-  - codice: |-
-      ris_b = await task_b
-      ris_a = await task_a
+  - codice: ris_b = await task_b
     commento: 'Il primo await dà il controllo al loop: A e B partono e restano in attesa insieme. In 2 secondi sono finiti entrambi.'
     trappola: I task partono solo quando l'event loop ha un momento libero, cioè al primo await del chiamante.
     parti:
     - voce: await task_b
       spiega: sospende main finché B finisce
+  - codice: ris_a = await task_a
+    parti:
     - voce: await task_a
       spiega: 'A è già finito: risultato immediato'
 segnaposto: {}

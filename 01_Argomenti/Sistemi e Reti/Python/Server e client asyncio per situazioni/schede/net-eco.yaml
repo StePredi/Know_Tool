@@ -10,23 +10,20 @@ quando: 'Quando vuoi il server più semplice: rimanda indietro quello che riceve
 fasi:
 - nome: Leggi e decodifica
   righe:
-  - codice: |-
-      dati = await reader.readline()
-      testo = dati.decode().strip()
+  - codice: dati = await reader.readline()
     commento: 'I dati arrivano come byte: decode() li trasforma in testo, strip() toglie lo spazio e il \n finali.'
     parti:
     - voce: dati
       spiega: byte (es. b"ciao\n")
+  - codice: testo = dati.decode().strip()
+    parti:
     - voce: .decode()
       spiega: da byte a stringa
     - voce: .strip()
       spiega: toglie spazi e a capo
 - nome: Rispondi
   righe:
-  - codice: |-
-      risposta = testo.upper() + "\n"
-      writer.write(risposta.encode())     # stringa -> bytes, messi nel buffer
-      await writer.drain()                # aspetta che i dati partano davvero
+  - codice: risposta = testo.upper() + "\n"
     commento: 'Si risponde in tre mosse: si prepara il testo, si trasforma in byte, si manda. Il drain() aspetta che i dati siano partiti davvero.'
     trappola: 'write() da solo non è un await: mette i dati nel buffer. Il drain() è il punto in cui la coroutine può sospendersi.'
     parti:
@@ -34,8 +31,12 @@ fasi:
       spiega: maiuscolo
     - voce: + "\n"
       spiega: serve al client che legge con readline
+  - codice: 'writer.write(risposta.encode())     # stringa -> bytes, messi nel buffer'
+    parti:
     - voce: .encode()
       spiega: da stringa a byte
+  - codice: 'await writer.drain()                # aspetta che i dati partano davvero'
+    parti:
     - voce: await writer.drain()
       spiega: attende lo svuotamento del buffer
 segnaposto: {}

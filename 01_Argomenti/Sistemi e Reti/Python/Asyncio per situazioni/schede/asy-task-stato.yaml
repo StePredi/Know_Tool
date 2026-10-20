@@ -10,24 +10,24 @@ quando: Quando vuoi sapere se un task è già finito senza aspettarlo.
 fasi:
 - nome: Controlla
   righe:
-  - codice: |-
-      task = asyncio.create_task(operazione_lenta())
-      print(task.done())
-      print(task.cancelled())
+  - codice: task = asyncio.create_task(operazione_lenta())
     commento: 'Un task ha uno stato: puoi chiedere se è finito o se è stato cancellato.'
+  - codice: print(task.done())
     parti:
     - voce: task.done()
       spiega: True se ha terminato (con successo, errore o cancellazione)
+  - codice: print(task.cancelled())
+    parti:
     - voce: task.cancelled()
       spiega: True solo se cancellato
-  - codice: |-
-      risultato = await task
-      print(task.done())
+  - codice: risultato = await task
     commento: Dopo l'await il task è finito e done() diventa True.
     trappola: cancelled() resta False se il task è finito normalmente.
     parti:
     - voce: await task
       spiega: aspetta e prende il risultato
+  - codice: print(task.done())
+    parti:
     - voce: task.done()
       spiega: 'True'
 segnaposto: {}

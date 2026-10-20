@@ -10,10 +10,7 @@ quando: Quando una risorsa (un file, un lock) va sempre rilasciata, anche se c'√
 fasi:
 - nome: Il with
   righe:
-  - codice: |-
-      with open("myfile.txt") as f:
-          for line in f:
-              print(line, end="")
+  - codice: 'with open("myfile.txt") as f:'
     commento: with apre il file e lo chiude da solo alla fine del blocco, anche in caso di errore. Dentro puoi leggere riga per riga con un for.
     trappola: Senza with il file resta aperto per un tempo indeterminato.
     parti:
@@ -21,8 +18,12 @@ fasi:
       spiega: apre il file
     - voce: as f
       spiega: il file si chiama f dentro il blocco
+  - codice: '    for line in f:'
+    parti:
     - voce: for line in f
       spiega: legge una riga alla volta
+  - codice: '        print(line, end="")'
+    parti:
     - voce: end=""
       spiega: le righe hanno gi√† il loro a capo
 segnaposto: {}

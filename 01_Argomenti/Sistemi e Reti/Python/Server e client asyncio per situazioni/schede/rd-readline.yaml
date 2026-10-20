@@ -10,9 +10,7 @@ quando: Quando i messaggi sono righe di testo.
 fasi:
 - nome: Leggi
   righe:
-  - codice: |-
-      riga = await reader.readline()
-      print("readline()        ->", riga)
+  - codice: riga = await reader.readline()
     commento: readline legge i byte fino al primo \n, compreso. Se la connessione è chiusa restituisce b"".
     trappola: 'Se la connessione è chiusa, readline restituisce b"" (vuoto): è il segnale per uscire dal ciclo.'
     parti:
@@ -20,6 +18,7 @@ fasi:
       spiega: esempio di riga ricevuta
     - voce: await
       spiega: aspetta che la riga sia completa
+  - codice: print("readline()        ->", riga)
 segnaposto: {}
 varianti: []
 vicine:

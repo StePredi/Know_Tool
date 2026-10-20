@@ -10,10 +10,9 @@ quando: Quando il programma deve scrivere a schermo e chiedere qualcosa all'uten
 fasi:
 - nome: Stampare
   righe:
-  - codice: |-
-      i = 256*256
-      print('The value of i is', i)
+  - codice: i = 256*256
     commento: print accetta più valori separati da virgola e li stampa con uno spazio in mezzo.
+  - codice: print('The value of i is', i)
     parti:
     - voce: print(a, b)
       spiega: a e b separati da uno spazio

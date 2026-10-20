@@ -10,15 +10,14 @@ quando: Quando vuoi sapere se la connessione è caduta da sola o l'hai chiusa tu
 fasi:
 - nome: La callback
   righe:
-  - codice: |-
-      def on_disconnect(self, client, userdata, disconnect_flags, rc, properties=None):
-          self.is_connected = False
-          if rc != 0:
-              self.logger.warning(f"disconnessione inaspettata, result code: {rc}")
-          else:
-              self.logger.info("disconnesso dal broker")
+  - codice: 'def on_disconnect(self, client, userdata, disconnect_flags, rc, properties=None):'
     commento: rc diverso da 0 = disconnessione non voluta
     trappola: 'Segna is_connected = False qui: altrimenti publish_message crederebbe ancora di essere connesso.'
+  - codice: '    self.is_connected = False'
+  - codice: '    if rc != 0:'
+  - codice: '        self.logger.warning(f"disconnessione inaspettata, result code: {rc}")'
+  - codice: '    else:'
+  - codice: '        self.logger.info("disconnesso dal broker")'
 segnaposto: {}
 varianti: []
 vicine:

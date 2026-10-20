@@ -10,13 +10,12 @@ quando: Quando il server deve smettere di servire un client che se n'è andato, 
 fasi:
 - nome: Controlla ogni lettura
   righe:
-  - codice: |-
-      data = self.conn.recv(1024)
-      if not data:
-          print(f"client {self.addr} disconesso")
-          break
+  - codice: data = self.conn.recv(1024)
     commento: byte vuoti = l'altro lato ha chiuso
     trappola: 'Nota: dopo la chiusura recv() continua a restituire subito byte vuoti: senza questo controllo il ciclo gira all''infinito.'
+  - codice: 'if not data:'
+  - codice: '    print(f"client {self.addr} disconesso")'
+  - codice: '    break'
 - nome: Libera la connessione
   righe:
   - codice: self.conn.close()

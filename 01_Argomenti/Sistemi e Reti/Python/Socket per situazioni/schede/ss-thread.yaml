@@ -10,24 +10,21 @@ quando: Quando il server socketserver deve gestire più client nello stesso mome
 fasi:
 - nome: Aggiungi la mix-in al server
   righe:
-  - codice: |-
-      class threadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
-          allow_reuse_address = True
+  - codice: 'class threadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):'
     commento: la mix-in avvia un thread per ogni richiesta
     trappola: 'ThreadingMixIn va scritta prima di TCPServer: sovrascrive un suo metodo e Python cerca i metodi da sinistra a destra.'
+  - codice: '    allow_reuse_address = True'
 - nome: Scrivi l'handler con un ciclo
   righe:
-  - codice: |-
-      class threadedEchoRequestHandler(socketserver.BaseRequestHandler):
-
-          def handle(self):
-              while True:
-                  data = self.request.recv(1024)
-                  if not data:
-                      break
-                  self.request.sendall(data)
+  - codice: 'class threadedEchoRequestHandler(socketserver.BaseRequestHandler):'
     commento: resta sul client finché non chiude
     trappola: 'Il ciclo con "if not data" è lo stesso del server con i socket normali: cambia solo chi crea i thread.'
+  - codice: '    def handle(self):'
+  - codice: '        while True:'
+  - codice: '            data = self.request.recv(1024)'
+  - codice: '            if not data:'
+  - codice: '                break'
+  - codice: '            self.request.sendall(data)'
 segnaposto: {}
 varianti:
 - codice: threading.current_thread().name

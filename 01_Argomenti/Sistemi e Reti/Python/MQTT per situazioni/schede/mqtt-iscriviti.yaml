@@ -10,17 +10,17 @@ quando: Quando devi decidere a quali messaggi arrivare e con quale garanzia di c
 fasi:
 - nome: Una subscribe per topic
   righe:
-  - codice: |-
-      self.subscribe(TOPIC_DATI,  qos=0)
-      self.subscribe(TOPIC_ALERT, qos=1)
-      self.subscribe(TOPIC_STATO, qos=1)
+  - codice: self.subscribe(TOPIC_DATI,  qos=0)
     commento: dati ripetuti con QoS 0, eventi e stato con QoS 1
+    trappola: 'Nota: la QoS effettiva è la più bassa fra quella di chi pubblica e quella di chi si iscrive.'
     parti:
     - voce: qos=0
       spiega: 'al massimo una volta: se un messaggio si perde pazienza'
+  - codice: self.subscribe(TOPIC_ALERT, qos=1)
+    parti:
     - voce: qos=1
       spiega: 'almeno una volta: il broker rimanda finché non è confermato'
-    trappola: 'Nota: la QoS effettiva è la più bassa fra quella di chi pubblica e quella di chi si iscrive.'
+  - codice: self.subscribe(TOPIC_STATO, qos=1)
 segnaposto: {}
 varianti: []
 vicine:

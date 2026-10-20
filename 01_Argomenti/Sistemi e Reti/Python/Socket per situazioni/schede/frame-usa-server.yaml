@@ -10,23 +10,21 @@ quando: Quando vuoi un server che riceva messaggi interi, di qualunque lunghezza
 fasi:
 - nome: Metti in ascolto
   righe:
-  - codice: |-
-      server = FrameSocket()
-      server.bind(('', 5000))
-      server.listen()
+  - codice: server = FrameSocket()
     commento: stesse chiamate del socket normale
     trappola: 'Nota: l''indirizzo vuoto '''' fa ascoltare il server su tutte le interfacce.'
+  - codice: server.bind(('', 5000))
+  - codice: server.listen()
 - nome: Accetta e rispondi
   righe:
   - codice: conn, addr = server.accept()
     commento: conn è già un FrameSocket, non un socket normale
     trappola: 'accept() di FrameSocket restituisce un altro FrameSocket: su conn si usa recv() senza argomenti.'
-  - codice: |-
-      data = conn.recv()
-      if not data:
-          conn.close()
-      conn.send(data)
+  - codice: data = conn.recv()
     commento: recv() restituisce il messaggio intero o None se il client ha chiuso
+  - codice: 'if not data:'
+  - codice: '    conn.close()'
+  - codice: conn.send(data)
 segnaposto: {}
 varianti: []
 vicine:

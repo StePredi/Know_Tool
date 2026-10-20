@@ -10,23 +10,21 @@ quando: Quando sai quanti byte devi leggere (per esempio la lunghezza dell'heade
 fasi:
 - nome: Prepara il conteggio
   righe:
-  - codice: |-
-      data = []
-      ricevuti = 0
+  - codice: data = []
     commento: data raccoglie i blocchi, ricevuti conta i byte
     trappola: 'Nota: nella fonte il ciclo confronta len(data) con n, ma len(data) conta i blocchi, non i byte (vedi la scheda sull''errore di conteggio).'
+  - codice: ricevuti = 0
 - nome: Ripeti finché non bastano
   righe:
-  - codice: |-
-      while ricevuti < n:
-          byte_mancanti = n - ricevuti
-          blocco = self.sock.recv(min(byte_mancanti, 1024))
-          if not blocco:
-              return None
-          data.append(blocco)
-          ricevuti += len(blocco)
+  - codice: 'while ricevuti < n:'
     commento: chiede solo quello che manca, al massimo 1024 byte alla volta
     trappola: 'Se blocco è vuoto l''altro lato ha chiuso: si esce con None, altrimenti il ciclo resterebbe in attesa per sempre.'
+  - codice: '    byte_mancanti = n - ricevuti'
+  - codice: '    blocco = self.sock.recv(min(byte_mancanti, 1024))'
+  - codice: '    if not blocco:'
+  - codice: '        return None'
+  - codice: '    data.append(blocco)'
+  - codice: '    ricevuti += len(blocco)'
 - nome: Rimetti insieme
   righe:
   - codice: return b''.join(data)

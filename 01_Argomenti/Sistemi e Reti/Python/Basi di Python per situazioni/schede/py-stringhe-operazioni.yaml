@@ -17,21 +17,19 @@ fasi:
       spiega: '''ununun'''
     - voce: + 'ium'
       spiega: si attacca alla fine
-  - codice: |-
-      prefix = 'Py'
-      prefix + 'thon'
+  - codice: prefix = 'Py'
     commento: Con una variabile devi usare il +.
     trappola: Due testi scritti per esteso uno accanto all'altro ('Py' 'thon') si uniscono da soli; con una variabile, prefix 'thon' dà SyntaxError.
+  - codice: prefix + 'thon'
     parti:
     - voce: prefix + 'thon'
       spiega: '''Python'''
 - nome: Cambiare un carattere
   righe:
-  - codice: |-
-      word = 'Python'
-      'J' + word[1:]
+  - codice: word = 'Python'
     commento: 'Le stringhe non si modificano: per cambiarle ne costruisci una nuova.'
     trappola: 'word[0] = ''J'' dà TypeError: le stringhe sono immutabili e non si cambiano sul posto.'
+  - codice: '''J'' + word[1:]'
     parti:
     - voce: '''J'' + word[1:]'
       spiega: '''J'' più tutto da ''y'' in poi'

@@ -40,31 +40,33 @@ fasi:
       spiega: l'ultimo
     - voce: pop(0)
       spiega: il primo
-  - codice: |-
-      del fruits[0]
-      del fruits[2:4]
+  - codice: del fruits[0]
     commento: del toglie per posizione o per fetta.
     parti:
     - voce: del fruits[0]
       spiega: il primo
+  - codice: del fruits[2:4]
+    parti:
     - voce: del fruits[2:4]
       spiega: gli elementi 2 e 3
 - nome: Ordinare e contare
   righe:
-  - codice: |-
-      fruits.sort()
-      fruits.reverse()
-      fruits.count('apple')
-      fruits.index('banana')
+  - codice: fruits.sort()
     commento: Quattro metodi di uso comune.
     trappola: 'I metodi che modificano la lista restituiscono None: fruits = fruits.sort() la cancella.'
     parti:
     - voce: sort()
       spiega: mette in ordine la lista
+  - codice: fruits.reverse()
+    parti:
     - voce: reverse()
       spiega: la rovescia
+  - codice: fruits.count('apple')
+    parti:
     - voce: count(x)
       spiega: quante volte c'è x
+  - codice: fruits.index('banana')
+    parti:
     - voce: index(x)
       spiega: posizione di x
 segnaposto: {}

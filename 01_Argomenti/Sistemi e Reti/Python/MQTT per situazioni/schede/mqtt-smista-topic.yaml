@@ -10,18 +10,17 @@ quando: Quando la stessa callback riceve da più topic e ognuno va trattato in m
 fasi:
 - nome: Confronta il topic
   righe:
-  - codice: |-
-      payload = json.loads(message.payload.decode('utf-8'))
-      if message.topic == TOPIC_CMD:
-          cmd = payload.get('cmd')
-          if cmd:
-              ...
-      elif message.topic == TOPIC_CONFIG:
-          th = payload.get('th')
-          if th is not None:
-              ...
+  - codice: payload = json.loads(message.payload.decode('utf-8'))
     commento: message.topic dice da dove arriva, payload.get() legge i campi
     trappola: 'Si usa get() e non payload["cmd"]: se il campo manca restituisce None invece di dare errore.'
+  - codice: 'if message.topic == TOPIC_CMD:'
+  - codice: '    cmd = payload.get(''cmd'')'
+  - codice: '    if cmd:'
+  - codice: '        ...'
+  - codice: 'elif message.topic == TOPIC_CONFIG:'
+  - codice: '    th = payload.get(''th'')'
+  - codice: '    if th is not None:'
+  - codice: '        ...'
 segnaposto: {}
 varianti: []
 vicine:

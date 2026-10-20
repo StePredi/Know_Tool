@@ -19,18 +19,18 @@ fasi:
       spiega: messaggio
 - nome: Rilanciare
   righe:
-  - codice: |-
-      try:
-          raise NameError('HiThere')
-      except NameError:
-          print('An exception flew by!')
-          raise
+  - codice: 'try:'
     commento: 'Dentro un except, raise da solo rilancia l''errore appena preso: lo vedi, lo registri, lo fai proseguire.'
+  - codice: '    raise NameError(''HiThere'')'
+    parti:
+    - voce: raise
+      spiega: lo rilancia
+  - codice: 'except NameError:'
     parti:
     - voce: 'except NameError:'
       spiega: prende l'errore
-    - voce: raise
-      spiega: lo rilancia
+  - codice: '    print(''An exception flew by!'')'
+  - codice: '    raise'
 - nome: Indicare la causa
   righe:
   - codice: raise RuntimeError from exc

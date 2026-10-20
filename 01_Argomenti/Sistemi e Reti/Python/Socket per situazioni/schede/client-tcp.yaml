@@ -17,19 +17,18 @@ fasi:
     trappola: 'Il server deve essere già in ascolto: altrimenti connect() fallisce con un errore di connessione rifiutata.'
 - nome: Scambia messaggi finché vuoi
   righe:
-  - codice: |-
-      while True:
-          messaggio = input("inserisci un messaggio per il server (q per uscire)")
-          if messaggio == "q":
-              break
-          sock.send(messaggio.encode())
-          data = sock.recv(1024)
-          print(f"messaggio di ritorno {data}")
+  - codice: 'while True:'
     commento: invia e aspetta la risposta
+    trappola: 'Nota: recv() restituisce byte, quindi la stampa mostra b''...''; con data.decode() si vede il testo.'
+  - codice: '    messaggio = input("inserisci un messaggio per il server (q per uscire)")'
+  - codice: '    if messaggio == "q":'
+  - codice: '        break'
+  - codice: '    sock.send(messaggio.encode())'
     parti:
     - voce: messaggio.encode()
       spiega: 'send() vuole byte, non stringhe: encode() converte il testo in byte'
-    trappola: 'Nota: recv() restituisce byte, quindi la stampa mostra b''...''; con data.decode() si vede il testo.'
+  - codice: '    data = sock.recv(1024)'
+  - codice: '    print(f"messaggio di ritorno {data}")'
 - nome: Chiudi
   righe:
   - codice: sock.close()

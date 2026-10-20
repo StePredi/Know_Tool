@@ -10,12 +10,11 @@ quando: Quando il programma termina e vuoi chiudere bene la connessione.
 fasi:
 - nome: Ferma e chiudi
   righe:
-  - codice: |-
-      def disconnect_from_broker(self):
-          self.loop_stop()
-          self.disconnect()
+  - codice: 'def disconnect_from_broker(self):'
     commento: loop_stop() ferma il thread di rete, disconnect() chiude la connessione
     trappola: 'Si chiama in un finally: così lo si fa anche se il programma si ferma con Ctrl+C.'
+  - codice: '    self.loop_stop()'
+  - codice: '    self.disconnect()'
 segnaposto: {}
 varianti: []
 vicine:

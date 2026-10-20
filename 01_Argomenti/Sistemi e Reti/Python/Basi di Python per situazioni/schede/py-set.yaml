@@ -10,34 +10,36 @@ quando: Quando ti servono elementi senza ripetizioni o operazioni tra insiemi.
 fasi:
 - nome: Creare e controllare
   righe:
-  - codice: |-
-      basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
-      'orange' in basket
+  - codice: basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
     commento: Un set tiene ogni elemento una volta sola e non ha ordine. "in" è molto veloce.
     trappola: 'Un insieme vuoto si crea con set(): {} crea un dizionario vuoto.'
     parti:
     - voce: '{ ... }'
       spiega: 'set: i doppioni spariscono'
+  - codice: '''orange'' in basket'
+    parti:
     - voce: '''orange'' in basket'
       spiega: 'True'
 - nome: Operazioni
   righe:
-  - codice: |-
-      a = set('abracadabra')
-      b = set('alacazam')
-      a - b
-      a & b
-      a ^ b
+  - codice: a = set('abracadabra')
     commento: Operazioni tra insiemi, come in matematica.
+    parti:
+    - voce: a | b
+      spiega: in almeno uno (unione)
+  - codice: b = set('alacazam')
+  - codice: a - b
     parti:
     - voce: a - b
       spiega: nel primo ma non nel secondo
+  - codice: a & b
+    parti:
     - voce: a & b
       spiega: in entrambi (intersezione)
+  - codice: a ^ b
+    parti:
     - voce: a ^ b
       spiega: in uno solo dei due
-    - voce: a | b
-      spiega: in almeno uno (unione)
   - codice: '{x for x in ''abracadabra'' if x not in ''abc''}'
     commento: Anche i set hanno la comprehension.
     parti:

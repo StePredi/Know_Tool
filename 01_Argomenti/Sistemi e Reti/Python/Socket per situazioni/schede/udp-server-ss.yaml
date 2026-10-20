@@ -10,20 +10,17 @@ quando: Quando i messaggi sono datagrammi UDP, senza connessione.
 fasi:
 - nome: Handler UDP
   righe:
-  - codice: |-
-      class echoUDPRequestHandler(socketserver.BaseRequestHandler):
-
-          def handle(self):
-              data, sock = self.request
-              sock.sendto(data.upper(), self.client_address)
+  - codice: 'class echoUDPRequestHandler(socketserver.BaseRequestHandler):'
     commento: risponde all'indirizzo da cui è arrivato il datagramma
     trappola: 'Con UDP self.request è una coppia (dati, socket), non il socket: per rispondere si usa sendto() con client_address.'
+  - codice: '    def handle(self):'
+  - codice: '        data, sock = self.request'
+  - codice: '        sock.sendto(data.upper(), self.client_address)'
 - nome: Server
   righe:
-  - codice: |-
-      server = socketserver.UDPServer((«HOST», «PORTA»), echoUDPRequestHandler)
-      server.serve_forever()
+  - codice: server = socketserver.UDPServer((«HOST», «PORTA»), echoUDPRequestHandler)
     commento: stessa struttura del server TCP
+  - codice: server.serve_forever()
 segnaposto:
   HOST:
     esempio: '''127.0.0.1'''

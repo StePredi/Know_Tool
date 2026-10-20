@@ -10,22 +10,21 @@ quando: Quando il programma deve parlare con un broker MQTT e vuoi tenere in una
 fasi:
 - nome: Scrivi la classe
   righe:
-  - codice: |-
-      import paho.mqtt.client as mqtt
-
-      class Client_MQTT(mqtt.Client):
-          def __init__(self, broker, port):
-              super().__init__(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
-              self.broker = broker
-              self.port = port
-              self.is_connected = False
+  - codice: import paho.mqtt.client as mqtt
     commento: estende mqtt.Client e salva broker, porta e uno stato di connessione
+    trappola: 'Nota: is_connected non esiste in paho, lo aggiungi tu per sapere se puoi pubblicare.'
+  - codice: 'class Client_MQTT(mqtt.Client):'
+  - codice: '    def __init__(self, broker, port):'
+  - codice: '        super().__init__(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)'
     parti:
     - voce: VERSION2
       spiega: 'versione 2 delle callback di paho: le funzioni on_* hanno i parametri come negli esempi di queste schede'
+  - codice: '        self.broker = broker'
+  - codice: '        self.port = port'
+  - codice: '        self.is_connected = False'
+    parti:
     - voce: is_connected
       spiega: 'flag tuo: lo si imposta nelle callback di connessione'
-    trappola: 'Nota: is_connected non esiste in paho, lo aggiungi tu per sapere se puoi pubblicare.'
 segnaposto: {}
 varianti: []
 vicine:

@@ -17,15 +17,15 @@ fasi:
       spiega: scrive il testo, con \n per andare a capo
     - voce: '15'
       spiega: numero di caratteri scritti
-  - codice: |-
-      value = ("the answer", 42)
-      s = str(value)
-      f.write(s)
+  - codice: value = ("the answer", 42)
     commento: Per scrivere qualcosa che non è testo (numero, tupla) prima lo converti con str().
     trappola: 'Per fine riga devi aggiungere tu \n: write() non lo mette.'
+  - codice: s = str(value)
     parti:
     - voce: str(value)
       spiega: da tupla a testo
+  - codice: f.write(s)
+    parti:
     - voce: f.write(s)
       spiega: scrive il testo
 segnaposto: {}

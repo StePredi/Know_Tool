@@ -10,23 +10,23 @@ quando: Quando vuoi che il programma scriva cosa sta facendo, su file e sullo sc
 fasi:
 - nome: Una sola configurazione, all'avvio
   righe:
-  - codice: |-
-      logging.basicConfig(
-          level=logging.DEBUG,
-          format="[%(asctime)s] [%(name)s] %(levelname)s: %(message)s",
-          datefmt="%H:%M:%S",
-          handlers=[
-              logging.FileHandler(LOG_FILE),
-              logging.StreamHandler()
-          ]
-      )
+  - codice: logging.basicConfig(
     commento: scrive su file e sulla console, con ora, nome e livello
+    trappola: basicConfig va chiamata una volta sola, nel main, prima di usare i logger.
+  - codice: '    level=logging.DEBUG,'
+  - codice: '    format="[%(asctime)s] [%(name)s] %(levelname)s: %(message)s",'
     parti:
     - voce: '%(name)s'
       spiega: nome del logger che ha scritto il messaggio
+  - codice: '    datefmt="%H:%M:%S",'
+  - codice: '    handlers=['
+    parti:
     - voce: handlers
       spiega: 'le destinazioni: file e console'
-    trappola: basicConfig va chiamata una volta sola, nel main, prima di usare i logger.
+  - codice: '        logging.FileHandler(LOG_FILE),'
+  - codice: '        logging.StreamHandler()'
+  - codice: '    ]'
+  - codice: )
 segnaposto: {}
 varianti: []
 vicine:

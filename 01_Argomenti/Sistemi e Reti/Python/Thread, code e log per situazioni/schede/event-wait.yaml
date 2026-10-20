@@ -10,9 +10,7 @@ quando: Quando vuoi una pausa tra due giri del ciclo che si interrompe subito al
 fasi:
 - nome: Pausa interrompibile
   righe:
-  - codice: |-
-      while not stop.wait(timeout=1.0):
-          ...
+  - codice: 'while not stop.wait(timeout=1.0):'
     commento: 'wait(timeout) fa da pausa: se l''evento scatta, torna subito True; se scade il tempo torna False. Il ciclo continua finché è False.'
     trappola: 'Nota: con time.sleep(1) il thread non può essere svegliato prima; con wait sì.'
     parti:
@@ -20,6 +18,7 @@ fasi:
       spiega: aspetta fino a 1 secondo
     - voce: while not ...
       spiega: continua se è scaduto il tempo senza segnale
+  - codice: '    ...'
 - nome: Aspetta e basta
   righe:
   - codice: evento.wait()

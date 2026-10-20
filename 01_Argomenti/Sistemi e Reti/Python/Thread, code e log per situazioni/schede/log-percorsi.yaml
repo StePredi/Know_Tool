@@ -10,17 +10,16 @@ quando: Quando i file di log e dati devono stare in cartelle accanto al programm
 fasi:
 - nome: Parti dalla posizione del file
   righe:
-  - codice: |-
-      _ROOT     = Path(__file__).resolve().parent.parent
-      LOG_FILE  = _ROOT / 'logs' / 'gateway.log'
-      DATA_FILE = _ROOT / 'data' / 'log.jsonl'
+  - codice: _ROOT     = Path(__file__).resolve().parent.parent
     commento: la radice del progetto è la cartella sopra quella dello script
+    trappola: 'Nota: le cartelle logs e data devono già esistere: FileHandler e open() non le creano e il programma si ferma con un errore.'
     parti:
     - voce: Path(__file__).resolve()
       spiega: percorso assoluto del file che sta girando
     - voce: .parent.parent
       spiega: 'due cartelle più in alto: dalla cartella dello script alla radice'
-    trappola: 'Nota: le cartelle logs e data devono già esistere: FileHandler e open() non le creano e il programma si ferma con un errore.'
+  - codice: LOG_FILE  = _ROOT / 'logs' / 'gateway.log'
+  - codice: DATA_FILE = _ROOT / 'data' / 'log.jsonl'
 segnaposto: {}
 varianti: []
 vicine:

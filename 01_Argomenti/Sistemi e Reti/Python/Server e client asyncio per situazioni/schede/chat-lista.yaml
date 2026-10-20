@@ -10,21 +10,21 @@ quando: Quando un messaggio deve arrivare a tutti gli altri.
 fasi:
 - nome: Registra
   righe:
-  - codice: |-
-      clienti = []   # lista dei writer di tutti i client connessi
-
-      ip, porta = writer.get_extra_info("peername")
-      nome = f"{ip}:{porta}"
-      clienti.append(writer)
-      print(nome, "è entrato")
+  - codice: 'clienti = []   # lista dei writer di tutti i client connessi'
     commento: Il server tiene una lista globale con il writer di ogni client collegato. Quando arriva un messaggio la usa per inoltrarlo.
     parti:
     - voce: clienti = []
       spiega: lista condivisa tra tutti i gestori
-    - voce: append(writer)
-      spiega: registra il client
+  - codice: ip, porta = writer.get_extra_info("peername")
+  - codice: nome = f"{ip}:{porta}"
+    parti:
     - voce: f"{ip}:{porta}"
       spiega: nome del client
+  - codice: clienti.append(writer)
+    parti:
+    - voce: append(writer)
+      spiega: registra il client
+  - codice: print(nome, "è entrato")
 segnaposto: {}
 varianti: []
 vicine:

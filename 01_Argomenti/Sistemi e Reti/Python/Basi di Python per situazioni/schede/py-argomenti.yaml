@@ -10,9 +10,7 @@ quando: Quando una funzione ha parametri facoltativi o ne ha molti e vuoi chiama
 fasi:
 - nome: Valori predefiniti
   righe:
-  - codice: |-
-      def ask_ok(prompt, retries=4, reminder='Please try again!'):
-          ...
+  - codice: 'def ask_ok(prompt, retries=4, reminder=''Please try again!''):'
     commento: 'retries e reminder sono parametri con un valore predefinito: se chi chiama la funzione non li scrive, Python usa questi. Quelli senza valore (prompt) sono obbligatori.'
     trappola: 'I valori predefiniti sono calcolati una volta sola, alla definizione: con liste e dizionari è una trappola (vedi la scheda sul default mutabile).'
     parti:
@@ -22,19 +20,21 @@ fasi:
       spiega: se non lo passi, vale questo testo
     - voce: prompt
       spiega: 'nessun valore predefinito: devi passarlo sempre'
+  - codice: '    ...'
 - nome: Chiamate valide
   righe:
-  - codice: |-
-      parrot(1000)
-      parrot(voltage=1000000, action='VOOOOOM')
-      parrot('a thousand', state='pushing up the daisies')
+  - codice: parrot(1000)
     commento: 'Tre modi di chiamare la stessa funzione: solo con l''argomento obbligatorio, con argomenti per nome, o mescolando posizione e nome.'
     trappola: 'Dopo un argomento per nome non possono più venirne di posizionali: parrot(voltage=5.0, ''dead'') è un errore.'
     parti:
     - voce: parrot(1000)
       spiega: solo voltage, gli altri hanno il loro valore predefinito
+  - codice: parrot(voltage=1000000, action='VOOOOOM')
+    parti:
     - voce: voltage=1000000, action='VOOOOOM'
       spiega: 'per nome: l''ordine non conta più'
+  - codice: parrot('a thousand', state='pushing up the daisies')
+    parti:
     - voce: '''a thousand'', state=''pushing up the daisies'''
       spiega: il primo per posizione, il secondo per nome
 segnaposto: {}

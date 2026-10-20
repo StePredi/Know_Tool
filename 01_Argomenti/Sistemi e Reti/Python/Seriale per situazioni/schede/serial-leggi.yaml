@@ -10,14 +10,13 @@ quando: Quando il dispositivo manda righe di testo e vuoi leggerle man mano.
 fasi:
 - nome: Se ci sono dati, leggi
   righe:
-  - codice: |-
-      if self.port.is_open and self.port.in_waiting > 0:
-          riga = self.port.readline().decode('ascii', errors='ignore')
+  - codice: 'if self.port.is_open and self.port.in_waiting > 0:'
     commento: in_waiting dice quanti byte sono già arrivati; readline() legge fino al carattere di a capo
+    trappola: 'readline() restituisce byte: serve decode() per ottenere una stringa.'
+  - codice: '    riga = self.port.readline().decode(''ascii'', errors=''ignore'')'
     parti:
     - voce: errors='ignore'
       spiega: i byte che non sono ASCII vengono saltati invece di dare errore
-    trappola: 'readline() restituisce byte: serve decode() per ottenere una stringa.'
 segnaposto: {}
 varianti: []
 vicine:

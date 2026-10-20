@@ -10,14 +10,13 @@ quando: Quando devi decidere come rendere concorrente un programma.
 fasi:
 - nome: Asyncio va bene per
   righe:
-  - codice: |-
-      # operazioni I/O-bound: rete, database, file
-      # molte connessioni simultanee
-      # download/upload multipli, chiamate API concorrenti
+  - codice: '# operazioni I/O-bound: rete, database, file'
     commento: 'Con asyncio un solo thread passa da un compito all''altro quando uno è in attesa: è ideale quando il programma passa il tempo ad aspettare.'
     parti:
     - voce: I/O-bound
       spiega: il tempo è speso ad aspettare rete, disco, database
+  - codice: '# molte connessioni simultanee'
+  - codice: '# download/upload multipli, chiamate API concorrenti'
 - nome: Non va bene per
   righe:
   - codice: '# calcoli pesanti (CPU-intensive)'

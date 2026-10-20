@@ -10,17 +10,17 @@ quando: 'Quando apri un file: sempre.'
 fasi:
 - nome: Usa with
   righe:
-  - codice: |-
-      with open("workfile", encoding="utf-8") as f:
-          read_data = f.read()
-
-      f.closed
+  - codice: 'with open("workfile", encoding="utf-8") as f:'
     commento: Alla fine del blocco with il file si chiude da solo. Dopo, f esiste ancora ma è chiuso.
     parti:
     - voce: 'with open(...) as f:'
       spiega: apre e assegna il file a f
+  - codice: '    read_data = f.read()'
+    parti:
     - voce: read_data = f.read()
       spiega: legge dentro il blocco
+  - codice: f.closed
+    parti:
     - voce: f.closed
       spiega: True se il file è chiuso
   - codice: f.read()

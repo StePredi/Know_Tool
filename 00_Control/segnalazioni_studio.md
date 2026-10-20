@@ -11,6 +11,7 @@ Quando una segnalazione è stata gestita, la sposto sotto «Fatte» (non la canc
 - 2026-10-16 · MikroTik VLAN · lo schema di rete del laboratorio (VM, router, switch, trunk, ether1-4 del PDF mikTikVlansvm.drawio.pdf) non si può mostrare: le figure supportano solo lo schema pin di una scheda elettronica; serve un modello di disegno per schemi di rete · (manca)
 
 ---
+- 2026-10-20 · Scheda (ricetta): il pulsante «Copia» di una fase unisce le righe con `r.codice.trim()` (`Scheda.tsx`, `testoFase`), quindi il codice copiato perde il rientro (in Python cambia il significato). Serve non fare il `trim()` a sinistra, solo a destra. Inoltre un blocco su più righe dentro una sola riga si vede con le righe successive spostate a destra (il rientro è calcolato una volta sola sulla prima riga): per ora ogni riga di codice è una riga della scheda.
 
 ## Fatte
 

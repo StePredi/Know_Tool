@@ -10,24 +10,24 @@ quando: Quando vuoi scrivere un percorso senza preoccuparti di / e \.
 fasi:
 - nome: Crea
   righe:
-  - codice: |-
-      from pathlib import Path
-      p = Path("dati")
-      q = p / "misure.json"
+  - codice: from pathlib import Path
     commento: Path rappresenta un percorso. Con / ne unisci i pezzi come cartelle, senza preoccuparti del separatore di Windows o Linux.
+  - codice: p = Path("dati")
     parti:
     - voce: Path("dati")
       spiega: percorso relativo
+  - codice: q = p / "misure.json"
+    parti:
     - voce: p / "misure.json"
       spiega: aggiunge un pezzo
-  - codice: |-
-      Path.cwd()
-      Path.home()
+  - codice: Path.cwd()
     commento: Due percorsi utili già pronti.
     trappola: 'Path non apre il file: costruisce solo il percorso.'
     parti:
     - voce: Path.cwd()
       spiega: cartella da cui avvii il programma
+  - codice: Path.home()
+    parti:
     - voce: Path.home()
       spiega: cartella personale dell'utente
 segnaposto: {}

@@ -10,24 +10,24 @@ quando: Quando vuoi riunire tutto il lavoro di un client nel gestore.
 fasi:
 - nome: Ciclo
   righe:
-  - codice: |-
-      try:
-          while True:
-              dati = await reader.readline()
-              if not dati:
-                  break
-              testo = dati.decode().strip()
-              await invia_a_tutti(f"[{nome}] {testo}\n", writer)
-      except ConnectionError:
-          pass                                 # il client è caduto all'improvviso
+  - codice: 'try:'
     commento: Il gestore legge righe finché il client resta collegato e le inoltra agli altri con il nome del mittente.
+  - codice: '    while True:'
+  - codice: '        dati = await reader.readline()'
+  - codice: '        if not dati:'
+  - codice: '            break'
+  - codice: '        testo = dati.decode().strip()'
+  - codice: '        await invia_a_tutti(f"[{nome}] {testo}\n", writer)'
     parti:
     - voce: invia_a_tutti(...)
       spiega: inoltra ai client
     - voce: f"[{nome}] {testo}\n"
       spiega: messaggio con mittente
+  - codice: 'except ConnectionError:'
+    parti:
     - voce: except ConnectionError
       spiega: client caduto all'improvviso
+  - codice: '    pass                                 # il client è caduto all''improvviso'
 segnaposto: {}
 varianti: []
 vicine:

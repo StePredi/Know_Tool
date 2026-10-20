@@ -17,24 +17,23 @@ fasi:
       spiega: attributo interno
 - nome: Name mangling
   righe:
-  - codice: |-
-      class Mapping:
-          def __init__(self, iterable):
-              self.items_list = []
-              self.__update(iterable)
-
-          def update(self, iterable):
-              for item in iterable:
-                  self.items_list.append(item)
-
-          __update = update
+  - codice: 'class Mapping:'
     commento: 'Con due underscore Python cambia il nome (name mangling): __update diventa _Mapping__update. Così una sottoclasse può ridefinire update() senza rompere __init__.'
     trappola: 'Non è una vera protezione: si può comunque accedere all''attributo con il nome modificato.'
+  - codice: '    def __init__(self, iterable):'
+  - codice: '        self.items_list = []'
+  - codice: '        self.__update(iterable)'
     parti:
     - voce: self.__update(iterable)
       spiega: chiama la copia privata
+  - codice: '    def update(self, iterable):'
+    parti:
     - voce: def update
       spiega: metodo pubblico, che le sottoclassi possono cambiare
+  - codice: '        for item in iterable:'
+  - codice: '            self.items_list.append(item)'
+  - codice: '    __update = update'
+    parti:
     - voce: __update = update
       spiega: copia privata di update
 segnaposto: {}

@@ -10,16 +10,16 @@ quando: Quando vuoi tutto quello che manda il server finché chiude.
 fasi:
 - nome: Leggi
   righe:
-  - codice: |-
-      print("read() in attesa della chiusura...")
-      resto = await reader.read()
-      print("read()            ->", resto)
+  - codice: print("read() in attesa della chiusura...")
     commento: 'read() senza numero continua a leggere finché il server non chiude: restituisce tutto quello che arriva fino ad allora.'
     parti:
     - voce: read()
       spiega: tutto fino alla chiusura
+  - codice: resto = await reader.read()
+    parti:
     - voce: resto
       spiega: b"secondo pezzo, ultimi dati"
+  - codice: print("read()            ->", resto)
 segnaposto: {}
 varianti: []
 vicine:

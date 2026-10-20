@@ -10,21 +10,19 @@ quando: Quando devi leggere un messaggio mandato con il frame (header di 4 byte 
 fasi:
 - nome: Leggi l'header
   righe:
-  - codice: |-
-      header = self.recv_exactly(HEADER_SIZE)
-      if not header:
-          return None
+  - codice: header = self.recv_exactly(HEADER_SIZE)
     commento: se l'altro lato ha chiuso non c'è niente da leggere
     trappola: 'recv() restituisce None quando la connessione è chiusa: chi lo usa deve controllarlo (nel server: "if not data").'
+  - codice: 'if not header:'
+  - codice: '    return None'
 - nome: Leggi il payload
   righe:
-  - codice: |-
-      payload_length = struct.unpack("!I", header)[0]
-      return self.recv_exactly(payload_length)
+  - codice: payload_length = struct.unpack("!I", header)[0]
     commento: 'unpack restituisce una tupla: il primo elemento è la lunghezza'
     parti:
     - voce: '[0]'
       spiega: struct.unpack restituisce sempre una tupla, anche con un solo valore
+  - codice: return self.recv_exactly(payload_length)
 segnaposto: {}
 varianti: []
 vicine:

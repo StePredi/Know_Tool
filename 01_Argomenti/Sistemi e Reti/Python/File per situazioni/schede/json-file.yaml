@@ -10,25 +10,25 @@ quando: Quando vuoi salvare dati strutturati in un file e rileggerli.
 fasi:
 - nome: Salva
   righe:
-  - codice: |-
-      with open("dati.json", "w", encoding="utf-8") as f:
-          json.dump(dati, f)
+  - codice: 'with open("dati.json", "w", encoding="utf-8") as f:'
     commento: dump scrive direttamente su un file aperto.
     parti:
     - voce: open(..., "w")
       spiega: file in scrittura
+  - codice: '    json.dump(dati, f)'
+    parti:
     - voce: json.dump(dati, f)
       spiega: scrive il JSON nel file
 - nome: Carica
   righe:
-  - codice: |-
-      with open("dati.json", "r", encoding="utf-8") as f:
-          dati = json.load(f)
+  - codice: 'with open("dati.json", "r", encoding="utf-8") as f:'
     commento: load legge il file e ricostruisce l'oggetto Python.
     trappola: 'Nota: json.dump e json.load hanno lo stesso nome senza la s di json.dumps e json.loads.'
     parti:
     - voce: open(..., "r")
       spiega: file in lettura
+  - codice: '    dati = json.load(f)'
+    parti:
     - voce: json.load(f)
       spiega: da file a oggetto Python
 segnaposto: {}

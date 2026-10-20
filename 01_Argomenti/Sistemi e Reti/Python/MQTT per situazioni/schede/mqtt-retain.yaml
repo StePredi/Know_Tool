@@ -15,11 +15,10 @@ fasi:
     trappola: 'Il retain tiene solo l''ultimo messaggio di ogni topic: quello nuovo sostituisce il precedente.'
 - nome: Chi riceve deve aspettare un attimo
   righe:
-  - codice: |-
-      self.client.connect_to_broker()
-      time.sleep(0.5)  # attende retained message da TOPIC_STATO
+  - codice: self.client.connect_to_broker()
     commento: il messaggio conservato arriva subito dopo l'iscrizione, non nello stesso istante
     trappola: Senza questa pausa lo stato risulta ancora vuoto ("non ancora ricevuto").
+  - codice: 'time.sleep(0.5)  # attende retained message da TOPIC_STATO'
 segnaposto: {}
 varianti: []
 vicine:

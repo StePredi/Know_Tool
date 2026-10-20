@@ -10,14 +10,13 @@ quando: Quando un thread ha un altro lavoro da fare (per esempio leggere la seri
 fasi:
 - nome: Prendi se c'è
   righe:
-  - codice: |-
-      try:
-          cmd = self.coda_mqtt_out.get_nowait()
-          self.port.write(cmd.encode('ascii'))
-      except queue.Empty:
-          pass
+  - codice: 'try:'
     commento: se la coda è vuota va avanti subito
     trappola: 'get_nowait() non aspetta mai: dentro un ciclo che non ha altre pause va a girare a vuoto.'
+  - codice: '    cmd = self.coda_mqtt_out.get_nowait()'
+  - codice: '    self.port.write(cmd.encode(''ascii''))'
+  - codice: 'except queue.Empty:'
+  - codice: '    pass'
 segnaposto: {}
 varianti: []
 vicine:

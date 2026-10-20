@@ -10,15 +10,14 @@ quando: Quando il server gira in un ciclo infinito e vuoi poterlo fermare chiude
 fasi:
 - nome: Racchiudi il ciclo in try
   righe:
-  - codice: |-
-      try:
-          while True:
-              conn, addr = server.accept()
-              ...
-      except KeyboardInterrupt:
-          server.close()
+  - codice: 'try:'
     commento: Ctrl+C interrompe il ciclo e chiude il socket
     trappola: 'La chiamata va scritta con le parentesi: server_sock.close(). Nella fonte server_medium_socket.py c''è solo "server_sock", che non fa niente (vedi la scheda sull''errore di chiusura).'
+  - codice: '    while True:'
+  - codice: '        conn, addr = server.accept()'
+  - codice: '        ...'
+  - codice: 'except KeyboardInterrupt:'
+  - codice: '    server.close()'
 segnaposto: {}
 varianti: []
 vicine:

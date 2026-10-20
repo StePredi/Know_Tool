@@ -17,10 +17,9 @@ fasi:
       spiega: il valore che va nella lista
     - voce: for x in range(10)
       spiega: da dove vengono gli x
-  - codice: |-
-      vec = [-4, -2, 0, 2, 4]
-      [abs(x) for x in vec]
+  - codice: vec = [-4, -2, 0, 2, 4]
     commento: Applichi una funzione a ogni elemento.
+  - codice: '[abs(x) for x in vec]'
     parti:
     - voce: abs(x)
       spiega: valore assoluto

@@ -10,21 +10,21 @@ quando: Quando non vuoi aspettare per sempre che il lock si liberi.
 fasi:
 - nome: Con attesa massima
   righe:
-  - codice: |-
-      if lock.acquire(timeout=2):
-          try:
-              ...
-          finally:
-              lock.release()
-      else:
-          print("lock occupato")
+  - codice: 'if lock.acquire(timeout=2):'
     commento: acquire() prende il lock; con timeout aspetta al massimo quel numero di secondi. Restituisce True se ce l'ha fatta.
     trappola: 'Il release() va fatto solo se l''acquire è riuscito, e in un finally: altrimenti il lock resta preso.'
     parti:
     - voce: acquire(timeout=2)
       spiega: aspetta fino a 2 secondi
+  - codice: '    try:'
+  - codice: '        ...'
+  - codice: '    finally:'
+    parti:
     - voce: 'finally: lock.release()'
       spiega: rilascia il lock sempre
+  - codice: '        lock.release()'
+  - codice: 'else:'
+  - codice: '    print("lock occupato")'
 - nome: Senza attendere
   righe:
   - codice: lock.acquire(blocking=False)

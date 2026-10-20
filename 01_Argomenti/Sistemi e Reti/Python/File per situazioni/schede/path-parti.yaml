@@ -10,20 +10,22 @@ quando: Quando da un percorso ti serve solo una parte.
 fasi:
 - nome: Parti
   righe:
-  - codice: |-
-      p = Path("/home/utente/dati/misure.json")
-      p.name
-      p.stem
-      p.suffix
-      p.parent
+  - codice: p = Path("/home/utente/dati/misure.json")
     commento: Ogni parte del percorso è una proprietà.
+  - codice: p.name
     parti:
     - voce: p.name
       spiega: nome del file con estensione
+  - codice: p.stem
+    parti:
     - voce: p.stem
       spiega: nome senza estensione
+  - codice: p.suffix
+    parti:
     - voce: p.suffix
       spiega: estensione, con il punto
+  - codice: p.parent
+    parti:
     - voce: p.parent
       spiega: cartella che lo contiene
 - nome: Percorso assoluto

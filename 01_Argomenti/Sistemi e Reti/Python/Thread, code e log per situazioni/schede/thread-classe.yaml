@@ -10,28 +10,28 @@ quando: Quando una parte del programma deve girare in parallelo alle altre, con 
 fasi:
 - nome: Scrivi la classe
   righe:
-  - codice: |-
-      class Scrittura(threading.Thread):
-          def __init__(self, coda_log, log_file):
-              super().__init__(name="Scrittura", daemon=True)
-              self.coda_log = coda_log
-              self.log_file = log_file
+  - codice: 'class Scrittura(threading.Thread):'
     commento: dai un nome al thread e passagli tutto quello che gli serve
+  - codice: '    def __init__(self, coda_log, log_file):'
+  - codice: '        super().__init__(name="Scrittura", daemon=True)'
     parti:
     - voce: name="Scrittura"
       spiega: nome del thread, utile nei log
     - voce: daemon=True
       spiega: si ferma da solo quando il programma principale termina
-  - codice: "    def run(self):\n        while True:\n            ..."
+  - codice: '        self.coda_log = coda_log'
+  - codice: '        self.log_file = log_file'
+  - codice: '    def run(self):'
     commento: il lavoro del thread, di solito un ciclo
     trappola: 'Il lavoro va in run(): il metodo non si chiama a mano.'
+  - codice: '        while True:'
+  - codice: '            ...'
 - nome: Avvialo
   righe:
-  - codice: |-
-      self.scrittura = Scrittura(self.coda_log, DATA_FILE)
-      self.scrittura.start()
+  - codice: self.scrittura = Scrittura(self.coda_log, DATA_FILE)
     commento: start() crea il thread e fa partire run()
     trappola: 'Si usa start(): chiamare run() direttamente lo eseguirebbe nel thread principale, senza parallelismo.'
+  - codice: self.scrittura.start()
 segnaposto: {}
 varianti: []
 vicine:

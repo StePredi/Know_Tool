@@ -10,27 +10,27 @@ quando: Quando il task è finito e vuoi il risultato subito, senza sospenderti.
 fasi:
 - nome: Prima della fine
   righe:
-  - codice: |-
-      try:
-          risultato = task.result()
-      except asyncio.InvalidStateError as e:
-          print(f"Errore: {e}")
+  - codice: 'try:'
     commento: result() su un task non ancora finito dà InvalidStateError.
+  - codice: '    risultato = task.result()'
     parti:
     - voce: task.result()
       spiega: prova a leggere il risultato
+  - codice: 'except asyncio.InvalidStateError as e:'
+    parti:
     - voce: asyncio.InvalidStateError
       spiega: il task non è finito
+  - codice: '    print(f"Errore: {e}")'
 - nome: Dopo la fine
   righe:
-  - codice: |-
-      if task.done():
-          risultato = task.result()
+  - codice: 'if task.done():'
     commento: Quando done() è True, result() restituisce il valore senza await.
     trappola: Controlla done() prima di chiamare result().
     parti:
     - voce: 'if task.done():'
       spiega: controllo
+  - codice: '    risultato = task.result()'
+    parti:
     - voce: task.result()
       spiega: valore restituito dalla coroutine
 segnaposto: {}

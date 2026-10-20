@@ -10,56 +10,52 @@ quando: Quando ti servono l'indice, due liste insieme, le coppie chiave-valore o
 fasi:
 - nome: Chiavi e valori
   righe:
-  - codice: |-
-      for k, v in knights.items():
-          print(k, v)
+  - codice: 'for k, v in knights.items():'
     commento: Con items() scorri un dizionario ottenendo chiave e valore insieme.
     parti:
     - voce: knights.items()
       spiega: coppie (chiave, valore)
     - voce: k, v
       spiega: le due parti della coppia, spacchettate
+  - codice: '    print(k, v)'
 - nome: Indice e valore
   righe:
-  - codice: |-
-      for i, v in enumerate(['tic', 'tac', 'toe']):
-          print(i, v)
+  - codice: 'for i, v in enumerate([''tic'', ''tac'', ''toe'']):'
     commento: 'enumerate aggiunge un contatore a partire da 0: utile quando ti serve sia la posizione sia il valore.'
     parti:
     - voce: enumerate(lista)
       spiega: coppie (posizione, valore)
     - voce: i, v
       spiega: posizione e valore
+  - codice: '    print(i, v)'
 - nome: Due liste insieme
   righe:
-  - codice: |-
-      for q, a in zip(questions, answers):
-          print(f'What is your {q}?  It is {a}.')
+  - codice: 'for q, a in zip(questions, answers):'
     commento: zip prende due (o più) liste e le scorre insieme, elemento con elemento.
     parti:
     - voce: zip(questions, answers)
       spiega: coppie (domanda, risposta) nella stessa posizione
+  - codice: '    print(f''What is your {q}?  It is {a}.'')'
+    parti:
     - voce: f'... {q} ... {a}'
       spiega: 'f-string: mette i due valori nel testo'
 - nome: In un altro ordine
   righe:
-  - codice: |-
-      for i in reversed(range(1, 10, 2)):
-          print(i)
+  - codice: 'for i in reversed(range(1, 10, 2)):'
     commento: reversed scorre una sequenza al contrario; range(1, 10, 2) produce 1 3 5 7 9.
     parti:
     - voce: range(1, 10, 2)
       spiega: da 1 a 9 con passo 2
     - voce: reversed(...)
       spiega: la stessa sequenza dall'ultimo al primo
-  - codice: |-
-      for i in sorted(basket):
-          print(i)
+  - codice: '    print(i)'
+  - codice: 'for i in sorted(basket):'
     commento: sorted scorre gli elementi in ordine, senza toccare la lista originale.
     trappola: sorted() restituisce una lista nuova; list.sort() invece modifica quella esistente.
     parti:
     - voce: sorted(basket)
       spiega: nuova lista ordinata
+  - codice: '    print(i)'
 segnaposto: {}
 varianti: []
 vicine:

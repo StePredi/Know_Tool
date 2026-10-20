@@ -22,13 +22,13 @@ fasi:
       spiega: così l'apice non dà problemi
 - nome: A capo
   righe:
-  - codice: |-
-      s = 'First line.\nSecond line.'
-      print(s)
+  - codice: s = 'First line.\nSecond line.'
     commento: \n significa a capo. Nell'interprete lo vedi come \n, con print() come vera riga nuova.
     parti:
     - voce: \n
       spiega: a capo
+  - codice: print(s)
+    parti:
     - voce: print(s)
       spiega: lo mostra
 - nome: Backslash nei percorsi
@@ -41,17 +41,16 @@ fasi:
       spiega: stringa grezza
 - nome: Più righe
   righe:
-  - codice: |-
-      print("""\
-      Usage: thingy [OPTIONS]
-           -h    Display this usage message
-      """)
+  - codice: print("""\
     commento: Tre virgolette per testo su più righe. Il \ finale toglie il primo a capo.
     parti:
     - voce: '"""...."""'
       spiega: più righe
     - voce: \
       spiega: 'a fine riga: non andare a capo'
+  - codice: 'Usage: thingy [OPTIONS]'
+  - codice: '     -h    Display this usage message'
+  - codice: '""")'
 segnaposto: {}
 varianti: []
 vicine:

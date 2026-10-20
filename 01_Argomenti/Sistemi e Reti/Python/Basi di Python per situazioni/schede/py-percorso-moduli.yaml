@@ -10,11 +10,10 @@ quando: Quando import non trova un modulo o ne importa uno diverso da quello che
 fasi:
 - nome: Dove cerca
   righe:
-  - codice: |-
-      import sys
-      print(sys.path)
+  - codice: import sys
     commento: Quando scrivi import x, Python cerca x nelle cartelle di sys.path, nell'ordine. La prima è quella dello script.
     trappola: Un tuo file con lo stesso nome di un modulo della libreria (per esempio un file socket.py o json.py) viene importato al posto di quello vero.
+  - codice: print(sys.path)
     parti:
     - voce: sys.path
       spiega: lista di cartelle

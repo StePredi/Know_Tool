@@ -10,21 +10,22 @@ quando: Quando il file potrebbe mancare o non essere accessibile.
 fasi:
 - nome: Prendi l'errore
   righe:
-  - codice: |-
-      try:
-          f = open(arg, "r")
-      except OSError:
-          print("cannot open", arg)
-      else:
-          print(arg, "has", len(f.readlines()), "lines")
-          f.close()
+  - codice: 'try:'
     commento: Se il file non si apre, open() solleva un OSError (FileNotFoundError se manca). Il try permette al programma di continuare con un messaggio.
     trappola: 'Nota: FileNotFoundError è un caso di OSError; se vuoi trattarlo a parte, mettilo prima nell''except.'
+  - codice: '    f = open(arg, "r")'
+  - codice: 'except OSError:'
     parti:
     - voce: 'except OSError:'
       spiega: file mancante, permessi negati, ecc.
+  - codice: '    print("cannot open", arg)'
+  - codice: 'else:'
+    parti:
     - voce: 'else:'
       spiega: lo esegui solo se open è andato bene
+  - codice: '    print(arg, "has", len(f.readlines()), "lines")'
+  - codice: '    f.close()'
+    parti:
     - voce: f.close()
       spiega: chiusura manuale (con with non servirebbe)
 segnaposto: {}

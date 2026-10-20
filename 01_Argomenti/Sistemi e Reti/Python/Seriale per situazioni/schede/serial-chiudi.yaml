@@ -10,13 +10,12 @@ quando: Quando il programma termina e la porta va liberata.
 fasi:
 - nome: Chiudi se serve
   righe:
-  - codice: |-
-      def chiudi(self):
-          if self.port and self.port.is_open:
-              self.port.close()
-              self.logger.info("porta seriale chiusa")
+  - codice: 'def chiudi(self):'
     commento: controlla prima che la porta esista e sia aperta
     trappola: 'port può essere None se l''apertura è fallita: senza il controllo si avrebbe un errore proprio in chiusura.'
+  - codice: '    if self.port and self.port.is_open:'
+  - codice: '        self.port.close()'
+  - codice: '        self.logger.info("porta seriale chiusa")'
 segnaposto: {}
 varianti: []
 vicine:

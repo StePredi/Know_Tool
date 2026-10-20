@@ -10,13 +10,13 @@ quando: Quando vuoi restituire o passare più valori insieme, o scambiare due va
 fasi:
 - nome: Impacchettare e spacchettare
   righe:
-  - codice: |-
-      t = 12345, 54321, 'hello!'
-      x, y, z = t
+  - codice: t = 12345, 54321, 'hello!'
     commento: Una tupla raggruppa valori. Spacchettare significa assegnarli a più variabili in un colpo solo.
     parti:
     - voce: t = 12345, 54321, 'hello!'
       spiega: tupla di 3 elementi
+  - codice: x, y, z = t
+    parti:
     - voce: x, y, z = t
       spiega: x=12345, y=54321, z='hello!'
   - codice: a, b = b, a+b
@@ -26,14 +26,13 @@ fasi:
       spiega: a prende il vecchio b, b prende la somma
 - nome: Casi particolari
   righe:
-  - codice: |-
-      singleton = 'hello',
-      len(singleton)
+  - codice: singleton = 'hello',
     commento: Una tupla di un solo elemento richiede la virgola, altrimenti sono solo parentesi o un valore normale.
     trappola: 'Le tuple non si modificano: t[0] = 88888 dà TypeError.'
     parti:
     - voce: '''hello'','
       spiega: tupla con un elemento
+  - codice: len(singleton)
   - codice: 0, *x, 4
     commento: L'asterisco in una tupla inserisce uno per uno gli elementi di un'altra sequenza.
     parti:

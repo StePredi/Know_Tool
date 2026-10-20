@@ -14,13 +14,12 @@ fasi:
     commento: il nome compare nel formato del log (%(name)s)
 - nome: Scegli il livello giusto
   righe:
-  - codice: |-
-      self.logger.debug(f"pubblicato su {topic}: {payload}")
-      self.logger.info("connesso al broker")
-      self.logger.warning("impossibile pubblicare — non connesso")
-      self.logger.error(f"connessione fallita, result code: {rc}")
+  - codice: 'self.logger.debug(f"pubblicato su {topic}: {payload}")'
     commento: dal più dettagliato al più grave
     trappola: 'Nota: debug per i dettagli utili solo a chi cerca un errore, info per i fatti normali, warning per i problemi che il programma supera, error per quelli che non supera.'
+  - codice: self.logger.info("connesso al broker")
+  - codice: self.logger.warning("impossibile pubblicare — non connesso")
+  - codice: 'self.logger.error(f"connessione fallita, result code: {rc}")'
 segnaposto: {}
 varianti: []
 vicine:

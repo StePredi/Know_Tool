@@ -10,16 +10,17 @@ quando: Quando devi cercare un valore a partire da un nome.
 fasi:
 - nome: Creare e leggere
   righe:
-  - codice: |-
-      tel = {'jack': 4098, 'sape': 4139}
-      tel['guido'] = 4127
-      tel['jack']
+  - codice: 'tel = {''jack'': 4098, ''sape'': 4139}'
     commento: Un dizionario associa chiavi a valori. Assegnando a una chiave nuova la aggiungi; leggendola con le parentesi quadre ottieni il valore.
     parti:
     - voce: '{''jack'': 4098, ...}'
       spiega: 'chiave: valore'
+  - codice: tel['guido'] = 4127
+    parti:
     - voce: tel['guido'] = 4127
       spiega: aggiunge (o cambia) la chiave guido
+  - codice: tel['jack']
+    parti:
     - voce: tel['jack']
       spiega: 'legge il valore: 4098'
   - codice: tel.get('irv')
@@ -32,17 +33,18 @@ fasi:
       spiega: oppure un valore di riserva a tua scelta
 - nome: Togliere e controllare
   righe:
-  - codice: |-
-      del tel['sape']
-      'guido' in tel
-      list(tel)
-      sorted(tel)
+  - codice: del tel['sape']
     commento: del toglie una chiave; in controlla se una chiave c'è; list() e sorted() danno l'elenco delle chiavi.
     parti:
     - voce: del tel['sape']
       spiega: elimina la chiave e il suo valore
+  - codice: '''guido'' in tel'
+    parti:
     - voce: '''guido'' in tel'
       spiega: True/False sulle chiavi
+  - codice: list(tel)
+  - codice: sorted(tel)
+    parti:
     - voce: sorted(tel)
       spiega: chiavi in ordine alfabetico
 - nome: Costruire

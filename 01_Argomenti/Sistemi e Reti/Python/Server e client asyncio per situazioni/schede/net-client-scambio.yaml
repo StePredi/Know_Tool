@@ -10,31 +10,31 @@ quando: Quando il client manda più messaggi e aspetta una risposta a ciascuno.
 fasi:
 - nome: Ciclo
   righe:
-  - codice: |-
-      messaggi = ["ciao", "come va?", "fine"]
-      for testo in messaggi:
-          writer.write((testo + "\n").encode())
-          await writer.drain()
-
-          risposta = await reader.readline()
-          print("Server:", risposta.decode().strip())
+  - codice: messaggi = ["ciao", "come va?", "fine"]
     commento: Il client manda un messaggio e aspetta la risposta, uno alla volta.
+  - codice: 'for testo in messaggi:'
+  - codice: '    writer.write((testo + "\n").encode())'
     parti:
     - voce: writer.write(...encode())
       spiega: mette il messaggio nel buffer
+  - codice: '    await writer.drain()'
+    parti:
     - voce: await writer.drain()
       spiega: lo fa partire
+  - codice: '    risposta = await reader.readline()'
+    parti:
     - voce: await reader.readline()
       spiega: aspetta la risposta
+  - codice: '    print("Server:", risposta.decode().strip())'
 - nome: Chiudi
   righe:
-  - codice: |-
-      writer.close()
-      await writer.wait_closed()
+  - codice: writer.close()
     commento: Alla fine chiudi la connessione.
     parti:
     - voce: close()
       spiega: chiude
+  - codice: await writer.wait_closed()
+    parti:
     - voce: wait_closed()
       spiega: aspetta
 segnaposto: {}

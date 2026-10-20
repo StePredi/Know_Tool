@@ -10,13 +10,12 @@ quando: Quando devi elaborare tutti i file di un certo tipo.
 fasi:
 - nome: Tutto il contenuto
   righe:
-  - codice: |-
-      for x in p.iterdir():
-          print(x)
+  - codice: 'for x in p.iterdir():'
     commento: iterdir() restituisce tutto quello che c'è dentro la cartella, un percorso alla volta.
     parti:
     - voce: p.iterdir()
       spiega: file e sottocartelle
+  - codice: '    print(x)'
 - nome: Solo alcuni
   righe:
   - codice: sorted(p.glob("*.py"))

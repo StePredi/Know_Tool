@@ -10,23 +10,24 @@ quando: Quando vuoi un server che gestisce più client insieme.
 fasi:
 - nome: Avvia
   righe:
-  - codice: |-
-      async def main():
-          server = await asyncio.start_server(gestisci_client, "127.0.0.1", 8888)
-          print("Server in ascolto sulla porta 8888")
-          async with server:
-              await server.serve_forever()
-
-      asyncio.run(main())
+  - codice: 'async def main():'
     commento: start_server apre la porta e per ogni client che si collega crea un task che esegue gestisci_client. Così più client sono serviti insieme, in un solo thread.
     trappola: 'serve_forever() non finisce mai: il server resta attivo finché non lo fermi.'
+  - codice: '    server = await asyncio.start_server(gestisci_client, "127.0.0.1", 8888)'
     parti:
     - voce: '"127.0.0.1", 8888'
       spiega: indirizzo (solo questo PC) e porta
+  - codice: '    print("Server in ascolto sulla porta 8888")'
+  - codice: '    async with server:'
+    parti:
     - voce: 'async with server:'
       spiega: chiude il server in modo pulito alla fine
+  - codice: '        await server.serve_forever()'
+    parti:
     - voce: serve_forever()
       spiega: accetta client senza mai finire
+  - codice: asyncio.run(main())
+    parti:
     - voce: asyncio.run(main())
       spiega: avvia l'event loop
 segnaposto: {}

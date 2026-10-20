@@ -10,48 +10,51 @@ quando: Quando i moduli sono tanti e vuoi tenerli in cartelle.
 fasi:
 - nome: La struttura
   righe:
-  - codice: |-
-      sound/
-          __init__.py
-          formats/
-              __init__.py
-              wavread.py
-          effects/
-              __init__.py
-              echo.py
+  - codice: sound/
     commento: Un pacchetto è una cartella con dentro moduli e un file __init__.py (che può restare vuoto). Le sottocartelle sono sotto-pacchetti.
     parti:
     - voce: sound/
       spiega: pacchetto principale
+  - codice: '    __init__.py'
+    parti:
     - voce: __init__.py
       spiega: segna la cartella come pacchetto
+  - codice: '    formats/'
+    parti:
     - voce: formats/ effects/
       spiega: sotto-pacchetti con i loro moduli
+  - codice: '        __init__.py'
+  - codice: '        wavread.py'
+  - codice: '    effects/'
+  - codice: '        __init__.py'
+  - codice: '        echo.py'
 - nome: Importare
   righe:
-  - codice: |-
-      import sound.effects.echo
-      from sound.effects import echo
-      from sound.effects.echo import echofilter
+  - codice: import sound.effects.echo
     commento: 'Tre modi di importare lo stesso modulo: più si accorcia il prefisso, meno scrivi dopo.'
     parti:
     - voce: import sound.effects.echo
       spiega: poi serve il nome completo
+  - codice: from sound.effects import echo
+    parti:
     - voce: from sound.effects import echo
       spiega: poi basta echo.…
+  - codice: from sound.effects.echo import echofilter
+    parti:
     - voce: from sound.effects.echo import echofilter
       spiega: poi basta echofilter(…)
-  - codice: |-
-      from . import echo
-      from .. import formats
-      from ..filters import equalizer
+  - codice: from . import echo
     commento: 'Dentro un pacchetto si può importare in modo relativo: il punto parte dalla cartella del file corrente.'
     trappola: 'Gli import relativi funzionano solo dentro un pacchetto: il modulo principale deve usare import assoluti.'
     parti:
     - voce: from . import echo
       spiega: dalla stessa cartella
+  - codice: from .. import formats
+    parti:
     - voce: from .. import formats
       spiega: dalla cartella sopra
+  - codice: from ..filters import equalizer
+    parti:
     - voce: from ..filters import equalizer
       spiega: da un pacchetto vicino
 segnaposto: {}

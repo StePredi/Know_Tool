@@ -15,13 +15,12 @@ fasi:
     parti:
     - voce: await task
       spiega: istantaneo se il task è finito
-  - codice: |-
-      risultato2 = await task
-      risultato3 = await task
+  - codice: risultato2 = await task
     commento: Puoi farlo quante volte vuoi, il risultato è sempre lo stesso.
     parti:
     - voce: await task (di nuovo)
       spiega: stesso risultato
+  - codice: risultato3 = await task
 segnaposto: {}
 varianti: []
 vicine:

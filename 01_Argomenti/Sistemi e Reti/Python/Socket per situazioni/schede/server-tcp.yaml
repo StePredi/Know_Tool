@@ -24,14 +24,13 @@ fasi:
     trappola: 'accept() è bloccante e questo server serve un solo client: gli altri aspettano finché il primo non ha finito. Per più client vedi la scheda sui thread.'
 - nome: Rispondi finché il client resta connesso
   righe:
-  - codice: |-
-      while True:
-          data = conn.recv(1024)
-          if not data:
-              break
-          conn.send(data)
+  - codice: 'while True:'
     commento: riceve fino a 1024 byte e li rimanda indietro
     trappola: 'recv() restituisce byte vuoti quando il client chiude: senza il controllo "if not data" il ciclo non finirebbe mai.'
+  - codice: '    data = conn.recv(1024)'
+  - codice: '    if not data:'
+  - codice: '        break'
+  - codice: '    conn.send(data)'
   - codice: conn.close()
     commento: chiude la connessione con quel client
 segnaposto:

@@ -10,15 +10,15 @@ quando: Quando una classe è una versione più specifica di un'altra.
 fasi:
 - nome: Derivare
   righe:
-  - codice: |-
-      class DerivedClassName(BaseClassName):
-          ...
+  - codice: 'class DerivedClassName(BaseClassName):'
     commento: 'Scrivi il nome della classe base tra parentesi: la nuova classe eredita tutti i suoi attributi e metodi.'
     parti:
     - voce: DerivedClassName
       spiega: la classe nuova (figlia)
     - voce: (BaseClassName)
       spiega: la classe da cui eredita (base)
+  - codice: '    ...'
+    parti:
     - voce: '...'
       spiega: qui aggiungi o cambi solo quello che serve
 - nome: Cambiare un metodo
@@ -38,13 +38,13 @@ fasi:
       spiega: l'oggetto e gli argomenti da passargli
 - nome: Controllare il tipo
   righe:
-  - codice: |-
-      isinstance(obj, int)
-      issubclass(bool, int)
+  - codice: isinstance(obj, int)
     commento: 'Due funzioni per controllare i tipi: la prima su un oggetto, la seconda su due classi.'
     parti:
     - voce: isinstance(obj, int)
       spiega: True se obj è un int o un tipo derivato
+  - codice: issubclass(bool, int)
+    parti:
     - voce: issubclass(bool, int)
       spiega: 'True: bool è figlia di int'
 segnaposto: {}

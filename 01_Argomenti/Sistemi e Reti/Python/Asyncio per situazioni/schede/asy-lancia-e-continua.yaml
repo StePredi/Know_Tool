@@ -10,16 +10,17 @@ quando: Quando un'operazione lunga può andare avanti mentre ne fai un'altra.
 fasi:
 - nome: Schema
   righe:
-  - codice: |-
-      task_lungo = asyncio.create_task(operazione_lunga())
-      risultato_veloce = await operazione_veloce()
-      risultato_lungo = await task_lungo
+  - codice: task_lungo = asyncio.create_task(operazione_lunga())
     commento: Il task lungo parte in background mentre il main fa altro; lo aspetti solo quando serve il risultato.
     parti:
     - voce: create_task(operazione_lunga())
       spiega: parte (appena il loop è libero)
+  - codice: risultato_veloce = await operazione_veloce()
+    parti:
     - voce: await operazione_veloce()
       spiega: nel frattempo il main fa questo
+  - codice: risultato_lungo = await task_lungo
+    parti:
     - voce: await task_lungo
       spiega: ora aspetta il resto
 segnaposto: {}

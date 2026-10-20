@@ -15,17 +15,15 @@ fasi:
     trappola: Va impostato prima di creare il server.
 - nome: Avvia in un thread
   righe:
-  - codice: |-
-      server_thread = threading.Thread(target=server.serve_forever, daemon=True)
-      server_thread.start()
+  - codice: server_thread = threading.Thread(target=server.serve_forever, daemon=True)
     commento: 'serve_forever() è bloccante: in un thread lascia libero il programma principale'
+  - codice: server_thread.start()
 - nome: Ferma
   righe:
-  - codice: |-
-      server.shutdown()
-      server.server_close()
+  - codice: server.shutdown()
     commento: shutdown() ferma il ciclo, server_close() chiude il socket
     trappola: 'shutdown() va chiamato dal thread principale: dice a serve_forever() di fermarsi e aspetta che lo faccia.'
+  - codice: server.server_close()
 segnaposto: {}
 varianti: []
 vicine:

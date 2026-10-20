@@ -10,11 +10,10 @@ quando: Quando ti serve una funzioncina da passare a un altro metodo, per esempi
 fasi:
 - nome: Come chiave di ordinamento
   righe:
-  - codice: |-
-      pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
-      pairs.sort(key=lambda pair: pair[1])
+  - codice: pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
     commento: 'key è la funzione che dice per quale valore ordinare. La lambda restituisce il secondo elemento di ogni coppia (il testo), quindi le coppie finiscono in ordine alfabetico: four, one, three, two.'
     trappola: 'Una lambda può contenere una sola espressione: se serve altro, scrivi una def.'
+  - codice: 'pairs.sort(key=lambda pair: pair[1])'
     parti:
     - voce: 'lambda pair: pair[1]'
       spiega: 'funzione senza nome: prende pair e restituisce pair[1]'
@@ -22,16 +21,15 @@ fasi:
       spiega: dice a sort() cosa guardare
 - nome: Funzione che ne crea un'altra
   righe:
-  - codice: |-
-      def make_incrementor(n):
-          return lambda x: x + n
-
-      f = make_incrementor(42)
-      f(1)
+  - codice: 'def make_incrementor(n):'
     commento: Una funzione può restituire una lambda. n resta "ricordato" nella lambda.
+  - codice: '    return lambda x: x + n'
+  - codice: f = make_incrementor(42)
     parti:
     - voce: make_incrementor(42)
       spiega: restituisce una funzione che somma 42
+  - codice: f(1)
+    parti:
     - voce: f(1)
       spiega: '43'
 segnaposto: {}

@@ -10,9 +10,7 @@ quando: Quando il messaggio ha una lunghezza fissa nota.
 fasi:
 - nome: Leggi
   righe:
-  - codice: |-
-      blocco1 = await reader.readexactly(4)
-      blocco2 = await reader.readexactly(4)
+  - codice: blocco1 = await reader.readexactly(4)
     commento: readexactly(n) aspetta finché non ha ricevuto n byte. Utile per messaggi con lunghezza fissa.
     trappola: Aspetta finché ha ricevuto tutti i byte richiesti.
     parti:
@@ -20,6 +18,7 @@ fasi:
       spiega: esattamente 4 byte
     - voce: blocco1, blocco2
       spiega: b"1234" e b"5678"
+  - codice: blocco2 = await reader.readexactly(4)
 segnaposto: {}
 varianti: []
 vicine:

@@ -10,12 +10,11 @@ quando: Quando il server deve accettare solo i client che passano un controllo, 
 fasi:
 - nome: Sovrascrivi verify_request
   righe:
-  - codice: |-
-      class MioServer(socketserver.TCPServer):
-          def verify_request(self, request, client_address):
-              return client_address[0] != «IP_RIFIUTATO»
+  - codice: 'class MioServer(socketserver.TCPServer):'
     commento: False = richiesta rifiutata, True = processata
     trappola: 'Nota: esempio scritto per l''esercizio 3 del notebook. Di base verify_request restituisce sempre True, cioè accetta tutto.'
+  - codice: '    def verify_request(self, request, client_address):'
+  - codice: '        return client_address[0] != «IP_RIFIUTATO»'
 segnaposto:
   IP_RIFIUTATO:
     esempio: '''192.168.1.50'''

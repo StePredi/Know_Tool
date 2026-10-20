@@ -10,12 +10,11 @@ quando: Quando devi mandare un datagramma UDP a un server e leggere la risposta.
 fasi:
 - nome: Invia e ricevi
   righe:
-  - codice: |-
-      with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-          s.sendto(b"messaggio UDP", («HOST», «PORTA»))
-          risposta, _ = s.recvfrom(1024)
+  - codice: 'with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:'
     commento: recvfrom restituisce i dati e l'indirizzo di chi ha risposto
     trappola: 'UDP non ha connect(): ogni datagramma porta con sé l''indirizzo; può perdersi o arrivare fuori ordine.'
+  - codice: '    s.sendto(b"messaggio UDP", («HOST», «PORTA»))'
+  - codice: '    risposta, _ = s.recvfrom(1024)'
 segnaposto:
   HOST:
     esempio: '''127.0.0.1'''

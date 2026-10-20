@@ -10,20 +10,18 @@ quando: Quando il log segnala "Riga malformata", "errore parsing" o "errore seri
 fasi:
 - nome: 'Riga sbagliata: scartala'
   righe:
-  - codice: |-
-      except ValueError as e:
-          self.logger.error(f"errore parsing: {e}")
-          return None
+  - codice: 'except ValueError as e:'
     commento: una riga corrotta non deve interrompere il programma
     trappola: 'Nota: righe a metà possono capitare se si inizia a leggere mentre il dispositivo sta già trasmettendo.'
+  - codice: '    self.logger.error(f"errore parsing: {e}")'
+  - codice: '    return None'
 - nome: 'Errore della porta: fermati'
   righe:
-  - codice: |-
-      except serial.SerialException as e:
-          self.logger.error(f"errore seriale: {e}")
-          break
+  - codice: 'except serial.SerialException as e:'
     commento: se la porta si guasta il ciclo termina
     trappola: 'Nota: succede per esempio se il cavo viene scollegato mentre il programma gira.'
+  - codice: '    self.logger.error(f"errore seriale: {e}")'
+  - codice: '    break'
 segnaposto: {}
 varianti: []
 vicine:

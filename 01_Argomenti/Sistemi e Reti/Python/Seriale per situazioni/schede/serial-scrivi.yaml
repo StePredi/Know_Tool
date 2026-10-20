@@ -15,11 +15,10 @@ fasi:
     trappola: 'Nota: senza il \n finale il dispositivo non capisce dove finisce il comando.'
 - nome: Scrivi
   righe:
-  - codice: |-
-      self.port.write(cmd.encode('ascii'))
-      self.logger.debug(f"TX -> {cmd.strip()}")
+  - codice: self.port.write(cmd.encode('ascii'))
     commento: write() vuole byte, non stringhe
     trappola: 'Nota: i comandi sono stringhe come "ALARM:ON" o "SET:TH:30"; il formato lo decide il programma sul dispositivo.'
+  - codice: self.logger.debug(f"TX -> {cmd.strip()}")
 segnaposto: {}
 varianti: []
 vicine:

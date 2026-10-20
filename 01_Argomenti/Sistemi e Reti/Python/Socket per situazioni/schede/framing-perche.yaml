@@ -17,11 +17,10 @@ fasi:
     trappola: 'Nota: TCP è un flusso di byte e non conserva i confini dei messaggi: una send() può arrivare in più recv(), e più send() in una sola.'
 - nome: Esempio dalle fonti
   righe:
-  - codice: |-
-      payload = "hello world " * 10000
-      s.send(payload.encode())
-      data = s.recv()
+  - codice: payload = "hello world " * 10000
     commento: 120000 byte spediti e ricevuti in un colpo solo, grazie al frame
+  - codice: s.send(payload.encode())
+  - codice: data = s.recv()
 segnaposto: {}
 varianti: []
 vicine:

@@ -10,19 +10,18 @@ quando: Quando il programma ha altro da fare (disegnare una dashboard, mostrare 
 fasi:
 - nome: Avvia e continua
   righe:
-  - codice: |-
-      self.client.connect_to_broker()
-      self.client.loop_start()
-      try:
-          while True:
-              self.stampa_dashboard()
-              time.sleep(0.5)
-      except KeyboardInterrupt:
-          pass
-      finally:
-          self.client.disconnect_from_broker()
+  - codice: self.client.connect_to_broker()
     commento: le callback girano nel thread di paho, il main ridisegna
     trappola: 'Nota: le callback aggiornano i dati mentre il main li legge: per dati semplici va bene, per strutture complesse servirebbero protezioni.'
+  - codice: self.client.loop_start()
+  - codice: 'try:'
+  - codice: '    while True:'
+  - codice: '        self.stampa_dashboard()'
+  - codice: '        time.sleep(0.5)'
+  - codice: 'except KeyboardInterrupt:'
+  - codice: '    pass'
+  - codice: 'finally:'
+  - codice: '    self.client.disconnect_from_broker()'
 segnaposto: {}
 varianti: []
 vicine:

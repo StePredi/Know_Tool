@@ -13,12 +13,11 @@ fasi:
   - codice: 'self.logger.error(f"Errore apertura porta: {e}")'
     commento: compare se Serial(...) non è riuscito ad aprire la porta
     trappola: 'Nota: cause comuni sono il numero COM sbagliato, il dispositivo non collegato, o la porta già aperta da un altro programma.'
-  - codice: |-
-      if self.port is None:
-          self.logger.error("porta non disponibile — thread terminato")
-          return
+  - codice: 'if self.port is None:'
     commento: 'in questo caso il thread seriale termina subito: il resto del programma continua ma senza dati'
     trappola: 'Il programma non si ferma da solo: se manca l''avviso nel log, può sembrare che funzioni ma non arrivano dati.'
+  - codice: '    self.logger.error("porta non disponibile — thread terminato")'
+  - codice: '    return'
 segnaposto: {}
 varianti: []
 vicine:

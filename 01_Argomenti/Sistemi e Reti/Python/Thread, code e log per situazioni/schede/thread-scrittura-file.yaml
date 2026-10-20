@@ -10,24 +10,24 @@ quando: Quando vuoi salvare i dati su file senza rallentare il resto del program
 fasi:
 - nome: Il ciclo di scrittura
   righe:
-  - codice: |-
-      while True:
-          try:
-              record = self.coda_log.get(timeout=1)
-              try:
-                  with open(self.log_file, 'a') as f:
-                      f.write(json.dumps(record) + '\n')
-              except IOError as e:
-                  self.logger.error(f"errore scrittura: {e}")
-          except queue.Empty:
-              pass
+  - codice: 'while True:'
     commento: un record JSON per riga, in coda al file
+    trappola: 'Il file si apre e si chiude a ogni record: più lento, ma ogni riga è già salvata quando il programma si interrompe.'
+  - codice: '    try:'
+  - codice: '        record = self.coda_log.get(timeout=1)'
     parti:
     - voce: '''a'''
       spiega: 'append: aggiunge in fondo senza cancellare quello che c''è'
+  - codice: '        try:'
+  - codice: '            with open(self.log_file, ''a'') as f:'
+  - codice: '                f.write(json.dumps(record) + ''\n'')'
+    parti:
     - voce: json.dumps(record) + '\n'
       spiega: una riga di testo JSON per ogni record
-    trappola: 'Il file si apre e si chiude a ogni record: più lento, ma ogni riga è già salvata quando il programma si interrompe.'
+  - codice: '        except IOError as e:'
+  - codice: '            self.logger.error(f"errore scrittura: {e}")'
+  - codice: '    except queue.Empty:'
+  - codice: '        pass'
 segnaposto: {}
 varianti: []
 vicine:

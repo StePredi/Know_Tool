@@ -10,24 +10,22 @@ quando: Quando preferisci una semplice funzione a una classe per gestire ogni cl
 fasi:
 - nome: Scrivi la funzione del client
   righe:
-  - codice: |-
-      def gestisci_client(conn, addr):
-          print(f"[SERVER] new client @{addr} connected!")
-          while True:
-              data = conn.recv()
-              if not data:
-                  conn.close()
-                  return
-              conn.send(data)
+  - codice: 'def gestisci_client(conn, addr):'
     commento: esce dalla funzione quando il client chiude
     trappola: 'Nota: qui conn.recv() senza argomenti è quello di FrameSocket; con un socket normale serve recv(1024).'
+  - codice: '    print(f"[SERVER] new client @{addr} connected!")'
+  - codice: '    while True:'
+  - codice: '        data = conn.recv()'
+  - codice: '        if not data:'
+  - codice: '            conn.close()'
+  - codice: '            return'
+  - codice: '        conn.send(data)'
 - nome: Avvia un thread per ogni connessione
   righe:
-  - codice: |-
-      t = threading.Thread(target=gestisci_client, args=(conn, addr), daemon=True)
-      t.start()
+  - codice: t = threading.Thread(target=gestisci_client, args=(conn, addr), daemon=True)
     commento: target è la funzione, args la tupla dei suoi argomenti
     trappola: 'args è una tupla: con un solo argomento serve la virgola finale, per esempio args=(conn,).'
+  - codice: t.start()
 segnaposto: {}
 varianti: []
 vicine:

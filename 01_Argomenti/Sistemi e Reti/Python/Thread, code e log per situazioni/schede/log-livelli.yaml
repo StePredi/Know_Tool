@@ -10,13 +10,12 @@ quando: Quando il programma disegna un menu o una dashboard e i messaggi di log 
 fasi:
 - nome: Due handler, due livelli
   righe:
-  - codice: |-
-      file_handler = logging.FileHandler(LOG_FILE)
-      file_handler.setLevel(logging.DEBUG)
-      console_handler = logging.StreamHandler()
-      console_handler.setLevel(logging.WARNING)  # protegge il menu
+  - codice: file_handler = logging.FileHandler(LOG_FILE)
     commento: nel file va tutto, sulla console solo WARNING e peggio
     trappola: 'Il livello generale di basicConfig deve essere abbastanza basso (DEBUG): ogni handler poi filtra con il suo.'
+  - codice: file_handler.setLevel(logging.DEBUG)
+  - codice: console_handler = logging.StreamHandler()
+  - codice: 'console_handler.setLevel(logging.WARNING)  # protegge il menu'
   - codice: logging.basicConfig(level=logging.DEBUG, handlers=[file_handler, console_handler])
     commento: passa i due handler a basicConfig
 segnaposto: {}

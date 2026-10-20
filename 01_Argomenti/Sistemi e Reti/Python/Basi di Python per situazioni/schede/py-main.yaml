@@ -10,10 +10,7 @@ quando: Quando un file deve poter essere sia un programma sia un modulo da impor
 fasi:
 - nome: In fondo al file
   righe:
-  - codice: |-
-      if __name__ == "__main__":
-          import sys
-          fib(int(sys.argv[1]))
+  - codice: 'if __name__ == "__main__":'
     commento: Ogni file ha una variabile __name__. Se lo avvii direttamente vale "__main__"; se lo importi vale il nome del modulo. Così il blocco parte solo da programma.
     trappola: Se il modulo viene importato __name__ vale il nome del modulo e il blocco non parte.
     parti:
@@ -21,6 +18,9 @@ fasi:
       spiega: nome del modulo in esecuzione
     - voce: '"__main__"'
       spiega: valore quando il file è avviato direttamente
+  - codice: '    import sys'
+  - codice: '    fib(int(sys.argv[1]))'
+    parti:
     - voce: sys.argv[1]
       spiega: primo argomento scritto dopo il nome del file
 - nome: Lancialo dal terminale

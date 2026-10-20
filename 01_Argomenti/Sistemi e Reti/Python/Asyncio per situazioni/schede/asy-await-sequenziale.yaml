@@ -12,14 +12,14 @@ quando: Quando la seconda operazione ha bisogno che la prima sia finita.
 fasi:
 - nome: Sequenziale
   righe:
-  - codice: |-
-      ris_a = await operazione_a()
-      ris_b = await operazione_b()
+  - codice: ris_a = await operazione_a()
     commento: Con await diretto ogni coroutine viene eseguita per intero prima della successiva. Con due pause da 2 secondi il totale è 4. Non c'è concorrenza.
     trappola: È come il codice normale, con in più la possibilità di cedere il controllo durante le attese.
     parti:
     - voce: await operazione_a()
       spiega: esegue A e aspetta la fine
+  - codice: ris_b = await operazione_b()
+    parti:
     - voce: await operazione_b()
       spiega: solo dopo parte B
 segnaposto: {}

@@ -10,27 +10,27 @@ quando: Quando vuoi che il task creato parta prima del resto del codice.
 fasi:
 - nome: Il problema
   righe:
-  - codice: |-
-      task_b = asyncio.create_task(operazione_lunga("Task-B"))
-      risultato_a = await operazione_lunga("Coroutine-A")
+  - codice: task_b = asyncio.create_task(operazione_lunga("Task-B"))
     commento: 'Il task è in coda ma non gira finché il main non si sospende: così la coroutine A inizia per prima, anche se il task è stato creato prima.'
     parti:
     - voce: create_task(...)
       spiega: il task entra in coda
+  - codice: risultato_a = await operazione_lunga("Coroutine-A")
+    parti:
     - voce: await operazione_lunga("Coroutine-A")
       spiega: A parte subito
 - nome: La soluzione
   righe:
-  - codice: |-
-      task_b = asyncio.create_task(operazione_lunga("Task-B"))
-      await asyncio.sleep(0)
+  - codice: task_b = asyncio.create_task(operazione_lunga("Task-B"))
     commento: 'sleep(0) non aspetta niente: serve solo a cedere il controllo, e il loop avvia i task in coda.'
     trappola: 'Il task entra in coda: parte solo quando il codice che lo ha creato si sospende.'
     parti:
-    - voce: await asyncio.sleep(0)
-      spiega: '"respiro" per l''event loop'
     - voce: Task-B
       spiega: ora parte prima di A
+  - codice: await asyncio.sleep(0)
+    parti:
+    - voce: await asyncio.sleep(0)
+      spiega: '"respiro" per l''event loop'
 segnaposto: {}
 varianti: []
 vicine:

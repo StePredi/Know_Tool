@@ -10,14 +10,14 @@ quando: Quando vuoi i dati disponibili senza aspettare di averne n.
 fasi:
 - nome: Leggi
   righe:
-  - codice: |-
-      pezzo = await reader.read(100)
-      print("read(100)         ->", pezzo, f"({len(pezzo)} byte)")
+  - codice: pezzo = await reader.read(100)
     commento: 'read(n) non aspetta di averne n: restituisce subito quello che c''è (al massimo n). Qui sono 11 byte di "primo pezzo".'
     trappola: 'read(n) legge FINO A n byte: non aspetta di arrivare a n.'
     parti:
     - voce: read(100)
       spiega: fino a 100 byte
+  - codice: print("read(100)         ->", pezzo, f"({len(pezzo)} byte)")
+    parti:
     - voce: len(pezzo)
       spiega: quanti ne sono arrivati davvero
 segnaposto: {}

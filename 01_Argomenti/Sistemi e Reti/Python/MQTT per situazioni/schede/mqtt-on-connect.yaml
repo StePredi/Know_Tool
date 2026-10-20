@@ -10,16 +10,15 @@ quando: Quando il programma deve iscriversi ai topic appena la connessione al br
 fasi:
 - nome: La callback
   righe:
-  - codice: |-
-      def on_connect(self, client, userdata, flags, rc, properties=None):
-          if rc == 0:
-              self.is_connected = True
-              self.logger.info("connesso al broker")
-              self.subscribe(TOPIC_STATO, qos=1)
-          else:
-              self.logger.error(f"connessione fallita, result code: {rc}")
+  - codice: 'def on_connect(self, client, userdata, flags, rc, properties=None):'
     commento: rc == 0 = connessione riuscita; solo allora si sottoscrive
     trappola: 'Nota: iscriversi dentro on_connect significa rifare le iscrizioni anche dopo una riconnessione automatica.'
+  - codice: '    if rc == 0:'
+  - codice: '        self.is_connected = True'
+  - codice: '        self.logger.info("connesso al broker")'
+  - codice: '        self.subscribe(TOPIC_STATO, qos=1)'
+  - codice: '    else:'
+  - codice: '        self.logger.error(f"connessione fallita, result code: {rc}")'
 segnaposto: {}
 varianti: []
 vicine:

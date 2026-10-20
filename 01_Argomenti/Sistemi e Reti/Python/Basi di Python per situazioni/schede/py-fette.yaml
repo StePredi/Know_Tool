@@ -10,10 +10,9 @@ quando: Quando ti serve un carattere, un elemento o un tratto di una stringa o d
 fasi:
 - nome: Un elemento
   righe:
-  - codice: |-
-      word = 'Python'
-      word[0]
+  - codice: word = 'Python'
     commento: 'Una stringa è una sequenza di caratteri numerati da 0: word[0] è il primo.'
+  - codice: word[0]
     parti:
     - voce: word[0]
       spiega: 'carattere in posizione 0: ''P'''

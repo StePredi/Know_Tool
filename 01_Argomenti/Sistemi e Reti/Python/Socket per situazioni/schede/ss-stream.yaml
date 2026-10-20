@@ -10,19 +10,18 @@ quando: Quando i messaggi sono righe di testo e vuoi usare readline() invece di 
 fasi:
 - nome: Handler a stream
   righe:
-  - codice: |-
-      class echoRequestHandler(socketserver.StreamRequestHandler):
-
-          def handle(self):
-              data = self.rfile.readline().strip()
-              self.wfile.write(data)
+  - codice: 'class echoRequestHandler(socketserver.StreamRequestHandler):'
     commento: rfile per leggere, wfile per rispondere
+    trappola: 'readline() aspetta il carattere di a capo: il client deve terminare il messaggio con \n, altrimenti il server resta in attesa.'
+  - codice: '    def handle(self):'
+  - codice: '        data = self.rfile.readline().strip()'
     parti:
     - voce: rfile
       spiega: oggetto simile a un file, per ricevere
+  - codice: '        self.wfile.write(data)'
+    parti:
     - voce: wfile
       spiega: oggetto simile a un file, per rispondere
-    trappola: 'readline() aspetta il carattere di a capo: il client deve terminare il messaggio con \n, altrimenti il server resta in attesa.'
 segnaposto: {}
 varianti: []
 vicine:

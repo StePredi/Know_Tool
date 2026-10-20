@@ -10,48 +10,49 @@ quando: Quando un ciclo deve fermarsi prima della fine, saltare un elemento o sa
 fasi:
 - nome: Fermare
   righe:
-  - codice: |-
-      for n in range(2, 10):
-          for x in range(2, n):
-              if n % x == 0:
-                  print(f"{n} equals {x} * {n//x}")
-                  break
+  - codice: 'for n in range(2, 10):'
     commento: 'Cerca i divisori di n: appena ne trova uno stampa la scomposizione ed esce dal ciclo interno con break, senza provare gli altri.'
+  - codice: '    for x in range(2, n):'
     parti:
     - voce: range(2, n)
       spiega: i numeri da 2 a n-1 da provare come divisori
+  - codice: '        if n % x == 0:'
+    parti:
     - voce: n % x == 0
       spiega: x divide n se il resto è 0
+  - codice: '            print(f"{n} equals {x} * {n//x}")'
+  - codice: '            break'
+    parti:
     - voce: break
       spiega: interrompe il for più interno e ripartono i giri di quello esterno
 - nome: Saltare
   righe:
-  - codice: |-
-      for num in range(2, 10):
-          if num % 2 == 0:
-              print(f"Found an even number {num}")
-              continue
-          print(f"Found an odd number {num}")
+  - codice: 'for num in range(2, 10):'
     commento: 'continue salta il resto del giro: per i numeri pari stampa e passa subito al successivo, per i dispari arriva alla seconda print.'
+  - codice: '    if num % 2 == 0:'
     parti:
     - voce: num % 2 == 0
       spiega: vero per i numeri pari
+  - codice: '        print(f"Found an even number {num}")'
+  - codice: '        continue'
+    parti:
     - voce: continue
       spiega: salta le istruzioni sotto e riparte dal giro dopo
+  - codice: '    print(f"Found an odd number {num}")'
 - nome: Sapere se non ci sono stati break
   righe:
-  - codice: |-
-      for n in range(2, 10):
-          for x in range(2, n):
-              if n % x == 0:
-                  break
-          else:
-              print(n, 'is a prime number')
+  - codice: 'for n in range(2, 10):'
     commento: 'L''else appartiene al for: gira solo se il ciclo finisce da solo, cioè nessun divisore trovato: il numero è primo.'
     trappola: Se il ciclo viene interrotto da un break, l'else NON viene eseguito.
     parti:
     - voce: for ... else
       spiega: l'else si esegue se il for finisce senza break
+  - codice: '    for x in range(2, n):'
+  - codice: '        if n % x == 0:'
+  - codice: '            break'
+  - codice: '    else:'
+  - codice: '        print(n, ''is a prime number'')'
+    parti:
     - voce: print(n, 'is a prime number')
       spiega: qui arrivi solo se nessun x ha diviso n
 segnaposto: {}

@@ -17,18 +17,18 @@ fasi:
       spiega: gli errori vengono restituiti invece di essere sollevati
 - nome: Controlla ogni risultato
   righe:
-  - codice: |-
-      for i, risultato in enumerate(risultati, 1):
-          if isinstance(risultato, Exception):
-              print(f"Task {i}: Errore - {risultato}")
-          else:
-              print(f"Task {i}: {risultato}")
+  - codice: 'for i, risultato in enumerate(risultati, 1):'
     commento: Per ogni risultato controlli se è un'eccezione.
     parti:
     - voce: enumerate(risultati, 1)
       spiega: numera da 1
+  - codice: '    if isinstance(risultato, Exception):'
+    parti:
     - voce: isinstance(risultato, Exception)
       spiega: True se il task è fallito
+  - codice: '        print(f"Task {i}: Errore - {risultato}")'
+  - codice: '    else:'
+  - codice: '        print(f"Task {i}: {risultato}")'
 segnaposto: {}
 varianti: []
 vicine:

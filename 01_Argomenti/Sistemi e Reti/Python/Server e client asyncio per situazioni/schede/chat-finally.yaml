@@ -10,18 +10,19 @@ quando: Quando un client esce, normalmente o all'improvviso.
 fasi:
 - nome: Pulizia
   righe:
-  - codice: |-
-      finally:
-          clienti.remove(writer)               # in ogni caso lo togliamo dalla lista
-          print(nome, "è uscito")
-          writer.close()
+  - codice: 'finally:'
     commento: 'Il finally toglie sempre il writer dalla lista: sia per uscita normale sia per errore. Senza, la lista conterrebbe client morti.'
     trappola: Senza il finally, un client caduto resterebbe nell'elenco e gli invii successivi darebbero errore.
     parti:
     - voce: 'finally:'
       spiega: si esegue sempre
+  - codice: '    clienti.remove(writer)               # in ogni caso lo togliamo dalla lista'
+    parti:
     - voce: clienti.remove(writer)
       spiega: toglie il client
+  - codice: '    print(nome, "è uscito")'
+  - codice: '    writer.close()'
+    parti:
     - voce: writer.close()
       spiega: chiude la connessione
 segnaposto: {}

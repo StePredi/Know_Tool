@@ -12,12 +12,7 @@ quando: Quando il server o il client deve inviare byte.
 fasi:
 - nome: Invia
   righe:
-  - codice: |-
-      writer.write(b"Ciao, sono il server\n")      # per readline()
-      writer.write(b"rosso;verde;blu;")            # per readuntil(b";")
-      writer.write(b"12345678")                    # per readexactly(4)
-      writer.write(b"primo pezzo")                 # per read(100)
-      await writer.drain()
+  - codice: 'writer.write(b"Ciao, sono il server\n")      # per readline()'
     commento: Ogni write() mette i byte in un buffer; il drain() li invia davvero. Il server manda quattro "pezzi" diversi, ognuno pensato per una lettura del client.
     trappola: Il b"..." serve perché write vuole byte, non stringhe.
     parti:
@@ -25,22 +20,27 @@ fasi:
       spiega: byte, non stringa
     - voce: write
       spiega: buffer
+  - codice: 'writer.write(b"rosso;verde;blu;")            # per readuntil(b";")'
+  - codice: 'writer.write(b"12345678")                    # per readexactly(4)'
+  - codice: 'writer.write(b"primo pezzo")                 # per read(100)'
+  - codice: await writer.drain()
+    parti:
     - voce: await drain()
       spiega: invia e aspetta
 - nome: Pausa e chiusura
   righe:
-  - codice: |-
-      await asyncio.sleep(2)                       # pausa: il resto arriva dopo
-      writer.write(b"secondo pezzo, ultimi dati")
-      await writer.drain()
-      writer.close()
-      await writer.wait_closed()
+  - codice: 'await asyncio.sleep(2)                       # pausa: il resto arriva dopo'
     commento: 'Dopo una pausa manda l''ultima parte e chiude: la chiusura è il segnale che fa finire read().'
     parti:
     - voce: await asyncio.sleep(2)
       spiega: pausa senza bloccare gli altri client
+  - codice: writer.write(b"secondo pezzo, ultimi dati")
+  - codice: await writer.drain()
+  - codice: writer.close()
+    parti:
     - voce: writer.close()
       spiega: fine della connessione
+  - codice: await writer.wait_closed()
 segnaposto: {}
 varianti: []
 vicine:

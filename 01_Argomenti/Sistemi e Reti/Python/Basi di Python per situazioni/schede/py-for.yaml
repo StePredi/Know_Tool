@@ -10,25 +10,24 @@ quando: Quando devi fare qualcosa per ogni elemento di una lista, o un certo num
 fasi:
 - nome: Su una sequenza
   righe:
-  - codice: |-
-      words = ['cat', 'window', 'defenestrate']
-      for w in words:
-          print(w, len(w))
+  - codice: words = ['cat', 'window', 'defenestrate']
     commento: 'Il for scorre una lista: ad ogni giro w contiene l''elemento successivo.'
+  - codice: 'for w in words:'
     parti:
     - voce: 'for w in words:'
       spiega: w = un elemento per giro
+  - codice: '    print(w, len(w))'
+    parti:
     - voce: len(w)
       spiega: lunghezza della parola
 - nome: Un certo numero di volte
   righe:
-  - codice: |-
-      for i in range(5):
-          print(i)
+  - codice: 'for i in range(5):'
     commento: range(5) produce i numeri da 0 a 4, utile quando ti serve solo ripetere n volte.
     parti:
     - voce: range(5)
       spiega: 0, 1, 2, 3, 4
+  - codice: '    print(i)'
   - codice: list(range(5, 10))
     commento: Con due numeri range parte dal primo e arriva al secondo escluso. list() serve per vedere i valori.
     parti:

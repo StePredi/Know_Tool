@@ -10,53 +10,53 @@ quando: Quando vuoi raggruppare dati e funzioni che lavorano su quei dati.
 fasi:
 - nome: Definisci
   righe:
-  - codice: |-
-      class Complex:
-          def __init__(self, realpart, imagpart):
-              self.r = realpart
-              self.i = imagpart
+  - codice: 'class Complex:'
     commento: '__init__ è il costruttore: Python lo chiama da solo ogni volta che crei un oggetto, e serve a dargli i valori iniziali.'
     trappola: self è solo una convenzione per il nome del primo parametro, ma tutti i metodi lo devono avere.
     parti:
     - voce: 'class Complex:'
       spiega: crea un nuovo tipo chiamato Complex
+  - codice: '    def __init__(self, realpart, imagpart):'
+    parti:
     - voce: def __init__(self, realpart, imagpart)
       spiega: self è l'oggetto che si sta creando; gli altri sono i dati passati
+  - codice: '        self.r = realpart'
+    parti:
     - voce: self.r = realpart
       spiega: salva il dato dentro l'oggetto, come attributo
+  - codice: '        self.i = imagpart'
 - nome: Usa
   righe:
-  - codice: |-
-      x = Complex(3.0, -4.5)
-      x.r, x.i
+  - codice: x = Complex(3.0, -4.5)
     commento: Per creare un oggetto chiami la classe come una funzione. Gli attributi si leggono con il punto.
     parti:
     - voce: Complex(3.0, -4.5)
       spiega: chiama __init__ con realpart=3.0 e imagpart=-4.5 (self lo mette Python)
+  - codice: x.r, x.i
+    parti:
     - voce: x.r, x.i
       spiega: legge gli attributi dell'oggetto x
 - nome: Metodi che usano altri metodi
   righe:
-  - codice: |-
-      class Bag:
-          def __init__(self):
-              self.data = []
-
-          def add(self, x):
-              self.data.append(x)
-
-          def addtwice(self, x):
-              self.add(x)
-              self.add(x)
+  - codice: 'class Bag:'
     commento: Un metodo può chiamare un altro metodo dello stesso oggetto scrivendo self.nome(...).
     trappola: 'x.f() è identico a MyClass.f(x): l''oggetto viene passato come primo argomento.'
+  - codice: '    def __init__(self):'
+  - codice: '        self.data = []'
     parti:
     - voce: self.data = []
       spiega: ogni Bag ha la sua lista
+  - codice: '    def add(self, x):'
+    parti:
     - voce: def add(self, x)
       spiega: 'metodo: il primo parametro è sempre l''oggetto'
+  - codice: '        self.data.append(x)'
+  - codice: '    def addtwice(self, x):'
+  - codice: '        self.add(x)'
+    parti:
     - voce: self.add(x)
       spiega: addtwice riusa add due volte
+  - codice: '        self.add(x)'
 segnaposto: {}
 varianti: []
 vicine:

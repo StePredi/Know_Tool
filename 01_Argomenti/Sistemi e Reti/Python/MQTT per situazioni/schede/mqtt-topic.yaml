@@ -10,14 +10,13 @@ quando: Quando devi decidere i topic del tuo sistema.
 fasi:
 - nome: Costanti in testa al file
   righe:
-  - codice: |-
-      TOPIC_DATI   = 'allarme/dati/sp'
-      TOPIC_ALERT  = 'allarme/alert/sp'
-      TOPIC_STATO  = 'allarme/stato/sp'
-      TOPIC_CMD    = 'allarme/cmd/sp'
-      TOPIC_CONFIG = 'allarme/config/sp'
+  - codice: TOPIC_DATI   = 'allarme/dati/sp'
     commento: primo livello = sistema, secondo = tipo di messaggio, terzo fisso
     trappola: 'Nota: i topic sono scritti in più file (gateway, controller, monitor): tenerli come costanti uguali ovunque evita refusi che fanno "non arrivare" i messaggi.'
+  - codice: TOPIC_ALERT  = 'allarme/alert/sp'
+  - codice: TOPIC_STATO  = 'allarme/stato/sp'
+  - codice: TOPIC_CMD    = 'allarme/cmd/sp'
+  - codice: TOPIC_CONFIG = 'allarme/config/sp'
 segnaposto: {}
 varianti: []
 vicine:

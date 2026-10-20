@@ -10,14 +10,13 @@ quando: Quando arriva un messaggio e vuoi trasformarlo in un dizionario Python.
 fasi:
 - nome: La callback
   righe:
-  - codice: |-
-      def on_message(self, client, userdata, message):
-          try:
-              self.stato_sistema = json.loads(message.payload.decode('utf-8'))
-          except json.JSONDecodeError as e:
-              self.logger.error(f"errore parsing JSON: {e}")
+  - codice: 'def on_message(self, client, userdata, message):'
     commento: 'payload è in byte: decode() lo trasforma in testo, json.loads() in dizionario'
     trappola: 'Un messaggio che non è JSON valido non deve fermare il programma: si registra l''errore e si va avanti.'
+  - codice: '    try:'
+  - codice: '        self.stato_sistema = json.loads(message.payload.decode(''utf-8''))'
+  - codice: '    except json.JSONDecodeError as e:'
+  - codice: '        self.logger.error(f"errore parsing JSON: {e}")'
 segnaposto: {}
 varianti: []
 vicine:

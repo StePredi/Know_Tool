@@ -10,33 +10,31 @@ quando: Quando il client deve ricevere i messaggi degli altri mentre l'utente sc
 fasi:
 - nome: Collega
   righe:
-  - codice: |-
-      reader, writer = await asyncio.open_connection("127.0.0.1", 8888)
-      print("Connesso alla chat. Scrivi /quit per uscire.")
-
-      await asyncio.gather(ricevi(reader, writer), invia(writer))
+  - codice: reader, writer = await asyncio.open_connection("127.0.0.1", 8888)
     commento: 'gather fa girare insieme ricevi() e invia(): il client mostra i messaggi mentre l''utente scrive.'
+  - codice: print("Connesso alla chat. Scrivi /quit per uscire.")
+  - codice: await asyncio.gather(ricevi(reader, writer), invia(writer))
     parti:
     - voce: gather(ricevi(...), invia(...))
       spiega: due coroutine in parallelo
 - nome: Ricevi
   righe:
-  - codice: |-
-      async def ricevi(reader, writer):
-          while True:
-              dati = await reader.readline()
-              if not dati:
-                  if not writer.is_closing():
-                      print("Il server ha chiuso la connessione (premi Invio per uscire)")
-                      writer.close()
-                  break
-              print(dati.decode().strip())
+  - codice: 'async def ricevi(reader, writer):'
     commento: ricevi() stampa quello che arriva; se il server chiude, esce e chiude anche il client.
+  - codice: '    while True:'
+  - codice: '        dati = await reader.readline()'
+  - codice: '        if not dati:'
     parti:
     - voce: if not dati
       spiega: il server ha chiuso
+  - codice: '            if not writer.is_closing():'
+    parti:
     - voce: writer.is_closing()
       spiega: evita di chiudere due volte
+  - codice: '                print("Il server ha chiuso la connessione (premi Invio per uscire)")'
+  - codice: '                writer.close()'
+  - codice: '            break'
+  - codice: '        print(dati.decode().strip())'
 segnaposto: {}
 varianti: []
 vicine:

@@ -10,13 +10,12 @@ quando: Quando il programma si ferma e le risorse (porta seriale, connessione al
 fasi:
 - nome: Chiama chiudi su ogni parte
   righe:
-  - codice: |-
-      def chiudi(self):
-          self.logger.info("chiusura gateway")
-          self.seriale.chiudi()
-          self.mqtt.chiudi()
+  - codice: 'def chiudi(self):'
     commento: ogni classe sa chiudere le proprie risorse
     trappola: 'Nota: i thread daemon non si "chiudono" ma si fermano col programma; chiudi() serve per liberare porta seriale e connessione.'
+  - codice: '    self.logger.info("chiusura gateway")'
+  - codice: '    self.seriale.chiudi()'
+  - codice: '    self.mqtt.chiudi()'
 segnaposto: {}
 varianti: []
 vicine:

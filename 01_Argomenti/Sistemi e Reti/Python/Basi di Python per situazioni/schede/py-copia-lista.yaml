@@ -18,22 +18,22 @@ fasi:
       spiega: due nomi, un solo oggetto
 - nome: Una copia vera
   righe:
-  - codice: |-
-      correct_rgba = rgba[:]
-      correct_rgba = rgba.copy()
+  - codice: correct_rgba = rgba[:]
     commento: 'Per avere una copia vera usa una fetta completa oppure copy(). È una copia "superficiale": copia la lista, non gli oggetti dentro.'
     parti:
     - voce: rgba[:]
       spiega: fetta dall'inizio alla fine = nuova lista
+  - codice: correct_rgba = rgba.copy()
+    parti:
     - voce: rgba.copy()
       spiega: stesso risultato, più esplicito
-  - codice: |-
-      x = [a, n]
-      x[0][1]
+  - codice: x = [a, n]
     commento: 'Se la lista contiene altre liste, la copia superficiale le condivide: modificare una lista interna cambia entrambe le copie.'
     parti:
     - voce: x = [a, n]
       spiega: lista che contiene la lista a
+  - codice: x[0][1]
+    parti:
     - voce: x[0][1]
       spiega: secondo elemento della lista interna a
 segnaposto: {}

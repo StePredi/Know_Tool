@@ -10,20 +10,19 @@ quando: Quando il programma deve parlare con un dispositivo collegato a una port
 fasi:
 - nome: Prova ad aprirla
   righe:
-  - codice: |-
-      try:
-          self.port = serial.Serial(«PORTA», «BAUD», timeout=1)
-          self.logger.info(f"Connesso su {«PORTA»}")
-      except serial.SerialException as e:
-          self.logger.error(f"Errore apertura porta: {e}")
-          self.port = None
+  - codice: 'try:'
     commento: se fallisce registra l'errore e lascia port a None
+    trappola: 'Nota: su Windows la porta si chiama COM e un numero; su Linux è del tipo /dev/ttyUSB0.'
+  - codice: '    self.port = serial.Serial(«PORTA», «BAUD», timeout=1)'
     parti:
     - voce: timeout=1
       spiega: una lettura aspetta al massimo 1 secondo
     - voce: «BAUD»
       spiega: 'velocità: deve essere la stessa del dispositivo'
-    trappola: 'Nota: su Windows la porta si chiama COM e un numero; su Linux è del tipo /dev/ttyUSB0.'
+  - codice: '    self.logger.info(f"Connesso su {«PORTA»}")'
+  - codice: 'except serial.SerialException as e:'
+  - codice: '    self.logger.error(f"Errore apertura porta: {e}")'
+  - codice: '    self.port = None'
 segnaposto:
   PORTA:
     esempio: '''COM12'''

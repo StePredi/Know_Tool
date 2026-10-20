@@ -10,25 +10,23 @@ quando: Quando la riga ricevuta è fatta di campi separati da virgole e devi ric
 fasi:
 - nome: Separa i campi e controlla quanti sono
   righe:
-  - codice: |-
-      campi = riga.strip().split(',')
-      if len(campi) < 3 or len(campi) > 4:
-          self.logger.warning(f"Riga malformata: {riga}")
-          return None
+  - codice: campi = riga.strip().split(',')
     commento: strip() toglie lo spazio e l'a capo, split(',') divide sulle virgole
     trappola: 'Una riga con troppi o troppo pochi campi si scarta con un avviso: non deve fermare il programma.'
+  - codice: 'if len(campi) < 3 or len(campi) > 4:'
+  - codice: '    self.logger.warning(f"Riga malformata: {riga}")'
+  - codice: '    return None'
 - nome: Costruisci il record
   righe:
-  - codice: |-
-      record = {
-          'ts': datetime.now().isoformat(),
-          'temp': float(campi[0]),
-          'stato': campi[1],
-          'src': campi[2],
-          'mute': len(campi) == 4 and campi[3] == 'MUTE'
-      }
+  - codice: record = {
     commento: il quarto campo è facoltativo
     trappola: 'float() lancia ValueError se il campo non è un numero (riga corrotta): va preso con except ValueError.'
+  - codice: '    ''ts'': datetime.now().isoformat(),'
+  - codice: '    ''temp'': float(campi[0]),'
+  - codice: '    ''stato'': campi[1],'
+  - codice: '    ''src'': campi[2],'
+  - codice: '    ''mute'': len(campi) == 4 and campi[3] == ''MUTE'''
+  - codice: '}'
 segnaposto: {}
 varianti: []
 vicine:

@@ -10,45 +10,42 @@ quando: Quando vuoi usare funzioni scritte in un altro file o nella libreria sta
 fasi:
 - nome: I modi di importare
   righe:
-  - codice: |-
-      import fibo
-      fibo.fib(1000)
+  - codice: import fibo
     commento: Il file fibo.py è un modulo. import fibo lo carica; per usare le sue funzioni scrivi il nome del modulo davanti.
     parti:
     - voce: import fibo
       spiega: carica il modulo
+  - codice: fibo.fib(1000)
+    parti:
     - voce: fibo.fib(1000)
       spiega: funzione fib dentro fibo
-  - codice: |-
-      from fibo import fib, fib2
-      fib(500)
+  - codice: from fibo import fib, fib2
     commento: from ... import porta nel tuo programma solo i nomi che indichi, senza prefisso.
     parti:
     - voce: from fibo import fib, fib2
       spiega: importa due funzioni
+  - codice: fib(500)
+    parti:
     - voce: fib(500)
       spiega: nessun prefisso
-  - codice: |-
-      import fibo as fib
-      fib.fib(500)
+  - codice: import fibo as fib
     commento: as dà al modulo un nome più corto.
     parti:
     - voce: import fibo as fib
       spiega: da ora il modulo si chiama fib
-  - codice: |-
-      from fibo import fib as fibonacci
-      fibonacci(500)
+  - codice: fib.fib(500)
+  - codice: from fibo import fib as fibonacci
     commento: as funziona anche per un solo nome importato.
     trappola: 'from fibo import * importa tutti i nomi che non iniziano con _, ma rende il codice poco leggibile: meglio evitarlo (si usa al più in console).'
     parti:
     - voce: from fibo import fib as fibonacci
       spiega: fib diventa fibonacci
+  - codice: fibonacci(500)
 - nome: Se modifichi il modulo
   righe:
-  - codice: |-
-      import importlib
-      importlib.reload(fibo)
+  - codice: import importlib
     commento: Il modulo viene letto una sola volta. Se modifichi il file mentre il programma gira, reload lo rilegge.
+  - codice: importlib.reload(fibo)
     parti:
     - voce: importlib.reload(fibo)
       spiega: rilegge il file del modulo

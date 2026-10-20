@@ -10,18 +10,18 @@ quando: Quando il testo letto potrebbe non essere JSON (file vuoto, messaggio ro
 fasi:
 - nome: Prendi l'errore
   righe:
-  - codice: |-
-      try:
-          dati = json.loads(testo)
-      except json.JSONDecodeError as e:
-          print("JSON non valido:", e)
+  - codice: 'try:'
     commento: loads/load sollevano JSONDecodeError se il testo non è JSON valido (file vuoto, virgole mancanti, testo tagliato).
     trappola: 'Nota: JSONDecodeError è una sottoclasse di ValueError, quindi anche except ValueError lo cattura.'
+  - codice: '    dati = json.loads(testo)'
+    parti:
+    - voce: e
+      spiega: il messaggio dice dove è il problema
+  - codice: 'except json.JSONDecodeError as e:'
     parti:
     - voce: except json.JSONDecodeError as e
       spiega: prende solo gli errori di JSON
-    - voce: e
-      spiega: il messaggio dice dove è il problema
+  - codice: '    print("JSON non valido:", e)'
 segnaposto: {}
 varianti: []
 vicine:

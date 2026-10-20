@@ -22,15 +22,14 @@ fasi:
     trappola: 'payload è bytes: con una stringa si fa prima payload.encode().'
 - nome: Invia tutto
   righe:
-  - codice: |-
-      bytes_sent = 0
-      while bytes_sent < HEADER_SIZE + payload_length:
-          chunk = frame[:1024]
-          n = self.sock.send(chunk)
-          bytes_sent += n
-          frame = frame[n:]
+  - codice: bytes_sent = 0
     commento: ripete finché ogni byte è partito
     trappola: 'send() può inviare meno di quanto chiesto e restituisce quanti byte ha mandato davvero: per questo si toglie dal frame solo n byte e si riprova.'
+  - codice: 'while bytes_sent < HEADER_SIZE + payload_length:'
+  - codice: '    chunk = frame[:1024]'
+  - codice: '    n = self.sock.send(chunk)'
+  - codice: '    bytes_sent += n'
+  - codice: '    frame = frame[n:]'
 segnaposto: {}
 varianti: []
 vicine:

@@ -10,28 +10,32 @@ quando: Quando il server deve parlare con più client nello stesso momento e vuo
 fasi:
 - nome: Scrivi la classe del gestore
   righe:
-  - codice: |-
-      class Gestore_Client(threading.Thread):
-          def __init__(self, conn, addr):
-              super().__init__(daemon=True)
-              self.conn = conn
-              self.addr = addr
+  - codice: 'class Gestore_Client(threading.Thread):'
     commento: salva connessione e indirizzo del client
+    trappola: 'Si scrive super().__init__(...) con le parentesi: nella fonte mancano e dà errore (vedi la scheda sull''errore di super).'
+  - codice: '    def __init__(self, conn, addr):'
+  - codice: '        super().__init__(daemon=True)'
     parti:
     - voce: daemon=True
       spiega: il thread si ferma da solo quando il programma principale termina
-    trappola: 'Si scrive super().__init__(...) con le parentesi: nella fonte mancano e dà errore (vedi la scheda sull''errore di super).'
-  - codice: "    def run(self):\n        while True:\n            data = self.conn.recv(1024)\n            if not data:\n                break\n            self.conn.send(data)\n        self.conn.close()"
+  - codice: '        self.conn = conn'
+  - codice: '        self.addr = addr'
+  - codice: '    def run(self):'
     commento: 'il lavoro del thread: eco finché il client resta'
+  - codice: '        while True:'
+  - codice: '            data = self.conn.recv(1024)'
+  - codice: '            if not data:'
+  - codice: '                break'
+  - codice: '            self.conn.send(data)'
+  - codice: '        self.conn.close()'
 - nome: Un thread per ogni client che arriva
   righe:
-  - codice: |-
-      while True:
-          conn, addr = server_sock.accept()
-          t = Gestore_Client(conn, addr)
-          t.start()
+  - codice: 'while True:'
     commento: accept() nel ciclo principale, il resto lo fa il thread
     trappola: 'Si chiama start(), non run(): run() eseguirebbe il lavoro nel thread principale, bloccando gli altri client.'
+  - codice: '    conn, addr = server_sock.accept()'
+  - codice: '    t = Gestore_Client(conn, addr)'
+  - codice: '    t.start()'
 segnaposto: {}
 varianti: []
 vicine:

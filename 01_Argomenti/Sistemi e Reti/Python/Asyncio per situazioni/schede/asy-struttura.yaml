@@ -10,22 +10,21 @@ quando: Quando devi impostare un programma asincrono da zero.
 fasi:
 - nome: Tre passi
   righe:
-  - codice: |-
-      async def scarica_file(nome):
-          ...
+  - codice: 'async def scarica_file(nome):'
     commento: 'Primo passo: scrivi le coroutine dei compiti che devono andare insieme.'
     parti:
     - voce: async def scarica_file(nome)
       spiega: un compito
-  - codice: |-
-      async def main():
-          task1 = asyncio.create_task(scarica_file("file1.txt"))
-          task2 = asyncio.create_task(scarica_file("file2.txt"))
-          risultati = await asyncio.gather(task1, task2)
+  - codice: '    ...'
+  - codice: 'async def main():'
     commento: 'Secondo passo: una coroutine main crea un task per ogni compito e li aspetta con gather.'
+  - codice: '    task1 = asyncio.create_task(scarica_file("file1.txt"))'
     parti:
     - voce: create_task(...)
       spiega: mette il compito in coda
+  - codice: '    task2 = asyncio.create_task(scarica_file("file2.txt"))'
+  - codice: '    risultati = await asyncio.gather(task1, task2)'
+    parti:
     - voce: gather(task1, task2)
       spiega: aspetta che finiscano tutti
   - codice: asyncio.run(main())

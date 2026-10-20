@@ -10,30 +10,28 @@ quando: Quando devi costruire un testo a partire da variabili e numeri.
 fasi:
 - nome: Valori nel testo
   righe:
-  - codice: |-
-      year = 2016
-      event = 'Referendum'
-      f'Results of the {year} {event}'
+  - codice: year = 2016
     commento: Con la f davanti al testo, ciò che sta tra { } viene sostituito dal valore della variabile.
     parti:
     - voce: f'...'
       spiega: f-string
+  - codice: event = 'Referendum'
+  - codice: f'Results of the {year} {event}'
+    parti:
     - voce: '{year}'
       spiega: il valore della variabile year
 - nome: Numeri formattati
   righe:
-  - codice: |-
-      import math
-      print(f'The value of pi is approximately {math.pi:.3f}.')
+  - codice: import math
     commento: 'Dopo i due punti si indica il formato: .3f significa tre cifre dopo la virgola.'
+  - codice: print(f'The value of pi is approximately {math.pi:.3f}.')
     parti:
     - voce: '{math.pi:.3f}'
       spiega: pi greco arrotondato a 3.142
-  - codice: |-
-      for name, phone in table.items():
-          print(f'{name:10} ==> {phone:10d}')
+  - codice: 'for name, phone in table.items():'
     commento: 'Un numero dopo i due punti riserva uno spazio di quella larghezza: serve a incolonnare.'
     trappola: Il testo non viene troncato se è più lungo della larghezza.
+  - codice: '    print(f''{name:10} ==> {phone:10d}'')'
     parti:
     - voce: '{name:10}'
       spiega: nome in 10 caratteri

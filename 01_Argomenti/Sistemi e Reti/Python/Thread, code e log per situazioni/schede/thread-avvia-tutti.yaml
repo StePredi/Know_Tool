@@ -10,17 +10,21 @@ quando: Quando il programma ha più compiti paralleli e un thread principale che
 fasi:
 - nome: Avvia i thread di lavoro
   righe:
-  - codice: |-
-      def run(self):
-          self.seriale.start()
-          self.mqtt.start()
-          self.scrittura.start()
+  - codice: 'def run(self):'
     commento: ognuno parte e lavora per conto suo
+  - codice: '    self.seriale.start()'
+  - codice: '    self.mqtt.start()'
+  - codice: '    self.scrittura.start()'
 - nome: Poi smista
   righe:
-  - codice: "    while True:\n        try:\n            record = self.coda_seriale.get(timeout=1)\n            self.gestisci_record(record)\n        except queue.Empty:\n            pass"
+  - codice: '    while True:'
     commento: il coordinatore legge dalla coda e mette i dati nelle code degli altri
     trappola: 'Nota: lo stato condiviso (self.stato) è un normale dizionario senza blocchi di protezione; qui lo usa un solo thread, ma con più thread che lo cambiano servirebbe un Lock.'
+  - codice: '        try:'
+  - codice: '            record = self.coda_seriale.get(timeout=1)'
+  - codice: '            self.gestisci_record(record)'
+  - codice: '        except queue.Empty:'
+  - codice: '            pass'
 segnaposto: {}
 varianti: []
 vicine:

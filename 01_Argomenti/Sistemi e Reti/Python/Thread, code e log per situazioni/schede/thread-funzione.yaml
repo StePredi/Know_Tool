@@ -10,17 +10,15 @@ quando: Quando basta una funzione e non serve scrivere una classe.
 fasi:
 - nome: Crea e avvia
   righe:
-  - codice: |-
-      t = threading.Thread(target=«FUNZIONE», args=(«ARG1», «ARG2»), daemon=True)
-      t.start()
+  - codice: t = threading.Thread(target=«FUNZIONE», args=(«ARG1», «ARG2»), daemon=True)
     commento: target è la funzione (senza parentesi), args la tupla dei suoi argomenti
     trappola: 'target=funzione, non target=funzione(): con le parentesi la funzione verrebbe eseguita subito nel thread principale.'
+  - codice: t.start()
 - nome: Sapere in quale thread sei
   righe:
-  - codice: |-
-      thread = threading.current_thread()
-      print(f"[SERVER] ricevuto: {data.decode()} nel thread: {thread.name}")
+  - codice: thread = threading.current_thread()
     commento: current_thread().name dà il nome del thread che sta eseguendo il codice
+  - codice: 'print(f"[SERVER] ricevuto: {data.decode()} nel thread: {thread.name}")'
 segnaposto:
   FUNZIONE:
     esempio: gestisci_client

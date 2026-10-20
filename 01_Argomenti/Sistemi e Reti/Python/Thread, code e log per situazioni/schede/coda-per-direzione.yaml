@@ -10,12 +10,11 @@ quando: Quando più thread devono scambiarsi dati in direzioni diverse e vuoi ch
 fasi:
 - nome: Una coda per ogni flusso
   righe:
-  - codice: |-
-      self.coda_seriale = queue.Queue()   # dalla seriale al gateway
-      self.coda_mqtt = queue.Queue()      # dal gateway a MQTT
-      self.coda_mqtt_out = queue.Queue()  # da MQTT alla seriale (comandi)
-      self.coda_log = queue.Queue()       # dal gateway alla scrittura su file
+  - codice: 'self.coda_seriale = queue.Queue()   # dalla seriale al gateway'
     commento: il nome della coda dice da dove a dove vanno i dati
+  - codice: 'self.coda_mqtt = queue.Queue()      # dal gateway a MQTT'
+  - codice: 'self.coda_mqtt_out = queue.Queue()  # da MQTT alla seriale (comandi)'
+  - codice: 'self.coda_log = queue.Queue()       # dal gateway alla scrittura su file'
 - nome: Passa le code ai thread
   righe:
   - codice: self.seriale = SerialeComunicazione(SERIAL_PORT, SERIAL_BAUD, self.coda_seriale, self.coda_mqtt_out)

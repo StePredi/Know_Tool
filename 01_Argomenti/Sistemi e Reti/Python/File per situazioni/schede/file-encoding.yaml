@@ -10,20 +10,19 @@ quando: Quando nel file ci sono lettere accentate o simboli.
 fasi:
 - nome: Indica la codifica
   righe:
-  - codice: |-
-      with open("dati.txt", "w", encoding="utf-8") as f:
-          f.write("perché")
+  - codice: 'with open("dati.txt", "w", encoding="utf-8") as f:'
     commento: 'Il testo viene salvato come byte: la codifica è la regola che associa i caratteri ai byte. Usa la stessa per scrivere e leggere, altrimenti gli accenti si rovinano.'
     parti:
     - voce: encoding="utf-8"
       spiega: codifica consigliata dal tutorial
+  - codice: '    f.write("perché")'
+    parti:
     - voce: '"perché"'
       spiega: la é richiede utf-8 per essere letta bene dopo
-  - codice: |-
-      with open("dati.txt", "r", encoding="utf-8") as f:
-          testo = f.read()
+  - codice: 'with open("dati.txt", "r", encoding="utf-8") as f:'
     commento: Qui leggi lo stesso file con la stessa codifica.
     trappola: Il tutorial dice che la codifica predefinita dipende dalla piattaforma e consiglia utf-8.
+  - codice: '    testo = f.read()'
     parti:
     - voce: f.read()
       spiega: tutto il testo come stringa

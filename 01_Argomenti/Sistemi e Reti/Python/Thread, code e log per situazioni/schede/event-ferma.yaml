@@ -10,27 +10,26 @@ quando: Quando un thread gira in un ciclo e devi poterlo fermare da fuori.
 fasi:
 - nome: Il thread controlla
   righe:
-  - codice: |-
-      stop = threading.Event()
-
-      def lavoro():
-          while not stop.is_set():
-              ...
+  - codice: stop = threading.Event()
     commento: 'Il thread controlla l''evento ad ogni giro del ciclo: finché non è impostato, continua a lavorare.'
     parti:
     - voce: threading.Event()
       spiega: interruttore condiviso, all'inizio spento
+  - codice: 'def lavoro():'
+  - codice: '    while not stop.is_set():'
+    parti:
     - voce: stop.is_set()
       spiega: True se qualcuno ha chiamato set()
+  - codice: '        ...'
 - nome: Il main ferma
   righe:
-  - codice: |-
-      stop.set()
-      t.join()
+  - codice: stop.set()
     commento: Il main alza il segnale e aspetta che il thread finisca.
     parti:
     - voce: stop.set()
       spiega: dà il segnale
+  - codice: t.join()
+    parti:
     - voce: t.join()
       spiega: aspetta la fine del thread
   - codice: t.is_alive()

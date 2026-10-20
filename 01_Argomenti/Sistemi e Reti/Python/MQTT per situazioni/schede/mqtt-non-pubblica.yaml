@@ -17,10 +17,9 @@ fasi:
     commento: compare se connect() stesso fallisce
 - nome: Non pubblicare troppo presto
   righe:
-  - codice: |-
-      self.client.connect_to_broker()
-      time.sleep(0.5)
+  - codice: self.client.connect_to_broker()
     commento: 'is_connected diventa True solo quando scatta on_connect: pubblicare subito dopo connect() può essere troppo presto'
+  - codice: time.sleep(0.5)
 segnaposto: {}
 varianti: []
 vicine:

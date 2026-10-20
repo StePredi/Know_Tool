@@ -10,26 +10,24 @@ quando: 'Quando vuoi un server senza scrivere bind, listen e accept: ci pensa la
 fasi:
 - nome: Scrivi il request handler
   righe:
-  - codice: |-
-      class echoRequestHandler(socketserver.BaseRequestHandler):
-
-          def handle(self):
-              data = self.request.recv(1024)
-              self.request.sendall(data)
+  - codice: 'class echoRequestHandler(socketserver.BaseRequestHandler):'
     commento: handle() è l'unico metodo obbligatorio
+    trappola: 'Nota: questo handler legge una volta sola, quindi risponde a un solo messaggio per connessione; per più messaggi serve un ciclo come nella scheda su ThreadingMixIn.'
+  - codice: '    def handle(self):'
+  - codice: '        data = self.request.recv(1024)'
     parti:
     - voce: self.request
       spiega: per TCP è il socket connesso al client
+  - codice: '        self.request.sendall(data)'
+    parti:
     - voce: sendall
       spiega: manda tutti i byte, ripetendo send() se serve
-    trappola: 'Nota: questo handler legge una volta sola, quindi risponde a un solo messaggio per connessione; per più messaggi serve un ciclo come nella scheda su ThreadingMixIn.'
 - nome: Crea e avvia il server
   righe:
-  - codice: |-
-      server = socketserver.TCPServer((«HOST», «PORTA»), echoRequestHandler)
-      server.serve_forever()
+  - codice: server = socketserver.TCPServer((«HOST», «PORTA»), echoRequestHandler)
     commento: la classe server fa bind, listen e accept da sola
     trappola: 'Alla classe server si passa la classe dell''handler, senza parentesi: viene istanziata dal server per ogni richiesta.'
+  - codice: server.serve_forever()
 segnaposto:
   HOST:
     esempio: '''127.0.0.1'''

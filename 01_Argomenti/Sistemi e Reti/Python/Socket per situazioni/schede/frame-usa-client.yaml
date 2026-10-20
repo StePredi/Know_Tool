@@ -10,18 +10,16 @@ quando: Quando vuoi spedire a un server un messaggio anche molto lungo e leggere
 fasi:
 - nome: Collegati e spedisci
   righe:
-  - codice: |-
-      s = FrameSocket()
-      s.connect(("localhost", 5000))
-      s.send(payload.encode())
+  - codice: s = FrameSocket()
     commento: il payload deve essere in byte
     trappola: 'send() vuole bytes: con una stringa serve .encode().'
+  - codice: s.connect(("localhost", 5000))
+  - codice: s.send(payload.encode())
 - nome: Leggi la risposta
   righe:
-  - codice: |-
-      data = s.recv()
-      print(f"[CLIENT] received: {len(data)}B")
+  - codice: data = s.recv()
     commento: data è il messaggio intero, non un pezzo
+  - codice: 'print(f"[CLIENT] received: {len(data)}B")'
 segnaposto: {}
 varianti: []
 vicine:

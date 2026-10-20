@@ -10,18 +10,18 @@ quando: Quando un'operazione potrebbe non finire mai.
 fasi:
 - nome: Con timeout
   righe:
-  - codice: |-
-      try:
-          risultato = await asyncio.wait_for(operazione_lenta(), timeout=2.0)
-          print(f"Risultato: {risultato}")
-      except asyncio.TimeoutError:
-          print("Operazione troppo lenta! Timeout raggiunto.")
+  - codice: 'try:'
     commento: wait_for dà un tempo massimo. Se l'operazione non finisce in tempo, solleva TimeoutError e viene interrotta.
+  - codice: '    risultato = await asyncio.wait_for(operazione_lenta(), timeout=2.0)'
     parti:
     - voce: wait_for(op(), timeout=2.0)
       spiega: al massimo 2 secondi
+  - codice: '    print(f"Risultato: {risultato}")'
+  - codice: 'except asyncio.TimeoutError:'
+    parti:
     - voce: except asyncio.TimeoutError
       spiega: scaduto il tempo
+  - codice: '    print("Operazione troppo lenta! Timeout raggiunto.")'
 segnaposto: {}
 varianti: []
 vicine:

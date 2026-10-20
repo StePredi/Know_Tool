@@ -10,20 +10,20 @@ quando: Quando una coroutine arriva a un'operazione lenta.
 fasi:
 - nome: Cosa succede
   righe:
-  - codice: |-
-      async def esempio():
-          print("1. Inizio")
-          risultato = await operazione_lenta()
-          print("3. Riprendo dopo l'attesa")
-          return risultato
+  - codice: 'async def esempio():'
     commento: Quando incontra await la coroutine si ferma e restituisce il controllo all'event loop, che può eseguire altro. Quando l'operazione ha finito, riparte dalla riga dopo.
+  - codice: '    print("1. Inizio")'
     parti:
     - voce: print("1. Inizio")
       spiega: prima della pausa
-    - voce: await operazione_lenta()
-      spiega: qui la coroutine si sospende
     - voce: print("3. Riprendo...")
       spiega: dopo l'attesa
+  - codice: '    risultato = await operazione_lenta()'
+    parti:
+    - voce: await operazione_lenta()
+      spiega: qui la coroutine si sospende
+  - codice: '    print("3. Riprendo dopo l''attesa")'
+  - codice: '    return risultato'
 - nome: Regole
   righe:
   - codice: await oggetto
