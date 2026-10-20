@@ -1,0 +1,27 @@
+id: asy-task-stato
+tipo: ricetta
+titolo: Controllare lo stato di un task
+sigla: done / cancelled
+comando: task.done()  task.cancelled()
+frase: il task è finito?
+fonte: asyncio_guide_2627.ipynb · §2.1 Stato dei Tasks
+parole: task done cancelled stato terminato cancellato
+quando: Quando vuoi sapere se un task è già finito senza aspettarlo.
+fasi:
+- nome: Controlla
+  righe:
+  - codice: |-
+      task = asyncio.create_task(operazione_lenta())
+      print(task.done())
+      print(task.cancelled())
+    commento: 'appena creato: done() è False e cancelled() è False'
+  - codice: |-
+      risultato = await task
+      print(task.done())
+    commento: dopo l'attesa done() è True
+    trappola: cancelled() resta False se il task è finito normalmente.
+segnaposto: {}
+varianti: []
+vicine:
+- asy-task-result
+- asy-await-finito

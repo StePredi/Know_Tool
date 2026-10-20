@@ -1,0 +1,29 @@
+id: chat-server
+tipo: ricetta
+titolo: Il ciclo del server chat
+sigla: Ciclo chat
+comando: await invia_a_tutti(...)
+frase: ogni riga ricevuta va agli altri
+fonte: 04_chat_server.py · gestisci_client()
+parole: chat server ciclo readline invia_a_tutti nome messaggio
+quando: Quando vuoi riunire tutto il lavoro di un client nel gestore.
+fasi:
+- nome: Ciclo
+  righe:
+  - codice: |-
+      try:
+          while True:
+              dati = await reader.readline()
+              if not dati:
+                  break
+              testo = dati.decode().strip()
+              await invia_a_tutti(f"[{nome}] {testo}\n", writer)
+      except ConnectionError:
+          pass                                 # il client è caduto all'improvviso
+    commento: il messaggio viene mandato con il nome davanti, [ip:porta] testo
+segnaposto: {}
+varianti: []
+vicine:
+- chat-lista
+- chat-invia-tutti
+- chat-finally

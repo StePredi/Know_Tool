@@ -1,0 +1,33 @@
+id: net-client-scambio
+tipo: ricetta
+titolo: Inviare messaggi e leggere le risposte
+sigla: Client eco
+comando: write → drain → readline
+frase: un messaggio alla volta
+fonte: 02_echo_client.py · main()
+parole: client invio ricezione messaggi risposta readline close wait_closed
+quando: Quando il client manda più messaggi e aspetta una risposta a ciascuno.
+fasi:
+- nome: Ciclo
+  righe:
+  - codice: |-
+      messaggi = ["ciao", "come va?", "fine"]
+      for testo in messaggi:
+          writer.write((testo + "\n").encode())
+          await writer.drain()
+
+          risposta = await reader.readline()
+          print("Server:", risposta.decode().strip())
+    commento: il "\n" serve perché il server legge con readline
+- nome: Chiudi
+  righe:
+  - codice: |-
+      writer.close()
+      await writer.wait_closed()
+    commento: alla fine chiudi la connessione
+segnaposto: {}
+varianti: []
+vicine:
+- net-client
+- net-eco
+- rd-readline

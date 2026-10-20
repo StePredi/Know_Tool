@@ -1,0 +1,70 @@
+modello: per_situazioni
+titolo: Asyncio, per situazioni
+centro: Asyncio
+sottotitolo: Parti da quello che vuoi far fare al programma, non dal nome della funzione.
+esempiRicerca: coroutine che non parte, due download insieme, timeout, un task va in errore
+rami:
+- id: b1
+  nome: Coroutine e loop
+  colore: blue
+  lato: R
+  voci:
+  - schede:
+    - asy-coroutine
+  - schede:
+    - asy-run
+  - schede:
+    - asy-struttura
+  - schede:
+    - asy-await
+- id: b2
+  nome: Una dopo l'altra o insieme
+  colore: teal
+  lato: L
+  voci:
+  - gruppo: Far partire
+    schede:
+    - asy-await-sequenziale
+    - asy-create-task
+    - asy-lancia-e-continua
+  - gruppo: Aspettare e ordinare
+    schede:
+    - asy-gather
+    - asy-respiro
+    - asy-confronto
+- id: b3
+  nome: 'Task: stato e risultato'
+  colore: green
+  lato: R
+  voci:
+  - schede:
+    - asy-task-stato
+  - schede:
+    - asy-task-result
+  - schede:
+    - asy-await-finito
+- id: b4
+  nome: Timeout ed errori
+  colore: orange
+  lato: L
+  voci:
+  - schede:
+    - asy-wait-for
+  - schede:
+    - asy-gather-errori
+- id: b5
+  nome: Errori comuni
+  colore: red
+  lato: T
+  voci:
+  - schede:
+    - asy-senza-await
+  - schede:
+    - asy-time-sleep
+- id: b6
+  nome: Quando usarlo
+  colore: violet
+  lato: B
+  voci:
+  - schede:
+    - asy-vs-thread

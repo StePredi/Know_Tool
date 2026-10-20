@@ -1,0 +1,28 @@
+id: asy-gather-errori
+tipo: ricetta
+titolo: Un task fallisce, gli altri continuano
+sigla: return_exceptions
+comando: gather(..., return_exceptions=True)
+frase: gli errori diventano risultati
+fonte: asyncio_guide_2627.ipynb · §6.3 Eccezioni nei task
+parole: gather return_exceptions errore eccezione task valueerror isinstance
+quando: Quando più task girano insieme e uno può dare errore.
+fasi:
+- nome: Raccogli anche gli errori
+  righe:
+  - codice: risultati = await asyncio.gather(task1, task2, task3, return_exceptions=True)
+    commento: continua anche se un task solleva un'eccezione
+- nome: Controlla ogni risultato
+  righe:
+  - codice: |-
+      for i, risultato in enumerate(risultati, 1):
+          if isinstance(risultato, Exception):
+              print(f"Task {i}: Errore - {risultato}")
+          else:
+              print(f"Task {i}: {risultato}")
+    commento: se è un'eccezione la stampi, altrimenti è il risultato normale
+segnaposto: {}
+varianti: []
+vicine:
+- asy-wait-for
+- asy-gather

@@ -1,0 +1,36 @@
+id: chat-client-due
+tipo: ricetta
+titolo: Un client che fa due cose insieme
+sigla: gather ricevi / invia
+comando: await asyncio.gather(ricevi(...), invia(...))
+frase: ricevere e scrivere in parallelo
+fonte: 05_chat_client.py · main()
+parole: chat client gather ricevi invia parallelo due coroutine
+quando: Quando il client deve ricevere i messaggi degli altri mentre l'utente scrive.
+fasi:
+- nome: Collega
+  righe:
+  - codice: |-
+      reader, writer = await asyncio.open_connection("127.0.0.1", 8888)
+      print("Connesso alla chat. Scrivi /quit per uscire.")
+
+      await asyncio.gather(ricevi(reader, writer), invia(writer))
+    commento: le due coroutine girano in parallelo
+- nome: Ricevi
+  righe:
+  - codice: |-
+      async def ricevi(reader, writer):
+          while True:
+              dati = await reader.readline()
+              if not dati:
+                  if not writer.is_closing():
+                      print("Il server ha chiuso la connessione (premi Invio per uscire)")
+                      writer.close()
+                  break
+              print(dati.decode().strip())
+    commento: se il server chiude, chiudi anche tu
+segnaposto: {}
+varianti: []
+vicine:
+- chat-input
+- net-client

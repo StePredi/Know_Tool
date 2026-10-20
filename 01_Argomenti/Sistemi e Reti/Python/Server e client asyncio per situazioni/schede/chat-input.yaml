@@ -1,0 +1,27 @@
+id: chat-input
+tipo: ricetta
+titolo: Leggere la tastiera senza bloccare
+sigla: to_thread(input)
+comando: await asyncio.to_thread(input)
+frase: input() in un thread
+fonte: 05_chat_client.py · invia()
+parole: to_thread input tastiera bloccante thread quit chat invia
+quando: Quando devi usare una funzione bloccante (come input()) dentro una coroutine.
+fasi:
+- nome: Invia
+  righe:
+  - codice: |-
+      async def invia(writer):
+          while True:
+              testo = await asyncio.to_thread(input)   # input() gira in un thread separato
+              if testo == "/quit" or writer.is_closing():
+                  break
+              writer.write((testo + "\n").encode())
+              await writer.drain()
+          writer.close()
+    commento: 'input() è bloccante: eseguita in un thread non ferma l''event loop'
+    trappola: Un input() diretto fermerebbe anche la ricezione dei messaggi.
+segnaposto: {}
+varianti: []
+vicine:
+- chat-client-due

@@ -1,0 +1,24 @@
+id: asy-await-sequenziale
+tipo: ricetta
+titolo: Eseguire due operazioni una dopo l'altra
+sigla: await diretto
+comando: |-
+  await a()
+  await b()
+frase: tempo = somma
+fonte: asyncio_guide_2627.ipynb · §1.2 await di una coroutine
+parole: await sequenziale coroutine una dopo altra tempo somma 4 secondi
+quando: Quando la seconda operazione ha bisogno che la prima sia finita.
+fasi:
+- nome: Sequenziale
+  righe:
+  - codice: |-
+      ris_a = await operazione_a()
+      ris_b = await operazione_b()
+    commento: 'b parte solo quando a è finita: con due sleep(2) il totale è 4 secondi'
+    trappola: È come il codice normale, con in più la possibilità di cedere il controllo durante le attese.
+segnaposto: {}
+varianti: []
+vicine:
+- asy-create-task
+- asy-confronto

@@ -1,0 +1,28 @@
+id: net-server
+tipo: ricetta
+titolo: Aprire un server che accetta più client
+sigla: start_server
+comando: asyncio.start_server(gestore, host, porta)
+frase: un task per ogni client
+fonte: 01_echo_server.py · main()
+parole: start_server server asyncio porta serve_forever async with ascolto
+quando: Quando vuoi un server che gestisce più client insieme.
+fasi:
+- nome: Avvia
+  righe:
+  - codice: |-
+      async def main():
+          server = await asyncio.start_server(gestisci_client, "127.0.0.1", 8888)
+          print("Server in ascolto sulla porta 8888")
+          async with server:
+              await server.serve_forever()
+
+      asyncio.run(main())
+    commento: apre la porta e chiama gestisci_client per ogni nuovo client
+    trappola: 'serve_forever() non finisce mai: il server resta attivo finché non lo fermi.'
+segnaposto: {}
+varianti: []
+vicine:
+- net-gestore
+- net-chiudi
+- net-client

@@ -1,0 +1,28 @@
+id: asy-respiro
+tipo: ricetta
+titolo: Far partire subito un task
+sigla: sleep(0)
+comando: await asyncio.sleep(0)
+frase: dà un respiro al loop
+fonte: asyncio_guide_2627.ipynb · §1.4–1.5
+parole: sleep 0 respiro cedere controllo task ordine esecuzione inizio
+quando: Quando vuoi che il task creato parta prima del resto del codice.
+fasi:
+- nome: Il problema
+  righe:
+  - codice: |-
+      task_b = asyncio.create_task(operazione_lunga("Task-B"))
+      risultato_a = await operazione_lunga("Coroutine-A")
+    commento: Coroutine-A inizia per prima, anche se il task è stato creato prima
+- nome: La soluzione
+  righe:
+  - codice: |-
+      task_b = asyncio.create_task(operazione_lunga("Task-B"))
+      await asyncio.sleep(0)
+    commento: 'sleep(0) cede il controllo: l''event loop esegue i task in coda, quindi Task-B inizia per primo'
+    trappola: 'Il task entra in coda: parte solo quando il codice che lo ha creato si sospende.'
+segnaposto: {}
+varianti: []
+vicine:
+- asy-create-task
+- asy-await-sequenziale

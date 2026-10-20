@@ -1,0 +1,25 @@
+id: chat-finally
+tipo: ricetta
+titolo: Togliere il client dall'elenco in ogni caso
+sigla: finally
+comando: 'finally: clienti.remove(writer)'
+frase: anche se il client cade
+fonte: 04_chat_server.py · gestisci_client()
+parole: chat finally remove lista uscito close client disconnesso
+quando: Quando un client esce, normalmente o all'improvviso.
+fasi:
+- nome: Pulizia
+  righe:
+  - codice: |-
+      finally:
+          clienti.remove(writer)               # in ogni caso lo togliamo dalla lista
+          print(nome, "è uscito")
+          writer.close()
+    commento: il finally gira sempre, anche dopo ConnectionError
+    trappola: Senza il finally, un client caduto resterebbe nell'elenco e gli invii successivi darebbero errore.
+segnaposto: {}
+varianti: []
+vicine:
+- chat-server
+- net-chiudi
+- chat-invia-tutti

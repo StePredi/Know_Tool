@@ -1,0 +1,24 @@
+id: asy-run
+tipo: ricetta
+titolo: Far partire una coroutine
+sigla: asyncio.run
+comando: asyncio.run(main())
+frase: crea l'event loop
+fonte: asyncio_intro_2627.ipynb · §2 Coroutines · §4 Tasks
+parole: asyncio run event loop avviare main jupyter notebook await
+quando: Quando hai una coroutine e devi eseguirla.
+fasi:
+- nome: In un programma
+  righe:
+  - codice: asyncio.run(main())
+    commento: crea il loop, esegue main(), restituisce il risultato e poi chiude il loop
+- nome: In un notebook
+  righe:
+  - codice: await main()
+    commento: 'il notebook ha già un event loop: si scrive solo await'
+    trappola: asyncio.run() dentro un notebook non va bene perché il loop esiste già.
+segnaposto: {}
+varianti: []
+vicine:
+- asy-struttura
+- asy-coroutine

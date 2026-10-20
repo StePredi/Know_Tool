@@ -1,0 +1,30 @@
+id: asy-struttura
+tipo: ricetta
+titolo: Come è fatto un programma asyncio
+sigla: Struttura
+comando: async def main()
+frase: coroutine + main + run
+fonte: asyncio_intro_2627.ipynb · §4 Tasks
+parole: struttura programma asyncio main coroutine create_task gather run
+quando: Quando devi impostare un programma asincrono da zero.
+fasi:
+- nome: Tre passi
+  righe:
+  - codice: |-
+      async def scarica_file(nome):
+          ...
+    commento: 1. scrivi le coroutine dei compiti concorrenti
+  - codice: |-
+      async def main():
+          task1 = asyncio.create_task(scarica_file("file1.txt"))
+          task2 = asyncio.create_task(scarica_file("file2.txt"))
+          risultati = await asyncio.gather(task1, task2)
+    commento: 2. una coroutine principale crea i task e li aspetta
+  - codice: asyncio.run(main())
+    commento: 3. avvia l'event loop con la principale
+segnaposto: {}
+varianti: []
+vicine:
+- asy-create-task
+- asy-gather
+- asy-run

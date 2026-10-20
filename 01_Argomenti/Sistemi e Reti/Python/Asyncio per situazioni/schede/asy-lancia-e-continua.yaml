@@ -1,0 +1,22 @@
+id: asy-lancia-e-continua
+tipo: ricetta
+titolo: Avviare un task e fare altro nel frattempo
+sigla: Task in background
+comando: create_task + altro lavoro + await
+frase: non aspetti subito
+fonte: asyncio_guide_2627.ipynb · §6.1 Eseguire task e continuare
+parole: task background continuare altro lavoro operazione lunga veloce
+quando: Quando un'operazione lunga può andare avanti mentre ne fai un'altra.
+fasi:
+- nome: Schema
+  righe:
+  - codice: |-
+      task_lungo = asyncio.create_task(operazione_lunga())
+      risultato_veloce = await operazione_veloce()
+      risultato_lungo = await task_lungo
+    commento: l'operazione lunga procede mentre completi quella veloce; la aspetti solo alla fine
+segnaposto: {}
+varianti: []
+vicine:
+- asy-create-task
+- asy-gather

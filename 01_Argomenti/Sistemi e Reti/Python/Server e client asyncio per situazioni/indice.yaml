@@ -1,0 +1,72 @@
+modello: per_situazioni
+titolo: Server e client asyncio, per situazioni
+centro: asyncio rete
+sottotitolo: Parti da quello che il server o il client deve fare, non dal nome della funzione.
+esempiRicerca: server che non risponde a più client, messaggio a metà, client che non esce
+rami:
+- id: b1
+  nome: Server
+  colore: blue
+  lato: R
+  voci:
+  - schede:
+    - net-server
+  - schede:
+    - net-gestore
+  - schede:
+    - net-eco
+  - schede:
+    - net-chiudi
+- id: b2
+  nome: Client
+  colore: teal
+  lato: L
+  voci:
+  - schede:
+    - net-client
+  - schede:
+    - net-client-scambio
+- id: b3
+  nome: Leggere dati
+  colore: green
+  lato: R
+  voci:
+  - gruppo: Come leggere
+    schede:
+    - rd-readline
+    - rd-readuntil
+    - rd-readexactly
+    - rd-read-n
+    - rd-read-tutto
+  - gruppo: Scegliere
+    schede:
+    - rd-scelta
+- id: b4
+  nome: Scrivere dati
+  colore: yellow
+  lato: L
+  voci:
+  - schede:
+    - wr-write-drain
+- id: b5
+  nome: Chat con più client
+  colore: orange
+  lato: T
+  voci:
+  - gruppo: Server
+    schede:
+    - chat-lista
+    - chat-invia-tutti
+    - chat-server
+    - chat-finally
+  - gruppo: Client
+    schede:
+    - chat-client-due
+    - chat-input
+- id: b6
+  nome: Errori comuni
+  colore: red
+  lato: B
+  voci:
+  - schede:
+    - net-sleep-bloccante

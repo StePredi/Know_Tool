@@ -1,0 +1,23 @@
+id: asy-await-finito
+tipo: ricetta
+titolo: Aspettare un task già finito
+sigla: await su task completato
+comando: await task
+frase: istantaneo, quante volte vuoi
+fonte: asyncio_guide_2627.ipynb · §2.2 await su Task già completato
+parole: await task completato istantaneo risultato ripetuto
+quando: Quando non sei sicuro che il task sia ancora in corso.
+fasi:
+- nome: Cosa succede
+  righe:
+  - codice: risultato = await task
+    commento: se il task è già finito, restituisce subito il risultato senza sospendere la coroutine
+  - codice: |-
+      risultato2 = await task
+      risultato3 = await task
+    commento: 'puoi ripetere l''await: ottieni sempre lo stesso risultato'
+segnaposto: {}
+varianti: []
+vicine:
+- asy-task-result
+- asy-task-stato

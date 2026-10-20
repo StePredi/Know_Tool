@@ -1,0 +1,23 @@
+id: rd-read-n
+tipo: ricetta
+titolo: Leggere quello che c'è, fino a n byte
+sigla: read(n)
+comando: await reader.read(100)
+frase: restituisce subito quello che è arrivato
+fonte: 07_client_letture.py · main()
+parole: read n byte disponibili subito parziale
+quando: Quando vuoi i dati disponibili senza aspettare di averne n.
+fasi:
+- nome: Leggi
+  righe:
+  - codice: |-
+      pezzo = await reader.read(100)
+      print("read(100)         ->", pezzo, f"({len(pezzo)} byte)")
+    commento: 'il server ha mandato solo "primo pezzo" (11 byte) e poi aspetta 2 secondi: read restituisce subito quegli 11 byte'
+    trappola: 'read(n) legge FINO A n byte: non aspetta di arrivare a n.'
+segnaposto: {}
+varianti: []
+vicine:
+- rd-readexactly
+- rd-read-tutto
+- rd-scelta

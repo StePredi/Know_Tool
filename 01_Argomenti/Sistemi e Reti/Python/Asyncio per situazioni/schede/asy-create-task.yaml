@@ -1,0 +1,29 @@
+id: asy-create-task
+tipo: ricetta
+titolo: Far partire un'operazione senza aspettarla subito
+sigla: create_task
+comando: asyncio.create_task(coro())
+frase: la mette in coda nel loop
+fonte: asyncio_guide_2627.ipynb · §1.3 task
+parole: create_task task schedulare concorrente coda event loop
+quando: Quando più operazioni possono andare insieme.
+fasi:
+- nome: Crea i task
+  righe:
+  - codice: |-
+      task_a = asyncio.create_task(operazione_a())
+      task_b = asyncio.create_task(operazione_b())
+    commento: le coroutine sono schedulate, ma non partono ancora
+- nome: Aspetta i risultati
+  righe:
+  - codice: |-
+      ris_b = await task_b
+      ris_a = await task_a
+    commento: con due sleep(2) il totale è 2 secondi, non 4
+    trappola: I task partono solo quando l'event loop ha un momento libero, cioè al primo await del chiamante.
+segnaposto: {}
+varianti: []
+vicine:
+- asy-gather
+- asy-respiro
+- asy-confronto

@@ -1,0 +1,26 @@
+id: asy-time-sleep
+tipo: prima_dopo
+titolo: 'Errore: time.sleep dentro una coroutine'
+sigla: Sleep bloccante
+comando: await asyncio.sleep()
+frase: time.sleep blocca tutto
+fonte: asyncio_guide_2627.ipynb · §7 Regole d'oro
+parole: time sleep bloccante asyncio sleep async blocca event loop
+prima: |-
+  async def operazione():
+      ⟦time.sleep(1)⟧           # blocca tutto!
+dopo: |-
+  async def operazione():
+      ⟦await asyncio.sleep(1)⟧   # permette ad altri task di andare
+uso: Fare una pausa senza fermare gli altri task.
+riconoscila: Più task insieme, ma i tempi si sommano come nel codice sequenziale.
+parti:
+- voce: time.sleep(1)
+  spiega: ferma l'intero event loop (un solo thread)
+- voce: await asyncio.sleep(1)
+  spiega: sospende solo questa coroutine
+trappola: 'Il loop è un solo thread: qualsiasi funzione bloccante dentro una coroutine ferma tutti i task.'
+varianti: []
+vicine:
+- asy-await
+- asy-vs-thread

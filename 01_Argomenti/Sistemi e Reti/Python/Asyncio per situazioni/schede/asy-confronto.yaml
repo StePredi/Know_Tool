@@ -1,0 +1,32 @@
+id: asy-confronto
+tipo: ricetta
+titolo: 'Quanto si risparmia: sequenziale contro concorrente'
+sigla: Confronto tempi
+comando: time.time()
+frase: 6 secondi contro 2
+fonte: asyncio_guide_2627.ipynb · §1.6 Confronto diretto
+parole: confronto sequenziale concorrente tempo download 2 secondi 6 secondi
+quando: Quando vuoi capire a cosa serve davvero asyncio.
+fasi:
+- nome: Sequenziale
+  righe:
+  - codice: |-
+      dati1 = await scarica_file("file1.txt", 2)
+      dati2 = await scarica_file("file2.txt", 2)
+      dati3 = await scarica_file("file3.txt", 2)
+    commento: 'tre download da 2 secondi, uno dopo l''altro: 6 secondi'
+- nome: Concorrente
+  righe:
+  - codice: |-
+      task1 = asyncio.create_task(scarica_file("file1.txt", 2))
+      task2 = asyncio.create_task(scarica_file("file2.txt", 2))
+      task3 = asyncio.create_task(scarica_file("file3.txt", 2))
+      dati1 = await task1
+      dati2 = await task2
+      dati3 = await task3
+    commento: 'gli stessi tre download partono insieme: 2 secondi'
+segnaposto: {}
+varianti: []
+vicine:
+- asy-await-sequenziale
+- asy-create-task

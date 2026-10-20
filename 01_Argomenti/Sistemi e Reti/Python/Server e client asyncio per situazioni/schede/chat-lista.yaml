@@ -1,0 +1,25 @@
+id: chat-lista
+tipo: ricetta
+titolo: Tenere l'elenco dei client connessi
+sigla: Lista dei writer
+comando: clienti = []  clienti.append(writer)
+frase: uno per client
+fonte: 04_chat_server.py · gestisci_client()
+parole: chat lista clienti writer append peername nome
+quando: Quando un messaggio deve arrivare a tutti gli altri.
+fasi:
+- nome: Registra
+  righe:
+  - codice: |-
+      clienti = []   # lista dei writer di tutti i client connessi
+
+      ip, porta = writer.get_extra_info("peername")
+      nome = f"{ip}:{porta}"
+      clienti.append(writer)
+      print(nome, "è entrato")
+    commento: il nome è ip:porta del client
+segnaposto: {}
+varianti: []
+vicine:
+- chat-invia-tutti
+- chat-finally

@@ -1,0 +1,29 @@
+id: net-sleep-bloccante
+tipo: prima_dopo
+titolo: 'Errore: time.sleep nel gestore del server'
+sigla: Sleep nel gestore
+comando: await asyncio.sleep(5)
+frase: time.sleep ferma tutti i client
+fonte: 01_echo_server.py · righe commentate
+parole: time sleep bloccante gestore server client fermi asyncio sleep
+prima: |-
+  async def gestisci_client(reader, writer):
+      ...
+      ⟦time.sleep(5)⟧
+      risposta = testo.upper() + "\n"
+dopo: |-
+  async def gestisci_client(reader, writer):
+      ...
+      ⟦await asyncio.sleep(5)⟧
+      risposta = testo.upper() + "\n"
+uso: Simulare un lavoro lento senza bloccare gli altri client.
+riconoscila: Con più client collegati, quando uno è in attesa tutti gli altri smettono di ricevere risposta.
+parti:
+- voce: time.sleep(5)
+  spiega: blocca l'unico thread del server
+- voce: await asyncio.sleep(5)
+  spiega: solo questo client aspetta
+trappola: 'Nota: nel file le due righe sono commentate (#await asyncio.sleep(5) e #time.sleep(5)): si possono scambiare per vedere la differenza.'
+varianti: []
+vicine:
+- net-gestore

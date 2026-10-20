@@ -1,0 +1,23 @@
+id: rd-readline
+tipo: ricetta
+titolo: Leggere una riga
+sigla: readline
+comando: await reader.readline()
+frase: fino a \n compreso
+fonte: 07_client_letture.py · main()
+parole: readline riga reader leggere fine riga
+quando: Quando i messaggi sono righe di testo.
+fasi:
+- nome: Leggi
+  righe:
+  - codice: |-
+      riga = await reader.readline()
+      print("readline()        ->", riga)
+    commento: legge fino a \n (compreso)
+    trappola: 'Se la connessione è chiusa, readline restituisce b"" (vuoto): è il segnale per uscire dal ciclo.'
+segnaposto: {}
+varianti: []
+vicine:
+- rd-readuntil
+- rd-readexactly
+- rd-scelta

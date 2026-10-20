@@ -1,0 +1,22 @@
+id: rd-read-tutto
+tipo: ricetta
+titolo: Leggere tutto fino alla chiusura
+sigla: read()
+comando: await reader.read()
+frase: finché l'altro lato non chiude
+fonte: 07_client_letture.py · main()
+parole: read tutto chiusura connessione fine dati
+quando: Quando vuoi tutto quello che manda il server finché chiude.
+fasi:
+- nome: Leggi
+  righe:
+  - codice: |-
+      print("read() in attesa della chiusura...")
+      resto = await reader.read()
+      print("read()            ->", resto)
+    commento: termina quando il server chiude la connessione (nell'esempio dopo 2 secondi)
+segnaposto: {}
+varianti: []
+vicine:
+- rd-read-n
+- rd-scelta

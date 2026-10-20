@@ -1,0 +1,30 @@
+id: net-eco
+tipo: ricetta
+titolo: Rispondere ripetendo il messaggio in maiuscolo
+sigla: Eco
+comando: writer.write(...) + await writer.drain()
+frase: legge, elabora, risponde
+fonte: 01_echo_server.py · gestisci_client()
+parole: eco echo upper decode encode write drain risposta
+quando: 'Quando vuoi il server più semplice: rimanda indietro quello che riceve.'
+fasi:
+- nome: Leggi e decodifica
+  righe:
+  - codice: |-
+      dati = await reader.readline()
+      testo = dati.decode().strip()
+    commento: da byte a stringa, senza lo \n finale
+- nome: Rispondi
+  righe:
+  - codice: |-
+      risposta = testo.upper() + "\n"
+      writer.write(risposta.encode())     # stringa -> bytes, messi nel buffer
+      await writer.drain()                # aspetta che i dati partano davvero
+    commento: encode() torna a byte; drain() aspetta che il buffer si svuoti
+    trappola: 'write() da solo non è un await: mette i dati nel buffer. Il drain() è il punto in cui la coroutine può sospendersi.'
+segnaposto: {}
+varianti: []
+vicine:
+- net-gestore
+- wr-write-drain
+- rd-readline

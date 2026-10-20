@@ -1,0 +1,29 @@
+id: asy-vs-thread
+tipo: ricetta
+titolo: Scegliere tra asyncio, thread e processi
+sigla: Quando usarlo
+comando: asyncio · thread · multiprocessing
+frase: dipende da cosa aspetti
+fonte: asyncio_intro_2627.ipynb · Il problema della concorrenza · asyncio_guide_2627.ipynb · §8 Conclusioni
+parole: asyncio thread multiprocessing io bound cpu bound quando usare scelta
+quando: Quando devi decidere come rendere concorrente un programma.
+fasi:
+- nome: Asyncio va bene per
+  righe:
+  - codice: |-
+      # operazioni I/O-bound: rete, database, file
+      # molte connessioni simultanee
+      # download/upload multipli, chiamate API concorrenti
+    commento: un solo thread che passa da un compito all'altro quando c'è un'attesa
+- nome: Non va bene per
+  righe:
+  - codice: '# calcoli pesanti (CPU-intensive)'
+    commento: si usa multiprocessing
+  - codice: '# codice semplice sequenziale'
+    commento: non serve concorrenza
+    trappola: Con i thread la gestione è del sistema operativo e ha un costo; con asyncio le coroutine cedono il controllo da sole.
+segnaposto: {}
+varianti: []
+vicine:
+- asy-await
+- asy-time-sleep

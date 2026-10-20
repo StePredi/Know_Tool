@@ -1,0 +1,29 @@
+id: chat-invia-tutti
+tipo: ricetta
+titolo: Inoltrare un messaggio a tutti gli altri
+sigla: Inoltra
+comando: 'for writer in clienti: ...'
+frase: salta il mittente
+fonte: 04_chat_server.py · invia_a_tutti()
+parole: chat inoltrare messaggio tutti altri mittente ConnectionError drain
+quando: Quando un client scrive e gli altri devono riceverlo.
+fasi:
+- nome: Ciclo
+  righe:
+  - codice: |-
+      async def invia_a_tutti(messaggio, mittente):
+          for writer in clienti:
+              if writer is not mittente:
+                  try:
+                      writer.write(messaggio.encode())
+                      await writer.drain()
+                  except ConnectionError:         # quel client si è appena disconnesso
+                      pass
+    commento: il try/except evita che un client caduto fermi l'invio agli altri
+    trappola: 'Nota: durante l''await del drain un altro client può uscire e modificare la lista clienti mentre la stai scorrendo; per sicurezza si può scorrere una copia: for writer in list(clienti).'
+segnaposto: {}
+varianti: []
+vicine:
+- chat-lista
+- chat-finally
+- chat-server

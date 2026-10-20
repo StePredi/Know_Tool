@@ -1,0 +1,23 @@
+id: rd-readexactly
+tipo: ricetta
+titolo: Leggere un numero preciso di byte
+sigla: readexactly
+comando: await reader.readexactly(n)
+frase: esattamente n byte
+fonte: 07_client_letture.py · main()
+parole: readexactly byte esatti blocco lunghezza fissa
+quando: Quando il messaggio ha una lunghezza fissa nota.
+fasi:
+- nome: Leggi
+  righe:
+  - codice: |-
+      blocco1 = await reader.readexactly(4)
+      blocco2 = await reader.readexactly(4)
+    commento: 'dal b"12345678" del server: b"1234" poi b"5678"'
+    trappola: Aspetta finché ha ricevuto tutti i byte richiesti.
+segnaposto: {}
+varianti: []
+vicine:
+- rd-readline
+- rd-read-n
+- rd-scelta

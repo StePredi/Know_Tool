@@ -1,0 +1,29 @@
+id: rd-scelta
+tipo: ricetta
+titolo: Quale lettura scegliere
+sigla: Scegliere
+comando: readline · readuntil · readexactly · read
+frase: dipende da come sono i messaggi
+fonte: 07_client_letture.py
+parole: scegliere lettura readline readuntil readexactly read confronto
+quando: Quando non sai quale funzione di lettura usare.
+fasi:
+- nome: In base ai dati
+  righe:
+  - codice: await reader.readline()
+    commento: messaggi a righe (fino a \n)
+  - codice: await reader.readuntil(b";")
+    commento: messaggi che finiscono con un separatore tuo
+  - codice: await reader.readexactly(n)
+    commento: messaggi di lunghezza fissa
+  - codice: await reader.read(n)
+    commento: quello che è arrivato, fino a n byte
+  - codice: await reader.read()
+    commento: tutto fino alla chiusura
+    trappola: 'Nota: il client sceglie la lettura che corrisponde a come il server manda i dati.'
+segnaposto: {}
+varianti: []
+vicine:
+- rd-readline
+- rd-readuntil
+- rd-readexactly

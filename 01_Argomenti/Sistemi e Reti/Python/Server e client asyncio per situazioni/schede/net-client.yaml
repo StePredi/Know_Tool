@@ -1,0 +1,19 @@
+id: net-client
+tipo: ricetta
+titolo: Collegarsi a un server
+sigla: open_connection
+comando: reader, writer = await asyncio.open_connection(host, porta)
+frase: la stessa coppia del server
+fonte: 02_echo_client.py · main()
+parole: open_connection client connettersi reader writer coppia
+quando: Quando il tuo programma deve parlare con un server.
+fasi:
+- nome: Connetti
+  righe:
+  - codice: reader, writer = await asyncio.open_connection("127.0.0.1", 8888)
+    commento: restituisce la stessa coppia (reader, writer) che riceve il server
+segnaposto: {}
+varianti: []
+vicine:
+- net-client-scambio
+- net-server

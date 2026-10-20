@@ -1,0 +1,32 @@
+id: asy-coroutine
+tipo: ricetta
+titolo: Scrivere una funzione che può mettersi in pausa
+sigla: Coroutine
+comando: async def
+frase: chiamarla non la esegue
+fonte: asyncio_intro_2627.ipynb · §2 Coroutines
+parole: coroutine async def funzione cooperativa oggetto coroutine pigra
+quando: Quando una funzione deve aspettare qualcosa di lento (rete, attesa) senza bloccare il resto del programma.
+fasi:
+- nome: Definisci
+  righe:
+  - codice: |-
+      async def scarica_file(nome):
+          print(f"Inizio download di {nome}")
+          await asyncio.sleep(2)
+          print(f"Completato download di {nome}")
+          return f"Contenuto di {nome}"
+    commento: async def trasforma la funzione in una coroutine; dentro dovrebbe usare await almeno una volta
+- nome: Chiamala
+  righe:
+  - codice: |-
+      coro = scarica_file("documento.pdf")
+      print(type(coro))
+    commento: 'non stampa niente dalla funzione: ottieni solo un oggetto coroutine'
+    trappola: 'Una coroutine chiamata non parte: la deve eseguire l''event loop (vedi asy-run).'
+segnaposto: {}
+varianti: []
+vicine:
+- asy-run
+- asy-await
+- asy-senza-await

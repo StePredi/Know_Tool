@@ -1,0 +1,30 @@
+id: asy-await
+tipo: ricetta
+titolo: Cedere il controllo con await
+sigla: await
+comando: risultato = await operazione()
+frase: '"io mi fermo, intanto fai altro"'
+fonte: asyncio_intro_2627.ipynb · §3 await
+parole: await sospendere cedere controllo awaitable coroutine task future
+quando: Quando una coroutine arriva a un'operazione lenta.
+fasi:
+- nome: Cosa succede
+  righe:
+  - codice: |-
+      async def esempio():
+          print("1. Inizio")
+          risultato = await operazione_lenta()
+          print("3. Riprendo dopo l'attesa")
+          return risultato
+    commento: la coroutine si ferma, l'event loop esegue altro, poi riprende dalla riga dopo l'await
+- nome: Regole
+  righe:
+  - codice: await oggetto
+    commento: 'si usa solo dentro una funzione async e solo su qualcosa di "awaitable": coroutine, Task o Future'
+    trappola: Nei thread decide il sistema operativo quando cambiare; qui decidi tu, con await.
+segnaposto: {}
+varianti: []
+vicine:
+- asy-coroutine
+- asy-vs-thread
+- asy-senza-await

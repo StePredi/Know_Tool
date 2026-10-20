@@ -1,0 +1,25 @@
+id: net-chiudi
+tipo: ricetta
+titolo: Chiudere la connessione
+sigla: close + wait_closed
+comando: |-
+  writer.close()
+  await writer.wait_closed()
+frase: prima chiudi, poi aspetti
+fonte: 01_echo_server.py · gestisci_client()
+parole: close wait_closed chiudere connessione writer disconnesso
+quando: Quando il client se n'è andato o hai finito di comunicare.
+fasi:
+- nome: Chiudi
+  righe:
+  - codice: |-
+      print("Disconnesso:", indirizzo)
+      writer.close()                          # chiude la connessione
+      await writer.wait_closed()
+    commento: close() avvia la chiusura, wait_closed() aspetta che sia completata
+    trappola: 'Nota: nel chat server (04_chat_server.py) c''è solo writer.close(), senza wait_closed().'
+segnaposto: {}
+varianti: []
+vicine:
+- net-gestore
+- chat-finally

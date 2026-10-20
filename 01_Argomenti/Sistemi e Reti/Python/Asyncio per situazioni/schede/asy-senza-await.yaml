@@ -1,0 +1,30 @@
+id: asy-senza-await
+tipo: prima_dopo
+titolo: 'Errore: chiamare una coroutine senza await'
+sigla: Manca await
+comando: await oppure create_task
+frase: crea solo un oggetto
+fonte: asyncio_guide_2627.ipynb · §7 Regole d'oro
+parole: await dimenticato coroutine oggetto non esegue create_task errore
+prima: |-
+  async def main():
+      ⟦operazione()⟧             # crea solo un oggetto, non esegue!
+      risultato = ⟦operazione_async()⟧
+dopo: |-
+  async def main():
+      ⟦await operazione()⟧           # esegue ora
+      task = ⟦asyncio.create_task(operazione())⟧   # oppure: esegue in concorrenza
+uso: Eseguire davvero la coroutine.
+riconoscila: Il programma parte ma la funzione non fa niente (o risultato è un oggetto coroutine).
+parti:
+- voce: operazione()
+  spiega: crea solo l'oggetto coroutine
+- voce: await operazione()
+  spiega: la esegue e aspetta la fine
+- voce: create_task(operazione())
+  spiega: la mette in coda per l'esecuzione concorrente
+trappola: La guida elenca questo tra gli errori da evitare.
+varianti: []
+vicine:
+- asy-coroutine
+- asy-create-task

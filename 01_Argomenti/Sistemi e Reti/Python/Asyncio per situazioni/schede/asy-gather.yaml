@@ -1,0 +1,27 @@
+id: asy-gather
+tipo: ricetta
+titolo: Aspettare più task insieme
+sigla: gather
+comando: await asyncio.gather(t1, t2, t3)
+frase: restituisce i risultati in lista
+fonte: asyncio_intro_2627.ipynb · §4 Tasks · asyncio_guide_2627.ipynb · §4
+parole: gather attendere tutti task risultati lista concorrente
+quando: Quando hai molti task e ti servono tutti i risultati.
+fasi:
+- nome: Con i task
+  righe:
+  - codice: risultati = await asyncio.gather(task1, task2, task3)
+    commento: aspetta che tutti finiscano e restituisce i risultati nell'ordine in cui li hai passati
+- nome: Con una lista
+  righe:
+  - codice: risultati = await asyncio.gather(*tasks)
+    commento: l'asterisco passa gli elementi della lista come argomenti
+  - codice: await asyncio.gather(operazione_lenta(1), operazione_lenta(2), operazione_lenta(3))
+    commento: si possono passare anche coroutine direttamente (~2 secondi totali)
+    trappola: 'Nota: passando coroutine a gather, asyncio le trasforma in task da sé (comportamento della libreria, non spiegato nelle fonti).'
+segnaposto: {}
+varianti: []
+vicine:
+- asy-create-task
+- asy-gather-errori
+- asy-struttura

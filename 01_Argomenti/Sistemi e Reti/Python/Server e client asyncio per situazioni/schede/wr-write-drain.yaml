@@ -1,0 +1,36 @@
+id: wr-write-drain
+tipo: ricetta
+titolo: Mandare dati
+sigla: write + drain
+comando: |-
+  writer.write(b"...")
+  await writer.drain()
+frase: prima nel buffer, poi partono
+fonte: 06_server_dati.py · gestisci_client()
+parole: write drain buffer byte invio server dati
+quando: Quando il server o il client deve inviare byte.
+fasi:
+- nome: Invia
+  righe:
+  - codice: |-
+      writer.write(b"Ciao, sono il server\n")      # per readline()
+      writer.write(b"rosso;verde;blu;")            # per readuntil(b";")
+      writer.write(b"12345678")                    # per readexactly(4)
+      writer.write(b"primo pezzo")                 # per read(100)
+      await writer.drain()
+    commento: più write messi nel buffer, un solo drain per farli partire
+    trappola: Il b"..." serve perché write vuole byte, non stringhe.
+- nome: Pausa e chiusura
+  righe:
+  - codice: |-
+      await asyncio.sleep(2)                       # pausa: il resto arriva dopo
+      writer.write(b"secondo pezzo, ultimi dati")
+      await writer.drain()
+      writer.close()
+      await writer.wait_closed()
+    commento: la chiusura fa terminare read() lato client
+segnaposto: {}
+varianti: []
+vicine:
+- net-eco
+- rd-read-tutto

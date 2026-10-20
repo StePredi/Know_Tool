@@ -1,0 +1,32 @@
+id: net-gestore
+tipo: ricetta
+titolo: Scrivere la funzione che gestisce un client
+sigla: Gestore
+comando: async def gestisci_client(reader, writer)
+frase: reader per leggere, writer per scrivere
+fonte: 01_echo_server.py · gestisci_client()
+parole: gestore handler reader writer peername client connesso
+quando: Quando serve una funzione chiamata a ogni connessione.
+fasi:
+- nome: Firma
+  righe:
+  - codice: |-
+      async def gestisci_client(reader, writer):
+          indirizzo = writer.get_extra_info("peername")   # (ip, porta) del client
+          print("Connesso:", indirizzo)
+    commento: asyncio la chiama in un task separato per ogni client, già con reader e writer
+- nome: Ciclo di lavoro
+  righe:
+  - codice: |-
+      while True:
+          dati = await reader.readline()
+          if not dati:
+              break
+    commento: 'se readline restituisce vuoto, il client ha chiuso: esci dal ciclo'
+    trappola: L'await sulla lettura permette agli altri client di andare avanti mentre questo aspetta.
+segnaposto: {}
+varianti: []
+vicine:
+- net-server
+- net-eco
+- net-chiudi

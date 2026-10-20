@@ -10,6 +10,7 @@
   - socket: `client_simple.py`, `server_simple_socket.py`, `server_medium_socket.py`
   - framing: `framesocket.py`, `frameserver.py`, `frameclient.py`
   - `socketserver.ipynb` → il modulo `socketserver` (teoria, esempi, 5 esercizi)
+  - asyncio: `asyncio_intro_2627.ipynb`, `asyncio_guide_2627.ipynb`, `01_echo_server.py`, `02_echo_client.py`, `04_chat_server.py`, `05_chat_client.py`, `06_server_dati.py`, `07_client_letture.py` (manca il file 03 nella numerazione)
   - `gateway.py`, `controller.py`, `monitor.py` → codice con MQTT (paho), thread, code, seriale, logging
 
 - Documenti «Per situazioni» (si aprono nell'app), uno per area tematica:
@@ -18,6 +19,8 @@
   - `MQTT per situazioni/` → client paho, ricevere, pubblicare, topic e messaggi (6 rami, 17 schede)
   - `Seriale per situazioni/` → pyserial: aprire, leggere, scrivere, decodificare (4 rami, 8 schede)
   - `Basi di Python per situazioni/` → valori e testo, if/for/while, funzioni, moduli, liste/tuple/set/dizionari, classi, errori (7 rami, 37 schede)
+  - `Asyncio per situazioni/` → coroutine, await, task, gather, timeout, errori, quando usarlo (6 rami, 18 schede)
+  - `Server e client asyncio per situazioni/` → start_server, open_connection, letture del reader, chat con più client (6 rami, 20 schede)
   - `File per situazioni/` → open/with, lettura, scrittura, JSON, pathlib, errori (6 rami, 23 schede)
 
 ---

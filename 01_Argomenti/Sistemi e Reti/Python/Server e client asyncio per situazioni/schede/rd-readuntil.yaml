@@ -1,0 +1,23 @@
+id: rd-readuntil
+tipo: ricetta
+titolo: Leggere fino a un separatore
+sigla: readuntil
+comando: await reader.readuntil(b";")
+frase: il separatore è compreso
+fonte: 07_client_letture.py · main()
+parole: readuntil separatore delimitatore punto e virgola leggere
+quando: Quando i dati sono separati da un carattere scelto da te.
+fasi:
+- nome: Leggi
+  righe:
+  - codice: |-
+      for i in range(3):
+          colore = await reader.readuntil(b";")
+          print("readuntil(b';')   ->", colore)
+    commento: 'il server manda b"rosso;verde;blu;": tre chiamate, tre pezzi (con il ; in fondo)'
+segnaposto: {}
+varianti: []
+vicine:
+- rd-readline
+- rd-readexactly
+- rd-scelta

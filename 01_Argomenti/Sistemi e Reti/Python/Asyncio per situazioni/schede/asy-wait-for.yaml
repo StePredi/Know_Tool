@@ -1,0 +1,24 @@
+id: asy-wait-for
+tipo: ricetta
+titolo: Mettere un tempo massimo a un'operazione
+sigla: wait_for
+comando: asyncio.wait_for(coro(), timeout=2.0)
+frase: scade con TimeoutError
+fonte: asyncio_guide_2627.ipynb · §6.2 Timeout
+parole: wait_for timeout tempo massimo timeouterror operazione lenta
+quando: Quando un'operazione potrebbe non finire mai.
+fasi:
+- nome: Con timeout
+  righe:
+  - codice: |-
+      try:
+          risultato = await asyncio.wait_for(operazione_lenta(), timeout=2.0)
+          print(f"Risultato: {risultato}")
+      except asyncio.TimeoutError:
+          print("Operazione troppo lenta! Timeout raggiunto.")
+    commento: se passano 2 secondi senza finire, parte l'except
+segnaposto: {}
+varianti: []
+vicine:
+- asy-gather-errori
+- asy-await

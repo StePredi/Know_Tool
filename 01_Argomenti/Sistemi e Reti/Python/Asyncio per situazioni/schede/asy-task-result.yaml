@@ -1,0 +1,30 @@
+id: asy-task-result
+tipo: ricetta
+titolo: Leggere il risultato senza await
+sigla: result()
+comando: task.result()
+frase: solo se il task è finito
+fonte: asyncio_guide_2627.ipynb · §2.3 result()
+parole: result task invalidstateerror risultato senza await done
+quando: Quando il task è finito e vuoi il risultato subito, senza sospenderti.
+fasi:
+- nome: Prima della fine
+  righe:
+  - codice: |-
+      try:
+          risultato = task.result()
+      except asyncio.InvalidStateError as e:
+          print(f"Errore: {e}")
+    commento: se il task non è finito, result() solleva InvalidStateError
+- nome: Dopo la fine
+  righe:
+  - codice: |-
+      if task.done():
+          risultato = task.result()
+    commento: funziona senza await
+    trappola: Controlla done() prima di chiamare result().
+segnaposto: {}
+varianti: []
+vicine:
+- asy-task-stato
+- asy-await-finito
