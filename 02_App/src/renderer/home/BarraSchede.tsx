@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Icona, type NomeIcona } from '../componenti/Icona'
+import { iconaNodo } from './Albero'
 import { HOME_ID, useHome, type SchedaApp } from './stato'
 
 const ICONA: Record<SchedaApp['tipo'], NomeIcona> = { home: 'casa', mappa: 'mappa', testo: 'libro', situazioni: 'carte', appunto: 'file' }
@@ -52,7 +53,7 @@ export function BarraSchede() {
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); useHome.getState().attiva_(t.id) } }}
           title={t.titolo}
         >
-          <Icona nome={ICONA[t.tipo]} size={14} />
+          <Icona nome={t.tipo === 'situazioni' ? iconaNodo({ tipo: 'situazioni', rel: t.rel }) : ICONA[t.tipo]} size={14} />
           <span className="tab-t">{t.titolo}</span>
           {t.id !== HOME_ID && (
             <button type="button" className="tab-x" aria-label={`Chiudi ${t.titolo}`} title="Chiudi (Ctrl+W)" onClick={(e) => { e.stopPropagation(); useHome.getState().chiudiScheda(t.id) }}>

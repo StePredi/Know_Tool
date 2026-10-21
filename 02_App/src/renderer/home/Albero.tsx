@@ -2,6 +2,11 @@ import { Icona, type NomeIcona } from '../componenti/Icona'
 import type { NodoArg, TipoNodo } from '@shared/types'
 import { èDocumento, HOME_ID, idScheda, useHome } from './stato'
 
+/** L'icona di un nodo: i documenti «per situazioni» dentro Matematica hanno la somma (la stessa del «+ Nuovo → Matematica»). */
+export function iconaNodo(n: { tipo: TipoNodo; rel?: string }): NomeIcona {
+  return n.tipo === 'situazioni' && n.rel?.split('/')[0]?.toLowerCase() === 'matematica' ? 'somma' : ICONA_NODO[n.tipo]
+}
+
 export const ICONA_NODO: Record<TipoNodo, NomeIcona> = { materia: 'libro', cartella: 'cartella', autore: 'file', mappa: 'mappa', testo: 'testo', situazioni: 'carte', appunto: 'file', file: 'incolla' }
 
 function Riga({ n, livello }: { n: NodoArg; livello: number }) {
@@ -30,7 +35,7 @@ function Riga({ n, livello }: { n: NodoArg; livello: number }) {
           }}
           title={n.nome}
         >
-          <span style={{ color: `hsl(var(--h) 50% 42%)`, display: 'inline-flex' }}><Icona nome={ICONA_NODO[n.tipo]} size={15} /></span>
+          <span style={{ color: `hsl(var(--h) 50% 42%)`, display: 'inline-flex' }}><Icona nome={iconaNodo(n)} size={15} /></span>
           <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{n.nome}</span>
         </button>
       </div>

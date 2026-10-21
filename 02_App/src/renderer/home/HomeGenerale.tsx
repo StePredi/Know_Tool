@@ -4,7 +4,7 @@ import { Con, Icona } from '../componenti/Icona'
 import { Modale, primario, secondario } from '../editor/ui'
 import { useEditor } from '../editor/stato'
 import { useStore } from '../store'
-import { Albero, ICONA_NODO } from './Albero'
+import { Albero, iconaNodo } from './Albero'
 import { Galleria } from './Galleria'
 import type { IdModello } from './modelli'
 import { èCartellaAutori } from '@shared/percorsi'
@@ -24,10 +24,10 @@ function quando(ms: number): string {
   return new Date(ms).toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
-function Medaglia({ tipo, size = 38 }: { tipo: TipoNodo; size?: number }) {
+function Medaglia({ tipo, rel, size = 38 }: { tipo: TipoNodo; rel?: string; size?: number }) {
   return (
     <span className={'hm-ico hm-t-' + tipo} style={{ width: size, height: size }}>
-      <Icona nome={ICONA_NODO[tipo]} size={Math.round(size * 0.5)} />
+      <Icona nome={iconaNodo({ tipo, rel })} size={Math.round(size * 0.5)} />
     </span>
   )
 }
@@ -51,7 +51,7 @@ function Cartolina({ n, grande }: { n: NodoArg; grande?: boolean }) {
         onContextMenu={(e) => { e.preventDefault(); useHome.getState().imposta({ sel: n.rel }) }}
         title={n.nome}
       >
-        <Medaglia tipo={n.tipo} size={grande ? 46 : 38} />
+        <Medaglia tipo={n.tipo} rel={n.rel} size={grande ? 46 : 38} />
         <span style={{ display: 'block', minWidth: 0 }}>
           <span style={{ display: 'block', fontSize: grande ? 18 : 14.5, fontWeight: 700, lineHeight: 1.25, overflowWrap: 'anywhere' }}>{n.nome}</span>
           <span style={{ display: 'block', marginTop: 3, fontSize: 12.5, color: 'var(--mute)' }}>{n.info}</span>
@@ -74,7 +74,7 @@ function Riga({ n }: { n: NodoArg }) {
   return (
     <button type="button" className={'hm-riga hm-t-' + n.tipo + (sel ? ' sel' : '')} onClick={() => apriNodo(n)} onContextMenu={(e) => { e.preventDefault(); useHome.getState().imposta({ sel: n.rel }) }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 0 }}>
-        <Medaglia tipo={n.tipo} size={30} />
+        <Medaglia tipo={n.tipo} rel={n.rel} size={30} />
         <span style={{ fontWeight: 700, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{n.nome}</span>
         {pref && <Icona nome="stella" size={12} piena />}
       </span>
@@ -170,7 +170,7 @@ function Dettagli({ n, azioni }: { n: NodoArg; azioni: { rinomina: () => void; a
   return (
     <aside className="hm-det" aria-label="Dettagli">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginBottom: 12 }}>
-        <Medaglia tipo={n.tipo} size={46} />
+        <Medaglia tipo={n.tipo} rel={n.rel} size={46} />
         <div style={{ flex: 1 }} />
         <button type="button" className="btn" aria-label="Chiudi i dettagli" onClick={() => useHome.getState().imposta({ sel: null })} style={{ padding: '6px 8px' }}><Icona nome="chiudi" size={14} /></button>
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNod
 import type { NodoArg } from '@shared/types'
 import { Con, Icona } from '../componenti/Icona'
 import { Modale, primario, secondario } from '../editor/ui'
-import { ICONA_NODO } from './Albero'
+import { iconaNodo } from './Albero'
 import { destinazioni, iniziale, ordina, type Contesto, type IdModello, type Modello } from './modelli'
 
 const pulisci = (m: string): string => m.replace(/^Error invoking remote method '[^']*': (Error: )?/, '')
@@ -144,7 +144,7 @@ export function Galleria({ contesto, albero, crea, chiudi }: { contesto: Contest
               </div>
 
               <div className="gal-crea">
-                <span style={{ flex: 'none', display: 'inline-flex', marginTop: 1 }}><Icona nome={ICONA_NODO[m.tipo]} size={15} /></span>
+                <span style={{ flex: 'none', display: 'inline-flex', marginTop: 1 }}><Icona nome={m.icona} size={15} /></span>
                 <span><strong style={{ color: 'var(--ink)' }}>Cosa crea:</strong> {m.crea}</span>
               </div>
 
@@ -174,13 +174,13 @@ export function Galleria({ contesto, albero, crea, chiudi }: { contesto: Contest
                       {voci.map((v) =>
                         v.ok ? (
                           <button key={v.n.rel} type="button" role="option" aria-selected={v.n.rel === padre} className={'gal-d' + (v.n.rel === padre ? ' on' : '')} style={{ paddingLeft: 10 + v.livello * 18 }} onClick={() => { setDove({ ...dove, [m.id]: v.n.rel }); setErr(null) }}>
-                            <Icona nome={ICONA_NODO[v.n.tipo]} size={15} />
+                            <Icona nome={iconaNodo(v.n)} size={15} />
                             <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.n.nome}</span>
                             {v.n.rel === padre && <Icona nome="spunta" size={14} />}
                           </button>
                         ) : (
                           <div key={v.n.rel} className="gal-d via" style={{ paddingLeft: 10 + v.livello * 18 }}>
-                            <Icona nome={ICONA_NODO[v.n.tipo]} size={15} />
+                            <Icona nome={iconaNodo(v.n)} size={15} />
                             <span>{v.n.nome}</span>
                           </div>
                         )
