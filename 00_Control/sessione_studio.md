@@ -116,3 +116,14 @@ Specifica: `specifiche/modello_matematica.md`. Esempio completo da copiare: `01_
 - **Prima di consegnare:** `cd 02_App && npm test`. `tests/regola.test.ts` legge da solo tutti i documenti in `01_Argomenti/Matematica`: indice, schede, collegamenti (`confondi`, `vicine`, passi con scheda, `esercizi.yaml`) e formule.
 - **Non si fa:** scrivere interfaccia o codice dell'app (tocca alla sessione di controllo); inventare formule a memoria senza controllo; mettere nei testi parole dentro le formule (`in x = 2`): le lettere vengono lette come variabili.
 - **Dimostrazioni di geometria:** si parte dalla tesi. Rami per tipo di tesi, un ramo a passi per lo scheletro. Negli esempi, passi `{dice, perche, scheda}` con la scheda del criterio che li giustifica.
+
+---
+
+## 8. Per non pestarci i piedi (2026-10-22)
+
+- **Prima di iniziare**: `git status`. Se ci sono file modificati che non sono miei, li lascio stare e non li committo.
+- **Non sposto né rinomino cartelle** di `01_Argomenti/` senza che Ste l'abbia chiesto: tolgo i riferimenti agli altri e rompo i test (che leggono i percorsi). Se serve riorganizzare, lo segnalo in `segnalazioni_studio.md`.
+- **Commit solo dei miei percorsi**: `git add 01_Argomenti/<cartella> …` con i nomi espliciti, poi `git commit -- <stessi percorsi>`.
+- **File lock di git**: se compare `.git/HEAD.lock` o simili e non posso cancellarli, li rinomino (`mv .git/HEAD.lock .git/stale-HEAD-lock-<ora>`) senza forzare; non tocco quelli di un git in esecuzione.
+- **Test**: se ho scritto una scheda `regola`, controllo che i test dell'argomento passino (`npx vitest run tests/regola.test.ts` in `02_App`) oppure lo scrivo in LOG.md come «non verificato».
+- **Ramo facoltativo**: se Ste lo chiede, lavoro su un ramo `studio` e non su `main`; il merge lo fa lui o lo sviluppo.
