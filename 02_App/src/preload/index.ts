@@ -19,6 +19,7 @@ const api: Api = {
   albero: () => ipcRenderer.invoke('albero:leggi'),
   leggiSituazioni: (rel) => ipcRenderer.invoke('situazioni:leggi', rel),
   segnaRipassata: (rel, id, v) => ipcRenderer.invoke('situazioni:ripassata', rel, id, v),
+  leggiMateriaStoria: (materia) => ipcRenderer.invoke('storia:materia', materia),
   leggiAppunto: (rel) => ipcRenderer.invoke('appunti:leggi', rel),
   leggiSorgente: (rel) => ipcRenderer.invoke('modifica:leggi', rel),
   salvaSorgente: (rel, testo, m, forza) => ipcRenderer.invoke('modifica:salva', rel, testo, m, forza ?? false),

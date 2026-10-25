@@ -207,10 +207,14 @@ const ramo = z.object({
   lato: z.enum(LATI).default('R'),
   /** true = i passi vanno fatti in ordine (pill numerate 1, 2, 3…) */
   ordine: z.boolean().default(false),
+  /** storia: gli anni coperti dal ramo, accanto al nome */
+  quando: testo.default(''),
   voci: z.array(voce).min(1)
 })
 export const schemaIndice = z.object({
   modello: z.literal('per_situazioni'),
+  /** con quale schermata si apre: la mappa a rami (default) o la vista di Storia */
+  vista: z.enum(['situazioni', 'storia']).default('situazioni'),
   titolo: testo.min(1),
   centro: testo.min(1),
   sottotitolo: testo.default(''),
@@ -275,6 +279,8 @@ export interface Situazioni {
   ripassate: string[]
   /** problemi trovati leggendo (file che non si leggono, collegamenti rotti…): non bloccano l'apertura */
   avvisi: string[]
+  /** i libri della materia (solo per i documenti di Storia): servono per la fonte in chiaro */
+  libri?: Libri
 }
 
 function messaggio(e: z.ZodError): string {
@@ -374,3 +380,69 @@ export function controllaEsercizi(esercizi: EserciziSit, schede: Record<string, 
   })
   return av
 }
+
+// ── _libri.yaml: i libri della materia ────────────────────────────────────
+// Si scrive una volta, dall'indice del libro. Serve per due cose: la fonte in
+// chiaro di ogni scheda e la vista «Copertura del libro».
+const paragrafoLibro = z.object({ n: z.number().int().positive(), titolo: testo.min(1), pp: testo.default('') })
+const capitoloLibro = z.object({ n: z.number().int().positive(), titolo: testo.min(1), pp: testo.default(''), paragrafi: z.array(paragrafoLibro).default([]) })
+export const schemaLibri = z.object({
+  libri: z.record(z.string(), z.object({ titolo: testo.min(1), capitoli: z.array(capitoloLibro).default([]) }))
+})
+export type Libri = z.infer<typeof schemaLibri>['libri']
+export type CapitoloLibro = z.infer<typeof capitoloLibro>
+
+export function leggiLibri(src: string): { libri?: Libri; errore?: string } {
+  let dati: unknown
+  try {
+    dati = YAML.parse(src)
+  } catch (e) {
+    return { errore: `_libri.yaml non si legge: ${(e as Error).message}` }
+  }
+  const r = schemaLibri.safeParse(dati)
+  return r.success ? { libri: r.data.libri } : { errore: `_libri.yaml: ${messaggio(r.error)}` }
+}
+
+/** «Q cap. 2 par. 5 — L'Impero austro-ungarico», ricavato dai libri della materia. */
+export function fonteInChiaro(d: Riferimento, libri?: Libri): string {
+  let s = `${d.l} cap. ${d.c}`
+  if (d.p) s += ` par. ${d.p}`
+  const cap = libri?.[d.l]?.capitoli.find((c) => c.n === d.c)
+  const par = d.p ? cap?.paragrafi.find((x) => x.n === d.p) : undefined
+  const titolo = par?.titolo ?? (d.p ? undefined : cap?.titolo)
+  if (titolo) s += ` — ${titolo}`
+  if (d.dove) s += ` (${d.dove})`
+  return s
+}
+
+/** Una riga della vista «Copertura del libro»: un paragrafo e le schede che lo coprono. */
+export interface RigaCopertura {
+  libro: string
+  capitolo: number
+  titoloCapitolo: string
+  paragrafo: number
+  titolo: string
+  schede: { rel: string; documento: string; id: string; titolo: string }[]
+}
+export interface DocumentoMateria {
+  rel: string
+  titolo: string
+  schede: { id: string; titolo: string; da: Riferimento[] }[]
+}
+
+export function copertura(libri: Libri, documenti: DocumentoMateria[]): RigaCopertura[] {
+  const righe: RigaCopertura[] = []
+  for (const [sigla, libro] of Object.entries(libri)) {
+    for (const cap of libro.capitoli) {
+      for (const par of cap.paragrafi) {
+        const schede = documenti.flatMap((d) =>
+          d.schede.filter((s) => s.da.some((x) => x.l === sigla && x.c === cap.n && x.p === par.n))
+            .map((s) => ({ rel: d.rel, documento: d.titolo, id: s.id, titolo: s.titolo }))
+        )
+        righe.push({ libro: libro.titolo, capitolo: cap.n, titoloCapitolo: cap.titolo, paragrafo: par.n, titolo: par.titolo, schede })
+      }
+    }
+  }
+  return righe
+}
+

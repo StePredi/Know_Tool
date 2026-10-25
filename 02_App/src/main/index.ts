@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { archiviaNodo, creaAppunto, creaMatematica, creaNodo, creaSituazioni, leggiAlbero, rinominaNodo } from './esplora'
 import { archiviaFile, creaFile, leggiSorgente, salvaSorgente } from './modifica'
 import { fileApribile, leggiAppunto, trovaFonte } from './appunti'
-import { leggiSituazioni, segnaRipassata } from './situazioni'
+import { leggiMateriaStoria, leggiSituazioni, segnaRipassata } from './situazioni'
 import { Repository } from './repository'
 import type { StatoApp } from '../shared/types'
 
@@ -175,6 +175,7 @@ function registraIpc(): void {
     if (err) throw new Error('Il sistema non ha aperto il file: ' + err)
   })
   ipcMain.handle('situazioni:ripassata', (_e, rel: string, id: string, v: boolean) => segnaRipassata(senzaRadice(), rel, id, v))
+  ipcMain.handle('storia:materia', (_e, materia: string) => leggiMateriaStoria(senzaRadice(), materia))
   ipcMain.handle('albero:leggi', async () => (radice ? leggiAlbero(radice) : []))
   ipcMain.handle('albero:crea', async (_e, padre: string, nome: string) => {
     const rel = await creaNodo(senzaRadice(), padre, nome)

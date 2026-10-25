@@ -1,4 +1,5 @@
 modello: per_situazioni
+vista: storia
 titolo: Le alleanze europee
 centro: Alleanze 1879-1914
 sottotitolo: ''
@@ -25,6 +26,7 @@ rami:
     - duplice-1879
     - triplice-1882
     - equilibri-bismarck
+  quando: 1879-1890
 - id: svolta-guglielmo
   nome: La svolta di Guglielmo II
   colore: red
@@ -36,6 +38,7 @@ rami:
     - weltpolitik
     - kruger-1896
     - bosnia-1908
+  quando: 1888-1908
 - id: nasce-intesa
   nome: 'La risposta: nasce l''Intesa'
   colore: green
@@ -47,6 +50,7 @@ rami:
     - entente-1904
     - gb-russia-1907
     - triplice-intesa
+  quando: 1891-1907
 - id: prove-di-forza
   nome: Le prove di forza
   colore: violet
@@ -58,6 +62,7 @@ rami:
     - agadir-1911
     - balcaniche-1912
     - polveriera
+  quando: 1905-1913
 - id: quadro
   nome: Il quadro d'insieme
   colore: yellow

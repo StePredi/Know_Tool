@@ -1,7 +1,7 @@
 // Tipi condivisi tra processo principale e interfaccia.
 // Nomi dei campi = nomi dei file (formato_studio_italiano.md), non quelli abbreviati della demo.
 
-import type { Situazioni } from './situazioni'
+import type { Situazioni, DocumentoMateria, Libri } from './situazioni'
 
 export type Gravita = 'errore' | 'avviso'
 
@@ -289,6 +289,8 @@ export interface Api {
   leggiSituazioni(rel: string): Promise<Situazioni>
   /** segna o toglie «ripassata»; restituisce l'elenco aggiornato */
   segnaRipassata(rel: string, id: string, ripassata: boolean): Promise<string[]>
+  /** Storia: tutti i documenti della materia con il campo «da», per la copertura del libro */
+  leggiMateriaStoria(materia: string): Promise<{ libri: Libri; documenti: DocumentoMateria[] }>
   /** un appunto .md della sessione di studio, con le immagini che cita (come data URL) */
   leggiAppunto(rel: string): Promise<Appunto>
   /** apre con l'app predefinita del sistema un file citato in un appunto (es. `fonti/x.pdf`) */

@@ -2,7 +2,7 @@
 
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
-import { controllaEsercizi, controllaSituazioni, leggiEsercizi, leggiIndice, leggiSchedaSit, type EserciziSit, type SchedaSit, type Situazioni } from '../shared/situazioni'
+import { controllaEsercizi, controllaSituazioni, leggiEsercizi, leggiIndice, leggiLibri, leggiSchedaSit, type DocumentoMateria, type EserciziSit, type Libri, type SchedaSit, type Situazioni } from '../shared/situazioni'
 
 const BASE = '01_Argomenti'
 
@@ -65,7 +65,58 @@ export async function leggiSituazioni(radice: string, rel: string): Promise<Situ
     /* esercizi.yaml è facoltativo */
   }
   const ripassate = (await leggiRipassate(dir)).filter((id) => schede[id])
-  return { rel, indice, schede, esercizi, ripassate, avvisi }
+  const libri = indice.vista === 'storia' ? await leggiLibriMateria(radice, rel) : undefined
+  return { rel, indice, schede, esercizi, ripassate, avvisi, libri }
+}
+
+/** `01_Argomenti/<Materia>/_libri.yaml`: i libri della materia. Facoltativo. */
+async function leggiLibriMateria(radice: string, rel: string): Promise<Libri | undefined> {
+  const materia = rel.split('/').filter(Boolean)[0]
+  if (!materia) return undefined
+  try {
+    const r = leggiLibri(await fs.readFile(join(radice, BASE, materia, '_libri.yaml'), 'utf8'))
+    return r.libri
+  } catch {
+    return undefined
+  }
+}
+
+/** Per la vista «Copertura del libro»: tutti i documenti «storia» della materia, con il solo campo «da». */
+export async function leggiMateriaStoria(radice: string, materia: string): Promise<{ libri: Libri; documenti: DocumentoMateria[] }> {
+  if (!materia || /[\\/]/.test(materia) || /^[_.]|^99_/.test(materia)) throw new Error('Materia non valida.')
+  const libri = (await leggiLibriMateria(radice, materia)) ?? {}
+  const documenti: DocumentoMateria[] = []
+  const radiceMateria = join(radice, BASE, materia)
+  const cerca = async (dir: string, rel: string, prof: number): Promise<void> => {
+    if (prof > 3) return
+    let voci: string[] = []
+    try {
+      voci = (await fs.readdir(dir, { withFileTypes: true })).filter((v) => v.isDirectory() && !/^[_.]|^99_/.test(v.name)).map((v) => v.name)
+    } catch {
+      return
+    }
+    if (await èSituazioni(dir)) {
+      try {
+        const { indice } = leggiIndice(await fs.readFile(join(dir, 'indice.yaml'), 'utf8'))
+        if (indice?.vista === 'storia') {
+          const schede: DocumentoMateria['schede'] = []
+          const nomi = (await fs.readdir(join(dir, 'schede'))).filter((f) => f.endsWith('.yaml')).sort()
+          for (const nome of nomi) {
+            const r = leggiSchedaSit(await fs.readFile(join(dir, 'schede', nome), 'utf8'), nome)
+            const sc = r.scheda
+            if (sc && (sc.tipo === 'voce' || sc.tipo === 'confronto')) schede.push({ id: sc.id, titolo: sc.titolo, da: sc.da })
+          }
+          documenti.push({ rel, titolo: indice.titolo, schede })
+        }
+      } catch {
+        /* un documento che non si legge non ferma la copertura */
+      }
+      return
+    }
+    for (const v of voci) await cerca(join(dir, v), `${rel}/${v}`, prof + 1)
+  }
+  await cerca(radiceMateria, materia, 0)
+  return { libri, documenti }
 }
 
 /** Segna o toglie «ripassata» e restituisce l'elenco aggiornato. Scrive in modo sicuro (file temporaneo + rinomina). */

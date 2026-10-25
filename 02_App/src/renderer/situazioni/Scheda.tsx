@@ -7,7 +7,7 @@ import { codiceDaCopiare, righeCodice } from './righe'
 import { DisegnoScheda } from './Figura'
 import { Comando, TestoMat } from './Formula'
 import { Regola } from './Regola'
-import { Confronto, Testo, Voce } from './Voce'
+import { Confronto, Voce } from '../storia/Voce'
 import { ModificaScheda } from './ModificaScheda'
 import { useSit, VISTA0 } from './stato'
 import type { InfoScheda } from './util'
@@ -313,7 +313,7 @@ function VoceScheda({ ctx, s }: { ctx: Ctx; s: SchedaVoce }): ReactNode {
   return (
     <>
       <Testata ctx={ctx} id={s.id} tipo={s.genere[0]!.toUpperCase() + s.genere.slice(1)} />
-      <Voce rel={ctx.rel} dati={ctx.dati} s={s} colore={colore} />
+      <Voce dati={ctx.dati} s={s} colore={colore} apri={(x) => useSit.getState().imposta(ctx.rel, { scheda: x })} />
       <Piede ctx={ctx} id={s.id} />
     </>
   )
@@ -324,7 +324,7 @@ function ConfrontoScheda({ ctx, s }: { ctx: Ctx; s: SchedaConfronto }): ReactNod
   return (
     <>
       <Testata ctx={ctx} id={s.id} tipo="Confronto" />
-      <Confronto rel={ctx.rel} dati={ctx.dati} s={s} colore={colore} />
+      <Confronto dati={ctx.dati} s={s} colore={colore} apri={(x) => useSit.getState().imposta(ctx.rel, { scheda: x })} />
       <Piede ctx={ctx} id={s.id} />
     </>
   )

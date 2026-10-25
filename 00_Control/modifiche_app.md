@@ -43,8 +43,11 @@ Apri l'app (`npm run dev` da `02_App/`) e nell'albero vai in **Storia**: ci sono
 due argomenti nuovi, «Le alleanze europee» e «Darwinismo sociale e teorie
 razziali». Aprili e guarda:
 
-1. **La mappa**: sei rami colorati per le alleanze, quattro per il darwinismo.
-   Sulle foglie, al posto del comando, c'è la data.
+0. **La testata**: in alto «Storia › Le alleanze europee» e, a destra, la
+   Copertura del libro; sotto, le tre famiglie **Leggi** (Mappa, Cronologia),
+   **Trova** (Glossario, Chi è chi, Svolte) ed **Esercita** (Ripasso).
+1. **La mappa**: in colonna a sinistra, sei rami colorati per le alleanze e
+   quattro per il darwinismo; accanto a ogni voce la data.
 2. **Una scheda «voce»** (per esempio *Triplice 1882*): il titolo, poi subito il
    testo; a destra la spalla con quando / dove / chi e l'elenco delle sezioni.
    Sotto: «Come si svolge» a passi numerati, «I dettagli», «Attenzione» con
@@ -56,8 +59,9 @@ razziali». Aprili e guarda:
    n'è uno tratteggiato e spento verso «totalitarismi», documento che non
    esiste ancora. Deve restare un avviso, non un errore.
 
-Cosa NON c'è ancora, di proposito: le viste ricavate (cronologia, glossario,
-chi è chi, svolte, copertura del libro) e il ripasso adattato alle voci. Sono
-nel mockup `03_Demo/storia/storia.html`, e si portano nell'app dopo questa
-prova.
-
+6. **Cronologia**: prende il posto della mappa nella colonna, la scheda resta
+   a destra. Guarda i salti di tempo («8 anni») e gli anni con più fatti.
+7. **Copertura del libro**: i paragrafi scoperti in rosso; le pastiglie verdi
+   portano alla scheda che copre quel paragrafo, anche in un altro argomento.
+8. **Ripasso**: copre «quando» e «chi» negli eventi, «cosa» nelle persone e
+   nei concetti, e una colonna del confronto. Si scopre con un clic.
