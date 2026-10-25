@@ -29,12 +29,6 @@ export function Testo({ s }: { s: string }): ReactNode {
   return <>{pezzi}</>
 }
 
-const GENERE: Record<SchedaVoce['genere'], { nome: string; icona: NomeIcona }> = {
-  evento: { nome: 'Evento', icona: 'orologio' },
-  persona: { nome: 'Persona', icona: 'persona' },
-  concetto: { nome: 'Concetto', icona: 'libro' },
-  processo: { nome: 'Processo', icona: 'collega' }
-}
 
 function Sezione({ icona, titolo, children }: { icona: NomeIcona; titolo: string; children: ReactNode }): ReactNode {
   return (

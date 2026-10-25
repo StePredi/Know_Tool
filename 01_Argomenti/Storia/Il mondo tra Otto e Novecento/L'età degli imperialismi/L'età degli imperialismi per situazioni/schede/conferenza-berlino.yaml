@@ -1,0 +1,19 @@
+tipo: voce
+id: conferenza-berlino
+titolo: La conferenza di Berlino
+sigla: Berlino 1884
+genere: evento
+quando: 1884-1885
+dove: Berlino
+chi:
+- Bismarck
+cosa: Bismarck invita i maggiori Stati europei a fissare le **linee dell'espansione in Africa**, fino a quel momento
+  condotta in modo caotico, definendo le rispettive aree di influenza e assegnando i territori non ancora sottoposti
+  a dominazione coloniale.
+conta: L'Africa viene spartita a tavolino fra europei, senza che nessun africano sia al tavolo. Dopo la caduta di
+  Bismarck (1890) quella linea prudente viene abbandonata.
+da:
+- l: Q
+  c: 2
+  p: 1
+parole: conferenza di Berlino, aree di influenza

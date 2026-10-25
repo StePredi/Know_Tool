@@ -1,0 +1,30 @@
+tipo: voce
+id: labour-riforme
+titolo: Il programma riformatore dei liberali
+sigla: Riforme liberali
+genere: processo
+quando: 1906-1914
+dove: Gran Bretagna
+chi:
+- Asquith
+- Lloyd George
+- Giorgio V
+cosa: 'Il patto fra liberali e laburisti permette un ampio programma di **riforme sociali**: servizi sanitari gratuiti
+  per i bambini, assistenza alla maternità, pensioni di vecchiaia, fondi assicurativi per disoccupazione e malattia
+  — come aveva già fatto la Germania di Bismarck.'
+conta: Per pagarle serve una **riforma tributaria progressiva** (Lloyd George), che colpisce i redditi e le proprietà
+  terriere dei più ricchi. La Camera dei Lord la respinge più volte.
+svolgimento:
+- quando: '1906'
+  passo: i liberali ottengono 401 seggi, i conservatori 157, il Labour 29
+- quando: dal 1908
+  passo: il governo Asquith introduce le riforme sociali
+- passo: la Camera dei Lord respinge la riforma fiscale approvata dai Comuni
+- quando: '1911'
+  passo: 'il **Parliament Act** toglie ai Lord il potere di veto in materia di bilancio: una svolta storica, le
+    oligarchie tradizionali cedono il passo'
+da:
+- l: Q
+  c: 2
+  p: 4
+parole: Parliament Act, riforma tributaria, progressività

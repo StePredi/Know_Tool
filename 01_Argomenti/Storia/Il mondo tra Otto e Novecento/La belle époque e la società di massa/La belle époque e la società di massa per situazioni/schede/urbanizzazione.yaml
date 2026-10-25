@@ -1,0 +1,21 @@
+tipo: voce
+id: urbanizzazione
+titolo: L'urbanizzazione
+sigla: Urbanizzazione
+genere: processo
+quando: 1900 circa
+dove: Europa e Stati Uniti
+cosa: 'Le città crescono in fretta e cambiano volto: **illuminazione elettrica**, metropolitane e tranvie elettrificate,
+  acqua corrente, parchi pubblici, musei e **grandi magazzini**.'
+conta: 'La città diventa il luogo dove si inventa la vita moderna: è lì che nascono il consumo di massa, la stampa
+  popolare e la politica di massa.'
+numeri:
+- cosa: Londra nel 1900
+  valore: 6,5 milioni
+- cosa: Vienna nel 1900
+  valore: 1,7 milioni
+da:
+- l: Q
+  c: 1
+  p: 2
+parole: urbanizzazione, grandi magazzini

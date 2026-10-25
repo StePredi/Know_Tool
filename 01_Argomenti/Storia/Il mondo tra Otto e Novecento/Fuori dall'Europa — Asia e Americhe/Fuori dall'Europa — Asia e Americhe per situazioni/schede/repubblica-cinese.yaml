@@ -1,0 +1,20 @@
+tipo: voce
+id: repubblica-cinese
+titolo: La nascita della Repubblica cinese
+sigla: Repubblica 1912
+genere: evento
+quando: 1911-1912
+dove: Cina
+chi:
+- Sun Yat-sen
+- Yuan Shikai
+cosa: 'Nel **1911** la dinastia Qing, screditata per la debolezza mostrata di fronte agli stranieri, è rovesciata
+  da una rivoluzione popolare: il millenario Impero cinese cade e nasce la **repubblica (1912)**.'
+conta: 'Il presidente **Sun Yat-sen** vuole frenare l''espansione occidentale e redistribuire le terre, ma dura
+  poco: **Yuan Shikai** instaura una dittatura militare sostenuta dalle potenze straniere, e nelle province comandano
+  i «signori della guerra» fino agli anni Trenta.'
+da:
+- l: Q
+  c: 2
+  p: 8
+parole: Sun Yat-sen, signori della guerra

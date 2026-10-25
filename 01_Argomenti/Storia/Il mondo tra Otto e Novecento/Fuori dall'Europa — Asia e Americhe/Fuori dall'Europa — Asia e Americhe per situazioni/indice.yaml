@@ -1,0 +1,52 @@
+modello: per_situazioni
+vista: storia
+titolo: Fuori dall'Europa — Asia e Americhe
+centro: Le potenze nascenti
+sottotitolo: ''
+ingresso: la domanda riguarda Cina, Giappone, Stati Uniti o America latina fra Otto e Novecento
+guida: questo paese subisce l’imperialismo o lo pratica?
+esempiRicerca: ''
+rami:
+- id: cina
+  nome: Cina
+  colore: red
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - spartizione-cina
+    - boxer
+    - repubblica-cinese
+  quando: 1898-1912
+- id: giappone
+  nome: Giappone
+  colore: orange
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - meiji
+    - guerra-russo-giapponese
+  quando: 1868-1905
+- id: usa
+  nome: Stati Uniti
+  colore: blue
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - usa-crescita
+    - antitrust
+    - imperialismo-usa
+    - monroe-roosevelt
+  quando: 1861-1914
+- id: latina
+  nome: America latina
+  colore: green
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - oligarchie
+    - rivoluzione-messicana
+  quando: 1877-1921

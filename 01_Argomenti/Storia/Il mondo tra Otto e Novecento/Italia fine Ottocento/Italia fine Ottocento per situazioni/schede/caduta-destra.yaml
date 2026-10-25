@@ -1,0 +1,34 @@
+tipo: voce
+id: caduta-destra
+titolo: La caduta della Destra storica
+sigla: Caduta Destra 1876
+genere: evento
+quando: '1876'
+dove: Italia
+chi:
+- Minghetti
+- Depretis
+- Vittorio Emanuele II
+cosa: Dopo quindici anni di governo ininterrotto, la **Destra storica** esce di scena in modo rapido e imprevisto,
+  in quella che fu definita — forse esageratamente — «**rivoluzione parlamentare**».
+conta: Rende esplicito il malcontento contro le politiche accentratrici della Destra, incapace di dare attenzione
+  a una società in rapida trasformazione; si contestavano le nazionalizzazioni, le misure contro la Grande depressione
+  e la severa politica fiscale che aveva penalizzato le classi meno abbienti.
+svolta: true
+svolgimento:
+- quando: 16 marzo 1876
+  passo: 'Minghetti annuncia il **pareggio di bilancio**, raggiunto per la prima volta nella storia unitaria: invece
+    degli applausi, viene ferocemente contestato'
+- quando: 18 marzo 1876
+  passo: pone il **voto di fiducia** sulla nazionalizzazione delle ferrovie e sul rinvio dell'abolizione della tassa
+    sul macinato; numerosi esponenti di Destra votano con la Sinistra e il governo cade
+- passo: Vittorio Emanuele II affida l'incarico ad **Agostino Depretis**, che guiderà il paese dal 1876 al 1887
+elementi:
+- nome: Voto di fiducia
+  spiega: in un sistema parlamentare il governo resta in carica finché ha la fiducia delle Camere; se la perde deve
+    dimettersi.
+da:
+- l: T
+  c: 18
+  p: 1
+parole: rivoluzione parlamentare, pareggio di bilancio, macinato

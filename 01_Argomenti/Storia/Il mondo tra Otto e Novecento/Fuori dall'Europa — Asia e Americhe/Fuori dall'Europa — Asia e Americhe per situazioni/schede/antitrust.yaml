@@ -1,0 +1,32 @@
+tipo: voce
+id: antitrust
+titolo: Le norme antitrust
+sigla: Antitrust
+genere: concetto
+quando: 1890-1911
+dove: Stati Uniti
+chi:
+- Theodore Roosevelt
+- Taft
+- Rockefeller
+cosa: 'Leggi per ostacolare la formazione di **concentrazioni monopolistiche** e agevolare il libero scambio. Lo
+  **Sherman Act (1890)** è la prima: rimasta a lungo inapplicata, viene usata massicciamente da Theodore Roosevelt
+  (1901-1909) e da Taft (1909-1913).'
+conta: Nel **1911** viene smantellata la **Standard Oil** di Rockefeller, che controllava buona parte del mercato
+  petrolifero. Mostra uno Stato che, pur restando lontano dall'economia, interviene quando il monopolio soffoca
+  il mercato.
+elementi:
+- nome: I sindacati americani
+  spiega: 'l''impatto della loro azione resta limitato: non fanno fronte comune, l''opinione pubblica è estranea
+    o ostile, e i due grandi partiti sono contrari all''intervento dello Stato anche perché finanziati dalle grandi
+    compagnie.'
+lega:
+- scheda: trust-cartelli
+  documento: Seconda rivoluzione industriale
+  tipo: confronto
+  perche: che cosa sono trust e cartelli, nel libro di terza
+da:
+- l: Q
+  c: 2
+  p: 9
+parole: Sherman Act, Standard Oil, monopolio

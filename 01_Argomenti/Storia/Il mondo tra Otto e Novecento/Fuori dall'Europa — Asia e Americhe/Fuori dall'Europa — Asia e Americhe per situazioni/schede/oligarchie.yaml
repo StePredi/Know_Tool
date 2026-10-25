@@ -1,0 +1,24 @@
+tipo: voce
+id: oligarchie
+titolo: Le oligarchie latinoamericane
+sigla: Oligarchie
+genere: processo
+quando: fine Ottocento - inizio Novecento
+dove: America latina
+cosa: Crescita economica trainata dalle esportazioni verso l'Europa — grano, carne, zucchero, caffè, cacao — che
+  accentua la **monocoltura**. Sul piano politico, repubbliche con costituzioni moderne ma potere concentrato in
+  una ristretta élite di latifondisti, gli **hacienderos**.
+conta: Le economie diventano dipendenti da quelle straniere; il voto non è né segreto né universale e i latifondisti
+  controllano gli elettori con clientele e intimidazioni. Lo stretto legame fra militari e classi al governo condiziona
+  a lungo la democratizzazione.
+elementi:
+- nome: Monocoltura
+  spiega: sistema economico in cui gli sforzi sono rivolti alla produzione di un solo bene, di solito agricolo,
+    per l'esportazione.
+- nome: Hacienderos
+  spiega: grandi proprietari terrieri e latifondisti nel Sud America ispanofono.
+da:
+- l: Q
+  c: 2
+  p: 10
+parole: monocoltura, hacienderos, regimi oligarchici

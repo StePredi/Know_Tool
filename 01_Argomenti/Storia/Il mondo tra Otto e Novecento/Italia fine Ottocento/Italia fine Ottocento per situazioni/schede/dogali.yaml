@@ -1,0 +1,31 @@
+tipo: voce
+id: dogali
+titolo: La strage di Dogali
+sigla: Dogali 1887
+genere: evento
+quando: '1887'
+dove: Eritrea
+chi:
+- truppe italiane
+- abissini
+cosa: 'Il contingente italiano di stanza a Massaua tenta una sortita verso l''entroterra eritreo, ma presso **Dogali**
+  è sterminato dalle truppe abissine al comando del *negus* e dei *ras* locali: **430 soldati** italiani, ricordati
+  come «i cinquecento».'
+conta: Suscita un'ondata di proteste, animate soprattutto dall'Estrema sinistra, contraria a nuove iniziative coloniali.
+  Crispi porta però dalla sua la maggioranza del parlamento, che vota contro il ritiro immediato.
+elementi:
+- nome: Eritrea
+  spiega: dal termine greco/latino per «rosso», già usato per il mar Rosso.
+- nome: Abissinia
+  spiega: nome alternativo dell'Etiopia, dall'arabo *al-Habash*.
+- nome: Negus e ras
+  spiega: il *negus* è l'imperatore d'Etiopia; i *ras* sono i più alti dignitari dopo di lui o i capi feudali delle
+    province.
+numeri:
+- cosa: Soldati italiani caduti
+  valore: '430'
+da:
+- l: T
+  c: 18
+  p: 2
+parole: Dogali, negus, ras, Massaua

@@ -1,0 +1,37 @@
+tipo: voce
+id: germania-industria
+titolo: La Germania prima potenza economica
+sigla: Industria tedesca
+genere: processo
+quando: 1871-1910
+dove: Germania
+cosa: L'industria tedesca si sviluppa in maniera esponenziale fino a fare della Germania la **prima potenza economica
+  europea**, unendo ricerca scientifica, applicazioni tecnologiche e infrastrutture.
+conta: 'È la base materiale della Weltpolitik: senza questa crescita, l''ambizione di Guglielmo II non avrebbe avuto
+  gambe.'
+elementi:
+- nome: I settori
+  spiega: 'siderurgia (**Krupp**), chimica (**Bayer**, con l''aspirina nel 1887), elettrico (**Siemens**: linee
+    telegrafiche, tramvie, turbine, telefoni, macchinari a raggi X).'
+- nome: La flotta
+  spiega: il vertiginoso ampliamento voluto dal Kaiser garantisce introiti alle industrie siderurgiche, ma pesa
+    sul bilancio dello Stato.
+numeri:
+- cosa: Popolazione nel 1871
+  valore: 41 milioni
+- cosa: Popolazione nel 1910
+  valore: 65 milioni
+- cosa: Occupati nell’industria, 1882
+  valore: 35%
+- cosa: Occupati nell’industria, 1907
+  valore: 42%
+lega:
+- scheda: weltpolitik
+  documento: Le alleanze europee
+  tipo: giustifica
+  perche: la potenza economica rende possibile la politica mondiale
+da:
+- l: Q
+  c: 2
+  p: 2
+parole: Krupp, Bayer, Siemens

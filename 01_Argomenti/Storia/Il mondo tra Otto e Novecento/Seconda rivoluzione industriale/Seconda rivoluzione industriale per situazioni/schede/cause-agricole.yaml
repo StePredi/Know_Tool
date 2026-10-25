@@ -1,0 +1,23 @@
+tipo: voce
+id: cause-agricole
+titolo: Le cause agricole
+sigla: Cause agricole
+genere: concetto
+quando: dal 1873
+dove: Europa
+cosa: 'L''agricoltura europea è poco meccanizzata, a differenza di quella di Stati Uniti e Canada. Ferrovie e navigazione
+  transoceanica abbattono i costi: tonnellate di **grano americano a basso prezzo** invadono i porti europei.'
+conta: Eccesso di offerta, prezzi giù fino al **30%**, profitti e salari agricoli in crollo, disoccupazione bracciantile
+  e flussi migratori verso altri continenti.
+numeri:
+- cosa: Popolazione europea nel 1850
+  valore: 270 milioni
+- cosa: Nel 1900
+  valore: 425 milioni
+- cosa: Ribasso dei prezzi
+  valore: fino al 30%
+da:
+- l: T
+  c: 16
+  p: 1
+parole: grano americano, sovrapproduzione agricola

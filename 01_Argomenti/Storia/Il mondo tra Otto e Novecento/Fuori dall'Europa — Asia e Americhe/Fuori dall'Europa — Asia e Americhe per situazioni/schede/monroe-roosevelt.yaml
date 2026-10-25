@@ -1,0 +1,26 @@
+tipo: confronto
+id: monroe-roosevelt
+titolo: Dalla dottrina Monroe al corollario Roosevelt
+sigla: Monroe → Roosevelt
+domande:
+- che cosa afferma
+- che scelta comporta
+- che effetti ha
+casi:
+- nome: Dottrina Monroe (1823)
+  risposte:
+  - le potenze europee non devono interessarsi del continente americano e gli USA non intervengono nelle questioni
+    europee
+  - scelta **isolazionista**
+  - supremazia USA nel continente americano; indipendenza dei paesi del Sud America dalle potenze coloniali
+- nome: Corollario Roosevelt (1904)
+  scheda: imperialismo-usa
+  risposte:
+  - gli Stati Uniti hanno diritto di intervenire nelle Americhe ovunque sia necessario
+  - scelta **imperialista**
+  - ingerenza crescente nella politica e nell'economia degli Stati del Centro e Sud America, oltre che dell'area
+    del Pacifico
+da:
+- l: Q
+  c: 2
+  p: 9

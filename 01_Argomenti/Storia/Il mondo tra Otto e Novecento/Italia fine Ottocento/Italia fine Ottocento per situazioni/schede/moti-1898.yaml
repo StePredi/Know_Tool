@@ -1,0 +1,27 @@
+tipo: voce
+id: moti-1898
+titolo: I moti per il pane e Bava Beccaris
+sigla: Moti 1898
+genere: evento
+quando: maggio 1898
+dove: Milano e altre città
+chi:
+- Rudinì
+- Bava Beccaris
+- Umberto I
+cosa: Un esagerato rincaro del prezzo del pane scatena agitazioni in numerose città. Sospettando erroneamente un
+  piano rivoluzionario dietro manifestazioni in larga parte spontanee, Rudinì decreta lo stato d'assedio e autorizza
+  l'esercito a usare le armi.
+conta: 'Fra l''**8 e il 9 maggio 1898** a Milano le truppe del generale **Bava Beccaris** sparano su una folla disarmata:
+  decine di morti e centinaia di feriti. Molti socialisti e repubblicani — fra cui Turati — vengono arrestati; **Bava
+  Beccaris è invece decorato dal re** e nominato senatore.'
+svolta: true
+lega:
+- scheda: umberto-i
+  tipo: causa
+  perche: è la ragione che Bresci dichiarerà per il regicidio
+da:
+- l: T
+  c: 18
+  p: 5
+parole: Bava Beccaris, stato d'assedio

@@ -1,0 +1,17 @@
+tipo: voce
+id: organizzazioni-lavoratori
+titolo: Le prime organizzazioni dei lavoratori
+sigla: Organizzazioni
+genere: processo
+quando: anni Ottanta
+dove: Italia
+cosa: Con l'aggravarsi della crisi nascono le prime **federazioni di mestiere** (antenate dei sindacati), che riuniscono
+  a livello nazionale gli appartenenti a una categoria; le **Camere del lavoro**, che riuniscono tutte le categorie
+  di una città o provincia; nelle campagne le **leghe contadine** e, soprattutto al Nord, le **cooperative di lavoro**.
+conta: 'È la società che si organizza prima che la politica le dia rappresentanza: il Partito socialista arriverà
+  dopo, nel 1892.'
+da:
+- l: T
+  c: 18
+  p: 3
+parole: Camere del lavoro, leghe contadine, cooperative

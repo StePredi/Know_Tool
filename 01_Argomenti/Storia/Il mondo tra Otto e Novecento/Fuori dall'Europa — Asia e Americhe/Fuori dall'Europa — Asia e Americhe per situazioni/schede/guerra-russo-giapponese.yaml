@@ -1,0 +1,39 @@
+tipo: voce
+id: guerra-russo-giapponese
+titolo: La guerra russo-giapponese
+sigla: Russia-Giappone 1904
+genere: evento
+quando: 1904-1905
+dove: Manciuria e Mar del Giappone
+chi:
+- Giappone
+- Impero russo
+cosa: Dopo la Corea, il Giappone punta alla **Manciuria**, già sotto controllo russo. Il conflitto si apre con l'affondamento
+  di navi russe a **Port Arthur**, senza dichiarazione di guerra.
+conta: '**È la prima volta che uno Stato asiatico batte alla pari una potenza europea.** L''immagine del governo
+  russo ne esce devastata e i problemi interni si aggravano; il Giappone diventa la prima potenza imperialista dell''Asia
+  e un modello per i movimenti indipendentisti. Per numero di soldati, armamenti e tattiche, gli storici lo considerano
+  il **preludio della Prima guerra mondiale**.'
+svolta: true
+svolgimento:
+- quando: '1904'
+  passo: attacco a Port Arthur
+- passo: 'due disfatte russe: la battaglia terrestre di **Mukden** e quella navale di **Tsushima**, dove la flotta
+    russa perde due terzi delle navi'
+- quando: '1905'
+  passo: '**pace di Portsmouth**: al Giappone il protettorato sulla Corea, la Manciuria meridionale, il Liaodong
+    e il sud di Sachalin'
+storiografia:
+- autore: Cemil Aydin
+  titolo: Le implicazioni globali della guerra russo-giapponese
+  pagina: p. 71
+lega:
+- scheda: rivoluzione-1905
+  documento: Le potenze europee una per una
+  tipo: causa
+  perche: la sconfitta aggrava il malcontento in Russia
+da:
+- l: Q
+  c: 2
+  p: 8
+parole: Port Arthur, Tsushima, Portsmouth

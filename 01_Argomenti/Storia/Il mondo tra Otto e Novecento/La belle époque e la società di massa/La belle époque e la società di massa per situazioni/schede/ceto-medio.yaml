@@ -1,0 +1,19 @@
+tipo: voce
+id: ceto-medio
+titolo: Il ceto medio urbano
+sigla: Ceto medio
+genere: concetto
+quando: fine Ottocento
+dove: città europee
+cosa: 'Impiegati, tecnici, commercianti, insegnanti: un gruppo nuovo, né borghesia ricca né proletariato, che vive
+  di stipendio e tiene moltissimo alla **rispettabilità**.'
+conta: È il pubblico del consumo di massa e il bacino elettorale che i partiti nuovi si contendono. Il libro lo
+  chiede nella domanda CHI del nucleo 2.
+confondi:
+- scheda: societa-di-massa
+  differenza: il ceto medio è un gruppo sociale; la società di massa è il modo in cui funziona tutta la società
+da:
+- l: Q
+  c: 1
+  p: 2
+parole: ceto medio, rispettabilità

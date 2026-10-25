@@ -1,0 +1,21 @@
+tipo: voce
+id: seconda-internazionale
+titolo: La Seconda Internazionale
+sigla: II Internazionale
+genere: evento
+quando: 1889-1916
+dove: Parigi
+cosa: 'Federazione dei partiti e sindacati socialisti nazionali, ormai legalmente riconosciuti. Programma: sostegno
+  reciproco, riforme economiche e sociali, **rifiuto del militarismo e della guerra**.'
+conta: 'Sopravvive ufficialmente fino al 1916, ma lo scoppio della guerra nel 1914 ne decreta di fatto la fine:
+  i partiti socialisti votano i crediti di guerra nei rispettivi paesi.'
+lega:
+- scheda: psi
+  documento: Italia fine Ottocento
+  tipo: sincronia
+  perche: il PSI nasce nel 1892, a pochi anni dalla sua ricostituzione
+da:
+- l: T
+  c: 16
+  p: 4
+parole: Seconda Internazionale

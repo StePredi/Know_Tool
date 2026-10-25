@@ -1,0 +1,29 @@
+tipo: voce
+id: psi
+titolo: La nascita del Partito socialista
+sigla: PSI 1892
+genere: evento
+quando: agosto 1892
+dove: Genova
+chi:
+- Filippo Turati
+- Andrea Costa
+- Giuseppe Croce
+cosa: 'A congresso si riuniscono i delegati di circa **trecento** circoli politici, leghe contadine e associazioni
+  operaie. Tre le correnti: l''«Estrema» di **Costa**, la «moderata» di **Croce**, la «riformista» di **Turati**.
+  Prevale la proposta di Turati di fondare subito un Partito dei lavoratori italiani, tre anni dopo ribattezzato
+  **Partito socialista italiano**.'
+conta: Si ispira al **socialismo scientifico** di Marx — lotta di classe, rovesciamento del capitalismo, socializzazione
+  — ma **ripudia i metodi insurrezionali** e punta a riforme graduali. Durante gli anni Novanta, nonostante la messa
+  al bando del 1894, i socialisti difendono le libertà costituzionali minacciate dall'autoritarismo di Crispi.
+lega:
+- scheda: seconda-internazionale
+  documento: Seconda rivoluzione industriale
+  tipo: sincronia
+  perche: nasce a pochi anni dalla ricostituzione della Seconda Internazionale (1889); in tutta Europa nascevano
+    partiti socialisti nazionali
+da:
+- l: T
+  c: 18
+  p: 3
+parole: PSI, Turati, socialismo scientifico, riforme graduali

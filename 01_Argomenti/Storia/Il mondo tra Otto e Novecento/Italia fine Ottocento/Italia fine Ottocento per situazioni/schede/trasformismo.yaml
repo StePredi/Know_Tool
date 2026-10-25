@@ -1,0 +1,29 @@
+tipo: voce
+id: trasformismo
+titolo: Il trasformismo
+sigla: Trasformismo
+genere: concetto
+quando: dagli anni Ottanta
+dove: Italia
+chi:
+- Depretis
+cosa: Il metodo parlamentare della ricerca di **maggioranze trasversali** fra deputati liberali, conservatori e
+  democratici, con l'ingresso nei governi di Sinistra di uomini della Destra. Nasce per emarginare i conservatori
+  clericali e gli estremisti di sinistra, **sfumando le differenze** fra i due schieramenti.
+conta: 'Le critiche sono fondate: favoritismi e scambi basati su interessi personali, aumento di clientelismo e
+  corruzione, discredito sulle istituzioni rappresentative, e soprattutto **impedì la nascita di veri partiti moderni**
+  con identità e programmi riconoscibili.'
+elementi:
+- nome: Rappresentanza
+  spiega: le modalità con cui interessi ed esigenze dei cittadini vengono rappresentati presso i poteri dello Stato.
+- nome: Lobby
+  spiega: gruppo di persone legate da interessi comuni, in grado di esercitare pressioni sul potere politico a proprio
+    favore.
+confondi:
+- scheda: programma-sinistra
+  differenza: il programma è ciò che la Sinistra prometteva; il trasformismo è il metodo con cui finì per governare
+da:
+- l: T
+  c: 18
+  p: 1
+parole: trasformismo, clientelismo, lobby

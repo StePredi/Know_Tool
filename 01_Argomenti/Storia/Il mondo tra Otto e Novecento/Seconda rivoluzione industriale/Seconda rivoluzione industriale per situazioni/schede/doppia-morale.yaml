@@ -1,0 +1,22 @@
+tipo: voce
+id: doppia-morale
+titolo: Le contraddizioni della società borghese
+sigla: Doppia morale
+genere: concetto
+quando: Ottocento
+cosa: 'Nonostante i principi liberali ed egualitari professati in politica, la mentalità borghese separa nettamente
+  uomini e donne: la **sfera pubblica** (politica, militare, economica, pienezza dei diritti) è quasi esclusiva
+  degli uomini, lo **spazio domestico** è il «regno» delle donne.'
+conta: 'Ne deriva una **doppia morale sessuale**: inammissibile che una ragazza non arrivasse vergine al matrimonio
+  o che una moglie fosse infedele, mentre per uomini e ragazzi non valevano le stesse regole. Romanzi e melodrammi
+  ottocenteschi svelano moralismo e ossessione per la rispettabilità.'
+lega:
+- scheda: suffragette
+  documento: La belle époque e la società di massa
+  tipo: prosegue
+  perche: è contro questa separazione che nasce il movimento
+da:
+- l: T
+  c: 16
+  p: 3
+parole: sfera pubblica, doppia morale

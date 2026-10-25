@@ -1,0 +1,17 @@
+tipo: voce
+id: crisi-industria
+titolo: La crisi si allarga a industria e finanza
+sigla: Industria e finanza
+genere: processo
+quando: 1873 e 1893
+cosa: Alla **sovrapproduzione industriale** — le fabbriche producono più di quanto il mercato assorba — seguono
+  ribasso dei prezzi, chiusure e licenziamenti; sui mercati finanziari, fuga verso i titoli di Stato e corsa alla
+  vendita delle azioni industriali.
+conta: 'Nel **1873** crolla la Borsa di Vienna e la crisi si estende alle principali piazze occidentali; negli USA
+  falliscono banche importanti e la produzione industriale cala di quasi un terzo. Una crisi simile nel **1893**:
+  entrambe brevi, rientrate con interventi di politica economica e monetaria degli Stati.'
+da:
+- l: T
+  c: 16
+  p: 1
+parole: sovrapproduzione, Borsa di Vienna

@@ -1,0 +1,19 @@
+tipo: voce
+id: belle-epoque
+titolo: La belle époque
+sigla: Belle époque
+genere: processo
+quando: fine XIX - 1914
+dove: Europa
+cosa: Il periodo di **benessere economico** e fiducia nel progresso che precede la Prima guerra mondiale, reso possibile
+  da innovazione tecnologica, nuove fonti di energia e **produzione di massa**.
+conta: 'È il clima in cui matura tutto il resto: il consumo di massa, la politica di massa e, sotto la superficie,
+  il nazionalismo aggressivo che porterà alla guerra.'
+lega:
+- scheda: societa-di-massa
+  tipo: prosegue
+da:
+- l: Q
+  c: 1
+  p: 1
+parole: belle époque, progresso

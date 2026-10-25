@@ -1,0 +1,63 @@
+modello: per_situazioni
+vista: storia
+titolo: Le potenze europee una per una
+centro: Gli Stati europei 1870-1914
+sottotitolo: ''
+ingresso: la domanda riguarda la situazione interna di un paese europeo prima della guerra
+guida: chi comanda qui, e quale problema non riesce a risolvere?
+esempiRicerca: ''
+rami:
+- id: germania
+  nome: Germania
+  colore: slate
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - germania-industria
+    - spd
+  quando: 1888-1914
+- id: francia
+  nome: Francia
+  colore: blue
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - instabilita-francese
+    - affaire-dreyfus
+    - governi-radicali
+  quando: 1889-1912
+- id: gb
+  nome: Gran Bretagna
+  colore: red
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - fine-eta-vittoriana
+    - labour-riforme
+    - questione-irlandese
+  quando: 1886-1914
+- id: austria
+  nome: Austria-Ungheria
+  colore: yellow
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - questione-nazionalita
+    - panslavismo
+  quando: 1867-1908
+- id: russia
+  nome: Russia
+  colore: violet
+  lato: T
+  ordine: true
+  voci:
+  - schede:
+    - reazione-zarista
+    - russificazione
+    - rivoluzione-1905
+    - stolypin
+  quando: 1881-1911

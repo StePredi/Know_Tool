@@ -1,0 +1,32 @@
+tipo: voce
+id: rerum-novarum
+titolo: La Rerum Novarum
+sigla: Rerum Novarum
+genere: evento
+quando: '1891'
+dove: Roma
+chi:
+- Leone XIII
+cosa: 'Enciclica con cui la Chiesa prende posizione sulla **questione sociale**: difende la legittimità della proprietà
+  privata, ma critica lo sfruttamento del lavoro operaio e la concentrazione della ricchezza nelle mani di pochi;
+  condanna la pratica rivoluzionaria e riconosce agli operai il diritto di organizzarsi in sindacati e di chiedere
+  un giusto salario.'
+conta: 'È la risposta cattolica al socialismo. Alla sua base c''è l''**interclassismo**: le classi non devono lottare
+  fra loro ma collaborare.'
+elementi:
+- nome: Enciclica
+  spiega: 'dal greco «lettera circolare»: la lettera che il papa indirizza ai vescovi per trasmettere alla Chiesa
+    insegnamenti e disposizioni su temi di particolare rilevanza.'
+citazioni:
+- testo: Resti fermo adunque, che nell'opera di migliorare le sorti delle classi operaie, deve porsi come fondamento
+    inconcusso il diritto di proprietà privata.
+  chi: Leone XIII
+  dove: Rerum Novarum, 1891
+lega:
+- scheda: due-societa
+  tipo: confronto
+da:
+- l: Q
+  c: 1
+  p: 5
+parole: enciclica, interclassismo, questione sociale

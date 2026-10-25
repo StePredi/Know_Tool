@@ -1,0 +1,24 @@
+tipo: confronto
+id: due-societa
+titolo: Due interpretazioni della società
+sigla: Due società
+domande:
+- che natura ha la società
+- che cosa devono fare le classi
+- a che cosa porta
+casi:
+- nome: 'Socialisti: lotta di classe'
+  risposte:
+  - 'conflittuale: le classi perseguono fini differenti'
+  - lottare, perché gli interessi sono opposti
+  - il rovesciamento del sistema e la socializzazione
+- nome: 'Cattolici: concezione organica'
+  scheda: rerum-novarum
+  risposte:
+  - 'organica: funziona bene solo se ogni parte svolge la propria funzione, come in un organismo vivente'
+  - 'collaborare: ceti poveri e benestanti contribuiscono insieme al bene comune'
+  - il sostegno solidale ai più poveri, l'unità dei cattolici, il rispetto dell'autorità
+da:
+- l: Q
+  c: 1
+  p: 5

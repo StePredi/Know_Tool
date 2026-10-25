@@ -1,0 +1,20 @@
+tipo: voce
+id: ragioni-politiche
+titolo: Le ragioni politiche
+sigla: 'Perché: politica'
+genere: concetto
+quando: 1870-1914
+cosa: Possedere colonie raccoglie **consenso** fra le masse, distraendole dai problemi interni, ed è un **segno
+  tangibile della potenza** di un paese nelle relazioni diplomatiche.
+conta: 'È il motivo per cui anche dispute periferiche e lontane possono avere ripercussioni sugli equilibri europei:
+  in gioco c''è il prestigio.'
+lega:
+- scheda: missione-civilizzatrice
+  documento: Darwinismo sociale e teorie razziali
+  tipo: usa
+  perche: la giustificazione ideologica sta nell'altro documento
+da:
+- l: Q
+  c: 2
+  p: 1
+parole: consenso, prestigio

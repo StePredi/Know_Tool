@@ -1,0 +1,58 @@
+modello: per_situazioni
+vista: storia
+titolo: Italia fine Ottocento
+centro: Italia 1876-1900
+sottotitolo: ''
+ingresso: la domanda riguarda l'Italia fra la caduta della Destra e la crisi di fine secolo
+guida: chi governa in questo momento, e con quale maggioranza?
+esempiRicerca: ''
+rami:
+- id: depretis
+  nome: La Sinistra di Depretis
+  colore: blue
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - caduta-destra
+    - programma-sinistra
+    - riforme-depretis
+    - trasformismo
+    - protezionismo-italiano
+    - italia-emigrazione
+  quando: 1876-1887
+- id: crispi
+  nome: Crispi e le colonie
+  colore: red
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - crispi-colonie
+    - dogali
+    - uccialli
+    - adua
+  quando: 1887-1896
+- id: sociale
+  nome: La questione sociale
+  colore: orange
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - organizzazioni-lavoratori
+    - psi
+    - fasci-siciliani
+  quando: 1880-1894
+- id: crisi
+  nome: La crisi di fine secolo
+  colore: violet
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - banca-romana
+    - moti-1898
+    - leggi-liberticide
+    - umberto-i
+  quando: 1892-1900

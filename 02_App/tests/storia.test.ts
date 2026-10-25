@@ -2,12 +2,13 @@ import { mkdtemp, cp } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { leggiSituazioni } from '../src/main/situazioni'
-import { controllaSituazioni, leggiSchedaSit, ordineSchede, ETICHETTA_LEGA } from '../src/shared/situazioni'
+import { leggiSituazioni, leggiMateriaStoria } from '../src/main/situazioni'
+import { controllaSituazioni, leggiSchedaSit, ordineSchede, copertura, ETICHETTA_LEGA } from '../src/shared/situazioni'
 import type { SchedaConfronto, SchedaVoce } from '../src/shared/situazioni'
 
-const ALLEANZE = 'Storia/Le alleanze europee/Le alleanze europee per situazioni'
-const DARWIN = 'Storia/Darwinismo sociale e teorie razziali/Darwinismo sociale e teorie razziali per situazioni'
+const MACRO = 'Storia/Il mondo tra Otto e Novecento'
+const ALLEANZE = `${MACRO}/Le alleanze europee/Le alleanze europee per situazioni`
+const DARWIN = `${MACRO}/Darwinismo sociale e teorie razziali/Darwinismo sociale e teorie razziali per situazioni`
 let radice = ''
 
 beforeEach(async () => {
@@ -108,5 +109,54 @@ describe('Storia: i due argomenti veri si leggono', () => {
     const alleanze = await leggiSituazioni(radice, ALLEANZE)
     const sv = Object.values(alleanze.schede).filter((s) => s.tipo === 'voce' && s.svolta)
     expect(sv.map((s) => s.id).sort()).toEqual(['caduta-bismarck-1890', 'polveriera'])
+  })
+})
+
+describe('Il macro-argomento della verifica', () => {
+  it('gli otto documenti si leggono tutti, senza errori né avvisi', async () => {
+    const { documenti } = await leggiMateriaStoria(radice, 'Storia')
+    expect(documenti.map((d) => d.titolo).sort()).toEqual([
+      "Fuori dall'Europa — Asia e Americhe",
+      'Italia fine Ottocento',
+      "L'età degli imperialismi",
+      'La belle époque e la società di massa',
+      'Le alleanze europee',
+      'Le potenze europee una per una',
+      'Darwinismo sociale e teorie razziali',
+      'Seconda rivoluzione industriale'
+    ].sort())
+    for (const d of documenti) {
+      const letto = await leggiSituazioni(radice, d.rel)
+      expect(letto.avvisi, d.titolo).toEqual([])
+    }
+  })
+
+  it('ogni collegamento verso un altro documento trova documento e scheda', async () => {
+    const { documenti } = await leggiMateriaStoria(radice, 'Storia')
+    const perTitolo = new Map(documenti.map((d) => [d.titolo, new Set(d.schede.map((s) => s.id))]))
+    let n = 0
+    for (const d of documenti) {
+      const letto = await leggiSituazioni(radice, d.rel)
+      for (const s of Object.values(letto.schede)) {
+        if (s.tipo !== 'voce') continue
+        for (const g of s.lega) {
+          if (!g.documento) continue
+          if (g.documento === 'totalitarismi') continue // argomento non ancora studiato
+          const ids = perTitolo.get(g.documento)
+          expect(ids, `${d.titolo}/${s.id} → documento «${g.documento}»`).toBeTruthy()
+          expect(ids!.has(g.scheda), `${d.titolo}/${s.id} → ${g.documento}/${g.scheda}`).toBe(true)
+          n++
+        }
+      }
+    }
+    expect(n).toBeGreaterThan(5)
+  })
+
+  it('la copertura del libro arriva a tutti i paragrafi letti', async () => {
+    const { libri, documenti } = await leggiMateriaStoria(radice, 'Storia')
+    const righe = copertura(libri, documenti).filter((r) => r.titoloCapitolo !== '(non ancora letto)')
+    expect(righe).toHaveLength(25)
+    const scoperti = righe.filter((r) => r.schede.length === 0).map((r) => `c${r.capitolo}.${r.paragrafo}`)
+    expect(scoperti).toEqual([])
   })
 })

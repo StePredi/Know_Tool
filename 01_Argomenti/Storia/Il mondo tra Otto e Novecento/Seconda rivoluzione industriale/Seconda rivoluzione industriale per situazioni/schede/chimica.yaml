@@ -1,0 +1,24 @@
+tipo: voce
+id: chimica
+titolo: La chimica pervasiva
+sigla: Chimica
+genere: processo
+quando: seconda metà dell’Ottocento
+cosa: Nuovi processi per carta, vetro, coloranti artificiali, detersivi, concimi; esplosivi (la **dinamite** di
+  Nobel, 1867); gomme sintetiche per pneumatici e cavi telegrafici transatlantici.
+conta: 'Nell''alimentare la **pastorizzazione** di Pasteur, poi sterilizzazione, conservazione e refrigerazione:
+  con gli alimenti in scatola finisce «l''incubo delle carestie» in Occidente. In medicina: prassi antisettica,
+  anestetici, **aspirina** (1899), identificazione degli agenti di peste, colera e tubercolosi (**Koch, 1882**),
+  primi vaccini.'
+numeri:
+- cosa: Dinamite (Nobel)
+  valore: '1867'
+- cosa: Koch e la tubercolosi
+  valore: '1882'
+- cosa: Aspirina
+  valore: '1899'
+da:
+- l: T
+  c: 16
+  p: 2
+parole: Nobel, Pasteur, Koch, aspirina

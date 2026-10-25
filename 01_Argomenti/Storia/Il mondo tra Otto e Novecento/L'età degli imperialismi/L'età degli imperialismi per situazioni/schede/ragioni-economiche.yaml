@@ -1,0 +1,23 @@
+tipo: voce
+id: ragioni-economiche
+titolo: Le ragioni economiche
+sigla: 'Perché: economia'
+genere: concetto
+quando: 1870-1914
+cosa: Le potenze hanno bisogno di **nuovi mercati** dove dirottare il surplus delle industrie e di **materie prime
+  a basso costo** — ferro, carbone, petrolio, lana, cotone — per sostenere una produzione crescente. La conquista
+  promette anche di assorbire la disoccupazione e contenere i conflitti sociali interni.
+conta: 'Spiega l''affanno della corsa: non è solo orgoglio nazionale, è la nuova società industrializzata che chiede
+  spazio.'
+numeri:
+- cosa: Gran Bretagna, territori acquisiti 1875-1914
+  valore: ~10 milioni di km²
+- cosa: Francia
+  valore: ~9 milioni di km²
+- cosa: Germania
+  valore: quasi 3 milioni di km²
+da:
+- l: Q
+  c: 2
+  p: 1
+parole: mercati, materie prime

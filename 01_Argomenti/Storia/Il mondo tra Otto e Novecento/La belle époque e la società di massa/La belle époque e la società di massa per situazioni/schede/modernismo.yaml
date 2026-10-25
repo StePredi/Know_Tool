@@ -1,0 +1,23 @@
+tipo: voce
+id: modernismo
+titolo: Il modernismo
+sigla: Modernismo
+genere: concetto
+quando: primo decennio del Novecento
+dove: mondo cattolico
+chi:
+- Pio X
+cosa: 'Tentativo di riforma interna alla Chiesa: a partire da un''interpretazione moderna della religione cristiana,
+  i modernisti affermano che i cristiani hanno il dovere morale di **lottare contro le ingiustizie e i privilegi**,
+  compresi quelli della Chiesa, e di impegnarsi direttamente in politica.'
+conta: Tollerato all'inizio, viene condannato duramente nel **1907** con l'enciclica *Pascendi Dominici gregis*
+  di Pio X, eletto nel 1903 e legato a una visione tradizionale.
+confondi:
+- scheda: rerum-novarum
+  differenza: la Rerum Novarum è la posizione ufficiale della Chiesa sulla questione sociale; il modernismo è un
+    movimento interno che viene condannato
+da:
+- l: Q
+  c: 1
+  p: 5
+parole: modernismo, Pascendi Dominici gregis

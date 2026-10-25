@@ -1,0 +1,22 @@
+tipo: voce
+id: panslavismo
+titolo: Il panslavismo
+sigla: Panslavismo
+genere: concetto
+quando: dal 1848
+dove: Balcani e Impero austro-ungarico
+cosa: 'Progetto di unione politica di tutti i **popoli slavi**, avviato al congresso slavo di Praga (giugno 1848)
+  e diventato poi un progetto nazionalista e imperialista: liberare gli slavi dei Balcani e unirli in una federazione
+  guidata dalla **Russia**.'
+conta: 'Dà alla Russia una ragione per intromettersi nei Balcani e all''Austria un motivo per temerla: è una delle
+  micce della polveriera.'
+lega:
+- scheda: bosnia-1908
+  documento: Le alleanze europee
+  tipo: prosegue
+  perche: l'annessione della Bosnia lo rafforza
+da:
+- l: Q
+  c: 2
+  p: 5
+parole: panslavismo

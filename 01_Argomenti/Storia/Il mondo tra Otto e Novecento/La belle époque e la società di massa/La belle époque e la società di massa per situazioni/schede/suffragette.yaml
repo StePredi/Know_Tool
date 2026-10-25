@@ -1,0 +1,25 @@
+tipo: voce
+id: suffragette
+titolo: Le suffragette
+sigla: Suffragette
+genere: concetto
+quando: inizio Novecento
+dove: Gran Bretagna e altri paesi
+chi:
+- Emmeline Pankhurst
+cosa: Il movimento che chiede il **voto alle donne**, con manifestazioni, disobbedienza civile, scioperi della fame
+  e azioni clamorose.
+conta: 'La società di massa include le donne nella vita pubblica molto prima di darle il diritto di voto: la distanza
+  fra le due cose è la loro battaglia.'
+numeri:
+- cosa: Nuova Zelanda, prima al mondo
+  valore: '1893'
+- cosa: Gran Bretagna
+  valore: '1918'
+- cosa: Italia
+  valore: '1945'
+da:
+- l: Q
+  c: 1
+  p: 5
+parole: suffragette, suffragio femminile

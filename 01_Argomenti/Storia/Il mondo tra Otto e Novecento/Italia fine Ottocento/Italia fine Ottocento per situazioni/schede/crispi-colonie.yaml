@@ -1,0 +1,24 @@
+tipo: voce
+id: crispi-colonie
+titolo: Crispi e la politica coloniale
+sigla: Crispi
+genere: persona
+quando: dal 1887
+dove: Italia e Corno d’Africa
+chi:
+- Francesco Crispi
+cosa: Alla guida di due governi, **Crispi** lancia in modo deciso la politica coloniale italiana, promuovendo l'espansione
+  nel Corno d'Africa.
+conta: 'Ai suoi occhi le iniziative coloniali erano la prosecuzione logica della militanza patriottica che aveva
+  portato all''unificazione: un dovere dei patrioti rinsaldare il prestigio dell''Italia. Rinnova la Triplice e
+  inasprisce la guerra doganale con la Francia.'
+lega:
+- scheda: triplice-1882
+  documento: Le alleanze europee
+  tipo: prosegue
+  perche: è lui a rinnovare il patto nel 1887
+da:
+- l: T
+  c: 18
+  p: 2
+parole: Crispi, colonialismo italiano

@@ -1,0 +1,21 @@
+tipo: voce
+id: taylorismo
+titolo: Il taylorismo
+sigla: Taylorismo
+genere: concetto
+quando: '1911'
+dove: Stati Uniti
+chi:
+- Frederick W. Taylor
+cosa: '**Organizzazione scientifica del lavoro**: ogni gesto dell''operaio viene studiato, cronometrato e ridotto
+  al minimo necessario, così che la produzione sia più veloce e non dipenda dall''abilità del singolo.'
+conta: 'È il passo che rende possibile la produzione in serie: il lavoro si scompone in operazioni semplici e ripetibili.'
+lega:
+- scheda: fordismo
+  tipo: prosegue
+  perche: Ford lo applica alla catena di montaggio
+da:
+- l: Q
+  c: 1
+  p: 3
+parole: taylorismo, organizzazione scientifica

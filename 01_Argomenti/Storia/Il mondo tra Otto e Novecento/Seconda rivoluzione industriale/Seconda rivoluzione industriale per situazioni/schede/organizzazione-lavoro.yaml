@@ -1,0 +1,20 @@
+tipo: voce
+id: organizzazione-lavoro
+titolo: Nuovi modi di organizzare il lavoro
+sigla: Organizzazione del lavoro
+genere: concetto
+quando: seconda metà dell’Ottocento
+dove: Germania e Stati Uniti
+cosa: 'L''**American system of manufacturing**: assemblaggio in sequenza di componenti meccaniche standardizzate
+  e interscambiabili, nato nella fabbricazione di armi. E la **lavorazione a ciclo continuo**, con nastri trasportatori
+  che portano l''oggetto davanti al lavoratore.'
+conta: 'È l''anteprima della produzione in serie novecentesca: il taylorismo e il fordismo arriveranno da qui.'
+lega:
+- scheda: taylorismo
+  documento: La belle époque e la società di massa
+  tipo: prosegue
+da:
+- l: T
+  c: 16
+  p: 2
+parole: American system, ciclo continuo

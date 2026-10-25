@@ -1,0 +1,46 @@
+tipo: voce
+id: affaire-dreyfus
+titolo: L'Affaire Dreyfus
+sigla: Dreyfus
+genere: evento
+quando: 1894-1906
+dove: Francia
+chi:
+- Alfred Dreyfus
+- Émile Zola
+- Esterházy
+cosa: '**Alfred Dreyfus**, ufficiale dell''esercito francese di origine ebraica, è accusato di **spionaggio** e
+  condannato al carcere a vita sulla base di prove segrete mai mostrate alla difesa.'
+conta: 'Divide la Francia in due: i conservatori e l''*Action française* lo vogliono colpevole e alimentano l''**antisemitismo**;
+  dall''altra parte si schierano gli intellettuali. È il caso in cui si vede che l''antisemitismo non è un residuo
+  del passato ma un fatto politico del presente.'
+svolta: true
+svolgimento:
+- quando: dicembre 1894
+  passo: condanna al carcere a vita e deportazione sull’isola del Diavolo, in Guyana
+- quando: maggio 1896
+  passo: nuove indagini indicano il maggiore **Esterházy** come vera spia dei tedeschi
+- passo: Esterházy viene assolto dopo un processo frettoloso
+- quando: '1898'
+  passo: '**Zola** pubblica su «L''Aurore» l''articolo *J''accuse…!*'
+- passo: si scopre che anche i documenti segreti erano falsi; il colonnello Henry, autore delle falsificazioni,
+    si suicida
+- quando: '1899'
+  passo: 'secondo processo: colpevolezza confermata, ma arriva la grazia del presidente Loubet'
+- quando: '1906'
+  passo: '**riabilitazione** completa: la Cassazione decreta l''innocenza e Dreyfus rientra nell''esercito con il
+    grado di maggiore'
+citazioni:
+- testo: J'accuse…!
+  chi: Émile Zola
+  dove: «L'Aurore», 1898
+lega:
+- scheda: antisemitismo
+  documento: Darwinismo sociale e teorie razziali
+  tipo: esempio
+  perche: è l'antisemitismo moderno in azione
+da:
+- l: Q
+  c: 2
+  p: 3
+parole: Affaire Dreyfus, J'accuse, antisemitismo

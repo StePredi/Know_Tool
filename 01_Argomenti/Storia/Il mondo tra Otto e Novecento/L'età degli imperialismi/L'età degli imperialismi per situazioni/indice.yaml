@@ -1,0 +1,37 @@
+modello: per_situazioni
+vista: storia
+titolo: L'età degli imperialismi
+centro: Imperialismo 1870-1914
+sottotitolo: ''
+ingresso: la domanda riguarda la corsa alle colonie e il perché le potenze se le contendono
+guida: 'che cosa cerca davvero questo paese: mercati, materie prime o prestigio?'
+esempiRicerca: ''
+rami:
+- id: cose
+  nome: Che cos’è
+  colore: blue
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - colonialismo-imperialismo
+    - conferenza-berlino
+- id: perche
+  nome: Perché lo fanno
+  colore: orange
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - ragioni-economiche
+    - ragioni-politiche
+    - armamenti
+- id: dove
+  nome: Dove arrivano
+  colore: green
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - imperi-coloniali
+    - fashoda-1898

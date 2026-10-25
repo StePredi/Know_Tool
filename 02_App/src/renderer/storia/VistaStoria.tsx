@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, type ReactNode } from 'react'
 import type { SchedaConfronto, SchedaVoce, Situazioni } from '@shared/situazioni'
-import { fonteInChiaro } from '@shared/situazioni'
+import { fonteInChiaro, type Riferimento } from '@shared/situazioni'
 import { Icona, type NomeIcona } from '../componenti/Icona'
 import { useHome } from '../home/stato'
 import { useSit } from '../situazioni/stato'
@@ -17,7 +17,7 @@ const FAMIGLIE: { nome: string; viste: { id: Vista; nome: string; icona: NomeIco
 ]
 
 function Testata({ rel, dati, st, passo }: { rel: string; dati: Situazioni; st: ReturnType<typeof statoDi>; passo: (d: 1 | -1) => void }): ReactNode {
-  const imposta = (p: Parameters<typeof useStoria.getState>[0] extends never ? never : Partial<typeof STORIA0>): void => useStoria.getState().imposta(rel, p)
+  const imposta = (p: Partial<typeof STORIA0>): void => useStoria.getState().imposta(rel, p)
   const materia = rel.split('/').filter(Boolean)[0] ?? ''
   const copertura = st.vista === 'copertura'
   return (
@@ -114,9 +114,9 @@ function Scheda({ rel, dati, id, ripasso, apri }: { rel: string; dati: Situazion
       {s.tipo === 'voce'
         ? <Voce dati={dati} s={s} colore={colore} apri={apri} nascosti={nascosti as string[]} />
         : <Confronto dati={dati} s={s as SchedaConfronto} colore={colore} apri={apri} ripasso={ripasso} />}
-      {s.da.length > 0 && (
+      {(s.tipo === 'voce' || s.tipo === 'confronto') && s.da.length > 0 && (
         <p className="st-da">
-          Dal libro: {s.da.map((d, i) => <code key={i}>{fonteInChiaro(d, dati.libri)}</code>)}
+          Dal libro: {s.da.map((d: Riferimento, i: number) => <code key={i}>{fonteInChiaro(d, dati.libri)}</code>)}
           {s.parole ? <span className="st-pc">parole chiave: {s.parole}</span> : null}
         </p>
       )}
@@ -182,6 +182,7 @@ export function VistaStoria({ rel }: { rel: string }): ReactNode {
 
   const apri = (id: string): void => useStoria.getState().imposta(rel, { scheda: id })
   const conColonna = st.vista === 'mappa' || st.vista === 'cronologia'
+  const elenco = st.vista === 'glossario' || st.vista === 'persone' || st.vista === 'svolte' ? st.vista : null
   const posizione = corrente ? ordine.indexOf(corrente) + 1 : 0
 
   return (
@@ -222,7 +223,7 @@ export function VistaStoria({ rel }: { rel: string }): ReactNode {
                       <Scheda rel={rel} dati={dati} id={corrente} ripasso={st.ripasso} apri={apri} />
                     </>
                   : <p className="st-vuoto">Questo argomento non ha ancora schede.</p>)
-              : <Elenco dati={dati} vista={st.vista} apri={(id) => useStoria.getState().imposta(rel, { scheda: id, vista: 'mappa' })} />}
+              : <Elenco dati={dati} vista={elenco ?? 'glossario'} apri={(id) => useStoria.getState().imposta(rel, { scheda: id, vista: 'mappa' })} />}
         </main>
       </div>
     </div>

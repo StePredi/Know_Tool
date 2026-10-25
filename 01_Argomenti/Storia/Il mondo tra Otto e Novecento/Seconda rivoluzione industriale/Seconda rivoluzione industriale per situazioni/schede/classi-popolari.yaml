@@ -1,0 +1,21 @@
+tipo: voce
+id: classi-popolari
+titolo: Le classi popolari
+sigla: Classi popolari
+genere: concetto
+quando: Ottocento
+cosa: La maggioranza della popolazione resta formata da **contadini e operai**, con condizioni di vita molto dure,
+  aggravate durante la Grande depressione dai licenziamenti in massa.
+conta: 'Il mondo operaio è variegato: qualificati e non, operai di lungo corso e apprendisti (il lavoro minorile
+  è diffuso), uomini e donne — queste ultime con contratti peggiori e salari inferiori. Le **rivendicazioni** portano
+  scioperi e manifestazioni, e conquiste importanti nella seconda metà del secolo.'
+numeri:
+- cosa: Quota del bilancio operaio in alimentari
+  valore: oltre il 60%
+- cosa: Per l'abitazione
+  valore: circa il 15%
+da:
+- l: T
+  c: 16
+  p: 3
+parole: operai, lavoro minorile, rivendicazioni

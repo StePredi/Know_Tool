@@ -1,0 +1,23 @@
+tipo: voce
+id: banca-romana
+titolo: Lo scandalo della Banca Romana
+sigla: Banca Romana
+genere: evento
+quando: 1892-1893
+dove: Italia
+chi:
+- Giolitti
+- Crispi
+cosa: La **Banca Romana**, uno dei sei istituti autorizzati a emettere cartamoneta, dopo investimenti sbagliati
+  nell'edilizia stampa cartamoneta oltre i limiti per coprire i propri ammanchi. Il governo Crispi, al corrente
+  dal 1889, insabbia in cambio di finanziamenti illeciti, prestiti a uomini politici e denaro per influenzare la
+  stampa.
+conta: 'Fa cadere il **primo governo Giolitti**: accusato di aver coperto i responsabili fin dal 1889, quando era
+  ministro del Tesoro, si dimette e viene rimpiazzato proprio da Crispi, che aveva responsabilità ben più gravi
+  ma seppe cavalcare la situazione. Nell''agosto **1893** la Banca Romana è soppressa e gli altri istituti accorpati
+  nella **Banca d''Italia**.'
+da:
+- l: T
+  c: 18
+  p: 4
+parole: Banca Romana, Banca d'Italia, cartamoneta

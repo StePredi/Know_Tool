@@ -1,0 +1,20 @@
+tipo: voce
+id: fordismo
+titolo: Il fordismo
+sigla: Fordismo
+genere: concetto
+quando: '1913'
+dove: Stati Uniti
+chi:
+- Henry Ford
+cosa: 'La **catena di montaggio**: il pezzo si muove e l''operaio resta fermo a compiere sempre la stessa operazione.
+  Ford paga salari alti perché gli operai possano comprare le automobili che costruiscono.'
+conta: 'Chiude il cerchio fra produzione e consumo di massa: chi produce diventa anche chi compra.'
+lega:
+- scheda: consumo-di-massa
+  tipo: giustifica
+da:
+- l: Q
+  c: 1
+  p: 3
+parole: fordismo, catena di montaggio

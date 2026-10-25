@@ -1,0 +1,23 @@
+tipo: voce
+id: meiji
+titolo: Il Giappone Meiji
+sigla: Meiji
+genere: processo
+quando: 1868-1912
+dove: Giappone
+chi:
+- Mutsuhito
+cosa: 'Con la **restaurazione Meiji** l''imperatore Mutsuhito trasforma il Giappone in una potenza industriale e
+  militare sul modello occidentale: **Costituzione (1889)** di modello prussiano, abolizione dei vincoli feudali,
+  riforma di esercito e marina, istruzione elementare obbligatoria, banca nazionale e moneta comune (lo **yen**).'
+conta: 'È l''unico paese extraeuropeo che risponde all''imperialismo diventando esso stesso imperialista: militarismo,
+  nazionalismo e razzismo alimentano il progetto di dominio sull''Asia.'
+elementi:
+- nome: Meiji
+  spiega: 'significa «illuminato» in giapponese: è il nome assunto dall''imperatore e, per estensione, del suo lungo
+    «governo illuminato».'
+da:
+- l: Q
+  c: 2
+  p: 8
+parole: Meiji, yen, Costituzione 1889

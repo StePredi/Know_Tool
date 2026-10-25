@@ -1,0 +1,28 @@
+tipo: voce
+id: boxer
+titolo: La rivolta dei Boxer
+sigla: Boxer 1900
+genere: evento
+quando: 1898-1900
+dove: Cina
+chi:
+- Boxer
+- potenze coloniali
+cosa: Una società segreta xenofoba solleva il popolo contro tutti gli stranieri presenti in Cina e contro i cinesi
+  convertiti al cristianesimo. Nel **1900** i Boxer assaltano il quartiere di Pechino dove vivono i diplomatici
+  stranieri.
+conta: Le potenze reagiscono compatte con una spedizione multinazionale — con truppe italiane — che conquista Pechino,
+  compie una brutale rappresaglia e impone alla Cina **indennità altissime**.
+elementi:
+- nome: Il nome
+  spiega: «Boxer» deriva dall'inglese per «pugile», ma è una traduzione sbagliata del cinese *Yihetuan*, che significa
+    «società di giustizia e concordia».
+citazioni:
+- testo: Maneggiate le vostre armi in modo tale che per mille anni nessun cinese osi guardare con sospetto un tedesco.
+  chi: Guglielmo II
+  dove: discorso alle truppe in partenza per la Cina
+da:
+- l: Q
+  c: 2
+  p: 8
+parole: Boxer, Yihetuan, indennità

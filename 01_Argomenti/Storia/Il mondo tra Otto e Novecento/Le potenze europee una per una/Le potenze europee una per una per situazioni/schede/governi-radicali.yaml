@@ -1,0 +1,24 @@
+tipo: voce
+id: governi-radicali
+titolo: I governi radicali
+sigla: Radicali
+genere: processo
+quando: 1899-1912
+dove: Francia
+chi:
+- Clemenceau
+- Briand
+- Poincaré
+cosa: Dopo l'Affaire prevale una coalizione di democratici, repubblicani e radicali; il **movimento radicale**,
+  partito dal 1901, ha fra i suoi fondamenti l'**anticlericalismo** e la laicità dello Stato.
+conta: 'Porta due cose destinate a durare: la **separazione fra Chiesa e Stato (1905)**, che abolisce il Concordato
+  napoleonico del 1801, e le prime riforme sociali (pensione di vecchiaia, limitazione dell''orario, riposo settimanale).'
+elementi:
+- nome: La CGT
+  spiega: 'nel principale sindacato francese prevale la corrente rivoluzionaria, contraria alle riforme e alla collaborazione:
+    ne segue una lunga ondata di scioperi.'
+da:
+- l: Q
+  c: 2
+  p: 3
+parole: anticlericalismo, separazione Chiesa-Stato, CGT

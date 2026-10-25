@@ -1,0 +1,35 @@
+tipo: voce
+id: fasci-siciliani
+titolo: I Fasci siciliani
+sigla: Fasci siciliani
+genere: evento
+quando: 1893-1894
+dove: Sicilia
+chi:
+- Giolitti
+- Crispi
+cosa: Un movimento di protesta sociale animato da associazioni locali di lavoratori, che con il supporto di borghesi,
+  radicali, socialisti e anarchici chiede la revisione dei patti agrari, la diminuzione delle tasse e l'abolizione
+  dei dazi.
+conta: '**Due risposte opposte a pochi mesi di distanza.** Giolitti non dichiara lo stato d''assedio e rifiuta la
+  repressione violenta; Crispi, tornato al potere, proclama lo **stato d''assedio** e invia 30.000 soldati, anche
+  a costo di sparare sui dimostranti.'
+elementi:
+- nome: Stato d'assedio
+  spiega: 'provvedimento giuridico d''eccezione: dalla sospensione dei diritti costituzionali per un periodo o territorio
+    limitato fino al trasferimento del potere civile alle autorità militari.'
+- nome: La mafia
+  spiega: Crispi agisce a vantaggio dei proprietari delle miniere di zolfo e dei grandi latifondisti siciliani,
+    al cui servizio operava una forma di criminalità organizzata.
+numeri:
+- cosa: Soldati inviati da Crispi
+  valore: '30.000'
+- cosa: Uccisi
+  valore: una novantina
+- cosa: Arrestati
+  valore: circa 2000
+da:
+- l: T
+  c: 18
+  p: 4
+parole: Fasci siciliani, stato d'assedio, mafia

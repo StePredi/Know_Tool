@@ -1,0 +1,19 @@
+tipo: voce
+id: partiti-di-massa
+titolo: I partiti di massa
+sigla: Partiti di massa
+genere: concetto
+quando: fine Ottocento
+dove: Europa
+cosa: 'Partiti con **iscritti, sedi, giornali e programmi**, non più comitati di notabili: si rivolgono a milioni
+  di elettori e li organizzano in modo stabile.'
+conta: 'Cambiano la politica alla radice: contano i numeri e l''organizzazione, non più solo i personaggi.'
+confondi:
+- scheda: sindacati
+  differenza: il partito punta al potere politico e alle elezioni; il sindacato difende i lavoratori nel luogo di
+    lavoro
+da:
+- l: Q
+  c: 1
+  p: 4
+parole: partiti di massa

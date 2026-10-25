@@ -1,0 +1,62 @@
+modello: per_situazioni
+vista: storia
+titolo: Seconda rivoluzione industriale
+centro: Economia e società 1873-1900
+sottotitolo: ''
+ingresso: la domanda riguarda la crisi di fine Ottocento, le nuove industrie o la borghesia
+guida: questa trasformazione nasce da una crisi o da un progresso?
+esempiRicerca: ''
+rami:
+- id: crisi
+  nome: La Grande depressione
+  colore: red
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - grande-depressione
+    - cause-agricole
+    - crisi-industria
+    - rimedi
+  quando: 1873-1895
+- id: industria
+  nome: Le nuove industrie
+  colore: blue
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - seconda-rivoluzione
+    - chimica
+    - acciaio-petrolio
+    - elettricita
+- id: imprese
+  nome: Imprese e banche
+  colore: orange
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - trust-cartelli
+    - capitalismo-finanziario
+    - organizzazione-lavoro
+- id: societa
+  nome: La società borghese
+  colore: green
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - borghesia
+    - doppia-morale
+    - turismo
+    - classi-popolari
+- id: internazionali
+  nome: Le Internazionali
+  colore: violet
+  lato: T
+  ordine: true
+  voci:
+  - schede:
+    - prima-internazionale
+    - seconda-internazionale

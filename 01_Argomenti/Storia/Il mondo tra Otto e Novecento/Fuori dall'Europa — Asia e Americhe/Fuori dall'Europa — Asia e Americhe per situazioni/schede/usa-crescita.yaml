@@ -1,0 +1,23 @@
+tipo: voce
+id: usa-crescita
+titolo: La crescita degli Stati Uniti
+sigla: Crescita USA
+genere: processo
+quando: 1865-1900
+dove: Stati Uniti
+cosa: 'Dopo la guerra civile (1861-1865) gli Stati Uniti crescono in modo massiccio, anche grazie all''immigrazione
+  europea, e diventano una **grande potenza economica**: ingenti investimenti in infrastrutture, una rete ferroviaria
+  di circa **300.000 km**, un grande mercato interno.'
+conta: 'È la base della potenza che si affaccerà sullo scacchiere mondiale: prima l''economia, poi la politica estera.'
+numeri:
+- cosa: Popolazione nel 1880
+  valore: ~50 milioni
+- cosa: Popolazione nel 1900
+  valore: oltre 70 milioni
+- cosa: Rete ferroviaria
+  valore: ~300.000 km
+da:
+- l: Q
+  c: 2
+  p: 9
+parole: mercato interno, ferrovie

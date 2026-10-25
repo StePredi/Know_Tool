@@ -1,0 +1,24 @@
+tipo: confronto
+id: trust-cartelli
+titolo: Holding, cartello e trust
+sigla: Forme d’impresa
+domande:
+- che cos’è
+- esempio
+casi:
+- nome: Holding
+  risposte:
+  - società finanziaria capogruppo che detiene il capitale di altre imprese
+  - —
+- nome: Cartello
+  risposte:
+  - coalizione fra imprese **indipendenti** dello stesso settore su prezzi, produzione o zone
+  - Siemens e AEG nell’elettricità tedesca
+- nome: Trust
+  risposte:
+  - concentrazione di società **fuse** insieme, con tendenza monopolistica
+  - 'Standard Oil di Rockefeller: oltre il 90% del petrolio USA'
+da:
+- l: T
+  c: 16
+  p: 2

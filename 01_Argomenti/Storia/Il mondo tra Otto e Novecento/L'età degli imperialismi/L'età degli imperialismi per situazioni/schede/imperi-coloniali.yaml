@@ -1,0 +1,28 @@
+tipo: voce
+id: imperi-coloniali
+titolo: Gli imperi coloniali
+sigla: Gli imperi
+genere: processo
+quando: 1858-1914
+dove: Africa, Asia, Pacifico
+cosa: Alla vigilia della guerra quasi tutta l'Africa e buona parte dell'Asia sono spartite. La carta del libro segna
+  la **data di acquisizione** di ogni possedimento.
+conta: 'Serve per la domanda DOVE: le date mostrano che la corsa si concentra in pochi decenni, dopo il 1880.'
+numeri:
+- cosa: India britannica
+  valore: '1858'
+- cosa: Egitto (GB)
+  valore: '1882'
+- cosa: Tunisia (Francia)
+  valore: '1881'
+- cosa: Libia (Italia)
+  valore: '1912'
+- cosa: Congo belga
+  valore: '1908'
+- cosa: Marocco (Francia)
+  valore: '1911'
+da:
+- l: Q
+  c: 2
+  p: 1
+parole: imperi coloniali

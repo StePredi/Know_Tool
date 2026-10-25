@@ -1,0 +1,23 @@
+tipo: voce
+id: uccialli
+titolo: Il trattato di Uccialli
+sigla: Uccialli 1889
+genere: evento
+quando: '1889'
+dove: Etiopia
+chi:
+- Pietro Antonelli
+- Menelik II
+cosa: 'Il trattato legittima l''esistenza di quella che dall''anno successivo si chiamerà **Colonia Eritrea**. Ma
+  contiene una **pericolosa ambiguità**: redatto in italiano e in amarico, l''articolo 17 è sostanzialmente diverso
+  nelle due versioni.'
+conta: 'Il testo italiano dice che il *negus* delega a Roma la propria politica estera — cioè un protettorato italiano
+  sull''Etiopia; quello amarico dice che il *negus* si riserva la delega «secondo convenienza». Resosi conto dell''equivoco,
+  nel **1893** Menelik II denuncia il trattato: tre anni dopo si arriva allo scontro armato.'
+errore: 'pensare che l''ambiguità fosse un errore di traduzione innocente: fu il punto su cui l''Italia costruì
+  la pretesa di protettorato'
+da:
+- l: T
+  c: 18
+  p: 2
+parole: Uccialli, articolo 17, Menelik II, protettorato

@@ -1,0 +1,19 @@
+tipo: voce
+id: acciaio-petrolio
+titolo: Acciaio, alluminio e petrolio
+sigla: Acciaio e petrolio
+genere: processo
+quando: 1856-1886
+cosa: 'L''**acciaio** — lega ferro-carbonio più resistente e flessibile del ferro dolce — diventa il materiale simbolo:
+  metodo Bessemer (1856), poi Martin-Siemens (1865), poi l''altoforno di Thomas (1881), più economico. Nel **1886**
+  Héroult e Hall ricavano l''**alluminio** dalla bauxite.'
+conta: 'Il **petrolio** si affianca al carbone: lubrificante, riscaldamento, illuminazione e soprattutto carburante
+  dei motori a combustione interna, che in pochi anni sostituiscono la macchina a vapore.'
+elementi:
+- nome: Il ponte di Brooklyn (1886)
+  spiega: 'primo ponte in acciaio al mondo: il simbolo del materiale nuovo.'
+da:
+- l: T
+  c: 16
+  p: 2
+parole: acciaio, Bessemer, alluminio, petrolio

@@ -1,0 +1,27 @@
+tipo: voce
+id: instabilita-francese
+titolo: L'instabilità della Terza Repubblica
+sigla: Instabilità
+genere: processo
+quando: 1889-1898
+dove: Francia
+cosa: La Francia deve fare i conti con il **revanscismo** — il desiderio di rivincita dopo la perdita di Alsazia
+  e Lorena — e con una profonda instabilità interna.
+conta: 'È il terreno su cui l''Affaire Dreyfus può incendiare il paese: la Repubblica è già fragile e divisa.'
+svolgimento:
+- quando: '1889'
+  passo: il tentativo di colpo di Stato del generale **Boulanger** mette a repentaglio le istituzioni
+- quando: '1892'
+  passo: 'lo **scandalo di Panama**: la compagnia del canale, guidata da Ferdinand de Lesseps, corrompe parlamentari
+    e giornalisti; il fallimento rovina gli azionisti'
+- quando: 1894-1898
+  passo: cinque primi ministri e tre presidenti della Repubblica si alternano in quattro anni
+elementi:
+- nome: Revanscismo
+  spiega: 'dal francese *revanche*, «rivincita»: i sentimenti nazionalisti di chi vuole indietro le regioni cedute
+    alla Germania con il trattato di Francoforte (1871).'
+da:
+- l: Q
+  c: 2
+  p: 3
+parole: revanscismo, scandalo di Panama, Boulanger

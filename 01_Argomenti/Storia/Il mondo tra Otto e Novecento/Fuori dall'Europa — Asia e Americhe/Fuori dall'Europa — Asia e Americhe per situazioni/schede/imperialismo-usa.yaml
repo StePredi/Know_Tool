@@ -1,0 +1,30 @@
+tipo: voce
+id: imperialismo-usa
+titolo: Un imperialismo di tipo nuovo
+sigla: Imperialismo USA
+genere: concetto
+quando: 1898-1914
+dove: Caraibi e Pacifico
+chi:
+- Theodore Roosevelt
+cosa: 'Gli Stati Uniti non fanno colonie sul modello europeo: creano **zone di influenza** in paesi considerati
+  vitali per la sicurezza e il commercio, che restano formalmente indipendenti ma dipendono dalla politica economica
+  o militare statunitense.'
+conta: 'Condannano il colonialismo tradizionale e insieme praticano un dominio indiretto: è una forma nuova, che
+  segnerà tutto il Novecento.'
+svolgimento:
+- quando: '1898'
+  passo: '**guerra ispano-americana**: col pretesto di aiutare i ribelli cubani di José Martí, gli USA dichiarano
+    guerra alla Spagna; Cuba ottiene l''indipendenza ma resta sotto tutela'
+- passo: passano sotto protezione statunitense anche Portorico e le Filippine; vengono occupati Guam, Samoa e le
+    Hawaii, dove si costruisce la base navale di Pearl Harbor
+- quando: '1903'
+  passo: gli USA fomentano la rivolta di **Panama** contro la Colombia; Panama ottiene l'indipendenza e finisce
+    nella sfera statunitense
+- quando: '1914'
+  passo: il **canale di Panama** è ultimato; la sua amministrazione è affidata in via perpetua agli statunitensi
+da:
+- l: Q
+  c: 2
+  p: 9
+parole: zone di influenza, Panama, Cuba

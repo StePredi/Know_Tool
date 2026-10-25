@@ -1,0 +1,40 @@
+tipo: voce
+id: rivoluzione-messicana
+titolo: La Rivoluzione messicana
+sigla: Messico 1910
+genere: evento
+quando: 1910-1921
+dove: Messico
+chi:
+- Porfirio Díaz
+- Madero
+- Zapata
+- Villa
+- Carranza
+- Obregón
+cosa: 'Contro il trentennale regime del generale **Porfirio Díaz**, che aveva aperto il paese a britannici e statunitensi,
+  scoppia una rivoluzione eterogenea: borghesi liberali guidati da **Madero** e movimento contadino di **Zapata**
+  e **Pancho Villa**, che chiede la redistribuzione delle terre.'
+conta: 'È il principale tentativo di emancipazione dal sistema oligarchico-militare in America latina, e mostra
+  quanto peso abbiano gli interessi stranieri: il colpo di Stato contro Madero ha il sostegno degli Stati Uniti,
+  che non vogliono rinunciare alle concessioni sui pozzi petroliferi e sulle miniere.'
+svolgimento:
+- quando: 1910-1911
+  passo: la rivoluzione abbatte il regime di Díaz; Madero diventa presidente
+- quando: '1913'
+  passo: Madero è destituito e assassinato da **Huerta**, con il sostegno dei conservatori e degli Stati Uniti
+- quando: 1913-1921
+  passo: guerra civile fra conservatori, liberali di Carranza e Obregón, e i guerriglieri contadini di Zapata e
+    Villa
+- quando: '1917'
+  passo: nuova **Costituzione democratica**, promulgata sotto Carranza
+- quando: 1919 e 1923
+  passo: Zapata e poi Villa sono uccisi in imboscate ordite dai loro avversari politici
+- quando: 1920-1924
+  passo: la presidenza di **Obregón** porta riforme liberali e la laicizzazione dello Stato; la riforma agraria
+    resta però incompiuta
+da:
+- l: Q
+  c: 2
+  p: 10
+parole: Zapata, Pancho Villa, peones, riforma agraria

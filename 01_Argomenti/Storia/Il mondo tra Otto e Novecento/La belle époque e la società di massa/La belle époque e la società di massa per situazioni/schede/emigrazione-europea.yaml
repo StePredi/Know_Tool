@@ -1,0 +1,22 @@
+tipo: voce
+id: emigrazione-europea
+titolo: L'emigrazione europea
+sigla: Emigrazione
+genere: processo
+quando: fine XIX - inizio XX secolo
+dove: Europa, Americhe, Australia
+cosa: Milioni di europei lasciano il continente, diretti soprattutto verso le **Americhe**. Dall'Italia partono
+  prima dal Nord, verso Francia e Austria-Ungheria per lavori stagionali, poi in prevalenza dal Centro-Sud verso
+  l'oltreoceano.
+conta: 'È il nucleo fondante 1 del capitolo: le trasformazioni economiche spostano le persone, non solo le merci.
+  Le **rimesse** degli emigranti diventano una voce dell''economia dei paesi di partenza.'
+lega:
+- scheda: italia-emigrazione
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: il caso italiano, nel libro di terza
+da:
+- l: Q
+  c: 1
+  p: 1
+parole: emigrazione, rimesse

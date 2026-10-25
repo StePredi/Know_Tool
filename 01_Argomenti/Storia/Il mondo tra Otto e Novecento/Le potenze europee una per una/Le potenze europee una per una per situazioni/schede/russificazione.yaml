@@ -1,0 +1,32 @@
+tipo: voce
+id: russificazione
+titolo: Russificazione e antisemitismo
+sigla: Russificazione
+genere: processo
+quando: 1791-1905
+dove: Impero russo
+cosa: 'Politica di **russificazione** e uniformazione religiosa: in Finlandia si impone la legislazione russa; verso
+  gli ebrei il regime è particolarmente vessatorio.'
+conta: Gli ebrei russi sono confinati nella **Zona di residenza** fin dal 1791 e colpiti da quote e divieti; sono
+  vittime di **pogrom** sempre più frequenti. Quella concentrazione in un'area delimitata avvantaggerà i nazisti
+  durante l'occupazione.
+elementi:
+- nome: I Protocolli dei Savi di Sion
+  spiega: testo costruito ad arte per dimostrare un presunto complotto giudaico mondiale, diffuso fra il 1903 e
+    il 1905.
+numeri:
+- cosa: Quota di studenti ebrei nella Zona (1887)
+  valore: max 10%
+- cosa: A Mosca
+  valore: 5%
+- cosa: A San Pietroburgo
+  valore: 3%
+lega:
+- scheda: antisemitismo
+  documento: Darwinismo sociale e teorie razziali
+  tipo: esempio
+da:
+- l: Q
+  c: 2
+  p: 6
+parole: Zona di residenza, pogrom, Protocolli dei Savi di Sion

@@ -1,0 +1,38 @@
+tipo: voce
+id: fine-eta-vittoriana
+titolo: La fine dell'età vittoriana
+sigla: Fine età vittoriana
+genere: evento
+quando: '1901'
+dove: Gran Bretagna
+chi:
+- regina Vittoria
+- Edoardo VII
+cosa: Dopo **64 anni di regno** muore la regina Vittoria. Finisce un'epoca di straordinaria espansione, in cui la
+  Gran Bretagna ha conquistato un vastissimo impero coloniale e un primato sui commerci marittimi mondiali.
+conta: 'L''epoca edoardiana che segue è segnata da instabilità e dall''ascesa di una forza politica nuova fra il
+  proletariato: il Labour Party.'
+svolgimento:
+- quando: 1886-1905
+  passo: dopo il ventennio liberale di Gladstone, la scena è dominata dai conservatori di **Lord Salisbury**, sostenuti
+    dai liberali **unionisti** di Joseph Chamberlain
+- quando: '1900'
+  passo: nasce il **Labour Party**, per volontà delle Trade Unions e di altri movimenti socialisti
+- quando: '1901'
+  passo: muore Vittoria, gli succede Edoardo VII
+- quando: '1903'
+  passo: i liberali stringono alleanza con i laburisti
+numeri:
+- cosa: Spesa pubblica nel 1870
+  valore: 93 milioni di sterline
+- cosa: Spesa pubblica nel 1900
+  valore: 281 milioni
+- cosa: Impiegati pubblici nel 1851
+  valore: '250.000'
+- cosa: Impiegati pubblici nel 1901
+  valore: '960.000'
+da:
+- l: Q
+  c: 2
+  p: 4
+parole: età vittoriana, Labour Party, unionisti

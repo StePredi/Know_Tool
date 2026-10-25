@@ -1,0 +1,21 @@
+tipo: voce
+id: colonialismo-imperialismo
+titolo: Da colonialismo a imperialismo
+sigla: Imperialismo
+genere: concetto
+quando: dal 1870 circa
+dove: Europa, Africa, Asia
+cosa: Il colonialismo era il **controllo commerciale esclusivo** di un'area, lasciato spesso a imprese e compagnie
+  private. Diventa **imperialismo** quando si fa dominio politico e militare di un territorio e sfruttamento delle
+  sue risorse, assunto direttamente dagli Stati.
+conta: 'Non è una parola diversa per la stessa cosa: cambia chi comanda (lo Stato, non i privati) e che cosa si
+  pretende (il territorio, non solo il commercio).'
+lega:
+- scheda: conferenza-berlino
+  tipo: prosegue
+errore: usare «colonialismo» e «imperialismo» come sinonimi
+da:
+- l: Q
+  c: 2
+  p: 1
+parole: colonialismo, imperialismo

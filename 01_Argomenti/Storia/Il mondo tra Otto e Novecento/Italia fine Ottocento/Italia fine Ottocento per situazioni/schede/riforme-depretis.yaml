@@ -1,0 +1,35 @@
+tipo: voce
+id: riforme-depretis
+titolo: Le riforme di Depretis
+sigla: Riforme
+genere: processo
+quando: 1877-1884
+dove: Italia
+cosa: 'Tre provvedimenti principali: la **legge Coppino (1877)**, che estende l''obbligo scolastico fino ai nove
+  anni con sanzioni per i genitori inadempienti; l''**abolizione della tassa sul macinato** (ridotta nel 1879, abolita
+  nel 1884); la **riforma elettorale del 1882**.'
+conta: 'Il numero degli aventi diritto al voto triplica, ma resta circa il **7% della popolazione**: le donne ne
+  sono totalmente escluse e un quarto dei maschi maggiorenni resta fuori per analfabetismo.'
+elementi:
+- nome: Il requisito nuovo
+  spiega: 'la riforma del 1882 dimezza il censo e stabilisce che valga anche il requisito dell''**istruzione elementare**
+    in alternativa: un''apertura importante in prospettiva.'
+numeri:
+- cosa: Legge Coppino
+  valore: '1877'
+- cosa: Abolizione del macinato
+  valore: '1884'
+- cosa: 'Riforma elettorale: età'
+  valore: da 25 a 21 anni
+- cosa: Aventi diritto dopo il 1882
+  valore: ~7%
+lega:
+- scheda: suffragette
+  documento: La belle époque e la società di massa
+  tipo: sincronia
+  perche: in tutta Europa vigeva il suffragio ristretto, mai concepito come diritto di tutti
+da:
+- l: T
+  c: 18
+  p: 1
+parole: legge Coppino, censo, suffragio ristretto

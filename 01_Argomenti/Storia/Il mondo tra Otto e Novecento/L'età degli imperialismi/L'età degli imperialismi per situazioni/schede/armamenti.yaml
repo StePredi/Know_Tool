@@ -1,0 +1,15 @@
+tipo: voce
+id: armamenti
+titolo: La potenza degli armamenti
+sigla: Armamenti
+genere: processo
+quando: fine Ottocento
+cosa: 'La Seconda rivoluzione industriale permette un **balzo spaventoso negli armamenti**: eserciti di grandezza
+  senza precedenti vengono equipaggiati con i ritrovati più moderni.'
+conta: '«La distruzione di massa diventava l''altra faccia della medaglia della produzione di massa»: è lo stesso
+  progresso che costruisce e che arma.'
+da:
+- l: Q
+  c: 2
+  p: 1
+parole: armamenti, distruzione di massa

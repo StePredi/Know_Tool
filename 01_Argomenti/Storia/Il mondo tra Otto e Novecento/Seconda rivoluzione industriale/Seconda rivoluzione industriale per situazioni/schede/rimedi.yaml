@@ -1,0 +1,20 @@
+tipo: voce
+id: rimedi
+titolo: Protezionismo e gold standard
+sigla: I rimedi
+genere: concetto
+quando: dal 1873
+cosa: 'Due risposte dei governi: i **dazi doganali** (protezionismo), adottati da tutti tranne la Gran Bretagna,
+  e il **gold standard**, cioè legare la valuta all''oro.'
+conta: Il protezionismo rialza domanda e consumi interni e dà tempo alle imprese di aggiornarsi; il gold standard
+  rende il sistema monetario più stabile e permette agli Stati di indebitarsi senza cadere nell'inflazione.
+lega:
+- scheda: protezionismo-italiano
+  documento: Italia fine Ottocento
+  tipo: esempio
+  perche: la Sinistra italiana fa la stessa scelta
+da:
+- l: T
+  c: 16
+  p: 1
+parole: protezionismo, dazi, gold standard

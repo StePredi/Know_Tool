@@ -1,0 +1,27 @@
+tipo: voce
+id: adua
+titolo: La disfatta di Adua
+sigla: Adua 1896
+genere: evento
+quando: 1° marzo 1896
+dove: Etiopia
+chi:
+- Crispi
+- Menelik II
+cosa: 'Crispi ordina alle truppe coloniali in Eritrea, male armate, di riprendere la marcia verso l''Etiopia. La
+  campagna, viziata dall''impreparazione dei vertici, si conclude in disastro: prima la sconfitta dell''**Amba Alagi**
+  (dicembre 1895), poi la clamorosa disfatta di **Adua**.'
+conta: Che un esercito europeo fosse battuto e quasi annientato da «guerrieri tribali africani» destò enorme impressione
+  in Europa — benché l'esercito abissino fosse armato alla pari, con aiuti francesi. In Italia la disfatta provoca
+  manifestazioni violente e la **caduta definitiva di Crispi**; il successore Rudinì firma la pace e riconosce l'**indipendenza
+  dell'Etiopia**.
+svolta: true
+lega:
+- scheda: uccialli
+  tipo: conseguenza
+  perche: la denuncia del trattato porta allo scontro
+da:
+- l: T
+  c: 18
+  p: 2
+parole: Adua, Amba Alagi

@@ -1,0 +1,29 @@
+tipo: voce
+id: reazione-zarista
+titolo: Il trionfo della reazione
+sigla: Reazione zarista
+genere: processo
+quando: 1881-1917
+dove: Russia
+chi:
+- Alessandro III
+- Nicola II
+cosa: 'Dopo la parentesi riformista di Alessandro II, i regni di **Alessandro III (1881-1894)** e **Nicola II (1894-1917)**
+  riportano un orientamento **reazionario** e **autoritario**: lo zar esercita il potere in modo esclusivo, appoggiandosi
+  alla Chiesa ortodossa e all''alta nobiltà.'
+conta: 'Il paese resta immobile mentre la società cambia: è l''origine dell''opposizione che esploderà nel 1905
+  e nel 1917.'
+elementi:
+- nome: La Banca agricola per la nobiltà (1885)
+  spiega: concede capitali agli aristocratici a tassi favorevoli; i contadini, privi di terra, devono affidarsi
+    ai latifondisti anche se la servitù della gleba era stata abolita nel 1861.
+numeri:
+- cosa: Elettori a San Pietroburgo, dopo il 1892
+  valore: da 21.000 a 8.000
+- cosa: Elettori a Mosca
+  valore: da 20.000 a 7.000
+da:
+- l: Q
+  c: 2
+  p: 6
+parole: autocrazia, reazione

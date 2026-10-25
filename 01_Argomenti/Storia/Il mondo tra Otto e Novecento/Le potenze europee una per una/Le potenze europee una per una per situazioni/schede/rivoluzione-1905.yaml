@@ -1,0 +1,30 @@
+tipo: voce
+id: rivoluzione-1905
+titolo: La rivoluzione del 1905
+sigla: '1905'
+genere: evento
+quando: '1905'
+dove: Russia
+chi:
+- Nicola II
+cosa: Un tentativo rivoluzionario per ottenere riforme dallo zar, nato dal malcontento e aggravato dall'andamento
+  disastroso della guerra contro il Giappone.
+conta: 'Lo zar è costretto a concedere il **Manifesto di ottobre**: libertà civili e una **Duma**, cioè un Parlamento
+  a cui sottoporre ogni proposta di legge. Ma poi limita le concessioni e cambia la legge elettorale: la Duma diventa
+  uno strumento nelle sue mani.'
+svolta: true
+svolgimento:
+- quando: 22 gennaio 1905
+  passo: '**domenica di sangue**: la polizia spara su una folla che sfila pacificamente a San Pietroburgo'
+- quando: 20-30 ottobre
+  passo: uno sciopero di amplissime proporzioni paralizza il paese; sorge per la prima volta un **soviet**, consiglio
+    di operai e contadini
+- passo: il Manifesto di ottobre concede libertà civili e la Duma
+- quando: '1906'
+  passo: le **leggi fondamentali** riservano grandi poteri allo zar; nel giugno 1907 la legge elettorale viene cambiata
+    per ridurre i rappresentanti di contadini e operai
+da:
+- l: Q
+  c: 2
+  p: 6
+parole: domenica di sangue, soviet, Duma, Manifesto di ottobre

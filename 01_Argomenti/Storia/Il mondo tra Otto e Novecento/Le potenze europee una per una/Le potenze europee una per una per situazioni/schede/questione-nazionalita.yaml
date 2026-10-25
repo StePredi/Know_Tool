@@ -1,0 +1,36 @@
+tipo: voce
+id: questione-nazionalita
+titolo: La questione delle nazionalità
+sigla: Nazionalità
+genere: processo
+quando: 1867-1908
+dove: Impero austro-ungarico
+chi:
+- Francesco Giuseppe
+- Taaffe
+- Badeni
+cosa: Dentro i confini dell'Impero vivono tedeschi, magiari, cechi, polacchi, ruteni, rumeni, croati, sloveni, serbi,
+  slovacchi, italiani. Nessun governo riesce a tenerli insieme.
+conta: 'L''Impero «si reggeva ormai solo grazie alla personalità dell''imperatore»: è la crepa che la guerra farà
+  saltare.'
+svolgimento:
+- quando: '1871'
+  passo: Francesco Giuseppe promette ai cechi la stessa autonomia ottenuta dagli ungheresi nel 1867, ma non mantiene
+- quando: 1879-1893
+  passo: il conte **Taaffe** cerca di riconciliare le nazioni dell'Impero; si dimette per il fallimento sulla pace
+    fra cechi e tedeschi
+- quando: '1897'
+  passo: il progetto di **Badeni** sul bilinguismo in Boemia provoca l'ostilità dei parlamentari germanofoni e tumulti
+    di piazza; il Parlamento di Vienna si inceppa
+- quando: '1907'
+  passo: il **suffragio universale maschile** dà un Parlamento democratico, ma privo di un vero potere decisionale
+numeri:
+- cosa: Primi ministri in Austria, 1867-1914
+  valore: '20'
+- cosa: In Ungheria
+  valore: '17'
+da:
+- l: Q
+  c: 2
+  p: 5
+parole: nazionalità, Badeni, bilinguismo

@@ -1,0 +1,24 @@
+tipo: voce
+id: fashoda-1898
+titolo: L'incidente di Fashoda
+sigla: Fashoda 1898
+genere: evento
+quando: '1898'
+dove: Sudan
+chi:
+- Gran Bretagna
+- Francia
+cosa: Nel villaggio di **Fashoda** le truppe inglesi, risalite dall'Egitto verso sud, incrociano un corpo di spedizione
+  francese diretto da ovest a est. Lo scontro armato sfiora l'incidente diplomatico gravissimo.
+conta: 'Parigi fa arretrare il proprio contingente: l''epilogo è favorevole a Londra, e sei anni dopo le due potenze
+  si accorderanno proprio sull''Africa.'
+lega:
+- scheda: entente-1904
+  documento: Le alleanze europee
+  tipo: prosegue
+  perche: la rivalità coloniale si chiude con l'Entente cordiale
+da:
+- l: Q
+  c: 2
+  p: 4
+parole: Fashoda, Sudan

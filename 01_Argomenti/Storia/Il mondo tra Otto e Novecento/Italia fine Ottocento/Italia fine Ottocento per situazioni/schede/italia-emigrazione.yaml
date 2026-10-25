@@ -1,0 +1,25 @@
+tipo: voce
+id: italia-emigrazione
+titolo: L'emigrazione italiana
+sigla: Emigrazione italiana
+genere: processo
+quando: dagli anni Ottanta
+dove: Italia, Europa, Americhe
+cosa: Dalle regioni del Nord braccianti e contadini poveri partono per lavori stagionali in Francia o Austria-Ungheria;
+  altri affrontano l'oceano verso Brasile, Argentina, Canada, Stati Uniti. Solo alla svolta del secolo il flusso
+  dal Centro-Sud diventa preponderante.
+conta: Emigrano soprattutto **uomini**; le donne restano in patria a occuparsi di anziani e bambini. Quasi la metà
+  di chi va in America prima del 1910 torna, con l'idea di comprare un pezzo di terra e lavorare da contadino indipendente
+  e non più da bracciante. I soldi spediti a casa — le **rimesse** — sono accolti come una benedizione.
+numeri:
+- cosa: Emigranti all’anno, inizio
+  valore: '100.000'
+- cosa: Verso il 1890
+  valore: '300.000'
+- cosa: Dieci anni dopo
+  valore: '600.000'
+da:
+- l: T
+  c: 18
+  p: 1
+parole: emigrazione, rimesse

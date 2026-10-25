@@ -1,0 +1,27 @@
+tipo: voce
+id: elettricita
+titolo: L'energia elettrica
+sigla: Elettricità
+genere: concetto
+quando: Ottocento
+cosa: L'elettricità **non è una fonte primaria**, ma una forma di distribuzione dell'energia prodotta altrove.
+conta: È ciò che si sbaglia più spesso. Dopo la pila di Volta, Faraday e Maxwell dimostrano il rapporto fra elettricità
+  e magnetismo; nasce il motore elettrico, superiore alla macchina a vapore, e con la lampadina il confine fra giorno
+  e notte si fa sfumato.
+numeri:
+- cosa: Telefono (Meucci)
+  valore: '1871'
+- cosa: Grammofono (Edison)
+  valore: '1876'
+- cosa: Lampadina a filamento (Edison)
+  valore: '1879'
+- cosa: Cinematografo (Lumière)
+  valore: '1895'
+- cosa: Telegrafo senza fili (Marconi)
+  valore: '1896'
+errore: considerare l'elettricità una fonte di energia come il carbone o il petrolio
+da:
+- l: T
+  c: 16
+  p: 2
+parole: elettricità, dinamo, Meucci, Marconi

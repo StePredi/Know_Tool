@@ -1,0 +1,33 @@
+tipo: voce
+id: leggi-liberticide
+titolo: Le «leggi liberticide» e l’ostruzionismo
+sigla: Leggi liberticide
+genere: evento
+quando: 1898-1900
+dove: Italia
+chi:
+- Pelloux
+- Sonnino
+cosa: Il generale **Pelloux** presenta provvedimenti dal carattere palesemente autoritario, che limitano drasticamente
+  le libertà di stampa, associazione, insegnamento e il diritto di sciopero.
+conta: 'I gruppi della Sinistra estrema mettono in atto per la prima volta l''**ostruzionismo**: prolungare le discussioni
+  all''infinito, interrompere la maggioranza, chiedere votazioni speciali. Nel giugno 1899 Pelloux promulga per
+  decreto; nel **febbraio 1900 la Corte di cassazione dichiara incostituzionale la procedura**, e l''opposizione
+  vince.'
+svolgimento:
+- quando: '1897'
+  passo: '**Sonnino** propone di tornare all''interpretazione originaria dello Statuto albertino, per cui il governo
+    risponde prima al re che al parlamento'
+- quando: '1898'
+  passo: Pelloux presenta il pacchetto di leggi
+- quando: giugno 1899
+  passo: promulgazione per decreto
+- quando: febbraio 1900
+  passo: la Cassazione annulla il decreto
+- quando: giugno 1900
+  passo: 'elezioni: la Destra perde molti seggi, il PSI passa da 17 a 33 deputati; Pelloux si dimette'
+da:
+- l: T
+  c: 18
+  p: 5
+parole: ostruzionismo, Statuto albertino, Pelloux

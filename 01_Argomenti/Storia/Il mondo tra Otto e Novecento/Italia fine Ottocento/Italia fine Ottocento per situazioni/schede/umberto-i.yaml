@@ -1,0 +1,24 @@
+tipo: voce
+id: umberto-i
+titolo: L'attentato a Umberto I
+sigla: Monza 1900
+genere: evento
+quando: 29 luglio 1900
+dove: Monza, presso Milano
+chi:
+- Umberto I
+- Gaetano Bresci
+- Vittorio Emanuele III
+cosa: L'anarchico **Gaetano Bresci** uccide il re. Dichiarerà di essere tornato apposta dagli Stati Uniti, dove
+  era riparato nel 1894 sfuggendo alla persecuzione politica del governo Crispi, per **vendicare le vittime dei
+  moti milanesi**.
+conta: '«Il secondo re d''Italia aveva pagato con la vita la scelta di appoggiare governi autoritari e antipopolari.»
+  Ma la gravità della situazione scuote le coscienze e facilita il superamento della crisi: tutte le forze si dichiarano
+  disposte a cercare un terreno d''intesa. Il nuovo sovrano **Vittorio Emanuele III** promette di ripristinare «la
+  pace interna e la concordia».'
+svolta: true
+da:
+- l: T
+  c: 18
+  p: 5
+parole: Bresci, regicidio, Vittorio Emanuele III

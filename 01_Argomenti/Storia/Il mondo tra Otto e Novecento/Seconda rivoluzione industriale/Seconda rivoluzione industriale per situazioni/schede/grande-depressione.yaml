@@ -1,0 +1,25 @@
+tipo: voce
+id: grande-depressione
+titolo: La Grande depressione
+sigla: Grande depressione
+genere: processo
+quando: 1873-1895
+dove: paesi industrializzati
+cosa: 'Una lunga fase in cui la crescita dei paesi industrializzati conosce **battute d''arresto ravvicinate**.
+  Non fu dirompente come quella del 1929: ebbe carattere discontinuo, con stagnazione o recessione alternate a riprese,
+  ed effetti diversi da paese a paese.'
+conta: 'Oggi è letta come una **fase di assestamento**: dimostrò che l''economia capitalistica è ciclica e non può
+  crescere all''infinito senza trasformazioni radicali della produzione.'
+elementi:
+- nome: Stagnazione
+  spiega: assenza di crescita economica.
+- nome: Recessione
+  spiega: crisi più generalizzata e profonda.
+lega:
+- scheda: cause-agricole
+  tipo: prosegue
+da:
+- l: T
+  c: 16
+  p: 1
+parole: Grande depressione, stagnazione, recessione

@@ -1,0 +1,59 @@
+modello: per_situazioni
+vista: storia
+titolo: La belle époque e la società di massa
+centro: La belle époque
+sottotitolo: ''
+ingresso: la domanda riguarda come cambiano città, lavoro e vita quotidiana fra Otto e Novecento
+guida: che cosa rende possibile questo benessere, e chi ne resta fuori?
+esempiRicerca: ''
+rami:
+- id: economia
+  nome: Economia e migrazioni
+  colore: orange
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - belle-epoque
+    - emigrazione-europea
+  quando: fine XIX - inizio XX secolo
+- id: citta
+  nome: La città e la società di massa
+  colore: blue
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - urbanizzazione
+    - ceto-medio
+    - societa-di-massa
+- id: lavoro
+  nome: Lavoro e consumo di massa
+  colore: green
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - taylorismo
+    - fordismo
+    - consumo-di-massa
+- id: politica
+  nome: La politica di massa
+  colore: violet
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - partiti-di-massa
+    - sindacati
+    - suffragette
+- id: chiesa
+  nome: La Chiesa davanti al secolo nuovo
+  colore: teal
+  lato: T
+  ordine: true
+  voci:
+  - schede:
+    - rerum-novarum
+    - modernismo
+    - due-societa

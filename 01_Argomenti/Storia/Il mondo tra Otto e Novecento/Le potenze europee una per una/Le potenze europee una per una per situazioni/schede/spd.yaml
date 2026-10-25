@@ -1,0 +1,17 @@
+tipo: voce
+id: spd
+titolo: Il Partito socialdemocratico
+sigla: SPD
+genere: concetto
+quando: fine Ottocento
+dove: Germania
+cosa: Il **Partito socialdemocratico (SPD)** incontra larghi consensi fra la classe operaia. Bismarck aveva tentato
+  di arrestarne la crescita sia con misure repressive sia varando un sistema di **assistenza e previdenza sociali
+  all'avanguardia in Europa**.
+conta: 'Mostra la doppia strategia dello Stato verso il movimento operaio: reprimere e insieme concedere, per togliergli
+  consenso.'
+da:
+- l: Q
+  c: 2
+  p: 2
+parole: SPD, previdenza sociale

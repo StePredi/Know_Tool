@@ -1,0 +1,22 @@
+tipo: voce
+id: societa-di-massa
+titolo: La società di massa
+sigla: Società di massa
+genere: concetto
+quando: fine XIX - inizio XX secolo
+dove: Europa e Stati Uniti
+cosa: 'Una società in cui **grandi numeri di persone** fanno le stesse cose: comprano gli stessi prodotti, leggono
+  gli stessi giornali, votano, si iscrivono a partiti e sindacati, vanno allo stadio.'
+conta: 'Cambia la politica — nascono i partiti di massa — e cambia la cultura: per la prima volta esiste un pubblico
+  di milioni di persone da convincere.'
+elementi:
+- nome: Le Bon
+  spiega: 'in *Psicologia delle folle* studia come si comporta la folla: è il segno che la massa diventa un oggetto
+    di studio.'
+- nome: Lo sport
+  spiega: 'de Coubertin fa rinascere le Olimpiadi: anche lo spettacolo diventa di massa.'
+da:
+- l: Q
+  c: 1
+  p: 2
+parole: società di massa, folla
