@@ -790,13 +790,28 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .st-vuoto { color: var(--mute); font-style: italic; }
 
 .st-vista { max-width: 90ch; }
+/* le viste a griglia usano tutta la larghezza: non si leggono a righe lunghe, si scorrono */
+.st-vista.larga { max-width: 1500px; }
 .st-vista h1 { font-size: 22px; margin: 0 0 4px; }
 .st-sotto { color: var(--mute); font-size: 14px; margin: 0 0 20px; }
-.st-elenco { display: grid; gap: 9px; }
-.st-card { display: grid; gap: 3px; text-align: left; background: none; border: 1px solid var(--line); border-left: 3px solid var(--c, var(--line)); border-radius: 10px; padding: 10px 13px; font: inherit; color: inherit; cursor: pointer; }
-.st-card:hover { border-color: var(--c, var(--ink)); }
-.st-card b { font-size: 16px; }
-.st-card span { font-size: 14px; color: var(--mute); }
+/* Glossario / Chi e' chi / Svolte: griglia di card che si aprono */
+.st-gl-barra { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; flex-wrap: wrap; }
+.st-gl-barra > span { font-size: 13px; color: var(--mute); }
+/* colonne tipo dizionario: aprendo una card le altre si richiudono sotto, senza buchi */
+.st-griglia { columns: 330px; column-gap: 10px; }
+.st-gl { break-inside: avoid; width: 100%; margin: 0 0 10px; border: 1px solid var(--line); border-left: 3px solid var(--c, var(--line)); border-radius: 10px; background: var(--surface); overflow: hidden; }
+.st-gl:hover { border-color: var(--c, var(--ink)); }
+.st-gl.aperta { background: var(--t, var(--surface2)); }
+.st-gl-t { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: 0; padding: 11px 13px; font: inherit; color: inherit; cursor: pointer; }
+.st-gl-t b { flex: 1; min-width: 0; font-size: 15.5px; line-height: 1.35; }
+.st-gl-t svg { flex: none; color: var(--mute); }
+.st-gl.aperta .st-gl-t b { color: var(--k, inherit); }
+.st-gl-c { padding: 0 13px 12px; }
+.st-gl-c p { margin: 0; font-size: 14.5px; line-height: 1.58; color: var(--fg2); }
+.st-gl-p { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 11px; flex-wrap: wrap; }
+.st-gl-p .st-pill { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.st-gl-ramo { font-size: 12.5px; color: var(--mute); min-width: 0; }
+@media (max-width: 620px) { .st-griglia { columns: 1; } }
 .st-cop-tot { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; margin-bottom: 22px; }
 .st-barra { height: 9px; background: var(--surface2); border-radius: 999px; overflow: hidden; margin-top: 9px; }
 .st-barra div { height: 100%; background: var(--par); }
@@ -821,7 +836,7 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .st-foglia .st-nome { flex: 1; min-width: 0; }
 .st-blk-v, .st-blk { min-width: 0; }
 .st-par-t { min-width: 0; }
-.st-card b, .st-card span { min-width: 0; }
+.st-gl-t b, .st-gl-c p { min-width: 0; }
 .vc-corpo, .vc-sp, .vc-box, .vc-dato-v, .vc-det, .vc-lega, .vc-lega span { min-width: 0; }
 .vc-lega { align-items: flex-start; }
 .vc-lega > span:last-child { flex: 1; min-width: 0; }
