@@ -65,3 +65,15 @@ razziali». Aprili e guarda:
    portano alla scheda che copre quel paragrafo, anche in un altro argomento.
 8. **Ripasso**: copre «quando» e «chi» negli eventi, «cosa» nelle persone e
    nei concetti, e una colonna del confronto. Si scopre con un clic.
+
+### Aggiunta del 2026-10-25: riproduzione
+
+Nella testata, gruppo **Scorri**: «‹» e «›» per andare a mano, **Riproduci**
+per farle scorrere da sole, e il menu dei secondi. Prova che:
+
+- l'ordine cambia con la vista: in **Mappa** segue i rami, in **Cronologia**
+  segue gli anni;
+- durante la riproduzione la barra dice «n di N» e il tasto «ferma» funziona;
+- a ogni scheda il contenuto riparte dall'alto e la voce si vede nella colonna;
+- arrivato in fondo si ferma da solo.
+

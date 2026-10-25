@@ -704,8 +704,8 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .vc-pc { display: block; margin-top: 5px; }
 
 /* ── Storia: la schermata dell'argomento ─────────────────────────────── */
-.st { display: flex; flex-direction: column; min-height: 0; flex: 1; background: var(--bg); }
-.st-testa { position: sticky; top: 0; z-index: 6; background: var(--surface); border-bottom: 1px solid var(--line); }
+.st { display: flex; flex-direction: column; min-height: 0; flex: 1; overflow: hidden; background: var(--bg); }
+.st-testa { flex: none; z-index: 6; background: var(--surface); border-bottom: 1px solid var(--line); }
 .st-r { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 9px 16px; }
 .st-r-dove { border-bottom: 1px solid var(--line2); }
 .st-r-fai { gap: 22px; }
@@ -726,12 +726,15 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .st-guida b { display: block; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--mute); }
 @media (max-width: 760px) { .st-fam-t { display: none; } .st-r-fai { gap: 14px; } }
 
-.st-corpo { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; min-height: 0; flex: 1; align-items: start; }
+/* scorre il corpo: la testata resta sempre visibile e non copre la colonna */
+.st-corpo { display: grid; grid-template-columns: minmax(240px, 340px) minmax(0, 1fr); align-items: stretch; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
 .st-piena .st-corpo { grid-template-columns: 1fr; }
 @media (max-width: 900px) { .st-corpo { grid-template-columns: 1fr; } }
-.st-col { padding: 14px 12px 40px; border-right: 1px solid var(--line); position: sticky; top: 118px; max-height: calc(100vh - 118px); overflow: auto; }
-@media (max-width: 900px) { .st-col { position: static; max-height: none; border-right: 0; border-bottom: 1px solid var(--line); } }
-.st-main { padding: 20px 24px 70px; min-width: 0; }
+.st-col { border-right: 1px solid var(--line); min-width: 0; }
+/* il contenuto della colonna resta fermo mentre il resto scorre */
+.st-col-in { position: sticky; top: 0; max-height: calc(100vh - 120px); overflow-y: auto; overflow-x: hidden; padding: 14px 12px 40px; }
+@media (max-width: 900px) { .st-col { border-right: 0; border-bottom: 1px solid var(--line); } .st-col-in { position: static; max-height: none; } }
+.st-main { padding: 20px 26px 90px; min-width: 0; font-size: 16.5px; line-height: 1.62; }
 .st-col-t { font-size: 11px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--mute); margin: 0 0 10px 2px; }
 .st-centro { border: 2px solid var(--ink); border-radius: 10px; padding: 9px 12px; font-weight: 700; text-align: center; margin-bottom: 12px; }
 
@@ -773,7 +776,7 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 
 .st-scheda { max-width: 106ch; }
 .st-kind { font-size: 11px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--mute); }
-.st-scheda h1 { font-size: 28px; line-height: 1.18; margin: 3px 0 14px; }
+.st-scheda h1 { font-size: 30px; line-height: 1.16; margin: 3px 0 16px; overflow-wrap: anywhere; }
 .st-ripasso-n { display: flex; align-items: center; gap: 8px; border: 1px dashed var(--warn-line); color: var(--warn-ink); background: var(--warn-bg); border-radius: 10px; padding: 8px 12px; font-size: 14px; }
 .st-coperto { background: var(--surface2); border: 0; border-bottom: 2px dotted var(--warn-line); border-radius: 4px; color: transparent; font: inherit; cursor: pointer; padding: 0 2px; }
 .st-coperto:hover { background: var(--line); }
@@ -807,3 +810,38 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .st-par.scoperto { border-color: var(--err-line); background: none; }
 .st-par.scoperto .st-par-t { color: var(--err-line); }
 .st-nessuna { display: inline-flex; align-items: center; gap: 5px; color: var(--err-line); font-size: 12.5px; white-space: nowrap; }
+
+/* niente testo fuori dai bordi: tutto va a capo, anche le parole lunghe */
+.st, .st * { overflow-wrap: anywhere; }
+.st code, .st .st-da code { overflow-wrap: anywhere; }
+.st-arg, .st-materia { overflow-wrap: anywhere; min-width: 0; }
+.st-r { max-width: 100%; }
+.st-col-t, .st-centro, .st-ramo-t span, .st-nome, .st-vv-t, .st-vv-s { min-width: 0; }
+.st-ramo-t > span:not(.st-anni) { flex: 1; min-width: 0; }
+.st-foglia .st-nome { flex: 1; min-width: 0; }
+.st-blk-v, .st-blk { min-width: 0; }
+.st-par-t { min-width: 0; }
+.st-card b, .st-card span { min-width: 0; }
+.vc-corpo, .vc-sp, .vc-box, .vc-dato-v, .vc-det, .vc-lega, .vc-lega span { min-width: 0; }
+.vc-lega { align-items: flex-start; }
+.vc-lega > span:last-child { flex: 1; min-width: 0; }
+.vc-num { max-width: 100%; }
+.st-main .vc-tab-w { max-width: 100%; }
+
+/* il contenuto della scheda eredita il corpo piu' grande */
+.st-main .vc-cosa, .st-main .vc-conta p, .st-main .vc-det, .st-main .vc-passi li,
+.st-main .vc-nota, .st-main .vc-cit p, .st-main .vc-tab td { font-size: inherit; }
+.st-main .vc-sec { font-size: 18px; }
+.st-main .vc-det-n { font-size: 17px; }
+.st-main .vc-dato-v { font-size: 15px; }
+.st-main .vc-lega { font-size: 15.5px; }
+.st-main .vc-lega small { font-size: 14px; }
+.st-main .rg-err { font-size: 15.5px; }
+
+
+/* Storia: riproduzione automatica delle schede */
+.st-passo select { font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 5px 7px; cursor: pointer; }
+.st-passo select:hover { border-color: var(--ink); }
+.st-play { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--k, var(--mute)); background: var(--t, var(--surface2)); border-radius: 10px; padding: 7px 12px; margin: 0 0 14px; }
+.st-play button { margin-left: auto; background: none; border: 1px solid currentColor; border-radius: 999px; padding: 2px 11px; font: inherit; font-size: 12.5px; color: inherit; cursor: pointer; }
+.st-play button:hover { background: var(--c); color: var(--on); border-color: var(--c); }
