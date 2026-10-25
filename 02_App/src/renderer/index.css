@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+/* OpenDyslexic (SIL Open Font License 1.1, licenza in src/renderer/font/OFL.txt).
+   I file stanno nel progetto, non su internet: l'app deve funzionare offline. */
+@font-face { font-family: 'OpenDyslexic'; font-style: normal; font-weight: 400; font-display: swap; src: url('./font/opendyslexic-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-style: italic; font-weight: 400; font-display: swap; src: url('./font/opendyslexic-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-style: normal; font-weight: 700; font-display: swap; src: url('./font/opendyslexic-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-style: italic; font-weight: 700; font-display: swap; src: url('./font/opendyslexic-latin-700-italic.woff2') format('woff2'); }
+
 :root {
   --bg: #f4f6f9; --surface: #ffffff; --surface2: #eceff4; --ink: #121920; --mute: #4c5a69;
   --line: #c6d0db; --line2: #dde3ea; --axis: #e6eaf0; --on: #ffffff; --focus: #1f5fb0;
@@ -860,3 +867,40 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .st-play { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--k, var(--mute)); background: var(--t, var(--surface2)); border-radius: 10px; padding: 7px 12px; margin: 0 0 14px; }
 .st-play button { margin-left: auto; background: none; border: 1px solid currentColor; border-radius: 999px; padding: 2px 11px; font: inherit; font-size: 12.5px; color: inherit; cursor: pointer; }
 .st-play button:hover { background: var(--c); color: var(--on); border-color: var(--c); }
+
+/* ─────────── Leggere meglio: font facile e modalità lettura ─────────── */
+
+/* «Font facile»: OpenDyslexic solo sul contenuto della scheda, non sull'interfaccia.
+   La lettera e' piu' larga e piu' alta di Atkinson, quindi scende di un filo e
+   respira di piu': spaziatura fra lettere e parole come raccomandano le linee
+   guida sulla dislessia. */
+/* la lettera e' gia' larga di suo: niente spaziatura aggiunta, solo piu' interlinea */
+.st-dys .st-scheda { font-family: 'OpenDyslexic', var(--ff); font-size: 0.93em; line-height: 1.8; word-spacing: 0.03em; }
+.st-dys .st-scheda h1 { font-size: 27px; line-height: 1.3; }
+.st-dys .st-scheda .vc-sec { font-size: 17px; }
+.st-dys .st-scheda b, .st-dys .st-scheda strong { font-weight: 700; }
+.st-dys .st-scheda i, .st-dys .st-scheda em { font-style: italic; }
+
+/* «Solo il testo»: resta la scheda e basta. Niente colonna, niente famiglie di
+   viste, niente guida in alto: una barra sottile per muoversi e uscire. */
+.st-lt-barra { display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-bottom: 1px solid var(--line); background: var(--surface); flex: none; }
+.st-lt-pos { font-size: 13px; color: var(--mute); min-width: 5.5em; text-align: center; }
+.st-lettura .st-corpo { grid-template-columns: minmax(0, 1fr); }
+.st-lettura .st-main { padding: 34px 26px 120px; font-size: 17.5px; line-height: 1.7; }
+.st-lettura .st-scheda { max-width: 68ch; margin: 0 auto; }
+.st-lettura.st-dys .st-scheda { max-width: 60ch; }
+.st-lettura .st-kind { display: none; }
+/* una colonna sola: i dati della voce vanno sopra il testo, non spariscono */
+.st-lettura .vc-g { display: flex; flex-direction: column; align-items: stretch; }
+.st-lettura .vc-sp { order: -1; }
+/* l'indice delle sezioni non serve quando si legge di seguito */
+.st-lettura .vc-sp nav.vc-box { display: none; }
+.st-lettura .vc-sp { position: static; display: block; margin: 0 0 20px; }
+/* in lettura «In una riga» diventa una fascia sola: quando, dove e chi affiancati */
+.st-lettura .vc-sp .vc-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 4px 20px; }
+.st-lettura .vc-sp .vc-box-t { grid-column: 1 / -1; margin-bottom: 2px; }
+.st-lettura .vc-sp .vc-dato { border-top: 0; padding: 4px 0; }
+.st-lettura .vc-corpo { margin: 0; }
+.st-lettura .vc-corpo > :first-child, .st-lettura .vc-corpo > :first-child > :first-child { margin-top: 0; }
+@media (max-width: 620px) { .st-lettura .st-main { padding: 22px 16px 100px; } }
+

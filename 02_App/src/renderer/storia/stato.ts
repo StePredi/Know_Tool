@@ -17,20 +17,51 @@ export interface StatoStoria {
   passo: number
 }
 export const STORIA0: StatoStoria = { scheda: null, vista: 'mappa', ripasso: false, chiusi: [], riproduci: false, passo: 15 }
+
+/** Come si legge: vale per tutti gli argomenti e resta fra una sessione e l'altra.
+ *  È un'impostazione di leggibilità, non una scelta di questo documento: doverla
+ *  riattivare a ogni argomento la renderebbe inutile. */
+export interface LeggiMeglio {
+  /** resta solo il contenuto della scheda, sparisce tutto il resto intorno */
+  lettura: boolean
+  /** font OpenDyslexic sul testo del contenuto */
+  dislessia: boolean
+}
+const CHIAVE_LM = 'kt-leggi-meglio'
+function leggiLM(): LeggiMeglio {
+  try {
+    const v = JSON.parse(localStorage.getItem(CHIAVE_LM) ?? '{}') as Partial<LeggiMeglio>
+    return { lettura: v.lettura === true, dislessia: v.dislessia === true }
+  } catch {
+    return { lettura: false, dislessia: false }
+  }
+}
 export const PASSI = [8, 15, 30, 60] as const
 
 interface Storia {
   stati: Record<string, StatoStoria>
   materia: Record<string, { libri: Libri; documenti: DocumentoMateria[] }>
+  lm: LeggiMeglio
   imposta(rel: string, p: Partial<StatoStoria>): void
+  impostaLM(p: Partial<LeggiMeglio>): void
   caricaMateria(materia: string): Promise<void>
 }
 
 export const useStoria = create<Storia>((set, get) => ({
   stati: {},
   materia: {},
+  lm: leggiLM(),
   imposta(rel, p) {
     set((s) => ({ stati: { ...s.stati, [rel]: { ...(s.stati[rel] ?? STORIA0), ...p } } }))
+  },
+  impostaLM(p) {
+    const lm = { ...get().lm, ...p }
+    set({ lm })
+    try {
+      localStorage.setItem(CHIAVE_LM, JSON.stringify(lm))
+    } catch {
+      /* se le preferenze non si salvano, pazienza: vale per questa sessione */
+    }
   },
   async caricaMateria(materia) {
     if (get().materia[materia]) return

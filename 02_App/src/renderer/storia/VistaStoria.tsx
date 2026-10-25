@@ -7,7 +7,7 @@ import { useSit } from '../situazioni/stato'
 import { Cronologia, Mappa } from './Navigatore'
 import { Confronto, Testo, Voce } from './Voce'
 import { Copertura, Elenco } from './Viste'
-import { ordineVista, PASSI, STORIA0, useStoria, type VistaStoria as Vista } from './stato'
+import { ordineVista, PASSI, STORIA0, useStoria, type LeggiMeglio, type VistaStoria as Vista } from './stato'
 
 /* Le viste raggruppate per quello che servono: leggere il contenuto, trovare
    una voce, esercitarsi. La copertura sta fuori: è di materia, non del documento. */
@@ -16,8 +16,9 @@ const FAMIGLIE: { nome: string; viste: { id: Vista; nome: string; icona: NomeIco
   { nome: 'Trova', viste: [{ id: 'glossario', nome: 'Glossario', icona: 'libro' }, { id: 'persone', nome: 'Chi è chi', icona: 'persona' }, { id: 'svolte', nome: 'Svolte', icona: 'svolta' }] }
 ]
 
-function Testata({ rel, dati, st, passo }: { rel: string; dati: Situazioni; st: ReturnType<typeof statoDi>; passo: (d: 1 | -1) => void }): ReactNode {
+function Testata({ rel, dati, st, lm, passo }: { rel: string; dati: Situazioni; st: ReturnType<typeof statoDi>; lm: LeggiMeglio; passo: (d: 1 | -1) => void }): ReactNode {
   const imposta = (p: Partial<typeof STORIA0>): void => useStoria.getState().imposta(rel, p)
+  const impostaLM = (p: Partial<LeggiMeglio>): void => useStoria.getState().impostaLM(p)
   const materia = rel.split('/').filter(Boolean)[0] ?? ''
   const copertura = st.vista === 'copertura'
   return (
@@ -68,6 +69,17 @@ function Testata({ rel, dati, st, passo }: { rel: string; dati: Situazioni; st: 
               <span className="st-led" /> Ripasso
             </button>
           </div>
+          <div className="st-fam">
+            <span className="st-fam-t">Leggi meglio</span>
+            <div className="st-gruppo">
+              <button type="button" className="btn" aria-pressed={lm.lettura} title="Resta solo il contenuto della scheda" onClick={() => impostaLM({ lettura: !lm.lettura })}>
+                <Icona nome="testo" size={14} /> Solo il testo
+              </button>
+              <button type="button" className="btn" aria-pressed={lm.dislessia} title="OpenDyslexic sul testo del contenuto" onClick={() => impostaLM({ dislessia: !lm.dislessia })}>
+                <Icona nome="occhio" size={14} /> Font facile
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {!copertura && (dati.indice.ingresso || dati.indice.guida) && (
@@ -76,6 +88,26 @@ function Testata({ rel, dati, st, passo }: { rel: string; dati: Situazioni; st: 
           {dati.indice.guida && <div><b>La domanda da farsi</b>{dati.indice.guida}</div>}
         </div>
       )}
+    </header>
+  )
+}
+
+/** In modalità lettura al posto della testata resta solo questa barra:
+ *  dove sono nell'elenco, avanti e indietro, il font, e l'uscita. */
+function BarraLettura({ lm, passo, posizione, totale }: { lm: LeggiMeglio; passo: (d: 1 | -1) => void; posizione: number; totale: number }): ReactNode {
+  const impostaLM = (p: Partial<LeggiMeglio>): void => useStoria.getState().impostaLM(p)
+  return (
+    <header className="st-lt-barra">
+      <button type="button" className="btn" title="Scheda precedente" aria-label="Scheda precedente" onClick={() => passo(-1)}><Icona nome="sx" size={14} /></button>
+      <span className="st-lt-pos">{posizione} di {totale}</span>
+      <button type="button" className="btn" title="Scheda successiva" aria-label="Scheda successiva" onClick={() => passo(1)}><Icona nome="dx" size={14} /></button>
+      <span className="st-sp" />
+      <button type="button" className="btn" aria-pressed={lm.dislessia} onClick={() => impostaLM({ dislessia: !lm.dislessia })}>
+        <Icona nome="occhio" size={14} /> Font facile
+      </button>
+      <button type="button" className="btn" onClick={() => impostaLM({ lettura: false })}>
+        <Icona nome="chiudi" size={14} /> Esci dalla lettura
+      </button>
     </header>
   )
 }
@@ -134,6 +166,7 @@ export function VistaStoria({ rel }: { rel: string }): ReactNode {
   const dati = useSit((s) => s.dati[rel])
   const errore = useSit((s) => s.errori[rel])
   const st = useStoria((s) => s.stati[rel] ?? STORIA0)
+  const lm = useStoria((s) => s.lm)
 
   useEffect(() => {
     void useSit.getState().carica(rel)
@@ -185,17 +218,21 @@ export function VistaStoria({ rel }: { rel: string }): ReactNode {
   const elenco = st.vista === 'glossario' || st.vista === 'persone' || st.vista === 'svolte' ? st.vista : null
   const posizione = corrente ? ordine.indexOf(corrente) + 1 : 0
 
+  const lettura = lm.lettura && st.vista !== 'copertura' && !!corrente
+
   return (
-    <div className={'st' + (conColonna ? '' : ' st-piena')}>
-      <Testata rel={rel} dati={dati} st={st} passo={passo} />
-      {dati.avvisi.length > 0 && (
+    <div className={'st' + (conColonna && !lettura ? '' : ' st-piena') + (lettura ? ' st-lettura' : '') + (lm.dislessia ? ' st-dys' : '')}>
+      {lettura
+        ? <BarraLettura lm={lm} passo={passo} posizione={posizione} totale={ordine.length} />
+        : <Testata rel={rel} dati={dati} st={st} lm={lm} passo={passo} />}
+      {!lettura && dati.avvisi.length > 0 && (
         <details className="st-avvisi">
           <summary><Icona nome="avviso" size={14} /> {dati.avvisi.length} avvisi nella lettura dei file</summary>
           <ul>{dati.avvisi.map((a, i) => <li key={i}>{a}</li>)}</ul>
         </details>
       )}
       <div className="st-corpo" ref={corpo}>
-        {conColonna && (
+        {conColonna && !lettura && (
           <nav className="st-col" aria-label="Navigazione dell'argomento">
             <div className="st-col-in">
               {st.vista === 'mappa'
@@ -211,7 +248,7 @@ export function VistaStoria({ rel }: { rel: string }): ReactNode {
                 const n = useHome.getState().albero.flatMap(function piatto(x): typeof x[] { return [x, ...(x.figli ?? []).flatMap(piatto)] }).find((x) => x.rel === r)
                 if (n) useHome.getState().apri(n)
               }} />
-            : conColonna
+            : conColonna || lettura
               ? (corrente
                   ? <>
                       {st.riproduci && (
