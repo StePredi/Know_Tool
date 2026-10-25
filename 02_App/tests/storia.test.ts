@@ -7,8 +7,8 @@ import { controllaSituazioni, leggiSchedaSit, ordineSchede, copertura, ETICHETTA
 import type { SchedaConfronto, SchedaVoce } from '../src/shared/situazioni'
 
 const MACRO = 'Storia/Il mondo tra Otto e Novecento'
-const ALLEANZE = `${MACRO}/Le alleanze europee/Le alleanze europee per situazioni`
-const DARWIN = `${MACRO}/Darwinismo sociale e teorie razziali/Darwinismo sociale e teorie razziali per situazioni`
+const ALLEANZE = `${MACRO}/Le alleanze europee per situazioni`
+const DARWIN = `${MACRO}/Darwinismo sociale e teorie razziali per situazioni`
 let radice = ''
 
 beforeEach(async () => {
