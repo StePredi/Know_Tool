@@ -1,0 +1,54 @@
+tipo: voce
+id: triplice-1882
+titolo: La Triplice alleanza
+sigla: Triplice 1882
+genere: evento
+quando: '1882'
+dove: Europa
+chi:
+- Germania
+- Austria-Ungheria
+- Italia
+cosa: 'L''Italia entra nel patto austro-tedesco, in maniera **imprevista e non priva di ambiguità**. L''accordo
+  è **militare e solo difensivo**, ma segna una profonda rottura col passato: pone l''Italia **nell''orbita
+  politica della Germania**, potenza di riferimento della *Mitteleuropa*.'
+conta: Rovescia le alleanze italiane. La Francia, che insieme alla Gran Bretagna era stata fra i più attivi
+  «sponsor» dell'unificazione, diventa un'avversaria; l'Austria-Ungheria, per decenni acerrima nemica,
+  passa a essere un paese alleato — e il problema delle **terre irredente** resta intatto.
+svolgimento:
+- quando: '1881'
+  passo: la Francia occupa la Tunisia; l'intervento coglie l'Italia impreparata
+- passo: rottura dei rapporti italo-francesi e guerra commerciale, dannosa per le esportazioni agricole
+    italiane
+- quando: '1882'
+  passo: per non restare isolata, l'Italia si avvicina alle potenze centrali e firma la Triplice
+- quando: '1887'
+  passo: Crispi, al governo, rinnova il patto e inasprisce la guerra doganale con la Francia
+elementi:
+- nome: Terre irredente
+  spiega: 'le regioni ritenute italiane perché abitate prevalentemente da **italofoni** e ancora soggette
+    agli Asburgo: Trento, Trieste e l''Istria.'
+- nome: La reazione degli irredentisti
+  spiega: 'indignata: proteste, agitazioni e attentati per tenere vivo il problema.'
+- nome: Il termine «irredentismo»
+  spiega: usato dal 1877, quando il repubblicano Matteo Renato Imbriani definì «*irredente*» (non emancipate)
+    le terre in attesa di essere liberate dal dominio austriaco.
+- nome: Casa Savoia
+  spiega: sul trono c'è Umberto I (1878-1900).
+lega:
+- scheda: tunisi-1881
+  tipo: conseguenza
+  perche: è la reazione allo smacco dell'anno prima
+- scheda: due-blocchi
+  tipo: confronto
+errore: 'pensare che la Triplice nasca da simpatia per la Germania: nasce dallo smacco di Tunisi'
+nota: 'L''accordo resta fragile proprio per il problema delle nazionalità: la popolazione italofona dell''Impero
+  austro-ungarico desiderava l''annessione all''Italia.'
+da:
+- l: T
+  c: 18
+  p: 1
+- l: Q
+  c: 2
+  p: 5
+parole: Triplice alleanza, irredentismo, Mitteleuropa

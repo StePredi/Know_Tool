@@ -1,0 +1,45 @@
+tipo: voce
+id: bosnia-1908
+titolo: L'annessione della Bosnia
+sigla: Bosnia 1908
+genere: evento
+quando: '1908'
+dove: Balcani
+chi:
+- Austria-Ungheria
+- Serbia
+- Russia
+- Germania
+cosa: L'Impero asburgico, logorato dai conflitti fra nazionalità e retto ormai solo dalla personalità
+  dell'imperatore, ratifica ufficialmente l'**annessione unilaterale della Bosnia-Erzegovina**, che occupava
+  dal 1878.
+conta: Aumenta il **peso delle nazionalità slave** dentro l'Impero e rafforza il **panslavismo**. Solleva
+  le proteste di tutti gli Stati europei tranne la Germania, e in particolare di Serbia e Russia, anch'esse
+  interessate alla supremazia nell'area balcanica.
+svolgimento:
+- quando: '1878'
+  passo: con il congresso di Berlino la Bosnia resta sotto sovranità turca ma passa all'amministrazione
+    austriaca
+- quando: '1908'
+  passo: l'imperatore, assecondando i conservatori al potere, ratifica l'annessione unilaterale
+- passo: protestano Serbia e Russia; la Germania sostiene Vienna
+elementi:
+- nome: Panslavismo
+  spiega: progetto di unione politica di tutti i popoli slavi, avviato al congresso slavo di Praga (giugno
+    1848) e diventato poi un progetto nazionalista e imperialista, volto alla liberazione degli slavi
+    dei Balcani e alla loro unificazione in una federazione guidata dalla Russia.
+- nome: La fragilità della Triplice
+  spiega: 'non erano solo gli slavi a rivendicare autonomia o indipendenza: anche la popolazione italofona
+    dell''Impero desiderava l''annessione all''Italia, alleata di Vienna.'
+lega:
+- scheda: polveriera
+  tipo: causa
+  perche: da qui i rapporti serbo-austriaci non si ricuciono più
+da:
+- l: Q
+  c: 2
+  p: 2
+- l: Q
+  c: 2
+  p: 5
+parole: Bosnia-Erzegovina, panslavismo, congresso di Berlino

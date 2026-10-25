@@ -1,0 +1,91 @@
+libri:
+  Q:
+    titolo: Storia vol. 2 (quarta)
+    capitoli:
+    - n: 1
+      titolo: La belle époque tra luci e ombre
+      pp: 2-33
+      paragrafi:
+      - n: 1
+        titolo: Le trasformazioni economiche e sociali
+        pp: 4-7
+      - n: 2
+        titolo: La città e la società di massa
+        pp: 8-12
+      - n: 3
+        titolo: L'organizzazione del lavoro e il consumo di massa
+        pp: 13-16
+      - n: 4
+        titolo: 'La politica di massa: partiti e sindacati'
+        pp: 17-21
+      - n: 5
+        titolo: Le suffragette, la Chiesa e il modernismo
+        pp: 22-25
+      - n: 6
+        titolo: Le ombre più cupe della belle époque
+        pp: 26-29
+    - n: 2
+      titolo: Vecchi imperi e potenze nascenti
+      pp: 34-65
+      paragrafi:
+      - n: 1
+        titolo: L'età degli imperialismi
+        pp: 34-35
+      - n: 2
+        titolo: La Germania di Guglielmo II
+        pp: 36-37
+      - n: 3
+        titolo: La Francia e il caso Dreyfus
+        pp: 38-39
+      - n: 4
+        titolo: La fine dell'età vittoriana in Gran Bretagna
+        pp: 40-44
+      - n: 5
+        titolo: L'Impero austro-ungarico e la questione delle nazionalità
+        pp: 45-46
+      - n: 6
+        titolo: La Russia zarista tra reazione e spinte democratiche
+        pp: 47-49
+      - n: 7
+        titolo: Crisi e conflitti tra Europa e Mediterraneo
+        pp: 50-53
+      - n: 8
+        titolo: 'L''Estremo Oriente: Cina e Giappone'
+        pp: 56-58
+      - n: 9
+        titolo: 'Gli Stati Uniti: una potenza in ascesa'
+        pp: 59-61
+      - n: 10
+        titolo: L'America latina e la Rivoluzione messicana
+        pp: 62-63
+    - n: 3
+      titolo: (non ancora letto)
+      pp: —
+      paragrafi: []
+  T:
+    titolo: Storia vol. 1 (terza) — riassunti
+    capitoli:
+    - n: 16
+      titolo: Economia e società nella Seconda rivoluzione industriale
+      paragrafi:
+      - n: 1
+        titolo: La «Grande depressione», fra crisi e crescita (1873-1895)
+      - n: 2
+        titolo: Le trasformazioni dell'industria e della finanza
+      - n: 3
+        titolo: Le trasformazioni sociali
+      - n: 4
+        titolo: Le nuove ideologie politiche e sociali
+    - n: 18
+      titolo: L'Italia della Sinistra storica e la crisi di fine secolo
+      paragrafi:
+      - n: 1
+        titolo: La Sinistra moderata di Depretis al potere
+      - n: 2
+        titolo: La politica coloniale del primo governo Crispi
+      - n: 3
+        titolo: L'inquietudine sociale e la nascita del Partito socialista
+      - n: 4
+        titolo: Dal primo governo Giolitti al secondo governo Crispi
+      - n: 5
+        titolo: La crisi di fine secolo

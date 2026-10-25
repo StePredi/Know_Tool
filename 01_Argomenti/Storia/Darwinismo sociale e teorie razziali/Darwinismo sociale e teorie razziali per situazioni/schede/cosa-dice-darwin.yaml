@@ -1,0 +1,24 @@
+tipo: voce
+id: cosa-dice-darwin
+titolo: Che cosa dice davvero la selezione naturale
+sigla: Selezione naturale
+genere: concetto
+quando: '1859'
+chi:
+- Charles Darwin
+cosa: 'Tutti gli esseri viventi si evolvono per adattarsi all''ambiente, attraverso un processo di **selezione
+  naturale**: sopravvivono gli individui e le specie con maggiori capacità di adattamento. L''ordine naturale
+  è sempre instabile e in divenire.'
+conta: 'Il punto che viene tradito subito dopo: il più adatto **non è necessariamente «superiore»**. Chi
+  lo dimentica ha già smesso di parlare di Darwin.'
+lega:
+- scheda: darwinismo-sociale
+  tipo: deformato_in
+- scheda: darwin-contro-darwinismo
+  tipo: confronto
+errore: credere che Darwin abbia parlato di razze superiori e inferiori
+da:
+- l: T
+  c: 16
+  p: 4
+parole: selezione naturale, adattamento

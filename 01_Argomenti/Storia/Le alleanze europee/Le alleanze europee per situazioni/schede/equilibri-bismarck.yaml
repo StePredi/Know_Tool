@@ -1,0 +1,33 @@
+tipo: voce
+id: equilibri-bismarck
+titolo: La politica degli equilibri
+sigla: Equilibri
+genere: processo
+quando: 1871-1890
+dove: Europa
+chi:
+- Otto von Bismarck
+cosa: 'Un sistema di **pesi e contrappesi** politico-militari, costruito con accortezza e coerenza: alleanze
+  incrociate che impediscono a chiunque di diventare troppo forte.'
+conta: Finché regge, nessuno in Europa ha interesse a rompere. Quando salta, il meccanismo che teneva
+  fermi tutti non c'è più — e lo si vedrà subito.
+elementi:
+- nome: Conferenza di Berlino (1884-1885)
+  spiega: Bismarck, con cautela e attenzione agli equilibri internazionali, invita i maggiori Stati europei
+    a fissare le linee dell'espansione in Africa — fino a quel momento condotta in modo caotico — definendo
+    le rispettive aree di influenza.
+- nome: La regola non scritta
+  spiega: quando uno Stato tende a diventare troppo influente, i suoi avversari si coalizzano per contenerne
+    l'egemonia. È la tradizione diplomatica europea su cui Bismarck lavora.
+lega:
+- scheda: caduta-bismarck-1890
+  tipo: chiude
+  perche: con lui se ne va il sistema
+da:
+- l: Q
+  c: 2
+  p: 1
+- l: Q
+  c: 2
+  p: 2
+parole: equilibri, conferenza di Berlino, aree di influenza

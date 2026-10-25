@@ -33,3 +33,16 @@ Per ogni parte del progetto, qual è il file che vale.
 ## Matematica: stato (2026-10-21)
 
 Decisione di Ste: Materia (Matematica) → un documento «Per situazioni» per argomento, con lo stesso albero degli altri. Aggiunte al modello: scheda `regola`, rami a passi (`ordine`), `ingresso`/`guida`, `esercizi.yaml`, disposizione **Formulario**, controllo numerico degli esempi. Derivate è il documento di riferimento. Il resto degli argomenti lo scrive una sessione di studio (vedi `sessione_studio.md`, sezione Matematica). Il primo codice Matematica (motore polinomi, schermata dedicata) è archiviato in `99_Archivio/Obsoleti/2026-10-21/matematica_prima_versione/`.
+
+## Storia (2026-10-25)
+
+Specifica: `specifiche/modello_storia.md` (approvata da Ste il 2026-10-25).
+
+- Niente motore separato: si riusa l'albero di «Per situazioni», come Matematica.
+- **L'unita' e' l'argomento, non il capitolo**: un argomento puo' nascere dal materiale di due capitoli, anche di due libri diversi.
+- Gli eventi contemporanei non si tengono con una cronologia unica, ma con un filo per soggetto + schede-nodo + collegamenti espliciti (`lega` con tipo e motivo, fra cui `sincronia`).
+- Due tipi di scheda nuovi: `voce` e `confronto`. I cinque campi di contenuto sono quelli con cui il libro apre i capitoli.
+- Le schede sono **complete** (Ste, 2026-10-25), organizzate a sezioni; la spalla con i dati sta a lato, mai fra titolo e testo.
+- Cronologia, glossario, «chi e' chi», svolte e **copertura del libro** sono viste ricavate: non si scrivono.
+- Prove a mano in `specifiche/prove/storia/`, mockup in `03_Demo/storia/storia.html`.
+

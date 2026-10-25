@@ -637,3 +637,68 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
   .fo-f { font-size: 14px; }
 }
 .fo-fl { display: block; }
+
+/* ── Storia: schede «voce» e «confronto» ─────────────────────────────── */
+.vc-g { display: grid; grid-template-columns: minmax(0, 1fr) 232px; gap: 28px; align-items: start; }
+@media (max-width: 1080px) { .vc-g { grid-template-columns: 1fr; } .vc-sp { order: -1; } }
+.vc-corpo { min-width: 0; }
+.vc-sec { display: flex; align-items: center; gap: 8px; font-size: 17px; }
+.vc-sec svg { color: var(--c, var(--mute)); }
+.vc-cosa { margin: 0 0 12px; }
+.vc-conta { border-left: 4px solid var(--c, var(--line)); padding: 2px 0 2px 13px; margin: 0 0 6px; }
+.vc-conta > b { display: block; font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--mute); }
+.vc-conta p { margin: 2px 0 0; }
+.vc-svolta { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; font-size: 14px; color: var(--k, var(--mute)); background: var(--t, transparent); border-radius: 10px; padding: 7px 12px; }
+
+.vc-passi { list-style: none; margin: 0; padding: 0; counter-reset: vp; }
+.vc-passi li { counter-increment: vp; position: relative; padding: 9px 0 9px 38px; border-bottom: 1px solid var(--line); line-height: 1.6; }
+.vc-passi li:last-child { border-bottom: 0; }
+.vc-passi li::before { content: counter(vp); position: absolute; left: 0; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--t, var(--bg2)); color: var(--k, var(--fg)); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.vc-passo-q { display: block; font-size: 13px; font-weight: 700; color: var(--mute); }
+
+.vc-det { border-left: 2px solid var(--line); padding: 3px 0 3px 13px; margin: 0 0 14px; line-height: 1.6; }
+.vc-det-n { font-weight: 700; }
+.vc-et { font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--mute); margin-bottom: 5px; }
+.vc-nota { border: 1px solid var(--line); border-radius: 10px; padding: 9px 13px; line-height: 1.6; }
+.vc-conf { margin: 10px 0; display: grid; gap: 6px; justify-items: start; }
+
+.vc-numeri { display: flex; flex-wrap: wrap; gap: 8px; }
+.vc-num { border: 1px solid var(--line); border-radius: 10px; padding: 8px 13px; min-width: 120px; }
+.vc-num-v { font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--k, var(--fg)); }
+.vc-num-c { font-size: 13px; color: var(--mute); margin-top: 2px; }
+
+.vc-cit { margin: 0 0 10px; border-left: 3px solid var(--c, var(--line)); padding: 2px 0 2px 13px; }
+.vc-cit p { margin: 0; font-style: italic; }
+.vc-cit cite { font-size: 13px; color: var(--mute); font-style: normal; }
+.vc-stor { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 14.5px; }
+
+.vc-leghe { display: grid; gap: 7px; }
+.vc-lega { display: flex; gap: 11px; align-items: baseline; width: 100%; text-align: left; background: none; border: 1px solid var(--line); border-left: 3px solid var(--c, var(--line)); border-radius: 10px; padding: 9px 12px; font: inherit; color: inherit; cursor: pointer; }
+.vc-lega:hover { border-color: var(--c, var(--fg)); }
+.vc-lega-t { font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); white-space: nowrap; min-width: 11ch; }
+.vc-lega small { display: block; color: var(--mute); font-size: 13.5px; line-height: 1.5; margin-top: 2px; }
+.vc-lega.fuori { border-style: dashed; cursor: default; opacity: 0.75; }
+
+.vc-sp { position: sticky; top: 8px; display: grid; gap: 14px; }
+@media (max-width: 1080px) { .vc-sp { position: static; } }
+.vc-box { border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; }
+.vc-box-t { font-size: 10.5px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+.vc-dato { padding: 6px 0; border-top: 1px solid var(--line); }
+.vc-dato:nth-of-type(2) { border-top: 0; padding-top: 0; }
+.vc-dato.vuoto { opacity: 0.4; }
+.vc-dato-k { display: flex; align-items: center; gap: 6px; font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--mute); }
+.vc-dato-v { font-size: 14.5px; line-height: 1.4; margin-top: 2px; }
+.vc-vai { display: block; width: 100%; text-align: left; background: none; border: 0; border-left: 2px solid var(--line); padding: 5px 0 5px 10px; font: inherit; font-size: 13.5px; color: var(--mute); cursor: pointer; }
+.vc-vai:hover { color: var(--fg); border-left-color: var(--c, var(--fg)); }
+
+.vc-tab-w { overflow-x: auto; }
+.vc-tab { border-collapse: collapse; width: 100%; }
+.vc-tab th, .vc-tab td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; line-height: 1.55; }
+.vc-tab thead th { background: var(--t, var(--bg2)); color: var(--k, var(--fg)); }
+.vc-tab tbody th { font-weight: 400; color: var(--mute); font-size: 13.5px; width: 19%; }
+.vc-caso { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: inherit; cursor: pointer; text-align: left; }
+.vc-caso:hover { text-decoration: underline; }
+
+.vc-da { font-size: 13.5px; color: var(--mute); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 22px; }
+.vc-da code { font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; margin-right: 6px; display: inline-block; margin-bottom: 4px; }
+.vc-pc { display: block; margin-top: 5px; }

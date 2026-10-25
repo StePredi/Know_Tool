@@ -1,0 +1,24 @@
+tipo: voce
+id: gb-russia-1907
+titolo: L'accordo Gran Bretagna-Russia
+sigla: GB-Russia 1907
+genere: evento
+quando: '1907'
+dove: Asia
+chi:
+- Gran Bretagna
+- Russia
+cosa: 'Accordo per appianare i contrasti coloniali in Asia: i britannici ottengono il controllo sull''**Afghanistan**,
+  i russi su parte della **Persia**.'
+conta: Cade l'ultima rivalità fra i tre futuri alleati. L'esito della guerra russo-giapponese aveva già
+  frenato l'espansionismo russo a oriente, e Londra guardava ormai alla Russia come a un possibile baluardo
+  contro l'ascesa dirompente della Germania.
+lega:
+- scheda: triplice-intesa
+  tipo: prosegue
+  perche: è il preludio alla firma, nello stesso anno
+da:
+- l: Q
+  c: 2
+  p: 7
+parole: Afghanistan, Persia, sfere d'influenza

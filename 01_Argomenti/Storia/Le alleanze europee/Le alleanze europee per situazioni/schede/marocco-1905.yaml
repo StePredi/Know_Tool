@@ -1,0 +1,30 @@
+tipo: voce
+id: marocco-1905
+titolo: La prima crisi marocchina
+sigla: Marocco 1905
+genere: evento
+quando: 1905-1906
+dove: Marocco
+chi:
+- Germania
+- Francia
+cosa: Rimasta fuori dalla contesa, nel 1905 la Germania decide di intervenire promettendo il proprio appoggio
+  al sultano Abd al-'Aziz, nell'intento di arginare l'espansione coloniale francese su tutta l'Africa
+  nord-occidentale.
+conta: 'Primo collaudo dei blocchi: la Germania cerca di dividere Francia e Gran Bretagna e ottiene che
+  restino unite, trovandosi quasi sola.'
+svolgimento:
+- quando: 1902 e 1904
+  passo: il governo di Parigi ottiene il nullaosta della Gran Bretagna per intervenire in Marocco, lasciando
+    agli spagnoli le sole regioni settentrionali
+- quando: '1905'
+  passo: intervento tedesco a favore del sultano; la Francia protesta duramente
+- quando: '1906'
+  passo: '**conferenza di Algeciras**: con l''appoggio di Gran Bretagna, Italia, Spagna e Russia, la Francia
+    ottiene che il Marocco sia sottoposto a controllo internazionale e le sia riconosciuto il diritto
+    di riorganizzare e addestrare la polizia marocchina'
+da:
+- l: Q
+  c: 2
+  p: 7
+parole: Algeciras, Abd al-'Aziz

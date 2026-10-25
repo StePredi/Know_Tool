@@ -117,7 +117,87 @@ const regola = z.object({
   confondi: z.array(z.object({ scheda: z.string(), differenza: testo })).default([]),
   perche: testo.optional()
 })
-export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura, regola])
+
+// ── Storia (modello_storia.md) ────────────────────────────────────────────
+// Due tipi nuovi: «voce» (evento, persona, concetto, processo) e «confronto».
+// I cinque campi di contenuto sono quelli con cui il libro apre i capitoli:
+// quando · dove · chi · cosa · perché è importante.
+export const GENERI = ['evento', 'persona', 'concetto', 'processo'] as const
+export type GenereVoce = (typeof GENERI)[number]
+/** i modi in cui due voci si legano; li dichiara il libro a parole */
+export const TIPI_LEGA = ['causa', 'conseguenza', 'prosegue', 'chiude', 'sincronia', 'esempio', 'giustifica', 'confronto', 'usa', 'prepara', 'deformato_in', 'formulato_da'] as const
+export type TipoLega = (typeof TIPI_LEGA)[number]
+export const ETICHETTA_LEGA: Record<TipoLega, string> = {
+  causa: 'causa', conseguenza: 'conseguenza di', prosegue: 'prosegue in', chiude: 'chiude',
+  sincronia: 'nello stesso periodo', esempio: 'per esempio', giustifica: 'giustifica',
+  confronto: 'a confronto in', usa: 'si appoggia a', prepara: 'prepara',
+  deformato_in: 'deformato in', formulato_da: 'formulato da'
+}
+
+/** da dove viene: libro, capitolo, paragrafo. La fonte in chiaro si ricava da _libri.yaml. */
+const riferimento = z.object({
+  l: z.string().min(1),
+  c: z.number().int().positive(),
+  p: z.number().int().positive().optional(),
+  /** «box «Ernst Haeckel»», «riquadro Punti di svolta» */
+  dove: testo.default('')
+})
+const legame = z.object({
+  scheda: z.string().min(1),
+  /** se c'è, la scheda sta in un altro documento: si segnala, non si controlla */
+  documento: z.string().optional(),
+  tipo: z.enum(TIPI_LEGA),
+  perche: testo.default('')
+})
+const comuniStoria = {
+  id: comuni.id,
+  titolo: testo.min(1),
+  /** se manca si usa il titolo */
+  sigla: testo.default(''),
+  /** sulla foglia della mappa: se manca si usa «quando» */
+  comando: testo.default(''),
+  frase: testo.default(''),
+  fonte: testo.default(''),
+  parole: testo.default(''),
+  varianti: z.array(coppiaCodice).default([]),
+  vicine: z.array(z.string()).default([]),
+  da: z.array(riferimento).default([])
+}
+const voceStoria = z.object({
+  tipo: z.literal('voce'),
+  ...comuniStoria,
+  genere: z.enum(GENERI),
+  quando: testo.default(''),
+  dove: testo.default(''),
+  chi: z.array(testo).default([]),
+  cosa: testo.min(1),
+  conta: testo.min(1),
+  /** punto di svolta: qui la vicenda cambia direzione */
+  svolta: z.boolean().default(false),
+  svolgimento: z.array(z.object({ quando: testo.default(''), passo: testo.min(1) })).default([]),
+  elementi: z.array(z.object({ nome: testo.min(1), spiega: testo.min(1) })).default([]),
+  numeri: z.array(z.object({ cosa: testo.min(1), valore: testo.min(1) })).default([]),
+  citazioni: z.array(z.object({ testo: testo.min(1), chi: testo.default(''), dove: testo.default('') })).default([]),
+  storiografia: z.array(z.object({ autore: testo.min(1), titolo: testo.min(1), pagina: testo.default('') })).default([]),
+  errore: testo.optional(),
+  nota: testo.optional(),
+  confondi: z.array(z.object({ scheda: z.string(), differenza: testo })).default([]),
+  lega: z.array(legame).default([])
+})
+const confrontoStoria = z.object({
+  tipo: z.literal('confronto'),
+  ...comuniStoria,
+  /** le stesse domande per tutti i casi */
+  domande: z.array(testo.min(1)).min(2),
+  casi: z.array(z.object({
+    nome: testo.min(1),
+    /** la voce di dettaglio, se esiste */
+    scheda: z.string().optional(),
+    risposte: z.array(testo).min(1)
+  })).min(2)
+})
+
+export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura, regola, voceStoria, confrontoStoria])
 
 const voce = z.object({ gruppo: testo.optional(), schede: z.array(z.string()).min(1) })
 const ramo = z.object({
@@ -154,7 +234,11 @@ export type PinDisegno = z.infer<typeof pinDisegno>
 export type SchedaRegola = z.infer<typeof regola>
 export type EsempioRegola = z.infer<typeof esempioRegola>
 export type PassoRegola = z.infer<typeof passoRegola>
-export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura | SchedaRegola
+export type SchedaVoce = z.infer<typeof voceStoria>
+export type SchedaConfronto = z.infer<typeof confrontoStoria>
+export type Legame = z.infer<typeof legame>
+export type Riferimento = z.infer<typeof riferimento>
+export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura | SchedaRegola | SchedaVoce | SchedaConfronto
 export type RamoSit = z.infer<typeof ramo>
 export type VoceRamo = z.infer<typeof voce>
 export type IndiceSit = z.infer<typeof schemaIndice>
@@ -220,6 +304,13 @@ export function leggiSchedaSit(src: string, nomeFile: string): { scheda?: Scheda
   if (`${r.data.id}.yaml` !== nomeFile) return { errore: `${nomeFile}: l'id «${r.data.id}» non corrisponde al nome del file` }
   if (r.data.tipo === 'regola' && !r.data.frase) r.data.frase = r.data.vedo ?? ''
   if (r.data.tipo === 'regola' && !r.data.comando) r.data.comando = Array.isArray(r.data.formula) ? r.data.formula[0]! : r.data.formula
+  if (r.data.tipo === 'voce' || r.data.tipo === 'confronto') {
+    if (!r.data.sigla) r.data.sigla = r.data.titolo
+    if (r.data.tipo === 'voce') {
+      if (!r.data.comando) r.data.comando = r.data.quando
+      if (!r.data.frase) r.data.frase = r.data.cosa
+    } else if (!r.data.frase) r.data.frase = r.data.domande.join(' · ')
+  }
   return { scheda: r.data }
 }
 
@@ -252,6 +343,19 @@ export function controllaSituazioni(indice: IndiceSit, schede: Record<string, Sc
     if (s.tipo === 'regola') {
       for (const c of s.confondi) if (!schede[c.scheda]) av.push(`«${s.id}»: «confondi» cita la scheda «${c.scheda}» che non esiste.`)
       for (const e of s.esempi) for (const p of e.passi) if (typeof p !== 'string' && p.scheda && !schede[p.scheda]) av.push(`«${s.id}»: un passo cita la scheda «${p.scheda}» che non esiste.`)
+    }
+    if (s.tipo === 'voce') {
+      for (const c of s.confondi) if (!schede[c.scheda]) av.push(`«${s.id}»: «confondi» cita la scheda «${c.scheda}» che non esiste.`)
+      for (const g of s.lega) {
+        if (g.documento) continue // un collegamento verso un altro documento si segnala solo quando quel documento c'è
+        if (!schede[g.scheda]) av.push(`«${s.id}»: il collegamento «${ETICHETTA_LEGA[g.tipo]}» cita la scheda «${g.scheda}» che non esiste.`)
+      }
+    }
+    if (s.tipo === 'confronto') {
+      for (const c of s.casi) {
+        if (c.risposte.length !== s.domande.length) av.push(`«${s.id}»: il caso «${c.nome}» ha ${c.risposte.length} risposte ma le domande sono ${s.domande.length}.`)
+        if (c.scheda && !schede[c.scheda]) av.push(`«${s.id}»: il caso «${c.nome}» cita la scheda «${c.scheda}» che non esiste.`)
+      }
     }
     if (s.tipo === 'ricetta') {
       const usati = new Set<string>()

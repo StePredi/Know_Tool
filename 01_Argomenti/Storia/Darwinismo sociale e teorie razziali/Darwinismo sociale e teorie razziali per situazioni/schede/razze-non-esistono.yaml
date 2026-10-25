@@ -1,0 +1,19 @@
+tipo: voce
+id: razze-non-esistono
+titolo: Le razze umane non esistono
+sigla: Una sola specie
+genere: concetto
+quando: oggi
+cosa: 'La genetica ha stabilito che le razze umane **semplicemente non esistono**: tutti gli esseri umani
+  appartengono alla **stessa specie**. Nell''Ottocento le scienze naturali muovevano i primi passi e questo
+  concetto, fondamentale, non era ancora chiaro.'
+conta: 'L''uso ideologico delle teorie darwiniane non era né scienza naturale né scienza sociale: era
+  **propaganda razzista**. È il giudizio con cui si chiude l''argomento.'
+da:
+- l: T
+  c: 16
+  p: 4
+- l: Q
+  c: 1
+  p: 6
+parole: genetica, una sola specie

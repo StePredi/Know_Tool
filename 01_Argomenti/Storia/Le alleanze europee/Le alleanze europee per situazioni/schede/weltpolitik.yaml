@@ -1,0 +1,49 @@
+tipo: voce
+id: weltpolitik
+titolo: La Weltpolitik
+sigla: Weltpolitik
+genere: concetto
+quando: dal 1890
+dove: Germania
+chi:
+- Guglielmo II
+cosa: Letteralmente «politica mondiale». **Aggressiva politica estera**, alimentata dal dilagare del **militarismo**
+  nel paese e volta ad assicurare alla Germania una posizione di rilievo sullo scenario internazionale,
+  in competizione con le principali potenze imperialiste dell'epoca.
+conta: 'Ha effetti ambivalenti: da una parte afferma la potenza nascente della Germania e ne accresce
+  il prestigio, dall''altra manda in crisi il complesso **sistema di pesi e contrappesi** architettato
+  da Bismarck. Urtando Londra e Parigi nello stesso periodo, le fa avvicinare fra loro: l''effetto è l''opposto
+  di quello cercato.'
+svolgimento:
+- passo: Guglielmo II non può ambire ai vasti territori già in mano a britannici e francesi, ma ne urta
+    gli interessi in più occasioni
+- quando: '1896'
+  passo: '**telegramma di solidarietà a Kruger**: incrina le relazioni con Londra'
+- quando: '1897'
+  passo: 'supporto ai turchi contro la Grecia, sostenuta dai britannici: le relazioni peggiorano'
+- quando: dal 1897
+  passo: potenziamento della flotta militare
+- passo: 'risultato: si appianano le rivalità fra Francia e Gran Bretagna, e fra quest''ultima e la Russia'
+- quando: '1908'
+  passo: il sostegno all'Austria-Ungheria sulla Bosnia segna l'allontanamento diplomatico definitivo fra
+    Germania e Russia
+elementi:
+- nome: Il costo interno
+  spiega: l'ampliamento della flotta garantì ricchi introiti alle industrie siderurgiche e metallurgiche,
+    ma incise negativamente sul bilancio dello Stato. Una vignetta del 1906 sul «Der Wahre Jacob» raffigura
+    la tassazione per la flotta come un vorace drago marino.
+storiografia:
+- autore: Michael Stürmer
+  titolo: Che cosa fu la Weltpolitik tedesca?
+  pagina: p. 69
+lega:
+- scheda: kruger-1896
+  tipo: esempio
+- scheda: entente-1904
+  tipo: causa
+  perche: l'attivismo tedesco rende impensabile che Londra resti isolata
+da:
+- l: Q
+  c: 2
+  p: 2
+parole: Weltpolitik, militarismo, flotta

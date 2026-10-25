@@ -2,11 +2,13 @@
 
 ## Fase attuale
 
-**Matematica rifatta dentro «Per situazioni» (2026-10-21): Derivate pronto, Formulario nell'app. L'app non è ancora stata provata a fondo su Windows (`npm run dev`).**
+**Storia dentro «Per situazioni» (2026-10-25): modello approvato, schede `voce` e `confronto` nell'app, due argomenti veri. Da provare su Windows (`npm run dev`).**
 
 ---
 
 ## Fatto
+
+- Storia (2026-10-25): modello nuovo dentro «Per situazioni». Due tipi di scheda, `voce` (evento / persona / concetto / processo, con i cinque campi dei nuclei del libro: quando, dove, chi, cosa, perche' conta) e `confronto` (le stesse domande poste a piu' casi); collegamenti `lega` con tipo e motivo; flag `svolta`; sezioni di dettaglio `svolgimento`, `elementi`, `numeri`, `citazioni`, `storiografia`; campo `da` (libro, capitolo, paragrafo) e file di materia `_libri.yaml`; **grassetto** e *corsivo* nei testi. Specifica in `specifiche/modello_storia.md`, prove a mano in `specifiche/prove/storia/`, mockup in `03_Demo/storia/storia.html`. Contenuti di prova: `01_Argomenti/Storia/` con «Le alleanze europee» (18 schede) e «Darwinismo sociale e teorie razziali» (12 schede). 9 test nuovi in `tests/storia.test.ts`. Da provare su Windows
 
 - «+ Nuovo» rifatto (2026-10-16): una finestra con modelli a sinistra e, a destra, cosa crea, nome e cartella di destinazione; niente carte spente; tolta la carta «Mappa cronologica». Da provare su Windows
 
@@ -60,6 +62,6 @@
 
 ## In attesa
 
-- Inglese, Storia e altre materie (un tool alla volta, quando servono)
+- Inglese e altre materie (un tool alla volta, quando servono)
 - **Matematica (2026-10-21).** Spec approvata, schema e vista scheda `regola`, Formulario, Derivate (22 schede, 10 esercizi, esempi controllati coi numeri). Il vecchio codice è in `99_Archivio/Obsoleti/2026-10-21/`. Prossimo: Limiti e gli altri argomenti dalla sessione di studio; figure per i grafici (aggiunta 3) e passi con motivazione per le dimostrazioni (aggiunta 4) quando servono.
 - Sistemi e Reti: argomento `Python` creato (fonti e `_scheda.md`), documenti da fare dopo la scelta dei moduli.

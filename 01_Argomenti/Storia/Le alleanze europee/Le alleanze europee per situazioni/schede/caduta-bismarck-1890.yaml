@@ -1,0 +1,45 @@
+tipo: voce
+id: caduta-bismarck-1890
+titolo: Le dimissioni di Bismarck
+sigla: Cade Bismarck
+genere: evento
+quando: 18 marzo 1890
+dove: Germania
+chi:
+- Otto von Bismarck
+- Guglielmo II
+cosa: Dopo vent'anni alla guida del paese, il **cancelliere** è costretto a **dimettersi** dal nuovo imperatore,
+  salito al trono nel 1888 e deciso ad accentrare tutto il potere nelle proprie mani.
+conta: Con lui finisce la **politica degli equilibri**, che aveva influenzato in modo decisivo gli assetti
+  europei. Da qui la Germania diventa aggressiva e spinge, senza volerlo, i propri avversari a cercarsi
+  fra loro.
+svolta: true
+svolgimento:
+- quando: '1888'
+  passo: Guglielmo II di Hohenzollern sale al trono
+- passo: profonda distanza di opinioni fra l'imperatore e il cancelliere, che aveva sempre perseguito
+    il mantenimento degli equilibri internazionali
+- quando: 18 marzo 1890
+  passo: Bismarck si dimette, dopo vent'anni in cui aveva retto le sorti del paese
+elementi:
+- nome: Chi è Guglielmo II
+  spiega: sostenitore della modernità e della tecnologia, convinto militarista, vuole essere protagonista
+    assoluto della politica internazionale.
+- nome: Che Germania trova
+  spiega: i partiti di massa acquistano importanza, in particolare il **Partito socialdemocratico** (*SPD*),
+    che Bismarck aveva tentato di arrestare sia con misure repressive sia con un sistema di assistenza
+    e previdenza sociali all'avanguardia in Europa.
+citazioni:
+- testo: '*Ritratto di Guglielmo II*'
+  chi: Otto von Bismarck
+  dove: Documento, nel libro
+lega:
+- scheda: weltpolitik
+  tipo: conseguenza
+- scheda: equilibri-bismarck
+  tipo: chiude
+da:
+- l: Q
+  c: 2
+  p: 2
+parole: Bismarck, Guglielmo II, cancelliere, SPD

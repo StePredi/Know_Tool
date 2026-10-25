@@ -1,0 +1,22 @@
+tipo: voce
+id: duplice-1879
+titolo: Il patto Germania-Austria
+sigla: Duplice 1879
+genere: evento
+quando: '1879'
+dove: Europa centrale
+chi:
+- Germania
+- Austria-Ungheria
+cosa: Patto in **chiave antirussa** fra l'Impero tedesco e l'Austria-Ungheria.
+conta: 'È il primo mattone del sistema di Bismarck: lega l''Austria alla Germania e isola la Russia, che
+  coltivava ambizioni sui Balcani.'
+lega:
+- scheda: triplice-1882
+  tipo: prosegue
+  perche: tre anni dopo vi entra l'Italia
+da:
+- l: Q
+  c: 2
+  p: 5
+parole: Duplice, antirussa

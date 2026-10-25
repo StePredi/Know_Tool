@@ -1,0 +1,30 @@
+tipo: voce
+id: tunisi-1881
+titolo: La Francia occupa la Tunisia
+sigla: Tunisi 1881
+genere: evento
+quando: '1881'
+dove: Africa settentrionale
+chi:
+- Francia
+- Italia
+cosa: La Francia occupa la **Tunisia**, che gli italiani consideravano **area di propria pertinenza**
+  per la vicinanza geografica e per la comunità italiana già presente.
+conta: Coglie l'Italia impreparata e rompe i **rapporti italo-francesi**, con una **guerra commerciale**
+  dannosa per le esportazioni agricole. È il motivo per cui l'Italia, l'anno dopo, cerca le potenze centrali.
+elementi:
+- nome: Prima del 1881
+  spiega: 'la Sinistra al potere manteneva rapporti equilibrati con tutte le grandi potenze, e con la
+    Francia della Terza Repubblica i legami erano particolarmente stretti: era un riferimento politico
+    per molti democratici italiani.'
+- nome: Dopo
+  spiega: guerra doganale fra i due paesi, inasprita poi da Crispi.
+lega:
+- scheda: triplice-1882
+  tipo: causa
+  perche: per non restare isolata, l'Italia si avvicina a Germania e Austria
+da:
+- l: T
+  c: 18
+  p: 1
+parole: Tunisia, guerra doganale

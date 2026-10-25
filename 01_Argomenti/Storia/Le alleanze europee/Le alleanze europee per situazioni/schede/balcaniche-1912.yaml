@@ -1,0 +1,37 @@
+tipo: voce
+id: balcaniche-1912
+titolo: Le guerre balcaniche
+sigla: Balcaniche 1912-13
+genere: evento
+quando: 1912-1913
+dove: Balcani
+chi:
+- Lega balcanica
+- Impero ottomano
+- Bulgaria
+- Serbia
+cosa: 'Grecia, Serbia, Montenegro e Bulgaria, incoraggiate dalla Russia, stringono un''alleanza antiottomana:
+  la **Lega balcanica**. Ne seguono due guerre in meno di un anno.'
+conta: La Serbia esce vincitrice e ingrandita, e persegue un programma politico nazionalista — la creazione
+  di una **Grande Serbia** che riunisca anche i serbi dell'Impero austro-ungarico. Gli interessi del piccolo
+  Stato balcanico entrano in rotta di collisione con quelli asburgici.
+svolgimento:
+- quando: ottobre 1912 - maggio 1913
+  passo: 'prima guerra balcanica: l''Impero ottomano è duramente sconfitto e costretto a cedere tutti
+    i suoi territori europei, con l''eccezione di Istanbul e dell''area circostante'
+- passo: gli Stati balcanici non trovano accordo sulla spartizione della Macedonia, contesa fra Serbia,
+    Grecia e Bulgaria
+- quando: giugno-agosto 1913
+  passo: 'seconda guerra balcanica: Serbia, Montenegro e Grecia contro la Bulgaria, attaccata anche dall''Impero
+    ottomano e dalla Romania; i bulgari cedono gran parte dei territori conquistati'
+- quando: 1912-1914
+  passo: nasce l'Albania; il riconoscimento internazionale arriva nel 1914, per volontà austro-ungarica
+    e italiana, per impedire che se ne impadronisse la Serbia
+lega:
+- scheda: polveriera
+  tipo: conseguenza
+da:
+- l: Q
+  c: 2
+  p: 7
+parole: Lega balcanica, Macedonia, Albania, Grande Serbia

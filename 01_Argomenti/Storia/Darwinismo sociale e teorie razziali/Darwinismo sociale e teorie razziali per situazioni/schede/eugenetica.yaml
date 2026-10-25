@@ -1,0 +1,23 @@
+tipo: voce
+id: eugenetica
+titolo: Le teorie eugenetiche
+sigla: Eugenetica
+genere: concetto
+quando: fine Ottocento - Novecento
+dove: Europa e Stati Uniti
+cosa: Insieme di teorie e pratiche medico-scientifiche che si prefiggono di **selezionare in modo arbitrario**
+  le caratteristiche di una popolazione, favorendo la riproduzione di soggetti considerati desiderabili
+  e prevenendo la nascita di soggetti «indesiderabili», perché malati o considerati inferiori.
+conta: 'È il punto in cui l''idea diventa pratica: ogni uomo avrebbe il dovere di preservare la **purezza
+  dei geni** della sua comunità, controllando la procreazione. Attuata nei campi di sterminio nazisti,
+  fu però sostenuta e applicata nel Novecento anche in paesi democratici come gli Stati Uniti e la Svezia.'
+lega:
+- documento: totalitarismi
+  scheda: nazismo
+  tipo: prosegue
+  perche: 'il filo arriva al programma nazista: argomento di un altro documento'
+da:
+- l: Q
+  c: 1
+  p: 6
+parole: eugenetica, purezza della razza

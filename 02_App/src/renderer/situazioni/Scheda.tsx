@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import type { SchedaFigura, SchedaPrimaDopo, SchedaRegola, SchedaRicetta, Situazioni } from '@shared/situazioni'
+import type { SchedaConfronto, SchedaFigura, SchedaPrimaDopo, SchedaRegola, SchedaRicetta, SchedaVoce, Situazioni } from '@shared/situazioni'
 import { Icona } from '../componenti/Icona'
 import { useStore } from '../store'
 import { Cod, testoPuro } from './Codice'
@@ -7,6 +7,7 @@ import { codiceDaCopiare, righeCodice } from './righe'
 import { DisegnoScheda } from './Figura'
 import { Comando, TestoMat } from './Formula'
 import { Regola } from './Regola'
+import { Confronto, Testo, Voce } from './Voce'
 import { ModificaScheda } from './ModificaScheda'
 import { useSit, VISTA0 } from './stato'
 import type { InfoScheda } from './util'
@@ -30,6 +31,7 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
   const inf = ctx.info[id]!
   const r = ctx.dati.indice.rami[inf.bi]!
   const ricetta = s.tipo !== 'prima_dopo'
+  const storia = s.tipo === 'voce' || s.tipo === 'confronto'
   return (
     <>
       <div className="s-bar">
@@ -41,14 +43,16 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
       </div>
       <div className="s-head">
         <div>
-          <div className="s-kind">{tipo}{s.fonte ? ` · ${s.fonte}` : ''}</div>
+          <div className="s-kind">{tipo}{s.tipo === 'voce' && s.svolta ? ' · punto di svolta' : ''}{s.fonte ? ` · ${s.fonte}` : ''}</div>
           <h1>{s.titolo}</h1>
-          {s.tipo === 'regola' ? <span className="s-cn rg-cn"><Comando s={s} /></span> : <span className="s-cn">{s.comando}</span>}
+          {storia ? null : s.tipo === 'regola' ? <span className="s-cn rg-cn"><Comando s={s} /></span> : <span className="s-cn">{s.comando}</span>}
         </div>
-        <div className="s-when">
-          <b>{s.tipo === 'regola' ? 'Cosa vedo' : ricetta ? 'Quando serve' : 'A cosa serve'}</b>
-          <p>{s.tipo === 'prima_dopo' ? s.uso : s.tipo === 'regola' ? <TestoMat s={s.frase} /> : s.quando}</p>
-        </div>
+        {!storia && (
+          <div className="s-when">
+            <b>{s.tipo === 'regola' ? 'Cosa vedo' : ricetta ? 'Quando serve' : 'A cosa serve'}</b>
+            <p>{s.tipo === 'prima_dopo' ? s.uso : s.tipo === 'regola' ? <TestoMat s={s.frase} /> : s.quando}</p>
+          </div>
+        )}
       </div>
     </>
   )
@@ -88,6 +92,12 @@ function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
             ))}
           </div>
         </>
+      )}
+      {(s.tipo === 'voce' || s.tipo === 'confronto') && s.da.length > 0 && (
+        <p className="vc-da">
+          Dal libro: {s.da.map((d, i) => <code key={i}>{`${d.l} cap. ${d.c}${d.p ? ` par. ${d.p}` : ''}${d.dove ? ` (${d.dove})` : ''}`}</code>)}
+          {s.parole ? <span className="vc-pc">parole chiave: {s.parole}</span> : null}
+        </p>
       )}
       <div className="s-mark">
         <button
@@ -298,6 +308,28 @@ function RegolaScheda({ ctx, s }: { ctx: Ctx; s: SchedaRegola }): ReactNode {
   )
 }
 
+function VoceScheda({ ctx, s }: { ctx: Ctx; s: SchedaVoce }): ReactNode {
+  const colore = (id: string): string | undefined => (ctx.info[id] ? ctx.dati.indice.rami[ctx.info[id]!.bi]!.colore : undefined)
+  return (
+    <>
+      <Testata ctx={ctx} id={s.id} tipo={s.genere[0]!.toUpperCase() + s.genere.slice(1)} />
+      <Voce rel={ctx.rel} dati={ctx.dati} s={s} colore={colore} />
+      <Piede ctx={ctx} id={s.id} />
+    </>
+  )
+}
+
+function ConfrontoScheda({ ctx, s }: { ctx: Ctx; s: SchedaConfronto }): ReactNode {
+  const colore = (id: string): string | undefined => (ctx.info[id] ? ctx.dati.indice.rami[ctx.info[id]!.bi]!.colore : undefined)
+  return (
+    <>
+      <Testata ctx={ctx} id={s.id} tipo="Confronto" />
+      <Confronto rel={ctx.rel} dati={ctx.dati} s={s} colore={colore} />
+      <Piede ctx={ctx} id={s.id} />
+    </>
+  )
+}
+
 export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const s = ctx.dati.schede[id]
   const ref = useRef<HTMLDivElement>(null)
@@ -308,7 +340,12 @@ export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const r = ctx.dati.indice.rami[ctx.info[id]!.bi]!
   return (
     <div ref={ref} data-c={r.colore}>
-      {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} /> : s.tipo === 'figura' ? <Figura key={id} ctx={ctx} s={s} /> : s.tipo === 'regola' ? <RegolaScheda key={id} ctx={ctx} s={s} /> : <PrimaDopo key={id} ctx={ctx} s={s} />}
+      {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} />
+        : s.tipo === 'figura' ? <Figura key={id} ctx={ctx} s={s} />
+        : s.tipo === 'regola' ? <RegolaScheda key={id} ctx={ctx} s={s} />
+        : s.tipo === 'voce' ? <VoceScheda key={id} ctx={ctx} s={s} />
+        : s.tipo === 'confronto' ? <ConfrontoScheda key={id} ctx={ctx} s={s} />
+        : <PrimaDopo key={id} ctx={ctx} s={s} />}
     </div>
   )
 }

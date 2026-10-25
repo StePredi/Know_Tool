@@ -1,0 +1,26 @@
+tipo: voce
+id: missione-civilizzatrice
+titolo: La «missione civilizzatrice dell'uomo bianco»
+sigla: Missione civilizzatrice
+genere: concetto
+quando: dal 1870 circa
+dove: Europa e colonie
+cosa: 'Retorica secondo cui gli europei, in quanto appartenenti a una presunta civiltà superiore, avrebbero
+  il **dovere morale di civilizzare** le popolazioni indigene degli altri continenti. Si fonda sulle **teorie
+  razziali**: la supremazia culturale degli europei avrebbe così una giustificazione biologica.'
+conta: 'È il punto in cui l''idea diventa politica estera: gli obiettivi economici e di prestigio internazionale,
+  perseguiti con la forza delle armi, vengono motivati come un dovere.'
+elementi:
+- nome: Il contesto
+  spiega: nazionalismo esasperato e aggressivo, espansione coloniale dal 1870 circa, bisogno di nemici
+    esterni e interni per ottenere consensi e contrastare la diffusione del socialismo fra i lavoratori.
+- nome: Il manifesto del «Giardino zoologico d'acclimatazione»
+  spiega: 'Parigi, 1892: vi venivano esibiti rappresentanti del popolo somalo.'
+lega:
+- scheda: darwinismo-sociale
+  tipo: usa
+da:
+- l: Q
+  c: 1
+  p: 6
+parole: missione civilizzatrice, imperialismo, nazionalismo

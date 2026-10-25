@@ -1,0 +1,39 @@
+tipo: voce
+id: boeri-1899
+titolo: La guerra anglo-boera
+sigla: Boeri 1899
+genere: evento
+quando: 1899-1902
+dove: Sudafrica
+chi:
+- Gran Bretagna
+- boeri
+- Germania
+cosa: 'Guerra contro i **boeri**, coloni di origine olandese del **Transvaal** e dell''**Orange**. Londra
+  contava di vincere rapidamente: fu insidiosa e lunga, anche per l''appoggio che i boeri ricevettero
+  dalla Germania, e si concluse nel 1902 con una sofferta vittoria britannica.'
+conta: Mostra alle altre potenze, e soprattutto alla Germania, che la Gran Bretagna è vulnerabile; e convince
+  Londra a modernizzare l'esercito e a **uscire dall'isolamento** in cui stava dai tempi della regina
+  Vittoria, cercando alleati in funzione antitedesca.
+svolgimento:
+- quando: 1830-1850
+  passo: 'il «**Grande trek**»: la minoranza boera migra dopo l''espansione britannica nella regione del
+    Capo e fonda Transvaal e Orange'
+- passo: i due Stati si rivelano ricchissimi di giacimenti d'oro e diamanti, e diventano oggetto delle
+    mire britanniche e tedesche
+- quando: '1899'
+  passo: scoppia il conflitto
+- quando: '1902'
+  passo: vittoria britannica, sofferta
+elementi:
+- nome: Mafeking, Kimberley, Ladysmith, Colenso
+  spiega: le principali battaglie, nella carta del libro
+lega:
+- scheda: entente-1904
+  tipo: causa
+  perche: è la spinta che porta Londra a cercare la Francia
+da:
+- l: Q
+  c: 2
+  p: 4
+parole: boeri, Transvaal, Orange, Grande trek, isolamento

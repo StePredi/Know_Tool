@@ -1,0 +1,42 @@
+tipo: voce
+id: haeckel
+titolo: Ernst Haeckel
+sigla: Haeckel
+genere: persona
+quando: '1868'
+dove: Germania
+chi:
+- Ernst Haeckel
+cosa: 'In *Storia naturale della creazione* classifica gerarchicamente le «razze» umane dal più basso
+  al più alto grado di evoluzione: alla base dell''albero filogenetico alcune popolazioni africane e micronesiane,
+  al vertice la **razza romana** e quella **germanica**.'
+conta: È il passaggio dal pregiudizio alla finta prova scientifica. Le sue convinzioni erano il prodotto
+  di un'applicazione delle teorie evoluzionistiche al genere umano, secondo una logica che all'epoca era
+  ritenuta coerente; ma l'errore di impostazione finì per «giustificare scientificamente» la superiorità
+  di un'etnia sull'altra e per dar credito a chi riteneva che le razze superiori avessero il diritto di
+  governare quelle inferiori.
+elementi:
+- nome: Il timore della medicina
+  spiega: Haeckel temeva che la medicina moderna, il cui obiettivo era guarire e prolungare la vita di
+    tutti i pazienti, avrebbe avuto effetti nocivi perché avrebbe impedito la selezione naturale.
+- nome: La ripresa nazista
+  spiega: 'solo pochi decenni dopo le sue teorie vennero riprese e distorte dal nazismo: il primato della
+    razza germanica fu affermato dagli scienziati nazisti, che operarono classificazioni dividendo l''umanità
+    in esseri umani e subumani.'
+lega:
+- scheda: eugenetica
+  tipo: prepara
+- scheda: gobineau
+  tipo: sincronia
+  perche: stessi anni, due discipline diverse, stessa direzione
+nota: Haeckel, pur citando l'uso spartano dell'abbandono dei bambini malati, deformi o deboli, non lo
+  considerò mai un modello selettivo da incoraggiare.
+da:
+- l: T
+  c: 16
+  p: 4
+- l: Q
+  c: 1
+  p: 6
+  dove: box «Ernst Haeckel e la deriva del darwinismo sociale»
+parole: Haeckel, albero filogenetico

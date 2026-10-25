@@ -1,0 +1,51 @@
+tipo: voce
+id: antisemitismo
+titolo: L'antisemitismo moderno
+sigla: Antisemitismo
+genere: concetto
+quando: XIX secolo
+dove: Europa
+cosa: Il termine «*antisemita*» nasce nel XIX secolo e, fin dalle origini, non indica l'odio per tutti
+  i semiti ma specificamente quello nei confronti degli ebrei.
+conta: All'antigiudaismo popolare, di origine religiosa e medievale, si aggiungono le ragioni scaturite
+  dalle teorie del **razzismo scientifico** e del **darwinismo sociale**, che facevano degli «ebrei semiti»
+  una razza inferiore a quella ariana.
+svolgimento:
+- passo: dalla fine del XVIII secolo gli ebrei ottengono l'emancipazione in molte società europee e sono
+    liberati dai ghetti
+- passo: per la prima volta possono ambire a ruoli prima preclusi; la presenza concorrenziale in posizioni
+    di potere origina una nuova forma di intolleranza
+- passo: alla fine dell'Ottocento, con i nazionalismi radicati e reazionari, l'idea che una minoranza
+    interna abbia una «doppia fedeltà» appare un ostacolo alla coesione nazionale
+- passo: il pretesto per violente campagne d'odio, persecuzioni e **pogrom**
+elementi:
+- nome: L'accusa
+  spiega: gli antisemiti denunciavano presunte cospirazioni di un'internazionale ebraica per il controllo
+    economico e politico del mondo.
+- nome: L'antigiudaismo precedente
+  spiega: 'alimentato dalla Chiesa nel Medioevo: gli ebrei accusati di diffondere epidemie e carestie,
+    e di essere «deicidi».'
+numeri:
+- cosa: emancipazione in Francia
+  valore: '1791'
+- cosa: nei Paesi Bassi
+  valore: '1834'
+- cosa: in Italia
+  valore: '1861'
+- cosa: in Gran Bretagna
+  valore: '1858'
+- cosa: in Austria
+  valore: '1867'
+confondi:
+- scheda: gobineau
+  differenza: il razzismo di Gobineau è una teoria generale sulle razze; l'antisemitismo è l'applicazione
+    a un gruppo preciso, con radici religiose molto più antiche
+da:
+- l: Q
+  c: 1
+  p: 6
+- l: Q
+  c: 2
+  p: 6
+  dove: box «L'antisemitismo in età moderna»
+parole: antisemitismo, antigiudaismo, pogrom, doppia fedeltà

@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storia — mockup del modello</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f4f5f7; --fg:#15181d; --fg2:#4a515e;
+  --bordo:#15181d; --bordo2:#c9ced8;
+  --acc:#1b4ed8; --ok:#0a7d4b; --att:#b4530a; --no:#c0392b;
+  --L:0.94; --C:0.055; --Lk:0.38; --Ck:0.13; --r:10px;
+}
+:root[data-tema="scuro"]{
+  --bg:#12151a; --bg2:#1a1f27; --fg:#eef1f5; --fg2:#b3bccb;
+  --bordo:#eef1f5; --bordo2:#39404d;
+  --acc:#7fa5ff; --ok:#4fd39a; --att:#f0a35c; --no:#ff7b6b;
+  --L:0.30; --C:0.06; --Lk:0.88; --Ck:0.10;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Atkinson Hyperlegible",system-ui,sans-serif; font-size:16px; line-height:1.55}
+button{font:inherit; color:inherit; cursor:pointer}
+h1,h2,h3{letter-spacing:-.015em}
+
+header{position:sticky; top:0; z-index:20; background:var(--bg); border-bottom:1px solid var(--bordo2)}
+.r{display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:9px 16px}
+.r-dove{border-bottom:1px solid var(--bordo2)}
+.r-fai{gap:22px; padding-top:7px; padding-bottom:7px}
+body.senza-mappa .r-fai{display:none}
+body.senza-mappa .guida{border-top:0}
+.marchio{font-weight:700; white-space:nowrap}
+.briciole{display:flex; align-items:center; gap:8px; min-width:0}
+.materia{font-size:14px; color:var(--fg2)}
+.sep{color:var(--bordo2)}
+.sel{font:inherit; font-size:15px; font-weight:700; color:var(--fg); background:var(--bg);
+  border:1px solid var(--bordo2); border-radius:var(--r); padding:5px 30px 5px 11px;
+  appearance:none; cursor:pointer; max-width:46vw; text-overflow:ellipsis;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 15px) 53%, calc(100% - 10px) 53%;
+  background-size:5px 5px,5px 5px; background-repeat:no-repeat}
+.sel:hover{border-color:var(--bordo)}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+.sp{flex:1}
+.fam{display:flex; align-items:center; gap:9px; min-width:0}
+.fam-t{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--fg2); white-space:nowrap}
+.gruppo{display:flex; gap:0; flex-wrap:wrap}
+.gruppo .btn{border-radius:0; margin-left:-1px}
+.gruppo .btn:first-child{border-radius:var(--r) 0 0 var(--r); margin-left:0}
+.gruppo .btn:last-child{border-radius:0 var(--r) var(--r) 0}
+.gruppo .btn:only-child{border-radius:var(--r)}
+.btn{background:var(--bg); border:1px solid var(--bordo2); padding:6px 12px; font-size:14px;
+  white-space:nowrap; border-radius:var(--r); position:relative}
+.btn:hover{border-color:var(--bordo); z-index:1}
+.btn[aria-pressed="true"]{background:var(--fg); color:var(--bg); border-color:var(--fg); z-index:2}
+.btn.fantasma{border-color:transparent; color:var(--fg2); font-size:13px}
+.btn.fantasma:hover{border-color:var(--bordo2); color:var(--fg)}
+.btn.fantasma[aria-pressed="true"]{background:var(--fg); color:var(--bg)}
+.btn.int{display:inline-flex; align-items:center; gap:8px}
+.led{width:8px; height:8px; border-radius:50%; border:1px solid var(--fg2); flex:none}
+.btn.int[aria-pressed="true"] .led{background:var(--att); border-color:var(--att)}
+.btn:focus-visible,.sel:focus-visible,.foglia:focus-visible,.lega:focus-visible,
+.chip-nav:focus-visible,.vv-t:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+.guida{display:flex; gap:22px; flex-wrap:wrap; padding:9px 16px 12px;
+  border-top:1px dashed var(--bordo2); font-size:14px}
+.guida div{max-width:60ch}
+.guida b{display:block; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--fg2)}
+@media (max-width:760px){
+  .r-fai{gap:14px}
+  .fam-t{display:none}
+  .fam{border-left:1px solid var(--bordo2); padding-left:12px}
+  .fam:first-child{border-left:0; padding-left:0}
+}
+main{display:grid; grid-template-columns:minmax(250px,310px) 1fr; align-items:start}
+body.senza-mappa main{grid-template-columns:1fr}
+@media (max-width:880px){ main{grid-template-columns:1fr} }
+
+.mappa{padding:14px 12px 40px; border-right:1px solid var(--bordo2);
+  position:sticky; top:118px; max-height:calc(100vh - 104px); overflow:auto}
+@media (max-width:880px){ .mappa{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--bordo2)} }
+.centro{border:2px solid var(--bordo); border-radius:var(--r); padding:9px 12px;
+  font-weight:700; text-align:center; margin-bottom:12px}
+.ramo{margin-bottom:6px; border-left:3px solid var(--t); padding-left:9px}
+.ramo-t{display:flex; align-items:center; gap:7px; width:100%; text-align:left;
+  background:var(--tc); color:var(--tk); border:1px solid transparent;
+  border-radius:8px; padding:5px 9px; font-weight:700; font-size:14px}
+.ramo-t:hover{border-color:var(--t)}
+.ramo-t .anni{font-weight:400; opacity:.75; font-size:12px; margin-left:auto}
+.ramo-t .piu{font-weight:400; opacity:.6}
+.foglie{display:flex; flex-direction:column; gap:3px; margin:5px 0 10px}
+.foglia{display:flex; align-items:baseline; gap:7px; text-align:left; width:100%;
+  background:none; border:1px solid transparent; border-radius:7px; padding:4px 8px; font-size:14px}
+.foglia:hover{background:var(--bg2); border-color:var(--bordo2)}
+.foglia.sel{background:var(--tc); color:var(--tk); border-color:var(--t)}
+.foglia .n{font-size:11px; opacity:.6; min-width:1.1em}
+.foglia .q{margin-left:auto; font-size:11px; opacity:.6; white-space:nowrap}
+.pall{width:7px;height:7px;border-radius:50%;background:var(--t);flex:none}
+.svolta-m{color:var(--att); font-weight:700}
+
+.pannello{padding:18px 22px 80px; max-width:106ch}
+.testa{border-bottom:1px solid var(--bordo2); padding-bottom:12px}
+.tipo{font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--fg2)}
+h1{font-size:28px; line-height:1.18; margin:3px 0 12px}
+.meta{display:flex; flex-wrap:wrap; gap:7px}
+.chip{border:1px solid var(--bordo2); border-radius:999px; padding:4px 12px; font-size:14px;
+  display:inline-flex; gap:6px; align-items:baseline}
+.chip b{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg2)}
+.chip.vuoto{opacity:.4; font-style:italic}
+
+.scheda-g{display:grid; grid-template-columns:1fr 232px; gap:30px; align-items:start}
+@media (max-width:1100px){ .scheda-g{grid-template-columns:1fr} }
+.corpo{min-width:0}
+.spalla{position:sticky; top:138px; display:flex; flex-direction:column; gap:16px; padding-top:18px}
+@media (max-width:1100px){ .spalla{position:static; order:-1; padding-top:12px} }
+.sp-blocco{border:1px solid var(--bordo2); border-radius:var(--r); padding:11px 13px}
+.sp-t{font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--fg2); margin-bottom:8px}
+.dato{padding:5px 0; border-top:1px solid var(--bordo2)}
+.dato:first-of-type{border-top:0; padding-top:0}
+.dato.vuoto{opacity:.4}
+.dato-k{font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--fg2)}
+.dato-v{font-size:14.5px; line-height:1.4}
+.sp-voce{display:block; width:100%; text-align:left; background:none; border:0;
+  border-left:2px solid var(--bordo2); padding:4px 0 4px 10px; font-size:13.5px; color:var(--fg2)}
+.sp-voce:hover{color:var(--fg); border-left-color:var(--fg)}
+.sp-voce:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+.sez{padding-top:20px; scroll-margin-top:160px}
+.sez-t{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--fg2);
+  margin:0 0 10px; font-weight:700}
+.blocco{margin:0 0 14px}
+.blocco p{margin:0}
+.et{font-size:11.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--fg2); margin-bottom:3px}
+.conta{border-left:3px solid var(--acc); padding:2px 0 2px 13px}
+.riq{border:1px solid var(--bordo2); border-radius:var(--r); padding:12px 14px; margin:0 0 11px; background:var(--bg2); line-height:1.6}
+.riq.att{border-color:var(--att); background:none}
+.riq.att .et{color:var(--att)}
+.riq.cit{border-left:3px solid var(--fg2)}
+.cit-t{font-style:italic}
+.cit-f{font-size:13.5px; color:var(--fg2); margin-top:5px}
+
+.passi{list-style:none; margin:0; padding:0; counter-reset:p}
+.passi li{counter-increment:p; position:relative; padding:9px 0 9px 36px; border-bottom:1px solid var(--bordo2); line-height:1.6}
+.passi li:last-child{border-bottom:0}
+.passi li::before{content:counter(p); position:absolute; left:0; top:8px;
+  width:22px; height:22px; border-radius:50%; background:var(--tc); color:var(--tk);
+  font-size:12px; font-weight:700; display:grid; place-items:center}
+.passo-q{display:block; font-size:13px; font-weight:700; color:var(--fg2); letter-spacing:.02em; margin-bottom:1px}
+
+.det{border-left:2px solid var(--bordo2); padding:3px 0 3px 13px; margin-bottom:15px; line-height:1.6}
+.det-n{font-weight:700; font-size:15.5px; margin-bottom:2px}
+
+.numeri{display:flex; flex-wrap:wrap; gap:8px}
+.num{border:1px solid var(--bordo2); border-radius:var(--r); padding:8px 12px; min-width:120px}
+.num-v{font-size:20px; font-weight:700; line-height:1.2}
+.num-c{font-size:13px; color:var(--fg2); margin-top:2px}
+.num.nascosto-n{cursor:pointer; border-style:dashed; border-color:var(--att)}
+.num.nascosto-n .num-v{color:var(--att)}
+
+.leghe{display:flex; flex-direction:column; gap:6px}
+.lega{display:flex; gap:11px; align-items:baseline; border:1px solid var(--bordo2);
+  border-radius:9px; padding:9px 12px; background:none; width:100%; text-align:left; font-size:15px}
+.lega:hover{border-color:var(--bordo)}
+.lega .t{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg2);
+  white-space:nowrap; min-width:11ch}
+.lega .p{color:var(--fg2); font-size:13.5px; line-height:1.5; margin-top:2px}
+.lega.fuori{border-style:dashed; cursor:default}
+.lega.fuori .t{color:var(--att)}
+
+table{border-collapse:collapse; width:100%; font-size:15px; margin-bottom:16px}
+th,td{border:1px solid var(--bordo2); padding:9px 11px; text-align:left; vertical-align:top}
+thead th{background:var(--bg2); font-size:13px}
+tbody th{font-weight:400; color:var(--fg2); font-size:13px; width:19%}
+td.nasc{color:transparent; background:var(--bg2); cursor:pointer}
+td.nasc:hover{background:var(--bordo2)}
+
+.nascosto{display:inline-block; min-width:5.5em; border-bottom:2px dotted var(--att);
+  color:transparent; cursor:pointer; user-select:none; background:var(--bg2); border-radius:4px}
+.nascosto:hover{background:var(--bordo2)}
+.nascosto.vis{color:inherit; background:none; border-bottom-color:transparent; cursor:default}
+.ripasso-nota{border:1px dashed var(--att); color:var(--att); border-radius:var(--r);
+  padding:9px 13px; font-size:14px; margin:16px 0 0}
+
+.fonte{font-size:13.5px; color:var(--fg2); border-top:1px solid var(--bordo2);
+  padding-top:12px; margin-top:28px}
+.fonte code{font-family:inherit; border:1px solid var(--bordo2); border-radius:5px;
+  padding:1px 7px; margin-right:6px; display:inline-block; margin-bottom:4px}
+.fonte .pc{margin-top:6px}
+
+.vista h2{font-size:21px; margin:0 0 4px}
+.vista p.sotto{color:var(--fg2); font-size:14px; margin:0 0 20px; max-width:70ch}
+.crono{position:relative; margin-left:6px; padding-left:22px; border-left:2px solid var(--bordo2)}
+.crono .v{position:relative; margin-bottom:13px}
+.crono .v::before{content:""; position:absolute; left:-27px; top:7px; width:9px; height:9px;
+  border-radius:50%; background:var(--t); border:2px solid var(--bg)}
+.crono .anno{font-size:13px; color:var(--fg2)}
+.crono button{background:none;border:0;padding:0;font-weight:700;text-align:left;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.crono button:hover{color:var(--acc)}
+.gl{display:grid; gap:9px}
+.gl .v{border:1px solid var(--bordo2); border-radius:var(--r); padding:10px 13px}
+.gl .v h3{margin:0 0 3px; font-size:16px}
+.gl .v p{margin:0; font-size:14px; color:var(--fg2)}
+.gl .v button{background:none;border:0;padding:0;font:inherit;font-weight:700;text-align:left}
+.gl .v button:hover{color:var(--acc)}
+.vuoto-v{color:var(--fg2); font-style:italic}
+
+/* copertura */
+.cop-tot{border:1px solid var(--bordo2); border-radius:var(--r); padding:13px 15px; margin-bottom:24px}
+.cop-n{font-weight:700}
+.cop-barra{height:9px; background:var(--bg2); border-radius:999px; overflow:hidden; margin:9px 0 7px}
+.cop-f{height:100%; background:var(--ok)}
+.cop-nota{font-size:13px; color:var(--fg2)}
+h3.lib{font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--fg2);
+  margin:24px 0 8px; border-bottom:1px solid var(--bordo2); padding-bottom:5px}
+.cap{font-weight:700; margin:14px 0 5px}
+.par{display:flex; gap:10px; align-items:baseline; padding:6px 9px; border-radius:8px; font-size:14px}
+.par:nth-child(odd){background:var(--bg2)}
+.par-n{color:var(--fg2); min-width:1.8em; font-size:13px}
+.par-t{flex:1}
+.par-d{display:flex; gap:5px; flex-wrap:wrap; justify-content:flex-end}
+.par.scoperto{border:1px solid var(--no); background:none}
+.par.scoperto .par-t{color:var(--no)}
+.par.ignoto{opacity:.55; font-style:italic}
+.nessuna{color:var(--no); font-size:12px; white-space:nowrap}
+.pill{background:none; border:1px solid var(--ok); color:var(--ok); border-radius:999px;
+  padding:2px 10px; font-size:12px; white-space:nowrap}
+.pill:hover{background:var(--ok); color:var(--bg)}
+
+/* cronologia a blocchi d'anno, nella colonna di sinistra */
+body.modo-crono main{grid-template-columns:minmax(300px,400px) 1fr}
+.col-t{font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--fg2);
+  margin:0 0 10px 2px}
+.crono2{max-width:none}
+.blk{display:grid; grid-template-columns:58px 1fr; gap:10px; align-items:start;
+  padding:9px 0; border-top:1px solid var(--bordo2)}
+.blk:first-child{border-top:0}
+.blk-sv{background:linear-gradient(90deg,var(--bg2),transparent 85%); border-radius:8px}
+.blk-a{text-align:right; padding-top:1px}
+.blk-anno{font-size:19px; font-weight:700; line-height:1.1; letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.blk-n{font-size:11px; color:var(--fg2); margin-top:2px}
+.blk-v{display:flex; flex-direction:column; gap:5px; min-width:0}
+.vv{display:block; width:100%; text-align:left; background:none;
+  border:1px solid transparent; border-left:3px solid var(--t);
+  border-radius:0 8px 8px 0; padding:5px 9px}
+.vv:hover{background:var(--bg2); border-color:var(--bordo2); border-left-color:var(--t)}
+.vv-sel{background:var(--tc); border-color:var(--t)}
+.vv-sel .vv-t, .vv-sel .vv-s{color:var(--tk)}
+.vv-t{display:block; font-weight:700; font-size:14px; line-height:1.3}
+.vv-s{display:block; font-size:12.5px; color:var(--fg2); margin-top:2px}
+.vv-q{font-weight:700; margin-right:8px}
+.salto{display:grid; grid-template-columns:58px 1fr; gap:10px}
+.salto span{grid-column:1; text-align:right; font-size:11px; color:var(--fg2);
+  border-top:1px dashed var(--bordo2); border-bottom:1px dashed var(--bordo2);
+  padding:2px 0; display:block}
+.senza-data{margin-top:18px; border-top:1px solid var(--bordo2); padding-top:12px}
+.senza-l{display:flex; flex-wrap:wrap; gap:5px; margin-top:7px}
+.chip-nav.on{background:var(--fg); color:var(--bg); border-color:var(--fg)}
+
+footer{border-top:1px solid var(--bordo2); padding:14px 22px 40px; color:var(--fg2); font-size:13px}
+footer b{color:var(--fg)}
+footer code{border:1px solid var(--bordo2); border-radius:5px; padding:1px 6px; font-family:inherit}
+</style>
+</head>
+<body>
+<header>
+  <!-- riga 1: dove sono -->
+  <div class="r r-dove">
+    <div class="marchio">Know_Tool</div>
+    <div class="briciole">
+      <span class="materia">Storia</span>
+      <span class="sep">›</span>
+      <label class="sr">Argomento</label>
+      <select id="sel-doc" class="sel"></select>
+    </div>
+    <div class="sp"></div>
+    <button class="btn fantasma" id="b-copertura">Copertura del libro</button>
+    <button class="btn fantasma" id="b-tema" title="Tema chiaro o scuro">Scuro</button>
+  </div>
+
+  <!-- riga 2: cosa ci faccio -->
+  <div class="r r-fai" id="r-fai">
+    <div class="fam">
+      <span class="fam-t">Leggi</span>
+      <div class="gruppo" id="g-leggi"></div>
+    </div>
+    <div class="fam">
+      <span class="fam-t">Trova</span>
+      <div class="gruppo" id="g-trova"></div>
+    </div>
+    <div class="sp"></div>
+    <div class="fam">
+      <span class="fam-t">Esercita</span>
+      <div class="gruppo"><button class="btn int" id="b-ripasso" aria-pressed="false"><span class="led"></span>Ripasso</button></div>
+    </div>
+  </div>
+
+  <div class="guida" id="guida"></div>
+</header>
+<main>
+  <nav class="mappa" id="mappa" aria-label="Mappa dell'argomento"></nav>
+  <section class="pannello" id="pannello" aria-live="polite"></section>
+</main>
+<footer>
+  <b>Che cos'è.</b> Mockup del modello «Storia» (<code>00_Control/specifiche/modello_storia.md</code>), con contenuti veri dal libro di quarta e dal riassunto di terza. Serve a giudicare la struttura, non la grafica.
+  Non è l'app: niente file su disco, niente modifica, niente ricerca.
+</footer>
+<script>
+/* I libri, capitolo per capitolo e paragrafo per paragrafo.
+   Si scrive una volta, dall'indice del libro. Serve per due cose:
+   1) la fonte di ogni scheda si RICAVA da qui (un dato, un posto);
+   2) la vista «Copertura» sa quali paragrafi esistono e quali sono scoperti.
+   Nell'app questo file sta in 01_Argomenti/Storia/_libri.yaml, a livello di
+   materia e non di documento. */
+const LIBRI = {
+  Q: { titolo:"Storia vol. 2 (quarta)", capitoli:[
+    { n:1, titolo:"La belle époque tra luci e ombre", pp:"2-33", paragrafi:[
+      { n:1, titolo:"Le trasformazioni economiche e sociali", pp:"4-7" },
+      { n:2, titolo:"La città e la società di massa", pp:"8-12" },
+      { n:3, titolo:"L'organizzazione del lavoro e il consumo di massa", pp:"13-16" },
+      { n:4, titolo:"La politica di massa: partiti e sindacati", pp:"17-21" },
+      { n:5, titolo:"Le suffragette, la Chiesa e il modernismo", pp:"22-25" },
+      { n:6, titolo:"Le ombre più cupe della belle époque", pp:"26-29" }
+    ]},
+    { n:2, titolo:"Vecchi imperi e potenze nascenti", pp:"34-65", paragrafi:[
+      { n:1, titolo:"L'età degli imperialismi", pp:"34-35" },
+      { n:2, titolo:"La Germania di Guglielmo II", pp:"36-37" },
+      { n:3, titolo:"La Francia e il caso Dreyfus", pp:"38-39" },
+      { n:4, titolo:"La fine dell'età vittoriana in Gran Bretagna", pp:"40-44" },
+      { n:5, titolo:"L'Impero austro-ungarico e la questione delle nazionalità", pp:"45-46" },
+      { n:6, titolo:"La Russia zarista tra reazione e spinte democratiche", pp:"47-49" },
+      { n:7, titolo:"Crisi e conflitti tra Europa e Mediterraneo", pp:"50-53" },
+      { n:8, titolo:"L'Estremo Oriente: Cina e Giappone", pp:"56-58" },
+      { n:9, titolo:"Gli Stati Uniti: una potenza in ascesa", pp:"59-61" },
+      { n:10, titolo:"L'America latina e la Rivoluzione messicana", pp:"62-63" }
+    ]},
+    { n:3, titolo:"(non ancora letto)", pp:"—", paragrafi:[] }
+  ]},
+  T: { titolo:"Storia vol. 1 (terza) — riassunti", capitoli:[
+    { n:16, titolo:"Economia e società nella Seconda rivoluzione industriale", paragrafi:[
+      { n:1, titolo:"La «Grande depressione», fra crisi e crescita (1873-1895)" },
+      { n:2, titolo:"Le trasformazioni dell'industria e della finanza" },
+      { n:3, titolo:"Le trasformazioni sociali" },
+      { n:4, titolo:"Le nuove ideologie politiche e sociali" }
+    ]},
+    { n:18, titolo:"L'Italia della Sinistra storica e la crisi di fine secolo", paragrafi:[
+      { n:1, titolo:"La Sinistra moderata di Depretis al potere" },
+      { n:2, titolo:"La politica coloniale del primo governo Crispi" },
+      { n:3, titolo:"L'inquietudine sociale e la nascita del Partito socialista" },
+      { n:4, titolo:"Dal primo governo Giolitti al secondo governo Crispi" },
+      { n:5, titolo:"La crisi di fine secolo" }
+    ]}
+  ]}
+};
+
+/* scrive la fonte in chiaro a partire da `da` */
+function fonteTesto(da){
+  const l = LIBRI[da.l];
+  const c = l && l.capitoli.find(x=>x.n===da.c);
+  const p = c && (c.paragrafi||[]).find(x=>x.n===da.p);
+  let s = `${da.l} cap. ${da.c}`;
+  if(da.p) s += ` par. ${da.p}`;
+  if(p) s += ` — ${p.titolo}`;
+  if(da.dove) s += ` (${da.dove})`;
+  return s;
+}
+/* Dati veri delle prove a mano. Nessun dato inventato: tutto viene dal libro
+   di quarta (Q) o dal riassunto del libro di terza (T).
+   v2: schede complete (svolgimento, numeri, elementi, citazioni) e `da` al
+   posto della fonte scritta a mano — la fonte si ricava da LIBRI. */
+const DOCS = {
+
+alleanze: {
+  titolo: "Le alleanze europee",
+  centro: "Alleanze 1879-1914",
+  ingresso: "la domanda riguarda chi sta con chi in Europa prima della guerra",
+  guida: "chi si sente accerchiato in questo momento, e da chi?",
+  rami: [
+    { id:"radici", nome:"Le radici", hue:25, schede:["tunisi-1881","boeri-1899"] },
+    { id:"sistema-bismarck", nome:"Il sistema di Bismarck", hue:210, ordine:true, quando:"1879-1890",
+      schede:["duplice-1879","triplice-1882","equilibri-bismarck"] },
+    { id:"svolta-guglielmo", nome:"La svolta di Guglielmo II", hue:0, ordine:true, quando:"1888-1908",
+      schede:["caduta-bismarck-1890","weltpolitik","kruger-1896","bosnia-1908"] },
+    { id:"nasce-intesa", nome:"La risposta: nasce l'Intesa", hue:150, ordine:true, quando:"1891-1907",
+      schede:["francia-russia-1891","entente-1904","gb-russia-1907","triplice-intesa"] },
+    { id:"prove-di-forza", nome:"Le prove di forza", hue:285, quando:"1905-1913",
+      schede:["marocco-1905","agadir-1911","balcaniche-1912","polveriera"] },
+    { id:"quadro", nome:"Il quadro d'insieme", hue:45, schede:["due-blocchi"] }
+  ],
+  schede: {
+
+"tunisi-1881": { tipo:"voce", genere:"evento", titolo:"La Francia occupa la Tunisia", sigla:"Tunisi 1881",
+  quando:"1881", dove:"Africa settentrionale", chi:["Francia","Italia"],
+  cosa:"La Francia occupa la **Tunisia**, che gli italiani consideravano **area di propria pertinenza** per la vicinanza geografica e per la comunità italiana già presente.",
+  conta:"Coglie l'Italia impreparata e rompe i **rapporti italo-francesi**, con una **guerra commerciale** dannosa per le esportazioni agricole. È il motivo per cui l'Italia, l'anno dopo, cerca le potenze centrali.",
+  elementi:[
+    {nome:"Prima del 1881", spiega:"la Sinistra al potere manteneva rapporti equilibrati con tutte le grandi potenze, e con la Francia della Terza Repubblica i legami erano particolarmente stretti: era un riferimento politico per molti democratici italiani."},
+    {nome:"Dopo", spiega:"guerra doganale fra i due paesi, inasprita poi da Crispi."}
+  ],
+  da:[{l:"T",c:18,p:1}], parole:["Tunisia","guerra doganale"],
+  lega:[{scheda:"triplice-1882", tipo:"causa", perche:"per non restare isolata, l'Italia si avvicina a Germania e Austria"}] },
+
+"boeri-1899": { tipo:"voce", genere:"evento", titolo:"La guerra anglo-boera", sigla:"Boeri 1899",
+  quando:"1899-1902", dove:"Sudafrica", chi:["Gran Bretagna","boeri","Germania"],
+  cosa:"Guerra contro i **boeri**, coloni di origine olandese del **Transvaal** e dell'**Orange**. Londra contava di vincere rapidamente: fu insidiosa e lunga, anche per l'appoggio che i boeri ricevettero dalla Germania, e si concluse nel 1902 con una sofferta vittoria britannica.",
+  conta:"Mostra alle altre potenze, e soprattutto alla Germania, che la Gran Bretagna è vulnerabile; e convince Londra a modernizzare l'esercito e a **uscire dall'isolamento** in cui stava dai tempi della regina Vittoria, cercando alleati in funzione antitedesca.",
+  svolgimento:[
+    {quando:"1830-1850", passo:"il «**Grande trek**»: la minoranza boera migra dopo l'espansione britannica nella regione del Capo e fonda Transvaal e Orange"},
+    {passo:"i due Stati si rivelano ricchissimi di giacimenti d'oro e diamanti, e diventano oggetto delle mire britanniche e tedesche"},
+    {quando:"1899", passo:"scoppia il conflitto"},
+    {quando:"1902", passo:"vittoria britannica, sofferta"}
+  ],
+  elementi:[
+    {nome:"Mafeking, Kimberley, Ladysmith, Colenso", spiega:"le principali battaglie, nella carta del libro"}
+  ],
+  da:[{l:"Q",c:2,p:4}], parole:["boeri","Transvaal","Orange","Grande trek","isolamento"],
+  lega:[{scheda:"entente-1904", tipo:"causa", perche:"è la spinta che porta Londra a cercare la Francia"}] },
+
+"duplice-1879": { tipo:"voce", genere:"evento", titolo:"Il patto Germania-Austria", sigla:"Duplice 1879",
+  quando:"1879", dove:"Europa centrale", chi:["Germania","Austria-Ungheria"],
+  cosa:"Patto in **chiave antirussa** fra l'Impero tedesco e l'Austria-Ungheria.",
+  conta:"È il primo mattone del sistema di Bismarck: lega l'Austria alla Germania e isola la Russia, che coltivava ambizioni sui Balcani.",
+  da:[{l:"Q",c:2,p:5}], parole:["Duplice","antirussa"],
+  lega:[{scheda:"triplice-1882", tipo:"prosegue", perche:"tre anni dopo vi entra l'Italia"}] },
+
+"triplice-1882": { tipo:"voce", genere:"evento", titolo:"La Triplice alleanza", sigla:"Triplice 1882",
+  quando:"1882", dove:"Europa", chi:["Germania","Austria-Ungheria","Italia"],
+  cosa:"L'Italia entra nel patto austro-tedesco, in maniera **imprevista e non priva di ambiguità**. L'accordo è **militare e solo difensivo**, ma segna una profonda rottura col passato: pone l'Italia **nell'orbita politica della Germania**, potenza di riferimento della *Mitteleuropa*.",
+  conta:"Rovescia le alleanze italiane. La Francia, che insieme alla Gran Bretagna era stata fra i più attivi «sponsor» dell'unificazione, diventa un'avversaria; l'Austria-Ungheria, per decenni acerrima nemica, passa a essere un paese alleato — e il problema delle **terre irredente** resta intatto.",
+  svolgimento:[
+    {quando:"1881", passo:"la Francia occupa la Tunisia; l'intervento coglie l'Italia impreparata"},
+    {passo:"rottura dei rapporti italo-francesi e guerra commerciale, dannosa per le esportazioni agricole italiane"},
+    {quando:"1882", passo:"per non restare isolata, l'Italia si avvicina alle potenze centrali e firma la Triplice"},
+    {quando:"1887", passo:"Crispi, al governo, rinnova il patto e inasprisce la guerra doganale con la Francia"}
+  ],
+  elementi:[
+    {nome:"Terre irredente", spiega:"le regioni ritenute italiane perché abitate prevalentemente da **italofoni** e ancora soggette agli Asburgo: Trento, Trieste e l'Istria."},
+    {nome:"La reazione degli irredentisti", spiega:"indignata: proteste, agitazioni e attentati per tenere vivo il problema."},
+    {nome:"Il termine «irredentismo»", spiega:"usato dal 1877, quando il repubblicano Matteo Renato Imbriani definì «*irredente*» (non emancipate) le terre in attesa di essere liberate dal dominio austriaco."},
+    {nome:"Casa Savoia", spiega:"sul trono c'è Umberto I (1878-1900)."}
+  ],
+  da:[{l:"T",c:18,p:1},{l:"Q",c:2,p:5}], parole:["Triplice alleanza","irredentismo","Mitteleuropa"],
+  errore:"pensare che la Triplice nasca da simpatia per la Germania: nasce dallo smacco di Tunisi",
+  nota:"L'accordo resta fragile proprio per il problema delle nazionalità: la popolazione italofona dell'Impero austro-ungarico desiderava l'annessione all'Italia.",
+  lega:[{scheda:"tunisi-1881", tipo:"conseguenza", perche:"è la reazione allo smacco dell'anno prima"},
+        {scheda:"due-blocchi", tipo:"confronto", perche:""}] },
+
+"equilibri-bismarck": { tipo:"voce", genere:"processo", titolo:"La politica degli equilibri", sigla:"Equilibri",
+  quando:"1871-1890", dove:"Europa", chi:["Otto von Bismarck"],
+  cosa:"Un sistema di **pesi e contrappesi** politico-militari, costruito con accortezza e coerenza: alleanze incrociate che impediscono a chiunque di diventare troppo forte.",
+  conta:"Finché regge, nessuno in Europa ha interesse a rompere. Quando salta, il meccanismo che teneva fermi tutti non c'è più — e lo si vedrà subito.",
+  elementi:[
+    {nome:"Conferenza di Berlino (1884-1885)", spiega:"Bismarck, con cautela e attenzione agli equilibri internazionali, invita i maggiori Stati europei a fissare le linee dell'espansione in Africa — fino a quel momento condotta in modo caotico — definendo le rispettive aree di influenza."},
+    {nome:"La regola non scritta", spiega:"quando uno Stato tende a diventare troppo influente, i suoi avversari si coalizzano per contenerne l'egemonia. È la tradizione diplomatica europea su cui Bismarck lavora."}
+  ],
+  da:[{l:"Q",c:2,p:1},{l:"Q",c:2,p:2}], parole:["equilibri","conferenza di Berlino","aree di influenza"],
+  lega:[{scheda:"caduta-bismarck-1890", tipo:"chiude", perche:"con lui se ne va il sistema"}] },
+
+"caduta-bismarck-1890": { tipo:"voce", genere:"evento", svolta:true, titolo:"Le dimissioni di Bismarck", sigla:"Cade Bismarck",
+  quando:"18 marzo 1890", dove:"Germania", chi:["Otto von Bismarck","Guglielmo II"],
+  cosa:"Dopo vent'anni alla guida del paese, il **cancelliere** è costretto a **dimettersi** dal nuovo imperatore, salito al trono nel 1888 e deciso ad accentrare tutto il potere nelle proprie mani.",
+  conta:"Con lui finisce la **politica degli equilibri**, che aveva influenzato in modo decisivo gli assetti europei. Da qui la Germania diventa aggressiva e spinge, senza volerlo, i propri avversari a cercarsi fra loro.",
+  svolgimento:[
+    {quando:"1888", passo:"Guglielmo II di Hohenzollern sale al trono"},
+    {passo:"profonda distanza di opinioni fra l'imperatore e il cancelliere, che aveva sempre perseguito il mantenimento degli equilibri internazionali"},
+    {quando:"18 marzo 1890", passo:"Bismarck si dimette, dopo vent'anni in cui aveva retto le sorti del paese"}
+  ],
+  elementi:[
+    {nome:"Chi è Guglielmo II", spiega:"sostenitore della modernità e della tecnologia, convinto militarista, vuole essere protagonista assoluto della politica internazionale."},
+    {nome:"Che Germania trova", spiega:"i partiti di massa acquistano importanza, in particolare il **Partito socialdemocratico** (*SPD*), che Bismarck aveva tentato di arrestare sia con misure repressive sia con un sistema di assistenza e previdenza sociali all'avanguardia in Europa."}
+  ],
+  citazioni:[
+    {testo:"*Ritratto di Guglielmo II*", chi:"Otto von Bismarck", dove:"Documento, nel libro"}
+  ],
+  da:[{l:"Q",c:2,p:2}], parole:["Bismarck","Guglielmo II","cancelliere","SPD"],
+  lega:[{scheda:"weltpolitik", tipo:"conseguenza", perche:""},
+        {scheda:"equilibri-bismarck", tipo:"chiude", perche:""}] },
+
+"weltpolitik": { tipo:"voce", genere:"concetto", titolo:"La Weltpolitik", sigla:"Weltpolitik",
+  quando:"dal 1890", dove:"Germania", chi:["Guglielmo II"],
+  cosa:"Letteralmente «politica mondiale». **Aggressiva politica estera**, alimentata dal dilagare del **militarismo** nel paese e volta ad assicurare alla Germania una posizione di rilievo sullo scenario internazionale, in competizione con le principali potenze imperialiste dell'epoca.",
+  conta:"Ha effetti ambivalenti: da una parte afferma la potenza nascente della Germania e ne accresce il prestigio, dall'altra manda in crisi il complesso **sistema di pesi e contrappesi** architettato da Bismarck. Urtando Londra e Parigi nello stesso periodo, le fa avvicinare fra loro: l'effetto è l'opposto di quello cercato.",
+  svolgimento:[
+    {passo:"Guglielmo II non può ambire ai vasti territori già in mano a britannici e francesi, ma ne urta gli interessi in più occasioni"},
+    {quando:"1896", passo:"**telegramma di solidarietà a Kruger**: incrina le relazioni con Londra"},
+    {quando:"1897", passo:"supporto ai turchi contro la Grecia, sostenuta dai britannici: le relazioni peggiorano"},
+    {quando:"dal 1897", passo:"potenziamento della flotta militare"},
+    {passo:"risultato: si appianano le rivalità fra Francia e Gran Bretagna, e fra quest'ultima e la Russia"},
+    {quando:"1908", passo:"il sostegno all'Austria-Ungheria sulla Bosnia segna l'allontanamento diplomatico definitivo fra Germania e Russia"}
+  ],
+  elementi:[
+    {nome:"Il costo interno", spiega:"l'ampliamento della flotta garantì ricchi introiti alle industrie siderurgiche e metallurgiche, ma incise negativamente sul bilancio dello Stato. Una vignetta del 1906 sul «Der Wahre Jacob» raffigura la tassazione per la flotta come un vorace drago marino."}
+  ],
+  storiografia:[{autore:"Michael Stürmer", titolo:"Che cosa fu la Weltpolitik tedesca?", pagina:"p. 69"}],
+  da:[{l:"Q",c:2,p:2}], parole:["Weltpolitik","militarismo","flotta"],
+  lega:[{scheda:"kruger-1896", tipo:"esempio", perche:""},
+        {scheda:"entente-1904", tipo:"causa", perche:"l'attivismo tedesco rende impensabile che Londra resti isolata"}] },
+
+"kruger-1896": { tipo:"voce", genere:"evento", titolo:"Il telegramma a Kruger", sigla:"Kruger 1896",
+  quando:"1896", dove:"Germania e Sudafrica", chi:["Guglielmo II","Paul Kruger","Gran Bretagna"],
+  cosa:"Guglielmo II invia un **telegramma di solidarietà** a Paul Kruger, presidente della Repubblica boera del **Transvaal**, con cui la Gran Bretagna era in guerra.",
+  conta:"Un gesto che incrina i rapporti con Londra senza portare alla Germania alcun vantaggio concreto: è la Weltpolitik all'opera, e il modo in cui si costruisce da sola i nemici.",
+  svolgimento:[
+    {quando:"1896", passo:"il telegramma a Kruger"},
+    {quando:"1897", passo:"in cambio di una concessione alle imprese tedesche per una linea ferroviaria nell'Impero ottomano, la Germania fornisce supporto ai turchi nel conflitto con la Grecia, mentre le truppe elleniche contano sul sostegno britannico"}
+  ],
+  da:[{l:"Q",c:2,p:2}], parole:["Kruger","Transvaal","Impero ottomano"] },
+
+"bosnia-1908": { tipo:"voce", genere:"evento", titolo:"L'annessione della Bosnia", sigla:"Bosnia 1908",
+  quando:"1908", dove:"Balcani", chi:["Austria-Ungheria","Serbia","Russia","Germania"],
+  cosa:"L'Impero asburgico, logorato dai conflitti fra nazionalità e retto ormai solo dalla personalità dell'imperatore, ratifica ufficialmente l'**annessione unilaterale della Bosnia-Erzegovina**, che occupava dal 1878.",
+  conta:"Aumenta il **peso delle nazionalità slave** dentro l'Impero e rafforza il **panslavismo**. Solleva le proteste di tutti gli Stati europei tranne la Germania, e in particolare di Serbia e Russia, anch'esse interessate alla supremazia nell'area balcanica.",
+  svolgimento:[
+    {quando:"1878", passo:"con il congresso di Berlino la Bosnia resta sotto sovranità turca ma passa all'amministrazione austriaca"},
+    {quando:"1908", passo:"l'imperatore, assecondando i conservatori al potere, ratifica l'annessione unilaterale"},
+    {passo:"protestano Serbia e Russia; la Germania sostiene Vienna"}
+  ],
+  elementi:[
+    {nome:"Panslavismo", spiega:"progetto di unione politica di tutti i popoli slavi, avviato al congresso slavo di Praga (giugno 1848) e diventato poi un progetto nazionalista e imperialista, volto alla liberazione degli slavi dei Balcani e alla loro unificazione in una federazione guidata dalla Russia."},
+    {nome:"La fragilità della Triplice", spiega:"non erano solo gli slavi a rivendicare autonomia o indipendenza: anche la popolazione italofona dell'Impero desiderava l'annessione all'Italia, alleata di Vienna."}
+  ],
+  da:[{l:"Q",c:2,p:2},{l:"Q",c:2,p:5}], parole:["Bosnia-Erzegovina","panslavismo","congresso di Berlino"],
+  lega:[{scheda:"polveriera", tipo:"causa", perche:"da qui i rapporti serbo-austriaci non si ricuciono più"}] },
+
+"francia-russia-1891": { tipo:"voce", genere:"evento", titolo:"L'accordo Francia-Russia", sigla:"Francia-Russia 1891",
+  quando:"1891", dove:"Europa", chi:["Francia","Russia"],
+  cosa:"Dopo l'uscita di scena di Bismarck, venuta meno ogni possibile intesa con la Germania — che aveva consolidato l'alleanza con l'Austria-Ungheria, acerrima nemica della Russia — lo zar stringe un accordo con la Francia, rafforzato da una **convenzione militare** che stabilisce l'**assistenza reciproca** in caso di attacco da parte della Germania o dell'Italia.",
+  conta:"È il primo pezzo dell'Intesa, e arriva un anno dopo la caduta di Bismarck: la reazione è immediata.",
+  da:[{l:"Q",c:2,p:6}], parole:["convenzione militare","isolamento diplomatico"],
+  lega:[{scheda:"caduta-bismarck-1890", tipo:"conseguenza", perche:""},
+        {scheda:"entente-1904", tipo:"prosegue", perche:""}] },
+
+"entente-1904": { tipo:"voce", genere:"evento", titolo:"L'Entente cordiale", sigla:"Entente 1904",
+  quando:"1904", dove:"Africa", chi:["Gran Bretagna","Francia"],
+  cosa:"«*Entente cordiale*», intesa cordiale: accordo con cui le due potenze risolvono i **contrasti coloniali in Africa**. I britannici ottengono il diritto a controllare l'**Egitto**, i francesi il via libera a occupare il **Marocco**.",
+  conta:"Due rivali di ieri si accordano. Si riducono così gli spazi d'azione della Germania, che deve «accontentarsi» dei territori sfuggiti alla colonizzazione di Parigi e Londra.",
+  svolgimento:[
+    {quando:"1898", passo:"l'incidente di Fashoda: inglesi e francesi rischiano lo scontro in Sudan, ma Parigi fa arretrare il proprio contingente"},
+    {quando:"1899-1902", passo:"la guerra anglo-boera mostra che la Gran Bretagna è vulnerabile"},
+    {passo:"di fronte all'attivismo tedesco, è impensabile che Londra resti nell'isolamento in cui si era chiusa"},
+    {quando:"1904", passo:"firma dell'Entente cordiale"}
+  ],
+  elementi:[
+    {nome:"Fashoda (1898)", spiega:"piccolo villaggio del Sudan dove le truppe inglesi, che risalivano dall'Egitto verso sud, incrociarono un corpo di spedizione francese diretto da ovest a est. Il conflitto fu scongiurato, con epilogo favorevole al governo britannico."}
+  ],
+  da:[{l:"Q",c:2,p:4},{l:"Q",c:2,p:7}], parole:["Entente cordiale","Egitto","Marocco","Fashoda"],
+  lega:[{scheda:"boeri-1899", tipo:"conseguenza", perche:""},
+        {scheda:"marocco-1905", tipo:"causa", perche:"la Germania, rimasta fuori dall'accordo sul Marocco, reagisce"},
+        {scheda:"gb-russia-1907", tipo:"prosegue", perche:""}] },
+
+"gb-russia-1907": { tipo:"voce", genere:"evento", titolo:"L'accordo Gran Bretagna-Russia", sigla:"GB-Russia 1907",
+  quando:"1907", dove:"Asia", chi:["Gran Bretagna","Russia"],
+  cosa:"Accordo per appianare i contrasti coloniali in Asia: i britannici ottengono il controllo sull'**Afghanistan**, i russi su parte della **Persia**.",
+  conta:"Cade l'ultima rivalità fra i tre futuri alleati. L'esito della guerra russo-giapponese aveva già frenato l'espansionismo russo a oriente, e Londra guardava ormai alla Russia come a un possibile baluardo contro l'ascesa dirompente della Germania.",
+  da:[{l:"Q",c:2,p:7}], parole:["Afghanistan","Persia","sfere d'influenza"],
+  lega:[{scheda:"triplice-intesa", tipo:"prosegue", perche:"è il preludio alla firma, nello stesso anno"}] },
+
+"triplice-intesa": { tipo:"voce", genere:"evento", titolo:"La Triplice intesa", sigla:"Intesa 1907",
+  quando:"1907", dove:"Europa", chi:["Russia","Francia","Gran Bretagna"],
+  cosa:"Patto dal **carattere difensivo** fra Russia, Francia e Gran Bretagna, nato per **arginare la potenza tedesca** e la Triplice alleanza.",
+  conta:"Gli equilibri diplomatici europei si irrigidiscono pericolosamente in **due blocchi contrapposti**, anticipando gli schieramenti che di lì a pochi anni avrebbero caratterizzato la Prima guerra mondiale.",
+  da:[{l:"Q",c:2,p:7}], parole:["Triplice intesa","blocchi contrapposti"],
+  errore:"confondere Triplice intesa e Triplice alleanza: i nomi si somigliano, gli schieramenti sono opposti",
+  confondi:[{scheda:"triplice-1882", differenza:"l'alleanza è del 1882 ed è Germania-Austria-Italia; l'intesa è del 1907 ed è Russia-Francia-Gran Bretagna"}],
+  lega:[{scheda:"due-blocchi", tipo:"confronto", perche:""}] },
+
+"marocco-1905": { tipo:"voce", genere:"evento", titolo:"La prima crisi marocchina", sigla:"Marocco 1905",
+  quando:"1905-1906", dove:"Marocco", chi:["Germania","Francia"],
+  cosa:"Rimasta fuori dalla contesa, nel 1905 la Germania decide di intervenire promettendo il proprio appoggio al sultano Abd al-'Aziz, nell'intento di arginare l'espansione coloniale francese su tutta l'Africa nord-occidentale.",
+  conta:"Primo collaudo dei blocchi: la Germania cerca di dividere Francia e Gran Bretagna e ottiene che restino unite, trovandosi quasi sola.",
+  svolgimento:[
+    {quando:"1902 e 1904", passo:"il governo di Parigi ottiene il nullaosta della Gran Bretagna per intervenire in Marocco, lasciando agli spagnoli le sole regioni settentrionali"},
+    {quando:"1905", passo:"intervento tedesco a favore del sultano; la Francia protesta duramente"},
+    {quando:"1906", passo:"**conferenza di Algeciras**: con l'appoggio di Gran Bretagna, Italia, Spagna e Russia, la Francia ottiene che il Marocco sia sottoposto a controllo internazionale e le sia riconosciuto il diritto di riorganizzare e addestrare la polizia marocchina"}
+  ],
+  da:[{l:"Q",c:2,p:7}], parole:["Algeciras","Abd al-'Aziz"] },
+
+"agadir-1911": { tipo:"voce", genere:"evento", titolo:"La seconda crisi marocchina", sigla:"Agadir 1911",
+  quando:"1911", dove:"Agadir, Marocco", chi:["Germania","Francia"],
+  cosa:"La Francia, prendendo a pretesto la ribellione di alcune tribù contro il sultano, invia un corpo di spedizione e occupa diverse città. La Germania reagisce inviando una **nave da guerra ad Agadir**, con la minaccia di entrare in azione contro le truppe francesi.",
+  conta:"Secondo collaudo, stesso esito: la minaccia tedesca si risolve in un baratto coloniale e salda ancora di più il fronte avverso.",
+  svolgimento:[
+    {quando:"estate 1911", passo:"la nave da guerra tedesca ad Agadir"},
+    {quando:"4 novembre 1911", passo:"le trattative si chiudono: in cambio di una parte del Congo francese, la Germania riconosce la supremazia francese in Marocco"},
+    {quando:"1912", passo:"con il **trattato di Fès** anche il sultano Mulay Abd al-Hafiz riconosce il Marocco come protettorato francese"}
+  ],
+  elementi:[
+    {nome:"Protettorato", spiega:"accordo con cui un territorio più debole viene posto sotto la tutela di uno Stato protettore, che lo rappresenta in ambito internazionale. Nell'età dell'imperialismo è spesso il primo passo verso la colonia vera e propria."}
+  ],
+  da:[{l:"Q",c:2,p:7}], parole:["Agadir","trattato di Fès","protettorato"],
+  lega:[{scheda:"marocco-1905", tipo:"prosegue", perche:"stessa partita, sei anni dopo"}] },
+
+"balcaniche-1912": { tipo:"voce", genere:"evento", titolo:"Le guerre balcaniche", sigla:"Balcaniche 1912-13",
+  quando:"1912-1913", dove:"Balcani", chi:["Lega balcanica","Impero ottomano","Bulgaria","Serbia"],
+  cosa:"Grecia, Serbia, Montenegro e Bulgaria, incoraggiate dalla Russia, stringono un'alleanza antiottomana: la **Lega balcanica**. Ne seguono due guerre in meno di un anno.",
+  conta:"La Serbia esce vincitrice e ingrandita, e persegue un programma politico nazionalista — la creazione di una **Grande Serbia** che riunisca anche i serbi dell'Impero austro-ungarico. Gli interessi del piccolo Stato balcanico entrano in rotta di collisione con quelli asburgici.",
+  svolgimento:[
+    {quando:"ottobre 1912 - maggio 1913", passo:"prima guerra balcanica: l'Impero ottomano è duramente sconfitto e costretto a cedere tutti i suoi territori europei, con l'eccezione di Istanbul e dell'area circostante"},
+    {passo:"gli Stati balcanici non trovano accordo sulla spartizione della Macedonia, contesa fra Serbia, Grecia e Bulgaria"},
+    {quando:"giugno-agosto 1913", passo:"seconda guerra balcanica: Serbia, Montenegro e Grecia contro la Bulgaria, attaccata anche dall'Impero ottomano e dalla Romania; i bulgari cedono gran parte dei territori conquistati"},
+    {quando:"1912-1914", passo:"nasce l'Albania; il riconoscimento internazionale arriva nel 1914, per volontà austro-ungarica e italiana, per impedire che se ne impadronisse la Serbia"}
+  ],
+  da:[{l:"Q",c:2,p:7}], parole:["Lega balcanica","Macedonia","Albania","Grande Serbia"],
+  lega:[{scheda:"polveriera", tipo:"conseguenza", perche:""}] },
+
+"polveriera": { tipo:"voce", genere:"processo", svolta:true, titolo:"I Balcani diventano una polveriera", sigla:"La polveriera",
+  quando:"1913", dove:"Balcani", chi:["Serbia","Austria-Ungheria","Russia"],
+  cosa:"La conclusione delle guerre balcaniche, invece di stabilizzare gli equilibri politici nell'area, contribuisce al radicarsi di sentimenti nazionalisti, risentimenti e desideri di vendetta, rendendo l'area un'autentica «**polveriera**».",
+  conta:"I rapporti fra Serbia e Impero asburgico diventano ancora più tesi; entrambi possono contare su stretti e agguerriti alleati in Europa, pronti a soccorrerli in caso di conflitto, innescando un pericoloso **effetto domino**. Fu ciò che fece precipitare l'Europa nell'abisso del primo conflitto mondiale.",
+  da:[{l:"Q",c:2,p:7,dove:"riquadro «Punti di svolta»"}], parole:["polveriera","effetto domino","Grande Serbia"],
+  lega:[{scheda:"bosnia-1908", tipo:"causa", perche:""},
+        {scheda:"due-blocchi", tipo:"usa", perche:"l'effetto domino funziona solo perché i due blocchi esistono già"}] },
+
+"due-blocchi": { tipo:"confronto", titolo:"Triplice alleanza e Triplice intesa", sigla:"I due blocchi",
+  da:[{l:"Q",c:2,p:5},{l:"Q",c:2,p:7}],
+  domande:["chi ne fa parte","quando si forma","cosa tiene insieme","punto debole"],
+  casi:[
+    { nome:"Triplice alleanza", scheda:"triplice-1882", risposte:[
+      "Germania, Austria-Ungheria, Italia",
+      "1879 il nucleo, 1882 con l'Italia",
+      "contenere la Russia nei Balcani; per l'Italia, non restare isolata",
+      "l'Italia rivendica terre all'Austria, che è sua alleata" ] },
+    { nome:"Triplice intesa", scheda:"triplice-intesa", risposte:[
+      "Francia, Russia, Gran Bretagna",
+      "1891 Francia-Russia, 1904 Entente, 1907 GB-Russia",
+      "arginare la potenza tedesca",
+      "nata da accordi separati, non da un patto unico" ] }
+  ] }
+
+  }
+},
+
+darwinismo: {
+  titolo: "Darwinismo sociale e teorie razziali",
+  centro: "Dal positivismo al razzismo",
+  ingresso: "la domanda riguarda come si è giustificato il dominio di un popolo su un altro, o da dove viene il razzismo «scientifico»",
+  guida: "questa idea è scienza, o è un uso politico della scienza?",
+  rami: [
+    { id:"da-dove-nasce", nome:"Da dove nasce", hue:210, ordine:true,
+      schede:["positivismo","darwin","cosa-dice-darwin"] },
+    { id:"lo-stravolgimento", nome:"Lo stravolgimento", hue:0, ordine:true,
+      schede:["darwinismo-sociale","spencer","gobineau","haeckel"] },
+    { id:"a-cosa-serve", nome:"A cosa serve, in politica", hue:285,
+      schede:["missione-civilizzatrice","antisemitismo","eugenetica"] },
+    { id:"giudizio", nome:"Come si giudica oggi", hue:150,
+      schede:["razze-non-esistono","darwin-contro-darwinismo"] }
+  ],
+  schede: {
+
+"positivismo": { tipo:"voce", genere:"concetto", titolo:"Il positivismo", sigla:"Positivismo",
+  quando:"anni Venti-Quaranta dell'Ottocento", dove:"Francia, poi Europa", chi:["Henri Saint-Simon","Auguste Comte"],
+  cosa:"Termine coniato da Saint-Simon per indicare la preminenza delle scienze sperimentali, «positive» perché basate su dati reali. Comte lo rende famoso negli anni Quaranta sostenendo che il metodo scientifico può applicarsi anche alla società: nasce una nuova scienza sociale, la **sociologia**.",
+  conta:"È il terreno su cui tutto il resto cresce: l'idea che la scienza possa spiegare anche gli uomini e le nazioni. Diventa una mentalità diffusa, un forte ottimismo che si sposa con l'intraprendenza della borghesia in ascesa.",
+  elementi:[
+    {nome:"La diffusione", spiega:"dalla Francia si estende alla Gran Bretagna con John Stuart Mill e Herbert Spencer."},
+    {nome:"Il rappresentante più importante", spiega:"non è un filosofo ma un naturalista: Charles Darwin."}
+  ],
+  da:[{l:"T",c:16,p:4}], parole:["positivismo","sociologia","Comte"],
+  lega:[{scheda:"darwinismo-sociale", tipo:"giustifica", perche:"dà l'idea di progresso che verrà fusa con l'evoluzionismo"}] },
+
+"darwin": { tipo:"voce", genere:"persona", titolo:"Charles Darwin", sigla:"Darwin",
+  quando:"1859 e 1871", dove:"Gran Bretagna", chi:["Charles Darwin"],
+  cosa:"Con *L'origine delle specie* (1859) e *L'origine dell'uomo* (1871) mostra che gli esseri viventi, uomo compreso, si evolvono per adattarsi all'ambiente.",
+  conta:"Teoria giudicata scandalosa perché contraddice il racconto biblico della creazione. Segna il superamento definitivo della dottrina fissista, secondo cui le specie erano fisse e immutabili fin dall'inizio.",
+  svolgimento:[
+    {quando:"1859", passo:"*L'origine delle specie*: evoluzione per **selezione naturale**"},
+    {quando:"1871", passo:"*L'origine dell'uomo*: le stesse dinamiche valgono per la specie umana"}
+  ],
+  elementi:[
+    {nome:"Mendel", spiega:"sviluppa la teoria dell'ereditarietà partendo dal concetto darwiniano di adattamento."},
+    {nome:"Linneo", spiega:"rappresentante della dottrina fissista superata da Darwin."}
+  ],
+  da:[{l:"T",c:16,p:4}], parole:["Darwin","evoluzionismo","fissismo","Mendel"] },
+
+"cosa-dice-darwin": { tipo:"voce", genere:"concetto", titolo:"Che cosa dice davvero la selezione naturale", sigla:"Selezione naturale",
+  quando:"1859", chi:["Charles Darwin"],
+  cosa:"Tutti gli esseri viventi si evolvono per adattarsi all'ambiente, attraverso un processo di **selezione naturale**: sopravvivono gli individui e le specie con maggiori capacità di adattamento. L'ordine naturale è sempre instabile e in divenire.",
+  conta:"Il punto che viene tradito subito dopo: il più adatto **non è necessariamente «superiore»**. Chi lo dimentica ha già smesso di parlare di Darwin.",
+  da:[{l:"T",c:16,p:4}], parole:["selezione naturale","adattamento"],
+  errore:"credere che Darwin abbia parlato di razze superiori e inferiori",
+  lega:[{scheda:"darwinismo-sociale", tipo:"deformato_in", perche:""},
+        {scheda:"darwin-contro-darwinismo", tipo:"confronto", perche:""}] },
+
+"darwinismo-sociale": { tipo:"voce", genere:"concetto", titolo:"Il darwinismo sociale", sigla:"Darwinismo sociale",
+  quando:"seconda metà dell'Ottocento", dove:"Europa",
+  cosa:"Teoria evoluzionista, idea positivista di progresso e nazionalismo ottocentesco vengono fusi — spesso in modo improprio — e applicati alla politica: ne esce la tesi che l'intero meccanismo della vita in società si basi sulla selezione naturale.",
+  conta:"Trasforma un'osservazione sulla natura in una regola di governo: se vince il più adatto, allora chi vince ha ragione di vincere.",
+  da:[{l:"T",c:16,p:4},{l:"Q",c:1,p:6}], parole:["darwinismo sociale","progresso","competizione"],
+  confondi:[{scheda:"cosa-dice-darwin", differenza:"Darwin descrive le specie in natura; il darwinismo sociale prescrive come devono stare gli uomini fra loro"}],
+  lega:[{scheda:"spencer", tipo:"formulato_da", perche:""},
+        {scheda:"missione-civilizzatrice", tipo:"giustifica", perche:""}] },
+
+"spencer": { tipo:"voce", genere:"persona", titolo:"Herbert Spencer", sigla:"Spencer",
+  quando:"1851", dove:"Gran Bretagna", chi:["Herbert Spencer"],
+  cosa:"In *Social Statics* sostiene che l'evoluzione è progresso, una legge universale; anche nella sfera sociale vige una spietata competizione individuale che non va ostacolata con leggi o istituzioni a favore dei più deboli, perché alla fine prevarranno i migliori.",
+  conta:"Mostra che il darwinismo sociale non nasce da Darwin: l'idea c'era già, e il nome di Darwin le è stato appiccicato dopo.",
+  da:[{l:"T",c:16,p:4}], parole:["Spencer","Social Statics"],
+  nota:"La data conta: 1851, otto anni prima dell'«Origine delle specie»." },
+
+"gobineau": { tipo:"voce", genere:"persona", titolo:"Joseph Arthur de Gobineau", sigla:"Gobineau",
+  quando:"1853-1855", dove:"Francia", chi:["Joseph Arthur de Gobineau"],
+  cosa:"Nel *Saggio sull'ineguaglianza delle razze umane* suddivide l'umanità sulla base di presunte caratteristiche psicologiche innate, legge la storia umana come storia dei conflitti fra razze superiori e inferiori e teorizza il diritto della **«razza ariana»** a dominare, senza mai «ibridarsi» con le altre.",
+  conta:"È la forma letteraria del razzismo, che poi cercherà una copertura scientifica. Trovò una sponda inattesa — e involontaria — in alcuni scienziati.",
+  elementi:[
+    {nome:"Houston Chamberlain", spiega:"insieme a Gobineau inventò l'espressione «razza ariana» per indicare i popoli di origine indoeuropea."}
+  ],
+  da:[{l:"T",c:16,p:4},{l:"Q",c:1,p:6}], parole:["Gobineau","razza ariana"],
+  lega:[{scheda:"haeckel", tipo:"sincronia", perche:"stessi anni, strade diverse: Gobineau parte dalla letteratura, Haeckel dalla biologia"}] },
+
+"haeckel": { tipo:"voce", genere:"persona", titolo:"Ernst Haeckel", sigla:"Haeckel",
+  quando:"1868", dove:"Germania", chi:["Ernst Haeckel"],
+  cosa:"In *Storia naturale della creazione* classifica gerarchicamente le «razze» umane dal più basso al più alto grado di evoluzione: alla base dell'albero filogenetico alcune popolazioni africane e micronesiane, al vertice la **razza romana** e quella **germanica**.",
+  conta:"È il passaggio dal pregiudizio alla finta prova scientifica. Le sue convinzioni erano il prodotto di un'applicazione delle teorie evoluzionistiche al genere umano, secondo una logica che all'epoca era ritenuta coerente; ma l'errore di impostazione finì per «giustificare scientificamente» la superiorità di un'etnia sull'altra e per dar credito a chi riteneva che le razze superiori avessero il diritto di governare quelle inferiori.",
+  elementi:[
+    {nome:"Il timore della medicina", spiega:"Haeckel temeva che la medicina moderna, il cui obiettivo era guarire e prolungare la vita di tutti i pazienti, avrebbe avuto effetti nocivi perché avrebbe impedito la selezione naturale."},
+    {nome:"La ripresa nazista", spiega:"solo pochi decenni dopo le sue teorie vennero riprese e distorte dal nazismo: il primato della razza germanica fu affermato dagli scienziati nazisti, che operarono classificazioni dividendo l'umanità in esseri umani e subumani."}
+  ],
+  da:[{l:"T",c:16,p:4},{l:"Q",c:1,p:6,dove:"box «Ernst Haeckel e la deriva del darwinismo sociale»"}],
+  parole:["Haeckel","albero filogenetico"],
+  nota:"Haeckel, pur citando l'uso spartano dell'abbandono dei bambini malati, deformi o deboli, non lo considerò mai un modello selettivo da incoraggiare.",
+  lega:[{scheda:"eugenetica", tipo:"prepara", perche:""},
+        {scheda:"gobineau", tipo:"sincronia", perche:"stessi anni, due discipline diverse, stessa direzione"}] },
+
+"missione-civilizzatrice": { tipo:"voce", genere:"concetto", titolo:"La «missione civilizzatrice dell'uomo bianco»", sigla:"Missione civilizzatrice",
+  quando:"dal 1870 circa", dove:"Europa e colonie",
+  cosa:"Retorica secondo cui gli europei, in quanto appartenenti a una presunta civiltà superiore, avrebbero il **dovere morale di civilizzare** le popolazioni indigene degli altri continenti. Si fonda sulle **teorie razziali**: la supremazia culturale degli europei avrebbe così una giustificazione biologica.",
+  conta:"È il punto in cui l'idea diventa politica estera: gli obiettivi economici e di prestigio internazionale, perseguiti con la forza delle armi, vengono motivati come un dovere.",
+  elementi:[
+    {nome:"Il contesto", spiega:"nazionalismo esasperato e aggressivo, espansione coloniale dal 1870 circa, bisogno di nemici esterni e interni per ottenere consensi e contrastare la diffusione del socialismo fra i lavoratori."},
+    {nome:"Il manifesto del «Giardino zoologico d'acclimatazione»", spiega:"Parigi, 1892: vi venivano esibiti rappresentanti del popolo somalo."}
+  ],
+  da:[{l:"Q",c:1,p:6}], parole:["missione civilizzatrice","imperialismo","nazionalismo"],
+  lega:[{scheda:"darwinismo-sociale", tipo:"usa", perche:""}] },
+
+"antisemitismo": { tipo:"voce", genere:"concetto", titolo:"L'antisemitismo moderno", sigla:"Antisemitismo",
+  quando:"XIX secolo", dove:"Europa",
+  cosa:"Il termine «*antisemita*» nasce nel XIX secolo e, fin dalle origini, non indica l'odio per tutti i semiti ma specificamente quello nei confronti degli ebrei.",
+  conta:"All'antigiudaismo popolare, di origine religiosa e medievale, si aggiungono le ragioni scaturite dalle teorie del **razzismo scientifico** e del **darwinismo sociale**, che facevano degli «ebrei semiti» una razza inferiore a quella ariana.",
+  svolgimento:[
+    {passo:"dalla fine del XVIII secolo gli ebrei ottengono l'emancipazione in molte società europee e sono liberati dai ghetti"},
+    {passo:"per la prima volta possono ambire a ruoli prima preclusi; la presenza concorrenziale in posizioni di potere origina una nuova forma di intolleranza"},
+    {passo:"alla fine dell'Ottocento, con i nazionalismi radicati e reazionari, l'idea che una minoranza interna abbia una «doppia fedeltà» appare un ostacolo alla coesione nazionale"},
+    {passo:"il pretesto per violente campagne d'odio, persecuzioni e **pogrom**"}
+  ],
+  numeri:[
+    {cosa:"emancipazione in Francia", valore:"1791"},
+    {cosa:"nei Paesi Bassi", valore:"1834"},
+    {cosa:"in Italia", valore:"1861"},
+    {cosa:"in Gran Bretagna", valore:"1858"},
+    {cosa:"in Austria", valore:"1867"}
+  ],
+  elementi:[
+    {nome:"L'accusa", spiega:"gli antisemiti denunciavano presunte cospirazioni di un'internazionale ebraica per il controllo economico e politico del mondo."},
+    {nome:"L'antigiudaismo precedente", spiega:"alimentato dalla Chiesa nel Medioevo: gli ebrei accusati di diffondere epidemie e carestie, e di essere «deicidi»."}
+  ],
+  da:[{l:"Q",c:1,p:6},{l:"Q",c:2,p:6,dove:"box «L'antisemitismo in età moderna»"}],
+  parole:["antisemitismo","antigiudaismo","pogrom","doppia fedeltà"],
+  confondi:[{scheda:"gobineau", differenza:"il razzismo di Gobineau è una teoria generale sulle razze; l'antisemitismo è l'applicazione a un gruppo preciso, con radici religiose molto più antiche"}] },
+
+"eugenetica": { tipo:"voce", genere:"concetto", titolo:"Le teorie eugenetiche", sigla:"Eugenetica",
+  quando:"fine Ottocento - Novecento", dove:"Europa e Stati Uniti",
+  cosa:"Insieme di teorie e pratiche medico-scientifiche che si prefiggono di **selezionare in modo arbitrario** le caratteristiche di una popolazione, favorendo la riproduzione di soggetti considerati desiderabili e prevenendo la nascita di soggetti «indesiderabili», perché malati o considerati inferiori.",
+  conta:"È il punto in cui l'idea diventa pratica: ogni uomo avrebbe il dovere di preservare la **purezza dei geni** della sua comunità, controllando la procreazione. Attuata nei campi di sterminio nazisti, fu però sostenuta e applicata nel Novecento anche in paesi democratici come gli Stati Uniti e la Svezia.",
+  da:[{l:"Q",c:1,p:6}], parole:["eugenetica","purezza della razza"],
+  lega:[{documento:"totalitarismi", scheda:"nazismo", tipo:"prosegue", perche:"il filo arriva al programma nazista: argomento di un altro documento"}] },
+
+"razze-non-esistono": { tipo:"voce", genere:"concetto", titolo:"Le razze umane non esistono", sigla:"Una sola specie",
+  quando:"oggi",
+  cosa:"La genetica ha stabilito che le razze umane **semplicemente non esistono**: tutti gli esseri umani appartengono alla **stessa specie**. Nell'Ottocento le scienze naturali muovevano i primi passi e questo concetto, fondamentale, non era ancora chiaro.",
+  conta:"L'uso ideologico delle teorie darwiniane non era né scienza naturale né scienza sociale: era **propaganda razzista**. È il giudizio con cui si chiude l'argomento.",
+  da:[{l:"T",c:16,p:4},{l:"Q",c:1,p:6}], parole:["genetica","una sola specie"] },
+
+"darwin-contro-darwinismo": { tipo:"confronto", titolo:"Darwin e il darwinismo sociale", sigla:"Chi dice cosa",
+  da:[{l:"T",c:16,p:4}],
+  domande:["di che cosa parla","che cosa afferma","che cosa ne segue","chi lo sostiene"],
+  casi:[
+    { nome:"Darwin", scheda:"cosa-dice-darwin", risposte:[
+      "le specie viventi in natura",
+      "sopravvive chi si adatta meglio all'ambiente",
+      "niente: descrive, non prescrive. Il più adatto non è superiore",
+      "Darwin, e poi Mendel per l'ereditarietà" ] },
+    { nome:"Darwinismo sociale", scheda:"darwinismo-sociale", risposte:[
+      "gli uomini e le nazioni",
+      "nella società vige la stessa selezione",
+      "i forti hanno diritto di prevalere; i deboli non vanno protetti",
+      "Spencer, poi Gobineau e Haeckel in chiave razziale" ] }
+  ] }
+
+  }
+}
+};
+
+const TIPI_LEGA = {
+  causa: "causa", conseguenza: "conseguenza di", prosegue: "prosegue in",
+  chiude: "chiude", sincronia: "nello stesso periodo", esempio: "per esempio",
+  giustifica: "giustifica", confronto: "a confronto in", usa: "si appoggia a",
+  deformato_in: "deformato in", formulato_da: "formulato da", prepara: "prepara"
+};
+
+const RIPASSO = {
+  evento:   ["quando", "chi"],
+  persona:  ["cosa", "quando"],
+  concetto: ["cosa"],
+  processo: ["conta"]
+};
+/* ============ stato ============ */
+let docId = "alleanze";
+let schedaId = null;
+let vista = "mappa";
+let ripasso = false;
+let aperti = {};
+
+const $ = (s,r=document)=>r.querySelector(s);
+const el = (t,c,txt)=>{const n=document.createElement(t); if(c)n.className=c; if(txt!=null)n.textContent=txt; return n;};
+const doc = ()=>DOCS[docId];
+const sc  = id => doc().schede[id];
+const ramoDi = id => doc().rami.find(r=>r.schede.includes(id));
+const anno = s => { const m=(s||"").match(/\d{4}/); return m?+m[0]:9999; };
+
+function tinte(hue){
+  const s=getComputedStyle(document.documentElement);
+  const L=s.getPropertyValue('--L'), C=s.getPropertyValue('--C');
+  const Lk=s.getPropertyValue('--Lk'), Ck=s.getPropertyValue('--Ck');
+  return {t:`oklch(0.62 0.17 ${hue})`, tc:`oklch(${L} ${C} ${hue})`, tk:`oklch(${Lk} ${Ck} ${hue})`};
+}
+function applicaTinta(nodo,hue){
+  const {t,tc,tk}=tinte(hue);
+  nodo.style.setProperty('--t',t); nodo.style.setProperty('--tc',tc); nodo.style.setProperty('--tk',tk);
+}
+
+/* ============ testata ============ */
+/* tre famiglie, per quello che servono:
+   Leggi  = il contenuto, nella sua forma (mappa) o nel tempo (cronologia)
+   Trova  = gli indici, per cercare una voce
+   Esercita = il ripasso
+   Fuori dalle famiglie: l'argomento (dove sono) e la copertura (stato della materia). */
+const VISTE = {
+  leggi: [["mappa","Mappa"],["cronologia","Cronologia"]],
+  trova: [["glossario","Glossario"],["persone","Chi è chi"],["svolte","Svolte"]]
+};
+
+function barra(){
+  /* selettore dell'argomento: regge anche dieci argomenti */
+  const sd=$("#sel-doc"); sd.innerHTML="";
+  Object.entries(DOCS).forEach(([id,d])=>{
+    const o=el("option",null,d.titolo); o.value=id; if(id===docId) o.selected=true; sd.append(o);
+  });
+  sd.onchange=()=>{ docId=sd.value; schedaId=null; aperti={}; if(vista==="copertura") vista="mappa"; disegna(); };
+
+  Object.entries(VISTE).forEach(([fam,lista])=>{
+    const g=$("#g-"+fam); g.innerHTML="";
+    lista.forEach(([id,nome])=>{
+      const b=el("button","btn",nome);
+      b.setAttribute("aria-pressed", id===vista);
+      b.onclick=()=>{vista=id; disegna(); window.scrollTo({top:0});};
+      g.append(b);
+    });
+  });
+
+  const bc=$("#b-copertura");
+  bc.setAttribute("aria-pressed", vista==="copertura");
+  bc.onclick=()=>{ vista = vista==="copertura" ? "mappa" : "copertura"; disegna(); window.scrollTo({top:0}); };
+
+  const g=$("#guida"); g.innerHTML="";
+  const d=doc();
+  if(vista==="copertura"){
+    const n=el("div"); n.append(el("b",null,"Copertura — vista di materia"),
+      document.createTextNode("Non riguarda un argomento solo: dice quali paragrafi del libro sono finiti in una scheda e quali no. Si ricava dal campo «da» delle schede."));
+    g.append(n); return;
+  }
+  [["Quando usarlo",d.ingresso],["La domanda da farsi",d.guida]].forEach(([t,v])=>{
+    const n=el("div"); n.append(el("b",null,t), document.createTextNode(v)); g.append(n);
+  });
+}
+
+/* ============ mappa ============ */
+function mappa(){
+  const m=$("#mappa"); m.innerHTML="";
+  if(vista==="copertura"){ m.style.display="none"; return; }
+  m.style.display="";
+  if(vista==="cronologia") return cronoColonna(m);
+  m.append(el("div","col-t","Mappa dell'argomento"));
+  m.append(el("div","centro",doc().centro));
+  doc().rami.forEach(r=>{
+    const box=el("div","ramo"); applicaTinta(box,r.hue);
+    const ap = aperti[r.id]===undefined ? true : aperti[r.id];
+    const t=el("button","ramo-t");
+    t.append(el("span","piu", ap?"−":"+"), el("span",null,r.nome));
+    if(r.quando) t.append(el("span","anni",r.quando));
+    t.onclick=()=>{aperti[r.id]=!ap; mappa();};
+    box.append(t);
+    if(ap){
+      const f=el("div","foglie");
+      r.schede.forEach((id,i)=>{
+        const s=sc(id); if(!s) return;
+        const b=el("button","foglia"+(id===schedaId?" sel":""));
+        if(r.ordine) b.append(el("span","n",(i+1)+"."));
+        else b.append(el("span","pall"));
+        const nome=el("span",null,s.sigla||s.titolo);
+        if(s.svolta) nome.append(el("span","svolta-m"," ◆"));
+        b.append(nome);
+        if(s.quando) b.append(el("span","q",s.quando));
+        b.onclick=()=>{schedaId=id; vista="mappa"; disegna(); window.scrollTo({top:0});};
+        f.append(b);
+      });
+      box.append(f);
+    }
+    m.append(box);
+  });
+}
+
+/* ============ formattazione del testo ============ */
+/* Nei campi si scrive **grassetto** per i termini chiave e *corsivo* per le
+   parole straniere e i titoli delle opere: la stessa sintassi degli appunti
+   .md, cosi' Ste puo' correggerla a mano. */
+function fmt(t){
+  const frag=document.createDocumentFragment();
+  const re=/\*\*(.+?)\*\*|\*(.+?)\*/g;
+  let last=0,m;
+  while((m=re.exec(t))!==null){
+    if(m.index>last) frag.append(t.slice(last,m.index));
+    frag.append(m[1]!==undefined ? el("strong",null,m[1]) : el("em",null,m[2]));
+    last=re.lastIndex;
+  }
+  if(last<t.length) frag.append(t.slice(last));
+  return frag;
+}
+const pulito = t => String(t).replace(/\*\*?/g,"");
+/* mette testo formattato dentro un nodo */
+function testo(nodo,t){ nodo.append(fmt(t)); return nodo; }
+
+/* ============ cronologia come colonna ============ */
+function cronoColonna(m){
+  const voci=Object.entries(doc().schede).filter(([,s])=>s.tipo==="voce");
+  const datate=voci.filter(([,s])=>s.quando && anno(s.quando)<9999)
+                   .sort((a,b)=>anno(a[1].quando)-anno(b[1].quando));
+  const gruppi=[];
+  datate.forEach(([id,s])=>{
+    const a=anno(s.quando), g=gruppi[gruppi.length-1];
+    if(g && g.anno===a) g.voci.push([id,s]); else gruppi.push({anno:a, voci:[[id,s]]});
+  });
+
+  m.append(el("div","col-t","Cronologia"));
+  const c=el("div","crono2");
+  gruppi.forEach((g,i)=>{
+    if(i>0){
+      const salto=g.anno-gruppi[i-1].anno;
+      if(salto>=4){ const s2=el("div","salto"); s2.append(el("span",null,salto+" anni")); c.append(s2); }
+    }
+    const blocco=el("div","blk"+(g.voci.some(([,s])=>s.svolta)?" blk-sv":""));
+    const col=el("div","blk-a");
+    col.append(el("div","blk-anno",String(g.anno)));
+    if(g.voci.length>1) col.append(el("div","blk-n",g.voci.length+" fatti"));
+    blocco.append(col);
+    const lista=el("div","blk-v");
+    g.voci.forEach(([id,s])=>{
+      const r=ramoDi(id);
+      const b=el("button","vv"+(id===schedaId?" vv-sel":""));
+      if(r) applicaTinta(b,r.hue);
+      const t=el("span","vv-t");
+      if(s.svolta) t.append(el("span","svolta-m","◆ "));
+      t.append(el("span",null,s.titolo));
+      b.append(t);
+      const sotto=el("span","vv-s");
+      if(s.quando && !/^\d{4}$/.test(s.quando.trim())) sotto.append(el("span","vv-q",s.quando));
+      if(r) sotto.append(el("span","vv-r",r.nome));
+      b.append(sotto);
+      b.onclick=()=>{schedaId=id; disegna();};
+      lista.append(b);
+    });
+    blocco.append(lista);
+    c.append(blocco);
+  });
+
+  const senza=voci.filter(([,s])=>!s.quando || anno(s.quando)===9999);
+  if(senza.length){
+    const z=el("div","senza-data");
+    z.append(el("div","et","Senza una data precisa · "+senza.length));
+    const l=el("div","senza-l");
+    senza.forEach(([id,s])=>{
+      const b=el("button","chip-nav"+(id===schedaId?" on":""),s.sigla||s.titolo);
+      b.onclick=()=>{schedaId=id; disegna();};
+      l.append(b);
+    });
+    z.append(l); c.append(z);
+  }
+  m.append(c);
+}
+
+/* ============ campo nascondibile ============ */
+function campo(t, nascondi){
+  if(!nascondi) return fmt(t);
+  const s=el("span","nascosto",pulito(t));
+  s.title="clicca per scoprire";
+  s.onclick=()=>s.classList.add("vis");
+  return s;
+}
+function sezione(id,titolo){
+  const s=el("section","sez"); s.id="sez-"+id;
+  s.append(el("h2","sez-t",titolo));
+  return s;
+}
+
+/* ============ scheda ============ */
+function scheda(id){
+  const p=$("#pannello"); p.innerHTML="";
+  const s=sc(id); if(!s){ p.append(el("p","vuoto-v","Scegli una voce dalla mappa.")); return; }
+  const r=ramoDi(id); if(r) applicaTinta(p,r.hue);
+  if(s.tipo==="confronto") return confronto(s,p);
+
+  const nascosti = ripasso ? (RIPASSO[s.genere]||[]) : [];
+
+  /* titolo: tutta la larghezza */
+  const testa=el("div","testa");
+  testa.append(el("div","tipo", s.genere + (s.svolta?" · punto di svolta":"")));
+  testa.append(el("h1",null,s.titolo));
+  p.append(testa);
+
+  /* corpo a sinistra, spalla a destra: fra titolo e testo non si mette niente */
+  const g=el("div","scheda-g");
+  const corpo=el("div","corpo");
+  const spalla=el("aside","spalla");
+  g.append(corpo,spalla); p.append(g);
+
+  if(ripasso && nascosti.length)
+    corpo.append(el("div","ripasso-nota","Ripasso: "+nascosti.map(c=>"«"+c+"»").join(" e ")+" sono coperti. Clicca per scoprire."));
+
+  /* spalla 1: i dati della voce */
+  const dati=el("div","sp-blocco");
+  dati.append(el("div","sp-t","In una riga"));
+  [["quando",s.quando],["dove",s.dove],["chi",(s.chi||[]).join(", ")]].forEach(([k,v])=>{
+    const r=el("div","dato"+(v?"":" vuoto"));
+    r.append(el("div","dato-k",k));
+    const val=el("div","dato-v");
+    if(v) val.append(campo(v, nascosti.includes(k))); else val.textContent="—";
+    r.append(val); dati.append(r);
+  });
+  spalla.append(dati);
+
+  /* spalla 2: le sezioni di questa scheda */
+  const sezioni=[];
+  const seg=(id,nome,cond)=>{ if(cond) sezioni.push([id,nome]); };
+  seg("nocciolo","In breve",true);
+  seg("svolgimento","Come si svolge",(s.svolgimento||[]).length);
+  seg("elementi","I dettagli",(s.elementi||[]).length);
+  seg("numeri","I numeri",(s.numeri||[]).length);
+  seg("attenzione","Attenzione",s.errore||(s.confondi||[]).length||s.nota);
+  seg("altro","Documenti e studi",(s.citazioni||[]).length||(s.storiografia||[]).length);
+  seg("lega","Collegamenti",(s.lega||[]).length);
+  if(sezioni.length>1){
+    const nav=el("nav","sp-blocco");
+    nav.append(el("div","sp-t","In questa scheda"));
+    sezioni.forEach(([sid,nome])=>{
+      const b=el("button","sp-voce",nome);
+      b.onclick=()=>document.getElementById("sez-"+sid)?.scrollIntoView({behavior:"smooth",block:"start"});
+      nav.append(b);
+    });
+    spalla.append(nav);
+  }
+
+  /* 1. nocciolo */
+  const s1=sezione("nocciolo","In breve");
+  const b1=el("div","blocco"); b1.append(el("div","et","Che cos'è"));
+  const p1=el("p"); p1.append(campo(s.cosa, nascosti.includes("cosa"))); b1.append(p1); s1.append(b1);
+  const b2=el("div","blocco conta"); b2.append(el("div","et","Perché conta"));
+  const p2=el("p"); p2.append(campo(s.conta, nascosti.includes("conta"))); b2.append(p2); s1.append(b2);
+  corpo.append(s1);
+
+  /* 2. svolgimento */
+  if((s.svolgimento||[]).length){
+    const sx=sezione("svolgimento","Come si svolge");
+    const ol=el("ol","passi");
+    s.svolgimento.forEach(v=>{
+      const li=el("li");
+      if(v.quando) li.append(el("span","passo-q",v.quando));
+      li.append(testo(el("span"),v.passo));
+      ol.append(li);
+    });
+    sx.append(ol); corpo.append(sx);
+  }
+
+  /* 3. elementi */
+  if((s.elementi||[]).length){
+    const sx=sezione("elementi","I dettagli");
+    s.elementi.forEach(v=>{
+      const d=el("div","det");
+      d.append(testo(el("div","det-n"),v.nome), testo(el("div"),v.spiega));
+      sx.append(d);
+    });
+    corpo.append(sx);
+  }
+
+  /* 4. numeri */
+  if((s.numeri||[]).length){
+    const sx=sezione("numeri","I numeri");
+    const g=el("div","numeri");
+    s.numeri.forEach(v=>{
+      const d=el("div","num");
+      d.append(el("div","num-v", ripasso? "···" : v.valore), el("div","num-c",v.cosa));
+      if(ripasso){ d.classList.add("nascosto-n"); d.onclick=()=>{d.firstChild.textContent=v.valore; d.classList.remove("nascosto-n");}; }
+      g.append(d);
+    });
+    sx.append(g); corpo.append(sx);
+  }
+
+  /* 5. attenzione */
+  if(s.errore||(s.confondi||[]).length||s.nota){
+    const sx=sezione("attenzione","Attenzione");
+    if(s.errore){ const q=el("div","riq att"); q.append(el("div","et","Errore tipico"), testo(el("div"),s.errore)); sx.append(q); }
+    (s.confondi||[]).forEach(c=>{
+      const q=el("div","riq"); q.append(el("div","et","Da non confondere con"));
+      const b=el("button","lega");
+      b.append(el("span","t",(sc(c.scheda)?.sigla)||c.scheda), testo(el("span"),c.differenza));
+      b.onclick=()=>{schedaId=c.scheda; disegna(); window.scrollTo({top:0});};
+      q.append(b); sx.append(q);
+    });
+    if(s.nota){ const q=el("div","riq"); q.append(el("div","et","Nota"), testo(el("div"),s.nota)); sx.append(q); }
+    corpo.append(sx);
+  }
+
+  /* 6. documenti e studi */
+  if((s.citazioni||[]).length||(s.storiografia||[]).length){
+    const sx=sezione("altro","Documenti e studi");
+    (s.citazioni||[]).forEach(c=>{
+      const q=el("div","riq cit");
+      q.append(el("div","et","Documento"), testo(el("div","cit-t"),"«"+c.testo+"»"),
+               el("div","cit-f",c.chi+(c.dove?" — "+c.dove:"")));
+      sx.append(q);
+    });
+    (s.storiografia||[]).forEach(h=>{
+      const q=el("div","riq"); q.append(el("div","et","Storiografia"),
+        el("div",null,h.autore+", «"+h.titolo+"» — "+h.pagina)); sx.append(q);
+    });
+    corpo.append(sx);
+  }
+
+  /* 7. collegamenti */
+  if((s.lega||[]).length){
+    const sx=sezione("lega","Collegamenti");
+    const l=el("div","leghe");
+    s.lega.forEach(g=>{
+      const fuori=!!g.documento, bers=fuori?null:sc(g.scheda);
+      const btn=el("button","lega"+(fuori?" fuori":""));
+      btn.append(el("span","t",TIPI_LEGA[g.tipo]||g.tipo));
+      const corpo=el("span");
+      corpo.append(el("b",null, fuori ? (g.scheda+" (in «"+g.documento+"»)") : (bers?bers.titolo:g.scheda)));
+      if(g.perche) corpo.append(testo(el("div","p"),g.perche));
+      if(fuori) corpo.append(el("div","p","documento non ancora creato — avviso, non errore"));
+      btn.append(corpo);
+      if(fuori) btn.disabled=true;
+      else btn.onclick=()=>{schedaId=g.scheda; disegna(); window.scrollTo({top:0});};
+      l.append(btn);
+    });
+    sx.append(l); corpo.append(sx);
+  }
+
+  corpo.append(piede(s));
+}
+
+function piede(s){
+  const f=el("div","fonte");
+  f.append(el("span",null,"Dal libro: "));
+  (s.da||[]).forEach(d=>f.append(el("code",null,fonteTesto(d))));
+  if((s.parole||[]).length) f.append(el("div","pc","parole chiave: "+s.parole.join(" · ")));
+  return f;
+}
+
+/* ============ confronto ============ */
+function confronto(s,p){
+  p.append(el("div","tipo","confronto"));
+  p.append(el("h1",null,s.titolo));
+  if(ripasso) p.append(el("div","ripasso-nota","Ripasso: le risposte di una colonna sono coperte. Clicca una casella per scoprirla."));
+  const t=el("table");
+  const thead=el("thead"); const tr=el("tr"); tr.append(el("th",null,""));
+  s.casi.forEach(c=>{
+    const th=el("th"); const b=el("button","btn"); b.textContent=c.nome;
+    b.onclick=()=>{ if(c.scheda){ schedaId=c.scheda; vista="mappa"; disegna(); window.scrollTo({top:0}); } };
+    th.append(b); tr.append(th);
+  });
+  thead.append(tr); t.append(thead);
+  const tb=el("tbody");
+  s.domande.forEach((d,i)=>{
+    const r=el("tr"); r.append(el("th",null,d));
+    s.casi.forEach((c,j)=>{
+      const td=testo(el("td"),c.risposte[i]);
+      if(ripasso && j===1){ td.classList.add("nasc"); td.onclick=()=>td.classList.remove("nasc"); }
+      r.append(td);
+    });
+    tb.append(r);
+  });
+  t.append(tb); p.append(t);
+  p.append(piede(s));
+}
+
+/* ============ viste ricavate ============ */
+function ricavata(){
+  const p=$("#pannello"); p.innerHTML=""; p.classList.add("vista");
+  const voci=Object.entries(doc().schede).filter(([,s])=>s.tipo==="voce");
+
+  if(vista==="copertura") return copertura(p);
+
+  const conf = {
+    glossario:["Glossario","Ricavato: tutte le voci di genere «concetto».", s=>s.genere==="concetto"],
+    persone:["Chi è chi","Ricavato: tutte le voci di genere «persona».", s=>s.genere==="persona"],
+    svolte:["Svolte","Ricavate: le voci segnate come punto di svolta.", s=>s.svolta]
+  }[vista];
+  p.append(el("h2",null,conf[0]));
+  p.append(el("p","sotto",conf[1]));
+  const g=el("div","gl");
+  const sel=voci.filter(([,s])=>conf[2](s));
+  if(!sel.length) p.append(el("p","vuoto-v","Nessuna voce di questo tipo in questo argomento."));
+  sel.forEach(([id,s])=>{
+    const v=el("div","v");
+    const b=el("button",null,pulito(s.titolo)); b.onclick=()=>{schedaId=id; vista="mappa"; disegna(); window.scrollTo({top:0});};
+    const h=el("h3"); h.append(b); v.append(h);
+    v.append(testo(el("p"), vista==="svolte" ? s.conta : s.cosa));
+    g.append(v);
+  });
+  p.append(g);
+}
+
+/* ============ copertura del libro ============ */
+function copertura(p){
+  /* indice: libro/cap/par -> [{doc, scheda}] */
+  const idx={};
+  Object.entries(DOCS).forEach(([did,d])=>{
+    Object.entries(d.schede).forEach(([sid,s])=>{
+      (s.da||[]).forEach(x=>{
+        const k=`${x.l}-${x.c}-${x.p||0}`;
+        (idx[k]=idx[k]||[]).push({doc:did, docNome:d.titolo, scheda:sid, titolo:s.titolo});
+      });
+    });
+  });
+
+  p.append(el("h2",null,"Copertura del libro"));
+  p.append(el("p","sotto","Di tutta la materia Storia, non di un argomento solo. In rosso i paragrafi che nessuna scheda copre: lì il libro dice cose che nel tool non ci sono."));
+
+  let tot=0, cop=0;
+  const corpo=el("div");
+  Object.entries(LIBRI).forEach(([sigla,libro])=>{
+    corpo.append(el("h3","lib",libro.titolo));
+    libro.capitoli.forEach(c=>{
+      if(!c.paragrafi.length){
+        const d=el("div","par ignoto");
+        d.append(el("span","par-n",`cap. ${c.n}`), el("span","par-t",c.titolo));
+        corpo.append(d); return;
+      }
+      corpo.append(el("div","cap",`Cap. ${c.n} — ${c.titolo}`));
+      c.paragrafi.forEach(par=>{
+        tot++;
+        const hit = idx[`${sigla}-${c.n}-${par.n}`]||[];
+        if(hit.length) cop++;
+        const d=el("div","par"+(hit.length?"":" scoperto"));
+        d.append(el("span","par-n",`${par.n}.`), el("span","par-t",par.titolo));
+        const dove=el("span","par-d");
+        if(!hit.length) dove.append(el("span","nessuna","nessuna scheda"));
+        else {
+          const perDoc={};
+          hit.forEach(h=>{ (perDoc[h.docNome]=perDoc[h.docNome]||[]).push(h); });
+          Object.entries(perDoc).forEach(([nome,lista])=>{
+            const b=el("button","pill", `${lista.length} in «${nome}»`);
+            b.onclick=()=>{ docId=lista[0].doc; schedaId=lista[0].scheda; vista="mappa"; disegna(); window.scrollTo({top:0}); };
+            dove.append(b);
+          });
+        }
+        d.append(dove);
+        corpo.append(d);
+      });
+    });
+  });
+
+  const barra=el("div","cop-tot");
+  const pc=Math.round(cop/tot*100);
+  barra.append(el("div","cop-n", `${cop} paragrafi su ${tot} hanno almeno una scheda (${pc}%)`));
+  const b=el("div","cop-barra"); const f=el("div","cop-f"); f.style.width=pc+"%"; b.append(f);
+  barra.append(b);
+  barra.append(el("div","cop-nota","Due argomenti costruiti coprono poco: è normale, e questa vista serve proprio a dirlo prima di una verifica."));
+  p.append(barra);
+  p.append(corpo);
+}
+
+/* ============ disegna ============ */
+function disegna(){
+  barra(); mappa();
+  const p=$("#pannello"); p.classList.remove("vista");
+  document.body.classList.toggle("senza-mappa", vista==="copertura");
+  document.body.classList.toggle("modo-crono", vista==="cronologia");
+  if(vista==="mappa" || vista==="cronologia") scheda(schedaId || doc().rami[0].schede[0]);
+  else ricavata();
+  $("#b-ripasso").setAttribute("aria-pressed", ripasso);
+}
+
+$("#b-ripasso").onclick=()=>{ripasso=!ripasso; disegna();};
+$("#b-tema").onclick=function(){
+  const scuro = document.documentElement.getAttribute("data-tema")==="scuro";
+  document.documentElement.setAttribute("data-tema", scuro?"chiaro":"scuro");
+  this.textContent = scuro?"Scuro":"Chiaro";
+  disegna();
+};
+disegna();
+
+</script>
+</body>
+</html>

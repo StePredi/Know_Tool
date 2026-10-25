@@ -1,0 +1,29 @@
+tipo: voce
+id: darwinismo-sociale
+titolo: Il darwinismo sociale
+sigla: Darwinismo sociale
+genere: concetto
+quando: seconda metà dell'Ottocento
+dove: Europa
+cosa: 'Teoria evoluzionista, idea positivista di progresso e nazionalismo ottocentesco vengono fusi —
+  spesso in modo improprio — e applicati alla politica: ne esce la tesi che l''intero meccanismo della
+  vita in società si basi sulla selezione naturale.'
+conta: 'Trasforma un''osservazione sulla natura in una regola di governo: se vince il più adatto, allora
+  chi vince ha ragione di vincere.'
+confondi:
+- scheda: cosa-dice-darwin
+  differenza: Darwin descrive le specie in natura; il darwinismo sociale prescrive come devono stare gli
+    uomini fra loro
+lega:
+- scheda: spencer
+  tipo: formulato_da
+- scheda: missione-civilizzatrice
+  tipo: giustifica
+da:
+- l: T
+  c: 16
+  p: 4
+- l: Q
+  c: 1
+  p: 6
+parole: darwinismo sociale, progresso, competizione

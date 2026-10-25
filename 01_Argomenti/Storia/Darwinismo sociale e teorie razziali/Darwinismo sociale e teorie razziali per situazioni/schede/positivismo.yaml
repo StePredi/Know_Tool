@@ -1,0 +1,30 @@
+tipo: voce
+id: positivismo
+titolo: Il positivismo
+sigla: Positivismo
+genere: concetto
+quando: anni Venti-Quaranta dell'Ottocento
+dove: Francia, poi Europa
+chi:
+- Henri Saint-Simon
+- Auguste Comte
+cosa: 'Termine coniato da Saint-Simon per indicare la preminenza delle scienze sperimentali, «positive»
+  perché basate su dati reali. Comte lo rende famoso negli anni Quaranta sostenendo che il metodo scientifico
+  può applicarsi anche alla società: nasce una nuova scienza sociale, la **sociologia**.'
+conta: 'È il terreno su cui tutto il resto cresce: l''idea che la scienza possa spiegare anche gli uomini
+  e le nazioni. Diventa una mentalità diffusa, un forte ottimismo che si sposa con l''intraprendenza della
+  borghesia in ascesa.'
+elementi:
+- nome: La diffusione
+  spiega: dalla Francia si estende alla Gran Bretagna con John Stuart Mill e Herbert Spencer.
+- nome: Il rappresentante più importante
+  spiega: 'non è un filosofo ma un naturalista: Charles Darwin.'
+lega:
+- scheda: darwinismo-sociale
+  tipo: giustifica
+  perche: dà l'idea di progresso che verrà fusa con l'evoluzionismo
+da:
+- l: T
+  c: 16
+  p: 4
+parole: positivismo, sociologia, Comte

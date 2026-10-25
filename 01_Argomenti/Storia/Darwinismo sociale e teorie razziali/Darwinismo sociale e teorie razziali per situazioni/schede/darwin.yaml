@@ -1,0 +1,28 @@
+tipo: voce
+id: darwin
+titolo: Charles Darwin
+sigla: Darwin
+genere: persona
+quando: 1859 e 1871
+dove: Gran Bretagna
+chi:
+- Charles Darwin
+cosa: Con *L'origine delle specie* (1859) e *L'origine dell'uomo* (1871) mostra che gli esseri viventi,
+  uomo compreso, si evolvono per adattarsi all'ambiente.
+conta: Teoria giudicata scandalosa perché contraddice il racconto biblico della creazione. Segna il superamento
+  definitivo della dottrina fissista, secondo cui le specie erano fisse e immutabili fin dall'inizio.
+svolgimento:
+- quando: '1859'
+  passo: '*L''origine delle specie*: evoluzione per **selezione naturale**'
+- quando: '1871'
+  passo: '*L''origine dell''uomo*: le stesse dinamiche valgono per la specie umana'
+elementi:
+- nome: Mendel
+  spiega: sviluppa la teoria dell'ereditarietà partendo dal concetto darwiniano di adattamento.
+- nome: Linneo
+  spiega: rappresentante della dottrina fissista superata da Darwin.
+da:
+- l: T
+  c: 16
+  p: 4
+parole: Darwin, evoluzionismo, fissismo, Mendel

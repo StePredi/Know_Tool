@@ -1,0 +1,28 @@
+tipo: voce
+id: triplice-intesa
+titolo: La Triplice intesa
+sigla: Intesa 1907
+genere: evento
+quando: '1907'
+dove: Europa
+chi:
+- Russia
+- Francia
+- Gran Bretagna
+cosa: Patto dal **carattere difensivo** fra Russia, Francia e Gran Bretagna, nato per **arginare la potenza
+  tedesca** e la Triplice alleanza.
+conta: Gli equilibri diplomatici europei si irrigidiscono pericolosamente in **due blocchi contrapposti**,
+  anticipando gli schieramenti che di lì a pochi anni avrebbero caratterizzato la Prima guerra mondiale.
+confondi:
+- scheda: triplice-1882
+  differenza: l'alleanza è del 1882 ed è Germania-Austria-Italia; l'intesa è del 1907 ed è Russia-Francia-Gran
+    Bretagna
+lega:
+- scheda: due-blocchi
+  tipo: confronto
+errore: 'confondere Triplice intesa e Triplice alleanza: i nomi si somigliano, gli schieramenti sono opposti'
+da:
+- l: Q
+  c: 2
+  p: 7
+parole: Triplice intesa, blocchi contrapposti

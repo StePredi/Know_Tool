@@ -1,0 +1,29 @@
+tipo: voce
+id: gobineau
+titolo: Joseph Arthur de Gobineau
+sigla: Gobineau
+genere: persona
+quando: 1853-1855
+dove: Francia
+chi:
+- Joseph Arthur de Gobineau
+cosa: Nel *Saggio sull'ineguaglianza delle razze umane* suddivide l'umanità sulla base di presunte caratteristiche
+  psicologiche innate, legge la storia umana come storia dei conflitti fra razze superiori e inferiori
+  e teorizza il diritto della **«razza ariana»** a dominare, senza mai «ibridarsi» con le altre.
+conta: È la forma letteraria del razzismo, che poi cercherà una copertura scientifica. Trovò una sponda
+  inattesa — e involontaria — in alcuni scienziati.
+elementi:
+- nome: Houston Chamberlain
+  spiega: insieme a Gobineau inventò l'espressione «razza ariana» per indicare i popoli di origine indoeuropea.
+lega:
+- scheda: haeckel
+  tipo: sincronia
+  perche: 'stessi anni, strade diverse: Gobineau parte dalla letteratura, Haeckel dalla biologia'
+da:
+- l: T
+  c: 16
+  p: 4
+- l: Q
+  c: 1
+  p: 6
+parole: Gobineau, razza ariana

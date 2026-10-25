@@ -1,0 +1,30 @@
+tipo: voce
+id: polveriera
+titolo: I Balcani diventano una polveriera
+sigla: La polveriera
+genere: processo
+quando: '1913'
+dove: Balcani
+chi:
+- Serbia
+- Austria-Ungheria
+- Russia
+cosa: La conclusione delle guerre balcaniche, invece di stabilizzare gli equilibri politici nell'area,
+  contribuisce al radicarsi di sentimenti nazionalisti, risentimenti e desideri di vendetta, rendendo
+  l'area un'autentica «**polveriera**».
+conta: I rapporti fra Serbia e Impero asburgico diventano ancora più tesi; entrambi possono contare su
+  stretti e agguerriti alleati in Europa, pronti a soccorrerli in caso di conflitto, innescando un pericoloso
+  **effetto domino**. Fu ciò che fece precipitare l'Europa nell'abisso del primo conflitto mondiale.
+svolta: true
+lega:
+- scheda: bosnia-1908
+  tipo: causa
+- scheda: due-blocchi
+  tipo: usa
+  perche: l'effetto domino funziona solo perché i due blocchi esistono già
+da:
+- l: Q
+  c: 2
+  p: 7
+  dove: riquadro «Punti di svolta»
+parole: polveriera, effetto domino, Grande Serbia

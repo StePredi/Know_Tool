@@ -1,0 +1,49 @@
+modello: per_situazioni
+titolo: Darwinismo sociale e teorie razziali
+centro: Dal positivismo al razzismo
+sottotitolo: ''
+ingresso: la domanda riguarda come si è giustificato il dominio di un popolo su un altro, o da dove viene
+  il razzismo «scientifico»
+guida: questa idea è scienza, o è un uso politico della scienza?
+esempiRicerca: ''
+rami:
+- id: da-dove-nasce
+  nome: Da dove nasce
+  colore: blue
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - positivismo
+    - darwin
+    - cosa-dice-darwin
+- id: lo-stravolgimento
+  nome: Lo stravolgimento
+  colore: red
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - darwinismo-sociale
+    - spencer
+    - gobineau
+    - haeckel
+- id: a-cosa-serve
+  nome: A cosa serve, in politica
+  colore: violet
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - missione-civilizzatrice
+    - antisemitismo
+    - eugenetica
+- id: giudizio
+  nome: Come si giudica oggi
+  colore: green
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - razze-non-esistono
+    - darwin-contro-darwinismo

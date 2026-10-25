@@ -1,0 +1,28 @@
+tipo: confronto
+id: darwin-contro-darwinismo
+titolo: Darwin e il darwinismo sociale
+sigla: Chi dice cosa
+domande:
+- di che cosa parla
+- che cosa afferma
+- che cosa ne segue
+- chi lo sostiene
+casi:
+- nome: Darwin
+  scheda: cosa-dice-darwin
+  risposte:
+  - le specie viventi in natura
+  - sopravvive chi si adatta meglio all'ambiente
+  - 'niente: descrive, non prescrive. Il più adatto non è superiore'
+  - Darwin, e poi Mendel per l'ereditarietà
+- nome: Darwinismo sociale
+  scheda: darwinismo-sociale
+  risposte:
+  - gli uomini e le nazioni
+  - nella società vige la stessa selezione
+  - i forti hanno diritto di prevalere; i deboli non vanno protetti
+  - Spencer, poi Gobineau e Haeckel in chiave razziale
+da:
+- l: T
+  c: 16
+  p: 4

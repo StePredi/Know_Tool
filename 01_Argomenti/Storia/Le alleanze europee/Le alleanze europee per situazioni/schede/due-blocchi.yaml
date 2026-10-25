@@ -1,0 +1,31 @@
+tipo: confronto
+id: due-blocchi
+titolo: Triplice alleanza e Triplice intesa
+sigla: I due blocchi
+domande:
+- chi ne fa parte
+- quando si forma
+- cosa tiene insieme
+- punto debole
+casi:
+- nome: Triplice alleanza
+  scheda: triplice-1882
+  risposte:
+  - Germania, Austria-Ungheria, Italia
+  - 1879 il nucleo, 1882 con l'Italia
+  - contenere la Russia nei Balcani; per l'Italia, non restare isolata
+  - l'Italia rivendica terre all'Austria, che è sua alleata
+- nome: Triplice intesa
+  scheda: triplice-intesa
+  risposte:
+  - Francia, Russia, Gran Bretagna
+  - 1891 Francia-Russia, 1904 Entente, 1907 GB-Russia
+  - arginare la potenza tedesca
+  - nata da accordi separati, non da un patto unico
+da:
+- l: Q
+  c: 2
+  p: 5
+- l: Q
+  c: 2
+  p: 7

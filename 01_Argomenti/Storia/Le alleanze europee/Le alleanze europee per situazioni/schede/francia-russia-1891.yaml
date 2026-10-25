@@ -1,0 +1,25 @@
+tipo: voce
+id: francia-russia-1891
+titolo: L'accordo Francia-Russia
+sigla: Francia-Russia 1891
+genere: evento
+quando: '1891'
+dove: Europa
+chi:
+- Francia
+- Russia
+cosa: Dopo l'uscita di scena di Bismarck, venuta meno ogni possibile intesa con la Germania — che aveva
+  consolidato l'alleanza con l'Austria-Ungheria, acerrima nemica della Russia — lo zar stringe un accordo
+  con la Francia, rafforzato da una **convenzione militare** che stabilisce l'**assistenza reciproca**
+  in caso di attacco da parte della Germania o dell'Italia.
+conta: 'È il primo pezzo dell''Intesa, e arriva un anno dopo la caduta di Bismarck: la reazione è immediata.'
+lega:
+- scheda: caduta-bismarck-1890
+  tipo: conseguenza
+- scheda: entente-1904
+  tipo: prosegue
+da:
+- l: Q
+  c: 2
+  p: 6
+parole: convenzione militare, isolamento diplomatico

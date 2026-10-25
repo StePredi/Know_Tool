@@ -1,0 +1,20 @@
+tipo: voce
+id: spencer
+titolo: Herbert Spencer
+sigla: Spencer
+genere: persona
+quando: '1851'
+dove: Gran Bretagna
+chi:
+- Herbert Spencer
+cosa: In *Social Statics* sostiene che l'evoluzione è progresso, una legge universale; anche nella sfera
+  sociale vige una spietata competizione individuale che non va ostacolata con leggi o istituzioni a favore
+  dei più deboli, perché alla fine prevarranno i migliori.
+conta: 'Mostra che il darwinismo sociale non nasce da Darwin: l''idea c''era già, e il nome di Darwin
+  le è stato appiccicato dopo.'
+nota: 'La data conta: 1851, otto anni prima dell''«Origine delle specie».'
+da:
+- l: T
+  c: 16
+  p: 4
+parole: Spencer, Social Statics

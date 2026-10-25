@@ -1,0 +1,46 @@
+tipo: voce
+id: entente-1904
+titolo: L'Entente cordiale
+sigla: Entente 1904
+genere: evento
+quando: '1904'
+dove: Africa
+chi:
+- Gran Bretagna
+- Francia
+cosa: '«*Entente cordiale*», intesa cordiale: accordo con cui le due potenze risolvono i **contrasti coloniali
+  in Africa**. I britannici ottengono il diritto a controllare l''**Egitto**, i francesi il via libera
+  a occupare il **Marocco**.'
+conta: Due rivali di ieri si accordano. Si riducono così gli spazi d'azione della Germania, che deve «accontentarsi»
+  dei territori sfuggiti alla colonizzazione di Parigi e Londra.
+svolgimento:
+- quando: '1898'
+  passo: 'l''incidente di Fashoda: inglesi e francesi rischiano lo scontro in Sudan, ma Parigi fa arretrare
+    il proprio contingente'
+- quando: 1899-1902
+  passo: la guerra anglo-boera mostra che la Gran Bretagna è vulnerabile
+- passo: di fronte all'attivismo tedesco, è impensabile che Londra resti nell'isolamento in cui si era
+    chiusa
+- quando: '1904'
+  passo: firma dell'Entente cordiale
+elementi:
+- nome: Fashoda (1898)
+  spiega: piccolo villaggio del Sudan dove le truppe inglesi, che risalivano dall'Egitto verso sud, incrociarono
+    un corpo di spedizione francese diretto da ovest a est. Il conflitto fu scongiurato, con epilogo favorevole
+    al governo britannico.
+lega:
+- scheda: boeri-1899
+  tipo: conseguenza
+- scheda: marocco-1905
+  tipo: causa
+  perche: la Germania, rimasta fuori dall'accordo sul Marocco, reagisce
+- scheda: gb-russia-1907
+  tipo: prosegue
+da:
+- l: Q
+  c: 2
+  p: 4
+- l: Q
+  c: 2
+  p: 7
+parole: Entente cordiale, Egitto, Marocco, Fashoda

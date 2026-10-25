@@ -1,0 +1,38 @@
+tipo: voce
+id: agadir-1911
+titolo: La seconda crisi marocchina
+sigla: Agadir 1911
+genere: evento
+quando: '1911'
+dove: Agadir, Marocco
+chi:
+- Germania
+- Francia
+cosa: La Francia, prendendo a pretesto la ribellione di alcune tribù contro il sultano, invia un corpo
+  di spedizione e occupa diverse città. La Germania reagisce inviando una **nave da guerra ad Agadir**,
+  con la minaccia di entrare in azione contro le truppe francesi.
+conta: 'Secondo collaudo, stesso esito: la minaccia tedesca si risolve in un baratto coloniale e salda
+  ancora di più il fronte avverso.'
+svolgimento:
+- quando: estate 1911
+  passo: la nave da guerra tedesca ad Agadir
+- quando: 4 novembre 1911
+  passo: 'le trattative si chiudono: in cambio di una parte del Congo francese, la Germania riconosce
+    la supremazia francese in Marocco'
+- quando: '1912'
+  passo: con il **trattato di Fès** anche il sultano Mulay Abd al-Hafiz riconosce il Marocco come protettorato
+    francese
+elementi:
+- nome: Protettorato
+  spiega: accordo con cui un territorio più debole viene posto sotto la tutela di uno Stato protettore,
+    che lo rappresenta in ambito internazionale. Nell'età dell'imperialismo è spesso il primo passo verso
+    la colonia vera e propria.
+lega:
+- scheda: marocco-1905
+  tipo: prosegue
+  perche: stessa partita, sei anni dopo
+da:
+- l: Q
+  c: 2
+  p: 7
+parole: Agadir, trattato di Fès, protettorato

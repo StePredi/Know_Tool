@@ -1,0 +1,27 @@
+tipo: voce
+id: kruger-1896
+titolo: Il telegramma a Kruger
+sigla: Kruger 1896
+genere: evento
+quando: '1896'
+dove: Germania e Sudafrica
+chi:
+- Guglielmo II
+- Paul Kruger
+- Gran Bretagna
+cosa: Guglielmo II invia un **telegramma di solidarietà** a Paul Kruger, presidente della Repubblica boera
+  del **Transvaal**, con cui la Gran Bretagna era in guerra.
+conta: 'Un gesto che incrina i rapporti con Londra senza portare alla Germania alcun vantaggio concreto:
+  è la Weltpolitik all''opera, e il modo in cui si costruisce da sola i nemici.'
+svolgimento:
+- quando: '1896'
+  passo: il telegramma a Kruger
+- quando: '1897'
+  passo: in cambio di una concessione alle imprese tedesche per una linea ferroviaria nell'Impero ottomano,
+    la Germania fornisce supporto ai turchi nel conflitto con la Grecia, mentre le truppe elleniche contano
+    sul sostegno britannico
+da:
+- l: Q
+  c: 2
+  p: 2
+parole: Kruger, Transvaal, Impero ottomano
