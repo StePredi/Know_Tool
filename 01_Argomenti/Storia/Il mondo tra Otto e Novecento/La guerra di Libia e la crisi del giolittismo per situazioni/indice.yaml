@@ -1,0 +1,70 @@
+modello: per_situazioni
+vista: storia
+titolo: La guerra di Libia e la crisi del giolittismo
+centro: Italia 1896-1914
+sottotitolo: ''
+ingresso: la domanda riguarda la politica estera italiana e la fine dell’età giolittiana
+guida: chi spinge per la guerra, e che cosa ci guadagna dopo?
+esempiRicerca: ''
+rami:
+- id: estera
+  nome: La svolta in politica estera
+  colore: blue
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - svolta-dopo-adua
+    - accordo-1902
+    - crisi-marocchine-italia
+    - bosnia-irritazione
+    - liberta-azione
+  quando: 1896-1908
+- id: nazionalismo
+  nome: Le nuove ambizioni coloniali
+  colore: orange
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - nazionalismo-italiano
+    - perche-la-libia
+    - chi-spinge
+  quando: 1908-1911
+- id: guerra
+  nome: La guerra di Libia
+  colore: red
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - cautela-giolitti
+    - guerra-1911
+    - pace-losanna
+    - resistenza-libica
+    - dibattito-donne
+  quando: 1911-1912
+- id: crisi
+  nome: La crisi del giolittismo
+  colore: violet
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - spartiacque
+    - imperialismo-nazionalista
+    - svolta-psi
+    - due-tendenze
+    - dimissioni-1914
+    - settimana-rossa
+  quando: 1912-1914
+- id: bilancio
+  nome: Il bilancio
+  colore: green
+  lato: T
+  ordine: false
+  voci:
+  - schede:
+    - bilancio-giolittiano
+    - interna-estera
+    - asino-satira

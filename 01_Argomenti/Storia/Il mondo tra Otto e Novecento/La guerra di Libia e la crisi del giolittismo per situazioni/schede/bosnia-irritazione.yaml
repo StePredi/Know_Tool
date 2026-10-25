@@ -1,0 +1,28 @@
+tipo: voce
+id: bosnia-irritazione
+titolo: L’annessione della Bosnia e l’irritazione italiana
+sigla: Bosnia 1908
+genere: evento
+quando: '1908'
+dove: Bosnia-Erzegovina
+chi:
+- Austria-Ungheria
+- Italia
+cosa: 'L''Austria-Ungheria approfittò della crisi dell''Impero ottomano per **annettere la Bosnia-Erzegovina**.
+  L''episodio suscitò particolare irritazione nel governo italiano: l''Italia, **alleata degli austriaci, non era
+  stata consultata**, nonostante la Triplice prevedesse l''obbligo per i contraenti di informarsi reciprocamente
+  in caso di iniziative diplomatiche o militari.'
+conta: Mise in luce la **scarsa rilevanza dell'Italia all'interno della Triplice** e sortì l'effetto di rafforzare
+  il **nazionalismo**.
+lega:
+- scheda: bosnia-1908
+  documento: Le alleanze europee
+  tipo: sincronia
+  perche: stesso fatto, dal lato delle alleanze europee
+- scheda: nazionalismo-italiano
+  tipo: causa
+  perche: lo smacco diplomatico alimenta i nazionalisti
+da:
+- l: Q
+  c: 3
+  p: 5

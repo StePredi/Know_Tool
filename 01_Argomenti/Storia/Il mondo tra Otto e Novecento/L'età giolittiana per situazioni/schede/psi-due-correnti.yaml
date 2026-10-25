@@ -1,0 +1,31 @@
+tipo: voce
+id: psi-due-correnti
+titolo: Il PSI e le sue due correnti
+sigla: PSI due correnti
+genere: evento
+quando: '1892'
+dove: Italia
+chi:
+- Filippo Turati
+- Arturo Labriola
+cosa: Il **Partito socialista italiano** era nato nel 1892 — inizialmente col nome di *Partito dei lavoratori* —
+  su iniziativa del giovane avvocato milanese **Filippo Turati**. **Primo partito di massa** a essere fondato in
+  Italia, in poco tempo divenne il principale riferimento politico per la classe operaia.
+conta: Restò però **privo di seguito nel Meridione** e si affermò soprattutto al Nord, fra gli operai delle grandi
+  città e i lavoratori delle campagne. Come stava avvenendo negli altri partiti socialisti europei, al suo interno
+  si crearono presto **due correnti** — **riformista** e **rivoluzionaria** — replicando le divisioni nate nella
+  Seconda internazionale.
+lega:
+- scheda: psi
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: la fondazione del 1892 è raccontata lì
+- scheda: seconda-internazionale
+  documento: Seconda rivoluzione industriale
+  tipo: causa
+  perche: le due correnti replicano la divisione nata nella Seconda internazionale
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: PSI, partito di massa, Turati

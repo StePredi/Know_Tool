@@ -1,0 +1,24 @@
+tipo: voce
+id: opportunismo
+titolo: L’opportunismo politico
+sigla: Opportunismo
+genere: concetto
+quando: 1903-1914
+chi:
+- Giovanni Giolitti
+cosa: 'Questo atteggiamento nascondeva un grande **opportunismo politico**: pur di garantirsi la guida del paese
+  Giolitti ricorse di volta in volta all''appoggio di **gruppi parlamentari diversi**, dapprima dei liberali progressisti,
+  poi dei cattolici e dei conservatori.'
+conta: A tal fine cercò di stabilire una **fitta rete di relazioni personali** con singoli parlamentari e forze
+  politiche, giocando sulla **concessione di favori**, sulla soddisfazione di interessi, sulla convergenza su singoli
+  temi. È il **trasformismo** di Depretis, applicato con metodo.
+lega:
+- scheda: trasformismo
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: è lo stesso metodo inaugurato da Depretis
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: opportunismo, pratica trasformista

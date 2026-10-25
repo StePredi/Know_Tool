@@ -1,0 +1,18 @@
+tipo: voce
+id: triangolo-industriale
+titolo: Il triangolo industriale
+sigla: Triangolo
+genere: concetto
+quando: '1914'
+dove: Genova, Torino, Milano
+cosa: 'Alla vigilia della Prima guerra mondiale la modernità dell''Italia si concentrava nel cosiddetto **triangolo
+  industriale**, i cui vertici coincidevano con tre città: **Genova, Torino e Milano**.'
+conta: 'Il Sud rimaneva lontano dallo sviluppo. È vero che Giolitti promosse degli interventi in favore del Mezzogiorno,
+  ma questi **non risultarono sufficienti per rimuovere le cause strutturali** dell''arretratezza meridionale. La
+  carta dell''alfabetizzazione del 1911 mostra lo stesso disegno: oltre l''80% al Nord, meno del 50% in Calabria
+  e Basilicata.'
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: triangolo industriale

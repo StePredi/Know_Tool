@@ -1,0 +1,19 @@
+tipo: voce
+id: cautela-giolitti
+titolo: La cautela di Giolitti
+sigla: Cautela
+genere: concetto
+quando: '1911'
+chi:
+- Giolitti
+cosa: 'Giolitti sapeva di dover agire con cautela. In primo luogo glielo imponeva il **timore di andare incontro
+  a un fallimento analogo a quello di Adua**: se la ripresa dell''avventura coloniale si fosse rivelata fallimentare,
+  la sua posizione politica ne sarebbe risultata fortemente indebolita. Oltretutto era **ostile alla politica dei
+  nazionalisti**, di cui temeva idee e comportamenti.'
+conta: 'Tuttavia la spinta in favore della guerra era troppo forte, e la stessa situazione internazionale portava
+  in quella direzione: quando, al termine della **seconda crisi marocchina**, fu riconosciuto alla Francia il diritto
+  di occupare il Marocco, il governo italiano **ruppe gli indugi**.'
+da:
+- l: Q
+  c: 3
+  p: 5

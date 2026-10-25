@@ -1,0 +1,25 @@
+tipo: voce
+id: analfabetismo
+titolo: L’analfabetismo
+sigla: Analfabeti 1911
+genere: concetto
+quando: '1911'
+dove: Italia
+cosa: Nonostante i progressi compiuti dai vari governi per incrementare i livelli di istruzione, i tassi di analfabetismo
+  restavano piuttosto alti.
+conta: Nel **1911** gli **analfabeti** erano ancora **quasi un terzo della popolazione**, ma la cifra in alcune
+  regioni meridionali **superava il 50%**.
+numeri:
+- cosa: Analfabeti in Italia (1911)
+  valore: quasi 1/3
+- cosa: In alcune regioni del Sud
+  valore: oltre il 50%
+lega:
+- scheda: legge-orlando
+  documento: L'età giolittiana
+  tipo: confronto
+  perche: l’obbligo fino a 12 anni è del 1904, ma i numeri si muovono lentamente
+da:
+- l: Q
+  c: 3
+  p: 4

@@ -1,0 +1,20 @@
+tipo: voce
+id: citta-e-campagna
+titolo: 'Città e campagna: le ombre'
+sigla: Luci e ombre
+genere: concetto
+quando: '1914'
+dove: Italia
+cosa: Il miglioramento riguardò perlopiù le **città**, dove però gli operai erano costretti ad abitare in **edifici
+  fatiscenti**, sovraffollati e privi di servizi igienici.
+conta: 'La situazione nelle campagne, in particolare quelle del Sud, era **ben peggiore**: i contadini, che costituivano
+  **più della metà dei 34 milioni di italiani**, continuavano a vivere nell''**arretratezza** e nella **miseria**.'
+numeri:
+- cosa: Popolazione italiana
+  valore: 34 milioni
+- cosa: Contadini
+  valore: più della metà
+da:
+- l: Q
+  c: 3
+  p: 4

@@ -118,6 +118,9 @@ describe('Il macro-argomento della verifica', () => {
     expect(documenti.map((d) => d.titolo).sort()).toEqual([
       "Fuori dall'Europa — Asia e Americhe",
       'Italia fine Ottocento',
+      "L'età giolittiana",
+      'Industria e questione meridionale',
+      'La guerra di Libia e la crisi del giolittismo',
       "L'età degli imperialismi",
       'La belle époque e la società di massa',
       'Le alleanze europee',
@@ -155,8 +158,8 @@ describe('Il macro-argomento della verifica', () => {
   it('la copertura del libro arriva a tutti i paragrafi letti', async () => {
     const { libri, documenti } = await leggiMateriaStoria(radice, 'Storia')
     const righe = copertura(libri, documenti).filter((r) => r.titoloCapitolo !== '(non ancora letto)')
-    expect(righe).toHaveLength(25)
-    const scoperti = righe.filter((r) => r.schede.length === 0).map((r) => `c${r.capitolo}.${r.paragrafo}`)
+    expect(righe).toHaveLength(30)
+    const scoperti = righe.filter((r) => r.schede.length === 0).map((r) => `${r.libro[0]}${r.capitolo}.${r.paragrafo}`)
     expect(scoperti).toEqual([])
   })
 })

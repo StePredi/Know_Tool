@@ -1,0 +1,26 @@
+tipo: voce
+id: pragmatismo
+titolo: Il pragmatismo di Giolitti
+sigla: Pragmatismo
+genere: concetto
+quando: 1903-1914
+chi:
+- Giovanni Giolitti
+cosa: 'Per sua stessa ammissione Giolitti si ispirò sempre a un **forte pragmatismo**: nelle sue memorie sostiene
+  la necessità, per chi fa politica, di **commisurare le proprie scelte non a princìpi astratti e generali, ma alle
+  condizioni effettive della realtà**, ai limiti reali imposti dalle cose.'
+conta: 'È il contrario del politico ideologico: per questo cercava «uomini nuovi», pratici, invece che uomini di
+  dottrina.'
+citazioni:
+- testo: Gli uomini che si danno alla carriera politica entrano nel parlamento con un certo bagaglio di idee e di
+    dottrine derivate dai loro studi […]; quello che generalmente manca loro […] è la pratica del trattamento delle
+    questioni concrete […]. Agli uomini politici che passano dalla critica all'azione […] si muove spesso l'accusa
+    di mutare le loro idee ma in verità ciò che accade non è che essi le mutino, ma le limitino adattandole alla
+    realtà.
+  chi: Giovanni Giolitti
+  dove: '*Memorie della mia vita*, Garzanti, Milano 1967'
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: pragmatismo

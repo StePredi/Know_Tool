@@ -1,0 +1,27 @@
+tipo: voce
+id: svolta-dopo-adua
+titolo: La svolta in politica estera dopo Adua
+sigla: Svolta 1896
+genere: concetto
+quando: dopo il 1896
+dove: Italia
+cosa: Dopo la sconfitta di **Adua** l'espansionismo coloniale aveva subito una battuta d'arresto che aprì un **nuovo
+  corso** in politica estera. L'Italia da un lato scelse di continuare a far parte della **Triplice alleanza**,
+  ma con un'**attenuazione delle posizioni filo-tedesche** che avevano caratterizzato gli anni di Crispi.
+conta: Dall'altro decise di **stabilire rapporti di amicizia e di collaborazione con altre potenze europee** — Francia,
+  Gran Bretagna, Russia — per tutelare gli interessi nazionali nell'area mediterranea e nei Balcani.
+svolta: true
+lega:
+- scheda: adua
+  documento: Italia fine Ottocento
+  tipo: conseguenza
+  perche: è la disfatta del 1896 a imporre il cambio di rotta
+- scheda: triplice-1882
+  documento: Le alleanze europee
+  tipo: prosegue
+  perche: il patto resta, ma cambia il modo di starci dentro
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: Triplice alleanza

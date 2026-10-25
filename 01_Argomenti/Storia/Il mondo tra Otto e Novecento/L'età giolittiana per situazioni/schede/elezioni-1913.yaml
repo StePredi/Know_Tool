@@ -1,0 +1,24 @@
+tipo: voce
+id: elezioni-1913
+titolo: Le elezioni del 1913
+sigla: Elezioni 1913
+genere: evento
+quando: '1913'
+dove: Italia
+cosa: Grazie alla nuova legge elettorale poterono partecipare al voto **quasi 9 milioni di elettori**, contro i
+  3 milioni delle precedenti consultazioni.
+conta: '**Per la prima volta nella storia dell''Italia unita i liberali vinsero le elezioni con l''appoggio esplicito
+  dei cattolici e della Chiesa.** Nel nuovo Parlamento entrarono **oltre duecento deputati** che avevano accettato
+  gli impegni contenuti nel patto. Le antiche ruggini fra la borghesia liberale e il papato erano ormai superate,
+  grazie alla **comune ostilità verso il socialismo**.'
+numeri:
+- cosa: Deputati legati al patto
+  valore: oltre 200
+lega:
+- scheda: non-expedit
+  tipo: chiude
+  perche: il divieto di Pio IX del 1870 è ormai superato nei fatti
+da:
+- l: Q
+  c: 3
+  p: 3

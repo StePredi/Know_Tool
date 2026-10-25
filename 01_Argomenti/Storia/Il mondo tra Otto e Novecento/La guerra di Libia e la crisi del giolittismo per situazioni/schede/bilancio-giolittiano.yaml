@@ -1,0 +1,26 @@
+tipo: voce
+id: bilancio-giolittiano
+titolo: Un bilancio dell’età giolittiana
+sigla: Bilancio
+genere: concetto
+quando: 1901-1914
+dove: Italia
+cosa: L'età giolittiana si chiudeva registrando uno **straordinario sviluppo industriale** che però **non aveva
+  toccato uniformemente tutte le aree** del paese. **Grandi progressi** erano stati fatti con l'estensione del **diritto
+  di voto**, per aumentare la partecipazione democratica, e in campo sociale, con l'**istruzione gratuita sino al
+  dodicesimo anno d'età**.
+conta: 'Tuttavia le **riforme più radicali** — soprattutto quella **agraria**, che avrebbe potuto sollevare gran
+  parte della popolazione contadina del Meridione dalla miseria — **non vennero mai prese seriamente in considerazione**:
+  l''opportunismo politico non permetteva a Giolitti di prendere decisioni che potessero ledere gli interessi di
+  una parte importante del suo blocco elettorale, come i **latifondisti**. In ogni caso, la fine del giolittismo
+  **non fu decretata tanto dai suoi limiti o dai suoi oppositori, quanto dal turbine della guerra totale** che si
+  stava per abbattere sull''intera Europa.'
+lega:
+- scheda: riforme-negate
+  documento: Industria e questione meridionale
+  tipo: conseguenza
+  perche: 'il bilancio conferma: la riforma agraria non si fa per non perdere i latifondisti'
+da:
+- l: Q
+  c: 3
+  p: 5

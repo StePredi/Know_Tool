@@ -1,0 +1,24 @@
+tipo: voce
+id: cgdl
+titolo: La Confederazione Generale del Lavoro
+sigla: CGdL 1906
+genere: evento
+quando: '1906'
+dove: Milano
+chi:
+- socialisti riformisti
+cosa: 'Su impulso dei **socialisti riformisti** fu fondata a Milano la **Confederazione Generale del Lavoro (CGdL)**:
+  un''organizzazione suddivisa in differenti categorie professionali — operai metalmeccanici, tessili, ferrovieri,
+  braccianti — che operava **su scala nazionale**.'
+conta: 'Riuniva sotto un solo tetto le **Camere del lavoro**, le **Federazioni di mestiere** e le **leghe bracciantili**:
+  il limite messo in luce dallo sciopero del 1904 veniva così superato.'
+lega:
+- scheda: organizzazioni-lavoratori
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: le Camere del lavoro e le Federazioni esistevano già dagli anni Ottanta
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: CGdL, Camere del lavoro, Federazioni di mestiere

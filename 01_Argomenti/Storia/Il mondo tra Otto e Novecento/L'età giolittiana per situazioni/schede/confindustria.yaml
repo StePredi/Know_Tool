@@ -1,0 +1,21 @@
+tipo: voce
+id: confindustria
+titolo: La Confederazione italiana dell’industria
+sigla: Confindustria 1910
+genere: evento
+quando: '1910'
+dove: Italia
+chi:
+- industriali
+cosa: 'Alla capacità organizzativa dei lavoratori corrispose un''analoga capacità da parte degli industriali: nacque
+  la **Confederazione italiana dell''industria (Confindustria)**, che riuniva quasi **2000 aziende**.'
+conta: 'Aveva il compito di **dialogare con lo Stato**, da un lato, e **con gli operai** dall''altro: la controparte
+  organizzata del sindacato.'
+numeri:
+- cosa: Aziende riunite
+  valore: quasi 2000
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: Confindustria

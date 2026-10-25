@@ -1,0 +1,27 @@
+tipo: confronto
+id: interna-estera
+titolo: 'Le azioni di Giolitti: interna ed estera'
+sigla: Interna / estera
+domande:
+- Verso i socialisti e i cattolici
+- Verso le alleanze
+- Verso il Mezzogiorno e le colonie
+- Verso il diritto di voto e le infrastrutture
+casi:
+- nome: Politica interna
+  risposte:
+  - apertura verso i movimenti socialisti; alleanza con il mondo cattolico
+  - —
+  - modernizzazione e sviluppo del Mezzogiorno
+  - nazionalizzazione della rete ferroviaria; suffragio universale maschile
+- nome: Politica estera
+  risposte:
+  - —
+  - conferma dell’alleanza con Germania e Impero austro-ungarico; avvicinamento alla Francia e ad altre potenze
+    europee
+  - 'ripresa della politica coloniale: guerra di Libia e occupazione del Dodecaneso'
+  - —
+da:
+- l: Q
+  c: 3
+  p: 5

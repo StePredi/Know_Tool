@@ -59,9 +59,24 @@ libri:
         titolo: L'America latina e la Rivoluzione messicana
         pp: 62-63
     - n: 3
-      titolo: (non ancora letto)
-      pp: —
-      paragrafi: []
+      titolo: L'Italia giolittiana
+      pp: 72-95
+      paragrafi:
+      - n: 1
+        titolo: La crisi di fine secolo e l'inizio di un nuovo corso politico
+        pp: 72-74
+      - n: 2
+        titolo: Socialisti e cattolici, nuovi protagonisti della vita politica italiana
+        pp: 75-76
+      - n: 3
+        titolo: La politica interna di Giolitti
+        pp: 77-80
+      - n: 4
+        titolo: Il decollo dell'industria e la questione meridionale
+        pp: 81-88
+      - n: 5
+        titolo: La politica coloniale e la crisi del sistema giolittiano
+        pp: 91-95
   T:
     titolo: Storia vol. 1 (terza) — riassunti
     capitoli:

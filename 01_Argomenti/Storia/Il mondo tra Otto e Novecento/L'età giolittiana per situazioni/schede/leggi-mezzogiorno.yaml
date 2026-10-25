@@ -1,0 +1,22 @@
+tipo: voce
+id: leggi-mezzogiorno
+titolo: Le leggi per il Mezzogiorno
+sigla: Leggi Mezzogiorno
+genere: processo
+quando: 1904-1906
+dove: Napoli, Basilicata, Puglia
+cosa: Furono varate alcune **leggi per il Mezzogiorno**, contenenti provvedimenti per lo sviluppo e la modernizzazione
+  di alcune regioni del Sud.
+conta: Ne trassero vantaggio la provincia di **Napoli**, sostenuta nell'avvio di un programma industriale e nell'azione
+  di risanamento economico; la **Basilicata**, aiutata nel tentativo di modernizzare il lavoro agricolo; la **Puglia**,
+  dove fu iniziata la costruzione di un **acquedotto**.
+lega:
+- scheda: squilibrio-nord-sud
+  documento: Industria e questione meridionale
+  tipo: confronto
+  perche: non bastarono a rimuovere le cause strutturali dell’arretratezza
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: leggi per il Mezzogiorno, acquedotto pugliese

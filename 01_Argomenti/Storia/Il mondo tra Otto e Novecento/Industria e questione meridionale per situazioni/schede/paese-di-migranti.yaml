@@ -1,0 +1,26 @@
+tipo: voce
+id: paese-di-migranti
+titolo: Un Paese di migranti
+sigla: Emigrazione 1900-14
+genere: processo
+quando: 1900-1914
+dove: Stati Uniti, Australia, Canada, Sud America, Europa
+cosa: 'Non stupisce che un numero elevato di cittadini decidesse di **emigrare**: tra il 1900 e il 1914 furono circa
+  **8 milioni** gli italiani che si spostarono altrove alla ricerca di un lavoro e di un''alternativa di vita.'
+conta: 'Facendo grandi sacrifici i migranti riuscivano a inviare a casa una parte dei soldi guadagnati, le cosiddette
+  «**rimesse**». Questo flusso di denaro era un vantaggio anche per il governo: da un lato migliorava le condizioni
+  di vita di interi nuclei familiari, dall''altro contribuiva a **sanare il deficit della bilancia dei pagamenti**
+  dello Stato.'
+numeri:
+- cosa: Emigrati 1900-1914
+  valore: circa 8 milioni
+lega:
+- scheda: italia-emigrazione
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: il flusso era già cominciato negli anni Ottanta
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: emigrazione, rimesse, bilancia dei pagamenti

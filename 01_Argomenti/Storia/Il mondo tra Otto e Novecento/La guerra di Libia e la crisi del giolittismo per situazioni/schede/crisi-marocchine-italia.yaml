@@ -1,0 +1,22 @@
+tipo: voce
+id: crisi-marocchine-italia
+titolo: L’Italia nelle due crisi marocchine
+sigla: Marocco 1905-1911
+genere: evento
+quando: 1905 e 1911
+dove: Marocco
+cosa: Nel primo decennio del Novecento i rapporti fra le potenze europee si deteriorarono progressivamente, rendendo
+  difficile per Giolitti attenersi a una politica di pace. Il **1905** e il **1911** furono gli anni delle due **crisi
+  marocchine**.
+conta: 'L''Italia, **stretta tra la necessità di sostenere l''alleata Germania** — decisa a espandersi proprio in
+  Marocco — **e il dover tener fede alle promesse fatte alla Francia**, si schierò al fianco di Parigi: la Triplice
+  c''era ancora, ma non decideva più da sola.'
+lega:
+- scheda: marocco-1905
+  documento: Le alleanze europee
+  tipo: sincronia
+  perche: è la stessa crisi, vista dal lato italiano
+da:
+- l: Q
+  c: 3
+  p: 5

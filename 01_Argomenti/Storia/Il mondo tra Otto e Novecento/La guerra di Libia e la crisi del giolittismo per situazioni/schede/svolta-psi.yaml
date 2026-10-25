@@ -1,0 +1,23 @@
+tipo: voce
+id: svolta-psi
+titolo: I rivoluzionari prendono il PSI
+sigla: Svolta nel PSI
+genere: evento
+quando: '1912'
+dove: Italia
+cosa: 'Si verificarono cambiamenti rilevanti all''interno del **Partito socialista**, di cui Giolitti era stato
+  uno dei principali interlocutori: anche a causa del comportamento tenuto di fronte alla guerra, da molti considerato
+  **troppo poco deciso**, i **riformisti furono messi in minoranza** e dovettero cedere la guida del partito ai
+  **socialisti rivoluzionari**, ostili a ogni ipotesi di compromesso con lo Stato borghese-liberale.'
+conta: 'Giolitti perde così il suo interlocutore a sinistra: la linea di Turati, che aveva già rifiutato il governo
+  nel 1903, adesso non comanda più nemmeno nel partito.'
+svolta: true
+lega:
+- scheda: rifiuto-turati
+  documento: L'età giolittiana
+  tipo: conseguenza
+  perche: è il punto d’arrivo dello spostamento dei rapporti di forza iniziato nel 1903
+da:
+- l: Q
+  c: 3
+  p: 5

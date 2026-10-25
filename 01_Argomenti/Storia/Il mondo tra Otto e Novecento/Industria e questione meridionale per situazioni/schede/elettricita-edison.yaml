@@ -1,0 +1,28 @@
+tipo: voce
+id: elettricita-edison
+titolo: L’industria elettrica
+sigla: Elettrico
+genere: processo
+quando: 1896-1913
+dove: Italia settentrionale
+cosa: L'industria **idroelettrica** permise all'Italia di ridurre le importazioni di **carbone**, materia prima
+  di cui era quasi del tutto sprovvista. L'elettricità serviva nelle fabbriche ma anche per l'**illuminazione di
+  case e strade**.
+conta: Tra il **1896 e il 1913** il numero di società elettriche passò da circa **20 a più di 250**, diffuse principalmente
+  al Nord; fra queste la milanese **Edison**, fondata nel 1883, che ottenendo il controllo sulle società più piccole
+  giunse a creare **un vero e proprio impero**.
+numeri:
+- cosa: Società elettriche nel 1896
+  valore: circa 20
+- cosa: Società elettriche nel 1913
+  valore: più di 250
+lega:
+- scheda: elettricita
+  documento: Seconda rivoluzione industriale
+  tipo: esempio
+  perche: è l’elettricità della seconda rivoluzione industriale che arriva in Italia
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: idroelettrico, Edison

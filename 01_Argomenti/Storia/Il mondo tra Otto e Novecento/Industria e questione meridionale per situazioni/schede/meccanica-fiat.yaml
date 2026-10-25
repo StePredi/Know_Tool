@@ -1,0 +1,17 @@
+tipo: voce
+id: meccanica-fiat
+titolo: L’industria meccanica e la FIAT
+sigla: FIAT 1899
+genere: processo
+quando: '1899'
+dove: Torino
+cosa: Lo sviluppo della siderurgia ebbe conseguenze importanti sull'industria **meccanica**, che si fondava sulla
+  lavorazione di pezzi d'acciaio. Al contrario di quello siderurgico, però, il comparto meccanico **non aveva potuto
+  usufruire della protezione** garantita dalla tariffa doganale del 1887 e subiva la concorrenza straniera.
+conta: Ciononostante, dalla fine del secolo ebbero luogo cambiamenti positivi, soprattutto nel settore **automobilistico**,
+  con la nascita nel **1899** dell'industria torinese **FIAT**.
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: FIAT, automobile

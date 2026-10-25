@@ -1,0 +1,20 @@
+tipo: voce
+id: legge-orlando
+titolo: La legge Orlando
+sigla: Orlando 1904
+genere: evento
+quando: '1904'
+dove: Italia
+cosa: Con la **legge Orlando** l'**obbligo scolastico** venne portato fino al **dodicesimo anno d'età**.
+conta: 'È uno dei «grandi progressi» del bilancio dell''età giolittiana: istruzione gratuita più lunga, in un paese
+  dove nel 1911 gli analfabeti erano ancora quasi un terzo della popolazione.'
+lega:
+- scheda: riforme-depretis
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: allunga l’obbligo della legge Coppino del 1877
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: legge Orlando, obbligo scolastico

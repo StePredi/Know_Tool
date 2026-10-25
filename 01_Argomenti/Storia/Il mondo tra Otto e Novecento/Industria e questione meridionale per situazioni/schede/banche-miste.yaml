@@ -1,0 +1,27 @@
+tipo: voce
+id: banche-miste
+titolo: Il riordino del sistema bancario
+sigla: Banche miste
+genere: concetto
+quando: dagli anni Novanta
+dove: Italia
+cosa: 'Accanto all''intervento statale, un secondo fattore fece da volano all''industria: il **riordino del sistema
+  bancario italiano**. Anzitutto fu fondata la **Banca d''Italia**, che svolse un ruolo di controllo e di coordinamento
+  dell''intero sistema. Furono poi create le cosiddette «**banche miste**», istituti che si occupavano contemporaneamente
+  del **credito ordinario e del finanziamento delle imprese**.'
+conta: Dal **Credito Italiano** ricevettero una spinta decisiva i settori chimico e siderurgico; la **Banca Commerciale**
+  diede il proprio appoggio all'industria elettrica. È l'**intreccio fra industria e finanza** caratteristico dell'Italia.
+lega:
+- scheda: banca-romana
+  documento: Italia fine Ottocento
+  tipo: conseguenza
+  perche: la Banca d’Italia nasce dallo scandalo del 1893
+- scheda: capitalismo-finanziario
+  documento: Seconda rivoluzione industriale
+  tipo: esempio
+  perche: è la versione italiana del capitalismo finanziario
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: banche miste, Credito Italiano, Banca Commerciale

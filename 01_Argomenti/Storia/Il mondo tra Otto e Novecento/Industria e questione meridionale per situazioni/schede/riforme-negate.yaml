@@ -1,0 +1,32 @@
+tipo: voce
+id: riforme-negate
+titolo: Le riforme negate e il «ministro della malavita»
+sigla: Ministro della malavita
+genere: concetto
+quando: età giolittiana
+dove: Mezzogiorno
+chi:
+- Giolitti
+- Salvemini
+cosa: Quella proposta da Salvemini era una politica **riformista, non certo rivoluzionaria**. Ma era comunque troppo
+  per Giolitti che, per ottenere voti e consensi, si appoggiava proprio ai **grandi latifondisti meridionali** e
+  talvolta persino alla criminalità organizzata, come la **mafia siciliana**.
+conta: 'Mentre si era mostrato disponibile verso le rivendicazioni operaie del Nord, **non era stato altrettanto
+  aperto nei confronti dei braccianti del Mezzogiorno**, dove aveva fatto intervenire più volte l''esercito a tutela
+  degli interessi dei proprietari fondiari. Per questo **Salvemini definì Giolitti «ministro della malavita»**.
+  Reti clientelari, corruzione e intimidazioni condizionavano i risultati elettorali a favore del blocco conservatore;
+  e il PSI, concentrato sulla questione operaia nelle fabbriche del Nord, era poco interessato ai problemi del Meridione:
+  **le riforme non vennero attuate**.'
+svolta: true
+lega:
+- scheda: fasci-siciliani
+  documento: Italia fine Ottocento
+  tipo: confronto
+  perche: 'con i Fasci siciliani Giolitti aveva rifiutato la repressione: qui l’esercito lo manda lui'
+nota: '«Ministro della malavita» è l''accusa di un **avversario socialista**, non un giudizio neutrale: Salvemini
+  era un antagonista politico di Giolitti.'
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: ministro della malavita, clientelismo, mafia

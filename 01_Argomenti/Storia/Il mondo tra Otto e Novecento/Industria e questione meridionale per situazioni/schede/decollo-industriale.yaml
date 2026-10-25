@@ -1,0 +1,25 @@
+tipo: voce
+id: decollo-industriale
+titolo: Il decollo dell’industria
+sigla: Decollo 1896
+genere: processo
+quando: dal 1896
+dove: Italia
+cosa: Un processo di ammodernamento iniziato a partire dal **1896**, che trasformò l'Italia in una nazione **parzialmente
+  industrializzata** — anche se non ancora in grado di competere con la Gran Bretagna, la Francia e la Germania.
+conta: 'L''industria non era del tutto assente: nell''Ottocento era stato sviluppato il **tessile** e negli ultimi
+  due decenni non erano mancati tentativi nell''**acciaio**, come la fondazione nel **1884** delle **Acciaierie
+  di Terni**. Ma erano realtà produttive ancora deboli, sfavorite da una congiuntura internazionale negativa. A
+  cavallo tra i due secoli la crisi che aveva indebolito l''economia europea **ebbe fine** e iniziò una nuova fase
+  di espansione.'
+svolta: true
+lega:
+- scheda: grande-depressione
+  documento: Seconda rivoluzione industriale
+  tipo: chiude
+  perche: la Grande depressione finisce proprio in quegli anni
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: decollo industriale, Acciaierie di Terni

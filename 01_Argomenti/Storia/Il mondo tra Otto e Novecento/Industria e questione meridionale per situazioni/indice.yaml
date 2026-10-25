@@ -1,0 +1,67 @@
+modello: per_situazioni
+vista: storia
+titolo: Industria e questione meridionale
+centro: Italia 1896-1914
+sottotitolo: ''
+ingresso: la domanda riguarda come cresce l’industria italiana e perché il Sud resta indietro
+guida: chi paga questa crescita, e chi non la vede arrivare?
+esempiRicerca: ''
+rami:
+- id: crescita
+  nome: Una fase di crescita
+  colore: green
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - decollo-industriale
+    - pil-italiano
+    - italia-vs-europa
+  quando: 1896-1913
+- id: fattori
+  nome: I fattori della crescita
+  colore: blue
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - intervento-stato
+    - protezionismo-doganale
+    - banche-miste
+- id: settori
+  nome: I settori strategici
+  colore: orange
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - siderurgia
+    - ilva
+    - meccanica-fiat
+    - elettricita-edison
+    - chimica-pirelli
+    - miracolo-economico
+- id: sud
+  nome: La questione meridionale
+  colore: red
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - squilibrio-nord-sud
+    - triangolo-industriale
+    - salvemini-latifondo
+    - riforme-negate
+    - calamita-sud
+- id: vita
+  nome: Luci e ombre
+  colore: violet
+  lato: T
+  ordine: false
+  voci:
+  - schede:
+    - belle-epoque-italiana
+    - analfabetismo
+    - paese-di-migranti
+    - pascoli-italy
+    - citta-e-campagna

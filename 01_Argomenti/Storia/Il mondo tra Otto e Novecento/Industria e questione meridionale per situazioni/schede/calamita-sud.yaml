@@ -1,0 +1,23 @@
+tipo: voce
+id: calamita-sud
+titolo: Le calamità naturali
+sigla: Vesuvio e Messina
+genere: evento
+quando: 1906-1908
+dove: Napoli, Reggio Calabria, Messina
+chi:
+- Giolitti
+cosa: Nel **1906** l'eruzione del **Vesuvio** causò crolli che provocarono più di **duecento morti**; nel **1908**
+  uno spaventoso **terremoto** distrusse **Reggio Calabria e Messina**, provocando **80.000 morti**.
+conta: Giolitti impiegò tutte le risorse pubbliche disponibili nell'opera di soccorso e di ricostruzione, ma **questo
+  non modificò in modo duraturo le sorti di quelle popolazioni**.
+numeri:
+- cosa: Vittime del Vesuvio (1906)
+  valore: più di 200
+- cosa: Vittime del terremoto (1908)
+  valore: '80.000'
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: terremoto di Messina

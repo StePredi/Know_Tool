@@ -1,0 +1,26 @@
+tipo: voce
+id: patto-gentiloni
+titolo: Il patto Gentiloni
+sigla: Patto Gentiloni
+genere: evento
+quando: '1913'
+dove: Italia
+chi:
+- Giolitti
+- Vincenzo Ottorino Gentiloni
+cosa: L'accordo prende il nome dal presidente dell'**Unione elettorale cattolica italiana**, il conte **Vincenzo
+  Ottorino Gentiloni**. In base a esso, stipulato in vista delle elezioni del 1913, i **cattolici accettarono di
+  votare i candidati liberali** per sbarrare la strada a quelli socialisti.
+conta: 'In cambio ottennero da Giolitti la promessa che il Parlamento **non avrebbe approvato nessuna legge** che
+  potesse offendere la sensibilità cattolica o danneggiare gli interessi della Chiesa: fra queste quella sul **divorzio**,
+  che in precedenza Zanardelli aveva provato a promuovere, o quelle che limitavano l''attività delle **scuole cattoliche**.'
+svolta: true
+elementi:
+- nome: Perché Giolitti, laico, lo fa
+  spiega: nonostante il suo schietto laicismo, l'apertura fu motivata soprattutto dalla necessità di **rafforzare
+    il fronte liberale** contro l'avanzata del Partito socialista.
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: patto Gentiloni, Unione elettorale cattolica

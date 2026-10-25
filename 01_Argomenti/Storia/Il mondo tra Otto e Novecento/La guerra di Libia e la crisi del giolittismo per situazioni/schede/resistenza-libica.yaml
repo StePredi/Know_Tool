@@ -1,0 +1,26 @@
+tipo: voce
+id: resistenza-libica
+titolo: La resistenza libica e le atrocità
+sigla: Resistenza libica
+genere: processo
+quando: dal 1912
+dove: Libia
+cosa: L'immigrazione di lavoratori italiani fu incoraggiata e col passare del tempo ci si poté quasi illudere che
+  la costa libica, con le grandi città di **Tripoli e Bengasi**, fosse diventata un pezzo d'Italia.
+conta: 'Ma la **popolazione araba dell''interno non accettò mai l''invasione**, a maggior ragione per il fatto che
+  i colonizzatori non erano musulmani: patriottismo e religione animarono un **vigoroso movimento di resistenza**,
+  mai veramente domato. Nella lotta contro la guerriglia le truppe italiane **commisero numerose atrocità**, a dispetto
+  della propaganda ufficiale, che sosteneva che il colonialismo italiano stesse portando civiltà e benessere alle
+  popolazioni indigene.'
+lega:
+- scheda: missione-civilizzatrice
+  documento: Darwinismo sociale e teorie razziali
+  tipo: esempio
+  perche: è la «missione civilizzatrice» usata come giustificazione
+errore: 'credere alla propaganda dell’epoca («La Tripolitania si apre finalmente alla civiltà»): il libro dice espressamente
+  il contrario'
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: resistenza, atrocità

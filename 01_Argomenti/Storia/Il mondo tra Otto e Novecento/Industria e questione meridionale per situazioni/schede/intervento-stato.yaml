@@ -1,0 +1,23 @@
+tipo: voce
+id: intervento-stato
+titolo: L’intervento dello Stato
+sigla: Intervento statale
+genere: concetto
+quando: età giolittiana
+dove: Italia
+cosa: L'Italia era un paese **povero di materie prime** e a molti l'idea di industrializzare un paese prevalentemente
+  agricolo appariva destinata all'insuccesso. Per riuscirci fu necessario l'**intervento dello Stato**, che fu il
+  **principale committente** delle industrie siderurgiche e meccaniche.
+conta: Lo Stato intervenne per portare a termine la costruzione della **rete ferroviaria**, per potenziare i **trasporti
+  terrestri e marittimi** e per rafforzare la **flotta da guerra**. La **modernizzazione delle infrastrutture**
+  fu indispensabile per rendere efficienti gli scambi e il trasporto dei materiali.
+lega:
+- scheda: ferrovie-stato
+  documento: L'età giolittiana
+  tipo: esempio
+  perche: la nazionalizzazione del 1905 è questo intervento in atto
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: committente, infrastrutture

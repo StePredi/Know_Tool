@@ -1,0 +1,22 @@
+tipo: voce
+id: accordo-1902
+titolo: L’accordo italo-francese del 1902
+sigla: Accordo 1902
+genere: evento
+quando: '1902'
+dove: Nordafrica
+chi:
+- Italia
+- Francia
+cosa: L'accordo stipulato fra l'Italia e la Francia stabiliva le **reciproche sfere di influenza in Nordafrica**.
+conta: Il governo italiano vedeva riconosciute le sue **aspirazioni sulla Libia**; quello francese otteneva **libertà
+  di azione in Marocco**. È il patto che nove anni dopo renderà possibile la guerra.
+lega:
+- scheda: guerra-1911
+  tipo: prepara
+  perche: la Libia era già stata assegnata all’Italia sulla carta
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: sfere di influenza

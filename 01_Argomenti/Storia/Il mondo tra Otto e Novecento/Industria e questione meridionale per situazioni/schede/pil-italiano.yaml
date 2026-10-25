@@ -1,0 +1,25 @@
+tipo: voce
+id: pil-italiano
+titolo: La crescita in cifre
+sigla: PIL 1890-1913
+genere: concetto
+quando: 1890-1913
+dove: Italia
+cosa: Il principale indice di crescita, il **prodotto interno lordo (PIL)**, aumentò in media del **6% annuo**,
+  con una fase di crisi intorno al **1907**, in corrispondenza con una crisi mondiale di breve durata.
+conta: Si innalzò inoltre il **reddito pro capite** — il reddito medio di ciascun italiano — e di conseguenza crebbero
+  anche i **consumi delle famiglie**.
+elementi:
+- nome: PIL
+  spiega: indicatore economico che misura la ricchezza di uno Stato in base al valore delle merci e dei servizi
+    prodotti.
+numeri:
+- cosa: Crescita media del PIL
+  valore: +6% annuo
+- cosa: Crisi mondiale breve
+  valore: '1907'
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: PIL, reddito pro capite

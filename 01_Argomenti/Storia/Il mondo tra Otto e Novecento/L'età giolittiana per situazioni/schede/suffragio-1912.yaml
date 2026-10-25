@@ -1,0 +1,40 @@
+tipo: voce
+id: suffragio-1912
+titolo: Il suffragio universale maschile
+sigla: Suffragio 1912
+genere: evento
+quando: 1911-1912
+dove: Italia
+chi:
+- Giolitti
+cosa: Nel solco del processo di progressiva democratizzazione, Giolitti ritenne maturi i tempi per un **allargamento
+  del diritto di voto** e nel **1911** propose il **suffragio universale maschile**, approvato nel **1912**. La
+  legge concedeva il voto a tutti i cittadini maschi **ventenni in possesso della licenza elementare** e anche agli
+  **analfabeti sopra i 30 anni**.
+conta: Il corpo elettorale passò **dal 9% al 24%** della popolazione italiana. Le **donne continuavano a essere
+  escluse**.
+svolta: true
+numeri:
+- cosa: Elettori nel 1861
+  valore: 2% della popolazione
+- cosa: Dopo Depretis (1882)
+  valore: 7-9%
+- cosa: Prima del 1912
+  valore: 9%
+- cosa: Dopo il 1912
+  valore: 24%
+- cosa: Elettori alle urne nel 1913
+  valore: quasi 9 milioni (contro 3)
+lega:
+- scheda: elezioni-1913
+  tipo: causa
+  perche: il corpo elettorale triplicato rende necessario cercare i cattolici
+- scheda: suffragette
+  documento: La belle époque e la società di massa
+  tipo: sincronia
+  perche: universale vuol dire ancora soltanto maschile
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: suffragio universale maschile

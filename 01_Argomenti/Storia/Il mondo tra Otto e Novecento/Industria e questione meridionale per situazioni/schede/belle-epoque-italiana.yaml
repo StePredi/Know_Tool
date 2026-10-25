@@ -1,0 +1,23 @@
+tipo: voce
+id: belle-epoque-italiana
+titolo: La belle époque italiana
+sigla: Benessere
+genere: concetto
+quando: primo decennio del Novecento
+dove: città italiane
+cosa: 'La crescita economica si tramutò in un **generale miglioramento delle condizioni di vita**. Come nel resto
+  d''Europa, anche l''Italia visse la sua *belle époque*: grazie a **salari più alti** le famiglie potevano destinare
+  una parte dei propri bilanci non soltanto al cibo, ma anche ai **beni di consumo** e allo **svago** — favorito
+  dalla riduzione della giornata di lavoro.'
+conta: 'Il processo di industrializzazione **non fu però sufficiente a cancellare** tutti gli altri problemi presenti
+  da tempo nella società italiana: alla vigilia della guerra l''Italia era «un paese con tante luci e troppe ombre».'
+lega:
+- scheda: consumo-di-massa
+  documento: La belle époque e la società di massa
+  tipo: esempio
+  perche: è il consumo di massa europeo visto dall’Italia
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: belle époque

@@ -1,0 +1,27 @@
+tipo: confronto
+id: dibattito-donne
+titolo: Il dibattito sulla guerra di Libia
+sigla: Goja e Serao
+domande:
+- Chi parla?
+- Che cosa dice della guerra?
+- Con quale immagine?
+- Dove esce?
+casi:
+- nome: Maria Goja — contro
+  risposte:
+  - sindacalista, contraria all’invasione
+  - le donne «maledicono la guerra per tutte le vite che spezza», per i bambini senza padre e i genitori a cui uccide
+    i figli
+  - i corpi «piagati, frantumati, insepolti» e gli istinti brutali che la guerra suscita
+  - '*Tutto il popolo è entusiasta!*, in «Su, compagne», n° 2, 14 ottobre 1911'
+- nome: Matilde Serao — a favore
+  risposte:
+  - scrittrice, sostiene la retorica coloniale
+  - i caduti hanno offerto alla Patria «il dono più prezioso», il loro sangue
+  - l’«Angelo della Vittoria» e la «grande avventura d’oltremare»
+  - '*Evviva la guerra!*, Francesco Ferrella & C., Napoli 1912'
+da:
+- l: Q
+  c: 3
+  p: 5

@@ -1,0 +1,25 @@
+tipo: voce
+id: dittatura-giolittiana
+titolo: Un riformismo pragmatico e cauto
+sigla: Il prezzo del metodo
+genere: concetto
+quando: 1903-1914
+cosa: A proposito di questo predominio alcuni storici, **applicando una forzatura**, parlano di «**dittatura giolittiana**».
+  Certamente la lunga stabilità di governo ottenuta con la pratica trasformista consentì allo statista piemontese
+  di conseguire **riforme importanti** per il paese.
+conta: 'Si trattava però di un **riformismo pragmatico e cauto, che pagava un prezzo**: in nome della costante ricerca
+  di una maggioranza in Parlamento, Giolitti dovette talvolta rinunciare ad azioni più incisive e dirompenti quando
+  queste entravano in contrasto con gli **interessi dei suoi sostenitori**.'
+lega:
+- scheda: riforme-negate
+  documento: Industria e questione meridionale
+  tipo: conseguenza
+  perche: 'il prezzo si vede nel Mezzogiorno: la riforma agraria non si fa'
+errore: 'prendere «dittatura giolittiana» alla lettera: il libro dice esplicitamente che è una forzatura degli storici'
+nota: 'Alcuni storici parlano di «dittatura giolittiana» per il predominio durato un decennio: il manuale avverte
+  che è una **forzatura**.'
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: dittatura giolittiana

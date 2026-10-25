@@ -1,0 +1,16 @@
+tipo: voce
+id: chimica-pirelli
+titolo: L’industria chimica
+sigla: Pirelli
+genere: processo
+quando: primi del Novecento
+dove: Milano
+cosa: 'Il processo di industrializzazione non si ridusse ai soli settori siderurgico, meccanico ed elettrico. Fra
+  gli altri comparti, quello dell''industria **chimica**: a essere sviluppata fu soprattutto la **lavorazione della
+  gomma**, a opera della società **Pirelli** di Milano.'
+conta: Completa il quadro dei settori che fanno dell'Italia un paese industriale, sia pure in ritardo.
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: Pirelli, gomma

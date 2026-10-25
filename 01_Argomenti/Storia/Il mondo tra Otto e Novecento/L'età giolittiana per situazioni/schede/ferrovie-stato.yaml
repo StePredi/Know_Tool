@@ -1,0 +1,24 @@
+tipo: voce
+id: ferrovie-stato
+titolo: La nazionalizzazione delle ferrovie
+sigla: FS 1905
+genere: evento
+quando: 1° luglio 1905
+dove: Italia
+chi:
+- Giolitti
+- socialisti riformisti
+- socialisti rivoluzionari
+cosa: 'Giolitti presentò un progetto di **nazionalizzazione delle ferrovie**. Due motivazioni: porre fine alla **cattiva
+  gestione delle società private** e venire incontro alle esigenze dei **grandi gruppi industriali**, che chiedevano
+  di ridurre i costi del trasporto merci e facilitare le importazioni di materie prime come il ferro e il carbone.'
+conta: '**Le due anime del PSI si dividono.** I **riformisti** appoggiarono il progetto, intravedendo la possibilità
+  di sottrarre profitti alle società private a favore della collettività; i **rivoluzionari** fecero dura opposizione,
+  temendo che i ferrovieri **perdessero il diritto di sciopero** a causa della statalizzazione. Nonostante il rallentamento
+  dell''iter parlamentare la legge fu approvata e il **1° luglio 1905** nacquero le **Ferrovie dello Stato**.'
+svolta: true
+da:
+- l: Q
+  c: 3
+  p: 3
+parole: Ferrovie dello Stato, nazionalizzazione

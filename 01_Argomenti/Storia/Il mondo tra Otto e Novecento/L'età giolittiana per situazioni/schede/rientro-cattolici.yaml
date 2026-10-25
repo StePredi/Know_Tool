@@ -1,0 +1,24 @@
+tipo: voce
+id: rientro-cattolici
+titolo: Il rientro dei cattolici nella politica
+sigla: Rientro cattolici
+genere: processo
+quando: dal 1891
+dove: Italia
+chi:
+- Leone XIII
+cosa: Erano sempre più numerosi i lavoratori cattolici che pensavano fosse giusto poter lottare per una **maggiore
+  giustizia sociale** senza necessariamente aderire alle organizzazioni di stampo socialista. In modo graduale i
+  cattolici cominciarono così a partecipare alla vita politica italiana.
+conta: Inizialmente si limitarono a **sostenere i liberali alle elezioni**. A seguito della pubblicazione nel **1891**
+  dell'enciclica *Rerum Novarum* di **Leone XIII** nacquero le **prime organizzazioni di orientamento cattolico**.
+lega:
+- scheda: rerum-novarum
+  documento: La belle époque e la società di massa
+  tipo: conseguenza
+  perche: l'enciclica del 1891 è il punto di partenza
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: Rerum Novarum

@@ -1,0 +1,22 @@
+tipo: voce
+id: rifiuto-turati
+titolo: Il rifiuto di Turati
+sigla: Rifiuto di Turati
+genere: evento
+quando: '1903'
+chi:
+- Filippo Turati
+cosa: Turati **rifiutò**. A distanza di tre anni dal congresso di Roma i rapporti di forza all'interno del PSI erano
+  **mutati a favore dei rivoluzionari**, ed egli aveva fondate ragioni per temere che collaborare con un governo
+  borghese avrebbe esposto il partito a gravi tensioni interne, fino al rischio di una **scissione**.
+conta: L'**unità della classe operaia** era per Turati una condizione irrinunciabile perché si realizzasse la sua
+  emancipazione. L'apertura a sinistra non poté dunque realizzarsi, pur proseguendo un rapporto fra i governi di
+  Giolitti e i socialisti riformisti che operavano nel partito e nel sindacato.
+lega:
+- scheda: sistema-giolittiano
+  tipo: causa
+  perche: il rifiuto costringe Giolitti a cercare maggioranze altrove
+da:
+- l: Q
+  c: 3
+  p: 3

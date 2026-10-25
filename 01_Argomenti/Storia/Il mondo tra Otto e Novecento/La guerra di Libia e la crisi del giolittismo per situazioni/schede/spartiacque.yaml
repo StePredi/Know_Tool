@@ -1,0 +1,19 @@
+tipo: voce
+id: spartiacque
+titolo: La guerra come spartiacque
+sigla: Spartiacque
+genere: concetto
+quando: 1911-1912
+dove: Italia
+chi:
+- Giolitti
+cosa: Giolitti sapeva che la decisione di conquistare la Libia gli avrebbe fatto guadagnare consensi. Nonostante
+  questo, e **a dispetto della vittoria**, la guerra rappresentò **uno spartiacque per la sua politica**.
+conta: Non solo **sconfessò le scelte fatte fino a quel momento**, ma mise in luce — rafforzandole — alcune **tendenze
+  politiche e culturali incompatibili con il giolittismo**.
+svolta: true
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: spartiacque

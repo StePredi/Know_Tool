@@ -1,0 +1,16 @@
+tipo: voce
+id: congresso-roma-1900
+titolo: Il congresso socialista di Roma
+sigla: Congresso 1900
+genere: evento
+quando: '1900'
+dove: Roma
+cosa: 'Al congresso socialista tenutosi a Roma il **programma minimo fu approvato a larghissima maggioranza**: la
+  linea di Turati vinceva.'
+conta: 'Non per questo la corrente rivoluzionaria perse terreno: guidava le **Camere del lavoro** di città importanti
+  come **Milano e Parma**. Tre anni dopo i rapporti di forza sarebbero già cambiati.'
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: congresso di Roma

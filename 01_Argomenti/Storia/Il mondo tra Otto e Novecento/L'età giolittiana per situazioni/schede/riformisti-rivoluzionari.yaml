@@ -1,0 +1,28 @@
+tipo: confronto
+id: riformisti-rivoluzionari
+titolo: Riformisti e rivoluzionari a confronto
+sigla: Le due anime del PSI
+domande:
+- Chi li guida?
+- Che rapporto con lo Stato liberale?
+- Che strumento usano?
+- Che cosa chiedono subito?
+casi:
+- nome: Riformisti
+  scheda: programma-minimo
+  risposte:
+  - Filippo Turati, con Claudio Treves
+  - collaborazione in Parlamento, compromesso provvisorio con la borghesia liberale
+  - 'la legge e il voto: riforme graduali e irreversibili'
+  - suffragio universale, libertà sindacale, niente colonie, scuola elementare obbligatoria
+- nome: Rivoluzionari
+  scheda: programma-massimo
+  risposte:
+  - Arturo Labriola, napoletano
+  - rifiuto totale di ogni compromesso coi governi borghesi-liberali
+  - lo sciopero generale come addestramento allo scontro
+  - la rivoluzione che porti al potere le classi lavoratrici
+da:
+- l: Q
+  c: 3
+  p: 2

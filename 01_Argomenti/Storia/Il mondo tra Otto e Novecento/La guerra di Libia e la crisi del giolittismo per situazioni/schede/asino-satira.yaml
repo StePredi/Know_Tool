@@ -1,0 +1,35 @@
+tipo: voce
+id: asino-satira
+titolo: Giolitti e la satira politica
+sigla: «L’Asino»
+genere: concetto
+quando: 1905 e 1911
+dove: Italia
+chi:
+- Guido Podrecca
+- Gabriele Galantara
+cosa: 'L''autoritarismo, i fallimenti coloniali e i conflitti sociali di fine Ottocento, poi gli scandali e i problemi
+  irrisolti dei primi decenni del Novecento provocarono un diffuso **malcontento verso la classe politica**. Se
+  ne fece interprete la **stampa satirica**, che «smascherò la pochezza morale della classe dirigente» parlando
+  «**alla pancia più che alla testa**» del pubblico, con immagini semplici e immediate. Un settimanale di successo
+  fu «**L''Asino**», fondato da due studenti di idee socialiste, il giornalista **Guido Podrecca** e il fumettista
+  **Gabriele Galantara**; il titolo richiama un motto risorgimentale: «*Come il popolo è l''asino: utile, paziente
+  e bastonato*».'
+conta: 'Giolitti divenne **bersaglio costante**: erano attaccati la spregiudicatezza con cui si presentava diversamente
+  a Nord e a Sud e l''uso disinvolto del trasformismo. Nella **caricatura del 1905** è un anziano **pagliaccio**
+  che sceglie quale naso indossare a seconda dello spettacolo e del pubblico. In quella del **1911** («*Giovanni
+  bifronte*») è ritratto in due immagini a specchio: **a destra**, in abiti proletari, scarpe contadine e berretto
+  sformato, si rivolge ai lavoratori del Sud e agli elettori socialisti come un sincero democratico; **a sinistra**,
+  in cilindro e abito scuro da cerimonia, rassicura i conservatori e gli elettori del Nord. In entrambe sovrasta
+  il suo pubblico — la **distanza della politica dal paese reale** — e ha **enormi mani** con cui fa e disfa qualsiasi
+  alleanza.'
+lega:
+- scheda: opportunismo
+  documento: L'età giolittiana
+  tipo: deformato_in
+  perche: la satira prende il trasformismo e ne fa un pagliaccio con due facce
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: L’Asino, Podrecca, Galantara, satira

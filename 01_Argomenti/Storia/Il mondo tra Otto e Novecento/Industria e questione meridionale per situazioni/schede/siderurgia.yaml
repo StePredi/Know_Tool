@@ -1,0 +1,22 @@
+tipo: voce
+id: siderurgia
+titolo: La siderurgia
+sigla: Siderurgia
+genere: processo
+quando: 1880-1914
+dove: costa ligure e tirrenica
+cosa: 'La siderurgia si sviluppò intorno a poli industriali e cantieri navali disseminati — a parte la già citata
+  Terni — soprattutto lungo la costa ligure e tirrenica: **Savona, Genova, Piombino e Bagnoli**. I principali stabilimenti
+  furono quelli dell''**Ansaldo di Genova**.'
+conta: 'Era l''industria **più impegnativa in termini di costi**: altiforni, laminatoi, montacarichi, macchinari
+  costosissimi. Serviva perciò una domanda **continua e consistente** di acciaio e ghisa. Negli anni Ottanta incontrò
+  grandi difficoltà e dovette chiedere allo Stato, oltre al protezionismo, anche un **sostegno finanziario**; verso
+  fine secolo migliorò, rispondendo alla domanda del settore **meccanico** (navi e treni) e **militare** (armi).'
+elementi:
+- nome: Ghisa
+  spiega: un'altra lega ferrosa, di minor qualità rispetto all'acciaio.
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: Ansaldo, altiforni, ghisa

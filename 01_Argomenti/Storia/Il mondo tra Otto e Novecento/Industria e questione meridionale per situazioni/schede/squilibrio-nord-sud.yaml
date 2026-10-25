@@ -1,0 +1,20 @@
+tipo: voce
+id: squilibrio-nord-sud
+titolo: Lo squilibrio fra Nord e Sud
+sigla: Squilibrio Nord-Sud
+genere: concetto
+quando: età giolittiana
+dove: Italia
+cosa: 'Per quanto poderoso, il decollo industriale aveva un punto debole: la sua **limitatezza territoriale**, cioè
+  l''esclusione di una parte consistente del paese, il **Mezzogiorno**.'
+conta: 'Il riformismo di Giolitti **non riuscì a colmare il divario** di sviluppo e di ricchezza fra Nord e Sud.
+  Anzi, questo grande problema dell''Italia unita, lasciato irrisolto dai precedenti governi di destra e di sinistra,
+  **andò ulteriormente ad aggravarsi** con la crescita economica: gli interventi pubblici a sostegno dell''industria
+  avvantaggiarono un''area geografica ristretta, già la più avanzata, dove le vie di comunicazione erano sviluppate
+  e c''era manodopera specializzata.'
+svolta: true
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: questione meridionale, divario

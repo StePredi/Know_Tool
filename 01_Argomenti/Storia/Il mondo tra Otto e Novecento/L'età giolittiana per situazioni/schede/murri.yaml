@@ -1,0 +1,28 @@
+tipo: voce
+id: murri
+titolo: Romolo Murri e la democrazia cristiana
+sigla: Murri
+genere: persona
+quando: fino al 1909
+dove: Italia
+chi:
+- Romolo Murri
+- Leone XIII
+- Pio X
+cosa: Un giovane sacerdote marchigiano, **Romolo Murri**, abbracciando le idee del **modernismo** criticò apertamente
+  il sistema liberale, accusato di non tutelare le classi popolari, e si adoperò per costruire un **movimento democratico
+  cristiano** attento soprattutto ai problemi sociali.
+conta: 'Il suo programma era più in linea con le idee della sinistra socialista e repubblicana e prevedeva un **impegno
+  politico diretto** da parte dei cattolici. Considerato troppo rivoluzionario dalle alte gerarchie, incontrò la
+  ferma opposizione sia di **Leone XIII** sia di **Pio X**: quest''ultimo dapprima lo **sospese dal sacerdozio**,
+  poi, nel **1909**, quando Murri decise di candidarsi come deputato radicale, lo **scomunicò**.'
+lega:
+- scheda: modernismo
+  documento: La belle époque e la società di massa
+  tipo: esempio
+  perche: è il modernismo applicato alla politica italiana
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: Murri, democrazia cristiana, modernismo, scomunica

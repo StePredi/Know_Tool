@@ -1,0 +1,22 @@
+tipo: voce
+id: liberta-azione
+titolo: La ritrovata libertà di azione
+sigla: Libertà di azione
+genere: concetto
+quando: dopo il 1896
+chi:
+- Vittorio Emanuele III
+cosa: Con il cambio di rotta impresso alla politica estera dopo il 1896 l'Italia dimostrava di aver riconquistato
+  una certa **libertà di azione sullo scenario internazionale**, rispetto alla necessità di restare legata unicamente
+  alla Triplice alleanza.
+conta: Questo nuovo corso era favorito anche da **Vittorio Emanuele III**, che non nutriva grandi simpatie per la
+  Germania di Guglielmo II.
+lega:
+- scheda: weltpolitik
+  documento: Le alleanze europee
+  tipo: confronto
+  perche: la Germania di Guglielmo II è proprio ciò da cui il re italiano prende le distanze
+da:
+- l: Q
+  c: 3
+  p: 5

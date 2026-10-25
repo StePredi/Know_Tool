@@ -1,0 +1,18 @@
+tipo: voce
+id: pace-losanna
+titolo: La pace di Losanna
+sigla: Losanna 1912
+genere: evento
+quando: 18 ottobre 1912
+dove: Losanna
+cosa: In base all'accordo agli italiani sarebbe spettato il **controllo politico e militare** sulle province della
+  **Tripolitania** e della **Cirenaica**, mentre l'**Impero ottomano avrebbe mantenuto la propria autorità religiosa**
+  sulla popolazione.
+conta: Le truppe italiane rimasero stanziate nell'isola di **Rodi** e nel **Dodecaneso**, un arcipelago dell'Egeo
+  orientale che durante il conflitto era stato occupato per ragioni strategiche.
+svolta: true
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: pace di Losanna, Tripolitania, Cirenaica, Dodecaneso

@@ -1,0 +1,31 @@
+tipo: voce
+id: sciopero-1904
+titolo: Il primo sciopero generale nazionale
+sigla: Sciopero 1904
+genere: evento
+quando: '1904'
+dove: Italia
+chi:
+- socialisti rivoluzionari
+- Giolitti
+cosa: La corrente rivoluzionaria promosse uno **sciopero generale nazionale** per solidarietà contro la repressione
+  violenta delle proteste dei **minatori di Buggerru**, in Sardegna, e dei **contadini di Castelluzzo**, in Sicilia.
+conta: Fu la **prima esperienza di lotta di questo tipo condotta in un paese europeo**, concepita per addestrare
+  il proletariato allo scontro con la borghesia. Di fronte alle richieste di un intervento militare, **Giolitti
+  preferì tenere un atteggiamento neutrale** e lasciò che lo sciopero si esaurisse da solo. L'esito però rese evidente
+  l'**incapacità del movimento sindacale di agire in modo unitario**.
+svolta: true
+elementi:
+- nome: Sciopero generale nazionale
+  spiega: lo sciopero consiste nell'astensione collettiva e organizzata dal lavoro; quando i lavoratori di settori
+    diversi lo indicono congiuntamente in tutto il paese si parla di sciopero generale nazionale. In Italia il diritto
+    di sciopero è sancito dall'**articolo 40 della Costituzione**.
+lega:
+- scheda: cgdl
+  tipo: causa
+  perche: l'incapacità di agire uniti spinge i riformisti a creare un sindacato unico
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: sciopero generale nazionale, Buggerru, Castelluzzo

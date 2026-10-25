@@ -1,0 +1,20 @@
+tipo: voce
+id: anime-cattolicesimo
+titolo: Le anime del cattolicesimo
+sigla: Anime cattoliche
+genere: concetto
+quando: inizio Novecento
+dove: Italia
+cosa: Come nel Partito socialista, anche nel mondo cattolico esistevano **diverse correnti**. Gli **intransigenti**,
+  che si opponevano al tentativo d'integrazione dei cattolici nello Stato liberale, col tempo avevano perso terreno
+  a vantaggio dei **moderati**, aperti alla partecipazione alla vita pubblica **in accordo con i liberali**.
+conta: 'Lo scopo principale dei moderati era **arginare i socialisti**: è da qui che nascerà il patto Gentiloni.'
+lega:
+- scheda: patto-gentiloni
+  tipo: prepara
+  perche: l'ala moderata è quella che poi stringe l'accordo coi liberali
+da:
+- l: Q
+  c: 3
+  p: 2
+parole: intransigenti, moderati

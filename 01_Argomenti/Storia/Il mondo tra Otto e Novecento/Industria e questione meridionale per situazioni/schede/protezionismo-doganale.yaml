@@ -1,0 +1,22 @@
+tipo: voce
+id: protezionismo-doganale
+titolo: Il protezionismo doganale
+sigla: Dazi 1887
+genere: concetto
+quando: 1887-1892
+dove: Italia e Francia
+cosa: Agli effetti dell'intervento statale si aggiunsero quelli del **protezionismo doganale** promosso a fine Ottocento
+  dai governi Depretis e Crispi.
+conta: I dazi imposti durante la «**guerra delle tariffe**» con la Francia (1887-1892) permisero alle industrie
+  italiane — soprattutto quelle **siderurgiche** — di vendere i loro prodotti a prezzi abbastanza alti **senza temere
+  la concorrenza straniera**. Il comparto **meccanico**, invece, non godette di quella protezione.
+lega:
+- scheda: protezionismo-italiano
+  documento: Italia fine Ottocento
+  tipo: prosegue
+  perche: è la svolta protezionistica della Sinistra che continua a produrre effetti
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: guerra delle tariffe, dazi

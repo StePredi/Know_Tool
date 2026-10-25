@@ -1,0 +1,81 @@
+modello: per_situazioni
+vista: storia
+titolo: L'età giolittiana
+centro: Giolitti 1901-1914
+sottotitolo: ''
+ingresso: la domanda riguarda come Giolitti governa l’Italia e con chi fa maggioranza
+guida: chi deve entrare nello Stato liberale, e che cosa Giolitti gli offre in cambio?
+esempiRicerca: ''
+rami:
+- id: socialisti
+  nome: I socialisti
+  colore: red
+  lato: R
+  ordine: false
+  voci:
+  - schede:
+    - psi-due-correnti
+    - programma-minimo
+    - programma-massimo
+    - riformisti-rivoluzionari
+    - congresso-roma-1900
+    - sciopero-1904
+    - cgdl
+    - confindustria
+  quando: 1892-1906
+- id: cattolici
+  nome: I cattolici
+  colore: yellow
+  lato: L
+  ordine: true
+  voci:
+  - schede:
+    - non-expedit
+    - rientro-cattolici
+    - anime-cattolicesimo
+    - murri
+  quando: 1870-1909
+- id: dialogo
+  nome: Il dialogo mancato con Turati
+  colore: orange
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - giolitti-turati
+    - rifiuto-turati
+  quando: '1903'
+- id: metodo
+  nome: Il sistema giolittiano
+  colore: blue
+  lato: L
+  ordine: false
+  voci:
+  - schede:
+    - sistema-giolittiano
+    - opportunismo
+    - pragmatismo
+    - dittatura-giolittiana
+- id: riforme
+  nome: Le riforme
+  colore: green
+  lato: T
+  ordine: true
+  voci:
+  - schede:
+    - legge-orlando
+    - leggi-mezzogiorno
+    - ferrovie-stato
+    - suffragio-1912
+    - assicurazioni-vita
+  quando: 1904-1912
+- id: gentiloni
+  nome: Il patto Gentiloni
+  colore: violet
+  lato: B
+  ordine: false
+  voci:
+  - schede:
+    - patto-gentiloni
+    - elezioni-1913
+  quando: '1913'

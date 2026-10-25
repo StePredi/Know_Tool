@@ -1,0 +1,21 @@
+tipo: voce
+id: dimissioni-1914
+titolo: Le dimissioni di Giolitti
+sigla: Dimissioni 1914
+genere: evento
+quando: 4 marzo 1914
+dove: Italia
+chi:
+- Giolitti
+- Antonio Salandra
+cosa: Dopo l'abbandono del governo da parte di alcuni ministri, Giolitti rassegnò le dimissioni e cedette il posto
+  di presidente del Consiglio ad **Antonio Salandra**, un liberale di orientamento conservatore.
+conta: Come già in altre occasioni, Giolitti pensò di lasciare per un certo periodo il governo, in modo da riprenderne
+  la guida in un momento politicamente più favorevole. **Ma la realtà italiana era ormai troppo cambiata** e quello
+  che in passato gli era riuscito non poteva più essere ripetuto.
+svolta: true
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: Salandra

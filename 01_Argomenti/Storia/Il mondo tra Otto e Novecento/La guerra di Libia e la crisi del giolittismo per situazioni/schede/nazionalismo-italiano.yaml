@@ -1,0 +1,25 @@
+tipo: voce
+id: nazionalismo-italiano
+titolo: Il nazionalismo italiano
+sigla: Nazionalismo
+genere: concetto
+quando: dopo il 1908
+dove: Italia
+cosa: Il nazionalismo conquistava spazi crescenti soprattutto fra i **ceti intellettuali**, la **classe politica
+  liberal-conservatrice** e anche presso alcuni **gruppi economici**. Sempre più numerose erano le voci di chi chiedeva
+  al governo una politica estera **più coraggiosa e più decisa**, rispolverando i progetti coloniali abbandonati
+  dopo il 1896.
+conta: Fra i nazionalisti era diffusa la convinzione che, se l'Italia fosse diventata **potenza coloniale al pari
+  di Francia e Inghilterra**, gli italiani **non sarebbero più stati costretti a emigrare** e a mettere le proprie
+  energie al servizio di paesi stranieri.
+svolta: true
+lega:
+- scheda: paese-di-migranti
+  documento: Industria e questione meridionale
+  tipo: usa
+  perche: l’emigrazione è l’argomento con cui i nazionalisti giustificano le colonie
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: nazionalismo

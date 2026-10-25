@@ -1,0 +1,25 @@
+tipo: voce
+id: italia-vs-europa
+titolo: Quanto l’Italia resta indietro
+sigla: Italia vs Europa
+genere: concetto
+quando: '1914'
+dove: Europa
+cosa: Nonostante la rapida industrializzazione del primo decennio del Novecento, i risultati dell'Italia erano **ben
+  lontani da quelli delle maggiori potenze europee**.
+conta: Alla vigilia della Prima guerra mondiale la popolazione impiegata nelle campagne era il **55% in Italia**
+  e soltanto l'**8% in Gran Bretagna**. L'Italia produceva **un milione di tonnellate di acciaio**; la Germania
+  **17,6 milioni**.
+numeri:
+- cosa: Popolazione nelle campagne — Italia
+  valore: 55%
+- cosa: Popolazione nelle campagne — Gran Bretagna
+  valore: 8%
+- cosa: Acciaio — Italia
+  valore: 1 milione di t
+- cosa: Acciaio — Germania
+  valore: 17,6 milioni di t
+da:
+- l: Q
+  c: 3
+  p: 4

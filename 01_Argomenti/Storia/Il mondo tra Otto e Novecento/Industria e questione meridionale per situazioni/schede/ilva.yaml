@@ -1,0 +1,33 @@
+tipo: voce
+id: ilva
+titolo: 'L’Ilva: dal ferro dell’Elba agli acciai d’Italia'
+sigla: Ilva 1905
+genere: evento
+quando: '1905'
+dove: Portoferraio, Piombino, Bagnoli
+cosa: 'Il principale limite allo sviluppo industriale era la **scarsità di materie prime**: il minerale ferroso
+  dell''isola d''Elba veniva **esportato all''estero**, soprattutto in Gran Bretagna, mentre le industrie italiane
+  producevano ghisa e acciaio **a partire da rottami**, con l''effetto di abbassare la qualità del prodotto finale.
+  La svolta fu la fondazione dell''**Ilva** — dal nome latino dell''isola d''Elba — che utilizzava il minerale elbano.'
+conta: 'Costituitasi per **fusione di società preesistenti** e col sostegno di alcune banche, ottenne dallo Stato
+  un''importantissima concessione: **acquistare il minerale dell''Elba a un prezzo bassissimo**. In più lo Stato
+  raggiunse un accordo con le industrie straniere, che si impegnarono a lasciare l''intero mercato nazionale alla
+  produzione italiana **in cambio della rinuncia italiana a esportare**.'
+svolta: true
+elementi:
+- nome: Dove
+  spiega: i primi stabilimenti a **Portoferraio** (isola d’Elba), **Piombino** sulla costa toscana e **Bagnoli**
+    nel napoletano; poi Cornigliano a Genova e Taranto.
+- nome: I limiti
+  spiega: il prodotto finale aveva un **costo elevato** e molti potenziali acquirenti preferivano rivolgersi ai
+    mercati stranieri.
+numeri:
+- cosa: Acciaio prodotto nel 1881
+  valore: 4000 tonnellate
+- cosa: Acciaio prodotto nel 1913
+  valore: 911.000 tonnellate
+da:
+- l: Q
+  c: 3
+  p: 4
+parole: Ilva, Portoferraio, Bagnoli

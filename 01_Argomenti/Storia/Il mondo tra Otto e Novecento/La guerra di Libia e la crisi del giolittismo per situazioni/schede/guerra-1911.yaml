@@ -1,0 +1,21 @@
+tipo: voce
+id: guerra-1911
+titolo: La guerra italo-turca
+sigla: Guerra 1911
+genere: evento
+quando: 28 settembre 1911
+dove: Libia
+chi:
+- Italia
+- Impero ottomano
+cosa: La guerra ebbe inizio il **28 settembre 1911**. Per difendere la Libia l'esercito ottomano scelse di **evitare
+  scontri campali**, in cui sarebbe stato con ogni probabilità sconfitto, e **puntò tutto sulla guerriglia**.
+conta: 'Ciò rese il conflitto **più impegnativo del previsto**: solo dopo più di un anno, col sacrificio di migliaia
+  di soldati, l''Italia ottenne la vittoria. Un ruolo importante fu svolto dalla **Regia Marina**, che oltre a trasportare
+  le truppe contrastò la flotta turca e bombardò le coste; le basi di partenza furono **Augusta**, in Sicilia, e
+  **Taranto**, in Puglia.'
+da:
+- l: Q
+  c: 3
+  p: 5
+parole: guerra italo-turca, guerriglia
