@@ -894,9 +894,10 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .st-lettura .st-sfuma:hover, .st-lettura .st-sfuma:focus-within,
 .st-lettura .st-guida:hover { opacity: 1; }
 /* il contenuto invece prende aria: misura da lettura e corpo più grande */
-.st-lettura .st-main { padding: 30px 30px 120px; font-size: 17.5px; line-height: 1.7; }
-.st-lettura .st-scheda { max-width: 68ch; }
-.st-lettura.st-dys .st-scheda { max-width: 60ch; }
+.st-lettura .st-main { padding: 30px 22px 120px; font-size: 17.5px; line-height: 1.7; }
+/* niente restringimento: in lettura il contenuto tiene la larghezza che ha
+   sempre, prende solo piu' corpo e piu' aria. Stringerlo lo comprimeva verso
+   il centro, che e' l'opposto di quello che serve. */
 @media (max-width: 620px) { .st-lettura .st-main { padding: 22px 16px 100px; } }
 @media (prefers-reduced-motion: reduce) { .st-lettura .st-col, .st-lettura .st-r-dove, .st-lettura .st-sfuma, .st-lettura .st-guida { transition: none; } }
 
