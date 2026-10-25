@@ -148,9 +148,11 @@ export function VistaStoria({ rel }: { rel: string }): ReactNode {
       <div className="st-corpo">
         {conColonna && (
           <nav className="st-col" aria-label="Navigazione dell'argomento">
-            {st.vista === 'mappa'
-              ? <Mappa rel={rel} dati={dati} scheda={corrente ?? null} apri={apri} />
-              : <Cronologia dati={dati} scheda={corrente ?? null} apri={apri} />}
+            <div className="st-col-in">
+              {st.vista === 'mappa'
+                ? <Mappa rel={rel} dati={dati} scheda={corrente ?? null} apri={apri} />
+                : <Cronologia dati={dati} scheda={corrente ?? null} apri={apri} />}
+            </div>
           </nav>
         )}
         <main className="st-main">
