@@ -36,3 +36,28 @@ Elenco raccolto il 2026-10-10. Spuntare quando fatto.
 - Gli `.md` di `appunti/` e `pratica/` compaiono nell'albero e si aprono in una scheda (sola lettura)
 - Clic su una fonte citata (`fonti/x.pdf`) = si apre con l'app predefinita del sistema (da provare: PDF, pptx, html)
 - Provato solo nel browser con dati simulati, non in Electron
+
+## 2026-10-25 — Storia
+
+Apri l'app (`npm run dev` da `02_App/`) e nell'albero vai in **Storia**: ci sono
+due argomenti nuovi, «Le alleanze europee» e «Darwinismo sociale e teorie
+razziali». Aprili e guarda:
+
+1. **La mappa**: sei rami colorati per le alleanze, quattro per il darwinismo.
+   Sulle foglie, al posto del comando, c'è la data.
+2. **Una scheda «voce»** (per esempio *Triplice 1882*): il titolo, poi subito il
+   testo; a destra la spalla con quando / dove / chi e l'elenco delle sezioni.
+   Sotto: «Come si svolge» a passi numerati, «I dettagli», «Attenzione» con
+   l'errore tipico e la nota, «Collegamenti» con il tipo di legame e il motivo.
+3. **Una scheda «confronto»** (*I due blocchi*): la tabella con le stesse
+   domande per i due casi; i nomi in testa sono cliccabili.
+4. **Il grassetto e il corsivo** dentro i testi.
+5. **Un collegamento che esce dall'argomento**: in *Eugenetica* (darwinismo) ce
+   n'è uno tratteggiato e spento verso «totalitarismi», documento che non
+   esiste ancora. Deve restare un avviso, non un errore.
+
+Cosa NON c'è ancora, di proposito: le viste ricavate (cronologia, glossario,
+chi è chi, svolte, copertura del libro) e il ripasso adattato alle voci. Sono
+nel mockup `03_Demo/storia/storia.html`, e si portano nell'app dopo questa
+prova.
+
