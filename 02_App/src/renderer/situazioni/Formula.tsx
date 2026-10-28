@@ -1,28 +1,24 @@
 import type { ReactNode } from 'react'
-import { leggiFormula, pezziTesto, type NodoF } from '@shared/notazione'
+import katex from 'katex'
+import 'katex/dist/katex.min.css'
+import { aLatex } from '@shared/latex'
+import { pezziTesto } from '@shared/notazione'
 
-function nodi(n: NodoF[]): ReactNode {
-  return n.map((x, i) => {
-    if (x.t === 'txt') return x.v
-    if (x.t === 'var') return <i key={i} className={'mt-v' + ('fgh'.includes(x.v) ? ' mt-' + x.v : '')}>{x.v}</i>
-    if (x.t === 'fn') return <span key={i} className="mt-fn">{x.v}</span>
-    if (x.t === 'op') return <span key={i} className={x.v === '·' ? 'mt-op mt-dot' : 'mt-op'}>{x.v}</span>
-    if (x.t === 'un') return <span key={i} className="mt-un">{x.v}</span>
-    if (x.t === 'sp') return <span key={i} className="mt-sp" />
-    if (x.t === 'pr') return <span key={i} className="mt-pr">′</span>
-    if (x.t === 'par') return x.grande
-      ? <span key={i} className="mt-bg"><span className="mt-bp">(</span>{nodi(x.c)}<span className="mt-bp">)</span></span>
-      : <span key={i}>({nodi(x.c)})</span>
-    if (x.t === 'sup') return <sup key={i}>{nodi(x.c)}</sup>
-    if (x.t === 'sub') return <sub key={i}>{nodi(x.c)}</sub>
-    if (x.t === 'rad') return <span key={i}>√<span className="mt-rd">{nodi(x.c)}</span></span>
-    return <span key={i} className="mt-fr"><span className="mt-n">{nodi(x.n)}</span><span className="mt-d">{nodi(x.d)}</span></span>
-  })
+const memoria = new Map<string, string>()
+
+/** HTML di KaTeX per una formula in notazione Know_Tool (con memoria, così non si ricalcola a ogni disegno). */
+function html(s: string): string {
+  let h = memoria.get(s)
+  if (h === undefined) {
+    h = katex.renderToString(aLatex(s), { throwOnError: false, output: 'html', strict: 'ignore', trust: (c) => c.command === '\\htmlClass' })
+    memoria.set(s, h)
+  }
+  return h
 }
 
 /** Una formula in notazione testuale (senza apici inversi). */
 export function Formula({ s }: { s: string }): ReactNode {
-  return <span className="mt">{nodi(leggiFormula(s))}</span>
+  return <span className="mt" dangerouslySetInnerHTML={{ __html: html(s) }} />
 }
 
 /** Un testo con formule tra apici inversi. */
