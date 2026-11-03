@@ -1,0 +1,14 @@
+---
+temi:
+  - { id: impers, nome: Impersonalità e metodo }
+  - { id: scienza, nome: Scienza e letteratura }
+  - { id: popolo, nome: Mondo popolare e rurale }
+  - { id: roba, nome: Roba e logica economica }
+  - { id: progresso, nome: Progresso e vinti }
+  - { id: esclus, nome: Esclusione e solitudine }
+  - { id: passione, nome: Amore-passione }
+  - { id: meridione, nome: Questione meridionale }
+  - { id: lingua, nome: Lingua e stile }
+  - { id: pessimismo, nome: Pessimismo e storia }
+  - { id: borghesia, nome: Borghesia e società di massa }
+---
