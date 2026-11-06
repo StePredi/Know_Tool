@@ -1,0 +1,35 @@
+id: vlan-lab-chr
+tipo: ricetta
+titolo: Preparare il laboratorio con due router virtuali (CHR)
+sigla: Laboratorio CHR
+comando: VirtualBox + CHR
+frase: 'due copie: S1 e R1'
+fonte: Schema mikTikVlansRoutingPaov.3 · NOTE
+parole: laboratorio chr cloud hosted router virtualbox ova macchina virtuale bridge rete interna promiscuo winbox management s1 r1
+quando: Quando devi provare VLAN e routing sul tuo PC con macchine virtuali al posto dei router veri.
+fasi:
+- nome: Installa i due router
+  righe:
+  - codice: '# dal sito MikroTik scarica il Cloud Hosted Router (v7.xx), template OVA'
+    commento: è il router virtuale
+  - codice: '# importalo due volte in VirtualBox: una copia per S1 (switch) e una per R1 (router)'
+    commento: due macchine virtuali uguali
+    trappola: Servono anche macchine virtuali Linux da collegare alle porte access dello switch (la traccia dice di installarne due copie).
+- nome: Imposta le schede di rete
+  righe:
+  - codice: '# R1, ether1 (WAN) e ether3 (gestione): modalità bridge'
+    commento: ether1 vede la rete a monte, ether3 serve a WinBox sul PC
+  - codice: '# R1 ether2, tutte le schede di S1 e quelle delle macchine collegate: "rete interna" in modo promiscuo'
+    commento: è la rete finta in cui passano i frame con tag
+    trappola: 'Nota: la traccia scrive "le schede di ogni macchina virtuale di R1"; qui è inteso come le macchine virtuali collegate alla rete interna.'
+- nome: Gestione
+  righe:
+  - codice: '# dal PC con WinBox: collegati a R1 sulla porta di gestione (ether3)'
+    commento: da R1, con ROMON, raggiungi anche S1
+    trappola: 'Nota: l''ultima parte è un''interpretazione: la traccia attiva ROMON ma non dice come raggiungere S1.'
+segnaposto: {}
+varianti: []
+vicine:
+- vlan-scenario-switch
+- vlan-scenario-router
+- romon

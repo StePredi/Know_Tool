@@ -1,0 +1,76 @@
+id: vlan-indirizzi
+tipo: ricetta
+titolo: 'Dare a ogni VLAN il suo gateway: il primo indirizzo della rete'
+sigla: Gateway delle VLAN
+comando: ip address add (primo IP)
+frase: uno per interfaccia VLAN
+fonte: Traccia configurazione InterVlanRouting · Schema mikTikVlansRoutingPaov.3 · Passo 4
+parole: vlan ip address gateway primo indirizzo subnet 172.18 piano di indirizzamento maschera interfaccia vlan
+quando: Quando le interfacce VLAN esistono e ognuna deve diventare il gateway della sua rete.
+fasi:
+- nome: Il piano degli indirizzi
+  righe:
+  - codice: '# vlan10: 172.18.«N».0 · vlan20: 172.18.«N30».0 · vlan30: 172.18.«N60».0'
+    commento: la terza parte cambia di 30 in 30 (N, N+30, N+60)
+    trappola: 'Nota: N è il tuo numero. Lo schema indica anche quanti dispositivi servono per VLAN: 10+N, 50+N, 100+N.'
+- nome: Un indirizzo per ogni interfaccia
+  righe:
+  - codice: /ip address add address=172.18.«N».«X»/«MM» interface=«NOME_A»
+    commento: gateway della VLAN 10
+    parti:
+    - voce: «X»
+      spiega: primo indirizzo disponibile della subnet
+    - voce: «MM»
+      spiega: 'maschera in bit: dipende da quanti dispositivi ci sono nella rete'
+    trappola: 'Il gateway è il primo indirizzo utilizzabile della subnet. Nota: nello schema le tre subnet sono scritte /24, mentre la traccia dice di scegliere la maschera in base al numero di dispositivi.'
+  - codice: /ip address add address=172.18.«N30».«Y»/«NN» interface=«NOME_B»
+    commento: gateway della VLAN 20
+  - codice: /ip address add address=172.18.«N60».«W»/«OO» interface=«NOME_C»
+    commento: gateway della VLAN 30
+    trappola: L'IP va sull'interfaccia VLAN, non sulla porta trunk.
+- nome: Controlla
+  righe:
+  - codice: /ip address print
+    commento: le tre reti compaiono, ognuna sulla sua interfaccia
+segnaposto:
+  N:
+    esempio: '5'
+    spiega: il tuo numero (terza parte dell'indirizzo della VLAN 10)
+  N30:
+    esempio: '35'
+    spiega: N + 30
+  N60:
+    esempio: '65'
+    spiega: N + 60
+  X:
+    esempio: '1'
+    spiega: primo indirizzo utilizzabile della subnet 10
+  Y:
+    esempio: '1'
+    spiega: primo indirizzo utilizzabile della subnet 20
+  W:
+    esempio: '1'
+    spiega: primo indirizzo utilizzabile della subnet 30
+  MM:
+    esempio: '27'
+    spiega: bit di rete della VLAN 10 (per 15 dispositivi)
+  NN:
+    esempio: '26'
+    spiega: bit di rete della VLAN 20 (per 55 dispositivi)
+  OO:
+    esempio: '25'
+    spiega: bit di rete della VLAN 30 (per 105 dispositivi)
+  NOME_A:
+    esempio: vlan10-ufficio
+    spiega: interfaccia VLAN 10
+  NOME_B:
+    esempio: vlan20-laboratorio
+    spiega: interfaccia VLAN 20
+  NOME_C:
+    esempio: vlan30-ospiti
+    spiega: interfaccia VLAN 30
+varianti: []
+vicine:
+- vlan-router-interfacce
+- dhcp-multi
+- subnet

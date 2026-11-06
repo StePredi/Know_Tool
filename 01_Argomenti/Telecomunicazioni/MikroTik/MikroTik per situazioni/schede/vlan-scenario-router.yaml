@@ -1,0 +1,104 @@
+id: vlan-scenario-router
+tipo: ricetta
+titolo: 'Configurare R1 come router di frontiera: WAN, VLAN, gateway, DHCP e NAT'
+sigla: Scenario router R1
+comando: interface vlan + ip address + NAT
+frase: dal reset a Internet per tutte le VLAN
+fonte: Traccia configurazione InterVlanRouting · Schema mikTikVlansRoutingPaov.3 · Mikrotik 2 - router di frontiera
+parole: router frontiera r1 wan trunk interfacce vlan gateway dhcp nat masquerade inter vlan routing scenario completo ether1 ether2 ether3
+quando: 'Quando il router deve collegare le VLAN tra loro e a Internet: una porta WAN, una porta trunk verso lo switch e una porta per la gestione.'
+fasi:
+- nome: Prepara il router
+  righe:
+  - codice: /system reset-configuration no-defaults=yes skip-backup=yes
+    commento: router vuoto, senza backup automatico
+    trappola: Il reset riavvia il router e cancella l'IP con cui sei collegato.
+  - codice: /system identity set name=«NOME_ROUTER»
+    commento: nome del router
+  - codice: /tool romon set enabled=yes
+    commento: ROMON acceso
+- nome: Porta verso Internet (WAN)
+  righe:
+  - codice: /ip dhcp-client add interface=«PORTA_WAN»
+    commento: la WAN prende l'indirizzo dalla rete a monte
+    trappola: 'Nel laboratorio la rete a monte è 192.168.24.0/24: l''ether1 è collegata in modalità bridge.'
+- nome: Le interfacce VLAN sul trunk
+  righe:
+  - codice: /interface vlan add interface=«TRUNK» vlan-id=«VLAN_A» name=«NOME_A»
+    commento: VLAN 10
+  - codice: /interface vlan add interface=«TRUNK» vlan-id=«VLAN_B» name=«NOME_B»
+    commento: VLAN 20
+  - codice: /interface vlan add interface=«TRUNK» vlan-id=«VLAN_C» name=«NOME_C»
+    commento: VLAN 30
+- nome: Il gateway di ogni VLAN
+  righe:
+  - codice: /ip address add address=«IP_A»/«PREFISSO_A» interface=«NOME_A»
+    commento: primo indirizzo della subnet della VLAN 10
+    trappola: 'Nota: nel passo 4 la traccia scrive interface=vlan10-stampante, ma l''interfaccia creata al passo 3 si chiama vlan10-ufficio: il nome giusto è quello creato.'
+  - codice: /ip address add address=«IP_B»/«PREFISSO_B» interface=«NOME_B»
+    commento: VLAN 20
+  - codice: /ip address add address=«IP_C»/«PREFISSO_C» interface=«NOME_C»
+    commento: VLAN 30
+- nome: Un server DHCP per VLAN
+  righe:
+  - codice: '# crea un server DHCP su ognuna delle tre interfacce VLAN: vedi la scheda "dhcp-multi"'
+    commento: sulle interfacce virtuali con l'indirizzo del gateway, non sulla porta trunk
+- nome: NAT verso Internet
+  righe:
+  - codice: /ip firewall nat add chain=srcnat out-interface=«PORTA_WAN» action=masquerade comment="NAT verso Internet"
+    commento: tutte le VLAN escono con l'IP della WAN
+    trappola: out-interface è la WAN, non le VLAN.
+segnaposto:
+  NOME_ROUTER:
+    esempio: R1
+    spiega: nome del router
+  PORTA_WAN:
+    esempio: ether1
+    spiega: porta verso Internet
+  TRUNK:
+    esempio: ether2
+    spiega: porta trunk verso lo switch
+  VLAN_A:
+    esempio: '10'
+    spiega: prima VLAN
+  VLAN_B:
+    esempio: '20'
+    spiega: seconda VLAN
+  VLAN_C:
+    esempio: '30'
+    spiega: terza VLAN
+  NOME_A:
+    esempio: vlan10-ufficio
+    spiega: interfaccia VLAN 10
+  NOME_B:
+    esempio: vlan20-laboratorio
+    spiega: interfaccia VLAN 20
+  NOME_C:
+    esempio: vlan30-ospiti
+    spiega: interfaccia VLAN 30
+  IP_A:
+    esempio: 172.18.5.1
+    spiega: primo indirizzo della subnet della VLAN 10 (172.18.N.x)
+  IP_B:
+    esempio: 172.18.35.1
+    spiega: primo indirizzo della subnet della VLAN 20 (172.18.N+30.y)
+  IP_C:
+    esempio: 172.18.65.1
+    spiega: primo indirizzo della subnet della VLAN 30 (172.18.N+60.w)
+  PREFISSO_A:
+    esempio: '27'
+    spiega: bit di rete della VLAN 10
+  PREFISSO_B:
+    esempio: '26'
+    spiega: bit di rete della VLAN 20
+  PREFISSO_C:
+    esempio: '25'
+    spiega: bit di rete della VLAN 30
+varianti: []
+vicine:
+- vlan-scenario-switch
+- vlan-router-interfacce
+- vlan-indirizzi
+- dhcp-multi
+- nat
+- vlan-lab-chr

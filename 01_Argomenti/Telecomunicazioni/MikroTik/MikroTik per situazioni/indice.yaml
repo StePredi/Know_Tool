@@ -18,6 +18,7 @@ rami:
     - reset
     - aggiornare
     - identity
+    - romon
 - id: b2
   nome: Interfacce
   colore: teal
@@ -101,10 +102,20 @@ rami:
     - vlan-tabella
     - vlan-filtering
     - vlan-interfaccia
+  - gruppo: Router sul trunk
+    schede:
+    - vlan-router-interfacce
+    - vlan-indirizzi
   - gruppo: Collegare e verificare
     schede:
     - vlan-internet
     - vlan-verifica
+  - gruppo: Scenario completo
+    schede:
+    - vlan-scenario-switch
+    - vlan-scenario-router
+    - vlan-lab-chr
+    - vlan-ordine-switch
 - id: b8
   nome: Salvare e ripristinare
   colore: violet

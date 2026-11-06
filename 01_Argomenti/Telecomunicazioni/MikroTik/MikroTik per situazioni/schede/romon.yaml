@@ -1,0 +1,31 @@
+id: romon
+tipo: ricetta
+titolo: 'Gestire da WinBox anche i router vicini: ROMON'
+sigla: ROMON
+comando: /tool romon
+frase: si attiva su ogni router
+fonte: Traccia configurazione InterVlanRouting · Passo 1
+parole: romon tool romon winbox gestione router vicini abilitare enabled
+quando: Quando hai più router collegati e vuoi gestirli da WinBox passando da uno di loro.
+fasi:
+- nome: Attiva ROMON
+  righe:
+  - codice: /tool romon set enabled=yes
+    commento: abilita ROMON su questo router
+    parti:
+    - voce: romon
+      spiega: 'Router Management Overlay Network: un modo per raggiungere i router vicini attraverso il router a cui sei collegato (Nota: spiegazione non scritta nella traccia)'
+    - voce: enabled=yes
+      spiega: acceso
+    trappola: 'La traccia lo attiva sia sullo switch S1 sia sul router R1: va acceso su ogni router che vuoi raggiungere.'
+- nome: Controlla
+  righe:
+  - codice: /tool romon print
+    commento: enabled deve essere yes
+    trappola: 'Nota: questo comando di controllo non è nella traccia, ma print si usa in ogni menu di RouterOS.'
+segnaposto: {}
+varianti: []
+vicine:
+- identity
+- reset
+- vlan-scenario-router

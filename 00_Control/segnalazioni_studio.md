@@ -9,8 +9,10 @@ Quando una segnalazione è stata gestita, la sposto sotto «Fatte» (non la canc
 ## Da fare
 
 - 2026-10-16 · MikroTik VLAN · lo schema di rete del laboratorio (VM, router, switch, trunk, ether1-4 del PDF mikTikVlansvm.drawio.pdf) non si può mostrare: le figure supportano solo lo schema pin di una scheda elettronica; serve un modello di disegno per schemi di rete · (manca)
+- 2026-10-21 · Matematica · i documenti ora sono in `01_Argomenti/Matematica/Biennio/<Argomento>/<Argomento> per situazioni/` (tre livelli sotto Matematica). `tests/regola.test.ts` (`documentiMat`) cerca solo `Matematica/<Argomento>/<doc>/indice.yaml`, quindi non controlla più Monomi e polinomi, Scomposizione, Frazioni algebriche; da verificare anche che l'app li mostri nell'albero · (da controllare)
 
 ---
+- 2026-11-06 · MikroTik · `tests/situazioni.test.ts` si aspetta 43 schede e «43 situazioni» per MikroTik (righe 20-25 e 41): dopo le nuove schede InterVlanRouting sono 50 (10 rami). Il test va aggiornato a 50. · (manca)
 
 ## Fatte
 

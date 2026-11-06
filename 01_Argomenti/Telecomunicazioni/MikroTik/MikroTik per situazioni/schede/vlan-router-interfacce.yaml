@@ -1,0 +1,63 @@
+id: vlan-router-interfacce
+tipo: ricetta
+titolo: Far arrivare le VLAN a un router sulla porta trunk
+sigla: VLAN sul router
+comando: interface vlan add interface=trunk
+frase: una interfaccia per VLAN
+fonte: Traccia configurazione InterVlanRouting · Schema mikTikVlansRoutingPaov.3
+parole: vlan interface vlan router trunk ether2 vlan-id inter vlan routing frontiera tagged interfacce virtuali
+quando: Quando il router è solo router (nessun bridge) e riceve le VLAN con il tag su una porta trunk.
+fasi:
+- nome: Una interfaccia per ogni VLAN
+  righe:
+  - codice: /interface vlan add interface=«TRUNK» vlan-id=«VLAN_A» name=«NOME_A»
+    commento: 'VLAN 10: prende i frame con tag 10 che arrivano dal trunk'
+    parti:
+    - voce: interface=«TRUNK»
+      spiega: la porta fisica che riceve i frame con tag
+    - voce: vlan-id=«VLAN_A»
+      spiega: il numero della VLAN
+    - voce: name=«NOME_A»
+      spiega: nome che dai all'interfaccia virtuale
+    trappola: 'interface è la porta trunk, non un bridge: qui il router non ha bridge e riceve i frame con tag direttamente sulla porta. Con un bridge si usa la scheda "vlan-interfaccia".'
+  - codice: /interface vlan add interface=«TRUNK» vlan-id=«VLAN_B» name=«NOME_B»
+    commento: VLAN 20
+  - codice: /interface vlan add interface=«TRUNK» vlan-id=«VLAN_C» name=«NOME_C»
+    commento: VLAN 30
+    trappola: Il vlan-id deve essere lo stesso scritto sulla tabella dello switch dall'altra parte del trunk.
+- nome: Controlla
+  righe:
+  - codice: /interface vlan print
+    commento: le tre interfacce devono comparire con il loro vlan-id
+segnaposto:
+  TRUNK:
+    esempio: ether2
+    spiega: porta trunk verso lo switch
+  VLAN_A:
+    esempio: '10'
+    spiega: prima VLAN
+  NOME_A:
+    esempio: vlan10-ufficio
+    spiega: nome dell'interfaccia della VLAN 10
+  VLAN_B:
+    esempio: '20'
+    spiega: seconda VLAN
+  NOME_B:
+    esempio: vlan20-laboratorio
+    spiega: nome della VLAN 20
+  VLAN_C:
+    esempio: '30'
+    spiega: terza VLAN
+  NOME_C:
+    esempio: vlan30-ospiti
+    spiega: nome della VLAN 30
+  BRIDGE:
+    esempio: bridge-vlan
+    spiega: nome del bridge (solo nella variante)
+varianti:
+- codice: /interface vlan add interface=«BRIDGE» vlan-id=«VLAN_A» name=«NOME_A»
+  spiega: 'se invece il router ha un bridge con le VLAN: l''interfaccia va sul bridge'
+vicine:
+- vlan-interfaccia
+- vlan-indirizzi
+- vlan-scenario-router

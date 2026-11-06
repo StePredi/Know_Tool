@@ -39,7 +39,10 @@ varianti:
   spiega: una lista di interfacce al posto del nome singolo
 - codice: action=src-nat to-addresses=«IP»
   spiega: IP pubblico fisso invece del masquerade
+- codice: comment="NAT verso Internet"
+  spiega: aggiungilo alla regola per riconoscerla nell'elenco (traccia InterVlanRouting)
 vicine:
 - dhcp-client
 - dns
 - test-gradini
+- vlan-scenario-router

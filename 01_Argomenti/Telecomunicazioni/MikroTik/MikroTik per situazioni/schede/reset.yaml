@@ -31,6 +31,10 @@ varianti:
   spiega: mantiene gli utenti e le loro password
 - codice: tasto reset del router
   spiega: reset fisico all'accensione, se hai perso l'accesso
+- codice: /system reset-configuration no-defaults=yes skip-backup=yes
+  spiega: no-defaults è il nome completo del parametro (la scheda usa la forma abbreviata no-default); skip-backup=yes non fa il backup automatico prima del reset (traccia InterVlanRouting)
 vicine:
 - ripristina
 - chiuso-fuori
+- romon
+- vlan-scenario-router

@@ -1,0 +1,84 @@
+id: vlan-scenario-switch
+tipo: ricetta
+titolo: 'Configurare S1 come switch managed: un trunk e tre porte access'
+sigla: Scenario switch S1
+comando: bridge + pvid + tabella VLAN
+frase: dal reset al VLAN filtering
+fonte: Traccia configurazione InterVlanRouting · Schema mikTikVlansRoutingPaov.3 · Mikrotik 1 - switch managed
+parole: switch managed s1 trunk access bridge-switch pvid vlan filtering scenario completo ether1 ether2 ether3 ether4
+quando: 'Quando il MikroTik deve fare solo da switch: una porta trunk verso il router e le altre porte access per i PC.'
+fasi:
+- nome: Prepara lo switch
+  righe:
+  - codice: /system reset-configuration no-defaults=yes
+    commento: router vuoto
+    trappola: 'Il reset riavvia il router: dopo ti riconnetti con WinBox dal MAC.'
+  - codice: /system identity set name=«NOME_SWITCH»
+    commento: nome dello switch
+  - codice: /tool romon set enabled=yes
+    commento: ROMON acceso
+- nome: Crea il bridge
+  righe:
+  - codice: /interface bridge add name=«BRIDGE»
+    commento: il bridge è lo switch
+    trappola: 'Nota: va creato prima delle porte. La traccia lo scrive in fondo, con vlan-filtering=yes (vedi la scheda "Errore: bridge creato dopo le porte").'
+- nome: Metti le porte nel bridge
+  righe:
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«TRUNK»
+    commento: trunk verso il router, senza pvid
+    trappola: 'Il trunk non ha pvid: i frame arrivano già con il tag. La traccia dice che porta anche il traffico nativo untagged, ma non scrive comandi per questo.'
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA_A» pvid=«VLAN_A»
+    commento: 'PC ufficio: i frame senza tag entrano nella VLAN 10'
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA_B» pvid=«VLAN_B»
+    commento: 'PC laboratorio: VLAN 20'
+  - codice: /interface bridge port add bridge=«BRIDGE» interface=«PORTA_C» pvid=«VLAN_C»
+    commento: 'PC ospiti: VLAN 30'
+- nome: Scrivi la tabella delle VLAN
+  righe:
+  - codice: /interface bridge vlan add bridge=«BRIDGE» tagged=«TRUNK» untagged=«PORTA_A» vlan-ids=«VLAN_A»
+    commento: la VLAN 10 esce dal trunk con tag e dalla porta access senza
+    trappola: 'Qui il bridge non è tra i tagged: lo switch non ha indirizzi, il livello 3 lo fa il router R1.'
+  - codice: /interface bridge vlan add bridge=«BRIDGE» tagged=«TRUNK» untagged=«PORTA_B» vlan-ids=«VLAN_B»
+    commento: VLAN 20
+  - codice: /interface bridge vlan add bridge=«BRIDGE» tagged=«TRUNK» untagged=«PORTA_C» vlan-ids=«VLAN_C»
+    commento: VLAN 30
+- nome: Accendi il filtro
+  righe:
+  - codice: /interface bridge set «BRIDGE» vlan-filtering=yes
+    commento: da qui il bridge guarda i tag
+    trappola: Per ultimo, a porte e tabella già scritte.
+segnaposto:
+  NOME_SWITCH:
+    esempio: S1
+    spiega: nome dello switch
+  BRIDGE:
+    esempio: bridge-switch
+    spiega: nome del bridge
+  TRUNK:
+    esempio: ether1
+    spiega: porta trunk verso il router
+  PORTA_A:
+    esempio: ether2
+    spiega: porta access della VLAN 10
+  PORTA_B:
+    esempio: ether3
+    spiega: porta access della VLAN 20
+  PORTA_C:
+    esempio: ether4
+    spiega: porta access della VLAN 30
+  VLAN_A:
+    esempio: '10'
+    spiega: prima VLAN
+  VLAN_B:
+    esempio: '20'
+    spiega: seconda VLAN
+  VLAN_C:
+    esempio: '30'
+    spiega: terza VLAN
+varianti: []
+vicine:
+- vlan-scenario-router
+- vlan-ordine-switch
+- vlan-bridge-porte
+- vlan-tabella
+- vlan-filtering

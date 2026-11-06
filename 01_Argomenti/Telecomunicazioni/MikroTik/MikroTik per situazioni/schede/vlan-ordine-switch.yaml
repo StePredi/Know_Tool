@@ -1,0 +1,30 @@
+id: vlan-ordine-switch
+tipo: prima_dopo
+titolo: 'Errore: bridge creato dopo le porte'
+sigla: Ordine dei comandi
+comando: bridge, poi porte, poi filtro
+frase: prima il bridge, il filtro per ultimo
+fonte: Traccia configurazione InterVlanRouting · Mikrotik 1 - switch managed
+parole: ordine bridge port vlan filtering creare bridge switch errore input does not match bridge-switch
+prima: |-
+  /interface bridge port add bridge=bridge-switch interface=ether2 pvid=10
+  /interface bridge vlan add bridge=bridge-switch tagged=ether1 untagged=ether2 vlan-ids=10
+  ⟦/interface bridge add name=bridge-switch vlan-filtering=yes⟧
+dopo: |-
+  ⟦/interface bridge add name=bridge-switch⟧
+  /interface bridge port add bridge=bridge-switch interface=ether2 pvid=10
+  /interface bridge vlan add bridge=bridge-switch tagged=ether1 untagged=ether2 vlan-ids=10
+  ⟦/interface bridge set bridge-switch vlan-filtering=yes⟧
+uso: Scrivere la configurazione dello switch nell'ordine giusto.
+riconoscila: Nella traccia le porte e la tabella VLAN vengono scritte prima che il bridge esista; il bridge compare solo alla fine, già con vlan-filtering=yes.
+parti:
+- voce: add name=bridge-switch
+  spiega: 'crea il bridge: va fatto per primo, altrimenti le porte non hanno dove entrare'
+- voce: vlan-filtering=yes
+  spiega: si accende per ultimo, a porte e tabella già scritte
+trappola: 'Nota: un comando che usa un bridge non ancora creato dà errore. Creare il bridge con il filtro già acceso lo fa lavorare prima che la tabella sia pronta: se ti colleghi da una porta non ancora in tabella puoi restare fuori.'
+varianti: []
+vicine:
+- vlan-scenario-switch
+- vlan-filtering
+- vlan-bridge-porte

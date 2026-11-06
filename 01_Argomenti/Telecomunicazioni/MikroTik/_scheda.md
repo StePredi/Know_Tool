@@ -11,7 +11,9 @@
   - `configurazione_switch_routervm.docx` → traccia passo passo della configurazione
   - `spiegazione_esperienza_vm.docx` → descrizione dell'esperienza con due VLAN
   - `schema_vlan_vm.drawio.pdf` → schema di rete e consegne
-- `MikroTik per situazioni/` → la documentazione «Per situazioni» (si apre nell'app): 10 rami, 43 schede: prima i rami per costruire la rete (dalle Basi alle VLAN), in fondo i due rami trasversali «Salvare e ripristinare» e «Quando non funziona»
+  - `configurazione_intervlanRouting.docx` → traccia dello scenario switch S1 + router di frontiera R1 (interfacce VLAN sul trunk, DHCP, NAT)
+  - `mikTikVlansRoutingPaov.3.drawio.pdf` → schema InterVlanRouting con piano di indirizzamento e note sul laboratorio con due CHR
+- `MikroTik per situazioni/` → la documentazione «Per situazioni» (si apre nell'app): 10 rami, 50 schede: prima i rami per costruire la rete (dalle Basi alle VLAN), in fondo i due rami trasversali «Salvare e ripristinare» e «Quando non funziona»
 
 ---
 

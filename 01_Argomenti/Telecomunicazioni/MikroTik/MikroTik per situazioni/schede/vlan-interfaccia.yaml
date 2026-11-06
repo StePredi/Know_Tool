@@ -46,3 +46,5 @@ vicine:
 - vlan-tabella
 - ip-porta
 - dhcp-server
+- vlan-router-interfacce
+- vlan-indirizzi
