@@ -110,3 +110,49 @@ Colori delle famiglie: gli stessi dei rami (red, orange, yellow, green, teal, bl
 
 Da fare: figure dentro altre schede (per esempio gli schemi di Git: aree, HEAD, merge) e altri modelli di disegno (SVG libero).
 
+
+---
+
+## Spiegazione (2026-11-13)
+
+Scheda per la **teoria senza codice**, in testo normale con riquadri, tabelle e disegni, come nelle slide del corso. Nata per Docker (VM e container, architettura, volumi, reti). Da provare su Windows.
+
+Formato (`schede/<id>.yaml`):
+
+```
+tipo: spiegazione
+(id, titolo, sigla, comando, frase, fonte, parole, quando, varianti, vicine: come le altre schede)
+blocchi:                       # in ordine, ogni elemento ha UNA sola chiave
+- titolo: Architettura a confronto
+- testo: Un **container** impacchetta il codice…     # **grassetto** e *corsivo*
+- punti: [Esegue le VM., Emula i dispositivi.]
+- carte:                       # riquadri affiancati
+  - {titolo: Dimensione, sotto: riga in corsivo, etichetta: Consigliato, testo: …, punti: […],
+     numeri: [{valore: ~2 GB, cosa: VM Ubuntu Server}]}
+- tabella: {colonne: [Caratteristica, VM, Container], righe: [[…, …, …]]}
+- comandi: [{codice: docker version, spiega: …}]
+- nota: fascia scura di riepilogo
+- trappola: riquadro giallo
+- disegno:
+    modello: pile              # livelli impilati, una o più colonne affiancate
+    colonne:
+    - titolo: Container
+      cornice: Sistema host    # facoltativa: riquadro tratteggiato con etichetta
+      strati:                  # dall'alto in basso
+      - [App, App, App]        # più riquadri affiancati
+      - {testo: Container engine, tono: colore}
+      - {testo: "Hardware\nriga piccola", tono: scuro}   # dopo l'a capo: testo piccolo
+      nota: sotto la colonna
+    nota: sotto il disegno
+- disegno:
+    modello: flusso            # riquadri in fila con frecce
+    nodi: [Dockerfile, {nome: Immagine, sotto: …, punti: […], tono: colore}]
+    frecce: [docker build]     # una etichetta per ogni spazio fra due nodi
+    gruppo: {nome: app-network, da: 2, a: 4}   # facoltativo: cornice attorno ai nodi da…a
+```
+
+Toni: `chiaro` (app, librerie), `oro` (sistemi operativi, dati), `colore` (il colore del ramo: hypervisor, engine), `scuro` (hardware, daemon).
+
+Controlli (avvisi, mai blocchi): righe di tabella con un numero di celle diverso dalle colonne; più frecce che spazi fra i nodi; gruppo fuori dai nodi. Un blocco con una chiave sconosciuta è un errore di lettura.
+
+Non c'è (vedi `modifiche_app.md`, 2026-11-13): moduli di modifica, ripasso, ricerca nel testo dei blocchi, frecce che tornano indietro o si dividono, schemi di rete liberi.

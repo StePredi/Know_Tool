@@ -9,7 +9,7 @@ describe('scheda nuova', () => {
     expect(slugId('???')).toBe('scheda')
   })
   it('i modelli sono schede valide', () => {
-    for (const t of ['ricetta', 'prima_dopo'] as const) {
+    for (const t of ['ricetta', 'prima_dopo', 'regola', 'spiegazione'] as const) {
       const r = leggiSchedaSit(modelloScheda(t, 'prova', 'Una prova'), 'prova.yaml')
       expect(r.errore).toBeUndefined()
       expect(r.scheda?.tipo).toBe(t)

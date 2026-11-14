@@ -134,16 +134,20 @@ const radiceMat = resolve(__dirname, '../../01_Argomenti/Matematica')
 function documentiMat(): string[] {
   if (!existsSync(radiceMat)) return []
   const out: string[] = []
-  for (const arg of readdirSync(radiceMat, { withFileTypes: true })) {
-    if (!arg.isDirectory()) continue
-    for (const d of readdirSync(join(radiceMat, arg.name), { withFileTypes: true })) {
-      if (d.isDirectory() && existsSync(join(radiceMat, arg.name, d.name, 'indice.yaml'))) out.push(join(radiceMat, arg.name, d.name))
+  // a qualsiasi profondità (Matematica/<Arg>/<doc>, Matematica/Biennio/<Arg>/<doc>, …)
+  const cerca = (d: string, livello: number): void => {
+    for (const e of readdirSync(d, { withFileTypes: true })) {
+      if (!e.isDirectory() || livello > 4) continue
+      const p = join(d, e.name)
+      if (existsSync(join(p, 'indice.yaml'))) out.push(p)
+      else cerca(p, livello + 1)
     }
   }
+  cerca(radiceMat, 1)
   return out
 }
 
-describe.each(documentiMat().map((d) => [d.split(/[\\/]/).slice(-2).join('/'), d] as const))('documento di matematica: %s', (_nome, dir) => {
+describe.each(documentiMat().map((d) => [d.split(/[\\/]/).slice(-3).join('/'), d] as const))('documento di matematica: %s', (_nome, dir) => {
   const { indice, errore } = leggiIndice(readFileSync(join(dir, 'indice.yaml'), 'utf8'))
   const schede: Record<string, SchedaSit> = {}
   const errori: string[] = []

@@ -4,6 +4,36 @@ Stato: **analisi in corso**. Elenco fornito da Ste (programma ufficiale: primo b
 
 ---
 
+## 0. Stato di copertura (aggiornato 2026-10-22)
+
+Documenti «Per situazioni» già costruiti, in `01_Argomenti/Matematica/<Biennio | Secondo biennio>/<Argomento> per situazioni/` (Derivate è a parte, nella cartella `Matematica/`). Il tracker interattivo con la mappa dei 43 argomenti è l'artefatto «Programma di matematica».
+
+| # | Argomento | Cartella | Schede | Esercizi | Data |
+|---|---|---|---|---|---|
+| 6 | Monomi e polinomi | Biennio | 18 | 7 | 2026-10-21 |
+| 7 | Scomposizione | Biennio | 12 | 10 | 2026-10-21 |
+| 8 | Frazioni algebriche | Biennio | 12 | 9 | 2026-10-21 |
+| 9 | Equazioni di 1º e 2º grado | Biennio | 11 | 10 | 2026-10-21 |
+| 10 | Disequazioni di 1º e 2º grado | Biennio | 10 | 9 | 2026-10-21 |
+| 11 | Sistemi lineari | Biennio | 9 | 9 | 2026-10-21 |
+| 21 | Goniometria e trigonometria | Secondo biennio | 22 | 11 | 2026-10-22 |
+| 22 | Esponenziali e logaritmi | Secondo biennio | 17 | 12 | 2026-10-22 |
+| 24 | Coniche (geometria analitica) | Secondo biennio | 15 | 12 | 2026-10-22 |
+| 25 | Logica matematica | Secondo biennio | 16 | 11 | 2026-10-22 |
+| 27 | Successioni | Secondo biennio | 14 | 11 | 2026-10-22 |
+| 28 | Limiti e continuità | Secondo biennio | 17 | 12 | 2026-10-22 |
+| 29 | Introduzione alla derivata | Secondo biennio | 14 | 12 | 2026-10-22 |
+| 31 | Derivate | Matematica (quinto anno: restano nella cartella principale) | 24 | 10 | 2026-10-22 (allineato agli altri) |
+| 32 | Studio di funzione | Matematica (quinto anno: restano nella cartella principale) | 25 | 12 | 2026-10-27 |
+| 33 | Integrali indefiniti | Matematica (quinto anno: restano nella cartella principale) | 24 | 13 | 2026-10-28 |
+| 34 | Integrali definiti, aree e volumi | Matematica (quinto anno: restano nella cartella principale) | 19 | 13 | 2026-11-12 |
+
+Totale: 17 argomenti su 43. Ogni documento è stato controllato con gli stessi controlli dell'app (struttura, collegamenti, esempi in `x`) e con sympy o calcoli per le soluzioni; nessuno è stato ancora aperto nell'app né confrontato con il libro di Ste.
+
+**Non ancora fatti** (nell'ordine in cui Ste li ha chiesti o li farà): 1–5, 12–20 (geometria e statistica hanno bisogno di figure o dati: l'app non ha ancora il tipo figura), 23 (numeri complessi, saltato per ora), 26, 30, 35–37, poi 38–43 (solo economico, in fondo per decisione di Ste).
+
+---
+
 ## 1. L'idea del tool (da mettere alla prova)
 
 - **Si parte dall'esercizio**: cosa vedo, quindi cosa faccio.

@@ -54,7 +54,8 @@ describe.skipIf(!existsSync(sorgente))('Repository', () => {
 
   it('elenca gli autori e carica il modello', async () => {
     const r = copia()
-    expect(await Repository.elencaAutori(r)).toEqual([{ id: 'leopardi', nome: expect.any(String) }])
+    // gli autori crescono con lo studio (Leopardi, Verga, De Roberto…): basta che ci sia Leopardi
+    expect(await Repository.elencaAutori(r)).toEqual(expect.arrayContaining([{ id: 'leopardi', nome: expect.any(String) }]))
     repo = new Repository(r, 'leopardi')
     await repo.carica()
     expect(repo.modello().schede).toHaveLength(105)

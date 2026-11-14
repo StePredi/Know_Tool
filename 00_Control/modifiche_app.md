@@ -77,3 +77,93 @@ per farle scorrere da sole, e il menu dei secondi. Prova che:
 - a ogni scheda il contenuto riparte dall'alto e la voce si vede nella colonna;
 - arrivato in fondo si ferma da solo.
 
+
+## 2026-11-13 — Scheda «spiegazione» (teoria con testo e disegni)
+
+Nuovo tipo di scheda nei documenti «Per situazioni», per le spiegazioni senza
+codice: testo normale, riquadri, numeri grandi, tabelle e disegni nello stile
+delle slide. Primo uso: 11 schede di «Docker per situazioni»
+(`01_Argomenti/Sistemi e Reti/Docker/`).
+
+File toccati: `src/shared/situazioni.ts` (schema e controlli),
+`src/renderer/situazioni/Spiegazione.tsx` (nuovo), `Scheda.tsx`,
+`ModificaScheda.tsx`, `util.ts`, `index.css` (classi `.sp-*`),
+`tests/spiegazione.test.ts` (nuovo, 3 test).
+
+Già controllato nel cloud: typecheck pulito, i 3 test passano, immagini di 7
+schede in chiaro e scuro. **Non provato in Electron.**
+
+### Da provare su Windows
+
+Apri l'app (`npm run dev` da `02_App/`), vai in **Sistemi e Reti › Docker ›
+Docker per situazioni** e guarda:
+
+- [ ] **La mappa**: 9 rami e 65 foglie; il ramo «Capire i container» in alto.
+- [ ] **Una scheda di spiegazione** (*VM o container*): in alto «Spiegazione»
+      al posto di «Ricetta»; sotto, testo, tre riquadri, il disegno con le due
+      pile affiancate (VM a sinistra, container a destra), la fascia scura,
+      i numeri grandi, la tabella e la trappola gialla.
+- [ ] **I colori dei livelli**: oro = sistemi operativi, scuro = hardware,
+      colore del ramo = hypervisor ed engine, bianco = app e librerie.
+- [ ] **Il flusso con le frecce** (*Immagine e container*, *Architettura
+      Docker*, *Ciclo di vita*): le scritte sopra le frecce
+      (`docker build`, `API REST`…) si leggono e non si sovrappongono.
+- [ ] **La cornice tratteggiata** «Sistema host» (*docker0*, *Volume o bind
+      mount*) con l'etichetta in alto a sinistra.
+- [ ] **Il tema scuro**: tutti i riquadri leggibili, specialmente quelli oro
+      e scuri.
+- [ ] **Finestra stretta** (sotto i 900 px): le pile vanno una sotto l'altra;
+      nel flusso le frecce vanno a capo senza uscire dal riquadro.
+- [ ] **Precedente / Successiva, Situazioni vicine, Segna come ripassata**:
+      funzionano anche sulle spiegazioni.
+- [ ] **Modifica**: su una spiegazione si apre il testo YAML con la nota che
+      spiega i blocchi; salvando una modifica la scheda si aggiorna.
+- [ ] **Test sul PC**: `npx vitest run tests/spiegazione.test.ts` (sul PC i
+      test non partivano per il modulo rollup mancante: va sistemato prima).
+
+### Da fare nell'app
+
+- [ ] **Moduli di modifica**: oggi la spiegazione si modifica solo come YAML.
+      Servono: aggiungere / spostare / eliminare un blocco; un modulo per
+      ogni tipo di blocco (titolo, testo, punti, carte, tabella, comandi,
+      nota, trappola); per i disegni un editor a righe: pile = colonne con
+      livelli dall'alto in basso, ogni livello con uno o più riquadri e il
+      tono; flusso = nodi in fila con l'etichetta di ogni freccia e il gruppo.
+- [x] (fatto 2026-11-13: `shared/testoSpiegazione.ts` + `costruisciIndici`) **Ricerca dentro le spiegazioni**: la ricerca della mappa guarda solo
+      titolo, sigla, comando, parole e «quando». Aggiungere il testo dei
+      blocchi (titoli, testo, punti, carte, nomi dei nodi e dei livelli) in
+      `util.ts`, `costruisciIndici`.
+- [x] (fatto 2026-11-14: `elementiDaCoprire`, barra «Mettiti alla prova» in `Scheda.tsx`, `s-quiz` in `Spiegazione.tsx`; da vedere in Electron) **Mettiti alla prova**: le spiegazioni non hanno il ripasso. Scelta: coprire i valori dei numeri grandi, le celle della
+      tabella (tranne la prima colonna) e i nomi dei livelli dei disegni, da
+      scoprire con un clic come nelle ricette.
+- [x] (fatto 2026-11-13) **Nuova scheda**: «+ Nuova scheda» offre ricetta, prima e dopo, regola
+      (`modelloScheda.ts`, `TipoNuova`); aggiungere «Spiegazione» con un
+      esempio minimo (un testo e una pila).
+- [ ] **Disegni che mancano** (da progettare con
+      `procedura_nuovi_documenti.md`, prima i casi veri):
+  - frecce che tornano indietro o si dividono (ciclo di vita completo con
+    `docker start` che torna a «In esecuzione»; un utente verso più servizi);
+  - frecce verticali fra i livelli di una pila (container → volume);
+  - schemi di rete veri, con nodi e collegamenti liberi: è la stessa richiesta
+    della segnalazione del 2026-10-16 sul laboratorio MikroTik VLAN.
+- [x] (fatto 2026-11-13: `\*` = asterisco vero, `shared/enfasi.ts`) **Asterischi nel testo**: `*corsivo*` e `**grassetto**` usano gli
+      asterischi, quindi un testo come `*.md` si rompe. Aggiungere un modo per
+      scrivere un asterisco vero (per esempio `\*`) in `Testo` di
+      `storia/Voce.tsx`.
+- [ ] **Specifica**: la sezione «Spiegazione» è stata aggiunta a
+      `specifiche/modello_per_situazioni.md`; dopo la prova di Ste, segnare la
+      decisione in `DECISIONI.md`.
+- [ ] **Mappa in HTML esterno** (come `Mappa MikroTik.html`): se se ne genera
+      una per Docker, va incluso il componente `Spiegazione`.
+
+### Da decidere sui contenuti
+
+- [ ] Altre schede Docker hanno ancora righe di soli commenti dentro una
+      ricetta: «Le altre opzioni frequenti» in *docker run -d*, «Cosa
+      cercarci» in *docker logs*, «Differenza» in *Solo in locale*, i
+      risultati in *CMD ed ENTRYPOINT*. Valutare se trasformarle in
+      spiegazione o lasciarle così.
+- [ ] Le altre documentazioni (MikroTik, Python, MSP) potrebbero usare la
+      spiegazione per la teoria, per esempio il VLAN filtering.
+- [ ] Il file temporaneo `99_Archivio/Obsoleti/2026-11-13/_tmp_app_src.tgz`
+      (copia del codice usata per lavorare nel cloud) si può eliminare.

@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import type { SchedaConfronto, SchedaVoce, Situazioni } from '@shared/situazioni'
 import { ETICHETTA_LEGA } from '@shared/situazioni'
+import { pezziEnfasi } from '@shared/enfasi'
 import { Icona, type NomeIcona } from '../componenti/Icona'
 
 /** Un campo coperto dal ripasso: si scopre con un clic. */
@@ -9,26 +10,15 @@ export function Coperto({ s, attivo }: { s: string; attivo: boolean }): ReactNod
   if (!attivo || visto) return <Testo s={s} />
   return (
     <button type="button" className="st-coperto" title="clicca per scoprire" onClick={() => setVisto(true)}>
-      {s.replace(/\*\*?/g, '')}
+      {pezziEnfasi(s).map((p) => p.v).join('')}
     </button>
   )
 }
 
-/** **grassetto** e *corsivo* dentro i testi, come negli appunti .md. */
+/** **grassetto** e *corsivo* dentro i testi, come negli appunti .md; \* = asterisco vero. */
 export function Testo({ s }: { s: string }): ReactNode {
-  const pezzi: ReactNode[] = []
-  const re = /\*\*(.+?)\*\*|\*(.+?)\*/g
-  let ultimo = 0
-  let m: RegExpExecArray | null
-  while ((m = re.exec(s)) !== null) {
-    if (m.index > ultimo) pezzi.push(s.slice(ultimo, m.index))
-    pezzi.push(m[1] !== undefined ? <b key={m.index}>{m[1]}</b> : <i key={m.index}>{m[2]}</i>)
-    ultimo = re.lastIndex
-  }
-  if (ultimo < s.length) pezzi.push(s.slice(ultimo))
-  return <>{pezzi}</>
+  return <>{pezziEnfasi(s).map((p, i) => (p.t === 'b' ? <b key={i}>{p.v}</b> : p.t === 'i' ? <i key={i}>{p.v}</i> : p.v))}</>
 }
-
 
 function Sezione({ icona, titolo, children }: { icona: NomeIcona; titolo: string; children: ReactNode }): ReactNode {
   return (

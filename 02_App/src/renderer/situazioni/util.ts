@@ -1,5 +1,6 @@
 import type { Situazioni } from '@shared/situazioni'
 import { ordineSchede } from '@shared/situazioni'
+import { testoSpiegazione } from '@shared/testoSpiegazione'
 
 export interface InfoScheda {
   /** posizione del ramo = livello (parte da 0) */
@@ -15,7 +16,8 @@ export function costruisciIndici(d: Situazioni): { ordine: string[]; info: Recor
   for (const id of ordine) {
     const s = d.schede[id]!
     const pin = s.tipo === 'figura' ? [...s.disegno.sinistra, ...s.disegno.destra].map((p) => [p.etichetta, p.gpio ? 'gpio' + p.gpio : '', ...p.funzioni].join(' ')).join(' ') : ''
-    pagliaio[id] = norm([s.sigla, s.comando, s.titolo, s.parole, pin, d.indice.rami[info[id]!.bi]!.nome, info[id]!.gruppo ?? ''].join(' '))
+    const spieg = s.tipo === 'spiegazione' ? testoSpiegazione(s) : ''
+    pagliaio[id] = norm([s.sigla, s.comando, s.titolo, s.parole, pin, spieg, d.indice.rami[info[id]!.bi]!.nome, info[id]!.gruppo ?? ''].join(' '))
   }
   return { ordine, info, pagliaio }
 }

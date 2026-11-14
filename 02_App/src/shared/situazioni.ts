@@ -86,6 +86,71 @@ const figura = z.object({
   disegno: schemaDisegno
 })
 
+// Spiegazione: la teoria senza codice, scritta in testo normale con riquadri, tabelle e disegni
+// (come nelle slide del corso). I disegni sono di due modelli soltanto:
+//   pile   → livelli impilati (hardware, SO, hypervisor, layer…), una o più colonne affiancate
+//   flusso → riquadri in fila collegati da frecce con un'etichetta (client → daemon → registry)
+export const TONI = ['chiaro', 'oro', 'colore', 'scuro'] as const
+export type Tono = (typeof TONI)[number]
+const testiRiga = z.union([testo.min(1), z.array(testo.min(1)).min(1)])
+/** un livello: un riquadro solo, più riquadri affiancati (lista), oppure { testo, tono } */
+const strato = z.union([testiRiga, z.object({ testo: testiRiga, tono: z.enum(TONI).default('chiaro') })])
+const colonnaPila = z.object({
+  titolo: testo.default(''),
+  /** riquadro tratteggiato attorno ai livelli, con questa etichetta (per esempio «Sistema host») */
+  cornice: testo.optional(),
+  /** dall'alto verso il basso, come si vedono nel disegno */
+  strati: z.array(strato).min(1),
+  nota: testo.default('')
+})
+const disegnoPile = z.object({ modello: z.literal('pile'), colonne: z.array(colonnaPila).min(1), nota: testo.default('') })
+const nodoFlusso = z.union([
+  testo.min(1),
+  z.object({ nome: testo.min(1), sotto: testo.default(''), punti: z.array(testo).default([]), tono: z.enum(TONI).default('chiaro') })
+])
+const disegnoFlusso = z.object({
+  modello: z.literal('flusso'),
+  nodi: z.array(nodoFlusso).min(2),
+  /** l'etichetta di ogni freccia, fra un nodo e il successivo ('' = freccia senza scritta) */
+  frecce: z.array(testo).default([]),
+  /** riquadro tratteggiato attorno ai nodi da…a (contati da 1) */
+  gruppo: z.object({ nome: testo.min(1), da: z.number().int().positive(), a: z.number().int().positive() }).optional(),
+  nota: testo.default('')
+})
+export const schemaDisegnoSpieg = z.discriminatedUnion('modello', [disegnoPile, disegnoFlusso])
+const carta = z.object({
+  titolo: testo.min(1),
+  /** riga breve sotto il titolo, in corsivo colorato */
+  sotto: testo.default(''),
+  /** pillola accanto al titolo, per esempio «Consigliato» */
+  etichetta: testo.default(''),
+  testo: testo.default(''),
+  punti: z.array(testo).default([]),
+  numeri: z.array(z.object({ valore: testo.min(1), cosa: testo.default('') })).default([])
+})
+const blocco = z.union([
+  z.strictObject({ titolo: testo.min(1) }),
+  z.strictObject({ testo: testo.min(1) }),
+  z.strictObject({ punti: z.array(testo.min(1)).min(1) }),
+  z.strictObject({ carte: z.array(carta).min(1) }),
+  z.strictObject({ tabella: z.object({ colonne: z.array(testo).min(2), righe: z.array(z.array(testo)).min(1) }) }),
+  z.strictObject({ disegno: schemaDisegnoSpieg }),
+  z.strictObject({ comandi: z.array(coppiaCodice).min(1) }),
+  z.strictObject({ nota: testo.min(1) }),
+  z.strictObject({ trappola: testo.min(1) })
+])
+const spiegazione = z.object({
+  tipo: z.literal('spiegazione'),
+  ...comuni,
+  quando: testo,
+  blocchi: z.array(blocco).min(1)
+})
+export type BloccoSpieg = z.infer<typeof blocco>
+export type DisegnoSpieg = z.infer<typeof schemaDisegnoSpieg>
+export type StratoPila = z.infer<typeof strato>
+export type NodoFlusso = z.infer<typeof nodoFlusso>
+export type CartaSpieg = z.infer<typeof carta>
+
 // Regola di matematica (modello_matematica.md): riconosci, formula, adattamenti, esempi svolti, errore, confusioni.
 const passoRegola = z.union([
   testo,
@@ -197,7 +262,7 @@ const confrontoStoria = z.object({
   })).min(2)
 })
 
-export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura, regola, voceStoria, confrontoStoria])
+export const schemaScheda = z.discriminatedUnion('tipo', [ricetta, primaDopo, figura, spiegazione, regola, voceStoria, confrontoStoria])
 
 const voce = z.object({ gruppo: testo.optional(), schede: z.array(z.string()).min(1) })
 const ramo = z.object({
@@ -233,6 +298,7 @@ export type Fase = z.infer<typeof fase>
 export type SchedaRicetta = z.infer<typeof ricetta>
 export type SchedaPrimaDopo = z.infer<typeof primaDopo>
 export type SchedaFigura = z.infer<typeof figura>
+export type SchedaSpiegazione = z.infer<typeof spiegazione>
 export type DisegnoSit = z.infer<typeof schemaDisegno>
 export type PinDisegno = z.infer<typeof pinDisegno>
 export type SchedaRegola = z.infer<typeof regola>
@@ -242,7 +308,7 @@ export type SchedaVoce = z.infer<typeof voceStoria>
 export type SchedaConfronto = z.infer<typeof confrontoStoria>
 export type Legame = z.infer<typeof legame>
 export type Riferimento = z.infer<typeof riferimento>
-export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura | SchedaRegola | SchedaVoce | SchedaConfronto
+export type SchedaSit = SchedaRicetta | SchedaPrimaDopo | SchedaFigura | SchedaSpiegazione | SchedaRegola | SchedaVoce | SchedaConfronto
 export type RamoSit = z.infer<typeof ramo>
 export type VoceRamo = z.infer<typeof voce>
 export type IndiceSit = z.infer<typeof schemaIndice>
@@ -362,6 +428,16 @@ export function controllaSituazioni(indice: IndiceSit, schede: Record<string, Sc
         if (c.risposte.length !== s.domande.length) av.push(`«${s.id}»: il caso «${c.nome}» ha ${c.risposte.length} risposte ma le domande sono ${s.domande.length}.`)
         if (c.scheda && !schede[c.scheda]) av.push(`«${s.id}»: il caso «${c.nome}» cita la scheda «${c.scheda}» che non esiste.`)
       }
+    }
+    if (s.tipo === 'spiegazione') {
+      s.blocchi.forEach((b, i) => {
+        if ('tabella' in b) b.tabella.righe.forEach((r, k) => { if (r.length !== b.tabella.colonne.length) av.push(`«${s.id}»: la tabella del blocco ${i + 1}, riga ${k + 1}, ha ${r.length} celle ma le colonne sono ${b.tabella.colonne.length}.`) })
+        if ('disegno' in b && b.disegno.modello === 'flusso') {
+          const d = b.disegno
+          if (d.frecce.length > d.nodi.length - 1) av.push(`«${s.id}»: il flusso del blocco ${i + 1} ha più frecce (${d.frecce.length}) che spazi fra i nodi (${d.nodi.length - 1}).`)
+          if (d.gruppo && (d.gruppo.da > d.gruppo.a || d.gruppo.a > d.nodi.length)) av.push(`«${s.id}»: il gruppo del flusso nel blocco ${i + 1} va da ${d.gruppo.da} a ${d.gruppo.a}, ma i nodi sono ${d.nodi.length}.`)
+        }
+      })
     }
     if (s.tipo === 'ricetta') {
       const usati = new Set<string>()

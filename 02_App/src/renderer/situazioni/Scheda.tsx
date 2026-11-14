@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import type { SchedaConfronto, SchedaFigura, SchedaPrimaDopo, SchedaRegola, SchedaRicetta, SchedaVoce, Situazioni } from '@shared/situazioni'
+import type { SchedaConfronto, SchedaFigura, SchedaPrimaDopo, SchedaRegola, SchedaRicetta, SchedaSpiegazione, SchedaVoce, Situazioni } from '@shared/situazioni'
 import { Icona } from '../componenti/Icona'
 import { useStore } from '../store'
 import { Cod, testoPuro } from './Codice'
@@ -7,6 +7,8 @@ import { codiceDaCopiare, righeCodice } from './righe'
 import { DisegnoScheda } from './Figura'
 import { Comando, TestoMat } from './Formula'
 import { Regola } from './Regola'
+import { Spiegazione } from './Spiegazione'
+import { elementiDaCoprire } from '@shared/testoSpiegazione'
 import { Confronto, Voce } from '../storia/Voce'
 import { ModificaScheda } from './ModificaScheda'
 import { useSit, VISTA0 } from './stato'
@@ -298,6 +300,27 @@ function Figura({ ctx, s }: { ctx: Ctx; s: SchedaFigura }): ReactNode {
   )
 }
 
+function SpiegazioneScheda({ ctx, s }: { ctx: Ctx; s: SchedaSpiegazione }): ReactNode {
+  const v = useSit((x) => x.viste[ctx.rel] ?? VISTA0)
+  const n = elementiDaCoprire(s)
+  return (
+    <>
+      <Testata ctx={ctx} id={s.id} tipo="Spiegazione" />
+      {n > 0 && (
+        <div className="s-sum">
+          <span className="st">{v.prova ? <>Clicca sui pezzi sfocati per scoprirli: <b>{n}</b> da ricordare</> : <><b>{n}</b> pezzi da ricordare (numeri, tabelle, livelli dei disegni)</>}</span>
+          <div className="sp">
+            <button type="button" className="btn" aria-pressed={v.prova} onClick={() => useSit.getState().imposta(ctx.rel, { prova: !v.prova })}>Mettiti alla prova</button>
+          </div>
+        </div>
+      )}
+      {/* key: uscendo e rientrando dalla prova i pezzi tornano coperti */}
+      <Spiegazione key={String(v.prova)} s={s} prova={v.prova} />
+      <Piede ctx={ctx} id={s.id} />
+    </>
+  )
+}
+
 function RegolaScheda({ ctx, s }: { ctx: Ctx; s: SchedaRegola }): ReactNode {
   return (
     <>
@@ -342,6 +365,7 @@ export function SchedaVista({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
     <div ref={ref} data-c={r.colore}>
       {s.tipo === 'ricetta' ? <Ricetta key={id} ctx={ctx} s={s} />
         : s.tipo === 'figura' ? <Figura key={id} ctx={ctx} s={s} />
+        : s.tipo === 'spiegazione' ? <SpiegazioneScheda key={id} ctx={ctx} s={s} />
         : s.tipo === 'regola' ? <RegolaScheda key={id} ctx={ctx} s={s} />
         : s.tipo === 'voce' ? <VoceScheda key={id} ctx={ctx} s={s} />
         : s.tipo === 'confronto' ? <ConfrontoScheda key={id} ctx={ctx} s={s} />

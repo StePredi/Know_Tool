@@ -263,6 +263,7 @@ export function ModificaMappa({ ctx, esci }: { ctx: { rel: string; dati: Situazi
                     <option value="ricetta">Ricetta (passi con codice)</option>
                     <option value="prima_dopo">Prima e dopo (cosa cambia)</option>
                     <option value="regola">Regola (matematica: formula ed esempi)</option>
+                    <option value="spiegazione">Spiegazione (teoria: testo, riquadri, disegni)</option>
                   </select>
                 </Campo>
                 <Campo nome="Mettila in" aiuto="Facoltativo: puoi anche aggiungerla dopo.">
