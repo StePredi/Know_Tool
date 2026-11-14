@@ -951,3 +951,17 @@ div.mat-b:hover { background: color-mix(in srgb, var(--c) 18%, var(--surface)); 
 .sp-trap { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 12px; padding: 10px 14px; font-size: 15px; margin: 8px 0 16px; }
 .sp-cmd { margin-bottom: 16px; }
 @media (max-width: 900px) { .sp-pile { grid-template-columns: 1fr; } }
+
+/* modifica a moduli delle spiegazioni (ModificaSpiegazione.tsx) */
+.m-bl-ed { display: grid; grid-template-columns: minmax(230px, 300px) 1fr; gap: 14px; align-items: start; }
+@media (max-width: 820px) { .m-bl-ed { grid-template-columns: 1fr; } }
+.m-bl-lista { display: flex; flex-direction: column; gap: 6px; }
+.m-bl { display: flex; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); padding: 3px 4px 3px 3px; }
+.m-bl.sel { border-color: var(--ink); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ink) 18%, transparent); }
+.m-bl-v { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 0; text-align: left; background: none; border: 0; padding: 3px 6px; color: inherit; font: inherit; cursor: pointer; }
+.m-bl-k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--mute); }
+.m-bl-x { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+.m-bl-conf { flex: none; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
+.m-bl-menu { display: flex; flex-wrap: wrap; gap: 6px; }
+.m-bl-form { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--bg); min-width: 0; }
+.m-bl-campo { display: flex; flex-direction: column; gap: 6px; }

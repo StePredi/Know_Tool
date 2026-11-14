@@ -1,0 +1,22 @@
+# Prova a mano 1/2 · da mikTikVlansRoutingPaov.3.drawio.pdf (InterVlanRouting)
+tipo: figura
+disegno:
+  modello: rete
+  vlan:
+    - { id: 10, nome: ufficio,     colore: blu,     rete: 172.18.n.0/24 }
+    - { id: 20, nome: laboratorio, colore: arancio, rete: 172.18.n+30.0/24 }
+    - { id: 30, nome: ospiti,      colore: verde,   rete: 172.18.n+60.0/24 }
+  nodi:
+    - [ { id: net, nome: internet, tipo: nuvola } ]
+    - [ { id: r1, nome: R1 (CHR), tipo: router, sotto: dhcp-server sulle VLAN · snat } ]
+    - [ { id: s1, nome: S1 (CHR), tipo: switch, sotto: Bridge-Switch } ]
+    - [ { id: p10, nome: stampante/ufficio, sotto: dhcpClient },
+        { id: p20, nome: device laboratorio, sotto: dhcpClient },
+        { id: p30, nome: device ospiti, sotto: dhcpClient } ]
+  cavi:
+    - { da: net, a: r1, porta_a: ether1 }
+    - { da: r1, a: s1, porta_da: ether2, porta_a: ether1, trunk: [10, 20, 30] }
+    - { da: s1, a: p10, porta_da: ether2, access: 10 }
+    - { da: s1, a: p20, porta_da: ether3, access: 20 }
+    - { da: s1, a: p30, porta_da: ether4, access: 30 }
+# Esito: entra nel modello così com'è.

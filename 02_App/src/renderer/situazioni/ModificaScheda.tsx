@@ -6,6 +6,7 @@ import type { SorgenteFile } from '@shared/types'
 import { Con, Icona } from '../componenti/Icona'
 import { useStore } from '../store'
 import { useSit } from './stato'
+import { ModificaSpiegazione } from './ModificaSpiegazione'
 
 // Modifica di una scheda «Per situazioni»: a moduli (un campo per ogni parte) oppure come testo YAML.
 // Si salva solo se la scheda rispetta lo schema. La versione precedente resta in 99_Archivio/Versioni.
@@ -17,6 +18,7 @@ interface Ctx { rel: string; dati: Situazioni }
 const ORDINE: Record<string, string[]> = {
   ricetta: ['tipo', 'id', 'titolo', 'sigla', 'comando', 'frase', 'fonte', 'parole', 'quando', 'fasi', 'varianti', 'segnaposto', 'vicine'],
   prima_dopo: ['tipo', 'id', 'titolo', 'sigla', 'comando', 'frase', 'fonte', 'parole', 'prima', 'dopo', 'uso', 'riconoscila', 'parti', 'trappola', 'varianti', 'vicine'],
+  spiegazione: ['tipo', 'id', 'titolo', 'sigla', 'comando', 'frase', 'fonte', 'parole', 'quando', 'blocchi', 'varianti', 'vicine'],
   figura: ['tipo', 'id', 'titolo', 'sigla', 'comando', 'frase', 'fonte', 'parole', 'quando', 'disegno', 'varianti', 'vicine']
 }
 
@@ -192,7 +194,7 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
   if (!src) return <p>Apro la scheda…</p>
 
   const tipo = (o?.tipo ?? daYaml.o?.tipo) as string | undefined
-  const moduli = tipo === 'ricetta' || tipo === 'prima_dopo'
+  const moduli = tipo === 'ricetta' || tipo === 'prima_dopo' || tipo === 'spiegazione'
   const usati = new Set<string>()
   if (o?.fasi) for (const f of o.fasi) for (const r of f.righe ?? []) for (const m of String(r.codice ?? '').matchAll(/«([A-Z0-9_]+)»/g)) usati.add(m[1]!)
   const mancanti = [...usati].filter((u) => !o?.segnaposto?.[u])
@@ -282,7 +284,6 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
       {tab === 'yaml' || !moduli || !o ? (
         <>
           {!moduli && tipo === 'figura' && <p className="m-nota">Le figure (disegno della scheda con i pin) si modificano come testo: i moduli arriveranno dopo.</p>}
-          {!moduli && tipo === 'spiegazione' && <p className="m-nota">Le spiegazioni (testo, riquadri, tabelle e disegni) si modificano come testo YAML: ogni elemento di «blocchi» è uno fra titolo, testo, punti, carte, tabella, disegno, comandi, nota, trappola.</p>}
           {!moduli && tipo === 'regola' && <p className="m-nota">Le regole di matematica si modificano come testo YAML: formule in notazione testuale, per esempio (f*g)&apos; = f&apos;*g + f*g&apos;.</p>}
           <textarea className="inp m-yaml mono" aria-label="Testo YAML della scheda" spellCheck={false} value={testo} onChange={(e) => { setTesto(e.target.value); setSporco(true); setErrSalva([]) }} />
         </>
@@ -298,7 +299,7 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
               <Campo nome="Fonte" aiuto="Da dove viene (slide, PDF, pagina)"><Riga1 v={o.fonte} on={imp('fonte')} /></Campo>
               <Campo nome="Parole di ricerca" aiuto="Parole che devono far trovare la scheda"><Riga1 v={o.parole} on={imp('parole')} /></Campo>
             </div>
-            {tipo === 'ricetta' && <Campo nome="Quando serve" largo><Testo v={o.quando} on={imp('quando')} /></Campo>}
+            {(tipo === 'ricetta' || tipo === 'spiegazione') && <Campo nome="Quando serve" largo><Testo v={o.quando} on={imp('quando')} /></Campo>}
             {tipo === 'prima_dopo' && (
               <>
                 <div className="m-griglia">
@@ -317,6 +318,10 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
               <h2>Le parti, una per una</h2>
               {elenco('parti', 'voce', 'spiega', 'Voce', 'Cosa significa', true)}
             </section>
+          )}
+
+          {tipo === 'spiegazione' && (
+            <ModificaSpiegazione blocchi={o.blocchi ?? []} cambia={(fn) => mut((c) => { c.blocchi = fn(c.blocchi ?? []) })} />
           )}
 
           {tipo === 'ricetta' && (
@@ -384,11 +389,11 @@ export function ModificaScheda({ ctx, id, esci }: { ctx: Ctx; id: string; esci: 
             </section>
           )}
 
-          <section className="m-sez">
+          {tipo !== 'spiegazione' && <section className="m-sez">
             <h2>Varianti</h2>
             <p className="m-nota">Altri modi di ottenere la stessa cosa (facoltativo).</p>
             {elenco('varianti', 'codice', 'spiega', 'Codice', 'Quando si usa', true)}
-          </section>
+          </section>}
           {vicine}
         </div>
       )}

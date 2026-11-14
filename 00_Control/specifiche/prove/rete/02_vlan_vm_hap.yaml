@@ -1,0 +1,32 @@
+# Prova a mano 2/2 · da schema_vlan_vm.drawio.pdf (VM, l1Switch, mkRouter, hAP ac lite)
+# Letto per UNO studente (bob = VLAN 20, alice = VLAN 30); N = numero di classe.
+tipo: figura
+disegno:
+  modello: rete
+  vlan:
+    - { id: 20, nome: bob,   colore: arancio, rete: 192.168.(20+N).0/24 }
+    - { id: 30, nome: alice, colore: verde,   rete: 192.168.(30+N).0/24 }
+  nodi:
+    - [ { id: bvm, nome: bobVM1, tipo: vm },
+        { id: mgmt, nome: "192.168.24.0/24", tipo: nuvola, sotto: management },
+        { id: avm, nome: aliceVM1, tipo: vm } ]
+    - [ { id: sw, nome: l1Switch, tipo: switch } ]
+    - [ { id: rt, nome: mkRouter, tipo: router, sotto: "dhcp-server su br-vlan20 e br-vlan30" } ]
+    - [ { id: hap, nome: hAP ac lite, tipo: switch } ]
+    - [ { id: bd, nome: bobDevice, tipo: pc },
+        { id: ad, nome: aliceDevice, tipo: pc } ]
+  cavi:
+    - { da: bvm, a: sw, porta_a: ether2, access: 20, ip_da: ".bobDhcp" }
+    - { da: avm, a: sw, porta_a: ether3, access: 30, ip_da: ".aliceDhcp" }
+    - { da: mgmt, a: sw, porta_a: ether1, ip_a: ".10+N" }
+    - { da: sw, a: rt, porta_da: ether4, trunk: [20, 30], ip_a: ".254" }
+    - { da: rt, a: hap, trunk: [20, 30] }
+    - { da: hap, a: bd, porta_da: ether2, access: 20 }
+    - { da: hap, a: ad, porta_da: ether3, access: 30 }
+# Esito: entra, con DUE aggiunte al modello:
+#  1. il cavo porta un indirizzo per ogni capo: ip_da / ip_a (es. «.254», «.10+N»);
+#  2. «rete» di una VLAN può contenere formule con N (solo testo, non si calcola).
+# Limiti trovati (restano fuori): il PDF disegna due studenti in due schemi uguali
+#  (bob/alice × VM1/VM2): qui se ne disegna uno solo, l'altro è la stessa scheda con N diverso.
+#  I cavi vanno solo fra righe vicine (in questo caso va bene: VM e rete di management stanno
+#  nella stessa riga sopra lo switch).

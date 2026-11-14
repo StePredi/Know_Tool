@@ -167,3 +167,6 @@ Docker per situazioni** e guarda:
       spiegazione per la teoria, per esempio il VLAN filtering.
 - [ ] Il file temporaneo `99_Archivio/Obsoleti/2026-11-13/_tmp_app_src.tgz`
       (copia del codice usata per lavorare nel cloud) si può eliminare.
+
+- [ ] **Spiegazioni, modifica a moduli**: passo 1 fatto 2026-11-14 (da provare su Windows: aprire una scheda Docker, «Modifica», «Moduli»: aggiungere, spostare, eliminare un blocco, salvare). Passo 2 (moduli per carte, tabella, disegni pile/flusso) da fare dopo la prova.
+- [ ] **Disegno «rete»** (`specifiche/disegno_rete.md`): specifica approvata, prima della schermata la prova a mano su `schema_vlan_vm`.
