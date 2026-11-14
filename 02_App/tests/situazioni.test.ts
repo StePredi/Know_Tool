@@ -17,12 +17,12 @@ beforeEach(async () => {
 })
 
 describe('Per situazioni: dati veri di MikroTik', () => {
-  it('legge tutte le 50 schede senza avvisi e con 10 rami', async () => {
+  it('legge tutte le 51 schede senza avvisi e con 10 rami', async () => {
     const d = await leggiSituazioni(radice, REL)
     expect(d.avvisi).toEqual([])
-    expect(Object.keys(d.schede)).toHaveLength(50)
+    expect(Object.keys(d.schede)).toHaveLength(51)
     expect(d.indice.rami).toHaveLength(10)
-    expect(ordineSchede(d.indice)).toHaveLength(50)
+    expect(ordineSchede(d.indice)).toHaveLength(51)
     expect(d.schede['bridge-unico']!.tipo).toBe('prima_dopo')
     expect(d.schede['dhcp-server']!.tipo).toBe('ricetta')
   })
@@ -38,7 +38,7 @@ describe('Per situazioni: dati veri di MikroTik', () => {
     const doc = mikrotik.figli.find((n) => n.tipo === 'situazioni')!
     expect(doc.tipo).toBe('situazioni')
     expect(doc.nome).toBe('MikroTik per situazioni')
-    expect(doc.info).toBe('50 situazioni')
+    expect(doc.info).toBe('51 situazioni')
     expect(doc.figli).toEqual([])
     expect(doc.puoRinominare && doc.puoArchiviare).toBe(true)
   })

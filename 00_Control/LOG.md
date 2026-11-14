@@ -165,3 +165,7 @@ Registro cronologico delle azioni.
 - 2026-11-14 · Spiegazioni, modifica a moduli (passo 1, `specifiche/modifica_spiegazioni.md`): elenco dei blocchi con sposta / elimina (conferma se non vuoto) / aggiungi; moduli per titolo, testo, punti, nota, trappola; carte, tabella, disegno, comandi come testo YAML del solo blocco. Nuovi `shared/bloccoSpiegazione.ts`, `renderer/situazioni/ModificaSpiegazione.tsx`, `tests/bloccoSpiegazione.test.ts` (7). Typecheck web e node puliti; non visto in Electron.
 
 - 2026-11-14 · Disegno «rete»: prove a mano in `specifiche/prove/rete/` (InterVlanRouting, schema_vlan_vm); modello aggiornato con `ip_da`/`ip_a`; specifica pronta per il codice.
+
+- 2026-11-14 · Disegno «rete» (specifiche/disegno_rete.md): schema `modello: rete` nelle schede «figura» (nodi in righe, cavi con porte, indirizzi e VLAN, trunk a strisce), `shared/rete.ts` (controlli, posizioni), `renderer/situazioni/Rete.tsx`, ricerca che trova porte e VLAN, avvisi leggibili. Test `tests/rete.test.ts` (13) sulle due prove a mano; typecheck web e node puliti; non visto in Electron. Manca: una scheda vera nel documento MikroTik che lo usi.
+
+- 2026-11-14 · MikroTik: nuova scheda «figura» `vlan-schema-rete` («Lo schema del laboratorio InterVlanRouting», ramo VLAN, gruppo «Scenario completo»): 51 schede; `tests/situazioni.test.ts` e `_scheda.md` aggiornati. Nel cloud `situazioni.test.ts` e `rete.test.ts` passano (23 test, nessun avviso sull'indice). Chiude la segnalazione sullo schema di rete.

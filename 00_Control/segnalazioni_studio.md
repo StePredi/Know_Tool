@@ -8,11 +8,13 @@ Quando una segnalazione è stata gestita, la sposto sotto «Fatte» (non la canc
 
 ## Da fare
 
-- 2026-10-16 · MikroTik VLAN · lo schema di rete del laboratorio (VM, router, switch, trunk, ether1-4 del PDF mikTikVlansvm.drawio.pdf) non si può mostrare: le figure supportano solo lo schema pin di una scheda elettronica; serve un modello di disegno per schemi di rete · (manca)
+_(niente di aperto)_
 
 ---
 
 ## Fatte
+
+- 2026-10-16 · MikroTik VLAN · lo schema di rete del laboratorio (VM, router, switch, trunk, ether1-4 del PDF mikTikVlansvm.drawio.pdf) non si può mostrare: le figure supportano solo lo schema pin di una scheda elettronica; serve un modello di disegno per schemi di rete · (fatto 2026-11-14: modello «rete» e scheda `vlan-schema-rete` nel ramo VLAN)
 
 - 2026-11-13 · Matematica, test dei documenti: `tests/regola.test.ts` (`documentiMat`) ora cerca i documenti «per situazioni» a qualsiasi profondità sotto `Matematica/` (anche in `Biennio/`), quindi controlla anche Monomi e polinomi, Scomposizione, Frazioni algebriche, Equazioni, Disequazioni, Sistemi lineari. Nuovo `tests/albero_matematica.test.ts`: l'albero li mostra tutti come documenti «per situazioni» (anche dentro Biennio/). (testo originale: i documenti ora sono in `01_Argomenti/Matematica/Biennio/<Ar…)
 - 2026-11-13 · MikroTik, `tests/situazioni.test.ts` aggiornato a 50 schede e «50 situazioni». Corretto anche `tests/repository.test.ts` (si aspettava solo Leopardi come autore: ora basta che ci sia).

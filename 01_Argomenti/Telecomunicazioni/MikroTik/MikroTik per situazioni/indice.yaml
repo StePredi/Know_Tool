@@ -112,6 +112,7 @@ rami:
     - vlan-verifica
   - gruppo: Scenario completo
     schede:
+    - vlan-schema-rete
     - vlan-scenario-switch
     - vlan-scenario-router
     - vlan-lab-chr

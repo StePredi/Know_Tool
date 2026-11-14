@@ -169,4 +169,4 @@ Docker per situazioni** e guarda:
       (copia del codice usata per lavorare nel cloud) si può eliminare.
 
 - [ ] **Spiegazioni, modifica a moduli**: passo 1 fatto 2026-11-14 (da provare su Windows: aprire una scheda Docker, «Modifica», «Moduli»: aggiungere, spostare, eliminare un blocco, salvare). Passo 2 (moduli per carte, tabella, disegni pile/flusso) da fare dopo la prova.
-- [ ] **Disegno «rete»** (`specifiche/disegno_rete.md`): specifica approvata, prima della schermata la prova a mano su `schema_vlan_vm`.
+- [x] (fatto 2026-11-14, da vedere in Electron) **Disegno «rete»** (`specifiche/disegno_rete.md`): modello, controlli e disegno SVG. Scheda `vlan-schema-rete` aggiunta al MikroTik (51 schede).

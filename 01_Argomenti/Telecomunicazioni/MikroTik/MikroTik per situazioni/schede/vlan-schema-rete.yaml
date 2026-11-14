@@ -1,0 +1,35 @@
+id: vlan-schema-rete
+tipo: figura
+titolo: Lo schema del laboratorio InterVlanRouting
+sigla: Schema rete
+comando: R1 · S1 · trunk · access
+frase: chi è collegato a chi, su quale porta e con quale VLAN
+fonte: Schema mikTikVlansRoutingPaov.3 · Traccia configurazione InterVlanRouting
+parole: schema rete laboratorio intervlanrouting r1 s1 trunk access ether1 ether2 ether3 ether4 vlan10 vlan20 vlan30 winbox management cavi porte
+quando: 'Quando devi sapere quale porta va dove prima di scrivere i comandi: la porta WAN e quella di gestione del router, il trunk fra R1 e S1, le tre porte access dello switch.'
+disegno:
+  modello: rete
+  vlan:
+    - { id: 10, nome: ufficio,     colore: blue,   rete: 172.18.n.0/24 }
+    - { id: 20, nome: laboratorio, colore: orange, rete: 172.18.n+30.0/24 }
+    - { id: 30, nome: ospiti,      colore: green,  rete: 172.18.n+60.0/24 }
+  nodi:
+    - [ { id: net, nome: internet, tipo: nuvola, sotto: 192.168.24.0/24 },
+        { id: winbox, nome: winbox, sotto: management } ]
+    - [ { id: r1, nome: R1 (CHR), tipo: router, sotto: dhcp-server sulle VLAN · NAT } ]
+    - [ { id: s1, nome: S1 (CHR), tipo: switch, sotto: Bridge-Switch } ]
+    - [ { id: p10, nome: stampante/ufficio, sotto: dhcpClient },
+        { id: p20, nome: device laboratorio, sotto: dhcpClient },
+        { id: p30, nome: device ospiti, sotto: dhcpClient } ]
+  cavi:
+    - { da: net, a: r1, porta_a: ether1 }
+    - { da: winbox, a: r1, porta_a: ether3 }
+    - { da: r1, a: s1, porta_da: ether2, porta_a: ether1, trunk: [10, 20, 30] }
+    - { da: s1, a: p10, porta_da: ether2, access: 10 }
+    - { da: s1, a: p20, porta_da: ether3, access: 20 }
+    - { da: s1, a: p30, porta_da: ether4, access: 30 }
+  nota: 'N è il numero di classe. Le porte access non portano il tag; il trunk fra R1 e S1 porta le tre VLAN con il tag.'
+vicine:
+  - vlan-scenario-switch
+  - vlan-scenario-router
+  - vlan-lab-chr

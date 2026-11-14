@@ -5,6 +5,7 @@ import { useStore } from '../store'
 import { Cod, testoPuro } from './Codice'
 import { codiceDaCopiare, righeCodice } from './righe'
 import { DisegnoScheda } from './Figura'
+import { Rete } from './Rete'
 import { Comando, TestoMat } from './Formula'
 import { Regola } from './Regola'
 import { Spiegazione } from './Spiegazione'
@@ -288,13 +289,17 @@ function Figura({ ctx, s }: { ctx: Ctx; s: SchedaFigura }): ReactNode {
   return (
     <>
       <Testata ctx={ctx} id={s.id} tipo="Figura" />
-      <DisegnoScheda
-        d={s.disegno}
-        corrente={s.id}
-        schede={ctx.dati.schede}
-        colore={(id) => ctx.dati.indice.rami[ctx.info[id]!.bi]!.colore}
-        apri={(id) => useSit.getState().imposta(ctx.rel, { scheda: id })}
-      />
+      {s.disegno.modello === 'rete' ? (
+        <Rete d={s.disegno} />
+      ) : (
+        <DisegnoScheda
+          d={s.disegno}
+          corrente={s.id}
+          schede={ctx.dati.schede}
+          colore={(id) => ctx.dati.indice.rami[ctx.info[id]!.bi]!.colore}
+          apri={(id) => useSit.getState().imposta(ctx.rel, { scheda: id })}
+        />
+      )}
       <Piede ctx={ctx} id={s.id} />
     </>
   )

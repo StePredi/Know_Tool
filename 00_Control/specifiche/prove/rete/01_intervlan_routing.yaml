@@ -3,9 +3,9 @@ tipo: figura
 disegno:
   modello: rete
   vlan:
-    - { id: 10, nome: ufficio,     colore: blu,     rete: 172.18.n.0/24 }
-    - { id: 20, nome: laboratorio, colore: arancio, rete: 172.18.n+30.0/24 }
-    - { id: 30, nome: ospiti,      colore: verde,   rete: 172.18.n+60.0/24 }
+    - { id: 10, nome: ufficio,     colore: blue,     rete: 172.18.n.0/24 }
+    - { id: 20, nome: laboratorio, colore: orange, rete: 172.18.n+30.0/24 }
+    - { id: 30, nome: ospiti,      colore: green,   rete: 172.18.n+60.0/24 }
   nodi:
     - [ { id: net, nome: internet, tipo: nuvola } ]
     - [ { id: r1, nome: R1 (CHR), tipo: router, sotto: dhcp-server sulle VLAN · snat } ]

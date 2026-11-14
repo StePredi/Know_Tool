@@ -4,8 +4,8 @@ tipo: figura
 disegno:
   modello: rete
   vlan:
-    - { id: 20, nome: bob,   colore: arancio, rete: 192.168.(20+N).0/24 }
-    - { id: 30, nome: alice, colore: verde,   rete: 192.168.(30+N).0/24 }
+    - { id: 20, nome: bob,   colore: orange, rete: 192.168.(20+N).0/24 }
+    - { id: 30, nome: alice, colore: green,   rete: 192.168.(30+N).0/24 }
   nodi:
     - [ { id: bvm, nome: bobVM1, tipo: vm },
         { id: mgmt, nome: "192.168.24.0/24", tipo: nuvola, sotto: management },

@@ -3,6 +3,7 @@
 
 import YAML from 'yaml'
 import { z } from 'zod'
+import { controllaRete } from './rete'
 
 export const COLORI_RAMO = ['red', 'orange', 'yellow', 'green', 'teal', 'blue', 'indigo', 'violet', 'pink', 'slate'] as const
 export type ColoreRamo = (typeof COLORI_RAMO)[number]
@@ -79,11 +80,48 @@ export const schemaDisegno = z.object({
   /** parti già presenti sulla scheda (LED, pulsanti…), mostrate sotto il disegno */
   componenti: z.array(z.object({ nome: testo.min(1), spiega: testo })).default([])
 })
+// Schema di rete (specifiche/disegno_rete.md): nodi in righe, dall'alto in basso, e cavi con porte e VLAN.
+export const TIPI_NODO_RETE = ['nuvola', 'router', 'switch', 'pc', 'vm'] as const
+const nodoRete = z.object({
+  id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/i, 'id non valido (lettere, numeri e trattini)'),
+  nome: testo.min(1),
+  tipo: z.enum(TIPI_NODO_RETE).default('pc'),
+  sotto: testo.default('')
+})
+const vlanRete = z.object({
+  id: z.number().int().positive(),
+  nome: testo.min(1),
+  colore: z.enum(COLORI_RAMO),
+  /** solo testo: può contenere N, non si calcola */
+  rete: testo.default('')
+})
+const cavoRete = z.object({
+  da: z.string().min(1),
+  a: z.string().min(1),
+  porta_da: testo.default(''),
+  porta_a: testo.default(''),
+  /** indirizzo scritto vicino a ciascun capo (testo: «.254», «.10+N») */
+  ip_da: testo.default(''),
+  ip_a: testo.default(''),
+  /** porta access: una VLAN, frame senza tag */
+  access: z.number().int().positive().optional(),
+  /** porta trunk: le VLAN che passano, con tag */
+  trunk: z.array(z.number().int().positive()).min(1).optional()
+})
+export const schemaDisegnoRete = z.object({
+  modello: z.literal('rete'),
+  vlan: z.array(vlanRete).default([]),
+  /** una riga = una lista di nodi, dall'alto in basso */
+  nodi: z.array(z.array(nodoRete).min(1)).min(1),
+  cavi: z.array(cavoRete).default([]),
+  nota: testo.default('')
+})
+export const schemaDisegnoFigura = z.discriminatedUnion('modello', [schemaDisegno, schemaDisegnoRete])
 const figura = z.object({
   tipo: z.literal('figura'),
   ...comuni,
   quando: testo,
-  disegno: schemaDisegno
+  disegno: schemaDisegnoFigura
 })
 
 // Spiegazione: la teoria senza codice, scritta in testo normale con riquadri, tabelle e disegni
@@ -300,6 +338,9 @@ export type SchedaPrimaDopo = z.infer<typeof primaDopo>
 export type SchedaFigura = z.infer<typeof figura>
 export type SchedaSpiegazione = z.infer<typeof spiegazione>
 export type DisegnoSit = z.infer<typeof schemaDisegno>
+export type DisegnoRete = z.infer<typeof schemaDisegnoRete>
+export type NodoRete = z.infer<typeof nodoRete>
+export type CavoRete = z.infer<typeof cavoRete>
 export type PinDisegno = z.infer<typeof pinDisegno>
 export type SchedaRegola = z.infer<typeof regola>
 export type EsempioRegola = z.infer<typeof esempioRegola>
@@ -404,7 +445,8 @@ export function controllaSituazioni(indice: IndiceSit, schede: Record<string, Sc
   for (const id of Object.keys(schede)) if (!visti.has(id)) av.push(`La scheda «${id}» non è in nessun ramo dell'indice.`)
   for (const s of Object.values(schede)) {
     for (const v of s.vicine) if (!schede[v]) av.push(`«${s.id}»: la scheda vicina «${v}» non esiste.`)
-    if (s.tipo === 'figura') {
+    if (s.tipo === 'figura' && s.disegno.modello === 'rete') for (const m of controllaRete(s.disegno)) av.push(`«${s.id}»: ${m}`)
+    if (s.tipo === 'figura' && s.disegno.modello === 'scheda_pin') {
       const fam = new Set(s.disegno.famiglie.map((f) => f.id))
       for (const f of s.disegno.famiglie) for (const v of f.schede) if (!schede[v]) av.push(`«${s.id}»: la famiglia «${f.id}» cita la scheda «${v}» che non esiste.`)
       for (const p of [...s.disegno.sinistra, ...s.disegno.destra]) {
