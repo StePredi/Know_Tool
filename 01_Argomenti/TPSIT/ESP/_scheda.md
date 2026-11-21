@@ -1,4 +1,4 @@
-# MSP
+# ESP
 
 **Tipo di argomento:** tecnico / pratico (TPSIT, progetti con l'ESP32).
 
@@ -10,7 +10,7 @@
 - `Appunti/` → la **teoria**: IoT, hardware dell'ESP32 e dei sensori, protocollo I2C
 - `Pratica/` → la **parte pratica**: ambiente di lavoro, codice, esercizi
 - `Schemi/` → schema dei pin (immagini originali e versione cliccabile), schema a blocchi, specifiche
-- `MSP per situazioni/` → la documentazione «Per situazioni» (si apre nell'app)
+- `ESP per situazioni/` → la documentazione «Per situazioni» (si apre nell'app)
 
 ---
 

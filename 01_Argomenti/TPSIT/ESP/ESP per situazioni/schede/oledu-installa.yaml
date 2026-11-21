@@ -1,0 +1,40 @@
+id: oledu-installa
+tipo: ricetta
+titolo: Mettere oled_utils in un progetto PlatformIO
+sigla: Installa oled_utils
+comando: oled_utils.h
+frase: file e librerie da avere
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils installare platformio include lib_deps adafruit ssd1306 gfx progetto libreria
+quando: Quando vuoi usare la tua libreria oled_utils in un nuovo progetto.
+fasi:
+- nome: File del progetto
+  righe:
+  - codice: include/oled_utils.h
+    commento: la libreria va nella cartella include
+  - codice: src/main.cpp
+    commento: il programma principale
+- nome: platformio.ini
+  righe:
+  - codice: lib_deps =
+    commento: le dipendenze del progetto
+  - codice: '    adafruit/Adafruit SSD1306'
+    commento: prima libreria
+  - codice: '    adafruit/Adafruit GFX Library'
+    commento: seconda libreria
+    trappola: 'oled_utils si appoggia a Adafruit SSD1306 e Adafruit GFX: servono entrambe.'
+- nome: main.cpp
+  righe:
+  - codice: '#include <Arduino.h>'
+    commento: obbligatorio in PlatformIO
+    trappola: In PlatformIO senza Arduino.h il programma non compila.
+  - codice: '#include <Wire.h>'
+    commento: ''
+  - codice: '#include "oled_utils.h"'
+    commento: la tua libreria
+segnaposto: {}
+varianti: []
+vicine:
+- oled-libreria
+- oled-configura
+- oledu-init

@@ -220,7 +220,7 @@ Dalle slide: l'esempio completo dell'interrupt usa `BUTTON 0`, cioè proprio il 
 
 ## Dove si fa pratica
 
-Nel documento `MSP per situazioni`:
+Nel documento `ESP per situazioni`:
 
 - ramo **Pin e I/O della scheda** → leggere lo schema, scegliere il pin, LED e pulsante integrati
 - ramo **Touch** → quali pin, leggere, scegliere la soglia, interrupt

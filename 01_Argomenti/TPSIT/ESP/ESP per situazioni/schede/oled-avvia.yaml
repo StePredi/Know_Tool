@@ -1,0 +1,32 @@
+id: oled-avvia
+tipo: ricetta
+titolo: Avviare il display OLED nel setup
+sigla: Avvio OLED
+comando: display.begin
+frase: pin I2C e indirizzo 0x3C
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 begin setup wire begin 0x3c switchcapvcc avvio inizializzazione
+quando: Quando hai dichiarato il display e devi accenderlo nel setup().
+fasi:
+- nome: Nel setup
+  righe:
+  - codice: Wire.begin(OLED_SDA, OLED_SCL);
+    commento: imposta i pin I2C
+  - codice: display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+    commento: alimentazione del display e suo indirizzo sul bus I2C
+- nome: Ripeti finché risponde
+  righe:
+  - codice: while (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    commento: dall'esempio del corso
+  - codice: '  printf("display initialization failed");'
+    commento: messaggio finché il display non parte
+    trappola: Se il messaggio compare di continuo, controlla indirizzo 0x3C e collegamento SDA/SCL.
+  - codice: '}'
+    commento: ''
+segnaposto: {}
+varianti: []
+vicine:
+- oled-configura
+- oled-testo
+- oled-non-visibile
+- oledu-init

@@ -1,6 +1,6 @@
 # Sensori AHT20 e BMP280 (pratica)
 
-Fonte: `fonti/introduzione_esp32_iot_tpsit.pdf`
+Fonti: `fonti/introduzione_esp32_iot_tpsit.pdf`, `fonti/esercizi_i2c_oled_bmp_aht20.pdf`
 
 Teoria (caratteristiche, indirizzi, modalità): `appunti/esp32_hardware_e_sensori.md`
 
@@ -31,6 +31,11 @@ Serial.print(temp.temperature);
 Serial.print(humidity.relative_humidity);
 ```
 
+- `sensors_event_t humidity, temp;` dichiara i tipi per la lettura di temperatura e umidità
+- `aht.getEvent(&humidity, &temp);` legge temperatura e umidità
+- `temp.temperature` → valore della temperatura letta
+- `humidity.relative_humidity` → valore dell'umidità letta
+
 Indirizzo I2C: `0x38`. Una misura ogni **2 secondi** al massimo.
 
 ---
@@ -60,3 +65,9 @@ Indirizzo I2C: `0x76` (SDO libero) o `0x77` (SDO a 3,3 V).
 - **GPIO 22 = SCL**
 
 Per trovare l'indirizzo di un sensore: programma **I2C scanner** (vedi `i2c_wire_codice.md`).
+
+---
+
+## Lettura a basso livello del BMP280
+
+Al posto di `Adafruit BMP280` si possono leggere i registri direttamente con `Wire.h`: passi e funzioni in `i2c_wire_codice.md`, sezione «Leggere i registri di un sensore».

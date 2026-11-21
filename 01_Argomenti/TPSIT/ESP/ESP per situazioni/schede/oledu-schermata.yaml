@@ -1,0 +1,36 @@
+id: oledu-schermata
+tipo: ricetta
+titolo: Disegnare una schermata
+sigla: Pulisci · disegna · aggiorna
+comando: oled_aggiorna
+frase: una sola oled_aggiorna() per schermata
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils pulisci aggiorna buffer schermata sfarfallio loop disegnare
+quando: Quando devi mostrare o ridisegnare qualcosa sul display.
+fasi:
+- nome: Pulisci
+  righe:
+  - codice: oled_pulisci();
+    commento: svuota il buffer e porta il cursore a y = 0
+- nome: Disegna
+  righe:
+  - codice: oled_titolo("STAZIONE METEO");
+    commento: ''
+  - codice: oled_riga_icona(ICONA_TERMOMETRO, "21.3 \xF8" "C");
+    commento: ''
+  - codice: oled_valore("Umidita'", "54 %");
+    commento: ''
+  - codice: oled_barra(54);
+    commento: ''
+- nome: Aggiorna
+  righe:
+  - codice: oled_aggiorna();
+    commento: invia il buffer al display
+    trappola: 'Chiamala una volta sola, alla fine: più chiamate per schermata fanno sfarfallare lo schermo.'
+segnaposto: {}
+varianti: []
+vicine:
+- oled-visualizza
+- oledu-init
+- oledu-riga
+- oledu-non-va

@@ -1,0 +1,32 @@
+id: oledu-grafico
+tipo: ricetta
+titolo: Grafico a linea e indicatore a lancetta
+sigla: Grafico e indicatore
+comando: oled_grafico · oled_indicatore
+frase: storico dei valori
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils grafico indicatore lancetta storico aggiungi array float vmin vmax semicerchio
+quando: Quando vuoi vedere l'andamento di una misura nel tempo o un valore a lancetta.
+fasi:
+- nome: Storico
+  righe:
+  - codice: float storico[30];
+    commento: array dei valori
+  - codice: oled_storico_aggiungi(storico, 30, temperatura);
+    commento: fa scorrere l'array a sinistra e mette il valore in fondo
+- nome: Grafico
+  righe:
+  - codice: oled_grafico(0, 0, 128, 40, storico, 30);
+    commento: grafico a linea in un riquadro; vmin e vmax opzionali
+    trappola: Con vmin = vmax = 0 la scala si calcola da sola.
+- nome: Indicatore
+  righe:
+  - codice: oled_indicatore(32, 40, 28, umidita);
+    commento: semicerchio con lancetta e tacche a 0, 25, 50, 75, 100 %
+    trappola: 'cx, cy è il centro della base: occupa da cx - r a cx + r in orizzontale e da cy - r a cy
+      + 2 in verticale.'
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-barre
+- oledu-posizione

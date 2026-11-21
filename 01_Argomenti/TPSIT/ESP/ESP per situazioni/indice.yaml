@@ -1,6 +1,6 @@
 modello: per_situazioni
-titolo: MSP, per situazioni
-centro: MSP
+titolo: ESP, per situazioni
+centro: ESP
 sottotitolo: Parti da quello che devi fare con l'ESP32 e con l'I2C, non dal nome della funzione.
 prefissoCommento: //
 esempiRicerca: LED che non lampeggia, sensore I2C, interrupt, timer
@@ -118,6 +118,46 @@ rami:
     - bmp280-leggi
     - bmp280-indirizzo
     - bmp280-modalita
+- id: b12
+  nome: Display OLED
+  colore: pink
+  lato: R
+  voci:
+  - gruppo: Preparare
+    schede:
+    - oled-libreria
+    - oled-configura
+    - oled-avvia
+  - gruppo: Scrivere
+    schede:
+    - oled-testo
+    - oled-dimensione
+    - oled-cursore
+    - oled-visualizza
+  - schede:
+    - oled-esempio
+- id: b13
+  nome: Libreria oled_utils
+  colore: orange
+  lato: B
+  voci:
+  - gruppo: Partire
+    schede:
+    - oledu-installa
+    - oledu-init
+    - oledu-schermata
+  - gruppo: Testo e righe
+    schede:
+    - oledu-riga
+    - oledu-cursore
+    - oledu-posizione
+    - oledu-valore
+  - gruppo: Grafica
+    schede:
+    - oledu-barre
+    - oledu-grafico
+    - oledu-icone
+    - oledu-finestre
 - id: b9
   nome: Due schede sul bus
   colore: red
@@ -167,3 +207,5 @@ rami:
     - sensore-non-trovato
     - valori-aht20
     - adc-wifi
+    - oled-non-visibile
+    - oledu-non-va

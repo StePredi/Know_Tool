@@ -1,0 +1,27 @@
+id: oled-cursore
+tipo: ricetta
+titolo: Scegliere dove scrivere sul display
+sigla: Posizione del testo
+comando: display.setCursor
+frase: coordinate x, y
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 setcursor posizione coordinate x y angolo alto sinistra 0,0
+quando: Quando il testo deve partire da un punto preciso e non dall'angolo.
+fasi:
+- nome: Posiziona il cursore
+  righe:
+  - codice: display.setCursor(«x», «y»);
+    commento: posizione iniziale del testo
+    trappola: Le coordinate 0,0 sono l'angolo in alto a sinistra del display.
+segnaposto:
+  x:
+    esempio: '0'
+    spiega: colonna, cresce verso destra (il display ne ha 128)
+  y:
+    esempio: '0'
+    spiega: riga, cresce verso il basso (il display ne ha 64)
+varianti: []
+vicine:
+- oled-testo
+- oled-visualizza
+- oledu-posizione

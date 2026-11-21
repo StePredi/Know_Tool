@@ -1,0 +1,23 @@
+id: oled-dimensione
+tipo: prima_dopo
+titolo: Cambiare la dimensione del testo
+sigla: Dimensione testo
+comando: display.setTextSize
+frase: piccolo o grande
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 settextsize dimensione testo grande piccolo intero positivo
+prima: display.⟦setTextSize⟧(⟦1⟧);  display.println("Piccolo");
+dopo: display.⟦setTextSize⟧(⟦2⟧);  display.println("Grande");
+uso: Scrivere righe di grandezza diversa sullo stesso display.
+riconoscila: Il testo è troppo piccolo da leggere, o troppo grande e non ci sta.
+parti:
+- voce: setTextSize
+  spiega: imposta la dimensione del testo
+- voce: 1, 2
+  spiega: 'numero intero positivo: più è alto, più il testo cresce'
+trappola: Il cambio vale per quello che scrivi dopo. Nell'esempio del corso «Piccolo» è in dimensione
+  1 e «Grande» in dimensione 2.
+varianti: []
+vicine:
+- oled-testo
+- oled-esempio

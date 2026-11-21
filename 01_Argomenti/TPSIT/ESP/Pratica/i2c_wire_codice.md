@@ -171,6 +171,49 @@ Wire.endTransmission();
 
 ---
 
+## Leggere i registri di un sensore (es. BMP280)
+
+Fonte: `fonti/esercizi_i2c_oled_bmp_aht20.pdf` (note pratiche)
+
+Riferimento: https://www.arduino.cc/reference/en/language/functions/communication/wire/
+
+Per accedere a basso livello alla memoria del BMP280 si usa `Wire.h` con le funzioni per **selezionare il dispositivo** e **leggere i registri**. Conviene leggere **più registri in una volta** (burst read, vedi `appunti/esp32_hardware_e_sensori.md`).
+
+Il **master** definisce il tipo di operazione (lettura) e con chi:
+
+1. definire l'**indirizzo** con cui si vuole comunicare → `Wire.beginTransmission(address)`
+2. inserire il **primo indirizzo di memoria** da cui leggere → `Wire.write(registro)`
+3. **chiudere la trasmissione** → `Wire.endTransmission()`
+
+Lo **slave** comincia a mandare e il master si attiva in lettura:
+
+4. `Wire.requestFrom(address, quantity)` → parte la lettura vera e propria
+5. inserire i dati in un **contenitore adeguato** (variabile o array)
+
+Ciclo di lettura dei dati arrivati su I2C:
+
+```cpp
+while (Wire.available()) {
+  ??? = Wire.read();
+}
+```
+
+Funzioni usate (tabella completa più sopra): `beginTransmission`, `write`, `endTransmission`, `requestFrom`, `available`, `read`.
+
+> **Nota** (non nella fonte): schema che mette insieme i passi. `indirizzo`, `registro` e `quanti` sono segnaposto da riempire con i valori del datasheet.
+>
+> ```cpp
+> Wire.beginTransmission(indirizzo);     // con chi
+> Wire.write(registro);                  // primo registro da leggere
+> Wire.endTransmission();                // chiude la trasmissione
+> Wire.requestFrom(indirizzo, quanti);   // legge `quanti` byte
+> while (Wire.available()) {
+>   byte b = Wire.read();                // nel contenitore
+> }
+> ```
+
+---
+
 ## Esercizi (dal PDF di Crivellaro)
 
 1. Interpretare sequenze I2C, indicando il significato dei gruppi di bit e chi li ha inviati:

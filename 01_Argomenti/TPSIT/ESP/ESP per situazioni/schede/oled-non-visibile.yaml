@@ -1,0 +1,31 @@
+id: oled-non-visibile
+tipo: ricetta
+titolo: Il display OLED resta nero
+sigla: OLED nero
+comando: controlli in ordine
+frase: cosa controllare
+fonte: 'Display OLED SSD1306 · slide del corso · nota: controllo con lo scanner I2C'
+parole: oled nero spento non scrive display non funziona 0x3c display.display sda scl scanner
+quando: Quando hai caricato il programma ma sul display non compare niente.
+fasi:
+- nome: Controlla in ordine
+  righe:
+  - codice: 1. display.display() dopo aver scritto
+    commento: il testo sta nel buffer finché non lo trasferisci
+    trappola: Senza display.display() non si vede niente.
+  - codice: 2. display.begin(SSD1306_SWITCHCAPVCC, 0x3C)
+    commento: indirizzo giusto e alimentazione indicata
+  - codice: 3. Wire.begin(OLED_SDA, OLED_SCL)
+    commento: con SDA = 21 e SCL = 22, come nei define
+  - codice: 4. setTextColor(SSD1306_WHITE)
+    commento: testo bianco su nero
+  - codice: 5. scanner I2C
+    commento: 'nota: deve comparire 0x3C; se non c''è, il problema è nei cavi o nell''alimentazione'
+segnaposto: {}
+varianti: []
+vicine:
+- oled-visualizza
+- oled-avvia
+- i2c-indirizzo
+- sensore-non-trovato
+- oledu-non-va

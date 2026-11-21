@@ -1,0 +1,43 @@
+id: oledu-non-va
+tipo: ricetta
+titolo: 'oled_utils: problemi comuni'
+sigla: oled_utils non va
+comando: problema → soluzione
+frase: cosa fare
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils problemi schermo nero init false sfarfallio grado accentate sda scl trasparente 0x3d
+quando: Quando qualcosa con oled_utils non si vede o si vede strano.
+fasi:
+- nome: Il display
+  righe:
+  - codice: Schermo nero
+    commento: prova 0x3D in oled_init; controlla SDA/SCL e alimentazione 3,3 V
+  - codice: oled_init ritorna false
+    commento: 'il display non risponde su I²C: cablaggio o indirizzo; usa uno scanner I²C'
+  - codice: Sfarfallio
+    commento: 'più oled_aggiorna() per schermata: chiamala solo alla fine'
+- nome: Il testo
+  righe:
+  - codice: Manca il fondo del testo
+    commento: 'non c''era spazio in verticale (oled_riga ritorna false): riduci size o interlinea'
+  - codice: Simbolo ° sbagliato
+    commento: 'scrivi " \xF8" "C" con le stringhe separate: "\xF8C" verrebbe letto come l''esadecimale
+      F8C'
+  - codice: Lettere accentate strane
+    commento: 'il font non ha à è ì ò ù in UTF-8: usa e'' oppure i codici CP437 ("\x8A" = è, "\x85" =
+      à)'
+  - codice: Testo sopra la grafica
+    commento: 'lo sfondo del testo è trasparente: pulisci l''area con display.fillRect(..., SSD1306_BLACK)
+      prima di riscrivere un valore'
+- nome: Il codice
+  righe:
+  - codice: Errore con SDA / SCL
+    commento: 'il core ESP32 li definisce già: usa PIN_SDA e PIN_SCL'
+  - codice: display.begin()
+    commento: 'non usarlo: lo fa già oled_init'
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-init
+- oled-non-visibile
+- sensore-non-trovato

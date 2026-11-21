@@ -1,0 +1,48 @@
+id: oledu-cursore
+tipo: ricetta
+titolo: 'Il cursore di riga: dove scrive la prossima riga'
+sigla: Cursore di riga
+comando: oled_y · oled_vai_a
+frase: chi lo sposta e chi no
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils cursore y oled_y oled_vai_a oled_spazio oled_spazio_rimasto oled_misura centrare verticale
+  layout
+quando: Quando le righe non finiscono dove vuoi, o vuoi centrare un blocco di testo.
+fasi:
+- nome: Lo spostano da sole
+  righe:
+  - codice: oled_riga · oled_valore · oled_titolo
+    commento: scrivono alla y interna e poi scendono
+  - codice: oled_riga_icona · oled_separatore · oled_barra · oled_menu
+    commento: scendono dello spazio occupato + interlinea
+- nome: Non lo spostano
+  righe:
+  - codice: oled_testo · oled_testo_allineato
+    commento: posizione libera
+  - codice: grafica _xy, icone, indicatore, grafico, cornice, popup
+    commento: posizione libera
+    trappola: Mescolando i due tipi ricorda che solo le funzioni di layout fanno scendere il cursore.
+- nome: Controllarlo
+  righe:
+  - codice: oled_y();
+    commento: y della prossima riga
+  - codice: oled_vai_a(y);
+    commento: sposta il cursore a una y precisa
+  - codice: oled_spazio(px);
+    commento: aggiunge spazio; negativo = risale
+  - codice: oled_spazio_rimasto();
+    commento: px liberi sotto il cursore
+- nome: Centrare in verticale
+  righe:
+  - codice: int16_t h = oled_misura(msg, 1);
+    commento: altezza del testo con a capo, senza disegnarlo
+  - codice: oled_vai_a((64 - h) / 2);
+    commento: ''
+  - codice: oled_riga(msg, 1, CENTRO);
+    commento: ''
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-riga
+- oledu-posizione
+- oled-cursore

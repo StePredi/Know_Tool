@@ -1,0 +1,40 @@
+id: oledu-posizione
+tipo: ricetta
+titolo: Scrivere in un punto preciso
+sigla: oled_testo
+comando: oled_testo(x, y, …)
+frase: posizione libera, non sposta il cursore
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils oled_testo oled_testo_allineato posizione x y larghezza altezza occupata coordinate
+quando: Quando il testo deve stare in un punto preciso, per esempio accanto a un grafico.
+fasi:
+- nome: Scrivi a x, y
+  righe:
+  - codice: oled_testo(«x», «y», «testo»);
+    commento: va a capo al bordo destro dello schermo
+  - codice: 'oled_testo(5, y, "SSID: Casa", 1, false, 60);'
+    commento: con larghezza massima di 60 px (size, inv, larghezza opzionali)
+- nome: Alla y indicata
+  righe:
+  - codice: oled_testo_allineato(«y», «testo», 2, CENTRO);
+    commento: come oled_riga ma alla y indicata, senza spostare il cursore
+- nome: Cosa ritornano
+  righe:
+  - codice: int16_t h = oled_testo(…);
+    commento: altezza occupata in px
+    trappola: 'Usala per mettere qualcosa sotto: y + h.'
+segnaposto:
+  x:
+    esempio: '0'
+    spiega: colonna dell'angolo in alto a sinistra
+  y:
+    esempio: '0'
+    spiega: riga dell'angolo in alto a sinistra
+  testo:
+    esempio: '"Temp"'
+    spiega: il testo da scrivere
+varianti: []
+vicine:
+- oledu-riga
+- oledu-cursore
+- oled-cursore

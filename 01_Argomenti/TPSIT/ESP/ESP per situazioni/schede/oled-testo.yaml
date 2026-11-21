@@ -1,0 +1,42 @@
+id: oled-testo
+tipo: ricetta
+titolo: Scrivere del testo sul display
+sigla: Testo OLED
+comando: display.println
+frase: cancella, imposta, scrivi, mostra
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 testo print println cleardisplay settextcolor settextsize setcursor scrivere stampa
+quando: Quando vuoi mostrare una scritta sul display.
+fasi:
+- nome: Prepara
+  righe:
+  - codice: display.clearDisplay();
+    commento: cancella il display
+  - codice: display.setTextColor(SSD1306_WHITE);
+    commento: bianco su nero
+  - codice: display.setTextSize(1);
+    commento: dimensione del testo
+  - codice: display.setCursor(0, 0);
+    commento: da dove si comincia a scrivere
+- nome: Scrivi
+  righe:
+  - codice: display.print(«testo»);
+    commento: stampa senza andare a capo
+  - codice: display.println(«testo»);
+    commento: stampa e va a capo
+- nome: Mostra
+  righe:
+  - codice: display.display();
+    commento: trasferisce il buffer sul display
+    trappola: Senza questa riga sul display non compare niente.
+segnaposto:
+  testo:
+    esempio: '"Piccolo"'
+    spiega: il testo da scrivere, tra virgolette
+varianti: []
+vicine:
+- oled-dimensione
+- oled-cursore
+- oled-visualizza
+- oled-esempio
+- oledu-riga

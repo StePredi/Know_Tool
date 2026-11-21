@@ -1,0 +1,36 @@
+id: oledu-valore
+tipo: ricetta
+titolo: Titolo, etichetta e valore, riga con icona
+sigla: Titolo e valori
+comando: oled_titolo · oled_valore
+frase: schermata a righe ordinate
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils oled_titolo oled_valore oled_riga_icona separatore tratteggiato etichetta valore dashboard
+quando: Quando vuoi una schermata ordinata con titolo e misure una sotto l'altra.
+fasi:
+- nome: Titolo
+  righe:
+  - codice: oled_titolo("MENU");
+    commento: fascia bianca a tutta larghezza con testo nero centrato
+    trappola: Sopra il titolo puoi disegnare icone nere, per esempio oled_batteria(112, 2, 70, true).
+- nome: Etichetta e valore
+  righe:
+  - codice: oled_valore("Pressione", "1013 hPa");
+    commento: etichetta a sinistra, valore a destra, una riga sola
+    trappola: Se manca spazio l'etichetta viene accorciata; ritorna false se la riga non entra in verticale.
+- nome: Icona e testo
+  righe:
+  - codice: oled_riga_icona(ICONA_GOCCIA, "54 %");
+    commento: icona 8 × 8 a sinistra + testo sulla stessa riga
+- nome: Separatori
+  righe:
+  - codice: oled_separatore();
+    commento: linea orizzontale, 2 px sopra e sotto
+  - codice: oled_separatore_tratteggiato();
+    commento: linea a puntini, un punto ogni 3 px
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-schermata
+- oledu-icone
+- oledu-barre

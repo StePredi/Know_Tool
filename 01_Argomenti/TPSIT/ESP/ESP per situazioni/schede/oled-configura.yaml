@@ -1,0 +1,39 @@
+id: oled-configura
+tipo: ricetta
+titolo: Preparare il codice per il display OLED
+sigla: Configurazione OLED
+comando: '#define · Adafruit_SSD1306'
+frase: include, pin, dimensioni, istanza
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 include define sda scl rst row col istanza adafruit_ssd1306 wire 128 64 configurazione
+quando: Quando inizi un programma che usa il display e devi scrivere la parte fissa in alto.
+fasi:
+- nome: Include
+  righe:
+  - codice: '#include <Adafruit_SSD1306.h>'
+    commento: la libreria del display
+  - codice: '#include <Wire.h>'
+    commento: gestisce I2C
+- nome: Pin e dimensioni
+  righe:
+  - codice: '#define OLED_SDA 21'
+    commento: pin SDA
+    trappola: 'I pin I2C della nostra scheda non sono standard per questa libreria: vanno definiti.'
+  - codice: '#define OLED_SCL 22'
+    commento: pin SCL
+  - codice: '#define OLED_RST -1'
+    commento: reset del display
+  - codice: '#define ROW 64'
+    commento: numero di righe
+  - codice: '#define COL 128'
+    commento: numero di colonne
+- nome: Istanza
+  righe:
+  - codice: Adafruit_SSD1306 display = Adafruit_SSD1306(COL, ROW, &Wire, OLED_RST);
+    commento: istanza della classe, con le caratteristiche del display
+segnaposto: {}
+varianti: []
+vicine:
+- oled-avvia
+- i2c-pin-cambia
+- oled-libreria

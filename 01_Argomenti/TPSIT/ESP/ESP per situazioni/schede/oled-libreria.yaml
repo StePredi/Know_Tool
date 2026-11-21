@@ -1,0 +1,26 @@
+id: oled-libreria
+tipo: ricetta
+titolo: Installare la libreria del display OLED
+sigla: Libreria OLED
+comando: Adafruit SSD 1306
+frase: aggiungere la libreria al progetto
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 libreria adafruit installare platformio libraries display
+quando: Quando vuoi usare il display OLED in un progetto PlatformIO.
+fasi:
+- nome: In PlatformIO
+  righe:
+  - codice: menu «Libraries»
+    commento: voce del menu di PlatformIO
+  - codice: cerca «adafruit»
+    commento: nella casella di ricerca
+  - codice: seleziona «Adafruit SSD 1306»
+    commento: scorri i risultati fino a trovare questa dicitura
+  - codice: aggiungila al progetto
+    commento: quello in cui userai il display
+    trappola: La libreria va aggiunta al progetto in cui si usa il display.
+segnaposto: {}
+varianti: []
+vicine:
+- platformio-progetto
+- oled-configura

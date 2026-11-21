@@ -1,0 +1,28 @@
+id: oledu-init
+tipo: prima_dopo
+titolo: Avviare il display con oled_init
+sigla: oled_init
+comando: oled_init(display)
+frase: al posto di display.begin
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils oled_init display begin avvio setup indirizzo 0x3c 0x3d interlinea margine pad
+prima: if (!⟦display.begin(SSD1306_SWITCHCAPVCC, 0x3C)⟧) {
+dopo: if (!⟦oled_init(display)⟧) {
+uso: Avviare il display nel setup() quando usi oled_utils.
+riconoscila: Usi oled_utils ma hai ancora display.begin() nel setup.
+parti:
+- voce: oled_init(d, [indirizzo], [interlinea], [margine], [pad])
+  spiega: 'default: indirizzo 0x3C, interlinea 2 px, margine 0 px, pad 2 px'
+- voce: valore restituito
+  spiega: false se il display non risponde
+trappola: 'Non usare display.begin(): lo fa già oled_init. Alcuni moduli hanno indirizzo 0x3D: passalo
+  come secondo parametro, oled_init(display, 0x3D). Il display si dichiara come sempre: Adafruit_SSD1306
+  display(128, 64, &Wire, -1);'
+varianti:
+- codice: Wire.begin(PIN_SDA, PIN_SCL);
+  spiega: prima di oled_init, con PIN_SDA 21 e PIN_SCL 22
+vicine:
+- oled-avvia
+- oled-configura
+- oledu-installa
+- oledu-non-va

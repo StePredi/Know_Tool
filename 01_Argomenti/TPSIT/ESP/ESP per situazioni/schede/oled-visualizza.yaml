@@ -1,0 +1,30 @@
+id: oled-visualizza
+tipo: ricetta
+titolo: Far comparire sul display quello che hai scritto
+sigla: Buffer e display()
+comando: display.display
+frase: il testo va prima nel buffer
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 display buffer memoria non compare vuoto cleardisplay trasferire
+quando: Quando hai scritto sul display ma non vedi niente, o vuoi aggiornare lo schermo.
+fasi:
+- nome: Scrivi nel buffer
+  righe:
+  - codice: display.println("...");
+    commento: testo e grafica finiscono in un buffer di memoria
+- nome: Trasferisci
+  righe:
+  - codice: display.display();
+    commento: il buffer passa sul display e diventa visibile
+    trappola: Senza questa istruzione il display resta com'era.
+- nome: Nota (non dalle slide)
+  righe:
+  - codice: display.clearDisplay();
+    commento: cancella; poi riscrivi e richiama display.display()
+    trappola: Dopo clearDisplay() lo schermo si svuota davvero solo con display.display().
+segnaposto: {}
+varianti: []
+vicine:
+- oled-testo
+- oled-non-visibile
+- oledu-schermata

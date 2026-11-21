@@ -151,3 +151,20 @@ hPa = unità di pressione, 100 N/m². **1 hPa = 1 millibar.**
 - Misure troppo frequenti **riscaldano il sensore** e falsano la misura. Per tenere il riscaldamento sotto 0,1 °C il tempo di attività deve stare sotto il **10 %**: si consiglia **una misura ogni 2 secondi**.
 
 Codice in `pratica/esp32_sensori_codice.md`.
+
+---
+
+## Display OLED SSD1306
+
+Fonte: `fonti/display_oled_ssd1306_slide.pptx`
+
+- Display organizzato in **128 colonne e 64 righe**
+- Interfaccia **I2C**, indirizzo **`0x3C`**
+- Pin I2C della scheda: **GPIO 21 = SDA**, **GPIO 22 = SCL**. Per questa libreria non sono standard, quindi nel codice vanno definiti a mano.
+- Libreria: **Adafruit SSD1306** (con `Wire.h`)
+- Testo e grafica si scrivono prima in un **buffer di memoria**; compaiono solo dopo `display.display()`.
+- Coordinate: `0,0` = angolo in alto a sinistra.
+
+Codice in `pratica/oled_ssd1306_codice.md`.
+
+**Libreria personale** `oled_utils.h` (testo con a capo automatico, layout a righe, barre, grafico, menu, popup): documentazione in `fonti/oled_utils.md`, schede nel ramo «Libreria oled_utils» di «ESP per situazioni».

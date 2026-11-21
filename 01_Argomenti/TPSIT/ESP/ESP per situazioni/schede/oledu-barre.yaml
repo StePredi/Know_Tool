@@ -1,0 +1,29 @@
+id: oledu-barre
+tipo: ricetta
+titolo: Barre, batteria e segnale
+sigla: Barre e indicatori
+comando: oled_barra · oled_batteria
+frase: percentuali e livelli
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils barra barra_xy barra_v batteria segnale livello percentuale riempimento
+quando: Quando vuoi mostrare una percentuale o lo stato di batteria e segnale.
+fasi:
+- nome: Barra
+  righe:
+  - codice: oled_barra(54);
+    commento: 0–100 %, a tutta larghezza, scende col cursore (altezza 7 px)
+  - codice: oled_barra_xy(x, y, w, h, perc);
+    commento: barra orizzontale con bordo, in posizione libera
+  - codice: oled_barra_v(x, y, w, h, perc);
+    commento: barra verticale, si riempie dal basso
+- nome: Batteria e segnale
+  righe:
+  - codice: oled_batteria(112, 2, 70, true);
+    commento: icona 14 × 7 px; inv = true la disegna nera, per metterla nel titolo
+  - codice: oled_segnale(2, 1, 3, true);
+    commento: tacche 11 × 8 px, livello da 0 a 4
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-valore
+- oledu-grafico

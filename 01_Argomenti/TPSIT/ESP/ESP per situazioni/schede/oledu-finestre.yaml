@@ -1,0 +1,37 @@
+id: oledu-finestre
+tipo: ricetta
+titolo: Menu, popup e cornice
+sigla: Menu e popup
+comando: oled_menu · oled_popup
+frase: liste, avvisi, riquadri
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils menu popup cornice riquadro titolo voci selezionata scorrimento avviso errore
+quando: Quando vuoi un menu a voci, un avviso sopra la schermata o un riquadro con titolo.
+fasi:
+- nome: Menu
+  righe:
+  - codice: const char *voci[] = {"Misure", "Grafico", "Wi-Fi", "Info"};
+    commento: ''
+  - codice: oled_titolo("MENU");
+    commento: ''
+  - codice: oled_menu(voci, 4, selezionata);
+    commento: la voce selezionata è invertita; se non entrano, la lista scorre con una barra a destra
+    trappola: selezionata è l'indice della voce, da 0.
+- nome: Popup
+  righe:
+  - codice: oled_popup("Sensore non risponde.", "ERRORE");
+    commento: finestra centrata sopra quello che hai già disegnato
+  - codice: oled_aggiorna();
+    commento: poi si aggiorna
+    trappola: 'Prima disegna la schermata normale, poi il popup: pulisce solo la sua area.'
+- nome: Cornice
+  righe:
+  - codice: int16_t y = oled_cornice(0, 0, 128, 64, "Rete");
+    commento: riquadro con angoli arrotondati e linguetta col titolo
+  - codice: 'oled_testo(5, y, "SSID: Casa");'
+    commento: ritorna la y da cui scrivere il contenuto
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-valore
+- oledu-schermata

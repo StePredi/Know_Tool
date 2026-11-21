@@ -1,0 +1,55 @@
+id: oledu-riga
+tipo: ricetta
+titolo: Scrivere testo che va a capo da solo
+sigla: oled_riga
+comando: oled_riga
+frase: dimensione, allineamento, invertito
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils oled_riga testo a capo automatico size allinea centro inv invertito dimensione parole
+quando: Quando vuoi scrivere una o più righe di testo senza contare i caratteri.
+fasi:
+- nome: Scrivi
+  righe:
+  - codice: oled_riga(«testo»);
+    commento: alla y del cursore; poi il cursore scende
+  - codice: oled_riga("ATTENZIONE", 2, CENTRO, true);
+    commento: size 2, centrato, nero su riquadro bianco
+- nome: Parametri
+  righe:
+  - codice: size = 1
+    commento: dimensione da 1 a 4
+  - codice: allinea = SX
+    commento: SX · CENTRO · DX
+  - codice: inv = false
+    commento: true = nero su riquadro bianco con angoli arrotondati
+- nome: A capo automatico
+  righe:
+  - codice: spezza sugli spazi
+    commento: le parole restano intere
+  - codice: parola più lunga di una riga
+    commento: viene spezzata a metà
+  - codice: '"\n" nel testo'
+    commento: forza un a capo
+  - codice: riga che non entra in verticale
+    commento: non viene disegnata e oled_riga ritorna false
+    trappola: 'Controlla il valore restituito: se è false manca il fondo del testo. Riduci la size.'
+- nome: Quanto sta
+  righe:
+  - codice: size 1 → 21 caratteri per riga, 8 righe
+    commento: carattere 6 × 8 px
+  - codice: size 2 → 10 caratteri, 4 righe
+    commento: 12 × 16 px
+  - codice: size 3 → 7 caratteri, 2 righe
+    commento: 18 × 24 px
+  - codice: size 4 → 5 caratteri, 2 righe
+    commento: 24 × 32 px
+segnaposto:
+  testo:
+    esempio: '"Testo lungo che va a capo da solo"'
+    spiega: String oppure testo tra virgolette
+varianti: []
+vicine:
+- oled-testo
+- oled-dimensione
+- oledu-cursore
+- oledu-posizione

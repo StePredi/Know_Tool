@@ -1,0 +1,67 @@
+id: oled-esempio
+tipo: ricetta
+titolo: 'Esempio: due righe di dimensioni diverse'
+sigla: Esempio OLED
+comando: Piccolo / Grande
+frase: programma completo del corso
+fonte: Display OLED SSD1306 · slide del corso
+parole: oled ssd1306 esempio completo piccolo grande setup programma
+quando: Quando vuoi un programma intero da cui partire.
+fasi:
+- nome: Include e define
+  righe:
+  - codice: '#include <Arduino.h>'
+    commento: ''
+  - codice: '#include <Adafruit_SSD1306.h>'
+    commento: ''
+  - codice: '#include <Wire.h>'
+    commento: ''
+  - codice: '#define OLED_SDA 21'
+    commento: ''
+  - codice: '#define OLED_SCL 22'
+    commento: ''
+  - codice: '#define OLED_RST -1'
+    commento: ''
+  - codice: '#define ROW 64'
+    commento: ''
+  - codice: '#define COL 128'
+    commento: ''
+- nome: Istanza
+  righe:
+  - codice: Adafruit_SSD1306 display = Adafruit_SSD1306(COL, ROW, &Wire, OLED_RST);
+    commento: ''
+- nome: Nel setup
+  righe:
+  - codice: Wire.begin(OLED_SDA, OLED_SCL);
+    commento: pin I2C
+  - codice: while (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { printf("display initialization failed");
+      }
+    commento: ripete finché il display risponde
+  - codice: display.clearDisplay();
+    commento: ''
+  - codice: display.setTextColor(WHITE);
+    commento: 'nell''esempio è scritto WHITE (nota: alias di SSD1306_WHITE)'
+  - codice: display.setTextSize(1);
+    commento: ''
+  - codice: display.setCursor(0, 0);
+    commento: ''
+  - codice: display.println("Piccolo");
+    commento: riga piccola
+  - codice: display.setTextSize(2);
+    commento: ''
+  - codice: display.println("Grande");
+    commento: riga grande, sotto la prima
+  - codice: display.display();
+    commento: mostra tutto
+    trappola: Dimenticare display.display() lascia il display vuoto.
+- nome: Nel loop
+  righe:
+  - codice: '// put your main code here, to run repeatedly:'
+    commento: nell'esempio il loop è vuoto
+segnaposto: {}
+varianti: []
+vicine:
+- oled-testo
+- oled-dimensione
+- oled-avvia
+- oledu-schermata

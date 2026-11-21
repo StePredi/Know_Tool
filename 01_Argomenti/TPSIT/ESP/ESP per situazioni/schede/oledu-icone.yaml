@@ -1,0 +1,43 @@
+id: oledu-icone
+tipo: ricetta
+titolo: 'Icone 8 × 8: usarle e crearne una'
+sigla: Icone
+comando: oled_icona
+frase: simboli e icone tue
+fonte: oled_utils.h · documentazione v2 (libreria di Ste)
+parole: oled_utils icona icone 8x8 termometro goccia pressione ok errore attenzione creare array progmem
+  bit
+quando: Quando vuoi un simbolo accanto al testo, o disegnarne uno tuo.
+fasi:
+- nome: Disegnare
+  righe:
+  - codice: oled_icona(x, y, ICONA_OK);
+    commento: icona 8 × 8
+  - codice: oled_icona(x, y, ICONA_OK, true);
+    commento: nera su un quadrato bianco 10 × 10
+- nome: Quelle pronte
+  righe:
+  - codice: ICONA_TERMOMETRO
+    commento: temperatura
+  - codice: ICONA_GOCCIA
+    commento: umidità
+  - codice: ICONA_PRESSIONE
+    commento: manometro
+  - codice: ICONA_OK
+    commento: spunta
+  - codice: ICONA_ERRORE
+    commento: X
+  - codice: ICONA_ATTENZIONE
+    commento: triangolo con !
+- nome: Crearne una
+  righe:
+  - codice: static const uint8_t ICONA_FRECCIA[8] PROGMEM = {0x18,0x3C,0x7E,0xFF,0x3C,0x3C,0x3C,0x00};
+    commento: 8 byte, uno per riga
+    trappola: Ogni bit è un pixel; il bit più a sinistra (0x80) è il pixel a sinistra.
+  - codice: oled_icona(0, 0, ICONA_FRECCIA);
+    commento: poi si disegna come le altre
+segnaposto: {}
+varianti: []
+vicine:
+- oledu-valore
+- oledu-barre
