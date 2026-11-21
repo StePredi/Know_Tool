@@ -7,6 +7,7 @@ import {
   type Blocco, type TipoBlocco
 } from '@shared/bloccoSpiegazione'
 import { Comandi, Riga1, Testo } from './ModificaScheda'
+import { FormCarte, FormComandi, FormDisegno, FormTabella } from './ModuliBlocchi'
 
 // Modifica a moduli dei blocchi di una scheda «spiegazione» (specifiche/modifica_spiegazioni.md, passo 1):
 // elenco dei blocchi con sposta / elimina / aggiungi; titolo, testo, punti, nota e trappola hanno i loro campi,
@@ -92,7 +93,7 @@ export function ModificaSpiegazione({ blocchi, cambia }: Props): ReactNode {
 function FormBlocco({ b, on }: { b: Blocco; on: (b: Blocco) => void }): ReactNode {
   const t = tipoBlocco(b)
   if (!t) return <p role="alert" className="s-avv">Blocco non riconosciuto: si modifica dal «Testo (YAML)».</p>
-  if (!BLOCCHI_SEMPLICI.includes(t)) return <BloccoYaml b={b} on={on} t={t} />
+  if (!BLOCCHI_SEMPLICI.includes(t)) return <BloccoComplesso b={b} on={on} t={t} />
   const v = b[t]
   return (
     <div className="m-bl-campo">
@@ -117,7 +118,26 @@ function FormBlocco({ b, on }: { b: Blocco; on: (b: Blocco) => void }): ReactNod
   )
 }
 
-/** Carte, tabella, disegno, comandi: il testo YAML del solo blocco, con l'errore sotto se non si legge. */
+/** Carte, tabella, comandi, disegno: modulo a campi, oppure il testo YAML del solo blocco. */
+function BloccoComplesso({ b, on, t }: { b: Blocco; on: (b: Blocco) => void; t: TipoBlocco }): ReactNode {
+  const [vista, setVista] = useState<'campi' | 'yaml'>('campi')
+  const v = b[t]
+  return (
+    <div className="m-bl-campo">
+      <div className="m-tabs" role="tablist" aria-label="Come modificare il blocco">
+        <button type="button" role="tab" aria-selected={vista === 'campi'} onClick={() => setVista('campi')}>Campi</button>
+        <button type="button" role="tab" aria-selected={vista === 'yaml'} onClick={() => setVista('yaml')}>Testo (YAML)</button>
+      </div>
+      {vista === 'yaml' ? <BloccoYaml b={b} on={on} t={t} />
+        : t === 'carte' ? <FormCarte v={v} on={(x) => on({ carte: x })} />
+        : t === 'tabella' ? <FormTabella v={v} on={(x) => on({ tabella: x })} />
+        : t === 'comandi' ? <FormComandi v={v} on={(x) => on({ comandi: x })} />
+        : <FormDisegno v={v} on={(x) => on({ disegno: x })} />}
+    </div>
+  )
+}
+
+/** Il testo YAML del solo blocco, con l'errore sotto se non si legge. */
 function BloccoYaml({ b, on, t }: { b: Blocco; on: (b: Blocco) => void; t: TipoBlocco }): ReactNode {
   const [src, setSrc] = useState(() => YAML.stringify(b, { lineWidth: 0 }))
   const [err, setErr] = useState('')
@@ -137,7 +157,6 @@ function BloccoYaml({ b, on, t }: { b: Blocco; on: (b: Blocco) => void; t: TipoB
       <span className="m-l">{NOME_BLOCCO[t]} · testo YAML del blocco</span>
       <textarea className="inp m-yaml mono" rows={Math.min(22, Math.max(6, src.split('\n').length + 1))} spellCheck={false} aria-label={`Testo YAML del blocco ${NOME_BLOCCO[t]}`} value={src} onChange={(e) => cambia(e.target.value)} />
       {err && <span role="alert" className="s-avv">{err}</span>}
-      <span className="m-h">I moduli a campi per questo blocco arriveranno dopo: per ora si scrive il testo del blocco.</span>
     </div>
   )
 }

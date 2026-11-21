@@ -163,10 +163,10 @@ Docker per situazioni** e guarda:
       cercarci» in *docker logs*, «Differenza» in *Solo in locale*, i
       risultati in *CMD ed ENTRYPOINT*. Valutare se trasformarle in
       spiegazione o lasciarle così.
-- [ ] Le altre documentazioni (MikroTik, Python, MSP) potrebbero usare la
+- [ ] Le altre documentazioni (MikroTik, Python, ESP) potrebbero usare la
       spiegazione per la teoria, per esempio il VLAN filtering.
 - [ ] Il file temporaneo `99_Archivio/Obsoleti/2026-11-13/_tmp_app_src.tgz`
       (copia del codice usata per lavorare nel cloud) si può eliminare.
 
-- [ ] **Spiegazioni, modifica a moduli**: passo 1 fatto 2026-11-14 (da provare su Windows: aprire una scheda Docker, «Modifica», «Moduli»: aggiungere, spostare, eliminare un blocco, salvare). Passo 2 (moduli per carte, tabella, disegni pile/flusso) da fare dopo la prova.
+- [ ] **Spiegazioni, modifica a moduli**: passo 1 fatto 2026-11-14 (da provare su Windows: aprire una scheda Docker, «Modifica», «Moduli»: aggiungere, spostare, eliminare un blocco, salvare). Passo 2 (moduli per carte, tabella, comandi, disegni pile/flusso) fatto 2026-11-14, da provare su Windows: aprire una scheda Docker con disegni e tabelle, «Modifica», cambiare un livello, una cella, una freccia, salvare e riaprire.
 - [x] (fatto 2026-11-14, da vedere in Electron) **Disegno «rete»** (`specifiche/disegno_rete.md`): modello, controlli e disegno SVG. Scheda `vlan-schema-rete` aggiunta al MikroTik (51 schede).

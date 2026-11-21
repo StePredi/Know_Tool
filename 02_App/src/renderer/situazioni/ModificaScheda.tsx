@@ -7,6 +7,7 @@ import { Con, Icona } from '../componenti/Icona'
 import { useStore } from '../store'
 import { useSit } from './stato'
 import { ModificaSpiegazione } from './ModificaSpiegazione'
+import { puliziaBlocco } from '@shared/bloccoSpiegazione'
 
 // Modifica di una scheda «Per situazioni»: a moduli (un campo per ogni parte) oppure come testo YAML.
 // Si salva solo se la scheda rispetta lo schema. La versione precedente resta in 99_Archivio/Versioni.
@@ -38,6 +39,7 @@ function pulisci(o: O): O {
   if (Array.isArray(c.varianti)) c.varianti = c.varianti.filter((v: O) => v.codice || v.spiega)
   if (Array.isArray(c.parti)) c.parti = c.parti.filter((p: O) => p.voce || p.spiega)
   if (c.segnaposto && !Object.keys(c.segnaposto).length) delete c.segnaposto
+  if (c.tipo === 'spiegazione' && Array.isArray(c.blocchi)) c.blocchi = c.blocchi.map(puliziaBlocco)
   for (const k of ['fonte', 'parole', 'trappola']) if (c[k] === '') delete c[k]
   const ord = ORDINE[c.tipo] ?? []
   const out: O = {}
