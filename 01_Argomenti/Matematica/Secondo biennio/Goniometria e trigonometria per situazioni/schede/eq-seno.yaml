@@ -1,0 +1,39 @@
+id: eq-seno
+tipo: regola
+titolo: Equazione sin(x) = a
+sigla: Seno = a
+comando: x = arcsin(a) + 2k*pi, x = pi - arcsin(a) + 2k*pi
+vedo: Un'equazione della forma `sin(x) = numero` (o `sin(f(x)) = numero`).
+formula:
+- x = arcsin(a) + 2k*pi
+- x = pi - arcsin(a) + 2k*pi
+adatto:
+- Se `a` sta fuori da `[-1, 1]` non ci sono soluzioni.
+- 'Casi speciali: `sin(x) = 0` → `x = k*pi`; `sin(x) = 1` → `x = frac(pi|2) + 2k*pi`; `sin(x) = -1` → `x = -frac(pi|2) + 2k*pi`.'
+- '`sin(x) = sin(y)` → `x = y + 2k*pi` oppure `x = pi - y + 2k*pi`.'
+- Con `sin(2x) = a` risolvi per `2x` e poi dividi tutto per 2, anche il `2k*pi`.
+esempi:
+- da: sin(x) = frac(1|2)
+  passi:
+  - 'angolo notevole: `arcsin(frac(1|2)) = frac(pi|6)`'
+  ris: x = frac(pi|6) + 2k*pi, x = frac(5*pi|6) + 2k*pi
+- da: sin(x) = -frac(sqrt(3)|2)
+  passi:
+  - angolo di riferimento `frac(pi|3)`
+  - 'seno negativo: terzo e quarto quadrante'
+  ris: x = frac(4*pi|3) + 2k*pi, x = frac(5*pi|3) + 2k*pi
+- da: sin(2x) = frac(1|2)
+  passi:
+  - '`2x = frac(pi|6) + 2k*pi` oppure `2x = frac(5*pi|6) + 2k*pi`'
+  - divido tutto per 2
+  ris: x = frac(pi|12) + k*pi, x = frac(5*pi|12) + k*pi
+- da: sin(x) = frac(3|2)
+  passi:
+  - '`frac(3|2)` è maggiore di 1'
+  ris: impossibile
+errore: Dare una sola serie di soluzioni, o dividere per 2 solo la parte `2x` e non il `2k*pi`.
+confondi:
+- scheda: eq-coseno
+  differenza: Il coseno ha soluzioni simmetriche (±), il seno ha `x` e `pi - x`.
+perche: 'Su ogni giro la retta orizzontale `y = a` taglia la circonferenza in due punti con lo stesso seno: `x` e `pi - x`.'
+parole: equazione seno goniometrica sin x uguale periodo soluzioni

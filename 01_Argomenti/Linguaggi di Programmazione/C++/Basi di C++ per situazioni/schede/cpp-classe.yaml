@@ -1,0 +1,39 @@
+id: cpp-classe
+tipo: ricetta
+titolo: Scrivere una classe
+sigla: Classi
+comando: 'class Nome { public: … };'
+frase: dati nascosti, funzioni che li usano
+fonte: Documentazione C++ · cppreference.com · Classi · membri · costruttori
+parole: classe class private public costruttore metodo oggetto incapsulamento getter const
+quando: Quando dati e funzioni che li usano devono stare insieme e i dati non vanno toccati da fuori.
+fasi:
+- nome: La classe
+  righe:
+  - codice: class Conto {
+  - codice: 'private:'
+    commento: Visibile solo dentro la classe.
+  - codice: '    double saldo;'
+  - codice: 'public:'
+    commento: Visibile a tutti.
+  - codice: '    Conto(double s) : saldo(s) {}'
+    commento: 'Costruttore: stesso nome della classe; dopo i due punti si inizializzano i dati.'
+  - codice: '    void versa(double x) { saldo += x; }'
+  - codice: '    double getSaldo() const { return saldo; }'
+    commento: 'const: questa funzione non modifica l''oggetto.'
+  - codice: '};'
+- nome: Usarla
+  righe:
+  - codice: Conto c(100);
+    commento: Crea un oggetto con saldo 100.
+  - codice: c.versa(50);
+  - codice: cout << c.getSaldo();
+    commento: Stampa 150.
+    trappola: 'In una class tutto è private se non scrivi altro: c.saldo da fuori dà l''errore "is private
+      within this context".'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-struct
+- cpp-eredita
+- cpp-piu-file

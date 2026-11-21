@@ -1,0 +1,31 @@
+id: monomio-per-polinomio
+tipo: regola
+titolo: Monomio per polinomio
+sigla: Monomio per polinomio
+comando: il monomio per ogni termine
+vedo: "Un monomio fuori da una parentesi: `-2x*(x^2 - 3x + 1)`."
+formula: a*(b + c) = a*b + a*c
+adatto:
+  - "Moltiplica il monomio per ogni termine della parentesi, uno alla volta (scheda «Prodotto di monomi»)."
+  - "Controlla i segni di ogni prodotto: segno del monomio per segno del termine."
+  - "Se devi sommare più prodotti, prima sviluppa tutti, poi riduci i termini simili."
+esempi:
+  - da: -2x*(x^2 - 3x + 1)
+    passi:
+      - "`-2x * x^2 = -2x^3`"
+      - "`-2x * (-3x) = +6x^2`"
+      - "`-2x * 1 = -2x`"
+    ris: -2x^3 + 6x^2 - 2x
+    verifica: scomposizione
+  - da: 3x*(x + 2) - x*(2x - 1)
+    passi:
+      - "Sviluppo: `3x^2 + 6x - 2x^2 + x`"
+      - "Riduco: `x^2 + 7x`"
+    ris: x^2 + 7x
+    verifica: scomposizione
+errore: "Moltiplicare solo il primo termine della parentesi e lasciare gli altri come prima."
+confondi:
+  - scheda: polinomio-per-polinomio
+    differenza: "Qui fuori dalla parentesi c'è un solo termine; con due parentesi serve ogni termine per ogni termine."
+perche: "È la proprietà distributiva: il monomio moltiplica ogni pezzo della somma."
+parole: distributiva parentesi monomio polinomio sviluppo

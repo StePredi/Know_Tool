@@ -1,0 +1,37 @@
+id: proprieta-log
+tipo: regola
+titolo: Proprietà dei logaritmi
+sigla: Proprietà
+comando: log_a(x*y) = log_a(x) + log_a(y)
+vedo: Prodotti, quozienti o potenze dentro un logaritmo, o somme e differenze di logaritmi.
+formula:
+- log_a(x*y) = log_a(x) + log_a(y)
+- log_a(frac(x|y)) = log_a(x) - log_a(y)
+- log_a(x^n) = n*log_a(x)
+adatto:
+- Valgono per argomenti positivi.
+- '`log_a(x^2) = 2*log_a(|x|)` se `x` può essere negativo.'
+- Servono per riunire più logaritmi in uno solo (o spezzare uno in più).
+esempi:
+- da: log_2(x*(x + 1))
+  passi:
+  - somma dei logaritmi (per `x > 0`)
+  ris: log_2(x) + log_2(x + 1)
+  verifica: scomposizione
+- da: log_2(x^3)
+  passi:
+  - porto giù l'esponente
+  ris: 3*log_2(x)
+  verifica: scomposizione
+- da: log_3(frac(x|9))
+  passi:
+  - '`log_3(x) - log_3(9)`'
+  - '`log_3(9) = 2`'
+  ris: log_3(x) - 2
+  verifica: scomposizione
+errore: 'Scrivere `log(a + b) = log(a) + log(b)`: la somma non si spezza.'
+confondi:
+- scheda: cambio-base
+  differenza: Le proprietà lavorano sullo stesso logaritmo; il cambio di base passa da una base all'altra.
+perche: 'Sono le proprietà delle potenze lette al contrario: moltiplicare potenze significa sommare esponenti.'
+parole: proprietà logaritmi somma differenza potenza

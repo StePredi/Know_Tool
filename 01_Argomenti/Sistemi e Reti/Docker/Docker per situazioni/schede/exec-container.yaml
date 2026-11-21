@@ -1,0 +1,31 @@
+id: exec-container
+tipo: ricetta
+titolo: Eseguire un comando dentro un container già acceso
+sigla: docker exec
+comando: docker exec -it
+frase: entri senza fermare il servizio
+fonte: lab_immagini_dockerfile.pdf (parti 4.2, 4.5) · lab_networking_container.pdf (parte 1.3) · lab_volumi_servizi.pdf (parte 2.1) · container_mini_tutorial.md
+parole: exec eseguire comando dentro container in esecuzione shell bash sh -it controllare file
+quando: Quando il container è in esecuzione e vuoi guardarci dentro o cambiare qualcosa senza riavviarlo.
+fasi:
+- nome: Un comando solo
+  righe:
+  - codice: docker exec archivio ls -l /data
+    commento: esegue ls nel container e stampa il risultato
+  - codice: docker exec web sh -c 'echo "<h1>Modificato nel container</h1>" > /usr/share/nginx/html/index.html'
+    commento: con sh -c puoi usare redirezioni
+- nome: Una shell
+  righe:
+  - codice: docker exec -it c1 bash
+    commento: apri un terminale nel container; esci con exit (il container resta acceso)
+    trappola: 'Nota: alcune immagini piccole non hanno bash: in quel caso usa sh.'
+- nome: Un controllo dall'interno
+  righe:
+  - codice: docker exec solo-locale python -c "import socket; s = socket.create_connection(('127.0.0.1', 5000)); s.sendall(b'LIST\n'); print(s.recv(1000).decode())"
+    commento: 'prova il servizio da dentro il container: utile per capire se il problema è il servizio o la porta pubblicata'
+segnaposto: {}
+varianti: []
+vicine:
+- run-interattivo
+- bind-address
+- strumenti-rete

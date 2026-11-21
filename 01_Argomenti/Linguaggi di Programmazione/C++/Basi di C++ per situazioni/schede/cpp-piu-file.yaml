@@ -1,0 +1,39 @@
+id: cpp-piu-file
+tipo: ricetta
+titolo: Dividere il programma in più file
+sigla: Più file
+comando: '.h  .cpp  #pragma once'
+frase: dichiarazioni e definizioni separate
+fonte: Documentazione C++ · cppreference.com · Compilazione · header · unità di traduzione
+parole: header file h cpp pragma once include più file dichiarazione definizione linker undefined reference
+  compilare
+quando: Quando il programma cresce e vuoi tenere le funzioni in file diversi.
+fasi:
+- nome: Intestazione geometria.h
+  righe:
+  - codice: '#pragma once'
+    commento: Evita che il file venga incluso due volte.
+  - codice: int area(int a, int b);
+    commento: Solo la dichiarazione.
+- nome: Definizioni geometria.cpp
+  righe:
+  - codice: '#include "geometria.h"'
+    commento: Virgolette doppie per i file tuoi.
+  - codice: int area(int a, int b) { return a * b; }
+- nome: Uso in main.cpp
+  righe:
+  - codice: '#include "geometria.h"'
+  - codice: cout << area(3, 4);
+    commento: Stampa 12.
+- nome: Compilare
+  righe:
+  - codice: g++ -std=c++17 main.cpp geometria.cpp -o prog
+    commento: Tutti i .cpp nello stesso comando.
+    trappola: 'Se un .cpp manca dal comando il programma non si collega: "undefined reference to `area(int,
+      int)''".'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-compilare
+- cpp-funzione
+- cpp-errori-comuni

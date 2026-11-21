@@ -1,0 +1,32 @@
+id: negare-implicazione
+tipo: regola
+titolo: Negare un'implicazione
+sigla: Nega se-allora
+comando: ¬(p -> q) ≡ p ∧ ¬q
+vedo: Negare una frase «se… allora…».
+formula:
+- ¬(p -> q) ≡ p ∧ ¬q
+adatto:
+- 'La negazione dice: l''ipotesi è vera e la tesi è falsa.'
+- Non è un'altra implicazione.
+esempi:
+- da: nega «se piove allora prendo l'ombrello»
+  passi:
+  - ipotesi vera e tesi falsa
+  ris: piove e non prendo l'ombrello
+- da: nega «se x > 2 allora x² > 4»
+  passi:
+  - ipotesi e tesi negata
+  ris: x > 2 e x² ≤ 4
+- da: ¬(p -> q)
+  passi:
+  - 'righe in ordine: `VV, VF, FV, FF`'
+  - '`¬(p -> q)`: F V F F'
+  - '`p ∧ ¬q`: F V F F'
+  ris: p ∧ ¬q
+errore: Negare scrivendo «se… allora non…».
+confondi:
+- scheda: de-morgan
+  differenza: De Morgan nega un «e»/«o»; qui si nega «se… allora».
+perche: L'implicazione è falsa solo nel caso `V -> F`, cioè quando vale `p ∧ ¬q`.
+parole: negare implicazione se allora

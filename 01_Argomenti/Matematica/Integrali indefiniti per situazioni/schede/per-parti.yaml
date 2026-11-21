@@ -1,0 +1,35 @@
+id: per-parti
+tipo: regola
+titolo: Integrazione per parti
+sigla: Per parti
+comando: ∫ f g' dx = f g - ∫ f' g dx
+vedo: L'integrando è il prodotto di due funzioni diverse, come `x*e^x` o `x*sin x`.
+formula:
+- ∫ f(x) g'(x) dx = f(x) g(x) - ∫ f'(x) g(x) dx
+adatto:
+- Scegli una funzione da derivare (`f`) e una da integrare (`g'`).
+- Calcola `f'` e `g` e applica la formula.
+- Il nuovo integrale deve essere più semplice del primo.
+- Controlla derivando il risultato.
+esempi:
+- da: ∫ x*e^x dx
+  passi:
+  - derivo `x`, integro `e^x`
+  - '`x*e^x - ∫ e^x dx`'
+  ris: (x - 1)*e^x + c
+- da: ∫ x*cos x dx
+  passi:
+  - derivo `x`, integro `cos x`
+  - '`x sin x - ∫ sin x dx`'
+  ris: x sin x + cos x + c
+- da: ∫ x*sin x dx
+  passi:
+  - derivo `x`, integro `sin x`
+  - '`-x cos x + ∫ cos x dx`'
+  ris: -x cos x + sin x + c
+errore: 'Scegliere i fattori al contrario: se derivi `e^x` e integri `x` il nuovo integrale è più complicato.'
+confondi:
+- scheda: scelta-fattori
+  differenza: La formula è questa; la scelta dei fattori è nella scheda successiva.
+perche: 'Si legge al contrario la regola del prodotto: `(f g)'' = f'' g + f g''`.'
+parole: per parti integrazione prodotto

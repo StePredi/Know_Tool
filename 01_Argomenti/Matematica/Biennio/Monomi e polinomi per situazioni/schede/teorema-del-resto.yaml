@@ -1,0 +1,25 @@
+id: teorema-del-resto
+tipo: regola
+titolo: Teorema del resto
+sigla: Teorema del resto
+comando: resto = P(a)
+vedo: "Ti chiedono il resto, o se un polinomio è divisibile per `x - a`, senza fare la divisione."
+formula: R = P(a)
+adatto:
+  - "Sostituisci x = a in P: il numero che ottieni è il resto della divisione per `x - a`."
+  - "Se `P(a) = 0` il resto è 0: P è divisibile per `x - a`."
+  - "Per `x + 3` il valore da sostituire è -3."
+  - "Per cercare divisori di primo grado con coefficienti interi, prova i valori di a che dividono il termine noto."
+esempi:
+  - da: x^3 - 2x + 4
+    passi:
+      - "Divisore `x + 2`, quindi a = -2"
+      - "`P(-2) = -8 + 4 + 4 = 0`"
+      - "Resto 0: P è divisibile per `x + 2`"
+    ris: "0"
+errore: "Sostituire +2 invece di -2 quando il divisore è `x + 2`."
+confondi:
+  - scheda: ruffini
+    differenza: "Ruffini calcola quoziente e resto; il teorema serve solo se ti interessa il resto."
+perche: "Da `P = (x - a)*Q + R`, con x = a il primo pezzo vale 0 e resta solo R."
+parole: teorema del resto divisibile sostituire

@@ -1,0 +1,25 @@
+id: scomponi-zeri
+tipo: regola
+titolo: Scomponi e trova gli zeri
+sigla: Zeri
+comando: "ogni fattore a zero"
+frase: "Passo 2: trova i punti in cui il segno può cambiare."
+vedo: "Hai P(x) confrontato con 0: ti servono i punti dove il segno può cambiare."
+formula: A(x)*B(x) > 0
+adatto:
+  - "Scomponi P(x) in fattori (schede di Scomposizione). Per il secondo grado trova le radici con la formula risolutiva."
+  - "Ogni fattore uguale a zero dà uno zero."
+  - "Nelle fratte cerca gli zeri del numeratore e quelli del denominatore."
+  - "Scrivi gli zeri in ordine crescente."
+esempi:
+  - da: "x^2 + x - 6 > 0"
+    passi:
+      - "Trinomio: prodotto -6, somma 1, quindi `(x + 3)(x - 2)`"
+      - "Zeri: `x = -3` e `x = 2`"
+    ris: "(x + 3)(x - 2) > 0"
+errore: "Dimenticare uno zero, di solito quello di un fattore ripetuto o con un coefficiente davanti."
+confondi:
+  - scheda: linea-dei-segni
+    differenza: "Qui si trovano gli zeri; il segno tra uno zero e l'altro si studia nel passo dopo."
+perche: "Un polinomio può cambiare segno solo dove si annulla (o, in una frazione, dove non è definito)."
+parole: zeri radici scomporre fattori

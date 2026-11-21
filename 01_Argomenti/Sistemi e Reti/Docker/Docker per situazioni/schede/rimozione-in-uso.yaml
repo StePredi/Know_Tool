@@ -1,0 +1,26 @@
+id: rimozione-in-uso
+tipo: prima_dopo
+titolo: Non riesco a eliminare una rete o un volume
+sigla: Rete o volume in uso
+comando: prima docker rm -f
+frase: prima i container, poi il resto
+fonte: lab_networking_container.pdf (pulizia) · lab_volumi_servizi.pdf (pulizia)
+parole: rimuovere rete volume in uso errore network rm volume rm active endpoints in use
+prima: |-
+  docker network rm mynet
+  docker volume rm sito-vol
+dopo: |-
+  ⟦docker rm -f c3 c4 web3 web4⟧
+  docker network rm mynet
+  docker volume rm sito-vol
+uso: Ripulire reti e volumi alla fine di un'attività.
+riconoscila: Il comando fallisce dicendo che la rete o il volume sono ancora in uso.
+parti:
+- voce: docker rm -f
+  spiega: elimina prima i container che li usano, anche se accesi
+trappola: 'docker volume rm cancella i dati per sempre: fallo solo se non ti servono.'
+varianti: []
+vicine:
+- pulizia-ambiente
+- named-volume
+- rete-custom

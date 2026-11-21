@@ -1,0 +1,162 @@
+modello: per_situazioni
+titolo: Container e Docker, per situazioni
+centro: Docker
+sottotitolo: Parti da quello che devi fare con i container, non dal nome del comando.
+esempiRicerca: servizio che non risponde, dati spariti, ping per nome, Dockerfile, volume, porta
+rami:
+- id: b1
+  nome: Capire i container
+  colore: indigo
+  lato: T
+  voci:
+  - gruppo: Virtualizzazione
+    schede:
+    - vm-cosa-sono
+    - hypervisor-tipi
+  - gruppo: Container e Docker
+    schede:
+    - vm-o-container
+    - oggetti-docker
+    - architettura-docker
+- id: b2
+  nome: Usare i container
+  colore: blue
+  lato: R
+  voci:
+  - gruppo: Avviare
+    schede:
+    - run-background
+    - run-interattivo
+    - run-comando
+  - gruppo: Guardare dentro
+    schede:
+    - logs-container
+    - inspect-container
+    - exec-container
+  - gruppo: Gestire
+    schede:
+    - ciclo-vita
+    - cp-file
+    - pulizia-ambiente
+- id: b3
+  nome: Immagini
+  colore: teal
+  lato: L
+  voci:
+  - gruppo: Scaricare e guardare
+    schede:
+    - pull-immagine
+    - history-layer
+  - gruppo: Nomi e pulizia
+    schede:
+    - tag-immagine
+    - rimuovi-immagini
+  - schede:
+    - save-load
+- id: b4
+  nome: Dockerfile
+  colore: green
+  lato: R
+  voci:
+  - gruppo: Scrivere e costruire
+    schede:
+    - dockerfile-base
+    - docker-build
+    - cmd-entrypoint
+  - gruppo: Build veloci e pulite
+    schede:
+    - cache-layer
+    - requirements-ordine
+    - dockerignore
+  - gruppo: Immagini migliori
+    schede:
+    - utente-non-root
+    - immagine-alpine
+    - immagine-strumenti
+- id: b5
+  nome: Porte e servizi
+  colore: orange
+  lato: L
+  voci:
+  - gruppo: Pubblicare
+    schede:
+    - pubblica-porta
+    - porta-variabile
+    - pubblica-solo-locale
+    - piu-servizi
+  - gruppo: Dalla rete
+    schede:
+    - servizio-lan
+    - bind-address
+- id: b6
+  nome: Dati e volumi
+  colore: violet
+  lato: R
+  voci:
+  - gruppo: Perché servono
+    schede:
+    - dati-effimeri
+    - bind-o-volume
+  - gruppo: Named volume
+    schede:
+    - named-volume
+    - volume-servizio
+    - volume-condiviso
+    - backup-volume
+  - gruppo: Bind mount
+    schede:
+    - bind-mount
+    - bind-sola-lettura
+    - bind-sviluppo
+- id: b7
+  nome: Reti
+  colore: pink
+  lato: L
+  voci:
+  - gruppo: Guardare la rete
+    schede:
+    - rete-container
+    - docker0-host
+    - strumenti-rete
+  - gruppo: Bridge
+    schede:
+    - ping-tra-container
+    - rete-custom
+    - container-due-reti
+  - schede:
+    - host-none
+- id: b8
+  nome: Più container insieme
+  colore: yellow
+  lato: T
+  voci:
+  - gruppo: Con docker run
+    schede:
+    - microservizi
+    - app-tre-container
+  - gruppo: Docker Compose
+    schede:
+    - compose-file
+    - compose-comandi
+    - compose-tre-servizi
+- id: b9
+  nome: Quando non funziona
+  colore: red
+  lato: B
+  voci:
+  - gruppo: Il servizio non risponde
+    schede:
+    - client-non-collega
+    - porta-sbagliata
+    - porta-occupata
+    - pagina-403
+  - gruppo: Container e rete
+    schede:
+    - container-si-ferma
+    - comando-non-trovato
+    - ping-nome
+  - gruppo: Dati e pulizia
+    schede:
+    - nota-sparita
+    - file-di-root
+    - rimozione-in-uso

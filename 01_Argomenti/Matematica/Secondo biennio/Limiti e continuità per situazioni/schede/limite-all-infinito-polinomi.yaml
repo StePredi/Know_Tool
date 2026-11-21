@@ -1,0 +1,31 @@
+id: limite-all-infinito-polinomi
+tipo: regola
+titolo: Polinomio per x che tende all'infinito
+sigla: Polinomio a ∞
+comando: conta il termine di grado più alto
+vedo: Un polinomio e `x -> +inf` o `x -> -inf`.
+formula:
+- lim_(x -> +-inf) (a_n*x^n + ...) = lim_(x -> +-inf) a_n*x^n
+adatto:
+- Solo il termine di grado più alto conta.
+- Il segno dipende da `a_n` e dalla parità di `n` quando `x -> -inf`.
+- 'Esponente pari: `x^n -> +inf` da entrambi i lati. Dispari: `+inf` e `-inf`.'
+esempi:
+- da: lim_(x -> +inf) (-2x^3 + x)
+  passi:
+  - grado 3, coefficiente negativo
+  ris: -inf
+- da: lim_(x -> -inf) (x^3 - 5x)
+  passi:
+  - '`x^3` va a `-inf` per `x` negativo'
+  ris: -inf
+- da: lim_(x -> -inf) x^4
+  passi:
+  - esponente pari
+  ris: +inf
+errore: Dimenticare il segno quando `x -> -inf` e l'esponente è dispari.
+confondi:
+- scheda: forma-inf-meno-inf
+  differenza: Se esce `inf - inf` dopo la sostituzione, il raccoglimento è proprio questa regola.
+perche: Per `x` molto grande il termine di grado più alto è più grande di tutti gli altri messi insieme.
+parole: polinomio infinito grado più alto limite

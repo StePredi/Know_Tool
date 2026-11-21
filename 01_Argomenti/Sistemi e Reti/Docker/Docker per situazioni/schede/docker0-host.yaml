@@ -1,0 +1,54 @@
+id: docker0-host
+tipo: spiegazione
+titolo: Capire il bridge di default e docker0
+sigla: docker0
+comando: docker0 = gateway
+frase: uno switch virtuale con il PC dentro
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (bridge di default) · lab_networking_container.pdf (approfondimento B)
+parole: docker0 bridge default gateway 172.17.0.1 switch virtuale masquerading nat filtering host interfaccia
+quando: Quando devi spiegare come un container della rete bridge raggiunge l'host e Internet.
+blocchi:
+- testo: '**docker0** è il bridge creato da Docker: uno **switch virtuale** a cui si collegano i container.'
+- disegno:
+    modello: pile
+    colonne:
+    - cornice: Sistema host
+      strati:
+      - testo:
+        - |-
+          Container 1
+          eth0 · 172.17.0.2
+        - |-
+          Container 2
+          eth0 · 172.17.0.3
+        - |-
+          Container 3
+          eth0 · 172.17.0.4
+        tono: colore
+      - testo: |-
+          docker0 · 172.17.0.1
+          bridge software e interfaccia dell'host
+        tono: oro
+      - testo: |-
+          eth0 · interfaccia fisica
+          con regole di masquerading (NAT)
+        tono: scuro
+      nota: 'Sotto l''interfaccia fisica: Internet e la rete esterna.'
+- punti:
+  - Ogni container ha una **eth0 virtuale** collegata al bridge e un IP privato.
+  - docker0 è anche l'**interfaccia dell'host** sulla rete bridge.
+  - È il **default gateway** dei container, verso l'host e Internet.
+  - Docker aggiunge al firewall dell'host regole di masquerading (per uscire su Internet) e di filtering (per isolare reti diverse).
+- titolo: Guardalo dall'host (Linux)
+- comandi:
+  - codice: ip addr show docker0
+    spiega: l'indirizzo di docker0, cioè il gateway dei container
+  - codice: docker network inspect bridge
+    spiega: subnet, gateway e container collegati
+  - codice: ping -c 3 172.17.0.2
+    spiega: dall'host un container della rete bridge si raggiunge
+varianti: []
+vicine:
+- rete-container
+- ping-tra-container
+- rete-custom

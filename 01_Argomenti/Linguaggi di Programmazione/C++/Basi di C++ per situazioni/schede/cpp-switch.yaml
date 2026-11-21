@@ -1,0 +1,28 @@
+id: cpp-switch
+tipo: ricetta
+titolo: 'Scegliere tra tanti valori: switch'
+sigla: switch
+comando: switch (…) { case … }
+frase: un caso per ogni valore
+fonte: Documentazione C++ · cppreference.com · Istruzioni · switch
+parole: switch case break default fall-through scelta menu valori
+quando: Quando una variabile può avere molti valori e a ognuno corrisponde un'azione (per esempio un menu).
+fasi:
+- nome: Il blocco
+  righe:
+  - codice: switch (scelta) {
+    commento: Guarda il valore di scelta.
+  - codice: '    case 1: cout << "uno"; break;'
+    commento: Se vale 1.
+  - codice: '    case 2: cout << "due"; break;'
+    commento: Se vale 2.
+  - codice: '    default: cout << "altro";'
+    commento: Se non è nessuno dei casi.
+  - codice: '}'
+    trappola: 'Senza break l''esecuzione "cade" nel caso successivo: con scelta = 1 e senza break stamperebbe
+      uno e anche due. Con -Wall -Wextra g++ avvisa "this statement may fall through".'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-if
+- cpp-break-continue

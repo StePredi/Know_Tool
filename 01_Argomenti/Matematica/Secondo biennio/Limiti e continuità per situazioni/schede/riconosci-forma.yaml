@@ -1,0 +1,37 @@
+id: riconosci-forma
+tipo: regola
+titolo: Quale forma indeterminata?
+sigla: Riconosci forma
+comando: frac(0|0), frac(inf|inf), inf - inf, 0 * inf
+vedo: La sostituzione ha dato una forma che non si può risolvere subito.
+formula:
+- frac(0|0)
+- frac(inf|inf)
+- inf - inf
+- 0 * inf
+adatto:
+- '`frac(0|0)` con polinomi: scomponi e semplifica; con radici: razionalizza; con seno/coseno: limiti notevoli.'
+- '`frac(inf|inf)`: dividi numeratore e denominatore per la potenza più alta.'
+- '`inf - inf`: raccogli la potenza più alta, oppure razionalizza se ci sono radici.'
+- '`0 * inf`: riscrivi come frazione (`frac(0|0)` o `frac(inf|inf)`).'
+- 'Esistono anche `1^inf`, `0^0`, `inf^0`: si portano alla forma `e^(...)`.'
+esempi:
+- da: lim_(x -> 1) frac(x^2 - 1|x - 1)
+  passi:
+  - 'sostituendo: `frac(0|0)`'
+  - 'polinomi: scomponi'
+  ris: scomposizione e semplificazione
+- da: lim_(x -> +inf) frac(2x^2 + 1|x^2 - 3)
+  passi:
+  - '`frac(inf|inf)`'
+  ris: dividi per x^2
+- da: lim_(x -> +inf) (sqrt(x^2 + 1) - x)
+  passi:
+  - '`inf - inf` con radice'
+  ris: razionalizza
+errore: Applicare la tecnica sbagliata (es. dividere per la potenza maggiore in un `frac(0|0)`).
+confondi:
+- scheda: sostituisci-valore
+  differenza: Il primo passo è sempre la sostituzione.
+perche: Ogni forma indeterminata nasconde un risultato che dipende dalla velocità con cui le parti tendono ai loro limiti.
+parole: forme indeterminate riconoscere 0/0 inf/inf

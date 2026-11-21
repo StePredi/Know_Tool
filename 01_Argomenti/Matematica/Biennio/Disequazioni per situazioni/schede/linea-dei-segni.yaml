@@ -1,0 +1,32 @@
+id: linea-dei-segni
+tipo: regola
+titolo: Linea dei segni
+sigla: Linea dei segni
+comando: "segno di ogni fattore, poi il prodotto"
+frase: "Passo 3: studia il segno di ogni fattore e componi il segno del prodotto."
+vedo: "Hai gli zeri e vuoi sapere dove il prodotto o la frazione è positivo o negativo."
+formula:
+  - (+)*(+) = +
+  - (+)*(-) = -
+  - (-)*(-) = +
+adatto:
+  - "Disegna una retta con gli zeri in ordine, una riga per ogni fattore e una riga finale per il risultato."
+  - "Fattore `ax + b`: ha il segno di a a destra dello zero e il segno opposto a sinistra."
+  - "Un fattore sempre positivo, come `x^2 + 1`, non cambia niente: ignoralo."
+  - "Fattore con esponente pari: il segno non cambia quando attraversi lo zero (è positivo ovunque, tranne nello zero)."
+  - "Ultima riga: il prodotto è negativo se i segni meno sono in numero dispari."
+  - "Gli zeri del denominatore sono sempre esclusi."
+esempi:
+  - da: "(x + 3)(x - 2) > 0"
+    passi:
+      - "Zeri `-3` e `2`"
+      - "`x + 3`: meno prima di -3, più dopo"
+      - "`x - 2`: meno prima di 2, più dopo"
+      - "Prodotto: più prima di -3, meno tra -3 e 2, più dopo 2"
+    ris: "+   -   +"
+errore: "Cambiare il segno del prodotto anche attraversando uno zero di un fattore con esponente pari."
+confondi:
+  - scheda: leggi-soluzione
+    differenza: "La linea dà i segni; la soluzione si sceglie guardando il verso della disequazione."
+perche: "Il segno di un prodotto si ottiene moltiplicando i segni dei suoi fattori."
+parole: linea dei segni tabella segni prodotto fattori

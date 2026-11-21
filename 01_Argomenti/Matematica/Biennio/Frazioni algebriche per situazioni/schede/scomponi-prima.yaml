@@ -1,0 +1,32 @@
+id: scomponi-prima
+tipo: regola
+titolo: Scomponi numeratori e denominatori
+sigla: Scomponi prima
+comando: scomponi sopra e sotto
+frase: "Passo 1: prima di fare qualsiasi altra cosa scomponi numeratori e denominatori."
+vedo: "Una frazione con polinomi sopra e sotto: `frac(x^2 - 4|x^2 + 2x)`."
+formula: frac(x^2 - 4|x^2 + 2x) = frac((x - 2)(x + 2)|x(x + 2))
+adatto:
+  - "Scomponi ogni numeratore e ogni denominatore, anche quelli delle frazioni dentro un'operazione."
+  - "Usa i metodi di Scomposizione: raccoglimento, differenza di quadrati, trinomio…"
+  - "Scomporre serve a tre cose: trovare le condizioni di esistenza, semplificare, trovare il denominatore comune."
+  - "Un polinomio che non si scompone si lascia com'è."
+esempi:
+  - da: frac(x^2 - 4|x^2 + 2x)
+    passi:
+      - "Sopra: differenza di quadrati, `(x - 2)(x + 2)`"
+      - "Sotto: raccoglimento, `x(x + 2)`"
+    ris: frac((x - 2)(x + 2)|x(x + 2))
+    verifica: scomposizione
+  - da: frac(x^2 - 5x + 6|x^2 - 9)
+    passi:
+      - "Sopra: trinomio, prodotto 6 e somma -5, `(x - 2)(x - 3)`"
+      - "Sotto: differenza di quadrati, `(x - 3)(x + 3)`"
+    ris: frac((x - 2)(x - 3)|(x - 3)(x + 3))
+    verifica: scomposizione
+errore: "Cominciare a semplificare o a sommare senza aver scomposto: i fattori comuni restano nascosti."
+confondi:
+  - scheda: semplifica
+    differenza: "Scomporre viene prima; semplificare viene dopo, con le condizioni di esistenza."
+perche: "Si può semplificare solo tra fattori, e i fattori si vedono solo dopo la scomposizione."
+parole: scomporre prima numeratore denominatore fattori

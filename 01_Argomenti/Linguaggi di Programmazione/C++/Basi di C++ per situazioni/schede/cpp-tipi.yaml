@@ -1,0 +1,40 @@
+id: cpp-tipi
+tipo: ricetta
+titolo: Scegliere il tipo di una variabile
+sigla: Tipi di base
+comando: int  double  char  bool  string
+frase: ogni variabile ha un tipo
+fonte: Documentazione C++ · cppreference.com · Tour of C++ · tipi e dichiarazioni
+parole: tipi variabile int double char bool string dichiarare inizializzare intero decimale carattere
+quando: Quando devi dichiarare una variabile e non sai che tipo usare.
+fasi:
+- nome: Tipi di base
+  righe:
+  - codice: int eta = 17;
+    commento: Numero intero.
+  - codice: double prezzo = 9.99;
+    commento: Numero con la virgola.
+    parti:
+    - voce: '9.99'
+      spiega: con il punto, non con la virgola
+  - codice: char lettera = 'A';
+    commento: Un solo carattere, tra apici singoli.
+  - codice: bool pronto = true;
+    commento: 'Vero o falso: true / false.'
+  - codice: string nome = "Ste";
+    commento: Testo, tra virgolette doppie.
+    parti:
+    - voce: string
+      spiega: 'serve #include <string>'
+- nome: Senza valore
+  righe:
+  - codice: int x;
+    commento: Dichiarata ma senza valore.
+    trappola: 'Una variabile locale non inizializzata contiene un valore qualsiasi: dai sempre un valore
+      iniziale.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-divisione-int
+- cpp-const-auto
+- cpp-string-operazioni

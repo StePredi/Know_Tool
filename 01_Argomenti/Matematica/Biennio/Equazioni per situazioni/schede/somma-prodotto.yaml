@@ -1,0 +1,29 @@
+id: somma-prodotto
+tipo: regola
+titolo: Somma e prodotto delle soluzioni
+sigla: Somma e prodotto
+comando: "due numeri con somma -b e prodotto c"
+vedo: "Secondo grado con 1 davanti a x^2 e numeri piccoli: `x^2 - 5x + 6 = 0`."
+formula:
+  - x^2 + b*x + c = 0
+  - x_1 + x_2 = -b
+  - x_1*x_2 = c
+adatto:
+  - "Cerca due numeri con prodotto c e somma -b: sono le due soluzioni."
+  - "Attenzione al segno: in `(x - 2)(x - 3) = 0` le soluzioni sono +2 e +3."
+  - "Se non li trovi, usa la formula risolutiva."
+esempi:
+  - da: x^2 - 5x + 6 = 0
+    passi:
+      - "Prodotto 6, somma 5"
+    ris: x = 2, x = 3
+  - da: x^2 + x - 12 = 0
+    passi:
+      - "Prodotto -12, somma -1: coppie `3, -4`"
+    ris: x = 3, x = -4
+errore: "Cercare due numeri con somma b invece di -b."
+confondi:
+  - scheda: equazione-completa
+    differenza: "La formula funziona sempre; questo metodo è più veloce solo con numeri piccoli e a uguale a 1."
+perche: "`(x - x_1)(x - x_2) = x^2 - (x_1 + x_2)x + x_1*x_2`: confrontando i coefficienti escono somma e prodotto."
+parole: somma prodotto radici soluzioni vieta

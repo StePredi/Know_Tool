@@ -1,0 +1,31 @@
+id: esp-di-g
+tipo: regola
+titolo: Esponenziale di una funzione
+sigla: e alla g
+comando: ∫ e^g * g' dx = e^g + c
+vedo: L'esponente di `e` è una funzione, e la sua derivata moltiplica.
+formula:
+- ∫ e^(g(x)) * g'(x) dx = e^(g(x)) + c
+adatto:
+- Controlla che davanti all'esponenziale ci sia la derivata dell'esponente.
+- Se manca solo una costante, aggiustala.
+- Altrimenti prova per parti o per sostituzione.
+esempi:
+- da: ∫ 2x*e^(x^2) dx
+  passi:
+  - esponente `x^2`, derivata `2x`
+  ris: e^(x^2) + c
+- da: ∫ cos x*e^(sin x) dx
+  passi:
+  - esponente `sin x`, derivata `cos x`
+  ris: e^(sin x) + c
+- da: ∫ x*e^(x^2) dx
+  passi:
+  - derivata dell'esponente `2x`, manca il `2`
+  ris: frac(1|2)*e^(x^2) + c
+errore: 'Provare per parti con `x*e^(x^2)`: complica; qui basta la composta.'
+confondi:
+- scheda: integrale-esponenziale
+  differenza: Lì l'esponente è solo `x`.
+perche: La derivata di `e^g` è `e^g*g'`.
+parole: esponenziale di funzione derivata esponente

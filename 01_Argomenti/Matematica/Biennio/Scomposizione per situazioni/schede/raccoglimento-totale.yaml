@@ -1,0 +1,32 @@
+id: raccoglimento-totale
+tipo: regola
+titolo: Raccoglimento totale
+sigla: Raccoglimento totale
+comando: a*(b + c)
+frase: "Passo 1: tutti i termini hanno un fattore in comune."
+vedo: "Tutti i termini hanno un fattore in comune (un numero o una lettera): `6x^3 - 9x^2 + 3x`."
+formula: a*b + a*c = a*(b + c)
+adatto:
+  - "Cerca il MCD dei coefficienti e le lettere comuni a tutti i termini, con l'esponente più basso."
+  - "Dividi ogni termine per il fattore comune: i quozienti vanno in parentesi."
+  - "Se il primo termine è negativo conviene raccogliere anche il segno meno."
+  - "Fallo sempre per primo, anche quando dopo si può usare un'altra regola."
+esempi:
+  - da: 6x^3 - 9x^2 + 3x
+    passi:
+      - "MCD dei coefficienti: 3. Lettera comune: x, esponente più basso 1."
+      - "Fattore comune: `3x`"
+      - "`6x^3 : 3x = 2x^2`, `-9x^2 : 3x = -3x`, `3x : 3x = 1`"
+    ris: 3x(2x^2 - 3x + 1)
+    verifica: scomposizione
+  - da: x^4 - 16x^2
+    passi:
+      - "Fattore comune: `x^2`"
+    ris: x^2(x^2 - 16)
+    verifica: scomposizione
+errore: "Dimenticare l'1 quando un termine coincide con il fattore comune: `x^2 + x = x(x + 1)`, non `x(x)`."
+confondi:
+  - scheda: raccoglimento-parziale
+    differenza: "Il totale raccoglie da tutti i termini; il parziale prima raggruppa i termini a gruppi."
+perche: "È la proprietà distributiva letta al contrario."
+parole: raccoglimento fattore comune mcd

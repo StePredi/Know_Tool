@@ -1,0 +1,36 @@
+id: cpp-map-conta
+tipo: ricetta
+titolo: Contare quante volte compare ogni elemento
+sigla: Contatori con map
+comando: conta[parola]++
+frase: la chiave nuova parte da 0
+fonte: Documentazione C++ · cppreference.com · std::map · operator[]
+parole: contare frequenza occorrenze map conta parole istogramma incrementare
+quando: Quando devi contare le ripetizioni (parole in un testo, voti uguali, valori letti da un sensore).
+fasi:
+- nome: Il ciclo
+  righe:
+  - codice: map<string, int> conta;
+    commento: Parola → quante volte.
+  - codice: 'for (const string& p : parole) {'
+    commento: Per ogni parola.
+  - codice: '    conta[p]++;'
+    commento: Se p non c'è la mappa la crea con 0, poi aggiunge 1.
+    parti:
+    - voce: conta[p]
+      spiega: crea la chiave con valore 0 se manca (per gli int)
+    - voce: ++
+      spiega: aumenta di 1
+    trappola: 'Qui il comportamento di [] che crea la chiave è proprio quello che serve: non serve controllare
+      prima se la parola c''è.'
+  - codice: '}'
+- nome: Stampare
+  righe:
+  - codice: 'for (auto& [parola, n] : conta) cout << parola << "=" << n << " ";'
+    commento: Con a b a c a b stampa a=3 b=2 c=1.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-map
+- cpp-map-cerca
+- cpp-ordina-per-valore

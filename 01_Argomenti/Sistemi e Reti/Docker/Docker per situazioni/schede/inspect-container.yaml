@@ -1,0 +1,33 @@
+id: inspect-container
+tipo: ricetta
+titolo: 'Vedere i dettagli di un container: rete, IP, risorse, processi'
+sigla: docker inspect
+comando: docker inspect -f
+frase: tutto quello che Docker sa
+fonte: lab_networking_container.pdf (parte 1.2) · lab_volumi_servizi.pdf (parte 1.2) · container_mini_tutorial.md
+parole: inspect dettagli ip indirizzo gateway rete -f template networksettings stats cpu ram top processi
+quando: Quando ti serve un'informazione precisa su un container, per esempio il suo IP.
+fasi:
+- nome: Tutto o solo una parte
+  righe:
+  - codice: docker inspect c1
+    commento: un lungo JSON con tutta la configurazione
+  - codice: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
+    commento: con -f estrai solo l'IP
+  - codice: docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}} {{$v.IPAddress}} {{$v.Gateway}}{{end}}' c1
+    commento: nome della rete, IP e gateway
+- nome: Risorse e processi
+  righe:
+  - codice: docker stats
+    commento: CPU, RAM, rete di tutti i container (Ctrl+C per uscire)
+  - codice: docker top «NOME»
+    commento: i processi che girano nel container
+segnaposto:
+  NOME:
+    esempio: archivio
+    spiega: nome o ID del container
+varianti: []
+vicine:
+- rete-container
+- logs-container
+- exec-container

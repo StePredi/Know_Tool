@@ -1,0 +1,40 @@
+id: cpp-errori-comuni
+tipo: ricetta
+titolo: 'Il compilatore dà errore: cosa controllare'
+sigla: Errori di compilazione
+comando: messaggio → causa
+frase: leggere gli errori di g++
+fonte: Documentazione C++ · cppreference.com · g++ · messaggi di errore
+parole: errore compilatore expected semicolon not declared undefined reference return warning messaggio
+  g++
+quando: Quando il programma non compila o non si collega.
+fasi:
+- nome: Sintassi
+  righe:
+  - codice: expected ',' or ';' before …
+    commento: 'Manca un punto e virgola: guarda la riga PRIMA di quella indicata.'
+  - codice: expected ';' after struct definition
+    commento: Manca il ; dopo la } di una struct o class.
+- nome: Nomi
+  righe:
+  - codice: '''somma'' was not declared in this scope'
+    commento: 'Usi un nome prima di dichiararlo: aggiungi il prototipo o sposta la funzione sopra il main.'
+  - codice: '''cout'' was not declared in this scope'
+    commento: 'Manca #include <iostream> (o using namespace std;).'
+- nome: Collegamento
+  righe:
+  - codice: undefined reference to `somma(int, int)'
+    commento: La funzione è dichiarata ma non definita, o manca il .cpp nel comando di compilazione.
+- nome: Avvisi da non ignorare
+  righe:
+  - codice: control reaches end of non-void function
+    commento: Una funzione con tipo di ritorno può finire senza return.
+  - codice: suggest parentheses around assignment used as truth value
+    commento: Hai scritto = dove volevi ==.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-struttura
+- cpp-compilare
+- cpp-uguale
+- cpp-piu-file

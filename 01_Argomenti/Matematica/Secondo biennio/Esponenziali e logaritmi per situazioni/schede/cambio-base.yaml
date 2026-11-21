@@ -1,0 +1,41 @@
+id: cambio-base
+tipo: regola
+titolo: Cambio di base
+sigla: Cambio base
+comando: log_a(b) = frac(ln(b)|ln(a))
+vedo: Logaritmi con basi diverse o con una base scomoda per la calcolatrice.
+formula:
+- log_a(b) = frac(log_c(b)|log_c(a))
+- log_a(b) = frac(ln(b)|ln(a))
+- log_a(b) = frac(1|log_b(a))
+adatto:
+- Scegli come nuova base `c` una base comoda (2, 10 o `e`).
+- La calcolatrice ha di solito solo `ln` e `log` in base 10.
+esempi:
+- da: log_4(8)
+  passi:
+  - 'in base 2: `frac(log_2(8)|log_2(4))`'
+  - '`frac(3|2)`'
+  ris: frac(3|2)
+  verifica: scomposizione
+- da: log_8(2)
+  passi:
+  - '`frac(1|log_2(8))`'
+  ris: frac(1|3)
+  verifica: scomposizione
+- da: log_2(x)
+  passi:
+  - con i naturali
+  ris: frac(ln(x)|ln(2))
+  verifica: scomposizione
+- da: log_4(x)
+  passi:
+  - in base 2
+  ris: frac(log_2(x)|2)
+  verifica: scomposizione
+errore: 'Capovolgere la frazione: `log_a(b)` ha `ln(b)` sopra.'
+confondi:
+- scheda: proprieta-log
+  differenza: Lì la base resta; qui la base cambia.
+perche: Se `log_a(b) = c`, allora `a^c = b`; prendendo il logaritmo di entrambi i membri in base `d` si ottiene `c*log_d(a) = log_d(b)`.
+parole: cambio base logaritmo calcolatrice

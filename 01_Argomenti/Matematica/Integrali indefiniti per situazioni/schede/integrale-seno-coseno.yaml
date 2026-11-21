@@ -1,0 +1,32 @@
+id: integrale-seno-coseno
+tipo: regola
+titolo: Seno e coseno
+sigla: Seno e coseno
+comando: ∫ sin x = -cos x, ∫ cos x = sin x
+vedo: L'integrando è `sin x` o `cos x`.
+formula:
+- ∫ sin x dx = -cos x + c
+- ∫ cos x dx = sin x + c
+adatto:
+- L'integrale del seno ha il segno meno.
+- 'Controlla derivando: `(-cos x)'' = sin x`.'
+- Con argomento `kx` vedi le composte lineari.
+esempi:
+- da: ∫ sin x dx
+  passi:
+  - '`(-cos x)'' = sin x`'
+  ris: -cos x + c
+- da: ∫ cos x dx
+  passi:
+  - '`(sin x)'' = cos x`'
+  ris: sin x + c
+- da: ∫ (2 sin x - cos x) dx
+  passi:
+  - pezzo per pezzo
+  ris: -2 cos x - sin x + c
+errore: Dimenticare il segno meno nell'integrale del seno.
+confondi:
+- scheda: integrale-tangente
+  differenza: Il seno e il coseno sono immediati; il `frac(1|cos^2 x)` dà la tangente.
+perche: Si leggono al contrario le derivate di `sin` e `cos`.
+parole: integrale seno coseno goniometrici

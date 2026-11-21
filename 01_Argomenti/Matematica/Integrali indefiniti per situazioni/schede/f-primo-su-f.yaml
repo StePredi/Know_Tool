@@ -1,0 +1,33 @@
+id: f-primo-su-f
+tipo: regola
+titolo: Derivata sopra, funzione sotto
+sigla: f'/f
+comando: ∫ frac(f'|f) dx = ln|f| + c
+vedo: Il numeratore è la derivata del denominatore (o un suo multiplo).
+formula:
+- ∫ frac(f'(x)|f(x)) dx = ln|f(x)| + c
+adatto:
+- Calcola la derivata del denominatore e confrontala con il numeratore.
+- Se coincide, il risultato è il logaritmo del denominatore.
+- Se manca una costante, aggiustala moltiplicando e dividendo.
+- Così si trova anche l'integrale di `tan x`.
+esempi:
+- da: ∫ frac(2x|x^2 + 1) dx
+  passi:
+  - 'derivata del denominatore: `2x`'
+  ris: ln(x^2 + 1) + c
+- da: ∫ frac(x|x^2 + 4) dx
+  passi:
+  - 'derivata del denominatore: `2x`, manca il `2`'
+  - moltiplico e divido
+  ris: frac(1|2)*ln(x^2 + 4) + c
+- da: ∫ frac(e^x|e^x + 1) dx
+  passi:
+  - il numeratore è la derivata del denominatore
+  ris: ln(e^x + 1) + c
+errore: 'Applicarlo quando il numeratore non è un multiplo della derivata: in `frac(1|x^2 + 1)` non vale.'
+confondi:
+- scheda: integrale-arcotangente
+  differenza: '`frac(1|1 + x^2)` ha numeratore 1: la derivata del denominatore è `2x`, quindi dà arcotangente.'
+perche: La derivata di `ln|f|` è `frac(f'|f)`.
+parole: derivata sopra funzione sotto logaritmo primo su f

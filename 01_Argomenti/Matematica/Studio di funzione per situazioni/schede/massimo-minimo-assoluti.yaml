@@ -1,0 +1,30 @@
+id: massimo-minimo-assoluti
+tipo: regola
+titolo: Massimo e minimo in un intervallo
+sigla: Max e min assoluti
+comando: confronta i valori nei punti candidati e agli estremi
+vedo: Ti chiedono il massimo e il minimo di una funzione su un intervallo chiuso `[a, b]`.
+formula:
+- max e min tra f(a), f(b), f(punti stazionari)
+adatto:
+- Se `f` è continua su `[a, b]` il massimo e il minimo esistono (Weierstrass).
+- Trova i punti stazionari e quelli non derivabili dentro l'intervallo.
+- Calcola `f` in questi punti e agli estremi `a` e `b`.
+- Il valore più grande è il massimo, il più piccolo è il minimo.
+esempi:
+- da: f(x) = x^3 - 3x su [0, 2]
+  passi:
+  - stazionario in `x = 1` (dentro), `x = -1` fuori
+  - '`f(0) = 0`, `f(1) = -2`, `f(2) = 2`'
+  ris: massimo 2 in x = 2, minimo -2 in x = 1
+- da: f(x) = x^2 su [-1, 3]
+  passi:
+  - stazionario in `x = 0`
+  - '`f(-1) = 1`, `f(0) = 0`, `f(3) = 9`'
+  ris: massimo 9 in x = 3, minimo 0 in x = 0
+errore: 'Dimenticare gli estremi dell''intervallo: spesso il massimo o il minimo è lì.'
+confondi:
+- scheda: punti-stazionari
+  differenza: 'Relativi: confronto con i vicini. Assoluti: confronto su tutto l''intervallo.'
+perche: Una funzione continua su un intervallo chiuso assume il massimo e il minimo, in un punto stazionario o a un estremo.
+parole: massimo minimo assoluto intervallo weierstrass

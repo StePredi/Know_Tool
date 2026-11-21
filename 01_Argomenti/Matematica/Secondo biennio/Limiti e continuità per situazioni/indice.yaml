@@ -1,0 +1,50 @@
+modello: per_situazioni
+titolo: Limiti e continuità, per situazioni
+centro: Limiti e continuità
+sottotitolo: Limiti, forme indeterminate, asintoti
+ingresso: Limite da calcolare, funzione di cui studiare asintoti o continuità
+guida: Sostituisci sempre prima il valore a cui tende x. Se esce una forma indeterminata, riconoscila e scegli la tecnica.
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - sostituisci-valore
+    - riconosci-forma
+    - controlla-limite
+- id: lim
+  nome: Limiti di funzione
+  colore: orange
+  voci:
+  - schede:
+    - limite-finito-punto
+    - limite-infinito-da-numero
+    - limite-all-infinito-polinomi
+    - limite-fratta-infinito
+- id: ind
+  nome: Forme indeterminate
+  colore: violet
+  voci:
+  - schede:
+    - forma-0-su-0
+    - forma-inf-su-inf
+    - forma-inf-meno-inf
+    - limiti-notevoli
+- id: asi
+  nome: Asintoti
+  colore: green
+  voci:
+  - schede:
+    - asintoto-verticale
+    - asintoto-orizzontale
+    - asintoto-obliquo
+- id: con
+  nome: Continuità
+  colore: pink
+  voci:
+  - schede:
+    - continuita
+    - discontinuita-tipi
+    - teorema-zeri

@@ -1,0 +1,40 @@
+id: eq-lineare
+tipo: regola
+titolo: Equazione lineare in seno e coseno
+sigla: Lineare
+comando: p*sin(x) + q*cos(x) = c
+vedo: 'Seno e coseno compaiono insieme alla prima potenza: `p*sin(x) + q*cos(x) = c`.'
+formula:
+- p*sin(x) + q*cos(x) = c
+- R = sqrt(p^2 + q^2)
+- cos(y) = frac(p|R)
+- sin(y) = frac(q|R)
+- sin(x + y) = frac(c|R)
+adatto:
+- 'Se `c = 0`: dividi per `cos(x)` (controllando che `cos(x) = 0` non sia soluzione) e ottieni `p*tan(x) + q = 0`.'
+- 'Se `c` non è nullo: dividi per `R` e introduci l''angolo ausiliario `y` (metodo dell''angolo aggiunto).'
+- 'Condizione: `|c| <= R`, altrimenti nessuna soluzione.'
+esempi:
+- da: sin(x) + cos(x) = 1
+  passi:
+  - '`R = sqrt(2)`, `y = frac(pi|4)`'
+  - '`sin(x + frac(pi|4)) = frac(sqrt(2)|2)`'
+  - '`x + frac(pi|4) = frac(pi|4)` oppure `frac(3*pi|4)`'
+  ris: x = 2k*pi, x = frac(pi|2) + 2k*pi
+- da: sqrt(3)*sin(x) - cos(x) = 0
+  passi:
+  - '`c = 0`: divido per `cos(x)`'
+  - '`sqrt(3)*tan(x) = 1`'
+  ris: x = frac(pi|6) + k*pi
+- da: sin(x) + sqrt(3)*cos(x) = sqrt(3)
+  passi:
+  - '`R = 2`, `y = frac(pi|3)`'
+  - '`sin(x + frac(pi|3)) = frac(sqrt(3)|2)`'
+  - '`x + frac(pi|3) = frac(pi|3)` oppure `frac(2*pi|3)`'
+  ris: x = 2k*pi, x = frac(pi|3) + 2k*pi
+errore: Dividere per `cos(x)` senza controllare il caso `cos(x) = 0`.
+confondi:
+- scheda: eq-scomponibile
+  differenza: Con termine noto nullo si può anche raccogliere; con `c` non nullo serve l'angolo aggiunto.
+perche: '`p*sin(x) + q*cos(x)` si riscrive come `R*sin(x + y)` con la formula di addizione.'
+parole: equazione lineare seno coseno angolo aggiunto

@@ -1,0 +1,44 @@
+id: microservizi
+tipo: spiegazione
+titolo: Capire l'architettura a microservizi
+sigla: Microservizi
+comando: un servizio per container
+frase: piccoli servizi che parlano tramite API
+fonte: virtualizzazione_e_container.pdf (sez. 04)
+parole: microservizi architettura servizi api container kubernetes orchestrazione scalabilità guasti isolati
+quando: Quando devi spiegare perché un'applicazione si divide in più container.
+blocchi:
+- testo: Un sistema formato da **piccoli servizi autonomi**, ciascuno con una sola funzione, che comunicano tramite **API**.
+- disegno:
+    modello: pile
+    colonne:
+    - strati:
+      - Utente
+      - testo: Interfaccia unica
+        tono: scuro
+      - testo:
+        - |-
+          Servizio A
+          container
+        - |-
+          Servizio B
+          container
+        - |-
+          Servizio C
+          container
+        tono: colore
+    nota: Ogni servizio può stare in un proprio container.
+- carte:
+  - titolo: Codice più piccolo
+    testo: Ogni servizio ha la sua codebase, e può usare una tecnologia diversa.
+  - titolo: Scalabilità indipendente
+    testo: Moltiplichi solo il servizio che serve.
+  - titolo: Guasti isolati
+    testo: Se un servizio cade, gli altri continuano.
+  - titolo: Continuous delivery
+    testo: Aggiornare un servizio alla volta è più semplice.
+- nota: Strumenti di orchestrazione come **Kubernetes** automatizzano deployment, scaling e gestione. Docker Compose, più semplice, descrive e avvia i servizi da un file.
+varianti: []
+vicine:
+- app-tre-container
+- compose-tre-servizi

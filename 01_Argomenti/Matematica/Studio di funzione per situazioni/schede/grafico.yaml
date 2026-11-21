@@ -1,0 +1,34 @@
+id: grafico
+tipo: regola
+titolo: 7. Disegna il grafico
+sigla: Grafico
+comando: metti insieme tutti i dati
+vedo: Hai finito le tappe e devi costruire il grafico.
+formula:
+- asintoti
+- intersezioni
+- max, min, flessi
+adatto:
+- Traccia gli asintoti con linee tratteggiate.
+- Segna le intersezioni con gli assi, i massimi, i minimi e i flessi.
+- Collega i punti rispettando dove sale e scende, e come curva.
+- 'Controlla: il grafico si avvicina agli asintoti, non attraversa il dominio escluso, rispetta le simmetrie.'
+esempi:
+- da: f(x) = x^3 - 3x
+  passi:
+  - 'punti: `(-sqrt(3), 0)`, `(0, 0)`, `(sqrt(3), 0)`'
+  - massimo `(-1, 2)`, minimo `(1, -2)`, flesso `(0, 0)`
+  - da `-inf` sale fino a `(-1, 2)`, scende fino a `(1, -2)`, poi sale a `+inf`
+  ris: curva a "S" simmetrica rispetto all'origine
+- da: f(x) = frac(x^2|x - 1)
+  passi:
+  - asintoti `x = 1` e `y = x + 1`
+  - massimo `(0, 0)`, minimo `(2, 4)`
+  - 'due rami: uno sotto per `x < 1`, uno sopra per `x > 1`'
+  ris: due rami separati dall'asintoto verticale
+errore: Disegnare il grafico senza controllare che passi per i punti trovati e rispetti i segni.
+confondi:
+- scheda: intersezioni-segno
+  differenza: Dà i punti sugli assi; il grafico deve passarvi.
+perche: 'Il grafico è il riassunto: ogni tappa aggiunge un vincolo e la curva li rispetta tutti.'
+parole: grafico disegnare costruire riepilogo

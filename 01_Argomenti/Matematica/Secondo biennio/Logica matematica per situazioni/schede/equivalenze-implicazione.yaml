@@ -1,0 +1,29 @@
+id: equivalenze-implicazione
+tipo: regola
+titolo: Riscritture dell'implicazione
+sigla: Riscrivi
+comando: p -> q ≡ ¬p ∨ q
+vedo: Un'implicazione da riscrivere o semplificare.
+formula:
+- p -> q ≡ ¬p ∨ q
+- p -> q ≡ ¬q -> ¬p
+adatto:
+- La prima forma trasforma l'implicazione in una disgiunzione.
+- 'La seconda è la contronominale: stessa verità della frase originale.'
+esempi:
+- da: p -> q
+  passi:
+  - 'righe in ordine: `VV, VF, FV, FF`'
+  - '`p -> q`: V F V V'
+  - '`¬p ∨ q`: V F V V'
+  ris: ¬p ∨ q
+- da: se un numero è divisibile per 6 allora è pari
+  passi:
+  - 'contronominale: nego e scambio'
+  ris: se un numero non è pari allora non è divisibile per 6
+errore: Riscrivere come `¬p ∧ q` o come `p ∨ ¬q`.
+confondi:
+- scheda: inversa-contraria
+  differenza: La contronominale è equivalente; l'inversa e la contraria no.
+perche: 'Le colonne delle tavole di verità coincidono: sono la stessa frase scritta diversamente.'
+parole: implicazione equivalenza contronominale riscrivere

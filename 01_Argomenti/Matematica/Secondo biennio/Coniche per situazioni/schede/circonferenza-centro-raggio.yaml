@@ -1,0 +1,31 @@
+id: circonferenza-centro-raggio
+tipo: regola
+titolo: 'Circonferenza: centro e raggio'
+sigla: Centro-raggio
+comando: (x - a)^2 + (y - b)^2 = r^2
+vedo: Un'equazione con `(x - a)^2 + (y - b)^2`, o un centro e un raggio dati.
+formula:
+- (x - a)^2 + (y - b)^2 = r^2
+adatto:
+- Centro `C(a, b)`, raggio `r`.
+- 'Attenzione ai segni: `(x + 3)^2` ha centro con ascissa `-3`.'
+- 'Centro nell''origine: `x^2 + y^2 = r^2`.'
+esempi:
+- da: (x - 2)^2 + (y + 3)^2 = 25
+  passi:
+  - '`a = 2`, `b = -3`'
+  ris: C(2, -3), r = 5
+- da: x^2 + y^2 = 7
+  passi:
+  - centro nell'origine
+  ris: C(0, 0), r = sqrt(7)
+- da: centro (1, -1), raggio 3
+  passi:
+  - sostituisco
+  ris: (x - 1)^2 + (y + 1)^2 = 9
+errore: 'Leggere il segno sbagliato del centro: `(y + 3)` significa `b = -3`.'
+confondi:
+- scheda: circonferenza-equazione-generale
+  differenza: Qui l'equazione è già in forma canonica, lì devi ricavarla.
+perche: È la distanza di un punto `(x, y)` dal centro `(a, b)` posta uguale a `r`.
+parole: circonferenza centro raggio equazione canonica

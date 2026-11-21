@@ -1,0 +1,37 @@
+id: ruffini
+tipo: regola
+titolo: Scomporre con Ruffini
+sigla: Ruffini
+comando: cerco a con P(a) = 0
+frase: "Grado 3 o più, quando gli altri metodi non bastano."
+vedo: "Polinomio di grado 3 o più senza fattore comune e senza raggruppamento evidente: `x^3 - 2x^2 - 5x + 6`."
+formula:
+  - P(a) = 0
+  - P(x) = (x - a)*Q(x)
+adatto:
+  - "Prova i valori di a che dividono il termine noto, con segno + e −: cerca quello per cui `P(a) = 0`."
+  - "Se `P(a) = 0`, P è divisibile per `x - a`."
+  - "Dividi con la regola di Ruffini: il quoziente Q è l'altro fattore."
+  - "Scomponi ancora Q se serve: spesso è un trinomio."
+  - "Se il coefficiente del termine di grado più alto non è 1, prova anche le frazioni p/q, con p divisore del termine noto e q del coefficiente."
+esempi:
+  - da: x^3 - 2x^2 - 5x + 6
+    passi:
+      - "`P(1) = 1 - 2 - 5 + 6 = 0`, quindi `x - 1` divide P"
+      - "Ruffini con a = 1 sui coefficienti `1, -2, -5, 6`: `1, -1, -6`, resto 0"
+      - "Quoziente `x^2 - x - 6`, che è `(x - 3)(x + 2)`"
+    ris: (x - 1)(x - 3)(x + 2)
+    verifica: scomposizione
+  - da: 2x^3 - 3x^2 - 3x + 2
+    passi:
+      - "`P(2) = 16 - 12 - 6 + 2 = 0`"
+      - "Ruffini con a = 2 sui coefficienti `2, -3, -3, 2`: `2, 1, -1`, resto 0"
+      - "Quoziente `2x^2 + x - 1`, che è `(2x - 1)(x + 1)`"
+    ris: (x - 2)(2x - 1)(x + 1)
+    verifica: scomposizione
+errore: "Provare solo valori positivi, o valori che non dividono il termine noto."
+confondi:
+  - scheda: raccoglimento-parziale
+    differenza: "Con 4 termini prova prima il parziale: è più veloce."
+perche: "Teorema del resto: se P(a) = 0 il resto della divisione per `x - a` è 0."
+parole: ruffini radice teorema del resto grado terzo

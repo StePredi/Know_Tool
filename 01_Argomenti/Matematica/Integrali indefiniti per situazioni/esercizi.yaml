@@ -1,0 +1,94 @@
+esercizi:
+- testo: ∫ (3x^2 - 4x + 5) dx
+  risultato: x^3 - 2x^2 + 5x + c
+  piano:
+  - scheda: riconosci-forma
+    nota: 'Polinomio: immediato.'
+  - scheda: integrale-costante-somma
+    nota: Pezzo per pezzo.
+  - scheda: integrale-potenza
+    nota: Ogni potenza sale di uno.
+  - scheda: controlla-derivando
+    nota: Deriva e torna.
+- testo: ∫ frac(x^2 + 1|x) dx
+  risultato: x^2/2 + ln|x| + c
+  piano:
+  - scheda: semplifica-prima
+    nota: Spezzo la frazione.
+  - scheda: integrale-potenza
+    nota: '`x`.'
+  - scheda: integrale-uno-su-x
+    nota: '`frac(1|x)`.'
+- testo: ∫ sqrt(x) dx
+  risultato: 2/3 x sqrt(x) + c
+  piano:
+  - scheda: semplifica-prima
+    nota: '`sqrt(x) = x^(1/2)`.'
+  - scheda: integrale-potenza
+    nota: Esponente `frac(3|2)`.
+- testo: ∫ cos(3x) dx
+  risultato: sin(3x)/3 + c
+  piano:
+  - scheda: composta-lineare
+    nota: Divido per il coefficiente di `x`.
+  - scheda: integrale-seno-coseno
+    nota: Integrale di `cos`.
+- testo: ∫ frac(2x|x^2 + 1) dx
+  risultato: ln(x^2 + 1) + c
+  piano:
+  - scheda: riconosci-forma
+    nota: Numeratore = derivata del denominatore.
+  - scheda: f-primo-su-f
+    nota: Logaritmo del denominatore.
+- testo: ∫ 2x*e^(x^2) dx
+  risultato: e^(x^2) + c
+  piano:
+  - scheda: riconosci-forma
+    nota: Dentro l'esponente `x^2`, davanti `2x`.
+  - scheda: esp-di-g
+    nota: Il risultato è l'esponenziale stesso.
+- testo: ∫ x*e^x dx
+  risultato: (x - 1)*e^x + c
+  piano:
+  - scheda: riconosci-forma
+    nota: Prodotto di polinomio ed esponenziale.
+  - scheda: scelta-fattori
+    nota: Derivo `x`, integro `e^x`.
+  - scheda: per-parti
+    nota: Applico la formula.
+- testo: ∫ x*ln x dx
+  risultato: x^2/2 ln x - x^2/4 + c
+  piano:
+  - scheda: scelta-fattori
+    nota: Derivo `ln x`, integro `x`.
+  - scheda: per-parti
+    nota: Applico la formula.
+- testo: ∫ x^2*e^x dx
+  risultato: (x^2 - 2x + 2)*e^x + c
+  piano:
+  - scheda: per-parti-due-volte
+    nota: 'Polinomio di grado 2: due passaggi.'
+- testo: ∫ ln x dx
+  risultato: x ln x - x + c
+  piano:
+  - scheda: per-parti-ln-arctan
+    nota: Scrivo `1*ln x` e derivo il logaritmo.
+- testo: ∫ frac(1|1 + sqrt(x)) dx
+  risultato: 2 sqrt(x) - 2 ln(1 + sqrt(x)) + c
+  piano:
+  - scheda: riconosci-forma
+    nota: Una radice che complica.
+  - scheda: sostituzione
+    nota: '`t = sqrt(x)`, `dx = 2t dt`.'
+  - scheda: fratti-grado-maggiore
+    nota: '`frac(2t|1 + t) = 2 - frac(2|1 + t)`.'
+- testo: ∫ frac(1|x^2 - 1) dx
+  risultato: ln|x - 1|/2 - ln|x + 1|/2 + c
+  piano:
+  - scheda: fratti-radici-distinte
+    nota: Scompongo `(x - 1)(x + 1)` e trovo `A` e `B`.
+- testo: ∫ frac(1|x^2 + 2x + 5) dx
+  risultato: arctan((x + 1)/2)/2 + c
+  piano:
+  - scheda: fratto-irriducibile
+    nota: '`Delta < 0`: completo il quadrato `(x + 1)^2 + 4`.'

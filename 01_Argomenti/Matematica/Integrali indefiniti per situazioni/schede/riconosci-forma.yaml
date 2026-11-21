@@ -1,0 +1,39 @@
+id: riconosci-forma
+tipo: regola
+titolo: Riconosci la forma
+sigla: Forma
+comando: guarda la funzione e scegli il metodo
+vedo: Hai un integrale e non sai quale metodo usare.
+formula:
+- immediato
+- f'(x)*g(f(x))
+- f(x)*g'(x)
+- frac(N|D)
+adatto:
+- È una funzione di `x` semplice (potenza, `e^x`, `sin x`, ...)? Integrale immediato.
+- Contiene una funzione e, moltiplicata, la sua derivata (o quasi)? Composta o sostituzione.
+- È il prodotto di due funzioni diverse (polinomio per `e^x`, `sin x`, `ln x`)? Per parti.
+- È una frazione di polinomi con il denominatore di grado almeno 2? Fratti semplici.
+esempi:
+- da: ∫ x^3 dx
+  passi:
+  - una potenza
+  ris: immediato
+- da: ∫ 2x*e^(x^2) dx
+  passi:
+  - dentro l'esponente c'è `x^2`, e `2x` ne è la derivata
+  ris: composta
+- da: ∫ x*e^x dx
+  passi:
+  - 'due funzioni diverse moltiplicate: polinomio per esponenziale'
+  ris: per parti
+- da: ∫ frac(1|x^2 - 1) dx
+  passi:
+  - frazione con il denominatore di secondo grado
+  ris: fratti semplici
+errore: 'Provare «per parti» ogni volta che c''è un prodotto: a volte il prodotto è una composta (`x*e^(x^2)` si fa con la sostituzione).'
+confondi:
+- scheda: controlla-derivando
+  differenza: Qui scegli il metodo; lì controlli il risultato.
+perche: Ogni metodo corrisponde a una regola di derivazione letta al contrario.
+parole: riconoscere metodo scegliere integrale

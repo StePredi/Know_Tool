@@ -1,0 +1,31 @@
+id: integrale-uno-su-x
+tipo: regola
+titolo: Uno su x
+sigla: Uno su x
+comando: ∫ frac(1|x) dx = ln|x| + c
+vedo: L'integrando è `frac(k|x)`, cioè `x^(-1)`.
+formula:
+- ∫ frac(1|x) dx = ln|x| + c
+adatto:
+- Il risultato è un logaritmo con il valore assoluto.
+- Un numero al numeratore esce davanti.
+- Se il denominatore è `ax + b`, vedi la scheda delle composte lineari.
+esempi:
+- da: ∫ frac(1|x) dx
+  passi:
+  - '`(ln|x|)'' = frac(1|x)`'
+  ris: ln|x| + c
+- da: ∫ frac(5|x) dx
+  passi:
+  - '`5*∫ frac(1|x) dx`'
+  ris: 5*ln|x| + c
+- da: ∫ frac(3 + x|x) dx
+  passi:
+  - 'spezzo: `frac(3|x) + 1`'
+  ris: 3*ln|x| + x + c
+errore: 'Scrivere `ln(x)` senza valore assoluto: l''integrale vale anche per `x` negative.'
+confondi:
+- scheda: integrale-potenza
+  differenza: '`n = -1` è l''unico esponente che non si può trattare con la regola della potenza.'
+perche: La derivata di `ln|x|` è `frac(1|x)` per ogni `x` diversa da zero.
+parole: integrale uno su x logaritmo valore assoluto

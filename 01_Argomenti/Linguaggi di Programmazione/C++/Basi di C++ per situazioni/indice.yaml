@@ -1,0 +1,127 @@
+modello: per_situazioni
+titolo: Basi di C++, per situazioni
+centro: C++
+sottotitolo: Parti da quello che devi scrivere nel programma, non dal nome della parola chiave.
+esempiRicerca: divisione che perde i decimali, vector fuori limite, chiave nella map, undefined reference
+rami:
+- id: b1
+  nome: Primo programma
+  colore: blue
+  lato: R
+  voci:
+  - gruppo: Scrivere ed eseguire
+    schede:
+    - cpp-struttura
+    - cpp-compilare
+  - schede:
+    - cpp-output-input
+- id: b2
+  nome: Variabili e tipi
+  colore: teal
+  lato: R
+  voci:
+  - schede:
+    - cpp-tipi
+  - schede:
+    - cpp-divisione-int
+  - schede:
+    - cpp-const-auto
+- id: b3
+  nome: Stringhe
+  colore: green
+  lato: R
+  voci:
+  - schede:
+    - cpp-string-operazioni
+    - cpp-string-numeri
+    - cpp-string-scorri
+- id: b4
+  nome: Decidere e ripetere
+  colore: yellow
+  lato: T
+  voci:
+  - gruppo: Decidere
+    schede:
+    - cpp-if
+    - cpp-uguale
+    - cpp-switch
+  - gruppo: Ripetere
+    schede:
+    - cpp-for
+    - cpp-while
+    - cpp-break-continue
+- id: b5
+  nome: Funzioni
+  colore: orange
+  lato: T
+  voci:
+  - schede:
+    - cpp-funzione
+  - schede:
+    - cpp-riferimento
+  - schede:
+    - cpp-default-overload
+- id: b6
+  nome: Array e vector
+  colore: violet
+  lato: L
+  voci:
+  - gruppo: Raccolte di valori
+    schede:
+    - cpp-array
+    - cpp-vector
+    - cpp-vector-limiti
+  - schede:
+    - cpp-ordina
+- id: b7
+  nome: Chiavi e valori
+  colore: pink
+  lato: L
+  voci:
+  - gruppo: Coppie
+    schede:
+    - cpp-pair
+  - gruppo: map
+    schede:
+    - cpp-map
+    - cpp-map-cerca
+    - cpp-map-conta
+    - cpp-map-togliere
+  - gruppo: Altre mappe
+    schede:
+    - cpp-unordered-map
+    - cpp-ordina-per-valore
+- id: b8
+  nome: Puntatori e memoria
+  colore: red
+  lato: B
+  voci:
+  - schede:
+    - cpp-puntatore
+  - schede:
+    - cpp-ref-ptr
+  - schede:
+    - cpp-new-delete
+- id: b9
+  nome: Struct e classi
+  colore: indigo
+  lato: B
+  voci:
+  - gruppo: Dati e oggetti
+    schede:
+    - cpp-struct
+    - cpp-classe
+    - cpp-eredita
+  - schede:
+    - cpp-piu-file
+- id: b10
+  nome: Errori e file
+  colore: slate
+  lato: B
+  voci:
+  - schede:
+    - cpp-eccezioni
+  - schede:
+    - cpp-file
+  - schede:
+    - cpp-errori-comuni

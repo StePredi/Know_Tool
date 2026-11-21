@@ -1,0 +1,30 @@
+id: scelta-fattori
+tipo: regola
+titolo: Quale fattore derivare
+sigla: Scelta
+comando: deriva ln e i polinomi, integra e^x, sin, cos
+vedo: Hai riconosciuto il prodotto e non sai quale fattore derivare.
+formula:
+- ln > polinomio > esponenziale, seno, coseno
+adatto:
+- 'Da derivare: `ln x`, `arctan x`, poi il polinomio.'
+- 'Da integrare: `e^x`, `sin x`, `cos x`, e anche un polinomio se c''è un `ln x`.'
+- 'Il polinomio diventa più semplice derivando: è il fattore giusto da derivare.'
+- Con `ln x` si deriva sempre il logaritmo (non si sa integrarlo direttamente).
+esempi:
+- da: ∫ x*ln x dx
+  passi:
+  - 'derivo `ln x`, integro `x`: `frac(x^2|2)`'
+  - '`frac(x^2|2) ln x - ∫ frac(x|2) dx`'
+  ris: frac(x^2|2) ln x - frac(x^2|4) + c
+- da: ∫ x*e^(2x) dx
+  passi:
+  - 'derivo `x`, integro `e^(2x)`: `frac(e^(2x)|2)`'
+  - 'secondo integrale: `frac(e^(2x)|4)`'
+  ris: frac(e^(2x)(2x - 1)|4) + c
+errore: 'Derivare il polinomio e integrare il logaritmo: l''integrale di `ln x` non è immediato.'
+confondi:
+- scheda: per-parti
+  differenza: La formula è la stessa; qui si decide l'assegnazione.
+perche: La scelta serve a rendere il nuovo integrale più semplice dell'originale.
+parole: scelta fattori per parti liate

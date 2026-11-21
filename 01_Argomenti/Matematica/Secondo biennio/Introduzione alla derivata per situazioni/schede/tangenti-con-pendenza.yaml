@@ -1,0 +1,29 @@
+id: tangenti-con-pendenza
+tipo: regola
+titolo: Tangente con pendenza assegnata
+sigla: Pendenza data
+comando: f'(x_0) = m
+vedo: Cerchi le tangenti parallele o perpendicolari a una retta data.
+formula:
+- f'(x_0) = m
+adatto:
+- 'Parallela a una retta di pendenza `m`: imponi `f''(x) = m`.'
+- 'Perpendicolare: imponi `f''(x) = -frac(1|m)`.'
+- Risolvi per trovare `x_0`, poi scrivi la tangente.
+esempi:
+- da: f(x) = x^2 - 4x + 5, parallela a y = 2x
+  passi:
+  - '`f''(x) = 2x - 4 = 2`: `x_0 = 3`'
+  - '`f(3) = 2`'
+  ris: y = 2x - 4
+- da: f(x) = x^2 - 4x + 5, perpendicolare a y = frac(1|2)*x + 1
+  passi:
+  - '`m = -2`: `2x - 4 = -2`: `x_0 = 1`'
+  - '`f(1) = 2`'
+  ris: y = -2x + 4
+errore: Imporre `f(x) = m` invece di `f'(x) = m`.
+confondi:
+- scheda: retta-tangente
+  differenza: Lì il punto è dato; qui va trovato.
+perche: 'Tangente parallela vuol dire stessa pendenza: la derivata deve valere `m`.'
+parole: tangente parallela perpendicolare pendenza data

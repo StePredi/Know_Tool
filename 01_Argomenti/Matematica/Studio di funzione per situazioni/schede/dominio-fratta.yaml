@@ -1,0 +1,32 @@
+id: dominio-fratta
+tipo: regola
+titolo: 'Frazione: denominatore diverso da zero'
+sigla: Denominatore
+comando: g(x) != 0
+vedo: C'è una frazione con una `x` al denominatore.
+formula:
+- 'frac(f|g): g(x) != 0'
+adatto:
+- 'Pone il denominatore diverso da zero e risolvi: sono i valori da escludere.'
+- Il numeratore non pone condizioni (a meno che contenga altro).
+- I valori esclusi spesso danno asintoti verticali.
+esempi:
+- da: frac(x + 1|x - 3)
+  passi:
+  - '`x - 3 != 0`'
+  ris: x != 3
+- da: frac(1|x^2 - 4)
+  passi:
+  - '`x^2 - 4 != 0`'
+  - cioè `x != 2` e `x != -2`
+  ris: x != +-2
+- da: frac(x|x^2 + 1)
+  passi:
+  - '`x^2 + 1` non si annulla mai'
+  ris: tutti i reali
+errore: Escludere solo uno dei due valori quando il denominatore è un'equazione di secondo grado.
+confondi:
+- scheda: dominio-radice
+  differenza: Con la radice si chiede `>= 0`; con la frazione si chiede `!= 0`.
+perche: 'La divisione per zero non è definita: bisogna escludere quei punti.'
+parole: dominio frazione denominatore diverso da zero

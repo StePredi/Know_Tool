@@ -1,0 +1,30 @@
+id: parametri-derivabilita
+tipo: regola
+titolo: Parametri per la derivabilità
+sigla: Parametri
+comando: continuità + derivate uguali
+vedo: Una funzione a tratti con parametri da trovare perché sia derivabile nel punto di raccordo.
+formula:
+- f(c^-) = f(c^+)
+- f'(c^-) = f'(c^+)
+adatto:
+- 'Prima impone la continuità: i due tratti devono valere lo stesso numero in `c`.'
+- Poi imponi che le derivate dei due tratti in `c` siano uguali.
+- Metti le due condizioni a sistema.
+esempi:
+- da: f(x) = x^2 per x <= 1;  f(x) = a*x + b per x > 1
+  passi:
+  - 'continuità: `1 = a + b`'
+  - 'derivate: `2 = a`'
+  ris: a = 2, b = -1
+- da: f(x) = a*x^2 + 1 per x < 1;  f(x) = x + b per x >= 1
+  passi:
+  - 'continuità: `a + 1 = 1 + b`'
+  - 'derivate: `2a = 1`'
+  ris: a = frac(1|2), b = frac(1|2)
+errore: Imporre solo la continuità.
+confondi:
+- scheda: derivabilita-continuita
+  differenza: La derivabilità richiede la continuità, ma non basta.
+perche: Le due parti devono incollarsi (continuità) e con la stessa pendenza (derivabilità).
+parole: parametri derivabilità funzione a tratti raccordo

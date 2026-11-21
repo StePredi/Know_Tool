@@ -1,0 +1,35 @@
+id: cpp-ordina-per-valore
+tipo: ricetta
+titolo: Ordinare le coppie per valore
+sigla: Ordinare per valore
+comando: sort + lambda su vector<pair>
+frase: la map è ordinata per chiave, non per valore
+fonte: Documentazione C++ · cppreference.com · std::sort · lambda
+parole: ordinare per valore map vector pair sort lambda classifica decrescente
+quando: 'Quando vuoi una classifica: i nomi con il voto più alto per primi.'
+fasi:
+- nome: Copiare in un vector
+  righe:
+  - codice: vector<pair<string, int>> v(voti.begin(), voti.end());
+    commento: 'La map non si riordina: copia le coppie in un vector.'
+- nome: Ordinare
+  righe:
+  - codice: sort(v.begin(), v.end(), [](const auto& a, const auto& b) {
+    commento: Il terzo parametro dice come confrontare due coppie.
+    parti:
+    - voce: '[](const auto& a, const auto& b)'
+      spiega: funzione senza nome (lambda) che riceve due coppie
+  - codice: '    return a.second > b.second;'
+    commento: Prima chi ha il valore più grande.
+    trappola: Per l'ordine crescente basta cambiare > in <.
+  - codice: '});'
+- nome: Stampare
+  righe:
+  - codice: 'for (auto& [nome, voto] : v) cout << nome << voto << " ";'
+    commento: Con Anna 9, Bruno 7, Carla 8 stampa Anna9 Carla8 Bruno7.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-ordina
+- cpp-map
+- cpp-pair

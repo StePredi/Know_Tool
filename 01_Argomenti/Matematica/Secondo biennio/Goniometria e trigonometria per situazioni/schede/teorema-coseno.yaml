@@ -1,0 +1,32 @@
+id: teorema-coseno
+tipo: regola
+titolo: Teorema del coseno
+sigla: Coseno
+comando: a^2 = b^2 + c^2 - 2*b*c*cos(A)
+vedo: Triangolo qualsiasi con due lati e l'angolo compreso (cerchi il terzo lato), oppure con i tre lati (cerchi un angolo).
+formula:
+- a^2 = b^2 + c^2 - 2*b*c*cos(A)
+- cos(A) = frac(b^2 + c^2 - a^2|2*b*c)
+adatto:
+- Con `A = 90 gradi` diventa il teorema di Pitagora.
+- Se `cos(A)` è negativo l'angolo è ottuso.
+- 'Per gli altri angoli, calcola prima l''angolo maggiore con il coseno: poi i restanti sono sicuramente acuti e puoi usare i seni.'
+- Il lato `a` è quello opposto all'angolo `A`.
+esempi:
+- da: b = 5, c = 7, A = 60 gradi (compreso)
+  passi:
+  - '`a^2 = 25 + 49 - 2*5*7*cos(60)`'
+  - '`a^2 = 74 - 35 = 39`'
+  ris: a = sqrt(39)
+- da: 'tre lati: 4, 5, 6'
+  passi:
+  - angolo opposto al lato 6
+  - '`cos = frac(16 + 25 - 36|2*4*5) = frac(1|8)`'
+  - angolo circa 82,82 gradi
+  ris: angolo circa 82,82 gradi
+errore: Dimenticare il doppio prodotto `2*b*c`, o usare l'angolo non compreso tra i due lati.
+confondi:
+- scheda: teorema-seni
+  differenza: Il teorema dei seni richiede una coppia lato–angolo opposto; il coseno no.
+perche: 'Si ricava con Pitagora, scomponendo il triangolo con l''altezza: è Pitagora corretto dal termine con il coseno.'
+parole: teorema del coseno carnot triangolo tre lati angolo compreso

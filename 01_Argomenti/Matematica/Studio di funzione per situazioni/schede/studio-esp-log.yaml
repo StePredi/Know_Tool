@@ -1,0 +1,41 @@
+id: studio-esp-log
+tipo: regola
+titolo: Esponenziali e logaritmi
+sigla: Exp e log
+comando: dominio, limiti notevoli, derivate con ln e e^x
+vedo: La funzione contiene `e^x` o `ln x`, come `frac(ln(x)|x)` o `x*e^x`.
+formula:
+- 'ln(f): f > 0'
+- lim_(x -> +inf) frac(ln(x)|x) = 0
+- lim_(x -> -inf) x*e^x = 0
+adatto:
+- 'Dominio: argomento del logaritmo positivo.'
+- 'Limiti: usa le gerarchie, `e^x` batte ogni potenza, ogni potenza batte `ln x`.'
+- 'Derivate: `(ln x)'' = frac(1|x)`, `(e^x)'' = e^x`, poi prodotto o quoziente.'
+- '`e^x` è sempre positivo: il segno dipende dagli altri fattori.'
+esempi:
+- da: f(x) = frac(ln(x)|x)
+  passi:
+  - dominio `x > 0`; zero in `x = 1`
+  - verticale `x = 0`, orizzontale `y = 0` a `+inf`
+  - '`f''(x) = frac(1 - ln(x)|x^2)`: massimo `(e, frac(1|e))`'
+  - '`f''''(x) = frac(2*ln(x) - 3|x^3)`: flesso in `x = e^(3/2)`'
+  ris: massimo (e, 1/e), flesso x = e^(3/2)
+- da: f(x) = x*e^x
+  passi:
+  - dominio `R`; zero in `0`
+  - orizzontale `y = 0` a `-inf`; a `+inf` va a `+inf`
+  - '`f''(x) = (x + 1)*e^x`: minimo `(-1, -frac(1|e))`'
+  - '`f''''(x) = (x + 2)*e^x`: flesso `(-2, -frac(2|e^2))`'
+  ris: minimo (-1, -1/e), flesso (-2, -2/e^2)
+- da: frac(ln(x)|x)
+  passi:
+  - derivata
+  ris: frac(1 - ln(x)|x^2)
+  verifica: derivata
+errore: Dimenticare che l'asintoto orizzontale può essere solo a `-inf` (o solo a `+inf`).
+confondi:
+- scheda: dominio-logaritmo
+  differenza: Con il logaritmo il dominio parte da una disequazione.
+perche: 'Esponenziale e logaritmo crescono (e calano) con ritmi molto diversi dai polinomi: i limiti notevoli lo mostrano.'
+parole: esponenziale logaritmo studio funzione limiti notevoli

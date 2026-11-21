@@ -1,0 +1,44 @@
+id: forma-0-su-0
+tipo: regola
+titolo: Forma 0/0
+sigla: 0 su 0
+comando: scomponi e semplifica
+vedo: Sostituendo viene `frac(0|0)`.
+formula:
+- lim_(x -> c) frac(f(x)|g(x)) = lim_(x -> c) frac(f(x)/(x - c)|g(x)/(x - c))
+adatto:
+- 'Polinomi: scomponi e semplifica il fattore `(x - c)`.'
+- 'Radici: moltiplica numeratore e denominatore per il coniugato.'
+- 'Seno, coseno, esponenziali: usa i limiti notevoli.'
+- Dopo la semplificazione sostituisci di nuovo.
+esempi:
+- da: lim_(x -> 2) frac(x^2 - 4|x - 2)
+  passi:
+  - '`frac((x - 2)(x + 2)|x - 2)`'
+  - '`x + 2`'
+  ris: '4'
+- da: frac(x^2 - 4|x - 2)
+  passi:
+  - scomposizione e semplificazione
+  ris: x + 2
+  verifica: scomposizione
+- da: lim_(x -> 3) frac(x^2 - x - 6|x - 3)
+  passi:
+  - '`(x - 3)(x + 2)`'
+  ris: '5'
+- da: frac(sqrt(x + 1) - 1|x)
+  passi:
+  - moltiplico per il coniugato `sqrt(x + 1) + 1`
+  - 'numeratore: `x`'
+  ris: frac(1|sqrt(x + 1) + 1)
+  verifica: scomposizione
+- da: lim_(x -> 0) frac(sqrt(x + 1) - 1|x)
+  passi:
+  - sostituisco nella forma semplificata
+  ris: frac(1|2)
+errore: Semplificare senza scomporre, oppure semplificare termini invece di fattori.
+confondi:
+- scheda: limiti-notevoli
+  differenza: Se compare un seno o un esponenziale conviene il limite notevole.
+perche: 'Semplificare il fattore che si annulla elimina la forma indeterminata: i limiti dipendono dai valori vicini, non da quello nel punto.'
+parole: forma 0/0 scomposizione razionalizzazione coniugato

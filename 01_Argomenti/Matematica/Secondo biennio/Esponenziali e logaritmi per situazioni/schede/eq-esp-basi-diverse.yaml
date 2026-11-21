@@ -1,0 +1,36 @@
+id: eq-esp-basi-diverse
+tipo: regola
+titolo: Esponenziale con basi diverse
+sigla: Basi diverse
+comando: a^x = b -> x = log_a(b)
+vedo: Basi non riducibili tra loro (`2^x = 5`, `3^x = 2^(x + 1)`).
+formula:
+- a^x = b
+- x = log_a(b) = frac(ln(b)|ln(a))
+adatto:
+- Se `b <= 0` non ci sono soluzioni.
+- Con basi diverse da entrambe le parti, prendi il logaritmo naturale di tutti e due i membri.
+- 'Il logaritmo porta giù l''esponente: `ln(a^x) = x*ln(a)`.'
+- Per il valore numerico usa la calcolatrice con `frac(ln(b)|ln(a))`.
+esempi:
+- da: 2^x = 5
+  passi:
+  - '`x = log_2(5)`'
+  - '`frac(ln(5)|ln(2))`, circa 2,32'
+  ris: x = log_2(5)
+- da: 3^x = 2^(x + 1)
+  passi:
+  - '`x*ln(3) = (x + 1)*ln(2)`'
+  - '`x*(ln(3) - ln(2)) = ln(2)`'
+  - circa 1,71
+  ris: x = frac(ln(2)|ln(3) - ln(2))
+- da: 7^x = -2
+  passi:
+  - un esponenziale è positivo
+  ris: nessuna soluzione
+errore: Scrivere `ln(a + b) = ln(a) + ln(b)` durante il passaggio ai logaritmi.
+confondi:
+- scheda: eq-esp-stessa-base
+  differenza: Se le basi si riducono alla stessa, non servono i logaritmi.
+perche: 'Il logaritmo è l''operazione inversa: applicarlo ai due membri porta l''incognita fuori dall''esponente.'
+parole: esponenziale basi diverse logaritmo naturale

@@ -1,0 +1,33 @@
+id: eq-tangente
+tipo: regola
+titolo: Equazione tan(x) = a
+sigla: Tangente = a
+comando: x = arctan(a) + k*pi
+vedo: Un'equazione della forma `tan(x) = numero`.
+formula:
+- x = arctan(a) + k*pi
+adatto:
+- Ha sempre soluzioni, per qualsiasi `a`.
+- 'Il periodo è `pi`, non `2*pi`: una sola serie.'
+- 'Condizione di esistenza: `cos(x) != 0`.'
+- Con `tan(2x) = a` risolvi per `2x` e dividi tutto per 2.
+esempi:
+- da: tan(x) = 1
+  passi:
+  - '`arctan(1) = frac(pi|4)`'
+  ris: x = frac(pi|4) + k*pi
+- da: tan(x) = -sqrt(3)
+  passi:
+  - '`arctan(-sqrt(3)) = -frac(pi|3)`'
+  ris: x = -frac(pi|3) + k*pi
+- da: tan(2x) = frac(sqrt(3)|3)
+  passi:
+  - '`2x = frac(pi|6) + k*pi`'
+  - divido tutto per 2
+  ris: x = frac(pi|12) + frac(k*pi|2)
+errore: Scrivere `2k*pi` invece di `k*pi`.
+confondi:
+- scheda: eq-seno
+  differenza: Seno e coseno hanno periodo `2*pi`, la tangente `pi`.
+perche: La tangente si ripete ogni mezzo giro, perché `tan(x + pi) = tan(x)`.
+parole: equazione tangente goniometrica tan x periodo pi

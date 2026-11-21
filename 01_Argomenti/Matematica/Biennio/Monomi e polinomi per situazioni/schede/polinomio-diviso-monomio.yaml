@@ -1,0 +1,25 @@
+id: polinomio-diviso-monomio
+tipo: regola
+titolo: Polinomio diviso un monomio
+sigla: Polinomio diviso monomio
+comando: dividi ogni termine
+vedo: "Un polinomio diviso un monomio: `(6x^3 - 4x^2 + 2x) : (2x)`."
+formula: frac(a + b|c) = frac(a|c) + frac(b|c)
+adatto:
+  - "Dividi ogni termine del polinomio per il monomio (scheda «Quoziente di monomi»)."
+  - "Il risultato è un polinomio solo se ogni termine è divisibile."
+  - "Si spezza solo il numeratore: il denominatore con più termini non si spezza."
+esempi:
+  - da: frac(6x^3 - 4x^2 + 2x|2x)
+    passi:
+      - "`6x^3 : 2x = 3x^2`"
+      - "`-4x^2 : 2x = -2x`"
+      - "`2x : 2x = 1`"
+    ris: 3x^2 - 2x + 1
+    verifica: scomposizione
+errore: "Spezzare il denominatore: `frac(1|a+b)` non è uguale a `frac(1|a) + frac(1|b)`."
+confondi:
+  - scheda: divisione-polinomi
+    differenza: "Qui il divisore ha un solo termine; con due o più termini serve la divisione tra polinomi."
+perche: "Dividere per `2x` vuol dire moltiplicare ogni termine per `1/(2x)`: è la distributiva."
+parole: divisione polinomio monomio

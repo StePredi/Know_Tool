@@ -1,0 +1,31 @@
+id: negare-quantificatori
+tipo: regola
+titolo: Negare i quantificatori
+sigla: Nega ∀/∃
+comando: ¬∀xP ≡ ∃x¬P
+vedo: Negare una frase con «tutti», «ogni» o «esiste».
+formula:
+- ¬(∀x P(x)) ≡ ∃x ¬P(x)
+- ¬(∃x P(x)) ≡ ∀x ¬P(x)
+adatto:
+- Scambia il quantificatore (`∀` con `∃`) e nega la proprietà.
+- 'Negare «tutti sono…» non vuol dire «nessuno è…»: vuol dire «c''è almeno uno che non è…».'
+esempi:
+- da: nega «tutti gli studenti della classe sono maggiorenni»
+  passi:
+  - scambio `∀` con `∃` e nego
+  ris: esiste almeno uno studente che non è maggiorenne
+- da: nega «esiste un numero reale con x² < 0»
+  passi:
+  - scambio `∃` con `∀`
+  ris: 'per ogni x reale: x² ≥ 0'
+- da: 'nega ∀x ∈ R: x² > 0'
+  passi:
+  - '`∃x: x² ≤ 0`'
+  ris: '∃x ∈ R: x² ≤ 0, vera con x = 0'
+errore: Negare «tutti» con «nessuno».
+confondi:
+- scheda: negazione
+  differenza: Nella negazione semplice si inverte solo la proprietà; qui cambia anche il quantificatore.
+perche: Per smentire «tutti» basta un caso contrario; per smentire «esiste» occorre che nessuno valga.
+parole: negare quantificatori tutti esiste nessuno

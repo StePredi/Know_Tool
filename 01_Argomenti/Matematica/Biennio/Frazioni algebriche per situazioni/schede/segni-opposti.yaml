@@ -1,0 +1,31 @@
+id: segni-opposti
+tipo: regola
+titolo: Fattori con segni opposti
+sigla: Segni opposti
+comando: "b - a = -(a - b)"
+frase: "Due parentesi con gli stessi termini in ordine invertito."
+vedo: "Sopra e sotto ci sono due parentesi con gli stessi termini in ordine invertito: `frac(x - 3|3 - x)`."
+formula: b - a = -(a - b)
+adatto:
+  - "Cambia il segno a una delle due parentesi e metti un meno davanti."
+  - "`3 - x = -(x - 3)`: ora i due fattori sono uguali e si semplificano."
+  - "Con esponente pari il meno sparisce: `(3 - x)^2 = (x - 3)^2`. Con esponente dispari resta."
+esempi:
+  - da: frac(x - 3|3 - x)
+    passi:
+      - "`3 - x = -(x - 3)`"
+      - "Semplifico `(x - 3)`: resta `-1` al denominatore"
+    ris: "-1"
+    verifica: scomposizione
+  - da: frac(x^2 - 4|2 - x)
+    passi:
+      - "Sopra: `(x - 2)(x + 2)`; sotto: `2 - x = -(x - 2)`"
+      - "Semplifico `(x - 2)`: resta `x + 2` con il meno"
+    ris: -(x + 2)
+    verifica: scomposizione
+errore: "Semplificare `x - 3` con `3 - x` e scrivere 1: il risultato è -1."
+confondi:
+  - scheda: semplifica
+    differenza: "Qui i due fattori sono opposti, non uguali: prima va cambiato il segno a uno dei due."
+perche: "`3 - x` è `(-1)*(x - 3)`: il fattore -1 esce e resta il fattore comune."
+parole: segni opposti cambiare segno meno davanti

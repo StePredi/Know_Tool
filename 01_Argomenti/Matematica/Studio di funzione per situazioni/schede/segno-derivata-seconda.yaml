@@ -1,0 +1,28 @@
+id: segno-derivata-seconda
+tipo: regola
+titolo: Concavità
+sigla: Concavità
+comando: f'' > 0 convessa, f'' < 0 concava
+vedo: Hai la derivata seconda e vuoi sapere come curva il grafico.
+formula:
+- 'f''''(x) > 0: convessa'
+- 'f''''(x) < 0: concava'
+adatto:
+- Studia il segno di `f''` nel dominio.
+- Convessa (cupa verso l'alto, a «U») dove `f'' > 0`. Concava (a «n») dove `f'' < 0`.
+- 'Dove `f''''` cambia segno la curvatura cambia: possibile flesso.'
+esempi:
+- da: f''(x) = 6x
+  passi:
+  - positiva per `x > 0`, negativa per `x < 0`
+  ris: concava per x < 0, convessa per x > 0
+- da: f''(x) = frac(2|(x - 1)^3)
+  passi:
+  - segno di `(x - 1)^3`, cioè di `x - 1`
+  ris: concava per x < 1, convessa per x > 1, nessun flesso
+errore: 'Confondere convessa e concava: ricorda che `x^2` (`f'''' = 2 > 0`) è convessa.'
+confondi:
+- scheda: flesso
+  differenza: 'Concavità: il segno di `f''''`. Flesso: il punto dove il segno cambia.'
+perche: Se la pendenza cresce il grafico curva verso l'alto, se cala curva verso il basso.
+parole: concavità convessità derivata seconda segno

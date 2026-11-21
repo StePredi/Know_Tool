@@ -1,0 +1,32 @@
+id: disgiunzione
+tipo: regola
+titolo: Disgiunzione (o)
+sigla: O
+comando: p ∨ q
+vedo: 'Due alternative: «o», «oppure», «almeno uno».'
+formula:
+- p ∨ q
+adatto:
+- 'Tavola (righe in ordine: `VV, VF, FV, FF`): `V V V F`.'
+- Il «o» inclusivo è falso solo quando entrambe sono false.
+- 'Con gli insiemi: unione.'
+- 'Il «o» esclusivo («aut… aut») è vero quando esattamente una delle due è vera: `p ⊻ q`.'
+esempi:
+- da: 3 è pari o 3 è primo
+  passi:
+  - F o V
+  ris: vera
+- da: 2 > 5 o 4 > 9
+  passi:
+  - F o F
+  ris: falsa
+- da: x < 0 ∨ x > 3
+  passi:
+  - unione di due semirette
+  ris: x < 0 oppure x > 3
+errore: 'Confondere «o» inclusivo con quello esclusivo: nella logica il «o» è inclusivo se non è detto altro.'
+confondi:
+- scheda: congiunzione
+  differenza: O ne richiede almeno una; e ne richiede due.
+perche: È vera quando almeno una delle due alternative è vera.
+parole: disgiunzione o or unione inclusivo esclusivo

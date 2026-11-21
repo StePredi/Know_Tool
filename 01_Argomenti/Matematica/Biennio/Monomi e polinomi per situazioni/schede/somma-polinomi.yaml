@@ -1,0 +1,33 @@
+id: somma-polinomi
+tipo: regola
+titolo: Somma e differenza di polinomi
+sigla: Somma di polinomi
+comando: togli le parentesi, poi riduci
+vedo: "Due polinomi tra parentesi uniti da + o −: `(3x^2 - x) - (x^2 + 2x - 1)`."
+formula:
+  - -(a + b) = -a - b
+  - +(a + b) = a + b
+adatto:
+  - "Davanti al + la parentesi si toglie senza cambiare niente."
+  - "Davanti al − cambia il segno di tutti i termini dentro la parentesi."
+  - "Poi raggruppa i termini simili e sommali (scheda «Somma di monomi simili»)."
+  - "Scrivi il risultato in ordine, dal grado più alto."
+esempi:
+  - da: (3x^2 - x) - (x^2 + 2x - 1)
+    passi:
+      - "Tolgo le parentesi e cambio i segni della seconda: `3x^2 - x - x^2 - 2x + 1`"
+      - "Termini in x^2: `3x^2 - x^2 = 2x^2`"
+      - "Termini in x: `-x - 2x = -3x`"
+    ris: 2x^2 - 3x + 1
+    verifica: scomposizione
+  - da: (x^3 + 2x) + (4 - x^3 + x)
+    passi:
+      - "`x^3 - x^3 = 0`, `2x + x = 3x`, resta `+4`"
+    ris: 3x + 4
+    verifica: scomposizione
+errore: "Cambiare il segno solo del primo termine dentro la parentesi preceduta da −: `-(x^2 + 2x - 1)` diventa `-x^2 - 2x + 1`."
+confondi:
+  - scheda: somma-monomi
+    differenza: "Qui prima si tolgono le parentesi; poi si fanno tante somme di monomi simili."
+perche: "Il meno davanti alla parentesi è un × (−1) che si distribuisce su ogni termine."
+parole: somma differenza polinomi parentesi segno meno

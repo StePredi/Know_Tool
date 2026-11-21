@@ -1,0 +1,26 @@
+id: sistema-tre-incognite
+tipo: regola
+titolo: Sistema con tre incognite
+sigla: Tre incognite
+comando: "elimino la stessa incognita due volte"
+vedo: "Tre equazioni con tre incognite: `x + y + z = 6`, `x - y + 2z = 5`, `2x + y - z = 1`."
+formula: a*x + b*y + c*z = d
+adatto:
+  - "Elimina la stessa incognita da due coppie di equazioni (con riduzione) o ricavala da una e sostituiscila nelle altre due."
+  - "Ottieni un sistema di due equazioni in due incognite: risolvilo come sempre."
+  - "Torna indietro per trovare la terza incognita."
+  - "Controlla la terna in tutte e tre le equazioni."
+esempi:
+  - da: "x + y + z = 6,   x - y + 2z = 5,   2x + y - z = 1"
+    passi:
+      - "Elimino `z`: prima con la terza e la prima, sommo: `3x + 2y = 7`"
+      - "Poi con la seconda e la prima (seconda meno il doppio della prima): `x + 3y = 7`"
+      - "Sistema a due incognite: `x = 7 - 3y`, `21 - 9y + 2y = 7`, quindi `y = 2` e `x = 1`"
+      - "Dalla prima: `z = 6 - 1 - 2 = 3`"
+    ris: "(1, 2, 3)"
+errore: "Eliminare incognite diverse nelle due coppie: nei due passaggi deve sparire la stessa."
+confondi:
+  - scheda: riduzione
+    differenza: "Con tre incognite si applica due volte la riduzione, per arrivare a un sistema a due incognite."
+perche: "Ogni eliminazione toglie un'incognita e un'equazione."
+parole: tre incognite sistema tre equazioni terna

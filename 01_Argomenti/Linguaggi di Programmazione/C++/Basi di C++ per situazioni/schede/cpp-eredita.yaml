@@ -1,0 +1,38 @@
+id: cpp-eredita
+tipo: ricetta
+titolo: Ereditarietà e funzioni virtual
+sigla: Ereditarietà
+comando: 'class B : public A  virtual'
+frase: una classe che estende un'altra
+fonte: Documentazione C++ · cppreference.com · Classi derivate · virtual
+parole: ereditarietà virtual override classe derivata base polimorfismo public distruttore
+quando: Quando più classi condividono parti comuni ma una funzione si comporta in modo diverso in ognuna.
+fasi:
+- nome: Base
+  righe:
+  - codice: class Animale {
+  - codice: 'public:'
+  - codice: '    virtual void verso() const { cout << "..."; }'
+    commento: 'virtual: la versione giusta si sceglie in base all''oggetto vero.'
+  - codice: '    virtual ~Animale() = default;'
+    commento: Distruttore virtual nelle classi base.
+  - codice: '};'
+- nome: Derivata
+  righe:
+  - codice: 'class Cane : public Animale {'
+  - codice: 'public:'
+  - codice: '    void verso() const override { cout << "Bau"; }'
+    commento: 'override: il compilatore controlla che esista in base e sia virtual.'
+  - codice: '};'
+- nome: Usare
+  righe:
+  - codice: Cane c; Animale& a = c;
+  - codice: a.verso();
+    commento: Stampa Bau.
+    trappola: Senza virtual nella classe base a.verso() chiamerebbe la versione della base (qui stamperebbe
+      ...).
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-classe
+- cpp-ref-ptr

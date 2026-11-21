@@ -1,0 +1,34 @@
+id: eq-coseno
+tipo: regola
+titolo: Equazione cos(x) = a
+sigla: Coseno = a
+comando: x = +-arccos(a) + 2k*pi
+vedo: Un'equazione della forma `cos(x) = numero`.
+formula:
+- x = +-arccos(a) + 2k*pi
+adatto:
+- Se `a` sta fuori da `[-1, 1]` non ci sono soluzioni.
+- 'Casi speciali: `cos(x) = 0` → `x = frac(pi|2) + k*pi`; `cos(x) = 1` → `x = 2k*pi`; `cos(x) = -1` → `x = pi + 2k*pi`.'
+- '`cos(x) = cos(y)` → `x = +-y + 2k*pi`.'
+- Con `cos(3x) = a` risolvi per `3x` e dividi tutto per 3.
+esempi:
+- da: cos(x) = frac(sqrt(2)|2)
+  passi:
+  - '`arccos(frac(sqrt(2)|2)) = frac(pi|4)`'
+  ris: x = +-frac(pi|4) + 2k*pi
+- da: cos(x) = -frac(1|2)
+  passi:
+  - angolo di riferimento `frac(pi|3)`
+  - 'coseno negativo: secondo e terzo quadrante'
+  ris: x = +-frac(2*pi|3) + 2k*pi
+- da: cos(3x) = 0
+  passi:
+  - '`3x = frac(pi|2) + k*pi`'
+  - divido tutto per 3
+  ris: x = frac(pi|6) + frac(k*pi|3)
+errore: Dimenticare il ± e dare solo una serie di soluzioni.
+confondi:
+- scheda: eq-seno
+  differenza: 'Seno: `x` e `pi - x`. Coseno: `x` e `-x`.'
+perche: 'La retta verticale `x = a` taglia la circonferenza in due punti simmetrici rispetto all''asse orizzontale: angoli opposti.'
+parole: equazione coseno goniometrica cos x uguale periodo soluzioni

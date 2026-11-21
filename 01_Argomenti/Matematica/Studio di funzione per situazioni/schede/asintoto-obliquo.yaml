@@ -1,0 +1,34 @@
+id: asintoto-obliquo
+tipo: regola
+titolo: Asintoto obliquo
+sigla: Obliquo
+comando: y = m*x + q
+vedo: Quando `x` va all'infinito anche `f(x)` va all'infinito, in modo «quasi lineare».
+formula:
+- m = lim frac(f(x)|x)
+- q = lim (f(x) - m*x)
+adatto:
+- 'Calcola `m = lim_(x -> +inf) frac(f(x)|x)`: deve essere finito e diverso da `0`.'
+- 'Calcola `q = lim_(x -> +inf) (f(x) - m*x)`: deve essere finito.'
+- 'Frazione di polinomi con numeratore di un grado in più: dividi i polinomi, il quoziente è la retta.'
+- Ripeti per `-inf`.
+esempi:
+- da: f(x) = frac(x^2|x - 1)
+  passi:
+  - '`m = lim frac(x|x - 1) = 1`'
+  - '`q = lim (frac(x^2|x - 1) - x) = lim frac(x|x - 1) = 1`'
+  ris: y = x + 1
+- da: f(x) = frac(x^2 + 1|x)
+  passi:
+  - 'divisione: `x + frac(1|x)`'
+  ris: y = x
+- da: f(x) = x^3 - 3x
+  passi:
+  - '`m = lim (x^2 - 3) = +inf`'
+  ris: nessun asintoto obliquo
+errore: Scrivere l'asintoto obliquo senza controllare che `m` sia finito e `q` esista.
+confondi:
+- scheda: asintoto-orizzontale
+  differenza: Se c'è un orizzontale dalla stessa parte, l'obliquo non c'è.
+perche: 'La differenza tra la funzione e la retta tende a zero: il grafico si schiaccia sulla retta.'
+parole: asintoto obliquo retta m q

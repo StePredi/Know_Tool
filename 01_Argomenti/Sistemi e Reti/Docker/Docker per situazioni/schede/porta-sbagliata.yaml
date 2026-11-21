@@ -1,0 +1,21 @@
+id: porta-sbagliata
+tipo: prima_dopo
+titolo: 'Il servizio non risponde: la porta del container non è quella giusta'
+sigla: Porta sbagliata in -p
+comando: -p host:container
+frase: a destra va la porta dove il servizio ascolta
+fonte: lab_immagini_dockerfile.pdf (parte 4.4, domanda 15)
+parole: porta sbagliata -p -e port non risponde mapping errore porta container
+prima: docker run -d --name errore-porta -p 5003:⟦5000⟧ -e PORT=8080 note:2.0
+dopo: docker run -d --name errore-porta -p 5003:⟦8080⟧ -e PORT=8080 note:2.0
+uso: Pubblicare un servizio che ascolta su una porta diversa da quella predefinita.
+riconoscila: Il client non riceve risposta; docker logs dice «in ascolto su 0.0.0.0:8080», ma -p inoltra alla 5000.
+parti:
+- voce: '5003'
+  spiega: 'porta dell''host: può essere qualsiasi porta libera'
+- voce: '8080'
+  spiega: 'porta del container: deve coincidere con quella su cui il programma ascolta'
+varianti: []
+vicine:
+- porta-variabile
+- client-non-collega

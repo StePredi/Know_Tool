@@ -1,0 +1,34 @@
+id: grafico-log
+tipo: regola
+titolo: Grafico del logaritmo
+sigla: Grafico
+comando: y = log_a(x)
+vedo: Disegnare o leggere `y = log_a(x)` e le sue trasformazioni.
+formula:
+- y = log_a(x)
+- x > 0
+adatto:
+- Passa per `(1, 0)`; asintoto verticale `x = 0`.
+- '`a > 1`: crescente. `0 < a < 1`: decrescente.'
+- È il simmetrico di `a^x` rispetto alla bisettrice `y = x`.
+- '`y = log_a(x - h)` sposta l''asintoto a `x = h`; `y = log_a(x) + k` alza il grafico.'
+esempi:
+- da: y = log_2(x - 1)
+  passi:
+  - 'condizione: `x > 1`'
+  - 'zero: `x - 1 = 1`'
+  ris: dominio x > 1, asintoto x = 1, passa per (2, 0)
+- da: y = log_2(x) + 3
+  passi:
+  - 'zero: `log_2(x) = -3`'
+  ris: passa per (1, 3) e per (frac(1|8), 0)
+- da: y = ln(-x)
+  passi:
+  - 'condizione: `-x > 0`'
+  ris: dominio x < 0
+errore: 'Disegnare il grafico che attraversa l''asse `y`: ha asintoto verticale `x = 0`.'
+confondi:
+- scheda: grafico-esponenziale
+  differenza: 'Il logaritmo è l''inverso dell''esponenziale: i grafici si riflettono.'
+perche: 'Il grafico è quello di `a^x` riflesso: cambiano i ruoli di `x` e `y`.'
+parole: grafico logaritmo asintoto verticale crescente

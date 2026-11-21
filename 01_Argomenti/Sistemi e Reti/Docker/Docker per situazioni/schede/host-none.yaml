@@ -1,0 +1,24 @@
+id: host-none
+tipo: ricetta
+titolo: Usare la rete dell'host o nessuna rete
+sigla: host e none
+comando: --network host · --network none
+frase: zero isolamento o isolamento totale
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (reti)
+parole: network host none rete host prestazioni isolamento nessuna rete stand-alone
+quando: Quando servono le massime prestazioni di rete o, al contrario, un container senza rete.
+fasi:
+- nome: Rete dell'host
+  righe:
+  - codice: docker run -d --network host nginx
+    commento: 'il container usa direttamente la rete del PC: niente -p, niente isolamento'
+    trappola: 'Solo per container stand-alone: nessun isolamento di rete.'
+- nome: Nessuna rete
+  righe:
+  - codice: docker run -d --network none nginx
+    commento: 'il container non ha rete: completamente isolato'
+segnaposto: {}
+varianti: []
+vicine:
+- rete-custom
+- docker0-host

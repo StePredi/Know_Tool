@@ -1,0 +1,27 @@
+id: immagine-alpine
+tipo: ricetta
+titolo: Fare un'immagine più piccola con Alpine
+sigla: Alpine
+comando: FROM python:3.12-alpine
+frase: stessa app, base più leggera
+fonte: lab_immagini_dockerfile.pdf (approfondimento C) · container_mini_tutorial.md
+parole: alpine immagine piccola dimensione slim leggera adduser download registry
+quando: Quando l'immagine verrà scaricata da molti computer o da un registro e le dimensioni contano.
+fasi:
+- nome: Cambia la base
+  righe:
+  - codice: FROM python:3.12-alpine
+    commento: 'Alpine Linux: pochi MB invece delle centinaia di una base Debian'
+  - codice: RUN adduser -S -u 1000 app
+    commento: 'solo se usi l''utente non root: su Alpine useradd non c''è, si usa adduser'
+    trappola: 'Alpine è diversa da Debian: comandi e pacchetti possono cambiare nome.'
+- nome: Confronta
+  righe:
+  - codice: docker build -t note:alpine .
+  - codice: docker images note
+    commento: confronta la colonna SIZE con note:2.0
+segnaposto: {}
+varianti: []
+vicine:
+- utente-non-root
+- pull-immagine

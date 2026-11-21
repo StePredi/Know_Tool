@@ -1,0 +1,31 @@
+id: forma-normale-dis
+tipo: regola
+titolo: Porta la disequazione in forma normale
+sigla: Forma normale
+comando: "tutto a sinistra, confronto con 0"
+frase: "Passo 1: sviluppa, porta tutto a sinistra e riduci; a destra resta 0."
+vedo: "Una disequazione con termini da entrambi i lati o con parentesi."
+formula: P(x) > 0
+adatto:
+  - "Sviluppa, porta tutto a sinistra e riduci: a destra resta 0."
+  - "Sommando o sottraendo, il verso del segno resta lo stesso."
+  - "Moltiplicando o dividendo per un numero negativo il verso si inverte: `>` diventa `<`."
+  - "Se il primo coefficiente è negativo puoi cambiare il segno a tutto e invertire il verso."
+  - "Mai moltiplicare per un'espressione con la x di cui non conosci il segno: nelle fratte porta tutto a una sola frazione."
+esempi:
+  - da: "x^2 + 3x > 2x + 6"
+    passi:
+      - "Porto a sinistra: `x^2 + 3x - 2x - 6 > 0`"
+      - "Riduco"
+    ris: "x^2 + x - 6 > 0"
+  - da: "-x^2 + 4 >= 0"
+    passi:
+      - "Primo coefficiente negativo: moltiplico per -1"
+      - "Il verso si inverte: `>=` diventa `<=`"
+    ris: "x^2 - 4 <= 0"
+errore: "Moltiplicare per -1 senza invertire il verso."
+confondi:
+  - scheda: scomponi-zeri
+    differenza: "Prima si porta in forma normale, poi si cercano gli zeri."
+perche: "Con il confronto con 0 basta studiare il segno di un solo polinomio."
+parole: forma normale verso invertire disequazione

@@ -1,0 +1,35 @@
+id: semplifica-prima
+tipo: regola
+titolo: Riscrivi l'integrando
+sigla: Riscrivi
+comando: sviluppa, spezza, trasforma in potenze
+vedo: L'integrale non è immediato così com'è, ma lo diventa se riscrivi la funzione.
+formula:
+- frac(a + b|c) = frac(a|c) + frac(b|c)
+- sqrt(x) = x^(1/2)
+- frac(1|x^n) = x^(-n)
+adatto:
+- Radici e frazioni con una sola `x` al denominatore diventano potenze di `x`.
+- Un numeratore con più termini sopra un solo termine si spezza in una somma.
+- Un quadrato o un prodotto di polinomi si sviluppa.
+- Fatto questo, ogni pezzo è spesso un integrale immediato.
+esempi:
+- da: ∫ frac(x^2 + 1|x) dx
+  passi:
+  - 'spezzo la frazione: `x + frac(1|x)`'
+  - integro i due pezzi
+  ris: frac(x^2|2) + ln|x| + c
+- da: ∫ (x + 1)^2 dx
+  passi:
+  - 'sviluppo: `x^2 + 2x + 1`'
+  ris: frac(x^3|3) + x^2 + x + c
+- da: ∫ x*sqrt(x) dx
+  passi:
+  - '`x*x^(1/2) = x^(3/2)`'
+  ris: frac(2|5)*x^2*sqrt(x) + c
+errore: 'Integrare una frazione pezzo per pezzo: `∫ frac(1|x + 1) dx` non è `ln|x| + ln|1|`; si spezza solo il numeratore, mai il denominatore.'
+confondi:
+- scheda: riconosci-forma
+  differenza: Prima riscrivi, poi riconosci la forma del risultato.
+perche: 'Le regole immediate valgono per potenze, somme e costanti: riscrivere riporta l''integrale a quella forma.'
+parole: riscrivere sviluppare spezzare potenze radici

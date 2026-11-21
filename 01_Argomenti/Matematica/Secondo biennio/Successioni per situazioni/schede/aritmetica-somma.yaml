@@ -1,0 +1,34 @@
+id: aritmetica-somma
+tipo: regola
+titolo: 'Progressione aritmetica: somma'
+sigla: Aritmetica S_n
+comando: S_n = frac(n*(a_1 + a_n)|2)
+vedo: Devi sommare i primi `n` termini di una progressione aritmetica.
+formula:
+- S_n = frac(n*(a_1 + a_n)|2)
+- S_n = frac(n*(2*a_1 + (n - 1)*d)|2)
+adatto:
+- La prima formula serve se conosci l'ultimo termine; la seconda se conosci `d`.
+- 'Trucco di Gauss: primo + ultimo = secondo + penultimo = ...'
+- '`1 + 2 + ... + n = frac(n*(n + 1)|2)`.'
+esempi:
+- da: 1 + 2 + 3 + ... + 100
+  passi:
+  - '`frac(100*(1 + 100)|2)`'
+  ris: '5050'
+- da: 'a_1 = 4, d = 3: somma dei primi 10'
+  passi:
+  - '`a_10 = 31`'
+  - '`S_10 = frac(10*(4 + 31)|2)`'
+  ris: '175'
+- da: frac(x*(2*4 + (x - 1)*3)|2)
+  passi:
+  - sviluppo
+  ris: frac(3*x^2 + 5*x|2)
+  verifica: scomposizione
+errore: Dimenticare di dividere per 2.
+confondi:
+- scheda: geometrica-somma
+  differenza: Qui la formula con la media tra primo e ultimo; lì con la potenza di `q`.
+perche: 'Sommando la successione scritta in avanti e all''indietro, ogni coppia dà `a_1 + a_n`: `n` coppie, ognuna contata due volte.'
+parole: somma progressione aritmetica gauss primi n termini

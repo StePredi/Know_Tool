@@ -1,0 +1,38 @@
+id: eq-esp-sostituzione
+tipo: regola
+titolo: Esponenziale con sostituzione t = a^x
+sigla: Sostituzione
+comando: t = a^x, t > 0
+vedo: La stessa incognita compare come `a^x` e `a^(2x)` (o `4^x` e `2^x`), come in un'equazione di secondo grado.
+formula:
+- t = a^x
+- a*t^2 + b*t + c = 0
+- t > 0
+adatto:
+- Riscrivi tutto in funzione di `t = a^x` (`a^(2x) = t^2`).
+- Scarta i valori di `t` negativi o nulli.
+- Per ogni `t` buono risolvi `a^x = t`.
+esempi:
+- da: 4^x - 5*2^x + 4 = 0
+  passi:
+  - '`t = 2^x`: `t^2 - 5t + 4 = 0`'
+  - '`t = 1` oppure `t = 4`'
+  - '`2^x = 1` oppure `2^x = 4`'
+  ris: x = 0, x = 2
+- da: 9^x - 3^(x + 1) - 4 = 0
+  passi:
+  - '`t = 3^x`: `t^2 - 3t - 4 = 0`'
+  - '`t = 4` oppure `t = -1` (scartato)'
+  - '`3^x = 4`'
+  ris: x = log_3(4)
+- da: 2^x + 2^(-x) = frac(5|2)
+  passi:
+  - '`t = 2^x`: `t + frac(1|t) = frac(5|2)`'
+  - '`2t^2 - 5t + 2 = 0`: `t = 2` oppure `t = frac(1|2)`'
+  ris: x = 1, x = -1
+errore: Dimenticare di scartare `t <= 0`, oppure dimenticare di tornare a `x`.
+confondi:
+- scheda: eq-esp-stessa-base
+  differenza: Lì basta uguagliare gli esponenti; qui serve prima risolvere in `t`.
+perche: 'Con `t = a^x` l''equazione diventa un''equazione algebrica: poi si torna a `x` con l''esponenziale elementare.'
+parole: esponenziale sostituzione secondo grado t

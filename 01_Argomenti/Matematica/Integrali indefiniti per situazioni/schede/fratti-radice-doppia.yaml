@@ -1,0 +1,27 @@
+id: fratti-radice-doppia
+tipo: regola
+titolo: Radice doppia
+sigla: Radice doppia
+comando: frac(N|(x - a)^2) = frac(A|x - a) + frac(B|(x - a)^2)
+vedo: Il denominatore ha un fattore ripetuto, come `(x - 1)^2`.
+formula:
+- frac(N|(x - a)^2) = frac(A|x - a) + frac(B|(x - a)^2)
+adatto:
+- 'Servono due fratti: uno con la potenza 1, l''altro con la potenza 2.'
+- Il fratto con la potenza 2 si integra come una potenza negativa.
+- Se il numeratore è un numero, basta il secondo.
+esempi:
+- da: ∫ frac(1|(x - 1)^2) dx
+  passi:
+  - potenza `-2`
+  ris: -frac(1|x - 1) + c
+- da: ∫ frac(x|(x - 1)^2) dx
+  passi:
+  - '`x = (x - 1) + 1`: `frac(1|x - 1) + frac(1|(x - 1)^2)`'
+  ris: ln|x - 1| - frac(1|x - 1) + c
+errore: 'Scrivere un solo fratto per il fattore doppio: ne servono due.'
+confondi:
+- scheda: fratti-radici-distinte
+  differenza: Qui il fattore è ripetuto; lì i fattori sono diversi.
+perche: Quando un fattore è ripetuto il numeratore generale non si può esprimere con un fratto solo.
+parole: fratti radice doppia fattore ripetuto

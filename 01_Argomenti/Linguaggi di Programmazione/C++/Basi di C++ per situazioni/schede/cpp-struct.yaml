@@ -1,0 +1,34 @@
+id: cpp-struct
+tipo: ricetta
+titolo: 'struct: raggruppare dati'
+sigla: struct
+comando: struct Nome { … };
+frase: più dati sotto un nome
+fonte: Documentazione C++ · cppreference.com · Classi · struct
+parole: struct struttura raggruppare dati campi membri punto studente record
+quando: Quando un'informazione ha più parti (nome, età) e vuoi tenerle insieme con nomi chiari.
+fasi:
+- nome: Definire
+  righe:
+  - codice: struct Studente {
+  - codice: '    string nome;'
+    commento: Un campo.
+  - codice: '    int eta;'
+  - codice: '};'
+    trappola: 'Il punto e virgola dopo la parentesi graffa è obbligatorio: se manca g++ dice "expected
+      '';'' after struct definition".'
+- nome: Usare
+  righe:
+  - codice: Studente s = {"Anna", 17};
+  - codice: s.eta = 18;
+    commento: Il punto raggiunge un campo.
+  - codice: vector<Studente> classe = {{"Bruno", 16}, {"Carla", 17}};
+    commento: Anche in un vector.
+  - codice: void stampa(const Studente& s) { … }
+    commento: Passala per riferimento costante.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-classe
+- cpp-pair
+- cpp-riferimento

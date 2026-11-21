@@ -1,0 +1,36 @@
+id: flesso
+tipo: regola
+titolo: Punti di flesso
+sigla: Flesso
+comando: f''(x_0) = 0 e f'' cambia segno
+vedo: Cerchi dove il grafico cambia curvatura.
+formula:
+- f''(x_0) = 0
+- f'' cambia segno in x_0
+adatto:
+- 'Risolvi `f''''(x) = 0`: candidati.'
+- Controlla che `f''` cambi segno ai due lati.
+- Calcola `f(x_0)` per le coordinate.
+- Se in più `f'(x_0) = 0` è un flesso a tangente orizzontale.
+esempi:
+- da: f(x) = x^3 - 3x^2
+  passi:
+  - '`f''''(x) = 6(x - 1)`'
+  - cambia segno in `x = 1`, `f(1) = -2`
+  ris: flesso (1, -2)
+- da: f(x) = x^4 - 2x^2
+  passi:
+  - '`f''''(x) = 4(3x^2 - 1)`'
+  - zeri `x = +-frac(1|sqrt(3))`, `f'' ` cambia segno
+  ris: flessi in x = +-frac(1|sqrt(3)), y = -frac(5|9)
+- da: f(x) = x^4
+  passi:
+  - '`f''''(x) = 12x^2`, zero in `0`'
+  - ma `f''` non cambia segno
+  ris: nessun flesso
+errore: Fermarsi a `f'' = 0` senza controllare il cambio di segno.
+confondi:
+- scheda: punti-stazionari
+  differenza: 'Stazionario: `f'' = 0` e cambio di segno di `f''`. Flesso: `f'''' = 0` e cambio di segno di `f''''`.'
+perche: Il flesso è il punto in cui la pendenza smette di crescere e comincia a calare (o il contrario).
+parole: flesso punto di flesso cambia concavità

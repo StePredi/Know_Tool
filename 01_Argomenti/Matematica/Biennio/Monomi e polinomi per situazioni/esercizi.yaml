@@ -1,0 +1,54 @@
+esercizi:
+  - testo: (2x - 3)^2 - (x + 1)*(x - 1)
+    risultato: 3x^2 - 12x + 10
+    piano:
+      - scheda: somma-polinomi
+        nota: "Ultima operazione: una differenza tra due pezzi."
+      - scheda: quadrato-binomio
+        nota: "Primo pezzo: `(2x - 3)^2`."
+      - scheda: somma-per-differenza
+        nota: "Secondo pezzo: `(x + 1)(x - 1)`."
+  - testo: 3x*(x^2 - 2x) + (x + 1)^3
+    risultato: 4x^3 - 3x^2 + 3x + 1
+    piano:
+      - scheda: somma-polinomi
+        nota: "Ultima operazione: una somma."
+      - scheda: monomio-per-polinomio
+        nota: "Primo pezzo: `3x` fuori dalla parentesi."
+      - scheda: cubo-binomio
+        nota: "Secondo pezzo: `(x + 1)^3`."
+  - testo: (x + 2)*(x - 3) - (x - 1)^2
+    risultato: x - 7
+    piano:
+      - scheda: somma-polinomi
+        nota: "Ultima operazione: una differenza."
+      - scheda: polinomio-per-polinomio
+        nota: "Primo pezzo: due parentesi diverse."
+      - scheda: quadrato-binomio
+        nota: "Secondo pezzo: `(x - 1)^2`."
+  - testo: (3a^2b)^2*(-2ab^3)
+    risultato: -18a^5b^5
+    piano:
+      - scheda: prodotto-monomi
+        nota: "Ultima operazione: due monomi che si moltiplicano."
+      - scheda: potenza-monomio
+        nota: "Primo fattore: `(3a^2b)^2`."
+  - testo: frac(6x^4 - 9x^3 + 3x^2|3x^2)
+    risultato: 2x^2 - 3x + 1
+    piano:
+      - scheda: polinomio-diviso-monomio
+        nota: "Il divisore ha un solo termine."
+      - scheda: quoziente-monomi
+        nota: "Ogni termine diviso per `3x^2`."
+  - testo: frac(x^3 - 6x^2 + 11x - 6|x - 1)
+    risultato: x^2 - 5x + 6
+    piano:
+      - scheda: ruffini
+        nota: "Il divisore è `x - 1`, quindi a = 1."
+      - scheda: teorema-del-resto
+        nota: "Il resto viene 0: `P(1) = 0`."
+  - testo: frac(2x^3 + x^2 - 5x + 2|x^2 + x - 1)
+    risultato: 2x - 1 + frac(-2x + 1|x^2 + x - 1)
+    piano:
+      - scheda: divisione-polinomi
+        nota: "Il divisore ha tre termini: serve la divisione completa."

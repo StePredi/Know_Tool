@@ -1,0 +1,30 @@
+id: immagine-strumenti
+tipo: ricetta
+titolo: Costruire un'immagine con gli strumenti già installati
+sigla: Immagine con strumenti
+comando: RUN apt-get install … && rm -rf
+frase: installi una volta sola
+fonte: lab_networking_container.pdf (approfondimento A)
+parole: apt-get install immagine personalizzata ping iputils iproute2 sleep infinity netlab debian strumenti
+quando: Quando ti accorgi di installare gli stessi pacchetti in ogni container nuovo.
+fasi:
+- nome: Dockerfile
+  righe:
+  - codice: FROM debian:stable-slim
+  - codice: RUN apt-get update && apt-get install -y iputils-ping iproute2 && rm -rf /var/lib/apt/lists/*
+    commento: 'tutto in un RUN solo: un layer, e la cache di apt cancellata per non appesantirlo'
+  - codice: CMD ["sleep", "infinity"]
+    commento: 'un processo che non finisce mai: tiene il container acceso'
+- nome: Costruisci e usa
+  righe:
+  - codice: docker build -t netlab .
+  - codice: docker run -d --name c5 netlab
+    commento: 'qui basta -d: sleep infinity resta acceso anche senza terminale'
+  - codice: docker exec c5 ping -c 3 8.8.8.8
+    commento: ping c'è già
+segnaposto: {}
+varianti: []
+vicine:
+- strumenti-rete
+- comando-non-trovato
+- dockerfile-base

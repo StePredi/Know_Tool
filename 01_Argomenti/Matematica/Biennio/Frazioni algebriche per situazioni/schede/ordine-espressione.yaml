@@ -1,0 +1,32 @@
+id: ordine-espressione
+tipo: regola
+titolo: Espressione con più operazioni
+sigla: Più operazioni
+comando: parentesi, poi × e :, poi + e −
+vedo: "Un'espressione con più frazioni e più operazioni insieme, magari con parentesi."
+formula: frac(1|x) + frac(x|x + 1)*frac(1|x)
+adatto:
+  - "Stessa priorità dei numeri: parentesi, potenze, prodotti e quozienti, poi somme e differenze."
+  - "Svolgi una parentesi per volta; dopo ogni passo scomponi e semplifica."
+  - "Scrivi le condizioni di esistenza all'inizio, su tutte le frazioni."
+  - "Alla fine scomponi ancora il numeratore e controlla se si semplifica."
+esempi:
+  - da: frac(1|x) + frac(x|x + 1)*frac(1|x)
+    passi:
+      - "Prima il prodotto: `frac(x|x + 1)*frac(1|x) = frac(1|x + 1)`"
+      - "Poi la somma: mcm `x(x + 1)`"
+      - "Numeratore: `(x + 1) + x = 2x + 1`"
+    ris: frac(2x + 1|x(x + 1))
+    verifica: scomposizione
+  - da: frac(frac(1|x) - frac(1|x + 1)|frac(1|x^2 + x))
+    passi:
+      - "Numeratore: `frac(1|x) - frac(1|x + 1) = frac(1|x(x + 1))`"
+      - "Divido per `frac(1|x(x + 1))`: moltiplico per la reciproca"
+    ris: "1"
+    verifica: scomposizione
+errore: "Fare la somma prima del prodotto, o sommare i numeratori senza aver portato le frazioni allo stesso denominatore."
+confondi:
+  - scheda: somma-denominatori-diversi
+    differenza: "Quella scheda tratta solo la somma; qui si scelgono più operazioni in ordine."
+perche: "Le frazioni algebriche seguono le stesse regole di priorità dei numeri."
+parole: espressione più operazioni priorità parentesi

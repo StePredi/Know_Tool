@@ -1,0 +1,35 @@
+id: teorema-fondamentale
+tipo: regola
+titolo: Teorema fondamentale
+sigla: Torricelli-Barrow
+comando: ∫_a^b f dx = F(b) - F(a)
+vedo: Devi calcolare un integrale definito di una funzione continua.
+formula:
+- ∫_a^b f(x) dx = F(b) - F(a)
+- F'(x) = f(x)
+adatto:
+- Se `f` è continua su `[a, b]` e `F` è una sua primitiva, l'integrale è la differenza dei valori agli estremi.
+- 'Qualunque primitiva va bene: la costante `c` si cancella.'
+- Per le primitive vedi il documento sugli integrali indefiniti.
+esempi:
+- da: ∫_0^2 x^2 dx
+  passi:
+  - '`F(x) = frac(x^3|3)`'
+  - '`F(2) - F(0) = frac(8|3)`'
+  ris: frac(8|3)
+- da: ∫_0^1 e^x dx
+  passi:
+  - '`F(x) = e^x`'
+  - '`e - 1`'
+  ris: e - 1
+- da: ∫_1^2 frac(1|x^2) dx
+  passi:
+  - '`F(x) = -frac(1|x)`'
+  - '`-frac(1|2) + 1`'
+  ris: frac(1|2)
+errore: 'Usare il teorema con una `f` non continua nell''intervallo: se `f` ha un asintoto dentro `[a, b]` l''integrale è improprio.'
+confondi:
+- scheda: integrale-improprio-infinito
+  differenza: Il teorema vale su intervalli limitati con `f` continua; altrimenti l'integrale è improprio.
+perche: 'La derivata di `F` è `f`: sommando tante variazioni piccole di `F` si ottiene la variazione totale.'
+parole: teorema fondamentale torricelli barrow integrale definito

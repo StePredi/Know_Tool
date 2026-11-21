@@ -1,0 +1,30 @@
+id: rimuovi-immagini
+tipo: ricetta
+titolo: Eliminare immagini che non servono più
+sigla: docker rmi
+comando: docker rmi · image prune
+frase: libera spazio
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf · lab_immagini_dockerfile.pdf (pulizia)
+parole: rimuovere eliminare immagine rmi prune spazio disco non usate
+quando: Quando hai tante versioni di prova o vuoi liberare spazio.
+fasi:
+- nome: Una per volta
+  righe:
+  - codice: docker rmi nginx:latest
+  - codice: docker rmi «ID»
+    commento: anche con l'ID (o i primi caratteri)
+    trappola: 'Nota: un''immagine usata da un container (anche fermo) non si rimuove: prima elimina il container.'
+- nome: Tutte quelle inutili
+  righe:
+  - codice: docker image prune
+    commento: immagini senza nome (dangling)
+  - codice: docker image prune -a
+    commento: tutte le immagini non usate da nessun container
+segnaposto:
+  ID:
+    esempio: 3f2a9c1b7d4e
+    spiega: l'IMAGE ID mostrato da docker images
+varianti: []
+vicine:
+- pulizia-ambiente
+- pull-immagine

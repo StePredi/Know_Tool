@@ -1,0 +1,36 @@
+id: sostituisci-valore
+tipo: regola
+titolo: 'Prima di tutto: sostituisci'
+sigla: Sostituisci
+comando: lim_(x -> c) f(x) = f(c)
+vedo: Un limite da calcolare per `x` che tende a un numero o a infinito.
+formula:
+- lim_(x -> c) f(x) = f(c)
+adatto:
+- Sostituisci il valore a cui tende `x` nell'espressione.
+- 'Se esce un numero (con funzione continua): è il limite.'
+- 'Se esce `numero / 0`: studia il segno (limite infinito).'
+- 'Se esce una forma come `frac(0|0)`, `frac(inf|inf)`, `inf - inf`, `0 * inf`: è indeterminata, serve una tecnica.'
+esempi:
+- da: lim_(x -> 3) (x^2 + 1)
+  passi:
+  - '`9 + 1`'
+  ris: '10'
+- da: lim_(x -> 2) frac(x^2 - 4|x - 2)
+  passi:
+  - '`frac(0|0)`: indeterminata'
+  ris: serve una tecnica
+- da: lim_(x -> 0) frac(1|x)
+  passi:
+  - '`frac(1|0)`: guarda destra e sinistra'
+  ris: limite infinito da studiare
+- da: lim_(x -> +inf) (x^2 - x)
+  passi:
+  - '`inf - inf`'
+  ris: indeterminata
+errore: 'Sostituire e dichiarare «non esiste» quando esce `frac(0|0)`: è solo indeterminata.'
+confondi:
+- scheda: riconosci-forma
+  differenza: Qui si prova la sostituzione; lì si sceglie la tecnica.
+perche: 'Per le funzioni continue il limite coincide con il valore: la sostituzione è il primo passo.'
+parole: limite sostituire forma indeterminata calcolare

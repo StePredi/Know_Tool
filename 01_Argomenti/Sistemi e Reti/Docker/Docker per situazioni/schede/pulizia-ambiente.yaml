@@ -1,0 +1,33 @@
+id: pulizia-ambiente
+tipo: ricetta
+titolo: Ripulire container, immagini, volumi e reti alla fine
+sigla: Pulizia
+comando: rm · rmi · volume rm · network rm
+frase: prima i container, poi il resto
+fonte: lab_immagini_dockerfile.pdf (pulizia) · lab_networking_container.pdf (pulizia) · lab_volumi_servizi.pdf (pulizia)
+parole: pulizia ripulire eliminare tutto rm rmi volume rm network rm laboratorio fine attività
+quando: Quando hai finito un'attività e vuoi lasciare il PC pulito.
+fasi:
+- nome: Prima i container
+  righe:
+  - codice: docker rm -f archivio archivio-b prova
+    commento: rete e volume si possono eliminare solo quando nessun container li usa
+- nome: Poi immagini, volumi e reti
+  righe:
+  - codice: docker rmi note:1.0 note:2.0
+  - codice: docker volume rm notes-data
+  - codice: docker network rm mynet
+    trappola: 'Se un comando dice che un nome non esiste, ignoralo: quell''oggetto è già stato eliminato.'
+- nome: Controlla che non resti nulla
+  righe:
+  - codice: docker ps -a
+  - codice: docker images
+  - codice: docker volume ls
+  - codice: docker network ls
+segnaposto: {}
+varianti: []
+vicine:
+- ciclo-vita
+- rimuovi-immagini
+- rimozione-in-uso
+- file-di-root

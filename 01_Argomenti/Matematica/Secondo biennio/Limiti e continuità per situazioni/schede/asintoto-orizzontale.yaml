@@ -1,0 +1,32 @@
+id: asintoto-orizzontale
+tipo: regola
+titolo: Asintoto orizzontale
+sigla: Orizzontale
+comando: lim_(x -> +-inf) f(x) = L
+vedo: Come si comporta la funzione per `x` molto grande o molto piccolo.
+formula:
+- y = L
+adatto:
+- Calcola il limite per `x -> +inf` e per `x -> -inf`.
+- Se il limite è un numero `L`, `y = L` è asintoto orizzontale (da quel lato).
+- Può essere diverso a destra e a sinistra.
+esempi:
+- da: f(x) = frac(2x + 1|x - 3)
+  passi:
+  - 'stesso grado: `frac(2|1)`'
+  ris: asintoto orizzontale y = 2
+- da: f(x) = e^x
+  passi:
+  - '`x -> -inf`: 0'
+  - '`x -> +inf`: infinito'
+  ris: asintoto orizzontale y = 0 solo a sinistra
+- da: f(x) = arctan(x)
+  passi:
+  - '`+-frac(pi|2)`'
+  ris: asintoti orizzontali y = pi/2 (a destra) e y = -pi/2 (a sinistra)
+errore: 'Pensare che esista un solo asintoto orizzontale: ne possono servire due.'
+confondi:
+- scheda: asintoto-obliquo
+  differenza: Con un asintoto orizzontale da un lato non c'è l'obliquo dallo stesso lato.
+perche: Il grafico si avvicina a una retta orizzontale quando `x` si allontana.
+parole: asintoto orizzontale limite infinito

@@ -1,0 +1,28 @@
+id: gonio-di-g
+tipo: regola
+titolo: Goniometrica di una funzione
+sigla: Gonio di g
+comando: ∫ cos(g)*g' = sin(g)
+vedo: Dentro il seno o il coseno c'è una funzione, e la sua derivata moltiplica.
+formula:
+- ∫ cos(g(x)) * g'(x) dx = sin(g(x)) + c
+- ∫ sin(g(x)) * g'(x) dx = -cos(g(x)) + c
+adatto:
+- Individua la funzione dentro e controlla che la sua derivata sia davanti.
+- Integra come se fosse `sin x` o `cos x`.
+- Ricorda il segno meno per il seno.
+esempi:
+- da: ∫ 2x*cos(x^2) dx
+  passi:
+  - dentro `x^2`, derivata `2x`
+  ris: sin(x^2) + c
+- da: ∫ 3x^2*sin(x^3) dx
+  passi:
+  - dentro `x^3`, derivata `3x^2`
+  ris: -cos(x^3) + c
+errore: Dimenticare il meno nel caso del seno.
+confondi:
+- scheda: composta-lineare
+  differenza: Con argomento `ax + b` la derivata interna è costante; qui è una funzione di `x`.
+perche: La derivata di `sin g` è `cos g * g'`.
+parole: goniometrica di funzione composta seno coseno

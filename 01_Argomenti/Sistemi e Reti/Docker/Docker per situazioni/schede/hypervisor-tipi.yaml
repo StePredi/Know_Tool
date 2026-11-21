@@ -1,0 +1,42 @@
+id: hypervisor-tipi
+tipo: spiegazione
+titolo: Distinguere hypervisor di tipo 1 e di tipo 2
+sigla: Hypervisor tipo 1 e 2
+comando: bare metal / hosted
+frase: sull'hardware o sopra un SO
+fonte: virtualizzazione_e_container.pdf (sez. 01)
+parole: hypervisor tipo 1 tipo 2 bare metal hosted vmware esxi xen kvm virtualbox vmware workstation
+quando: Quando devi dire dove gira l'hypervisor e fare degli esempi.
+blocchi:
+- testo: 'La differenza è **dove gira l''hypervisor**: direttamente sull''hardware oppure come programma sopra un sistema operativo.'
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Tipo 1 · bare metal
+      strati:
+      - testo:
+        - VM
+        - VM
+        tono: oro
+      - testo: Hypervisor
+        tono: colore
+      - testo: Hardware
+        tono: scuro
+      nota: 'Gira direttamente sull''hardware. Esempi: VMware ESXi, Xen, KVM.'
+    - titolo: Tipo 2 · hosted
+      strati:
+      - testo:
+        - VM
+        - VM
+        tono: oro
+      - testo: Hypervisor
+        tono: colore
+      - Sistema operativo host
+      - testo: Hardware
+        tono: scuro
+      nota: 'Gira come applicazione sopra un SO. Esempi: VirtualBox, VMware Workstation.'
+- trappola: 'Nota: nel tipo 2 c''è un livello in più (il SO host), per questo è meno efficiente; è il tipo che usi sul tuo PC.'
+varianti: []
+vicine:
+- vm-cosa-sono
+- vm-o-container

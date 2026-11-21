@@ -1,0 +1,27 @@
+id: cpp-break-continue
+tipo: ricetta
+titolo: 'Uscire dal ciclo o saltare un giro: break e continue'
+sigla: break e continue
+comando: break  continue
+frase: interrompere un ciclo
+fonte: Documentazione C++ · cppreference.com · Istruzioni · break · continue
+parole: break continue uscire ciclo saltare giro interrompere for while switch
+quando: Quando in un ciclo devi fermarti prima della fine o ignorare certi elementi.
+fasi:
+- nome: Nel ciclo
+  righe:
+  - codice: for (int i = 1; i <= 6; i++) {
+  - codice: '    if (i == 2) continue;'
+    commento: Salta il resto del giro e passa al successivo.
+  - codice: '    if (i == 5) break;'
+    commento: Esce subito dal ciclo.
+  - codice: '    cout << i << " ";'
+    commento: Stampa 1 3 4.
+  - codice: '}'
+    trappola: Dentro uno switch che sta in un ciclo, break esce solo dallo switch, non dal ciclo.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-for
+- cpp-while
+- cpp-switch

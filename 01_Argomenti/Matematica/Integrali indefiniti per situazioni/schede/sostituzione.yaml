@@ -1,0 +1,36 @@
+id: sostituzione
+tipo: regola
+titolo: Sostituzione
+sigla: Sostituzione
+comando: poni t = g(x) e cambia anche dx
+vedo: Dentro compare una funzione `g(x)` e un fattore che somiglia alla sua derivata, ma non è immediato.
+formula:
+- t = g(x)
+- dt = g'(x) dx
+adatto:
+- Scegli la parte «complicata» come `t`.
+- 'Calcola `dt` e scrivi tutto in `t`: nessuna `x` deve restare.'
+- Integra in `t` e torna a `x` sostituendo.
+- Con una radice, spesso `t` è la radice stessa.
+esempi:
+- da: ∫ x*sqrt(x + 1) dx
+  passi:
+  - '`t = x + 1`, `x = t - 1`, `dx = dt`'
+  - '`∫ (t - 1) sqrt(t) dt = frac(2|5)t^2 sqrt(t) - frac(2|3) t sqrt(t)`'
+  ris: frac(2|5)(x + 1)^2 sqrt(x + 1) - frac(2|3)(x + 1) sqrt(x + 1) + c
+- da: ∫ frac(1|1 + sqrt(x)) dx
+  passi:
+  - '`t = sqrt(x)`, `x = t^2`, `dx = 2t dt`'
+  - '`∫ frac(2t|1 + t) dt = 2t - 2 ln(1 + t)`'
+  ris: 2 sqrt(x) - 2 ln(1 + sqrt(x)) + c
+- da: ∫ frac(e^x|e^(2x) + 1) dx
+  passi:
+  - '`t = e^x`, `dt = e^x dx`'
+  - '`∫ frac(1|t^2 + 1) dt = arctan t`'
+  ris: arctan(e^x) + c
+errore: Dimenticare di cambiare anche `dx`, o di tornare a `x` alla fine.
+confondi:
+- scheda: potenza-di-g
+  differenza: Se la derivata interna c'è già, non serve scrivere la sostituzione.
+perche: 'È la regola della derivata della composta letta al contrario: al posto della funzione interna si lavora con una sola lettera.'
+parole: sostituzione cambio variabile t dt

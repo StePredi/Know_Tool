@@ -1,0 +1,34 @@
+id: eq-log-forma-esp
+tipo: regola
+titolo: Equazione log_a f = k
+sigla: Forma esponenziale
+comando: log_a(f(x)) = k -> f(x) = a^k
+vedo: Un logaritmo uguale a un numero.
+formula:
+- log_a(f(x)) = k
+- f(x) = a^k
+adatto:
+- 'Condizione di esistenza: `f(x) > 0`.'
+- 'Applica la definizione: l''argomento è la base elevata al numero.'
+- Se ci sono due logaritmi, riuniscili prima.
+esempi:
+- da: log_2(x + 1) = 3
+  passi:
+  - 'condizione: `x > -1`'
+  - '`x + 1 = 2^3 = 8`'
+  ris: x = 7
+- da: log_3(2x - 1) = -1
+  passi:
+  - 'condizione: `x > frac(1|2)`'
+  - '`2x - 1 = 3^(-1) = frac(1|3)`'
+  ris: x = frac(2|3)
+- da: ln(x) = 2
+  passi:
+  - '`x = e^2`'
+  ris: x = e^2
+errore: Scrivere `f(x) = k*a` invece di `a^k`.
+confondi:
+- scheda: eq-log-uguaglianza
+  differenza: Qui un solo logaritmo e un numero; lì un logaritmo per lato.
+perche: È la definizione di logaritmo applicata all'incognita.
+parole: equazione logaritmica forma esponenziale definizione

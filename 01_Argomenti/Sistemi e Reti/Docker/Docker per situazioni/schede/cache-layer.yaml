@@ -1,0 +1,39 @@
+id: cache-layer
+tipo: prima_dopo
+titolo: Mettere in fondo al Dockerfile ciò che cambia spesso
+sigla: Ordine e cache
+comando: COPY app.py dopo RUN
+frase: cambia un layer → si rifanno tutti quelli dopo
+fonte: lab_immagini_dockerfile.pdf (parti 3.1-3.3)
+parole: cache layer ordine istruzioni build lenta rieseguire cached riordinare copy run
+prima: |-
+  FROM python:3.12-slim
+  WORKDIR /app
+  ⟦COPY app.py .⟧
+  RUN mkdir -p /data && echo "Benvenuto nell'archivio note" > /data/benvenuto.txt
+  ENV NOTES_DIR=/data PORT=5000
+  EXPOSE 5000
+  CMD ["python", "app.py"]
+dopo: |-
+  FROM python:3.12-slim
+  WORKDIR /app
+  RUN mkdir -p /data && echo "Benvenuto nell'archivio note" > /data/benvenuto.txt
+  ENV NOTES_DIR=/data PORT=5000
+  EXPOSE 5000
+  ⟦COPY app.py .⟧
+  CMD ["python", "app.py"]
+uso: Ricostruire in fretta quando modifichi solo il programma.
+riconoscila: Cambi una riga di app.py e la build riesegue anche il RUN, che con app.py non c'entra niente.
+parti:
+- voce: regola della cache
+  spiega: Docker riusa un layer se l'istruzione e tutto ciò che la precede non sono cambiati; appena un layer cambia, tutti i successivi si ricostruiscono
+- voce: in alto
+  spiega: ciò che cambia di rado (base, pacchetti, configurazione)
+- voce: in basso
+  spiega: ciò che cambia spesso (il codice)
+trappola: 'Nota: nell''output di docker build i passaggi riusati sono segnati come CACHED. Se ricostruisci senza cambiare nulla, sono tutti CACHED e la build dura un attimo.'
+varianti: []
+vicine:
+- requirements-ordine
+- history-layer
+- docker-build

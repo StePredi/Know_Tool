@@ -1,0 +1,30 @@
+id: parabola-da-dati
+tipo: regola
+titolo: Parabola da dati
+sigla: Da dati
+comando: y = a*(x - x_V)^2 + y_V
+vedo: Ti danno il vertice e un punto, o tre punti.
+formula:
+- y = a*(x - x_V)^2 + y_V
+- y = a*x^2 + b*x + c
+adatto:
+- 'Vertice e un punto: sostituisci il punto per trovare `a`.'
+- 'Tre punti: sostituisci ciascuno nella forma generale e risolvi il sistema in `a`, `b`, `c`.'
+- Il punto sull'asse `y` dà subito `c`.
+esempi:
+- da: vertice (1, 2), passa per (3, -2)
+  passi:
+  - '`-2 = a*4 + 2`: `a = -1`'
+  ris: y = -x^2 + 2x + 1
+- da: passa per (0, 1), (1, 0), (2, 1)
+  passi:
+  - '`c = 1`'
+  - '`a + b + 1 = 0` e `4a + 2b + 1 = 1`'
+  - '`a = 1`, `b = -2`'
+  ris: y = x^2 - 2x + 1
+errore: Usare i punti nella forma con il vertice senza sostituire anche `x_V` e `y_V`.
+confondi:
+- scheda: parabola-asse-verticale
+  differenza: Qui dai dati costruisci l'equazione; lì dall'equazione ricavi i dati.
+perche: 'Una parabola ha tre parametri: servono tre condizioni indipendenti.'
+parole: parabola per tre punti vertice equazione

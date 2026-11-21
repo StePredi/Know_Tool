@@ -1,0 +1,29 @@
+id: riconosci-tipo
+tipo: regola
+titolo: Riconosci il tipo di equazione
+sigla: Riconosci il tipo
+comando: grado, coefficienti mancanti, x al denominatore
+frase: "Passo 2: guarda l'esponente più alto e se la x compare in un denominatore."
+vedo: "Hai l'equazione in forma normale: guarda l'esponente più alto e se la x sta in un denominatore."
+formula:
+  - a*x + b = 0
+  - a*x^2 + b*x + c = 0
+  - frac(A|B) = 0
+adatto:
+  - "Grado 1: `ax + b = 0`, vedi «Equazione di primo grado»."
+  - "Grado 2: manca il termine noto → spuria; manca il termine di primo grado → pura; ci sono tutti → completa (o somma e prodotto se il primo coefficiente è 1)."
+  - "La x in un denominatore: equazione fratta, parti dalle condizioni di esistenza."
+  - "Grado 3 o più che si scompone in fattori: prodotto nullo."
+esempi:
+  - da: 3x^2 - 12x = 0
+    passi:
+      - "Grado 2"
+      - "Manca il termine noto: equazione spuria"
+      - "Raccolgo `3x`: `3x(x - 4) = 0`"
+    ris: x = 0, x = 4
+errore: "Usare la formula risolutiva in ogni caso di secondo grado: nelle spurie e nelle pure è molto più lunga."
+confondi:
+  - scheda: forma-normale
+    differenza: "Il tipo si legge solo dopo aver portato tutto in forma normale."
+perche: "Il tipo decide il metodo più corto."
+parole: riconoscere tipo grado spuria pura completa fratta

@@ -1,0 +1,26 @@
+id: quadrato-trinomio
+tipo: regola
+titolo: Quadrato di un trinomio
+sigla: Quadrato di trinomio
+comando: tre quadrati e tre doppi prodotti
+vedo: "Tre termini in una parentesi al quadrato: `(x^2 + x - 1)^2`."
+formula: (a + b + c)^2 = a^2 + b^2 + c^2 + 2*a*b + 2*a*c + 2*b*c
+adatto:
+  - "Quadrati dei tre termini, poi i doppi prodotti di ogni coppia (sono 3 coppie)."
+  - "Il segno di ogni doppio prodotto è il prodotto dei segni dei due termini."
+  - "Sono 6 termini prima di ridurre; poi riduci i simili."
+esempi:
+  - da: (x^2 + x - 1)^2
+    passi:
+      - "`a = x^2`, `b = x`, `c = -1`"
+      - "Quadrati: `x^4`, `x^2`, `1`"
+      - "Doppi prodotti: `2ab = 2x^3`, `2ac = -2x^2`, `2bc = -2x`"
+      - "Riduco: `x^2 - 2x^2 = -x^2`"
+    ris: x^4 + 2x^3 - x^2 - 2x + 1
+    verifica: scomposizione
+errore: "Dimenticare uno dei tre doppi prodotti."
+confondi:
+  - scheda: quadrato-binomio
+    differenza: "Con due termini c'è un solo doppio prodotto; con tre ce ne sono tre."
+perche: "È `(a+b+c)*(a+b+c)`: ogni termine per ogni termine, i prodotti misti compaiono due volte."
+parole: quadrato trinomio notevole

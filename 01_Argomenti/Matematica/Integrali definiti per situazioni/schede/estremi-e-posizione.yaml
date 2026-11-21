@@ -1,0 +1,36 @@
+id: estremi-e-posizione
+tipo: regola
+titolo: 1. Estremi e posizione
+sigla: Estremi
+comando: trova gli estremi e quale curva sta sopra
+vedo: Ti chiedono l'area o il volume di una regione e non sai da dove partire.
+formula:
+- a <= x <= b
+- f(x) >= g(x)
+adatto:
+- 'Gli estremi `a` e `b` sono dati, oppure sono le intersezioni delle curve: risolvi `f(x) = g(x)`.'
+- Fra gli estremi decidi quale curva sta sopra provando un punto in mezzo.
+- Se le curve si incrociano nell'intervallo, spezza l'intervallo nei punti di incrocio.
+- Se c'è l'asse `x`, `g(x) = 0`.
+esempi:
+- da: regione tra y = x e y = x^2
+  passi:
+  - '`x = x^2`: `x = 0` e `x = 1`'
+  - 'in `x = 0,5`: `x = 0,5` sopra, `x^2 = 0,25` sotto'
+  ris: estremi 0 e 1; sopra y = x
+- da: regione tra y = x^2 e y = 2x
+  passi:
+  - '`x^2 = 2x`: `x = 0` e `x = 2`'
+  - 'in `x = 1`: `2x = 2` sopra, `x^2 = 1` sotto'
+  ris: estremi 0 e 2; sopra y = 2x
+- da: regione tra y = x^3 - x e l'asse x
+  passi:
+  - 'zeri: `x = -1, 0, 1`'
+  - 'il segno cambia in `x = 0`: due regioni'
+  ris: 'due pezzi: [-1, 0] e [0, 1]'
+errore: Prendere come estremi i valori di `x` che non sono intersezioni, o non spezzare quando la curva attraversa l'asse.
+confondi:
+- scheda: imposta-integrale
+  differenza: Qui si fissano estremi e posizione; lì si scrive l'integrale.
+perche: 'L''area è somma di strisce verticali alte «sopra meno sotto»: servono gli estremi e l''ordine.'
+parole: estremi intersezioni sopra sotto segno intervallo

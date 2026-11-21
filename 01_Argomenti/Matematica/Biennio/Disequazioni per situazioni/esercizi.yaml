@@ -1,0 +1,60 @@
+esercizi:
+  - testo: "5 - 2x > 1"
+    risultato: "(-inf, 2)"
+    piano:
+      - scheda: forma-normale-dis
+        nota: "Il coefficiente di x è negativo."
+      - scheda: disequazione-primo-grado
+        nota: "Divido per -2 e inverto il verso."
+  - testo: "x^2 - 5x + 6 > 0"
+    risultato: "(-inf, 2) ∪ (3, +inf)"
+    piano:
+      - scheda: secondo-grado-completa
+        nota: "`D = 1`, valori esterni."
+  - testo: "x^2 + x - 6 <= 0"
+    risultato: "[-3, 2]"
+    piano:
+      - scheda: scomponi-zeri
+        nota: "`(x + 3)(x - 2)`."
+      - scheda: linea-dei-segni
+        nota: "Più, meno, più."
+      - scheda: leggi-soluzione
+        nota: "Cerco il meno, estremi inclusi."
+  - testo: "x^2 - 9 < 0"
+    risultato: "(-3, 3)"
+    piano:
+      - scheda: secondo-grado-incompleta
+        nota: "Pura: valori interni."
+  - testo: "x^2 - 4x >= 0"
+    risultato: "(-inf, 0] ∪ [4, +inf)"
+    piano:
+      - scheda: secondo-grado-incompleta
+        nota: "Spuria: raccolgo x."
+  - testo: "x^3 - 4x <= 0"
+    risultato: "(-inf, -2] ∪ [0, 2]"
+    piano:
+      - scheda: disequazione-prodotto
+        nota: "Scompongo in `x(x - 2)(x + 2)`."
+      - scheda: linea-dei-segni
+        nota: "Tre righe, una per fattore."
+  - testo: "frac(x - 1|x + 2) >= 0"
+    risultato: "(-inf, -2) ∪ [1, +inf)"
+    piano:
+      - scheda: disequazione-fratta
+        nota: "Già una sola frazione."
+      - scheda: linea-dei-segni
+        nota: "Una riga per il numeratore e una per il denominatore."
+  - testo: "frac(2|x - 1) > 1"
+    risultato: "(1, 3)"
+    piano:
+      - scheda: forma-normale-dis
+        nota: "Tutto a sinistra."
+      - scheda: disequazione-fratta
+        nota: "Una sola frazione: `frac(3 - x|x - 1)`."
+      - scheda: leggi-soluzione
+        nota: "Cerco il più."
+  - testo: "x^2 - 4 < 0   e   x - 1 > 0"
+    risultato: "(1, 2)"
+    piano:
+      - scheda: sistema-disequazioni
+        nota: "Intersezione di `(-2, 2)` e `(1, +inf)`."

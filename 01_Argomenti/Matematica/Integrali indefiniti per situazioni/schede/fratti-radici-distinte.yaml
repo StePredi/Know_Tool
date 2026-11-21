@@ -1,0 +1,33 @@
+id: fratti-radici-distinte
+tipo: regola
+titolo: Fratti con radici distinte
+sigla: Radici distinte
+comando: frac(N|(x - a)(x - b)) = frac(A|x - a) + frac(B|x - b)
+vedo: Frazione di polinomi con il denominatore che si scompone in fattori di primo grado diversi.
+formula:
+- frac(N|(x - a)(x - b)) = frac(A|x - a) + frac(B|x - b)
+adatto:
+- Scomponi il denominatore.
+- Scrivi un fratto per ogni fattore, con una lettera da trovare.
+- Trova `A` e `B` sostituendo le radici (o confrontando i coefficienti).
+- Ogni fratto dà un logaritmo.
+esempi:
+- da: ∫ frac(1|x^2 - 1) dx
+  passi:
+  - '`x^2 - 1 = (x - 1)(x + 1)`'
+  - '`frac(1|x^2 - 1) = frac(1|2)(frac(1|x - 1) - frac(1|x + 1))`'
+  ris: frac(1|2) ln|x - 1| - frac(1|2) ln|x + 1| + c
+- da: ∫ frac(1|x(x + 2)) dx
+  passi:
+  - '`frac(A|x) + frac(B|x + 2)`: `A = frac(1|2)`, `B = -frac(1|2)`'
+  ris: frac(1|2) ln|x| - frac(1|2) ln|x + 2| + c
+- da: ∫ frac(x + 3|(x - 2)(x + 1)) dx
+  passi:
+  - '`A = frac(5|3)`, `B = -frac(2|3)`'
+  ris: frac(5|3) ln|x - 2| - frac(2|3) ln|x + 1| + c
+errore: 'Scomporre male il denominatore: controlla moltiplicando i fattori.'
+confondi:
+- scheda: f-primo-su-f
+  differenza: Se il numeratore è già la derivata del denominatore non serve scomporre.
+perche: Ogni fratto semplice `frac(A|x - a)` ha per integrale `A ln|x - a|`.
+parole: fratti semplici scomposizione denominatore radici

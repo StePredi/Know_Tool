@@ -1,0 +1,36 @@
+id: valore-da-un-altro
+tipo: regola
+titolo: Dato un valore, trova gli altri
+sigla: Dato uno
+comando: cos(x) = +-sqrt(1 - sin^2(x))
+vedo: Ti dicono «sapendo che `sin(x) = ...` e `x` nel secondo quadrante, calcola `cos(x)` e `tan(x)`».
+formula:
+- cos(x) = +-sqrt(1 - sin^2(x))
+- sin(x) = +-sqrt(1 - cos^2(x))
+- tan(x) = frac(sin(x)|cos(x))
+adatto:
+- Il segno ± lo decide il quadrante indicato.
+- 'Se ti danno la tangente: `cos^2(x) = frac(1|1 + tan^2(x))`, poi `sin(x) = tan(x)*cos(x)`.'
+- Dai valori trovati puoi poi calcolare `sin(2x)` e simili.
+esempi:
+- da: sin(x) = frac(3|5), x nel secondo quadrante
+  passi:
+  - '`cos(x) = -sqrt(1 - frac(9|25)) = -frac(4|5)`'
+  - '`tan(x) = frac(3|5) : (-frac(4|5))`'
+  ris: cos(x) = -frac(4|5), tan(x) = -frac(3|4)
+- da: cos(x) = frac(5|13), x nel quarto quadrante
+  passi:
+  - '`sin(x) = -sqrt(1 - frac(25|169)) = -frac(12|13)`'
+  ris: sin(x) = -frac(12|13), tan(x) = -frac(12|5)
+- da: tan(x) = 2, x nel primo quadrante
+  passi:
+  - '`cos^2(x) = frac(1|1 + 4) = frac(1|5)`'
+  - 'primo quadrante: `cos(x) = frac(sqrt(5)|5)`'
+  - '`sin(x) = 2*frac(sqrt(5)|5)`'
+  ris: cos(x) = frac(sqrt(5)|5), sin(x) = frac(2*sqrt(5)|5)
+errore: Dimenticare il segno e prendere sempre la radice positiva.
+confondi:
+- scheda: identita-fondamentale
+  differenza: Quella è l'identità da usare; qui la applichi a numeri con il segno.
+perche: 'Dalla relazione fondamentale `cos^2(x) = 1 - sin^2(x)`: l''unico dato che manca è il segno, che viene dal quadrante.'
+parole: valore sapendo che trovare cos tan dato seno quadrante

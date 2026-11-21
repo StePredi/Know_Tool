@@ -1,0 +1,33 @@
+id: rotazione-asse-x
+tipo: regola
+titolo: Rotazione attorno all'asse x
+sigla: Rotazione x
+comando: π∫_a^b f(x)^2 dx
+vedo: Una regione sotto una curva ruota attorno all'asse `x`.
+formula:
+- V = π∫_a^b f(x)^2 dx
+adatto:
+- Ogni fetta del solido è un cerchio di raggio `f(x)`.
+- Il volume è `π` per l'integrale del quadrato di `f`.
+- 'Quadrato prima di integrare: `(sqrt(x))^2 = x`.'
+esempi:
+- da: y = x su [0, 2]
+  passi:
+  - '`π∫_0^2 x^2 dx = π*frac(8|3)`'
+  - è un cono
+  ris: frac(8π|3)
+- da: y = sqrt(x) su [0, 4]
+  passi:
+  - '`π∫_0^4 x dx`'
+  ris: 8π
+- da: y = sin x su [0, π]
+  passi:
+  - '`π∫_0^π sin^2 x dx`'
+  - '`sin^2 x = frac(1 - cos 2x|2)`'
+  ris: frac(π^2|2)
+errore: Dimenticare di elevare al quadrato la funzione prima di integrare (`π∫ f dx` non è un volume).
+confondi:
+- scheda: rotazione-corona
+  differenza: Qui il solido è pieno; lì è forato perché la regione non tocca l'asse.
+perche: Il solido è una pila di dischi sottili di area `π r^2`.
+parole: volume rotazione asse x solido dischi

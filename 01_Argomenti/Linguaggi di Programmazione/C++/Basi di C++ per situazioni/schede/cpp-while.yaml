@@ -1,0 +1,36 @@
+id: cpp-while
+tipo: ricetta
+titolo: 'Ripetere finché serve: while e do-while'
+sigla: while
+comando: while (…)  do {…} while (…)
+frase: finché la condizione è vera
+fonte: Documentazione C++ · cppreference.com · Istruzioni · while · do-while
+parole: while do while ciclo ripetere finché condizione infinito input convalida
+quando: Quando non sai quante volte ripetere, per esempio finché l'utente non scrive un valore valido.
+fasi:
+- nome: while
+  righe:
+  - codice: while (n > 0) {
+    commento: Controlla PRIMA di ogni giro.
+  - codice: '    cout << n << " ";'
+  - codice: '    n--;'
+    commento: Se non cambi n il ciclo non finisce mai.
+  - codice: '}'
+    trappola: 'Ciclo infinito: se nel corpo non cambia mai nulla che renda falsa la condizione, il programma
+      non termina.'
+- nome: do-while
+  righe:
+  - codice: do {
+    commento: Il corpo viene eseguito almeno una volta.
+  - codice: '    cin >> x;'
+  - codice: '} while (x < 0);'
+    commento: 'Controlla DOPO: ripete finché x è negativo.'
+    parti:
+    - voce: while (x < 0);
+      spiega: qui il punto e virgola è obbligatorio
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-for
+- cpp-break-continue
+- cpp-output-input

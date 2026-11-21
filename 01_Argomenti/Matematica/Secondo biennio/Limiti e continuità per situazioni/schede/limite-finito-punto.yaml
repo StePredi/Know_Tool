@@ -1,0 +1,30 @@
+id: limite-finito-punto
+tipo: regola
+titolo: Limite per x che tende a un numero
+sigla: Limite in un punto
+comando: lim_(x -> c) f(x) = f(c)
+vedo: Funzione polinomiale, razionale (con denominatore non nullo), radice, esponenziale, seno e `x` tende a un numero.
+formula:
+- lim_(x -> c) f(x) = f(c)
+adatto:
+- 'Le funzioni elementari sono continue dove sono definite: basta sostituire.'
+- Se `c` non sta nel dominio, sostituire dà una forma da studiare.
+esempi:
+- da: lim_(x -> 2) (3x^2 - x + 1)
+  passi:
+  - '`12 - 2 + 1`'
+  ris: '11'
+- da: lim_(x -> 1) sqrt(x + 3)
+  passi:
+  - '`sqrt(4)`'
+  ris: '2'
+- da: lim_(x -> 0) e^x
+  passi:
+  - '`e^0`'
+  ris: '1'
+errore: Scrivere il limite senza controllare che il punto sia nel dominio.
+confondi:
+- scheda: limite-infinito-da-numero
+  differenza: Qui il denominatore non si annulla; lì sì.
+perche: Una funzione continua in `c` ha limite uguale al valore in `c`.
+parole: limite punto sostituzione continua

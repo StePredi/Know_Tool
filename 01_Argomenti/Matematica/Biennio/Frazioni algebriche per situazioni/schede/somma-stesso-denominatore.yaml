@@ -1,0 +1,30 @@
+id: somma-stesso-denominatore
+tipo: regola
+titolo: Somma con lo stesso denominatore
+sigla: Stesso denominatore
+comando: sommo i numeratori
+vedo: "Frazioni con lo stesso denominatore: `frac(x + 1|x - 2) - frac(3 - x|x - 2)`."
+formula: frac(a|c) + frac(b|c) = frac(a + b|c)
+adatto:
+  - "Il denominatore resta uguale; i numeratori si sommano o si sottraggono."
+  - "Con il meno davanti a una frazione, metti il suo numeratore tra parentesi e cambia i segni di tutti i termini."
+  - "Poi riduci, scomponi il numeratore e controlla se si semplifica."
+esempi:
+  - da: frac(x + 1|x - 2) - frac(3 - x|x - 2)
+    passi:
+      - "Stesso denominatore `x - 2`"
+      - "Numeratore: `(x + 1) - (3 - x) = x + 1 - 3 + x`"
+    ris: frac(2x - 2|x - 2)
+    verifica: scomposizione
+  - da: frac(x^2|x - 1) - frac(1|x - 1)
+    passi:
+      - "Numeratore: `x^2 - 1`"
+      - "Scompongo `(x - 1)(x + 1)` e semplifico"
+    ris: x + 1
+    verifica: scomposizione
+errore: "Dimenticare di cambiare i segni di tutto il numeratore dopo il meno."
+confondi:
+  - scheda: somma-denominatori-diversi
+    differenza: "Qui il denominatore comune c'è già; altrimenti serve prima l'mcm."
+perche: "Sono pezzi della stessa dimensione: si contano insieme."
+parole: somma sottrazione stesso denominatore numeratori

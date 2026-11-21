@@ -1,0 +1,40 @@
+id: bisezione
+tipo: regola
+titolo: Formule di bisezione
+sigla: Bisezione
+comando: sin(frac(x|2)) = +-sqrt(frac(1 - cos(x)|2))
+vedo: L'angolo è la metà di uno noto (15, 22,5, 75 gradi, `frac(pi|8)`, `frac(x|2)`).
+formula:
+- sin(frac(x|2)) = +-sqrt(frac(1 - cos(x)|2))
+- cos(frac(x|2)) = +-sqrt(frac(1 + cos(x)|2))
+- tan(frac(x|2)) = frac(sin(x)|1 + cos(x))
+- tan(frac(x|2)) = frac(1 - cos(x)|sin(x))
+adatto:
+- Il segno ± dipende dal quadrante dell'angolo metà, non da quello dell'angolo intero.
+- Si parte dal coseno dell'angolo intero, che deve essere noto.
+- Per 22,5 gradi parti da 45; per 15 gradi da 30.
+esempi:
+- da: sin(frac(pi|8))
+  passi:
+  - '`frac(pi|8)` è la metà di `frac(pi|4)`'
+  - '`sqrt(frac(1 - frac(sqrt(2)|2)|2)) = sqrt(frac(2 - sqrt(2)|4))`'
+  - 'primo quadrante: segno +'
+  ris: frac(sqrt(2 - sqrt(2))|2)
+  verifica: scomposizione
+- da: cos(frac(pi|12))
+  passi:
+  - '`frac(pi|12)` è la metà di `frac(pi|6)`'
+  - '`sqrt(frac(1 + frac(sqrt(3)|2)|2)) = sqrt(frac(2 + sqrt(3)|4))`'
+  ris: frac(sqrt(2 + sqrt(3))|2)
+  verifica: scomposizione
+- da: 2*cos(frac(x|2))^2 - 1
+  passi:
+  - duplicazione applicata a `frac(x|2)`
+  ris: cos(x)
+  verifica: scomposizione
+errore: Dimenticare il ± e scegliere sempre il segno positivo.
+confondi:
+- scheda: duplicazione
+  differenza: La duplicazione va dalla metà all'intero; la bisezione dall'intero alla metà.
+perche: 'Si ottengono invertendo le formule di duplicazione: `cos(x) = 1 - 2*sin^2(frac(x|2))` e simili.'
+parole: bisezione metà angolo seno coseno tangente formule

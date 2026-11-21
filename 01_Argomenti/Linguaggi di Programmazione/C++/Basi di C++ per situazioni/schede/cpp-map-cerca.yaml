@@ -1,0 +1,41 @@
+id: cpp-map-cerca
+tipo: prima_dopo
+titolo: 'Errore: usare [] per controllare se una chiave c''è'
+sigla: find o count, non []
+comando: m.find(k) != m.end()
+frase: '[] crea la chiave che cerchi'
+fonte: Documentazione C++ · cppreference.com · std::map · find · count · operator[]
+parole: map find count end controllare chiave esiste operator parentesi quadre crea inserisce
+prima: |-
+  map<string, int> voti = {{"Anna", 9}};
+  if (voti⟦["Carla"]⟧ == 0) {
+      cout << "non c'è";
+  }
+  // ora voti.size() è 2
+dopo: |-
+  map<string, int> voti = {{"Anna", 9}};
+  if (voti⟦.find("Carla") == voti.end()⟧) {
+      cout << "non c'è";
+  }
+  // voti.size() resta 1
+uso: Sapere se un nome è presente nella mappa senza modificarla.
+riconoscila: 'Dopo aver solo controllato un nome, la mappa ha una chiave in più: size() è aumentato.'
+parti:
+- voce: voti["Carla"]
+  spiega: se la chiave manca la crea con valore 0 e restituisce quello
+- voce: voti.find("Carla")
+  spiega: cerca senza modificare; restituisce end() se non trova
+- voce: == voti.end()
+  spiega: vero quando la chiave non c'è
+trappola: 'Per i valori il caso 0 può essere un valore vero: [] non distingue "manca" da "vale 0". Usa
+  sempre find o count per controllare.'
+varianti:
+- codice: voti.count("Carla") == 0
+  spiega: 'count restituisce 0 o 1: più corto se ti basta sapere se c''è'
+- codice: auto it = voti.find("Anna"); if (it != voti.end()) cout << it->second;
+  spiega: trova e legge il valore con un solo find
+- codice: voti.contains("Carla")
+  spiega: solo da C++20 (compila con -std=c++20)
+vicine:
+- cpp-map
+- cpp-map-conta

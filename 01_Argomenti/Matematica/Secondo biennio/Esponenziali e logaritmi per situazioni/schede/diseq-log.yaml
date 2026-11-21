@@ -1,0 +1,35 @@
+id: diseq-log
+tipo: regola
+titolo: Disequazioni logaritmiche
+sigla: Disequazioni
+comando: 'log_a(f) > log_a(g): sistema con le C.E.'
+vedo: Una disequazione con logaritmi.
+formula:
+- log_a(f(x)) > log_a(g(x))
+adatto:
+- 'Prima le condizioni di esistenza: `f(x) > 0`, `g(x) > 0`.'
+- 'Base maggiore di 1: stesso verso tra gli argomenti.'
+- 'Base tra 0 e 1: verso invertito.'
+- La soluzione è l'intersezione tra condizioni e disequazione.
+esempi:
+- da: log_2(x - 1) > 3
+  passi:
+  - 'condizione: `x > 1`'
+  - '`x - 1 > 8`'
+  ris: x > 9
+- da: log_(1/2)(x) > 2
+  passi:
+  - 'condizione: `x > 0`'
+  - 'base tra 0 e 1: `x < (frac(1|2))^2`'
+  ris: 0 < x < frac(1|4)
+- da: log_3(x + 2) <= 1
+  passi:
+  - 'condizione: `x > -2`'
+  - '`x + 2 <= 3`'
+  ris: -2 < x <= 1
+errore: Dimenticare la condizione di esistenza, o il verso invertito con la base tra 0 e 1.
+confondi:
+- scheda: diseq-esponenziali
+  differenza: Stessa regola sulla base, ma qui servono anche le condizioni di esistenza.
+perche: Una funzione crescente conserva l'ordine, una decrescente lo inverte.
+parole: disequazione logaritmica verso condizioni esistenza

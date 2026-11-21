@@ -1,0 +1,40 @@
+id: utente-non-root
+tipo: ricetta
+titolo: Far girare il servizio senza essere root
+sigla: USER
+comando: useradd · chown · USER
+frase: meno privilegi nel container
+fonte: lab_immagini_dockerfile.pdf (approfondimento B)
+parole: root utente user useradd chown permessi sicurezza --user id bind mount proprietario
+quando: Quando vuoi seguire la buona pratica di non eseguire il programma come root.
+fasi:
+- nome: Crea l'utente e dagli la cartella dei dati
+  righe:
+  - codice: RUN useradd -r -u 1000 app \
+    commento: utente di sistema con UID 1000
+  - codice: '    && mkdir -p /data \'
+  - codice: '    && echo "Benvenuto nell''archivio note" > /data/benvenuto.txt \'
+  - codice: '    && chown -R app /data'
+    commento: la cartella dei dati deve appartenere all'utente app, altrimenti non può scriverci
+    trappola: 'Un named volume nuovo copia contenuto e proprietario dalla cartella dell''immagine: senza chown il volume sarebbe di root e app non potrebbe scriverci.'
+- nome: Usa l'utente
+  righe:
+  - codice: USER app
+    commento: da qui in poi, e all'avvio, il processo è app
+  - codice: CMD ["python", "app.py"]
+- nome: Verifica
+  righe:
+  - codice: docker build -t note:3.0 .
+  - codice: docker exec «NOME» id
+    commento: mostra con quale utente gira il container
+segnaposto:
+  NOME:
+    esempio: archivio
+    spiega: nome del container avviato da note:3.0
+varianti:
+- codice: docker run -d --user "$(id -u):$(id -g)" -p 5000:5000 note:2.0
+  spiega: 'fa girare il container con il tuo utente del PC: i file nel bind mount saranno tuoi'
+vicine:
+- file-di-root
+- immagine-alpine
+- bind-mount

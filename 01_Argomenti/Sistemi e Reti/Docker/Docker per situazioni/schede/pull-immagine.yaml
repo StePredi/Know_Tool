@@ -1,0 +1,37 @@
+id: pull-immagine
+tipo: ricetta
+titolo: Scaricare un'immagine e vedere quelle che hai
+sigla: docker pull
+comando: docker pull · docker images
+frase: dal registry al PC
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (comandi immagini) · lab_immagini_dockerfile.pdf (preparazione)
+parole: pull scaricare immagine registry docker hub images elenco search cercare tag latest slim alpine
+quando: Quando ti serve un'immagine pronta (nginx, python, debian…) o vuoi sapere quali hai in locale.
+fasi:
+- nome: Cerca e scarica
+  righe:
+  - codice: docker search nginx
+    commento: cerca su Docker Hub
+  - codice: docker pull «IMMAGINE»
+    commento: scarica l'immagine
+    parti:
+    - voce: nome:tag
+      spiega: 'il tag è la versione: python:3.12-slim, node:18-alpine, nginx:latest'
+    trappola: 'Nota: se ometti il tag Docker usa latest. Anche docker run scarica da solo un''immagine che non hai.'
+- nome: Guarda cosa hai
+  righe:
+  - codice: docker images
+    commento: immagini locali con tag, ID e dimensione
+  - codice: docker images note
+    commento: solo il repository note
+  - codice: docker images -a
+    commento: include i layer intermedi
+segnaposto:
+  IMMAGINE:
+    esempio: python:3.12-slim
+    spiega: repository:tag dell'immagine
+varianti: []
+vicine:
+- history-layer
+- rimuovi-immagini
+- architettura-docker

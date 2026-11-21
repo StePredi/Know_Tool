@@ -1,0 +1,27 @@
+id: volume-servizio
+tipo: ricetta
+titolo: Modificare i file di un volume con un container di servizio
+sigla: Container di servizio
+comando: docker run --rm -v volume:/data alpine
+frase: un container usa e getta che monta il volume
+fonte: lab_volumi_servizi.pdf (parte 5.3)
+parole: container di servizio modificare volume alpine rm scrivere file nel volume host non può
+quando: Quando devi scrivere o leggere i file di un named volume, che dall'host non puoi toccare.
+fasi:
+- nome: Scrivi nel volume
+  righe:
+  - codice: docker run --rm -v sito-vol:/data alpine sh -c 'echo "<h1>Sito nel volume</h1>" > /data/index.html'
+    commento: alpine monta il volume su /data, scrive il file e termina
+    parti:
+    - voce: --rm
+      spiega: il container di servizio sparisce, il volume resta
+- nome: Controlla
+  righe:
+  - codice: curl http://localhost:8082
+    commento: il container che usa sito-vol mostra subito la nuova pagina
+segnaposto: {}
+varianti: []
+vicine:
+- named-volume
+- volume-condiviso
+- run-comando

@@ -1,0 +1,69 @@
+esercizi:
+  - testo: 6x^3 - 24x
+    risultato: 6x(x - 2)(x + 2)
+    piano:
+      - scheda: raccoglimento-totale
+        nota: "Passo 1: raccolgo `6x`."
+      - scheda: differenza-quadrati
+        nota: "Dentro resta `x^2 - 4`: due quadrati con il meno."
+  - testo: x^4 - 16
+    risultato: (x - 2)(x + 2)(x^2 + 4)
+    piano:
+      - scheda: differenza-quadrati
+        nota: "Due termini, quadrati: `(x^2 - 4)(x^2 + 4)`."
+      - scheda: controlla-risultato
+        nota: "`x^2 - 4` si scompone ancora."
+  - testo: 2x^3 + 12x^2 + 18x
+    risultato: 2x(x + 3)^2
+    piano:
+      - scheda: raccoglimento-totale
+        nota: "Raccolgo `2x`: resta `x^2 + 6x + 9`."
+      - scheda: trinomio-quadrato
+        nota: "Due quadrati e il doppio prodotto `6x`."
+  - testo: x^3 - 3x^2 - 4x + 12
+    risultato: (x - 3)(x - 2)(x + 2)
+    piano:
+      - scheda: conta-termini
+        nota: "Nessun fattore comune, 4 termini."
+      - scheda: raccoglimento-parziale
+        nota: "Gruppi `x^3 - 3x^2` e `-4x + 12`."
+      - scheda: differenza-quadrati
+        nota: "Dentro resta `x^2 - 4`."
+  - testo: 3x^2 - 12x - 15
+    risultato: 3(x - 5)(x + 1)
+    piano:
+      - scheda: raccoglimento-totale
+        nota: "Raccolgo 3: resta `x^2 - 4x - 5`."
+      - scheda: trinomio-notevole
+        nota: "Prodotto -5, somma -4: `-5` e `1`."
+  - testo: x^3 + 27
+    risultato: (x + 3)(x^2 - 3x + 9)
+    piano:
+      - scheda: somma-differenza-cubi
+        nota: "Due cubi con il più: `a = x`, `b = 3`."
+  - testo: x^3 - 2x^2 - 5x + 6
+    risultato: (x - 1)(x - 3)(x + 2)
+    piano:
+      - scheda: ruffini
+        nota: "`P(1) = 0`: divido per `x - 1`."
+      - scheda: trinomio-notevole
+        nota: "Il quoziente `x^2 - x - 6`."
+  - testo: 6x^2 + x - 2
+    risultato: (3x + 2)(2x - 1)
+    piano:
+      - scheda: trinomio-a-diverso-da-1
+        nota: "`a*c = -12`, somma 1: `4` e `-3`."
+      - scheda: raccoglimento-parziale
+        nota: "`6x^2 + 4x - 3x - 2`."
+  - testo: x^4 - x^2 + 2x - 1
+    risultato: (x^2 - x + 1)(x^2 + x - 1)
+    piano:
+      - scheda: quadrato-nascosto
+        nota: "Gli ultimi tre formano `-(x - 1)^2`."
+      - scheda: differenza-quadrati
+        nota: "`x^4 - (x - 1)^2`."
+  - testo: x^3 - 6x^2 + 12x - 8
+    risultato: (x - 2)^3
+    piano:
+      - scheda: cubo-di-binomio
+        nota: "Cubi `x^3` e `8`, termini centrali `3*x^2*2` e `3*x*4`."

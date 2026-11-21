@@ -1,0 +1,37 @@
+id: identita-fondamentale
+tipo: regola
+titolo: Relazione fondamentale
+sigla: Fondamentale
+comando: sin^2(x) + cos^2(x) = 1
+vedo: Un `sin^2` e un `cos^2` insieme, un `1 - sin^2`, un `1 + tan^2`.
+formula:
+- sin^2(x) + cos^2(x) = 1
+- tan(x) = frac(sin(x)|cos(x))
+- 1 + tan^2(x) = frac(1|cos^2(x))
+adatto:
+- Da `sin^2 + cos^2 = 1` ricavi `1 - cos^2 = sin^2` e `1 - sin^2 = cos^2`.
+- Vale per qualsiasi angolo `x`, quindi anche per `2x`, `x + 1`...
+- 'Per passare dalla tangente: `1 + tan^2(x) = frac(1|cos^2(x))`.'
+esempi:
+- da: 1 - cos(x)^2
+  passi:
+  - '`1 - cos^2(x) = sin^2(x)`'
+  ris: sin(x)^2
+  verifica: scomposizione
+- da: sin(x)^2 - 1
+  passi:
+  - '`sin^2 - 1 = -cos^2`'
+  ris: -cos(x)^2
+  verifica: scomposizione
+- da: 1 + tan(x)^2
+  passi:
+  - porto tutto in seno e coseno
+  - '`frac(cos^2 + sin^2|cos^2)`'
+  ris: frac(1|cos(x)^2)
+  verifica: scomposizione
+errore: Scrivere `sin^2(x) + cos^2(x) = 1` con gli angoli diversi, o dimenticare il quadrato.
+confondi:
+- scheda: valore-da-un-altro
+  differenza: Questa è l'identità; l'altra la usa per trovare un valore preciso con il segno.
+perche: Su una circonferenza di raggio 1 il punto `(cos(x), sin(x))` soddisfa `X^2 + Y^2 = 1` (Pitagora).
+parole: relazione fondamentale identità seno coseno quadrato uno

@@ -1,0 +1,31 @@
+id: conta-termini
+tipo: regola
+titolo: Conta i termini
+sigla: Conta i termini
+comando: 2, 3 o 4 termini
+frase: "Passo 2: dopo il raccoglimento, il numero di termini dice quale metodo provare."
+vedo: "Hai raccolto il fattore comune: guarda quanti termini restano nella parentesi."
+formula:
+  - a^2 - b^2
+  - a^2 + 2*a*b + b^2
+  - a*c + a*d + b*c + b*d
+adatto:
+  - "2 termini: differenza di quadrati, oppure somma o differenza di cubi."
+  - "3 termini: trinomio quadrato, poi `x^2 + sx + p`, poi `ax^2 + bx + c`."
+  - "4 termini: raccoglimento parziale; se sono due cubi e due termini misti, cubo di binomio."
+  - "5 o più termini: prova a isolare un quadrato e riconoscere una differenza di quadrati."
+  - "Grado 3 o più, se non funziona niente: Ruffini."
+esempi:
+  - da: x^3 - 4x
+    passi:
+      - "Passo 1: raccolgo `x`: `x(x^2 - 4)`"
+      - "Passo 2: dentro la parentesi ci sono 2 termini, entrambi quadrati, con il meno"
+      - "Differenza di quadrati: `x^2 - 4 = (x - 2)(x + 2)`"
+    ris: x(x - 2)(x + 2)
+    verifica: scomposizione
+errore: "Contare i termini prima di aver raccolto il fattore comune."
+confondi:
+  - scheda: raccoglimento-totale
+    differenza: "Il raccoglimento totale va sempre prima di contare."
+perche: "Il numero di termini restringe i casi possibili: non devi provarli tutti."
+parole: quanti termini riconoscere quale metodo

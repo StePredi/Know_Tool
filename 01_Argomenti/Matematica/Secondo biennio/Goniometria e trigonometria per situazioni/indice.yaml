@@ -1,0 +1,55 @@
+modello: per_situazioni
+titolo: Goniometria e trigonometria, per situazioni
+centro: Goniometria e trigonometria
+sottotitolo: Angoli, formule, equazioni, triangoli
+ingresso: Angolo, espressione, equazione o triangolo
+guida: 'Prima chiediti cosa devi trovare: un valore, un''espressione da semplificare, un angolo incognito o un lato del triangolo. Poi guarda cosa ti è dato.'
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - gradi-radianti
+    - angoli-associati
+    - controlla-goniometria
+- id: val
+  nome: Valori e angoli
+  colore: orange
+  voci:
+  - schede:
+    - circonferenza-goniometrica
+    - angoli-notevoli
+    - identita-fondamentale
+    - valore-da-un-altro
+- id: for
+  nome: Formule
+  colore: violet
+  voci:
+  - schede:
+    - addizione
+    - duplicazione
+    - bisezione
+    - semplifica-espressione
+- id: eq
+  nome: Equazioni
+  colore: green
+  voci:
+  - schede:
+    - eq-seno
+    - eq-coseno
+    - eq-tangente
+    - eq-secondo-grado
+    - eq-lineare
+    - eq-scomponibile
+- id: tri
+  nome: Triangoli
+  colore: pink
+  voci:
+  - schede:
+    - scegli-teorema-triangolo
+    - triangolo-rettangolo
+    - teorema-seni
+    - teorema-coseno
+    - area-triangolo

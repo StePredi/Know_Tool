@@ -1,0 +1,32 @@
+id: scegli-teorema-triangolo
+tipo: regola
+titolo: Quale strumento per il triangolo?
+sigla: Scegli
+comando: dati noti -> teorema da usare
+vedo: 'Triangolo con dati misti: non sai se serve seno, coseno o i teoremi.'
+formula:
+- b = a*sin(B)
+- frac(a|sin(A)) = frac(b|sin(B))
+- a^2 = b^2 + c^2 - 2*b*c*cos(A)
+adatto:
+- C'è un angolo retto → seno, coseno, tangente (o Pitagora).
+- Ho una coppia lato–angolo opposto → teorema dei seni.
+- Ho due lati e l'angolo compreso, oppure tre lati → teorema del coseno.
+- 'Se ho due angoli, il terzo è `180 - A - B`: poi passo ai seni.'
+esempi:
+- da: 'a = 7, b = 5, C = 40 gradi: cerco c'
+  passi:
+  - '`C` è compreso tra `a` e `b`'
+  - non ho coppie lato–angolo opposto note
+  ris: teorema del coseno
+- da: 'A = 45, B = 60, a = 10: cerco b'
+  passi:
+  - ho `a` e il suo angolo opposto `A`
+  - e anche `B`, opposto a `b`
+  ris: teorema dei seni
+errore: Applicare il teorema dei seni senza una coppia lato–angolo opposto.
+confondi:
+- scheda: triangolo-rettangolo
+  differenza: Con l'angolo retto i rapporti semplici bastano.
+perche: 'Ogni caso è un dato iniziale diverso: i teoremi hanno ciascuno un tipo di dato che serve.'
+parole: quale teorema triangolo scegliere dati seni coseno

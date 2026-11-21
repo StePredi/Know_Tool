@@ -1,0 +1,39 @@
+id: studio-polinomio
+tipo: regola
+titolo: Polinomio
+sigla: Polinomio
+comando: 'nessun asintoto: derivate e segni'
+vedo: La funzione è un polinomio, come `x^3 - 3x` o `x^4 - 2x^2`.
+formula:
+- D = R
+- lim_(x -> +-inf) f(x) = +-inf
+adatto:
+- 'Dominio: tutti i reali, nessuna condizione.'
+- 'Nessun asintoto: i limiti vanno a `+-inf` senza rette guida.'
+- 'Zeri: scomponi. Il segno dipende dalle radici.'
+- 'Cuore dello studio: `f''` e `f''''` (polinomi, quindi semplici da studiare).'
+esempi:
+- da: f(x) = x^4 - 2x^2
+  passi:
+  - pari
+  - zeri `0` (doppio), `+-sqrt(2)`
+  - '`f''(x) = 4x(x - 1)(x + 1)`: minimi in `+-1`, massimo in `0`'
+  - '`f''''(x) = 4(3x^2 - 1)`: flessi in `+-frac(1|sqrt(3))`'
+  ris: minimi (+-1, -1), massimo (0, 0), 2 flessi
+- da: f(x) = x^3 - 3x^2
+  passi:
+  - zeri `0` (doppio) e `3`
+  - '`f''(x) = 3x(x - 2)`: massimo `(0, 0)`, minimo `(2, -4)`'
+  - '`f''''(x) = 6(x - 1)`: flesso `(1, -2)`'
+  ris: massimo (0, 0), minimo (2, -4), flesso (1, -2)
+- da: x^4 - 2x^2
+  passi:
+  - derivata
+  ris: 4x^3 - 4x
+  verifica: derivata
+errore: 'Cercare asintoti in un polinomio: non ne ha mai.'
+confondi:
+- scheda: studio-fratta
+  differenza: Il polinomio non ha asintoti né punti esclusi; la fratta sì.
+perche: 'Un polinomio è definito e derivabile ovunque: tutte le informazioni stanno in zeri, `f''` e `f''''`.'
+parole: polinomio studio funzione intera

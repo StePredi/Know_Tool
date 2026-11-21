@@ -1,0 +1,43 @@
+id: definizione-log
+tipo: regola
+titolo: Definizione di logaritmo
+sigla: Definizione
+comando: log_a(b) = c  <->  a^c = b
+vedo: Un logaritmo da calcolare, o un'equazione `log_a(x) = numero`.
+formula:
+- log_a(b) = c
+- a^c = b
+- log_a(1) = 0
+- log_a(a) = 1
+- a^(log_a(b)) = b
+adatto:
+- Il logaritmo è l'esponente a cui elevare la base per ottenere l'argomento.
+- 'Condizioni: `b > 0`, `a > 0`, `a != 1`.'
+- 'Per calcolarlo: «a che potenza elevo la base per avere l''argomento?»'
+esempi:
+- da: log_2(8)
+  passi:
+  - '`2^3 = 8`'
+  ris: '3'
+  verifica: scomposizione
+- da: log_3(frac(1|9))
+  passi:
+  - '`3^(-2) = frac(1|9)`'
+  ris: '-2'
+  verifica: scomposizione
+- da: log_5(1)
+  passi:
+  - '`5^0 = 1`'
+  ris: '0'
+  verifica: scomposizione
+- da: log_(1/2)(4)
+  passi:
+  - '`(frac(1|2))^(-2) = 4`'
+  ris: '-2'
+  verifica: scomposizione
+errore: 'Confondere l''ordine: `log_2(8)` è 3 (esponente), non 4 né 16.'
+confondi:
+- scheda: proprieta-log
+  differenza: La definizione dice cosa è; le proprietà dicono come si trasforma.
+perche: 'È la definizione stessa: l''esponenziale `a^c` e il logaritmo `log_a` sono funzioni inverse.'
+parole: definizione logaritmo base argomento esponente

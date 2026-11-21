@@ -1,0 +1,36 @@
+id: riconosci-notevole
+tipo: regola
+titolo: Quale prodotto notevole?
+sigla: Quale notevole?
+comando: guarda esponente e segni
+frase: "Una potenza di una somma, o due parentesi con gli stessi termini: scegli la formula giusta."
+vedo: "Una parentesi con esponente 2 o 3, o due parentesi con gli stessi termini: `(2x-3)^2`, `(x+4)(x-4)`."
+formula:
+  - (a + b)^2 = a^2 + 2*a*b + b^2
+  - (a + b)*(a - b) = a^2 - b^2
+  - (a + b)^3 = a^3 + 3*a^2*b + 3*a*b^2 + b^3
+  - (a + b + c)^2 = a^2 + b^2 + c^2 + 2*a*b + 2*a*c + 2*b*c
+adatto:
+  - "Una parentesi con 2 termini e esponente 2: quadrato di binomio."
+  - "Una parentesi con 2 termini e esponente 3: cubo di binomio."
+  - "Una parentesi con 3 termini e esponente 2: quadrato di trinomio."
+  - "Due parentesi con gli stessi termini ma segno opposto in mezzo (una con + e una con −): somma per differenza."
+  - "Due parentesi uguali, `(a+b)*(a+b)`: è un quadrato."
+  - "Prima di applicare la formula individua a e b: possono essere monomi. In `(2x-3)^2` è a = 2x, b = 3, con il meno."
+  - "Se non rientra in nessun caso, sviluppa termine per termine."
+esempi:
+  - da: (2x - 3)^2
+    passi:
+      - "Esponente 2 su un binomio: quadrato di binomio"
+      - "`a = 2x`, `b = 3`, segno meno"
+      - "`a^2 = 4x^2`, `2ab = 12x`, `b^2 = 9`"
+    ris: 4x^2 - 12x + 9
+    verifica: scomposizione
+errore: "Scegliere la formula senza guardare i segni: quadrato e somma per differenza non sono la stessa cosa."
+confondi:
+  - scheda: quadrato-binomio
+    differenza: "Una sola parentesi al quadrato: risultato a 3 termini."
+  - scheda: somma-per-differenza
+    differenza: "Due parentesi diverse nel segno: risultato a 2 termini."
+perche: "Ogni formula è lo sviluppo termine per termine di un caso ricorrente, scritto già ridotto."
+parole: notevoli notevole quadrato cubo riconoscere quale formula

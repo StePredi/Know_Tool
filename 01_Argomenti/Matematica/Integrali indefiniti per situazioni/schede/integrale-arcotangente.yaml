@@ -1,0 +1,32 @@
+id: integrale-arcotangente
+tipo: regola
+titolo: Arcotangente e arcoseno
+sigla: Arctan e arcsin
+comando: ∫ frac(1|1 + x^2) = arctan x
+vedo: Compare `frac(1|1 + x^2)` oppure `frac(1|sqrt(1 - x^2))`.
+formula:
+- ∫ frac(1|1 + x^2) dx = arctan x + c
+- ∫ frac(1|sqrt(1 - x^2)) dx = arcsin x + c
+adatto:
+- 'Somma di quadrati al denominatore (`1 + x^2`): arcotangente.'
+- 'Radice di `1 - x^2`: arcoseno.'
+- Se il denominatore è `x^2 + a^2`, vedi i fratti con il denominatore irriducibile.
+esempi:
+- da: ∫ frac(1|1 + x^2) dx
+  passi:
+  - '`(arctan x)'' = frac(1|1 + x^2)`'
+  ris: arctan x + c
+- da: ∫ frac(3|1 + x^2) dx
+  passi:
+  - la costante esce
+  ris: 3 arctan x + c
+- da: ∫ frac(1|sqrt(1 - x^2)) dx
+  passi:
+  - '`(arcsin x)'' = frac(1|sqrt(1 - x^2))`'
+  ris: arcsin x + c
+errore: 'Usare l''arcotangente con `1 - x^2` (differenza): lì c''è un''altra tecnica (fratti semplici).'
+confondi:
+- scheda: fratto-irriducibile
+  differenza: Qui il caso più semplice `1 + x^2`; lì `x^2 + bx + c` con `Delta < 0`.
+perche: Sono le derivate di `arctan` e `arcsin` lette al contrario.
+parole: integrale arcotangente arcoseno

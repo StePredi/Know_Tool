@@ -1,0 +1,35 @@
+id: circonferenza-equazione-generale
+tipo: regola
+titolo: 'Circonferenza: equazione generale'
+sigla: Generale
+comando: C = (-frac(a|2), -frac(b|2))
+vedo: Un'equazione `x^2 + y^2 + a*x + b*y + c = 0`.
+formula:
+- x^2 + y^2 + a*x + b*y + c = 0
+- C = (-frac(a|2), -frac(b|2))
+- r^2 = frac(a^2|4) + frac(b^2|4) - c
+adatto:
+- Se `r^2 > 0` è una circonferenza; se `r^2 = 0` è un punto; se `r^2 < 0` non esiste.
+- In alternativa completa i quadrati.
+- I coefficienti di `x^2` e `y^2` devono essere uguali a 1 (dividi se serve).
+esempi:
+- da: x^2 + y^2 - 4x + 6y - 12 = 0
+  passi:
+  - '`C = (2, -3)`'
+  - '`r^2 = 4 + 9 + 12 = 25`'
+  ris: C(2, -3), r = 5
+- da: x^2 + y^2 + 2x - 2y + 5 = 0
+  passi:
+  - '`r^2 = 1 + 1 - 5 = -3`'
+  ris: non esiste
+- da: x^2 + y^2 - 6x = 0
+  passi:
+  - '`C = (3, 0)`'
+  - '`r^2 = 9`'
+  ris: C(3, 0), r = 3
+errore: Dimenticare di dividere per 2 o il segno meno nelle coordinate del centro.
+confondi:
+- scheda: circonferenza-centro-raggio
+  differenza: Dalla forma canonica il centro si legge subito; qui si calcola.
+perche: Si ottiene sviluppando i quadrati di `(x - a)^2 + (y - b)^2 = r^2`.
+parole: circonferenza equazione generale centro raggio

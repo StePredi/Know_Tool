@@ -1,0 +1,31 @@
+id: sistema-disequazioni
+tipo: regola
+titolo: Sistema di disequazioni
+sigla: Sistema
+comando: "risolvo ogni disequazione, poi l'intersezione"
+vedo: "Due o più disequazioni da rispettare insieme: `x^2 - 4 < 0` e `x - 1 > 0`."
+formula: S = S_1 ∩ S_2
+adatto:
+  - "Risolvi ogni disequazione da sola."
+  - "Disegna le soluzioni su rette una sotto l'altra, con lo stesso asse."
+  - "La soluzione del sistema è dove tutte le righe sono vere: l'intersezione."
+  - "Controlla gli estremi uno per uno: sono inclusi solo se lo sono in tutte."
+esempi:
+  - da: "x^2 - 4 < 0   e   x - 1 > 0"
+    passi:
+      - "Prima: `(-2, 2)`"
+      - "Seconda: `x > 1`, cioè `(1, +inf)`"
+      - "Dove sono vere entrambe: da 1 a 2"
+    ris: "(1, 2)"
+  - da: "x^2 - 5x + 6 > 0   e   2x < 5"
+    passi:
+      - "Prima: `(-inf, 2) ∪ (3, +inf)`"
+      - "Seconda: `x < 5/2`"
+      - "Intersezione: resta solo `(-inf, 2)`"
+    ris: "(-inf, 2)"
+errore: "Fare l'unione delle soluzioni invece dell'intersezione."
+confondi:
+  - scheda: disequazione-primo-grado
+    differenza: "Una disequazione sola ha una soluzione; il sistema richiede che valgano tutte insieme."
+perche: "Un valore è soluzione del sistema se soddisfa ogni disequazione."
+parole: sistema disequazioni intersezione

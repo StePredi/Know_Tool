@@ -1,0 +1,38 @@
+id: forma-inf-meno-inf
+tipo: regola
+titolo: Forma ∞ − ∞
+sigla: Inf meno inf
+comando: raccogli o razionalizza
+vedo: Una differenza di due espressioni che vanno entrambe a infinito.
+formula:
+- inf - inf
+adatto:
+- 'Senza radici: raccogli la potenza più alta.'
+- 'Con radici: moltiplica e dividi per il coniugato, poi dividi per la potenza più alta.'
+- Dopo la trasformazione la forma diventa `frac(inf|inf)` o un limite diretto.
+esempi:
+- da: lim_(x -> +inf) (x^2 - x)
+  passi:
+  - 'raccolgo: `x^2*(1 - frac(1|x))`'
+  ris: +inf
+- da: sqrt(x^2 + 1) - x
+  passi:
+  - moltiplico e divido per `sqrt(x^2 + 1) + x`
+  - 'numeratore: `1`'
+  ris: frac(1|sqrt(x^2 + 1) + x)
+  verifica: scomposizione
+- da: lim_(x -> +inf) (sqrt(x^2 + 1) - x)
+  passi:
+  - denominatore tende a `+inf`
+  ris: '0'
+- da: lim_(x -> +inf) (sqrt(x^2 + x) - x)
+  passi:
+  - '`frac(x|sqrt(x^2 + x) + x)`'
+  - 'divido per `x`: `frac(1|sqrt(1 + frac(1|x)) + 1)`'
+  ris: frac(1|2)
+errore: 'Semplificare «a occhio» i due infiniti: non si cancellano.'
+confondi:
+- scheda: limite-all-infinito-polinomi
+  differenza: Un solo polinomio senza differenza; qui due termini in competizione.
+perche: Il coniugato trasforma la differenza in una frazione dove si vede chi vince.
+parole: forma inf meno inf coniugato razionalizzare raccogliere

@@ -1,0 +1,42 @@
+id: trinomio-notevole
+tipo: regola
+titolo: Trinomio x² + sx + p
+sigla: Trinomio x^2+sx+p
+comando: "(x + m)(x + n)"
+frase: "Trinomio di secondo grado con 1 davanti a x²."
+vedo: "Trinomio di secondo grado con coefficiente 1 davanti a x^2: `x^2 + 5x + 6`, `x^2 - x - 12`."
+formula:
+  - x^2 + s*x + p = (x + m)*(x + n)
+  - m + n = s
+  - m*n = p
+adatto:
+  - "Cerca due numeri che moltiplicati danno il termine noto e sommati danno il coefficiente di x."
+  - "Parti dai prodotti: elenca le coppie di divisori del termine noto, poi scegli quella con la somma giusta."
+  - "Termine noto positivo: i due numeri hanno lo stesso segno (quello del coefficiente di x). Termine noto negativo: segni opposti."
+  - "Se nessuna coppia funziona, con numeri interi il trinomio non si scompone."
+esempi:
+  - da: x^2 + 5x + 6
+    passi:
+      - "Prodotto 6, somma 5: coppie `1,6` e `2,3`"
+      - "`2 + 3 = 5`"
+    ris: (x + 2)(x + 3)
+    verifica: scomposizione
+  - da: x^2 - x - 12
+    passi:
+      - "Prodotto -12 (segni opposti), somma -1"
+      - "Coppie: `-4,3` dà somma -1"
+    ris: (x - 4)(x + 3)
+    verifica: scomposizione
+  - da: x^2 - 7x + 10
+    passi:
+      - "Prodotto 10, somma -7: entrambi negativi, `-2` e `-5`"
+    ris: (x - 2)(x - 5)
+    verifica: scomposizione
+errore: "Scegliere i numeri solo perché danno il prodotto giusto, senza controllare la somma."
+confondi:
+  - scheda: trinomio-a-diverso-da-1
+    differenza: "Qui davanti a x^2 c'è 1; con un altro numero serve il metodo con a·c."
+  - scheda: trinomio-quadrato
+    differenza: "Il quadrato è il caso in cui i due numeri sono uguali."
+perche: "`(x + m)(x + n) = x^2 + (m + n)x + mn`: è la moltiplicazione di due binomi letta al contrario."
+parole: trinomio somma prodotto secondo grado

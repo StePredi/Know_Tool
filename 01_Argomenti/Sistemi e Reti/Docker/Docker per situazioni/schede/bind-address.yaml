@@ -1,0 +1,30 @@
+id: bind-address
+tipo: ricetta
+titolo: Far ascoltare il servizio su tutte le interfacce del container
+sigla: BIND_ADDRESS
+comando: 0.0.0.0 · 127.0.0.1
+frase: nel container serve 0.0.0.0
+fonte: lab_immagini_dockerfile.pdf (parti 4.5, 6.1)
+parole: bind address 0.0.0.0 127.0.0.1 ascolto interfacce servizio interno container non risponde
+quando: Quando il servizio funziona da dentro il container ma da fuori non risponde.
+fasi:
+- nome: Il servizio ascolta solo in locale
+  righe:
+  - codice: docker run -d --name solo-locale -p 5004:5000 -e BIND_ADDRESS=127.0.0.1 note:2.0
+  - codice: python3 client.py localhost 5004 LIST
+    commento: nessuna risposta
+  - codice: docker exec solo-locale python -c "import socket; s = socket.create_connection(('127.0.0.1', 5000)); s.sendall(b'LIST\n'); print(s.recv(1000).decode())"
+    commento: da dentro il container invece risponde
+- nome: La regola
+  righe:
+  - codice: -e BIND_ADDRESS=127.0.0.1
+    commento: accetta solo connessioni nate dentro il container stesso
+  - codice: -e BIND_ADDRESS=0.0.0.0
+    commento: 'accetta da tutte le interfacce: serve per essere raggiunti da fuori'
+    trappola: Le connessioni pubblicate con -p arrivano al container dalla rete bridge, non da 127.0.0.1.
+segnaposto: {}
+varianti: []
+vicine:
+- pubblica-solo-locale
+- client-non-collega
+- exec-container

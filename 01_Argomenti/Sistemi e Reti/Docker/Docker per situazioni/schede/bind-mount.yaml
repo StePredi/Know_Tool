@@ -1,0 +1,36 @@
+id: bind-mount
+tipo: ricetta
+titolo: Montare una cartella del PC nel container
+sigla: Bind mount
+comando: -v /percorso/host:/percorso/container
+frase: file normali, modificabili dal PC
+fonte: lab_volumi_servizi.pdf (parte 3) · lab_immagini_dockerfile.pdf (parte 5.3) · container_mini_tutorial.md
+parole: bind mount cartella host percorso modifiche subito visibili nginx sito homepage index.html
+quando: Quando vuoi modificare dal PC i file che il container usa, e vedere subito il risultato.
+fasi:
+- nome: Monta la cartella
+  righe:
+  - codice: mkdir -p $HOME/sito
+  - codice: docker run -d --name web -p 8080:80 -v $HOME/sito:/usr/share/nginx/html nginx
+    commento: a sinistra il percorso sull'host, a destra quello nel container
+    trappola: 'La cartella montata nasconde quella dell''immagine: se è vuota, nginx non ha pagine (403 Forbidden).'
+- nome: Lavora dal PC
+  righe:
+  - codice: nano $HOME/sito/index.html
+    commento: scrivi la homepage
+  - codice: curl http://localhost:8080
+    commento: le modifiche si vedono subito, senza riavviare il container
+- nome: I file restano sul PC
+  righe:
+  - codice: docker rm -f web
+  - codice: docker run -d --name web -p 8080:80 -v $HOME/sito:/usr/share/nginx/html nginx
+    commento: il nuovo container ritrova la stessa homepage
+segnaposto: {}
+varianti:
+- codice: docker run -d -v "$PWD/archivio-dati":/data -p 5000:5000 note:2.0
+  spiega: dati dell'archivio note in una cartella del PC
+vicine:
+- bind-sola-lettura
+- bind-sviluppo
+- pagina-403
+- file-di-root

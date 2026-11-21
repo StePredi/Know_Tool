@@ -1,0 +1,39 @@
+id: divisione-polinomi
+tipo: regola
+titolo: Divisione tra polinomi
+sigla: Divisione tra polinomi
+comando: A = B*Q + R
+vedo: "Un polinomio diviso un altro con due o più termini: `(x^3 + 2x^2 - x + 3) : (x^2 + 1)`."
+formula: A = B*Q + R
+adatto:
+  - "Ordina dividendo e divisore dal grado più alto; per le potenze mancanti lascia uno spazio (coefficiente 0)."
+  - "Dividi il termine di grado più alto del dividendo per quello del divisore: è il primo termine del quoziente."
+  - "Moltiplica quel termine per tutto il divisore e sottrailo dal dividendo (cambia tutti i segni)."
+  - "Ripeti sul resto parziale. Fermati quando il grado del resto è minore del grado del divisore."
+  - "Verifica: `B*Q + R` deve tornare uguale ad A."
+  - "Se il divisore è del tipo `x - a` puoi usare Ruffini, più veloce."
+esempi:
+  - da: frac(x^3 + 2x^2 - x + 3|x^2 + 1)
+    passi:
+      - "`x^3 : x^2 = x`, primo termine del quoziente"
+      - "`x*(x^2 + 1) = x^3 + x`; sottraggo: resta `2x^2 - 2x + 3`"
+      - "`2x^2 : x^2 = 2`, secondo termine"
+      - "`2*(x^2 + 1) = 2x^2 + 2`; sottraggo: resta `-2x + 1`"
+      - "Grado 1, minore di 2: mi fermo. Quoziente `x + 2`, resto `-2x + 1`"
+      - "Verifica: `(x^2 + 1)(x + 2) + (-2x + 1) = x^3 + 2x^2 - x + 3`"
+    ris: x + 2 + frac(-2x + 1|x^2 + 1)
+    verifica: scomposizione
+  - da: frac(x^3 - 1|x - 1)
+    passi:
+      - "Scrivo `x^3 + 0x^2 + 0x - 1`"
+      - "Quoziente `x^2 + x + 1`, resto 0"
+    ris: x^2 + x + 1
+    verifica: scomposizione
+errore: "Sbagliare i segni nella sottrazione, o dimenticare i termini mancanti: `x^3 - 1` va scritto `x^3 + 0x^2 + 0x - 1`."
+confondi:
+  - scheda: ruffini
+    differenza: "Ruffini va bene solo se il divisore è `x - a`; la divisione completa vale sempre."
+  - scheda: polinomio-diviso-monomio
+    differenza: "Con un divisore di un solo termine basta dividere termine per termine."
+perche: "È la divisione in colonna tra numeri: 17 : 5 = 3 con resto 2 vuol dire 17 = 5*3 + 2."
+parole: divisione polinomi quoziente resto colonna

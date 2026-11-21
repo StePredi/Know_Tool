@@ -1,0 +1,36 @@
+id: limite-comportamento
+tipo: regola
+titolo: Comportamento per n grande
+sigla: n grande
+comando: divido per la potenza più alta
+vedo: Ti chiedono dove va la successione quando `n` diventa molto grande.
+formula:
+- a_n -> L
+adatto:
+- '`n^k` con `k > 0` cresce senza limite; `frac(1|n^k)` tende a 0.'
+- 'Frazione di polinomi in `n`: dividi numeratore e denominatore per la potenza più alta.'
+- '`q^n` tende a 0 se `|q| < 1`, cresce se `q > 1`; `(-1)^n` oscilla.'
+- 'È un''idea intuitiva: la definizione precisa è nel capitolo dei limiti.'
+esempi:
+- da: a_n = frac(1|n)
+  passi:
+  - i termini diventano sempre più piccoli
+  ris: tende a 0
+- da: a_n = frac(n|n + 1)
+  passi:
+  - 'divido per `n`: `frac(1|1 + frac(1|n))`'
+  ris: tende a 1
+- da: a_n = frac(3n^2 + 1|n^2 + n)
+  passi:
+  - 'divido per `n^2`: `frac(3 + frac(1|n^2)|1 + frac(1|n))`'
+  ris: tende a 3
+- da: a_n = (-1)^n
+  passi:
+  - salta tra `-1` e `1`
+  ris: non ha limite
+errore: Pensare che i termini diventino piccoli se la successione decresce.
+confondi:
+- scheda: monotonia
+  differenza: La monotonia dice come cambiano i termini; il comportamento dice dove vanno.
+perche: I termini con la potenza più alta dominano quando `n` è grande.
+parole: limite successione n grande tende comportamento

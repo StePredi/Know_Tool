@@ -1,0 +1,29 @@
+id: polinomio
+tipo: regola
+titolo: Polinomio, riduzione e grado
+sigla: Polinomio
+comando: riduci, poi leggi il grado
+frase: "Più monomi uniti da + e −: prima riduci, poi leggi il grado."
+vedo: "Più termini uniti da + e −: `3x^2 - 5x + 1`, `a^2b + ab^2`."
+formula: a_n*x^n + a_1*x + a_0
+adatto:
+  - "Prima riduci: somma i termini simili. Solo dopo guarda il grado."
+  - "Grado del polinomio: il grado più alto tra i termini rimasti. `3x^2 - 3x^2 + x` ha grado 1."
+  - "Binomio = 2 termini, trinomio = 3 termini."
+  - "Ordinato: termini scritti dal grado più alto al più basso. Completo: ci sono tutte le potenze, fino al termine noto."
+  - "Omogeneo: tutti i termini hanno lo stesso grado totale, per esempio `x^2 + xy + y^2`."
+  - "Il termine noto è il termine senza lettere."
+esempi:
+  - da: 2x^3 - x + 5 + x^3 - 4x^3
+    passi:
+      - "Termini simili in x^3: `2x^3 + x^3 - 4x^3 = -x^3`"
+      - "Restano `-x` e `+5`"
+      - "Il grado più alto rimasto è 3"
+    ris: -x^3 - x + 5
+    verifica: scomposizione
+errore: "Dire che il grado è quello del primo termine scritto, senza ridurre: il grado conta dopo aver sommato i termini simili."
+confondi:
+  - scheda: monomio
+    differenza: "Un monomio ha un termine solo; il polinomio ne ha più di uno anche dopo la riduzione."
+perche: "Per x molto grande comanda il termine con l'esponente più alto: per questo il grado è quello."
+parole: grado ordinato completo omogeneo binomio trinomio termine noto riduzione

@@ -1,0 +1,36 @@
+id: successione-ricorsiva
+tipo: regola
+titolo: Successione ricorsiva
+sigla: Ricorsiva
+comando: a_(n+1) = f(a_n)
+vedo: Ogni termine è definito a partire dal precedente (o dai precedenti).
+formula:
+- a_(n+1) = f(a_n)
+adatto:
+- Servono il primo termine (o i primi) e la regola.
+- Calcola i termini uno alla volta.
+- '`a_(n+1) = a_n + d` è aritmetica; `a_(n+1) = q*a_n` è geometrica.'
+- 'Fibonacci: `a_(n+2) = a_(n+1) + a_n`.'
+esempi:
+- da: a_1 = 2, a_(n+1) = 2*a_n - 1
+  passi:
+  - '`a_2 = 3`'
+  - '`a_3 = 5`'
+  - '`a_4 = 9`'
+  ris: 2, 3, 5, 9, 17, ...
+- da: a_1 = 1, a_2 = 1, a_(n+2) = a_(n+1) + a_n
+  passi:
+  - '`1 + 1 = 2`'
+  - '`1 + 2 = 3`'
+  - '`2 + 3 = 5`'
+  ris: 1, 1, 2, 3, 5, 8, ...
+- da: a_1 = 5, a_(n+1) = a_n + 3
+  passi:
+  - regola aritmetica con `d = 3`
+  ris: a_n = 3n + 2
+errore: Partire dal termine sbagliato o ignorare il valore iniziale.
+confondi:
+- scheda: termine-generale
+  differenza: La ricorsione dà il termine dal precedente; la formula generale lo dà direttamente.
+perche: 'Una regola ricorsiva da sola non basta: serve il punto di partenza.'
+parole: successione ricorsiva fibonacci termine precedente

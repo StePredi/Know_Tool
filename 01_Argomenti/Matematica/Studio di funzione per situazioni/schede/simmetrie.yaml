@@ -1,0 +1,36 @@
+id: simmetrie
+tipo: regola
+titolo: 2. Simmetrie
+sigla: Simmetrie
+comando: calcola f(-x) e confrontala con f(x)
+vedo: 'Hai il dominio e vuoi sapere se il grafico è simmetrico: ti dimezza il lavoro.'
+formula:
+- 'f(-x) = f(x): pari'
+- 'f(-x) = -f(x): dispari'
+adatto:
+- Controlla prima che il dominio sia simmetrico rispetto a `0`.
+- Sostituisci `-x` a ogni `x` e semplifica.
+- 'Se ottieni `f(x)`: pari, simmetrica rispetto all''asse `y`. Se ottieni `-f(x)`: dispari, simmetrica rispetto all''origine.'
+- 'Altrimenti non c''è simmetria: non è un errore, succede spesso.'
+esempi:
+- da: f(x) = x^4 - 2x^2
+  passi:
+  - '`f(-x) = (-x)^4 - 2(-x)^2 = x^4 - 2x^2`'
+  ris: pari
+- da: f(x) = x^3 - 3x
+  passi:
+  - '`f(-x) = -x^3 + 3x = -(x^3 - 3x)`'
+  ris: dispari
+- da: f(x) = x^2 + x
+  passi:
+  - '`f(-x) = x^2 - x`'
+  - né uguale a `f(x)` né a `-f(x)`
+  ris: né pari né dispari
+errore: 'Concludere «pari» con un solo valore che torna: serve per ogni `x` del dominio.'
+confondi:
+- scheda: funzione-pari
+  differenza: 'Pari: simmetria rispetto all''asse `y`.'
+- scheda: funzione-dispari
+  differenza: 'Dispari: simmetria rispetto all''origine.'
+perche: Se `f` è simmetrica basta studiarla per `x >= 0` e riflettere il grafico.
+parole: simmetrie pari dispari f(-x) asse origine

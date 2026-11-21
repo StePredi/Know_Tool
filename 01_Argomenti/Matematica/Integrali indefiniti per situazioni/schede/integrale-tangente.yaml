@@ -1,0 +1,27 @@
+id: integrale-tangente
+tipo: regola
+titolo: Uno su coseno al quadrato
+sigla: Tangente
+comando: ∫ frac(1|cos^2 x) dx = tan x + c
+vedo: Compare `frac(1|cos^2 x)` oppure `1 + tan^2 x`.
+formula:
+- ∫ frac(1|cos^2 x) dx = tan x + c
+- ∫ (1 + tan^2 x) dx = tan x + c
+adatto:
+- '`1 + tan^2 x` è uguale a `frac(1|cos^2 x)`.'
+- Con `frac(1|sin^2 x)` il risultato è `-cot x`.
+esempi:
+- da: ∫ frac(1|cos^2 x) dx
+  passi:
+  - '`(tan x)'' = frac(1|cos^2 x)`'
+  ris: tan x + c
+- da: ∫ (1 + tan^2 x) dx
+  passi:
+  - '`1 + tan^2 x = frac(1|cos^2 x)`'
+  ris: tan x + c
+errore: 'Integrare `tan^2 x` come se fosse `frac(tan^3 x|3)`: non c''è `tan x` derivata fuori.'
+confondi:
+- scheda: integrale-seno-coseno
+  differenza: Seno e coseno sono immediati; qui c'è il quadrato al denominatore.
+perche: La derivata di `tan x` è `frac(1|cos^2 x)`.
+parole: integrale tangente uno su coseno quadrato

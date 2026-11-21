@@ -1,0 +1,27 @@
+id: pagina-403
+tipo: prima_dopo
+titolo: nginx risponde 403 dopo aver montato una cartella
+sigla: 403 con il bind mount
+comando: cartella vuota
+frase: il bind mount nasconde i file dell'immagine
+fonte: lab_volumi_servizi.pdf (parte 3.1, domanda 6)
+parole: 403 forbidden nginx pagina vuota bind mount cartella vuota nasconde welcome
+prima: |-
+  mkdir -p $HOME/sito
+  docker run -d --name web -p 8080:80 -v $HOME/sito:/usr/share/nginx/html nginx
+dopo: |-
+  mkdir -p $HOME/sito
+  ⟦echo "<h1>Il mio sito</h1>" > $HOME/sito/index.html⟧
+  docker run -d --name web -p 8080:80 -v $HOME/sito:/usr/share/nginx/html nginx
+uso: Servire con nginx i file di una cartella del PC.
+riconoscila: curl -i http://localhost:8080 risponde 403 Forbidden invece della pagina di benvenuto.
+parti:
+- voce: cartella montata
+  spiega: 'prende il posto di quella dell''immagine: la pagina di benvenuto non si vede più'
+- voce: index.html
+  spiega: crea la homepage nella cartella del PC
+trappola: 'Con un named volume vuoto invece nginx mostra la pagina di benvenuto: Docker lo riempie con il contenuto dell''immagine.'
+varianti: []
+vicine:
+- bind-mount
+- named-volume

@@ -1,0 +1,50 @@
+id: semplifica-espressione
+tipo: regola
+titolo: Semplificare un'espressione goniometrica
+sigla: Semplifica
+comando: tan(x) = frac(sin(x)|cos(x))
+vedo: Un'espressione con più funzioni (`tan`, `sin^2`, `sin(2x)`) da ridurre a una forma più semplice.
+formula:
+- tan(x) = frac(sin(x)|cos(x))
+- sin^2(x) + cos^2(x) = 1
+- sin(2x) = 2*sin(x)*cos(x)
+adatto:
+- 1. Porta tutto in seno e coseno (`tan = sin/cos`).
+- 2. Cerca `sin^2 + cos^2` o `1 - cos^2`.
+- 3. Cerca un raccoglimento o un quadrato di binomio.
+- 4. Cerca un angolo doppio o somma di angoli.
+esempi:
+- da: tan(x)*cos(x)
+  passi:
+  - '`frac(sin(x)|cos(x))*cos(x)`'
+  ris: sin(x)
+  verifica: scomposizione
+- da: frac(1 - cos(x)^2|sin(x))
+  passi:
+  - '`1 - cos^2 = sin^2`'
+  - '`frac(sin^2(x)|sin(x))`'
+  ris: sin(x)
+  verifica: scomposizione
+- da: (sin(x) + cos(x))^2
+  passi:
+  - sviluppo il quadrato
+  - '`sin^2 + cos^2 + 2*sin(x)*cos(x)`'
+  - '`1 + sin(2x)`'
+  ris: 1 + sin(2x)
+  verifica: scomposizione
+- da: frac(sin(2x)|2*cos(x))
+  passi:
+  - '`frac(2*sin(x)*cos(x)|2*cos(x))`'
+  ris: sin(x)
+  verifica: scomposizione
+- da: frac(1|1 + tan(x)^2)
+  passi:
+  - '`1 + tan^2 = frac(1|cos^2)`'
+  ris: cos(x)^2
+  verifica: scomposizione
+errore: Semplificare togliendo `sin` da una somma come fosse un fattore.
+confondi:
+- scheda: identita-fondamentale
+  differenza: L'identità è uno strumento; qui scegli quando usarla.
+perche: Le identità goniometriche sono sempre vere; semplificare vuol dire sostituire un'espressione con un'altra uguale ma più corta.
+parole: semplificare espressione goniometrica identità ridurre

@@ -1,0 +1,31 @@
+id: area-sotto-curva
+tipo: regola
+titolo: Area sotto una curva
+sigla: Sotto la curva
+comando: ∫_a^b f dx (f >= 0)
+vedo: Devi calcolare l'area fra una curva sopra l'asse `x` e l'asse `x`.
+formula:
+- A = ∫_a^b f(x) dx
+adatto:
+- Controlla che `f >= 0` su tutto l'intervallo.
+- L'area è l'integrale di `f` tra `a` e `b`.
+- Se `f` cambia segno, vedi la scheda successiva.
+esempi:
+- da: y = x^2 su [0, 3]
+  passi:
+  - '`[frac(x^3|3)]_0^3`'
+  ris: '9'
+- da: y = sin x su [0, π]
+  passi:
+  - '`[-cos x]_0^π`'
+  ris: '2'
+- da: y = sqrt(x) su [0, 4]
+  passi:
+  - '`[frac(2|3) x sqrt(x)]_0^4 = frac(2|3)*8`'
+  ris: frac(16|3)
+errore: 'Usare la formula con una curva che va sotto l''asse: darebbe un''area negativa o troppo piccola.'
+confondi:
+- scheda: area-segno-cambia
+  differenza: Qui la curva sta tutta sopra l'asse; lì lo attraversa.
+perche: L'area è la somma delle strisce di altezza `f(x)` e larghezza piccolissima.
+parole: area sotto curva integrale definito asse x

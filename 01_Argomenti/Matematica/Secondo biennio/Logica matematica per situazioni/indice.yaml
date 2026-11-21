@@ -1,0 +1,44 @@
+modello: per_situazioni
+titolo: Logica matematica, per situazioni
+centro: Logica matematica
+sottotitolo: Connettivi, tavole di verità, quantificatori
+ingresso: Frase da analizzare, tradurre o negare
+guida: Prima chiediti se è una proposizione, poi quali connettivi o quantificatori contiene. Se serve, costruisci la tavola di verità.
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - individua-proposizione
+    - costruisci-tavola
+    - leggi-risultato
+- id: con
+  nome: Connettivi
+  colore: orange
+  voci:
+  - schede:
+    - negazione
+    - congiunzione
+    - disgiunzione
+    - implicazione
+    - doppia-implicazione
+- id: leg
+  nome: Leggi
+  colore: violet
+  voci:
+  - schede:
+    - de-morgan
+    - equivalenze-implicazione
+    - negare-implicazione
+    - inversa-contraria
+- id: qua
+  nome: Quantificatori
+  colore: green
+  voci:
+  - schede:
+    - quantificatori
+    - negare-quantificatori
+    - controesempio
+    - condizione-necessaria-sufficiente

@@ -1,0 +1,32 @@
+id: condizioni-esistenza
+tipo: regola
+titolo: Condizioni di esistenza
+sigla: Condizioni di esistenza
+comando: denominatore diverso da 0
+frase: "Passo 2: scrivi per quali valori di x la frazione ha senso, prima di semplificare."
+vedo: "Una frazione con la x al denominatore: serve sapere per quali valori ha senso."
+formula: B != 0
+adatto:
+  - "Scrivi le condizioni sui denominatori di partenza, già scomposti, prima di semplificare."
+  - "Uguaglia a zero ogni fattore del denominatore ed escludi quei valori."
+  - "Nella divisione tra frazioni escludi anche i valori che annullano il numeratore della frazione per cui dividi."
+  - "Un fattore che non si annulla mai, come `x^2 + 1`, non dà nessuna condizione."
+  - "Si scrivono nella forma `x != 2`."
+esempi:
+  - da: frac(x - 2|x(x + 2))
+    passi:
+      - "Denominatore scomposto: `x(x + 2)`"
+      - "`x = 0` oppure `x + 2 = 0`"
+      - "Escludo `x = 0` e `x = -2`"
+    ris: x != 0, x != -2
+  - da: frac(3|x^2 - 9)
+    passi:
+      - "Denominatore scomposto: `(x - 3)(x + 3)`"
+      - "Escludo `x = 3` e `x = -3`"
+    ris: x != 3, x != -3
+errore: "Calcolare le condizioni dopo aver semplificato: un fattore semplificato ha già lasciato il suo divieto, che resta valido."
+confondi:
+  - scheda: semplifica
+    differenza: "Le condizioni si scrivono sulla frazione di partenza, non su quella semplificata."
+perche: "Dividere per zero non ha significato: i valori che annullano il denominatore vanno esclusi."
+parole: condizioni di esistenza c.e. dominio denominatore zero

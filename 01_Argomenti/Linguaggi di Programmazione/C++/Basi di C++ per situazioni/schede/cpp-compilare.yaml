@@ -1,0 +1,35 @@
+id: cpp-compilare
+tipo: ricetta
+titolo: Compilare ed eseguire un programma
+sigla: Compilare
+comando: g++ main.cpp -o main
+frase: dal sorgente al programma
+fonte: Documentazione C++ · cppreference.com · g++ · opzioni di compilazione
+parole: compilare compilatore g++ eseguire std c++17 wall output eseguibile main.exe a.out
+quando: Quando hai scritto il codice e vuoi farlo girare.
+fasi:
+- nome: Compilare
+  righe:
+  - codice: g++ -std=c++17 -Wall main.cpp -o main
+    commento: Trasforma il sorgente nel programma eseguibile.
+    parti:
+    - voce: -std=c++17
+      spiega: versione del linguaggio da usare
+    - voce: -Wall
+      spiega: mostra gli avvisi utili
+    - voce: -o main
+      spiega: nome del programma prodotto
+    trappola: 'Dopo ogni modifica al codice bisogna ricompilare: se esegui il vecchio programma vedi il
+      vecchio comportamento.'
+- nome: Eseguire
+  righe:
+  - codice: ./main
+    commento: Su Linux e macOS.
+  - codice: main.exe
+    commento: Su Windows con MinGW il programma prodotto si chiama main.exe.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-struttura
+- cpp-piu-file
+- cpp-errori-comuni

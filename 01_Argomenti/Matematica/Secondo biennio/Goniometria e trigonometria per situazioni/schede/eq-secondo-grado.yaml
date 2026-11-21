@@ -1,0 +1,37 @@
+id: eq-secondo-grado
+tipo: regola
+titolo: Equazione di secondo grado in seno o coseno
+sigla: Secondo grado
+comando: a*t^2 + b*t + c = 0
+vedo: Il seno (o il coseno) compare sia al quadrato sia alla prima potenza, e nient'altro.
+formula:
+- t = sin(x)
+- a*t^2 + b*t + c = 0
+- -1 <= t <= 1
+adatto:
+- Poni `t = sin(x)` (o `cos(x)`) e risolvi in `t`.
+- Scarta i valori di `t` fuori da `[-1, 1]`.
+- Per ogni `t` buono risolvi `sin(x) = t` con l'equazione elementare.
+- Se compaiono sia seno sia coseno al quadrato, usa `sin^2 = 1 - cos^2` per portare tutto in una funzione.
+esempi:
+- da: 2*sin(x)^2 - sin(x) - 1 = 0
+  passi:
+  - '`t = sin(x)`: `2t^2 - t - 1 = 0`'
+  - '`t = 1` oppure `t = -frac(1|2)`'
+  ris: x = frac(pi|2) + 2k*pi, x = frac(7*pi|6) + 2k*pi, x = frac(11*pi|6) + 2k*pi
+- da: sin(x)^2 - 3*sin(x) + 2 = 0
+  passi:
+  - '`t^2 - 3t + 2 = 0`: `t = 1` oppure `t = 2`'
+  - '`t = 2` è fuori da `[-1, 1]`: scarto'
+  ris: x = frac(pi|2) + 2k*pi
+- da: 2*sin(x)^2 + cos(x) - 1 = 0
+  passi:
+  - '`sin^2 = 1 - cos^2`: `2 - 2cos^2 + cos - 1 = 0`'
+  - '`2t^2 - t - 1 = 0` con `t = cos(x)`: `t = 1` oppure `t = -frac(1|2)`'
+  ris: x = 2k*pi, x = +-frac(2*pi|3) + 2k*pi
+errore: Dimenticare di scartare un `t` maggiore di 1 in valore assoluto.
+confondi:
+- scheda: eq-scomponibile
+  differenza: Qui l'incognita `t` sostituisce la funzione; lì raccogli invece di sostituire.
+perche: È una normale equazione di secondo grado in cui l'incognita è una funzione goniometrica.
+parole: equazione secondo grado seno coseno sostituzione t

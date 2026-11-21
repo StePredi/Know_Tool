@@ -1,0 +1,29 @@
+id: file-di-root
+tipo: ricetta
+titolo: Non riesco a cancellare i file creati dal container
+sigla: File di root
+comando: docker run --rm … rm -rf
+frase: nel bind mount i file sono di root
+fonte: lab_immagini_dockerfile.pdf (pulizia, domanda 2, approfondimento B) · lab_volumi_servizi.pdf (parte 3.4)
+parole: permessi root proprietario cancellare file bind mount permission denied rm utente
+quando: Quando nel bind mount trovi file di root e il tuo utente non li può eliminare o modificare.
+fasi:
+- nome: Perché succede
+  righe:
+  - codice: ls -l $HOME/sito
+    commento: 'il processo nel container gira come root: i file che crea sono di root'
+- nome: Cancellali da un container
+  righe:
+  - codice: docker run --rm -v "$PWD":/w python:3.12-slim rm -rf /w/notes /w/archivio-dati
+    commento: il container è root e ha i permessi
+    trappola: 'rm -rf è definitivo: controlla bene i percorsi dopo /w.'
+- nome: Per non farlo succedere
+  righe:
+  - codice: docker run -d --user "$(id -u):$(id -g)" -p 5000:5000 -v "$PWD/archivio-dati":/data note:2.0
+    commento: il container usa il tuo utente
+segnaposto: {}
+varianti: []
+vicine:
+- utente-non-root
+- bind-mount
+- pulizia-ambiente

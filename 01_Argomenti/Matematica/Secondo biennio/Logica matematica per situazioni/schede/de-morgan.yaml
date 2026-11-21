@@ -1,0 +1,33 @@
+id: de-morgan
+tipo: regola
+titolo: Leggi di De Morgan
+sigla: De Morgan
+comando: ¬(p ∧ q) ≡ ¬p ∨ ¬q
+vedo: La negazione di un «e» o di un «o».
+formula:
+- ¬(p ∧ q) ≡ ¬p ∨ ¬q
+- ¬(p ∨ q) ≡ ¬p ∧ ¬q
+adatto:
+- Nega i due pezzi e scambia «e» con «o».
+- 'Con le disuguaglianze: un intervallo si nega con due semirette.'
+esempi:
+- da: ¬(x > 2 ∧ x < 5)
+  passi:
+  - 'nego e scambio: `x ≤ 2 ∨ x ≥ 5`'
+  ris: x ≤ 2 oppure x ≥ 5
+- da: nega «piove e fa freddo»
+  passi:
+  - nego i due pezzi e uso «o»
+  ris: non piove o non fa freddo
+- da: ¬(p ∨ q)
+  passi:
+  - 'righe in ordine: `VV, VF, FV, FF`'
+  - 'colonna di `¬(p ∨ q)`: F F F V'
+  - 'colonna di `¬p ∧ ¬q`: F F F V'
+  ris: ¬p ∧ ¬q
+errore: Negare i pezzi senza scambiare «e» con «o».
+confondi:
+- scheda: negare-implicazione
+  differenza: De Morgan riguarda «e»/«o»; la negazione dell'implicazione è un'altra regola.
+perche: 'Si dimostrano con le tavole di verità: le due colonne coincidono.'
+parole: de morgan negare e o

@@ -1,0 +1,31 @@
+id: derivata-definizione
+tipo: regola
+titolo: Definizione di derivata
+sigla: Definizione
+comando: f'(x_0) = lim_(h -> 0) frac(f(x_0 + h) - f(x_0)|h)
+vedo: Ti chiedono la derivata «dalla definizione», o se esiste in un punto.
+formula:
+- f'(x_0) = lim_(h -> 0) frac(f(x_0 + h) - f(x_0)|h)
+adatto:
+- Se il limite esiste finito, `f` è derivabile in `x_0` e il limite è `f'(x_0)`.
+- Il limite deve esistere sia da destra sia da sinistra.
+- Se `x_0` è una lettera, ottieni la funzione derivata `f'(x)`.
+esempi:
+- da: f(x) = x^2 in x_0 = 2
+  passi:
+  - '`frac((2 + h)^2 - 4|h) = 4 + h`'
+  ris: f'(2) = 4
+- da: f(x) = 3x + 2 in x_0 = 1
+  passi:
+  - '`frac(3(1 + h) + 2 - 5|h) = 3`'
+  ris: f'(1) = 3
+- da: f(x) = x^2 in un punto generico x
+  passi:
+  - '`frac((x + h)^2 - x^2|h) = 2x + h`'
+  ris: f'(x) = 2x
+errore: Dimenticare di fare il limite alla fine e lasciare `h` nel risultato.
+confondi:
+- scheda: rapporto-incrementale
+  differenza: Il rapporto incrementale è la pendenza media; la derivata è il suo limite.
+perche: 'La retta secante tende, per `h -> 0`, alla tangente: la derivata ne misura la pendenza.'
+parole: definizione derivata limite rapporto incrementale

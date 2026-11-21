@@ -1,0 +1,35 @@
+id: controlla-goniometria
+tipo: regola
+titolo: Controllo del risultato
+sigla: Controlla
+comando: sin^2(x) + cos^2(x) = 1
+vedo: Hai finito un calcolo o un'equazione e vuoi sapere se può essere giusto.
+formula:
+- -1 <= sin(x) <= 1
+- -1 <= cos(x) <= 1
+- sin^2(x) + cos^2(x) = 1
+adatto:
+- 'Seno e coseno stanno sempre tra `-1` e `1`: fuori da lì il risultato è impossibile.'
+- 'Il segno deve rispettare il quadrante (I: tutti positivi, II: solo seno, III: solo tangente, IV: solo coseno).'
+- 'Equazioni: sostituisci una soluzione nell''equazione di partenza.'
+- 'Triangoli: gli angoli sommano 180 gradi, il lato più lungo sta di fronte all''angolo più grande.'
+- 'Calcolatrice: controlla gradi o radianti.'
+esempi:
+- da: sin(x) = frac(5|4)
+  passi:
+  - '`frac(5|4)` è maggiore di 1'
+  ris: impossibile
+- da: sin(x) = 0,6 e cos(x) = 0,7
+  passi:
+  - '`0,36 + 0,49 = 0,85`, non fa 1'
+  ris: valori incompatibili
+- da: x = frac(pi|6) in 2*sin(x) = 1
+  passi:
+  - '`2*frac(1|2) = 1`'
+  ris: soluzione corretta
+errore: Fidarsi del primo risultato senza una sostituzione veloce.
+confondi:
+- scheda: gradi-radianti
+  differenza: Il controllo copre l'unità; la conversione è un'altra operazione.
+perche: 'Sono le proprietà della circonferenza di raggio 1: ogni punto ha coordinate tra `-1` e `1` e distanza 1 dall''origine.'
+parole: controllo verifica segno quadrante impossibile

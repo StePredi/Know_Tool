@@ -1,0 +1,53 @@
+modello: per_situazioni
+titolo: Coniche, per situazioni
+centro: Coniche
+sottotitolo: Circonferenza, parabola, ellisse, iperbole
+ingresso: Equazione di secondo grado in `x` e `y`, o dati geometrici (fuochi, vertice, punto)
+guida: Prima riconosci la conica dai coefficienti di x^2 e y^2, poi portala in forma canonica e leggi centro, vertice, semiassi.
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - riconosci-conica
+    - forma-canonica
+    - controlla-conica
+- id: cir
+  nome: Circonferenza
+  colore: orange
+  voci:
+  - schede:
+    - circonferenza-centro-raggio
+    - circonferenza-equazione-generale
+    - circonferenza-da-dati
+- id: par
+  nome: Parabola
+  colore: violet
+  voci:
+  - schede:
+    - parabola-asse-verticale
+    - parabola-asse-orizzontale
+    - parabola-da-dati
+- id: ell
+  nome: Ellisse
+  colore: green
+  voci:
+  - schede:
+    - ellisse-canonica
+    - ellisse-da-dati
+- id: ipe
+  nome: Iperbole
+  colore: pink
+  voci:
+  - schede:
+    - iperbole-canonica
+    - iperbole-equilatera
+- id: rel
+  nome: Retta e conica
+  colore: teal
+  voci:
+  - schede:
+    - retta-conica-posizione
+    - tangente-punto

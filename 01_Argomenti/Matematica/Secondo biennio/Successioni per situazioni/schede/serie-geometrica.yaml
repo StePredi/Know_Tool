@@ -1,0 +1,33 @@
+id: serie-geometrica
+tipo: regola
+titolo: Somma infinita (serie geometrica)
+sigla: Serie
+comando: S = frac(a_1|1 - q), |q| < 1
+vedo: Somma di infiniti termini di una progressione geometrica con `|q| < 1`, o un numero decimale periodico.
+formula:
+- S = frac(a_1|1 - q)
+- '|q| < 1'
+adatto:
+- Vale solo se `|q| < 1`; altrimenti la somma non esiste (diverge o oscilla).
+- Utile per trasformare decimali periodici in frazione.
+esempi:
+- da: 1 + frac(1|2) + frac(1|4) + ...
+  passi:
+  - '`a_1 = 1`, `q = frac(1|2)`'
+  ris: '2'
+- da: 3 + 1 + frac(1|3) + ...
+  passi:
+  - '`q = frac(1|3)`'
+  - '`frac(3|1 - frac(1|3))`'
+  ris: frac(9|2)
+- da: 0,333... = 3/10 + 3/100 + ...
+  passi:
+  - '`a_1 = frac(3|10)`, `q = frac(1|10)`'
+  - '`frac(frac(3|10)|1 - frac(1|10))`'
+  ris: frac(1|3)
+errore: Applicarla con `q = 1` o `|q| > 1`.
+confondi:
+- scheda: geometrica-somma
+  differenza: Lì `n` è finito; qui infiniti termini.
+perche: 'Con `|q| < 1`, `q^n` tende a 0: nella somma finita rimane `frac(a_1|1 - q)`.'
+parole: serie geometrica somma infinita decimale periodico

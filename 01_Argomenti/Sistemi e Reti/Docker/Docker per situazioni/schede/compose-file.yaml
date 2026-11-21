@@ -1,0 +1,35 @@
+id: compose-file
+tipo: ricetta
+titolo: Descrivere un container in un file compose.yaml
+sigla: compose.yaml
+comando: 'services: image ports volumes'
+frase: le opzioni di docker run scritte in un file
+fonte: lab_volumi_servizi.pdf (approfondimento B) · virtualizzazione_e_container.pdf
+parole: docker compose yaml compose.yaml services image ports volumes file nginx
+quando: Quando non vuoi riscrivere ogni volta un docker run lungo.
+fasi:
+- nome: Il file compose.yaml
+  righe:
+  - codice: 'services:'
+  - codice: '  web:'
+    commento: il nome del servizio
+  - codice: '    image: nginx'
+  - codice: '    ports:'
+  - codice: '      - "8080:80"'
+    commento: come -p 8080:80
+  - codice: '    volumes:'
+  - codice: '      - ./sito:/usr/share/nginx/html:ro'
+    commento: come -v, con percorso relativo al file
+    trappola: La cartella sito deve trovarsi accanto a compose.yaml.
+segnaposto: {}
+varianti:
+- codice: |2-
+      web2:
+        image: nginx
+        ports:
+          - "8081:80"
+  spiega: 'un secondo sito: un altro servizio sotto services'
+vicine:
+- compose-comandi
+- compose-tre-servizi
+- bind-mount

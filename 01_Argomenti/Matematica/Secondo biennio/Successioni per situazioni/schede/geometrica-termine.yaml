@@ -1,0 +1,31 @@
+id: geometrica-termine
+tipo: regola
+titolo: 'Progressione geometrica: termine'
+sigla: Geometrica a_n
+comando: a_n = a_1*q^(n - 1)
+vedo: Ogni termine si ottiene moltiplicando il precedente per la stessa quantità `q`.
+formula:
+- a_n = a_1*q^(n - 1)
+- q = frac(a_(n+1)|a_n)
+adatto:
+- '`q > 1`: cresce (se `a_1 > 0`); `0 < q < 1`: decresce; `q < 0`: segni alterni.'
+- L'esponente è `n - 1`, non `n`.
+esempi:
+- da: 'a_1 = 3, q = 2: a_6'
+  passi:
+  - '`3*2^5 = 3*32`'
+  ris: '96'
+- da: 'a_1 = 16, q = frac(1|2): a_5'
+  passi:
+  - '`16*(frac(1|2))^4 = frac(16|16)`'
+  ris: '1'
+- da: a_1 = 2, a_4 = 54
+  passi:
+  - '`q^3 = frac(54|2) = 27`'
+  ris: q = 3
+errore: Scrivere `q^n` invece di `q^(n - 1)`.
+confondi:
+- scheda: aritmetica-termine
+  differenza: Lì si aggiunge `d`; qui si moltiplica per `q`.
+perche: 'Ogni passo moltiplica per `q`: dopo `n - 1` passi si ha `q^(n - 1)`.'
+parole: progressione geometrica termine generale ragione rapporto

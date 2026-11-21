@@ -1,0 +1,29 @@
+id: condizione-necessaria-sufficiente
+tipo: regola
+titolo: Condizione necessaria e sufficiente
+sigla: Nec/Suff
+comando: 'p -> q: p suff., q nec.'
+vedo: «È condizione necessaria», «è sufficiente», «basta che».
+formula:
+- p -> q
+adatto:
+- 'In `p -> q`: `p` è sufficiente per `q` (basta `p`), `q` è necessaria per `p` (senza `q` non c''è `p`).'
+- Se vale anche `q -> p`, allora è condizione necessaria e sufficiente (`p ↔ q`).
+- 'Non invertire: la sufficiente non è necessaria in generale.'
+esempi:
+- da: se un numero è divisibile per 6 allora è divisibile per 3
+  passi:
+  - 6 basta per avere il 3
+  - senza il 3 non c'è il 6
+  ris: essere divisibile per 6 è sufficiente per 3; per 3 è necessaria
+- da: se un quadrilatero è un quadrato allora è un rettangolo
+  passi:
+  - 'quadrato: sufficiente'
+  - 'rettangolo: necessaria'
+  ris: rettangolo è condizione necessaria ma non sufficiente per essere quadrato
+errore: Scambiare necessaria e sufficiente.
+confondi:
+- scheda: implicazione
+  differenza: L'implicazione è la frase; qui si leggono i ruoli di `p` e `q`.
+perche: '«Se p allora q» dice che ogni volta che c''è `p` c''è anche `q`: quindi `q` serve a `p`.'
+parole: condizione necessaria sufficiente basta

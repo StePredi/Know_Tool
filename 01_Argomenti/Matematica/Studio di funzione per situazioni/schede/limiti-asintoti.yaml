@@ -1,0 +1,40 @@
+id: limiti-asintoti
+tipo: regola
+titolo: 4. Limiti e asintoti
+sigla: Limiti
+comando: limiti agli estremi del dominio
+vedo: Hai il dominio e vuoi sapere cosa fa la funzione ai bordi.
+formula:
+- lim_(x -> +-inf) f(x)
+- lim_(x -> c^+-) f(x)
+adatto:
+- Calcola il limite in ogni estremo del dominio e ai due lati di ogni punto escluso.
+- 'Infinito in un punto `c`: asintoto verticale `x = c`.'
+- 'Limite finito `l` a `+-inf`: asintoto orizzontale `y = l`.'
+- 'Limite infinito a `+-inf`: prova l''asintoto obliquo `y = m*x + q`.'
+esempi:
+- da: f(x) = frac(x^2|x - 1)
+  passi:
+  - 'in `x = 1`: limiti `-inf` da sinistra e `+inf` da destra'
+  - 'a `+-inf` va a `+-inf`: cerco l''obliquo'
+  ris: verticale x = 1; obliquo y = x + 1
+- da: f(x) = frac(ln(x)|x)
+  passi:
+  - 'in `0^+`: `-inf`'
+  - 'a `+inf`: `0`'
+  ris: verticale x = 0; orizzontale y = 0
+- da: f(x) = x^3 - 3x
+  passi:
+  - 'dominio `R`: solo `+-inf`'
+  - limiti `+-inf`, rapporto `f/x` infinito
+  ris: nessun asintoto
+errore: Calcolare i limiti solo a `+inf` e dimenticare `-inf`, o dimenticare i punti esclusi dal dominio.
+confondi:
+- scheda: asintoto-verticale
+  differenza: 'Verticale: la `x` va a un numero e la `y` all''infinito.'
+- scheda: asintoto-orizzontale
+  differenza: 'Orizzontale: la `x` va all''infinito e la `y` a un numero.'
+- scheda: asintoto-obliquo
+  differenza: 'Obliquo: tutte e due vanno all''infinito, con rapporto finito.'
+perche: 'Il grafico si avvicina agli asintoti: sono le guide più utili per disegnarlo.'
+parole: limiti asintoti estremi dominio comportamento

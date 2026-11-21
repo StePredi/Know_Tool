@@ -1,0 +1,31 @@
+id: disequazione-fratta
+tipo: regola
+titolo: Disequazione fratta
+sigla: Fratta
+comando: "una sola frazione, segno di N e di D"
+vedo: "La x compare in un denominatore: `frac(x - 1|x + 2) >= 0`."
+formula: frac(N|D) > 0
+adatto:
+  - "Non togliere il denominatore: non sai se è positivo o negativo."
+  - "Porta tutto a sinistra e riduci a una sola frazione (schede di Frazioni algebriche)."
+  - "Linea dei segni con una riga per il numeratore, una per il denominatore e una per il quoziente."
+  - "Gli zeri del denominatore sono sempre esclusi, anche con `>=` e `<=`."
+esempi:
+  - da: "frac(x - 1|x + 2) >= 0"
+    passi:
+      - "Zero del numeratore: 1. Zero del denominatore: -2 (escluso)"
+      - "Quoziente: più prima di -2, meno tra -2 e 1, più dopo 1"
+      - "Cerco il più; 1 incluso, -2 escluso"
+    ris: "(-inf, -2) ∪ [1, +inf)"
+  - da: "frac(2|x - 1) > 1"
+    passi:
+      - "Porto a sinistra: `frac(2|x - 1) - 1 > 0`, cioè `frac(3 - x|x - 1) > 0`"
+      - "Zero del numeratore: 3. Zero del denominatore: 1"
+      - "Quoziente: meno prima di 1, più tra 1 e 3, meno dopo 3"
+    ris: "(1, 3)"
+errore: "Moltiplicare per il denominatore come in un'equazione: se il denominatore è negativo il verso va invertito."
+confondi:
+  - scheda: disequazione-prodotto
+    differenza: "Stessa linea dei segni, ma gli zeri del denominatore restano sempre esclusi."
+perche: "Il segno di un quoziente è il segno del prodotto, ma il denominatore non può mai essere zero."
+parole: fratta frazionaria denominatore disequazione

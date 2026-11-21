@@ -1,0 +1,37 @@
+id: derivata-seconda
+tipo: regola
+titolo: 6. Derivata seconda
+sigla: f''
+comando: calcola f''(x) e studia il suo segno
+vedo: Vuoi sapere come curva il grafico e dove cambia curvatura.
+formula:
+- 'f''''(x) > 0: convessa'
+- 'f''''(x) < 0: concava'
+- 'f''''(x) = 0: possibile flesso'
+adatto:
+- Deriva `f'` e semplifica.
+- Risolvi `f''(x) = 0` per trovare i possibili flessi.
+- 'Studia il segno di `f''''`: dove cambia, c''è un flesso.'
+- Calcola `f` nei flessi per avere le coordinate del punto.
+esempi:
+- da: 3x^2 - 3
+  passi:
+  - 'questa è `f''(x)` di `x^3 - 3x`: la derivo ancora'
+  - '`f''''(x) = 6x`'
+  - concava per `x < 0`, convessa per `x > 0`
+  - flesso in `x = 0`
+  ris: 6x
+  verifica: derivata
+- da: 3x^2 - 6x
+  passi:
+  - 'questa è `f''(x)` di `x^3 - 3x^2`: la derivo ancora'
+  - '`f''''(x) = 6x - 6 = 6(x - 1)`'
+  - flesso in `x = 1`, con `f(1) = -2`
+  ris: 6x - 6
+  verifica: derivata
+errore: 'Chiamare flesso ogni punto con `f'''' = 0`: serve che `f''''` cambi segno (in `x^4` la `f''''` è zero in `0` ma non c''è flesso).'
+confondi:
+- scheda: derivata-prima
+  differenza: La prima dà crescenza e massimi/minimi; la seconda concavità e flessi.
+perche: 'La derivata seconda è la derivata della pendenza: dice se la pendenza cresce (convessa) o cala (concava).'
+parole: derivata seconda concavità convessità flessi

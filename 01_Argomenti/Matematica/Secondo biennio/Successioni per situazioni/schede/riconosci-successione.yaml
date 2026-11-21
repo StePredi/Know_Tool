@@ -1,0 +1,38 @@
+id: riconosci-successione
+tipo: regola
+titolo: Che tipo di successione è?
+sigla: Riconosci
+comando: 'a_(n+1) - a_n costante: aritmetica'
+vedo: Un elenco di numeri `a_1, a_2, a_3, ...` o una formula per `a_n`.
+formula:
+- a_(n+1) - a_n = d
+- frac(a_(n+1)|a_n) = q
+adatto:
+- 'Differenza costante tra termini consecutivi: progressione aritmetica (ragione `d`).'
+- 'Rapporto costante: progressione geometrica (ragione `q`).'
+- 'Termine ottenuto dal precedente (`a_(n+1) = ...`): successione ricorsiva.'
+- Altrimenti cerca la formula di `a_n` guardando come cambiano i termini (potenze, frazioni).
+esempi:
+- da: 2, 5, 8, 11, ...
+  passi:
+  - 'differenze: `3, 3, 3`'
+  ris: aritmetica, d = 3
+- da: 3, 6, 12, 24, ...
+  passi:
+  - 'rapporti: `2, 2, 2`'
+  ris: geometrica, q = 2
+- da: 1, 4, 9, 16, ...
+  passi:
+  - né differenza né rapporto costanti
+  - sono i quadrati
+  ris: a_n = n^2
+- da: 1, 1, 2, 3, 5, 8, ...
+  passi:
+  - ogni termine è la somma dei due precedenti
+  ris: ricorsiva (Fibonacci)
+errore: 'Controllare solo le prime due differenze: servono almeno tre termini.'
+confondi:
+- scheda: termine-generale
+  differenza: Qui si decide il tipo; lì si scrive la formula di `a_n`.
+perche: Il tipo di successione decide quale formula usare per il termine e per la somma.
+parole: riconoscere successione aritmetica geometrica ricorsiva ragione

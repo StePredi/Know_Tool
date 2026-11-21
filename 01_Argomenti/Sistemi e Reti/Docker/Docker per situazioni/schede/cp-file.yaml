@@ -1,0 +1,25 @@
+id: cp-file
+tipo: ricetta
+titolo: Copiare file tra il PC e un container
+sigla: docker cp
+comando: docker cp
+frase: copia in entrambe le direzioni
+fonte: container_mini_tutorial.md
+parole: copiare file cp host container trasferire
+quando: Quando devi mettere o prendere un file da un container senza volume.
+fasi:
+- nome: Copia
+  righe:
+  - codice: docker cp file.txt «NOME»:/app/
+    commento: dal PC al container
+  - codice: docker cp «NOME»:/app/file.txt ./
+    commento: dal container al PC
+    trappola: 'Nota: il file copiato nel container finisce nel layer scrivibile: sparisce con docker rm.'
+segnaposto:
+  NOME:
+    esempio: archivio
+    spiega: nome o ID del container
+varianti: []
+vicine:
+- exec-container
+- bind-mount

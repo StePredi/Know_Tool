@@ -1,0 +1,32 @@
+modello: per_situazioni
+titolo: Sistemi lineari, per situazioni
+centro: Sistemi lineari
+sottotitolo: "Due e tre incognite"
+ingresso: Sistema
+guida: "Metti le equazioni in forma normale, poi guarda i coefficienti: sono loro a dire quale metodo è il più corto."
+rami:
+  - id: ord
+    nome: Procedura in ordine
+    colore: blue
+    ordine: true
+    voci:
+      - schede:
+          - forma-normale-sistema
+          - scegli-metodo
+          - controlla-sistema
+  - id: met
+    nome: I quattro metodi
+    colore: orange
+    voci:
+      - schede:
+          - sostituzione
+          - confronto
+          - riduzione
+          - cramer
+  - id: cas
+    nome: Casi particolari
+    colore: pink
+    voci:
+      - schede:
+          - impossibile-indeterminato
+          - sistema-tre-incognite

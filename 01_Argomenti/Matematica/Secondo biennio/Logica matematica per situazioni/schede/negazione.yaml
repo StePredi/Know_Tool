@@ -1,0 +1,32 @@
+id: negazione
+tipo: regola
+titolo: Negazione
+sigla: Non
+comando: ¬p
+vedo: Una frase con «non», «non è vero che», oppure una disuguaglianza da negare.
+formula:
+- ¬p
+- ¬¬p ≡ p
+adatto:
+- 'Inverte il valore: se `p` è vera, `¬p` è falsa.'
+- 'Numeri: `¬(x > 3)` è `x ≤ 3`; `¬(x = 2)` è `x ≠ 2`.'
+- 'Doppia negazione: `¬¬p ≡ p`.'
+esempi:
+- da: 'p: «7 è pari»'
+  passi:
+  - '`p` è falsa'
+  ris: '¬p: «7 non è pari», vera'
+- da: ¬(x > 3)
+  passi:
+  - il contrario di maggiore è minore o uguale
+  ris: x ≤ 3
+- da: ¬(x ≤ -1)
+  passi:
+  - il contrario di minore o uguale è maggiore
+  ris: x > -1
+errore: Negare «maggiore» con «minore» dimenticando l'uguale.
+confondi:
+- scheda: negare-quantificatori
+  differenza: Negare «tutti» o «esiste» segue regole proprie.
+perche: La negazione è vera esattamente quando la proposizione è falsa.
+parole: negazione non vero falso inverte

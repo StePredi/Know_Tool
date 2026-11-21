@@ -1,0 +1,30 @@
+id: disequazione-prodotto
+tipo: regola
+titolo: Prodotto di più fattori
+sigla: Prodotto
+comando: "una riga per fattore"
+vedo: "Grado 3 o più, oppure più fattori confrontati con zero: `(x - 1)(x + 2)(x - 4) > 0`, `x^3 - 4x <= 0`."
+formula: A*B*C > 0
+adatto:
+  - "Scomponi il polinomio (schede di Scomposizione)."
+  - "Linea dei segni con una riga per fattore."
+  - "Un fattore con esponente pari non cambia segno; un fattore sempre positivo si ignora."
+  - "Con `<=` o `>=` gli zeri contano come soluzioni, anche quelli isolati."
+esempi:
+  - da: "x^3 - 4x <= 0"
+    passi:
+      - "Scompongo: `x(x - 2)(x + 2) <= 0`, zeri -2, 0, 2"
+      - "Segni del prodotto: meno prima di -2, più tra -2 e 0, meno tra 0 e 2, più dopo 2"
+      - "Cerco il meno, con estremi inclusi"
+    ris: "(-inf, -2] ∪ [0, 2]"
+  - da: "(x - 1)^2 (x + 3) > 0"
+    passi:
+      - "`(x - 1)^2` è positivo tranne in `x = 1`"
+      - "Resta `x + 3 > 0`, cioè `x > -3`, con `x != 1`"
+    ris: "(-3, 1) ∪ (1, +inf)"
+errore: "Cambiare segno attraversando uno zero di un fattore al quadrato."
+confondi:
+  - scheda: secondo-grado-completa
+    differenza: "Con due soli fattori di primo grado vale la regola dei valori interni ed esterni."
+perche: "Il segno di un prodotto dipende dal numero di fattori negativi."
+parole: prodotto grado alto fattori disequazione

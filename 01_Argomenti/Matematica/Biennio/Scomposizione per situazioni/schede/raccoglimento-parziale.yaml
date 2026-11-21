@@ -1,0 +1,34 @@
+id: raccoglimento-parziale
+tipo: regola
+titolo: Raccoglimento parziale
+sigla: Raccoglimento parziale
+comando: raccolgo a gruppi
+frase: "Quattro o più termini senza un fattore comune a tutti."
+vedo: "Quattro termini (o sei) senza un fattore comune a tutti: `x^3 + x^2 + 2x + 2`."
+formula: a*x + a*y + b*x + b*y = (a + b)*(x + y)
+adatto:
+  - "Forma gruppi di termini che hanno qualcosa in comune, di solito due a due."
+  - "In ogni gruppo raccogli il fattore comune."
+  - "Se la parentesi che resta è la stessa in tutti i gruppi, raccoglila: i fattori comuni formano l'altro fattore."
+  - "Se le parentesi non sono uguali, cambia il raggruppamento o raccogli un segno meno."
+esempi:
+  - da: x^3 + x^2 + 2x + 2
+    passi:
+      - "Primo gruppo: `x^3 + x^2 = x^2(x + 1)`"
+      - "Secondo gruppo: `2x + 2 = 2(x + 1)`"
+      - "Raccolgo `(x + 1)`: `(x + 1)(x^2 + 2)`"
+    ris: (x + 1)(x^2 + 2)
+    verifica: scomposizione
+  - da: x^3 - 3x^2 - 4x + 12
+    passi:
+      - "`x^3 - 3x^2 = x^2(x - 3)`"
+      - "`-4x + 12 = -4(x - 3)`"
+      - "`(x - 3)(x^2 - 4)`, poi `x^2 - 4` si scompone ancora"
+    ris: (x - 3)(x - 2)(x + 2)
+    verifica: scomposizione
+errore: "Sbagliare il segno quando raccogli: `-4x + 12 = -4(x - 3)`, non `-4(x + 3)`."
+confondi:
+  - scheda: raccoglimento-totale
+    differenza: "Il totale raccoglie da tutti i termini in una volta; il parziale lo fa a gruppi e poi raccoglie ancora."
+perche: "Si fa un raccoglimento totale due volte, poi si raccoglie la parentesi che compare in entrambe."
+parole: raccoglimento parziale gruppi quattro termini

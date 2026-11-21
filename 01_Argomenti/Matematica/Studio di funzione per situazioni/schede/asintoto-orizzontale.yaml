@@ -1,0 +1,32 @@
+id: asintoto-orizzontale
+tipo: regola
+titolo: Asintoto orizzontale
+sigla: Orizzontale
+comando: y = l se lim f = l
+vedo: Quando `x` va all'infinito, `f(x)` tende a un numero.
+formula:
+- lim_(x -> +-inf) f(x) = l
+adatto:
+- 'Calcola il limite a `+inf` e a `-inf`: possono essere due asintoti diversi.'
+- Se il limite è finito `l`, la retta `y = l` è asintoto orizzontale.
+- 'Frazione di polinomi: gradi uguali danno il rapporto dei coefficienti, grado minore al numeratore dà `0`.'
+esempi:
+- da: f(x) = frac(2x + 1|x - 3)
+  passi:
+  - 'gradi uguali: limite `frac(2|1)`'
+  ris: y = 2
+- da: f(x) = frac(x|x^2 + 1)
+  passi:
+  - 'grado del numeratore minore: limite `0`'
+  ris: y = 0
+- da: f(x) = x*e^x
+  passi:
+  - a `-inf` il prodotto va a `0`
+  - a `+inf` va a `+inf`
+  ris: y = 0 solo a -inf
+errore: 'Fermarsi a `+inf`: a `-inf` il limite può essere diverso, specie con esponenziali.'
+confondi:
+- scheda: asintoto-obliquo
+  differenza: 'Orizzontale: limite finito. Obliquo: limite infinito, con rapporto `f/x` finito.'
+perche: Il grafico si appiattisce sul valore `l` quando `x` è molto grande in valore assoluto.
+parole: asintoto orizzontale limite infinito finito

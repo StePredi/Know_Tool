@@ -1,0 +1,24 @@
+id: controlla-sistema
+tipo: regola
+titolo: Controlla la soluzione
+sigla: Controlla
+comando: "sostituisco in entrambe"
+frase: "Passo 3: verifica la coppia e classifica il sistema."
+vedo: "Hai trovato x e y: controlla e scrivi la risposta."
+formula: (x_0, y_0)
+adatto:
+  - "Sostituisci la coppia nelle equazioni di partenza, non in quelle trasformate: devono valere entrambe."
+  - "Scrivi la soluzione come coppia ordinata `(x, y)`."
+  - "Se arrivi a `0 = k` con k diverso da 0: sistema impossibile. Se arrivi a `0 = 0`: sistema indeterminato."
+esempi:
+  - da: "x + 2y = 5,   3x - y = 1"
+    passi:
+      - "Provo `(1, 2)` nella prima: `1 + 4 = 5`"
+      - "Nella seconda: `3 - 2 = 1`"
+    ris: "(1, 2)"
+errore: "Controllare solo in una delle due equazioni."
+confondi:
+  - scheda: impossibile-indeterminato
+    differenza: "Se esce `0 = k` o `0 = 0` non c'è una coppia da controllare."
+perche: "La coppia deve soddisfare tutte le equazioni insieme."
+parole: controllo verifica soluzione coppia

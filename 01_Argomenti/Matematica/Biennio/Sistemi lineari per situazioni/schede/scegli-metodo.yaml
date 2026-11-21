@@ -1,0 +1,26 @@
+id: scegli-metodo
+tipo: regola
+titolo: Scegli il metodo
+sigla: Scegli il metodo
+comando: "guarda i coefficienti"
+frase: "Passo 2: i coefficienti dicono quale metodo è più corto."
+vedo: "Hai il sistema in forma normale e devi decidere come risolverlo."
+formula: D = a_1*b_2 - a_2*b_1
+adatto:
+  - "Un'incognita con coefficiente 1 o -1 (per esempio `x + 2y = 5`): sostituzione."
+  - "Coefficienti uguali od opposti in una stessa incognita (per esempio `3x + y` e `2x - y`): riduzione, sommando o sottraendo."
+  - "La stessa incognita già isolata in entrambe (`y = 2x + 1` e `y = 5 - x`): confronto."
+  - "Coefficienti scomodi e vuoi una procedura meccanica: Cramer, che dice anche subito se il sistema è determinato."
+  - "Se nessuno dei casi precedenti, riduzione moltiplicando una o entrambe le equazioni."
+esempi:
+  - da: "x + 2y = 5,   3x - y = 1"
+    passi:
+      - "`x` ha coefficiente 1 nella prima e `y` ha coefficiente -1 nella seconda"
+      - "Sostituzione: ricavo `y` dalla seconda"
+    ris: "y = 3x - 1"
+errore: "Forzare un metodo quando un altro è chiaramente più corto."
+confondi:
+  - scheda: forma-normale-sistema
+    differenza: "Il metodo si sceglie dopo aver messo in forma normale."
+perche: "Il metodo giusto fa meno calcoli con le frazioni."
+parole: scegliere metodo sistema coefficienti

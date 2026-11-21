@@ -1,0 +1,33 @@
+id: continuita
+tipo: regola
+titolo: Continuità in un punto
+sigla: Continuità
+comando: lim_(x -> c) f(x) = f(c)
+vedo: Ti chiedono se una funzione è continua, o di trovare un parametro che la renda continua.
+formula:
+- lim_(x -> c^-) f(x) = lim_(x -> c^+) f(x) = f(c)
+adatto:
+- 'Servono tre cose: `f(c)` definita, limite esistente, limite uguale a `f(c)`.'
+- Per le funzioni a tratti calcola limite destro e sinistro nel punto di raccordo.
+- 'Parametro: imponi l''uguaglianza dei limiti e risolvi.'
+esempi:
+- da: f(x) = x^2
+  passi:
+  - funzione elementare nel suo dominio
+  ris: continua ovunque
+- da: f(x) = x + 1 per x < 2;  f(x) = a*x - 3 per x >= 2
+  passi:
+  - 'limite sinistro: `3`'
+  - 'limite destro e valore: `2a - 3`'
+  - '`2a - 3 = 3`'
+  ris: a = 3
+- da: f(x) = frac(x^2 - 1|x - 1) per x diverso da 1; f(1) = k
+  passi:
+  - 'limite: `x + 1 -> 2`'
+  ris: continua per k = 2
+errore: Controllare solo un lato.
+confondi:
+- scheda: discontinuita-tipi
+  differenza: Qui si chiede la continuità; lì si classifica quando non c'è.
+perche: 'Continuità: il valore nel punto coincide con ciò a cui si avvicinano i valori vicini.'
+parole: continuità punto parametro funzione a tratti

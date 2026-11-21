@@ -1,0 +1,26 @@
+id: volume-condiviso
+tipo: ricetta
+titolo: Condividere lo stesso volume tra più container
+sigla: Volume condiviso
+comando: -v sito-vol:… su più container
+frase: un dato, tanti container
+fonte: lab_volumi_servizi.pdf (parte 5.4) · container_mini_tutorial.md
+parole: volume condiviso più container stessi dati due web server sola lettura ro
+quando: Quando più container devono vedere gli stessi file.
+fasi:
+- nome: Monta lo stesso volume due volte
+  righe:
+  - codice: docker run -d --name web3 -p 8082:80 -v sito-vol:/usr/share/nginx/html nginx
+  - codice: docker run -d --name web4 -p 8083:80 -v sito-vol:/usr/share/nginx/html:ro nginx
+    commento: il secondo in sola lettura
+- nome: Verifica
+  righe:
+  - codice: curl http://localhost:8082
+  - codice: curl http://localhost:8083
+    commento: 'stessa pagina: modifichi una volta sola, la vedono tutti e due'
+segnaposto: {}
+varianti: []
+vicine:
+- named-volume
+- volume-servizio
+- bind-sola-lettura

@@ -1,0 +1,39 @@
+id: punti-stazionari
+tipo: regola
+titolo: Massimi e minimi relativi
+sigla: Max e min
+comando: f'(x) = 0 e cambia segno
+vedo: Cerchi dove la funzione ha un massimo o un minimo locale.
+formula:
+- f'(x_0) = 0
+- 'f'' passa da + a -: massimo'
+- 'f'' passa da - a +: minimo'
+adatto:
+- 'Risolvi `f''(x) = 0`: sono i candidati.'
+- Guarda il segno di `f'` prima e dopo ciascun candidato.
+- '`+` poi `-`: massimo. `-` poi `+`: minimo. Segno uguale prima e dopo: né massimo né minimo.'
+- Calcola `f(x_0)` per avere la coordinata `y` del punto.
+esempi:
+- da: f(x) = x^3 - 3x
+  passi:
+  - '`f''(x) = 3(x - 1)(x + 1)`'
+  - 'in `-1`: da `+` a `-`, massimo, `f(-1) = 2`'
+  - 'in `1`: da `-` a `+`, minimo, `f(1) = -2`'
+  ris: massimo (-1, 2), minimo (1, -2)
+- da: f(x) = x^4 - 2x^2
+  passi:
+  - '`f''(x) = 4x(x - 1)(x + 1)`'
+  - minimi in `+-1` con `f = -1`
+  - massimo in `0` con `f = 0`
+  ris: minimi (-1, -1) e (1, -1), massimo (0, 0)
+- da: f(x) = x^3
+  passi:
+  - '`f''(x) = 3x^2`, zero in `0`'
+  - '`f''` positiva da entrambe le parti'
+  ris: nessun massimo o minimo, `x = 0` è un flesso
+errore: 'Dire «massimo» ogni volta che `f'' = 0`: in `x^3` la derivata è zero in `0` ma non c''è né massimo né minimo.'
+confondi:
+- scheda: punto-non-derivabile
+  differenza: Qui `f' = 0`; lì `f'` non esiste ma può esserci ugualmente un estremo.
+perche: Quando la funzione smette di salire per cominciare a scendere, la tangente è orizzontale in quel punto.
+parole: massimo minimo relativo stazionario punto critico

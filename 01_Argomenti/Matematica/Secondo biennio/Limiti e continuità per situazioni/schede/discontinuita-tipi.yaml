@@ -1,0 +1,32 @@
+id: discontinuita-tipi
+tipo: regola
+titolo: Tipi di discontinuità
+sigla: Discontinuità
+comando: prima, seconda, terza specie
+vedo: Un punto dove la funzione non è continua e ti chiedono di classificarlo.
+formula:
+- lim_(x -> c^-) f(x)
+- lim_(x -> c^+) f(x)
+adatto:
+- 'Prima specie (salto): i due limiti sono finiti ma diversi; il salto è la differenza.'
+- 'Seconda specie: almeno uno dei limiti è infinito o non esiste.'
+- 'Terza specie (eliminabile): il limite esiste finito ma `f(c)` è diverso o non è definita.'
+esempi:
+- da: f(x) = frac(x|abs(x)) in x = 0
+  passi:
+  - limite sinistro `-1`, destro `1`
+  ris: prima specie, salto 2
+- da: f(x) = frac(1|x) in x = 0
+  passi:
+  - limite infinito
+  ris: seconda specie
+- da: f(x) = frac(sin(x)|x) in x = 0
+  passi:
+  - limite `1`, `f(0)` non definita
+  ris: eliminabile (terza specie)
+errore: Chiamare «salto» una discontinuità con limite infinito.
+confondi:
+- scheda: continuita
+  differenza: Lì i tre controlli di continuità; qui cosa va storto.
+perche: Il tipo dipende da come si comportano i limiti destro e sinistro rispetto al valore.
+parole: discontinuità prima seconda terza specie salto eliminabile

@@ -1,0 +1,40 @@
+id: limiti-notevoli
+tipo: regola
+titolo: Limiti notevoli
+sigla: Notevoli
+comando: lim_(x -> 0) frac(sin(x)|x) = 1
+vedo: Seno, tangente, coseno, esponenziale o logaritmo con `x -> 0`, oppure `(1 + frac(1|x))^x`.
+formula:
+- lim_(x -> 0) frac(sin(x)|x) = 1
+- lim_(x -> 0) frac(1 - cos(x)|x^2) = frac(1|2)
+- lim_(x -> 0) frac(e^x - 1|x) = 1
+- lim_(x -> 0) frac(ln(1 + x)|x) = 1
+- lim_(x -> +-inf) (1 + frac(1|x))^x = e
+adatto:
+- 'Se l''argomento è `k*x`, completa il denominatore: `frac(sin(k*x)|x) = k*frac(sin(k*x)|k*x)`.'
+- 'Vale per ogni argomento che tende a 0: `frac(sin(f(x))|f(x)) -> 1` se `f(x) -> 0`.'
+- '`frac(tan(x)|x) -> 1`.'
+- Per `(1 + frac(k|x))^x` il risultato è `e^k`.
+esempi:
+- da: lim_(x -> 0) frac(sin(3x)|x)
+  passi:
+  - '`3*frac(sin(3x)|3x)`'
+  ris: '3'
+- da: lim_(x -> 0) frac(sin(5x)|2x)
+  passi:
+  - '`frac(5|2)*frac(sin(5x)|5x)`'
+  ris: frac(5|2)
+- da: lim_(x -> 0) frac(1 - cos(x)|2x^2)
+  passi:
+  - '`frac(1|2)*frac(1 - cos(x)|x^2)`'
+  ris: frac(1|4)
+- da: lim_(x -> +inf) (1 + frac(2|x))^x
+  passi:
+  - posto `y = frac(x|2)`
+  ris: e^2
+errore: Dimenticare di compensare il fattore costante quando l'argomento è `k*x`.
+confondi:
+- scheda: forma-0-su-0
+  differenza: I limiti notevoli sono la tecnica per i `frac(0|0)` con funzioni trascendenti.
+perche: Si dimostrano confrontando aree e archi (per il seno) e con definizioni dell'esponenziale.
+parole: limiti notevoli seno coseno esponenziale logaritmo numero e

@@ -1,0 +1,39 @@
+id: secondo-grado-completa
+tipo: regola
+titolo: Secondo grado con la parabola
+sigla: Secondo grado
+comando: "esterni se > 0, interni se < 0"
+frase: "Secondo grado: guarda il segno della parabola rispetto all'asse x."
+vedo: "Secondo grado con tutti e tre i termini: `x^2 - 5x + 6 > 0`."
+formula:
+  - a*x^2 + b*x + c > 0
+  - D = b^2 - 4*a*c
+adatto:
+  - "Se a è negativo, cambia il segno a tutto e inverti il verso: così a è positivo."
+  - "Calcola D e, se D non è negativo, le radici `x_1 < x_2`."
+  - "Con a positivo la parabola sta sopra l'asse x fuori dalle radici e sotto tra le radici."
+  - "`> 0` con D > 0: valori esterni (`x < x_1` e `x > x_2`). `< 0` con D > 0: valori interni (`x_1 < x < x_2`)."
+  - "D = 0: la parabola tocca l'asse. `> 0` è vera ovunque tranne in `x_1`; `< 0` non è mai vera; `>= 0` sempre vera; `<= 0` solo in `x_1`."
+  - "D < 0: la parabola sta tutta sopra l'asse. `> 0` e `>= 0` sempre vere; `< 0` e `<= 0` mai vere."
+esempi:
+  - da: "x^2 - 5x + 6 > 0"
+    passi:
+      - "`D = 25 - 24 = 1`, radici 2 e 3"
+      - "Maggiore di zero: valori esterni"
+    ris: "(-inf, 2) ∪ (3, +inf)"
+  - da: "x^2 - 4x + 4 > 0"
+    passi:
+      - "`D = 0`, radice doppia 2"
+      - "Vera ovunque tranne in `x = 2`"
+    ris: "(-inf, 2) ∪ (2, +inf)"
+  - da: "x^2 + x + 1 < 0"
+    passi:
+      - "`D = 1 - 4 = -3`, negativo"
+      - "La parabola sta sopra l'asse: `< 0` non è mai vera"
+    ris: "nessuna soluzione"
+errore: "Scegliere gli intervalli esterni quando la disequazione è `< 0`, o dimenticare di invertire il verso quando a è negativo."
+confondi:
+  - scheda: secondo-grado-incompleta
+    differenza: "Le incomplete si risolvono più in fretta scomponendo."
+perche: "Il segno di `ax^2 + bx + c` è il segno della parabola: dipende da a, dalle radici e da D."
+parole: secondo grado parabola discriminante esterni interni

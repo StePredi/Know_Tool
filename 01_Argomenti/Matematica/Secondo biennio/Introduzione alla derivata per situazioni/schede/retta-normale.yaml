@@ -1,0 +1,25 @@
+id: retta-normale
+tipo: regola
+titolo: Retta normale
+sigla: Normale
+comando: y - f(x_0) = -frac(1|f'(x_0))*(x - x_0)
+vedo: Ti chiedono la retta perpendicolare alla tangente nel punto.
+formula:
+- y - f(x_0) = -frac(1|f'(x_0))*(x - x_0)
+adatto:
+- 'La pendenza è l''opposto del reciproco: `m_n = -frac(1|m_t)`.'
+- 'Se la tangente è orizzontale (`f'' = 0`), la normale è verticale: `x = x_0`.'
+- Se la tangente è verticale, la normale è orizzontale.
+esempi:
+- da: f(x) = x^2 in x_0 = 1
+  passi:
+  - '`m_t = 2`'
+  - '`m_n = -frac(1|2)`'
+  - '`y - 1 = -frac(1|2)(x - 1)`'
+  ris: y = -frac(1|2)*x + frac(3|2)
+errore: 'Cambiare solo il segno o solo il reciproco: servono entrambi.'
+confondi:
+- scheda: retta-tangente
+  differenza: Lì pendenza `f'(x_0)`; qui `-frac(1|f'(x_0))`.
+perche: Due rette sono perpendicolari se il prodotto delle pendenze è `-1`.
+parole: retta normale perpendicolare tangente

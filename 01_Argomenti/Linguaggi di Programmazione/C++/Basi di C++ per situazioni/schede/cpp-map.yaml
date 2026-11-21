@@ -1,0 +1,52 @@
+id: cpp-map
+tipo: ricetta
+titolo: 'Associare chiavi e valori: map'
+sigla: map
+comando: map<K, V>  m[chiave]
+frase: cerca un valore partendo dalla chiave
+fonte: Documentazione C++ · cppreference.com · std::map
+parole: map dizionario chiave valore associare cercare inserire at insert ordinata coppie
+quando: Quando devi cercare un valore a partire da un nome (voti per studente, prezzo per prodotto).
+fasi:
+- nome: Creare
+  righe:
+  - codice: '#include <map>'
+  - codice: map<string, int> voti;
+    commento: Chiavi di tipo string, valori di tipo int.
+- nome: Inserire e cambiare
+  righe:
+  - codice: voti["Anna"] = 9;
+    commento: Aggiunge la chiave Anna, oppure ne cambia il valore se c'è già.
+  - codice: voti.insert({"Bruno", 7});
+    commento: Aggiunge solo se la chiave non c'è.
+    trappola: 'insert su una chiave che esiste già non cambia niente: il vecchio valore resta. Per cambiarlo
+      usa [].'
+- nome: Leggere
+  righe:
+  - codice: voti.at("Anna")
+    commento: 'Il valore di Anna: 9. Se la chiave manca lancia out_of_range.'
+  - codice: voti.size()
+    commento: Quante coppie.
+- nome: Scorrere
+  righe:
+  - codice: 'for (auto& coppia : voti) {'
+    commento: Ogni elemento è una coppia chiave/valore.
+  - codice: '    cout << coppia.first << ": " << coppia.second;'
+    parti:
+    - voce: coppia.first
+      spiega: la chiave
+    - voce: coppia.second
+      spiega: il valore
+  - codice: '}'
+  - codice: 'for (auto& [nome, voto] : voti) {'
+    commento: 'Da C++17: dai un nome a chiave e valore.'
+    trappola: 'La map tiene le chiavi in ordine crescente: scorrendola escono in ordine alfabetico, non
+      nell''ordine in cui le hai inserite.'
+  - codice: '}'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-map-cerca
+- cpp-map-conta
+- cpp-map-togliere
+- cpp-pair

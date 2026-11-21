@@ -1,0 +1,41 @@
+id: cpp-if
+tipo: ricetta
+titolo: 'Decidere: if, else if, else'
+sigla: if
+comando: if (…) {…} else {…}
+frase: condizione tra parentesi
+fonte: Documentazione C++ · cppreference.com · Istruzioni · if
+parole: if else decidere condizione and or not operatori logici confronto maggiore uguale
+quando: Quando il programma deve fare cose diverse a seconda di un valore.
+fasi:
+- nome: Scegliere
+  righe:
+  - codice: if (voto >= 6) {
+    commento: Entra qui se la condizione è vera.
+  - codice: '    cout << "sufficiente";'
+  - codice: '} else if (voto >= 5) {'
+    commento: Altrimenti prova questa.
+  - codice: '    cout << "quasi";'
+  - codice: '} else {'
+    commento: Se nessuna è vera.
+  - codice: '    cout << "insufficiente";'
+  - codice: '}'
+- nome: Combinare condizioni
+  righe:
+  - codice: a && b
+    commento: 'E: vera se lo sono entrambe.'
+  - codice: a || b
+    commento: 'O: vera se lo è almeno una.'
+  - codice: '!a'
+    commento: 'NON: inverte vero e falso.'
+- nome: Confrontare
+  righe:
+  - codice: ==  !=  <  <=  >  >=
+    commento: Operatori di confronto.
+    trappola: 'Per vedere se due valori sono uguali servono due segni: ==. Con uno solo si assegna.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-uguale
+- cpp-switch
+- cpp-for

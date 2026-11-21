@@ -1,0 +1,36 @@
+id: forma-canonica
+tipo: regola
+titolo: Forma canonica (completare i quadrati)
+sigla: Canonica
+comando: (x - a)^2 = x^2 - 2*a*x + a^2
+vedo: Un'equazione con termini di primo grado (`-4x`, `+6y`) e vuoi leggere centro, vertice, semiassi.
+formula:
+- x^2 + b*x = (x + frac(b|2))^2 - frac(b^2|4)
+adatto:
+- Raggruppa i termini in `x` e quelli in `y`.
+- Completa il quadrato per ciascun gruppo e porta le costanti dall'altra parte.
+- Dividi per il termine noto per ottenere `= 1` (ellisse e iperbole).
+- Leggi centro e semiassi dalla forma ottenuta.
+esempi:
+- da: x^2 - 4x + 3
+  passi:
+  - '`x^2 - 4x = (x - 2)^2 - 4`'
+  - quindi `(x - 2)^2 - 4 + 3`
+  ris: (x - 2)^2 - 1
+  verifica: scomposizione
+- da: x^2 + y^2 - 4x + 6y - 12 = 0
+  passi:
+  - '`(x - 2)^2 - 4 + (y + 3)^2 - 9 - 12 = 0`'
+  ris: (x - 2)^2 + (y + 3)^2 = 25
+- da: 4x^2 + 9y^2 - 8x + 36y + 4 = 0
+  passi:
+  - '`4(x - 1)^2 - 4 + 9(y + 2)^2 - 36 + 4 = 0`'
+  - '`4(x - 1)^2 + 9(y + 2)^2 = 36`'
+  - divido per 36
+  ris: frac((x - 1)^2|9) + frac((y + 2)^2|4) = 1
+errore: Dimenticare di moltiplicare la costante aggiunta per il coefficiente del quadrato.
+confondi:
+- scheda: riconosci-conica
+  differenza: Prima si riconosce la conica, poi si completano i quadrati.
+perche: 'Il quadrato di un binomio contiene il doppio prodotto: completarlo serve a far comparire la traslazione.'
+parole: completare quadrato forma canonica centro traslazione

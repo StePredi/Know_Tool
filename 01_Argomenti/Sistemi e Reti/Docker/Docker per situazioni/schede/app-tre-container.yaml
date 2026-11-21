@@ -1,0 +1,31 @@
+id: app-tre-container
+tipo: ricetta
+titolo: Avviare un'applicazione a tre container su una rete custom
+sigla: App a tre container
+comando: docker network create + 3 docker run
+frase: si trovano per nome, solo il frontend pubblica
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (esempio a tre container)
+parole: applicazione multi container frontend backend database postgres rete custom dns nome variabili
+quando: Quando un frontend, un backend e un database devono lavorare insieme.
+fasi:
+- nome: La rete
+  righe:
+  - codice: docker network create app-network
+- nome: Database
+  righe:
+  - codice: docker run -d --name database --network app-network -e POSTGRES_PASSWORD=secret postgres:15
+- nome: Backend
+  righe:
+  - codice: docker run -d --name backend --network app-network -e DATABASE_URL=postgresql://postgres:secret@database:5432/myapp my-backend:latest
+    commento: raggiunge il database con il nome «database»
+- nome: Frontend
+  righe:
+  - codice: docker run -d --name frontend --network app-network -p 80:80 -e API_URL=http://backend:3000 my-frontend:latest
+    commento: solo il frontend pubblica una porta
+    trappola: 'Database e backend non hanno -p: dall''esterno non si raggiungono, solo dagli altri container della rete.'
+segnaposto: {}
+varianti: []
+vicine:
+- compose-tre-servizi
+- rete-custom
+- microservizi

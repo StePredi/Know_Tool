@@ -1,0 +1,40 @@
+modello: per_situazioni
+titolo: Esponenziali e logaritmi, per situazioni
+centro: Esponenziali e logaritmi
+sottotitolo: Equazioni, disequazioni, grafici
+ingresso: Equazione, disequazione o grafico con `a^x` o `log`
+guida: 'Prima guarda dove sta l''incognita: all''esponente (esponenziale) o dentro un logaritmo. Poi riduci alla stessa base e, con i logaritmi, scrivi le condizioni.'
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - condizioni-esistenza-log
+    - riduci-stessa-base
+    - controlla-esp-log
+- id: esp
+  nome: Esponenziali
+  colore: orange
+  voci:
+  - schede:
+    - proprieta-potenze-esp
+    - eq-esp-stessa-base
+    - eq-esp-sostituzione
+    - eq-esp-basi-diverse
+    - diseq-esponenziali
+    - grafico-esponenziale
+- id: log
+  nome: Logaritmi
+  colore: violet
+  voci:
+  - schede:
+    - definizione-log
+    - proprieta-log
+    - cambio-base
+    - eq-log-uguaglianza
+    - eq-log-forma-esp
+    - eq-log-sostituzione
+    - diseq-log
+    - grafico-log

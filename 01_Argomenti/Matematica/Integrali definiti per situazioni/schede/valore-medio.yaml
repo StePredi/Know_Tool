@@ -1,0 +1,34 @@
+id: valore-medio
+tipo: regola
+titolo: Valore medio
+sigla: Valore medio
+comando: frac(1|b - a) ∫_a^b f dx
+vedo: Ti chiedono il valore medio di una funzione su un intervallo.
+formula:
+- m = frac(1|b - a) ∫_a^b f(x) dx
+adatto:
+- Calcola l'integrale definito di `f` su `[a, b]`.
+- Dividi per la lunghezza dell'intervallo `b - a`.
+- Il valore medio è l'altezza del rettangolo di base `b - a` che ha la stessa area.
+esempi:
+- da: f(x) = x^2 su [0, 3]
+  passi:
+  - 'integrale: `9`'
+  - dividi per `3`
+  ris: '3'
+- da: f(x) = 2x + 1 su [1, 3]
+  passi:
+  - 'integrale: `10`'
+  - dividi per `2`
+  ris: '5'
+- da: f(x) = sin x su [0, π]
+  passi:
+  - 'integrale: `2`'
+  - dividi per `π`
+  ris: frac(2|π)
+errore: Dimenticare di dividere per la lunghezza dell'intervallo.
+confondi:
+- scheda: teorema-fondamentale
+  differenza: Il valore medio usa l'integrale che si calcola con il teorema fondamentale.
+perche: Distribuendo l'area in modo uniforme sull'intervallo si ottiene l'altezza media.
+parole: valore medio integrale intervallo media

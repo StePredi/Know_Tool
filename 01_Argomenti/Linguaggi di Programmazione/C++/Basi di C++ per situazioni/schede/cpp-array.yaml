@@ -1,0 +1,36 @@
+id: cpp-array
+tipo: ricetta
+titolo: 'Array: una fila di valori della stessa lunghezza'
+sigla: Array
+comando: int voti[5]
+frase: dimensione fissa
+fonte: Documentazione C++ · cppreference.com · Array · dichiarazione
+parole: array vettore indice elemento dimensione fissa sizeof fuori limite voti
+quando: Quando sai già quanti valori ti servono.
+fasi:
+- nome: Creare e leggere
+  righe:
+  - codice: int voti[5] = {7, 8, 6, 9, 5};
+    commento: Cinque interi.
+  - codice: voti[0]
+    commento: 'Primo elemento: 7.'
+    parti:
+    - voce: voti[0]
+      spiega: si parte da 0
+  - codice: voti[4]
+    commento: 'Ultimo elemento: 5.'
+- nome: Misurare
+  righe:
+  - codice: sizeof(voti) / sizeof(voti[0])
+    commento: 'Numero di elementi: 5.'
+    trappola: 'Se passi l''array a una funzione perde la dimensione: passa anche il numero di elementi
+      (o usa vector).'
+- nome: Scorrere
+  righe:
+  - codice: for (int i = 0; i < 5; i++) cout << voti[i];
+    trappola: 'voti[5] non esiste: il compilatore non ti ferma e il programma legge memoria a caso.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-vector
+- cpp-vector-limiti

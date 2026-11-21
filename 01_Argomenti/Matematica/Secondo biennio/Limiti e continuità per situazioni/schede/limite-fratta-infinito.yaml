@@ -1,0 +1,37 @@
+id: limite-fratta-infinito
+tipo: regola
+titolo: Rapporto di polinomi all'infinito
+sigla: Rapporto a ∞
+comando: confronta i gradi
+vedo: Una frazione di polinomi e `x -> +-inf`.
+formula:
+- 'grado N < grado D: 0'
+- 'grado N = grado D: frac(a|b)'
+- 'grado N > grado D: +-inf'
+adatto:
+- Confronta il grado del numeratore (N) con quello del denominatore (D).
+- Se N = D, il limite è il rapporto dei coefficienti principali.
+- 'Se N > D, il limite è infinito: controlla il segno (anche per `x -> -inf`).'
+esempi:
+- da: lim_(x -> +inf) frac(3x^2 + 1|x^2 - x)
+  passi:
+  - 'gradi uguali: `frac(3|1)`'
+  ris: '3'
+- da: lim_(x -> +inf) frac(x + 1|x^2)
+  passi:
+  - numeratore di grado minore
+  ris: '0'
+- da: lim_(x -> +inf) frac(x^3 + 1|2x^2)
+  passi:
+  - numeratore di grado maggiore, segno positivo
+  ris: +inf
+- da: lim_(x -> -inf) frac(x^3 + 1|2x^2)
+  passi:
+  - numeratore negativo, denominatore positivo
+  ris: -inf
+errore: Dimenticare il segno quando `x -> -inf`.
+confondi:
+- scheda: forma-inf-su-inf
+  differenza: Qui la regola veloce per i polinomi; lì il metodo generale con radici.
+perche: Dividendo tutto per la potenza più alta restano solo i coefficienti principali.
+parole: rapporto polinomi infinito gradi limite

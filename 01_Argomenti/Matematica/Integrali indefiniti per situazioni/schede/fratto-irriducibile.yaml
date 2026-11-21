@@ -1,0 +1,33 @@
+id: fratto-irriducibile
+tipo: regola
+titolo: Denominatore irriducibile
+sigla: Delta negativo
+comando: 'completa il quadrato: arcotangente'
+vedo: Il denominatore è di secondo grado e non si scompone (`Delta < 0`).
+formula:
+- ∫ frac(1|x^2 + a^2) dx = frac(1|a) arctan(frac(x|a)) + c
+adatto:
+- 'Controlla il discriminante: se è negativo non scomponi.'
+- 'Completa il quadrato: `x^2 + bx + c = (x + p)^2 + q^2`.'
+- Se il numeratore è la derivata del denominatore, è un logaritmo.
+- 'Altrimenti separa: una parte logaritmo, una arcotangente.'
+esempi:
+- da: ∫ frac(1|x^2 + 4) dx
+  passi:
+  - '`a = 2`'
+  ris: frac(1|2) arctan(frac(x|2)) + c
+- da: ∫ frac(1|x^2 + 2x + 5) dx
+  passi:
+  - '`(x + 1)^2 + 4`'
+  - arcotangente di `frac(x + 1|2)`
+  ris: frac(1|2) arctan(frac(x + 1|2)) + c
+- da: ∫ frac(2x + 2|x^2 + 2x + 5) dx
+  passi:
+  - il numeratore è la derivata del denominatore
+  ris: ln(x^2 + 2x + 5) + c
+errore: Dimenticare di dividere per `a` nel risultato dell'arcotangente.
+confondi:
+- scheda: integrale-arcotangente
+  differenza: Il caso con `1 + x^2` è l'esempio più semplice.
+perche: Completare il quadrato riporta l'integrale alla forma dell'arcotangente.
+parole: denominatore irriducibile delta negativo completare quadrato arcotangente

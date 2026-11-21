@@ -1,0 +1,33 @@
+id: dati-effimeri
+tipo: ricetta
+titolo: Capire quando i dati di un container si perdono
+sigla: Dati effimeri
+comando: restart ≠ rm
+frase: il layer scrivibile muore con il container
+fonte: lab_volumi_servizi.pdf (parte 2) · lab_immagini_dockerfile.pdf (parte 5.1) · container_mini_tutorial.md
+parole: dati persi effimeri layer scrivibile restart rm persistenza volume modifica container sparita
+quando: Quando devi prevedere se una modifica fatta in un container sopravvive.
+fasi:
+- nome: Modifica dentro il container
+  righe:
+  - codice: docker exec web sh -c 'echo "<h1>Modificato nel container</h1>" > /usr/share/nginx/html/index.html'
+  - codice: curl http://localhost:8080
+    commento: la pagina è cambiata
+- nome: 'Riavvia: la modifica resta'
+  righe:
+  - codice: docker restart web
+  - codice: curl http://localhost:8080
+    commento: stesso container, stesso layer scrivibile
+- nome: 'Elimina e ricrea: la modifica sparisce'
+  righe:
+  - codice: docker rm -f web
+  - codice: docker run -d --name web -p 8080:80 nginx
+  - codice: curl http://localhost:8080
+    commento: torna la pagina originale dell'immagine
+    trappola: 'Un container nuovo riparte sempre dall''immagine, che è immutabile: per conservare i dati servono volumi o bind mount.'
+segnaposto: {}
+varianti: []
+vicine:
+- named-volume
+- bind-mount
+- nota-sparita

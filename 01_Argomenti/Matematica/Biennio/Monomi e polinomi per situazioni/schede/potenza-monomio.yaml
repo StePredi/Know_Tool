@@ -1,0 +1,30 @@
+id: potenza-monomio
+tipo: regola
+titolo: Potenza di un monomio
+sigla: Potenza di monomio
+comando: "elevo tutto: numero ed esponenti"
+vedo: "Un monomio tra parentesi con un esponente: `(-2x^3)^4`, `(a^2b)^3`."
+formula: (k*x^a)^n = k^n*x^(a*n)
+adatto:
+  - "Eleva alla n il coefficiente, segno compreso, e moltiplica per n l'esponente di ogni lettera."
+  - "Segno: con esponente pari il risultato è positivo; con esponente dispari il segno resta."
+  - "Potenza di potenza: gli esponenti si moltiplicano. Se invece moltiplichi due potenze con la stessa base, gli esponenti si sommano."
+esempi:
+  - da: (-2x^3)^4
+    passi:
+      - "Coefficiente: `(-2)^4 = 16` (esponente pari)"
+      - "Esponente di x: `3 * 4 = 12`"
+    ris: 16x^12
+    verifica: scomposizione
+  - da: (-x^2)^3
+    passi:
+      - "Coefficiente: `(-1)^3 = -1` (esponente dispari)"
+      - "Esponente di x: `2 * 3 = 6`"
+    ris: -x^6
+    verifica: scomposizione
+errore: "Elevare solo la lettera: `(3x)^2 = 3x^2` è sbagliato, viene `9x^2`."
+confondi:
+  - scheda: prodotto-monomi
+    differenza: "Il prodotto di due monomi somma gli esponenti; la potenza li moltiplica."
+perche: "`(3x)^2 = 3x * 3x`: sia il 3 sia la x vengono moltiplicati due volte."
+parole: potenza elevamento monomio parentesi

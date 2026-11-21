@@ -1,0 +1,25 @@
+id: strumenti-rete
+tipo: ricetta
+titolo: Installare ping e ip in un container debian
+sigla: apt-get in un container
+comando: apt-get install iputils-ping iproute2
+frase: le immagini minimali non hanno strumenti
+fonte: lab_networking_container.pdf (parte 1.3)
+parole: ping ip installare apt-get update install iputils-ping iproute2 debian minimale strumenti
+quando: Quando dentro un container ti serve ping o ip e il comando non esiste.
+fasi:
+- nome: Entra e installa
+  righe:
+  - codice: docker exec -it c1 bash
+  - codice: apt-get update
+    commento: senza, apt non conosce ancora i pacchetti disponibili
+  - codice: apt-get install -y iputils-ping iproute2
+    commento: iputils-ping dà ping, iproute2 dà ip
+  - codice: exit
+    trappola: 'Va fatto in ogni container: i pacchetti finiscono nel layer scrivibile di quel container, non nell''immagine.'
+segnaposto: {}
+varianti: []
+vicine:
+- immagine-strumenti
+- comando-non-trovato
+- ping-tra-container

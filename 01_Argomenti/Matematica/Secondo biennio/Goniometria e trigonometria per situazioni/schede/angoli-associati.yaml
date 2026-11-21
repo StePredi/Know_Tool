@@ -1,0 +1,54 @@
+id: angoli-associati
+tipo: regola
+titolo: Angoli associati (riduzione al primo quadrante)
+sigla: Associati
+comando: sin(pi - x) = sin(x)
+vedo: Un angolo oltre 90 gradi (150, 210, 300), negativo, oppure `pi - x`, `pi + x`, `frac(pi|2) - x`.
+formula:
+- sin(pi - x) = sin(x)
+- cos(pi - x) = -cos(x)
+- sin(pi + x) = -sin(x)
+- cos(pi + x) = -cos(x)
+- sin(-x) = -sin(x)
+- cos(-x) = cos(x)
+- sin(frac(pi|2) - x) = cos(x)
+- cos(frac(pi|2) - x) = sin(x)
+- tan(pi + x) = tan(x)
+adatto:
+- Scrivi l'angolo come `pi +- x`, `2*pi - x`, `frac(pi|2) - x` con `x` nel primo quadrante.
+- Il segno del risultato lo decide il quadrante dell'angolo di partenza (non quello di `x`).
+- Con `frac(pi|2)` seno e coseno si scambiano; con `pi` o `2*pi` restano gli stessi (cambia solo il segno).
+- 'Oltre `2*pi` togli giri interi: `sin(x + 2k*pi) = sin(x)`.'
+esempi:
+- da: sin(pi - x)
+  passi:
+  - '`pi - x` è nel secondo quadrante: il seno resta positivo'
+  ris: sin(x)
+  verifica: scomposizione
+- da: cos(pi + x)
+  passi:
+  - '`pi + x` è nel terzo quadrante: il coseno è negativo'
+  ris: -cos(x)
+  verifica: scomposizione
+- da: sin(frac(pi|2) - x)
+  passi:
+  - con `frac(pi|2)` si scambiano seno e coseno
+  ris: cos(x)
+  verifica: scomposizione
+- da: sin(150 gradi)
+  passi:
+  - '`150 = 180 - 30`'
+  - '`sin(150) = sin(30)`'
+  ris: frac(1|2)
+- da: cos(frac(7*pi|6))
+  passi:
+  - '`frac(7*pi|6) = pi + frac(pi|6)`: terzo quadrante, coseno negativo'
+  - '`-cos(frac(pi|6))`'
+  ris: -frac(sqrt(3)|2)
+  verifica: scomposizione
+errore: 'Sbagliare il segno: guarda in che quadrante cade l''angolo di partenza e che segno ha quella funzione.'
+confondi:
+- scheda: circonferenza-goniometrica
+  differenza: Lì leggi i segni per quadrante; qui li usi per ridurre l'angolo.
+perche: 'Sulla circonferenza goniometrica gli angoli `pi - x`, `pi + x`, `-x` sono simmetrici a `x`: stesse coordinate a meno del segno.'
+parole: associati riduzione primo quadrante simmetria angoli

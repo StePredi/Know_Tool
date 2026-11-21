@@ -1,0 +1,38 @@
+id: intersezioni-segno
+tipo: regola
+titolo: 3. Intersezioni e segno
+sigla: Segno
+comando: f(x) = 0 per gli zeri, f(x) > 0 per il segno
+vedo: Vuoi sapere dove il grafico taglia gli assi e se sta sopra o sotto l'asse `x`.
+formula:
+- y = f(0)
+- f(x) = 0
+- f(x) > 0
+adatto:
+- 'Asse `y`: calcola `f(0)`, se `0` è nel dominio.'
+- 'Asse `x`: risolvi `f(x) = 0` dentro il dominio.'
+- 'Segno: risolvi `f(x) > 0` con numeratore e denominatore separati e il quadro dei segni.'
+- 'Segna i risultati sul piano: il grafico sta sopra l''asse dove `f > 0`, sotto dove `f < 0`.'
+esempi:
+- da: f(x) = x^3 - 3x
+  passi:
+  - 'asse `y`: `f(0) = 0`'
+  - 'zeri: `x(x^2 - 3) = 0`, cioè `x = 0` e `x = +-sqrt(3)`'
+  - 'segno: positiva per `-sqrt(3) < x < 0` e per `x > sqrt(3)`'
+  ris: zeri 0, +-sqrt(3)
+- da: f(x) = frac(x^2|x - 1)
+  passi:
+  - '`f(0) = 0`'
+  - numeratore sempre `>= 0`, denominatore positivo per `x > 1`
+  ris: zero 0; f > 0 per x > 1
+- da: f(x) = frac(ln(x)|x)
+  passi:
+  - '`0` non è nel dominio: nessuna intersezione con l''asse `y`'
+  - '`ln(x) = 0` per `x = 1`'
+  ris: zero 1; f > 0 per x > 1
+errore: Cercare gli zeri fuori dal dominio, o scambiare il segno di `f` con quello di `f'`.
+confondi:
+- scheda: segno-derivata-prima
+  differenza: Qui il segno di `f` (sopra o sotto l'asse); lì il segno di `f'` (sale o scende).
+perche: Gli zeri e il segno danno i punti obbligati del grafico e dicono in quale regione del piano si trova.
+parole: intersezioni assi zeri segno positività

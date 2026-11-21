@@ -1,0 +1,45 @@
+id: pubblica-porta
+tipo: ricetta
+titolo: Rendere raggiungibile un servizio del container
+sigla: Pubblicare con -p
+comando: -p porta-host:porta-container
+frase: EXPOSE non basta
+fonte: lab_volumi_servizi.pdf (parte 1) · lab_immagini_dockerfile.pdf (parte 4.1) · virtualizzazione_e_container.pdf
+parole: pubblicare porta -p expose raggiungibile localhost nginx 8080:80 docker port ss -ltn curl ports
+quando: Quando un servizio nel container (web server, server TCP) deve rispondere dal PC o dalla rete.
+fasi:
+- nome: Pubblica
+  righe:
+  - codice: docker run -d --name web -p 8080:80 nginx
+    commento: le connessioni alla porta 8080 del PC vanno alla porta 80 del container
+    parti:
+    - voce: '8080'
+      spiega: porta dell'host (a sinistra)
+    - voce: '80'
+      spiega: porta del container, dove il servizio ascolta (a destra)
+    trappola: L'immagine nginx dichiara già EXPOSE 80, ma senza -p il servizio non è pubblicato.
+- nome: Verifica
+  righe:
+  - codice: docker ps
+    commento: 'colonna PORTS: 0.0.0.0:8080->80/tcp'
+  - codice: docker port web
+  - codice: curl http://localhost:8080
+    commento: oppure il browser
+  - codice: ss -ltn | grep 8080
+    commento: su quale indirizzo del PC è in ascolto la porta
+- nome: Senza -p
+  righe:
+  - codice: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
+  - codice: curl http://«IP_CONTAINER»
+    commento: risponde solo dal PC che ospita il container
+    trappola: 'L''IP del container (172.17.x.x) sta sulla rete bridge interna: dagli altri PC della LAN non si raggiunge.'
+segnaposto:
+  IP_CONTAINER:
+    esempio: 172.17.0.2
+    spiega: l'IP del container sulla rete bridge, da docker inspect
+varianti: []
+vicine:
+- porta-variabile
+- pubblica-solo-locale
+- servizio-lan
+- porta-sbagliata

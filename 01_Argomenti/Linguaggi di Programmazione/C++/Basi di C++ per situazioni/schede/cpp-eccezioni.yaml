@@ -1,0 +1,38 @@
+id: cpp-eccezioni
+tipo: ricetta
+titolo: 'Gestire gli errori: try, catch, throw'
+sigla: Eccezioni
+comando: try { … } catch (…) { … }
+frase: intercettare un errore
+fonte: Documentazione C++ · cppreference.com · Eccezioni · try · catch · throw
+parole: eccezioni try catch throw runtime_error exception what errore gestire
+quando: Quando una funzione può fallire (divisione per zero, input sbagliato, indice fuori) e vuoi reagire
+  senza far chiudere il programma.
+fasi:
+- nome: Lanciare
+  righe:
+  - codice: double dividi(double a, double b) {
+  - codice: '    if (b == 0) throw runtime_error("divisione per zero");'
+    commento: Interrompe la funzione e segnala l'errore.
+  - codice: '    return a / b;'
+  - codice: '}'
+- nome: Intercettare
+  righe:
+  - codice: try {
+    commento: Il codice che può fallire.
+  - codice: '    cout << dividi(1, 0);'
+  - codice: '} catch (const exception& e) {'
+    commento: Se c'è un errore finisce qui.
+    parti:
+    - voce: const exception& e
+      spiega: per riferimento costante, senza copia
+  - codice: '    cout << "errore: " << e.what();'
+    commento: what() dà il messaggio.
+    trappola: 'Un errore non intercettato chiude il programma. Servono #include <stdexcept> per runtime_error.'
+  - codice: '}'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-vector-limiti
+- cpp-string-numeri
+- cpp-file

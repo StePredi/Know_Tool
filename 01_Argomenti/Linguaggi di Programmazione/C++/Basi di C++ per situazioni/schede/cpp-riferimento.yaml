@@ -1,0 +1,33 @@
+id: cpp-riferimento
+tipo: prima_dopo
+titolo: 'Errore: la funzione modifica una copia'
+sigla: Passare per riferimento
+comando: int& x
+frase: la funzione lavora sulla variabile vera
+fonte: Documentazione C++ · cppreference.com · Funzioni · parametri · riferimenti
+parole: riferimento & copia parametro valore const reference modificare funzione passaggio
+prima: |-
+  void raddoppia(⟦int x⟧) {
+      x = x * 2;
+  }
+  // int n = 10; raddoppia(n);  → n resta 10
+dopo: |-
+  void raddoppia(⟦int& x⟧) {
+      x = x * 2;
+  }
+  // int n = 10; raddoppia(n);  → n diventa 20
+uso: Far modificare a una funzione la variabile che le passi.
+riconoscila: La funzione cambia il parametro ma la variabile nel main resta uguale.
+parti:
+- voce: int x
+  spiega: 'il parametro è una copia: la funzione lavora su quella'
+- voce: int& x
+  spiega: 'riferimento: x è un altro nome della variabile del chiamante'
+trappola: 'Per oggetti grandi (string, vector) passa per riferimento costante, const vector<int>& v: niente
+  copia e niente modifiche accidentali.'
+varianti:
+- codice: void stampa(const vector<int>& v)
+  spiega: legge senza copiare e senza poter modificare
+vicine:
+- cpp-funzione
+- cpp-ref-ptr

@@ -1,0 +1,32 @@
+id: potenza-di-g
+tipo: regola
+titolo: Potenza di una funzione
+sigla: Potenza di g
+comando: ∫ g^n * g' dx = frac(g^(n + 1)|n + 1)
+vedo: Compare una funzione elevata a una potenza e, moltiplicata, la sua derivata.
+formula:
+- ∫ g(x)^n * g'(x) dx = frac(g(x)^(n + 1)|n + 1) + c
+adatto:
+- Cerca la funzione `g` che sta dentro la potenza.
+- Controlla che il resto sia `g'` (o un suo multiplo).
+- Applica la regola della potenza considerando `g` come se fosse `x`.
+- Con `ln x` e `frac(1|x)` esce `frac(ln^2 x|2)`.
+esempi:
+- da: ∫ 2x*(x^2 + 1)^3 dx
+  passi:
+  - '`g = x^2 + 1`, `g'' = 2x`'
+  ris: frac((x^2 + 1)^4|4) + c
+- da: ∫ sin x*cos^2 x dx
+  passi:
+  - '`g = cos x`, `g'' = -sin x`: manca un segno meno'
+  ris: -frac(cos^3 x|3) + c
+- da: ∫ frac(ln(x)|x) dx
+  passi:
+  - '`g = ln x`, `g'' = frac(1|x)`'
+  ris: frac(ln^2 x|2) + c
+errore: Dimenticare il segno meno quando la derivata interna è l'opposto (caso del coseno).
+confondi:
+- scheda: sostituzione
+  differenza: Se la derivata non c'è in modo evidente, la sostituzione la fa comparire.
+perche: 'Derivando `g^(n + 1)` esce `(n + 1)*g^n*g''`: dividere per `n + 1` lo compensa.'
+parole: potenza di funzione derivata interna composta

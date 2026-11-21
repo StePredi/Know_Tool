@@ -1,0 +1,28 @@
+id: doppia-implicazione
+tipo: regola
+titolo: Doppia implicazione (se e solo se)
+sigla: Se e solo se
+comando: p ↔ q
+vedo: «Se e solo se», «equivale a», «condizione necessaria e sufficiente».
+formula:
+- p ↔ q
+- p ↔ q ≡ (p -> q) ∧ (q -> p)
+adatto:
+- 'Tavola (righe in ordine: `VV, VF, FV, FF`): `V F F V`.'
+- Vera quando `p` e `q` hanno lo stesso valore.
+- Equivale a due implicazioni insieme.
+esempi:
+- da: x = 2 ↔ x + 1 = 3
+  passi:
+  - stessi valori per ogni `x`
+  ris: vera
+- da: x² = 4 ↔ x = 2
+  passi:
+  - 'con `x = -2`: la prima è vera, la seconda falsa'
+  ris: falsa
+errore: Verificare solo un verso e dichiarare l'equivalenza.
+confondi:
+- scheda: implicazione
+  differenza: Un solo verso contro due versi.
+perche: 'È vera quando le due proposizioni coincidono: entrambe vere o entrambe false.'
+parole: doppia implicazione se e solo se equivalenza

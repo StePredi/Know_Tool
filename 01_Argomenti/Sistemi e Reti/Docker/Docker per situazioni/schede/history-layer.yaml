@@ -1,0 +1,55 @@
+id: history-layer
+tipo: spiegazione
+titolo: Vedere di quali layer è fatta un'immagine
+sigla: docker history
+comando: docker history
+frase: un layer per istruzione
+fonte: lab_immagini_dockerfile.pdf (parte 2.3) · container_mini_tutorial.md · virtualizzazione_e_container.pdf (immagini e layer)
+parole: layer strati history inspect dimensione stratificata immagine base riuso cache 0 B
+quando: Quando vuoi capire da cosa è fatta un'immagine e quanto pesa ogni passaggio.
+blocchi:
+- testo: 'L''immagine è il **filesystem del container**: una pila di layer a sola lettura, uno per ogni passaggio di costruzione. Il container aggiunge in cima un layer scrivibile.'
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Immagine
+      strati:
+      - |-
+        COPY app.py /app/
+        10 KB
+      - |-
+        RUN pip install…
+        50 MB
+      - |-
+        COPY requirements…
+        1 KB
+      - testo: |-
+          FROM python:3.11
+          200 MB
+        tono: colore
+      nota: Layer a sola lettura, dal più recente (in alto) alla base.
+    - titolo: Container
+      strati:
+      - testo: layer scrivibile
+        tono: oro
+      - COPY app.py /app/
+      - RUN pip install…
+      - COPY requirements…
+      - testo: FROM python:3.11
+        tono: colore
+      nota: I layer dell'immagine più uno scrivibile.
+- punti:
+  - 'I layer comuni a immagini diverse si riusano: meno spazio su disco, build e download più veloci.'
+  - 'In basso ci sono i layer dell''immagine di base: la tua immagine è «stratificata» sopra un''altra.'
+- titolo: Vedere i layer
+- comandi:
+  - codice: docker history note:1.0
+    spiega: i layer dal più recente al più vecchio, con l'istruzione che li ha creati e la dimensione
+  - codice: docker inspect nginx:latest
+    spiega: tutti i dettagli dell'immagine
+- trappola: 'ENV, EXPOSE e CMD aggiungono solo metadati: in docker history compaiono con 0 B.'
+varianti: []
+vicine:
+- pull-immagine
+- cache-layer
+- dockerfile-base

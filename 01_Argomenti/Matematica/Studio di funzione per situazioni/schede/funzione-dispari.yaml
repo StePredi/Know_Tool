@@ -1,0 +1,32 @@
+id: funzione-dispari
+tipo: regola
+titolo: Funzione dispari
+sigla: Dispari
+comando: f(-x) = -f(x)
+vedo: Il calcolo di `f(-x)` dà l'opposto di `f(x)`.
+formula:
+- f(-x) = -f(x)
+adatto:
+- Il grafico è simmetrico rispetto all'origine.
+- Vale per i polinomi con solo potenze dispari, per `sin x`, `tan x`.
+- 'Se `0` è nel dominio, allora `f(0) = 0`: il grafico passa per l''origine.'
+- Studia solo `x >= 0` e ruota di mezzo giro.
+esempi:
+- da: f(x) = x^3 - 3x
+  passi:
+  - '`f(-x) = -x^3 + 3x = -f(x)`'
+  ris: dispari
+- da: f(x) = frac(x|x^2 + 1)
+  passi:
+  - '`f(-x) = frac(-x|x^2 + 1) = -f(x)`'
+  ris: dispari
+- da: f(x) = frac(1|x)
+  passi:
+  - '`f(-x) = -frac(1|x)`'
+  ris: dispari
+errore: 'Confondere `-f(x)` con `f(-x)`: sono due cose diverse e vanno calcolate separatamente.'
+confondi:
+- scheda: funzione-pari
+  differenza: 'Dispari: origine. Pari: asse `y`.'
+perche: I termini con esponente dispari cambiano segno quando si cambia `x` in `-x`.
+parole: dispari simmetria origine f(-x)

@@ -1,0 +1,48 @@
+id: ultima-operazione
+tipo: regola
+titolo: Trova l'ultima operazione
+sigla: Ultima operazione
+comando: l'ultima operazione sceglie la regola
+vedo: Un'espressione in x da derivare e non sai da dove cominciare.
+formula:
+  - f + g
+  - f*g
+  - frac(f|g)
+  - f(g(x))
+adatto:
+  - "Immagina di calcolare l'espressione per un valore di `x`: l'ultima operazione che fai decide la regola."
+  - "Somma o differenza: regola della somma. Prodotto: regola del prodotto. Frazione: quoziente. Una funzione con dentro qualcosa che non è solo `x`: funzione composta."
+  - Poi deriva i pezzi, partendo da quello più esterno.
+esempi:
+  - da: 3x^2 + 5x - 7
+    passi:
+      - "Ultima operazione: somma e differenza di tre pezzi."
+      - "Derivo un pezzo alla volta: `6x`, `5`, `0`."
+    ris: 6x + 5
+    verifica: derivata
+  - da: x^2*sin x
+    passi:
+      - "Ultima operazione: moltiplicazione tra `x^2` e `sin x`."
+      - "Regola del prodotto."
+    ris: 2x*sin x + x^2*cos x
+    verifica: derivata
+  - da: frac(x^2|x+1)
+    passi:
+      - "Ultima operazione: frazione con `x` sopra e sotto."
+      - "Regola del quoziente."
+    ris: frac(x^2+2x|(x+1)^2)
+    verifica: derivata
+  - da: sin(3x^2)
+    passi:
+      - "Ultima operazione: il seno di qualcosa che non è solo `x`."
+      - "Funzione composta: `cos(3x^2)` per la derivata di `3x^2`."
+    ris: 6x*cos(3x^2)
+    verifica: derivata
+errore: "Partire dal pezzo più in vista (per esempio il `sin`) senza guardare cosa c'è fuori: `x*sin x` è un prodotto, non un seno."
+confondi:
+  - scheda: funzione-composta
+    differenza: Nella composta una funzione sta dentro un'altra; nel prodotto due funzioni si moltiplicano.
+  - scheda: prodotto
+    differenza: Il prodotto vale se l'ultima operazione è la moltiplicazione di due pezzi con `x`.
+perche: La regola giusta è quella dell'operazione più esterna, perché è l'ultima a essere applicata.
+parole: ultima operazione regola scegliere radiografia esterna

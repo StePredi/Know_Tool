@@ -1,0 +1,24 @@
+id: denominatori-numerici
+tipo: regola
+titolo: Frazioni con denominatori numerici
+sigla: Denominatori numerici
+comando: moltiplico per l'mcm
+vedo: "Frazioni con soli numeri al denominatore: `frac(x - 1|2) + frac(x|3) = 4`."
+formula: frac(x - 1|2) + frac(x|3) = 4  ->  3(x - 1) + 2x = 24
+adatto:
+  - "Trova l'mcm dei denominatori."
+  - "Moltiplica entrambi i lati, tutti i termini compresi quelli senza frazione, per l'mcm."
+  - "Semplifica ogni frazione; se il numeratore ha più termini mettilo tra parentesi."
+  - "Poi è un'equazione di primo grado."
+esempi:
+  - da: frac(x - 1|2) + frac(x|3) = 4
+    passi:
+      - "mcm 6: `3(x - 1) + 2x = 24`"
+      - "`3x - 3 + 2x = 24`, quindi `5x = 27`"
+    ris: x = frac(27|5)
+errore: "Moltiplicare per l'mcm solo i termini con la frazione e dimenticare il termine senza denominatore."
+confondi:
+  - scheda: equazione-fratta
+    differenza: "Qui sotto ci sono solo numeri: nessuna condizione di esistenza."
+perche: "Moltiplicare entrambi i lati per lo stesso numero non cambia le soluzioni."
+parole: denominatori numerici mcm frazioni equazione

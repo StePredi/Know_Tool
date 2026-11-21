@@ -1,0 +1,36 @@
+id: compose-tre-servizi
+tipo: ricetta
+titolo: Scrivere in Compose un'applicazione a tre servizi
+sigla: Compose a tre servizi
+comando: 'services: frontend backend database'
+frase: servizi, rete e variabili in un file
+fonte: virtualizzazione_e_container.pdf (Docker Compose)
+parole: compose multi container frontend backend database environment postgres yaml
+quando: Quando vuoi trasformare l'app a tre container in un solo file.
+fasi:
+- nome: compose.yaml
+  righe:
+  - codice: 'services:'
+  - codice: '  frontend:'
+  - codice: '    image: my-frontend:latest'
+  - codice: '    ports:'
+  - codice: '      - "80:80"'
+    commento: solo il frontend pubblica
+  - codice: '    environment:'
+  - codice: '      API_URL: http://backend:3000'
+    commento: come -e; i servizi si trovano per nome
+  - codice: '  backend:'
+  - codice: '    image: my-backend:latest'
+  - codice: '    environment:'
+  - codice: '      DATABASE_URL: postgresql://postgres:secret@database/myapp'
+  - codice: '  database:'
+  - codice: '    image: postgres:15'
+  - codice: '    environment:'
+  - codice: '      POSTGRES_PASSWORD: secret'
+    trappola: 'Nota: Compose crea da solo una rete per i servizi del file: non serve docker network create.'
+segnaposto: {}
+varianti: []
+vicine:
+- app-tre-container
+- compose-comandi
+- compose-file

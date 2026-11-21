@@ -1,0 +1,26 @@
+id: forma-normale
+tipo: regola
+titolo: Porta l'equazione in forma normale
+sigla: Forma normale
+comando: tutto a sinistra, = 0
+frase: "Passo 1: sviluppa, porta tutto a sinistra e riduci."
+vedo: "Un'equazione scritta in modo disordinato: parentesi, termini da entrambi i lati."
+formula: P(x) = 0
+adatto:
+  - "Sviluppa parentesi e prodotti notevoli (schede di Monomi e polinomi)."
+  - "Denominatori solo numerici: moltiplica tutto per il loro mcm. Denominatori con la x: guarda «Equazione fratta»."
+  - "Sposta tutti i termini a sinistra cambiando segno, poi riduci i termini simili."
+  - "Ordina dal grado più alto. Se il primo coefficiente è negativo puoi cambiare segno a tutta l'equazione."
+esempi:
+  - da: (x + 1)(x - 2) = x + 2
+    passi:
+      - "Sviluppo: `x^2 - x - 2 = x + 2`"
+      - "Porto a sinistra: `x^2 - x - 2 - x - 2 = 0`"
+      - "Riduco"
+    ris: x^2 - 2x - 4 = 0
+errore: "Spostare un termine dall'altra parte senza cambiargli il segno."
+confondi:
+  - scheda: riconosci-tipo
+    differenza: "Prima si porta in forma normale, poi si guarda il grado."
+perche: "In forma normale il grado e i coefficienti si leggono a colpo d'occhio."
+parole: forma normale ridurre portare a sinistra

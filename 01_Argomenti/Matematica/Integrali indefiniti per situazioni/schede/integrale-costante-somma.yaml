@@ -1,0 +1,33 @@
+id: integrale-costante-somma
+tipo: regola
+titolo: Somma e costante
+sigla: Linearità
+comando: integra pezzo per pezzo, le costanti escono
+vedo: L'integrando è una somma di termini, o c'è un numero che moltiplica.
+formula:
+- ∫ (f + g) dx = ∫ f dx + ∫ g dx
+- ∫ k*f dx = k*∫ f dx
+adatto:
+- Integra ogni termine separatamente.
+- Un numero che moltiplica può uscire dall'integrale.
+- Una costante da sola ha per integrale la costante per `x`.
+- Una sola `+ c` alla fine.
+esempi:
+- da: ∫ (3x^2 - 4x + 5) dx
+  passi:
+  - '`x^3 - 2x^2 + 5x`'
+  ris: x^3 - 2x^2 + 5x + c
+- da: ∫ 7 dx
+  passi:
+  - costante per `x`
+  ris: 7x + c
+- da: ∫ 6x dx
+  passi:
+  - '`6*frac(x^2|2)`'
+  ris: 3x^2 + c
+errore: 'Mettere una `+ c` per ogni termine: ne basta una, alla fine.'
+confondi:
+- scheda: integrale-potenza
+  differenza: La linearità dice come spezzare; la potenza come integrare ogni pezzo.
+perche: Derivare è lineare, quindi lo è anche l'operazione inversa.
+parole: linearità somma costante integrale

@@ -1,0 +1,36 @@
+id: servizio-lan
+tipo: ricetta
+titolo: Raggiungere il servizio di un compagno nella LAN
+sigla: Servizio sulla LAN
+comando: http://IP:porta
+frase: con -p il servizio è visibile in rete
+fonte: lab_volumi_servizi.pdf (parti 4.1, 4.2) · lab_immagini_dockerfile.pdf (parte 6.1)
+parole: lan rete laboratorio compagno ip hostname -I ip addr raggiungere altro pc logs indirizzo
+quando: Quando un altro PC della rete deve usare il servizio che gira nel tuo container.
+fasi:
+- nome: Trova il tuo IP
+  righe:
+  - codice: ip -4 -br addr
+    commento: scegli l'interfaccia della LAN, non lo né docker0
+  - codice: hostname -I
+    commento: in alternativa
+- nome: Collegati al compagno
+  righe:
+  - codice: curl http://«IP_COMPAGNO»:8080
+    commento: il sito del compagno
+  - codice: python3 client.py «IP_COMPAGNO» 5000 PUT messaggio ciao
+    commento: il suo archivio note
+- nome: Guarda chi si collega
+  righe:
+  - codice: docker logs -f web
+    commento: compare l'IP del compagno
+    trappola: 'Nota: le tue richieste da localhost arrivano invece dal gateway di docker0 (172.17.0.1), non dal tuo IP della LAN.'
+segnaposto:
+  IP_COMPAGNO:
+    esempio: 192.168.1.23
+    spiega: l'indirizzo IP del PC del compagno nella LAN
+varianti: []
+vicine:
+- pubblica-porta
+- bind-address
+- docker0-host

@@ -1,0 +1,39 @@
+id: cpp-funzione
+tipo: ricetta
+titolo: Scrivere una funzione
+sigla: Funzioni
+comando: tipo nome(parametri) { … }
+frase: dichiarare, definire, chiamare
+fonte: Documentazione C++ · cppreference.com · Funzioni · dichiarazione e definizione
+parole: funzione function return void parametri prototipo dichiarazione definizione chiamare
+quando: Quando un pezzo di codice si ripete o vuoi dargli un nome.
+fasi:
+- nome: Definire
+  righe:
+  - codice: int somma(int a, int b) {
+    commento: Tipo del risultato, nome, parametri con il loro tipo.
+  - codice: '    return a + b;'
+    commento: Restituisce il valore.
+  - codice: '}'
+- nome: Chiamare
+  righe:
+  - codice: int s = somma(3, 4);
+    commento: s vale 7.
+- nome: Senza risultato
+  righe:
+  - codice: void saluta() {
+    commento: 'void: non restituisce niente.'
+  - codice: '    cout << "ciao";'
+  - codice: '}'
+- nome: Prototipo
+  righe:
+  - codice: int somma(int a, int b);
+    commento: Dice che la funzione esiste; la definizione può stare dopo il main.
+    trappola: 'Una funzione va dichiarata prima di usarla: altrimenti l''errore è "was not declared in
+      this scope".'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-riferimento
+- cpp-default-overload
+- cpp-piu-file

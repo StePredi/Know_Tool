@@ -1,0 +1,26 @@
+id: confronto
+tipo: regola
+titolo: Metodo del confronto
+sigla: Confronto
+comando: "uguaglio i due secondi membri"
+vedo: "La stessa incognita è già isolata, o facile da isolare, in entrambe: `y = 2x + 1` e `y = 5 - x`."
+formula:
+  - y = f(x)
+  - y = g(x)
+  - f(x) = g(x)
+adatto:
+  - "Isola la stessa incognita in entrambe le equazioni."
+  - "Uguaglia i due secondi membri."
+  - "Risolvi l'equazione che esce, poi ricava l'altra incognita da una delle due."
+esempi:
+  - da: "y = 2x + 1,   y = 5 - x"
+    passi:
+      - "`2x + 1 = 5 - x`, quindi `3x = 4` e `x = 4/3`"
+      - "`y = 2*4/3 + 1 = 11/3`"
+    ris: "(frac(4|3), frac(11|3))"
+errore: "Uguagliare espressioni di incognite diverse."
+confondi:
+  - scheda: sostituzione
+    differenza: "Nella sostituzione isoli in una sola equazione e sostituisci nell'altra."
+perche: "Se y è uguale a due espressioni, le due espressioni sono uguali."
+parole: confronto uguagliare sistema

@@ -1,0 +1,46 @@
+id: addizione
+tipo: regola
+titolo: Formule di addizione e sottrazione
+sigla: Addizione
+comando: sin(a + b) = sin(a)*cos(b) + cos(a)*sin(b)
+vedo: Un angolo che è somma o differenza di angoli notevoli (75, 15, 105 gradi), o `sin(x + qualcosa)`, o un'espressione come `sin(x)*cos(y) + cos(x)*sin(y)`.
+formula:
+- sin(a + b) = sin(a)*cos(b) + cos(a)*sin(b)
+- sin(a - b) = sin(a)*cos(b) - cos(a)*sin(b)
+- cos(a + b) = cos(a)*cos(b) - sin(a)*sin(b)
+- cos(a - b) = cos(a)*cos(b) + sin(a)*sin(b)
+- tan(a + b) = frac(tan(a) + tan(b)|1 - tan(a)*tan(b))
+adatto:
+- 'Spezza l''angolo in due notevoli: `75 = 45 + 30`, `15 = 45 - 30`, `105 = 60 + 45`.'
+- 'Nel coseno il segno si inverte: `cos(a + b)` ha un meno, `cos(a - b)` ha un più.'
+- Si può usare al contrario per riconoscere `sin(a + b)` in una somma di prodotti.
+esempi:
+- da: sin(frac(5*pi|12))
+  passi:
+  - '`75 = 45 + 30`'
+  - '`sin(45)cos(30) + cos(45)sin(30)`'
+  - '`frac(sqrt(2)|2)*frac(sqrt(3)|2) + frac(sqrt(2)|2)*frac(1|2)`'
+  ris: frac(sqrt(6) + sqrt(2)|4)
+  verifica: scomposizione
+- da: cos(frac(pi|12))
+  passi:
+  - '`15 = 45 - 30`'
+  - '`cos(45)cos(30) + sin(45)sin(30)`'
+  ris: frac(sqrt(6) + sqrt(2)|4)
+  verifica: scomposizione
+- da: sin(x + frac(pi|6))
+  passi:
+  - '`sin(x)cos(frac(pi|6)) + cos(x)sin(frac(pi|6))`'
+  ris: frac(sqrt(3)|2)*sin(x) + frac(1|2)*cos(x)
+  verifica: scomposizione
+- da: cos(x)*cos(frac(pi|3)) - sin(x)*sin(frac(pi|3))
+  passi:
+  - è lo sviluppo di `cos(a + b)` con `a = x`, `b = frac(pi|3)`
+  ris: cos(x + frac(pi|3))
+  verifica: scomposizione
+errore: 'Scrivere `sin(a + b) = sin(a) + sin(b)`: il seno non è lineare.'
+confondi:
+- scheda: duplicazione
+  differenza: La duplicazione è il caso particolare `a = b`.
+perche: Si dimostra con la distanza tra due punti della circonferenza goniometrica; le formule per `a - b` e `a + b` si ricavano l'una dall'altra.
+parole: addizione sottrazione somma differenza angoli seno coseno tangente formule

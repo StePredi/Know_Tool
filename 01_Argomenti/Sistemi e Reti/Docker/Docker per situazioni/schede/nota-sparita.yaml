@@ -1,0 +1,20 @@
+id: nota-sparita
+tipo: prima_dopo
+titolo: I dati spariscono quando ricrei il container
+sigla: Dati spariti
+comando: -v volume:/data
+frase: senza volume i dati muoiono con il container
+fonte: lab_immagini_dockerfile.pdf (parti 5.1, 5.2)
+parole: dati spariti persi nota sparita ricreare container volume persistenza rm
+prima: docker run -d --name archivio -p 5000:5000 note:2.0
+dopo: docker run -d --name archivio -p 5000:5000 ⟦-v notes-data:/data⟧ note:2.0
+uso: Conservare i dati di un servizio anche quando il container viene eliminato e ricreato.
+riconoscila: Dopo docker rm -f e un nuovo docker run, LIST non mostra più le note create prima.
+parti:
+- voce: -v notes-data:/data
+  spiega: la cartella dei dati sta in un named volume, fuori dal container
+trappola: Ricorda di usare lo stesso -v ogni volta che ricrei il container.
+varianti: []
+vicine:
+- named-volume
+- dati-effimeri

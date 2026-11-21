@@ -1,0 +1,34 @@
+id: controlla-derivata
+tipo: regola
+titolo: Controllo della derivata
+sigla: Controlla
+comando: confronta con un valore piccolo
+vedo: Hai finito di derivare e vuoi sapere se il risultato può essere giusto.
+formula:
+  - f'(a) = frac(f(a + h) - f(a)|h)
+adatto:
+  - "Scegli un numero semplice `a` e calcola il rapporto incrementale con `h` piccolo (`0,001`): deve essere vicino a `f'(a)`."
+  - "Segni: dove `f` sale, `f'` deve essere positiva; dove scende, negativa."
+  - "Polinomi: la derivata ha grado più basso di uno."
+  - Ricontrolla le parentesi nelle composte e nei quozienti.
+esempi:
+  - da: x^3 - 3x
+    passi:
+      - "Derivata trovata: `3x^2 - 3`."
+      - "In `a = 2`: `f'(2) = 9`."
+      - "Rapporto con `h = 0,001`: `frac(f(2,001) - f(2)|0,001)`, circa `9,006`."
+    ris: 3x^2 - 3
+    verifica: derivata
+  - da: sin x
+    passi:
+      - "Derivata trovata: `cos x`."
+      - "In `a = 0`: `f'(0) = 1`."
+      - "Rapporto con `h = 0,001`: `frac(sin(0,001)|0,001)`, circa `1`."
+    ris: cos x
+    verifica: derivata
+errore: Fidarsi del risultato senza controllare segni e parentesi, soprattutto in quozienti e composte.
+confondi:
+  - scheda: derivata-in-un-punto
+    differenza: Lì si calcola il valore della derivata in un punto; qui lo si usa per controllare il risultato.
+perche: La derivata è il limite del rapporto incrementale; con `h` molto piccolo il rapporto ne è una buona stima.
+parole: controllo verifica derivata rapporto incrementale segni

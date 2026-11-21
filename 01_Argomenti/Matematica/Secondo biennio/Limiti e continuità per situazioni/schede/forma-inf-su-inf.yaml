@@ -1,0 +1,31 @@
+id: forma-inf-su-inf
+tipo: regola
+titolo: Forma ∞/∞
+sigla: Inf su inf
+comando: dividi per la potenza più alta
+vedo: Una frazione in cui numeratore e denominatore vanno entrambi a infinito.
+formula:
+- lim frac(a_n*x^n + ...|b_m*x^m + ...)
+adatto:
+- Dividi numeratore e denominatore per la potenza più alta di `x` presente nel denominatore (o in tutta l'espressione).
+- 'Con le radici: `sqrt(x^2) = |x|`, quindi `x` per `x > 0` e `-x` per `x < 0`.'
+- Dopo la divisione i termini con `frac(1|x)` tendono a 0.
+esempi:
+- da: lim_(x -> +inf) frac(2x^2 + x|x^2 - 3)
+  passi:
+  - 'divido per `x^2`: `frac(2 + frac(1|x)|1 - frac(3|x^2))`'
+  ris: '2'
+- da: lim_(x -> +inf) frac(sqrt(x^2 + 1)|x)
+  passi:
+  - '`x > 0`: `sqrt(x^2 + 1) = x*sqrt(1 + frac(1|x^2))`'
+  ris: '1'
+- da: lim_(x -> -inf) frac(sqrt(x^2 + 1)|x)
+  passi:
+  - '`x < 0`: `sqrt(x^2) = -x`'
+  ris: '-1'
+errore: Dimenticare che per `x -> -inf` la radice di `x^2` è `-x`.
+confondi:
+- scheda: limite-fratta-infinito
+  differenza: Per soli polinomi basta confrontare i gradi.
+perche: 'La potenza più alta domina: dopo la divisione resta un limite finito.'
+parole: forma inf su inf dividere potenza più alta radice

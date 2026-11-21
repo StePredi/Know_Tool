@@ -1,0 +1,26 @@
+id: compose-comandi
+tipo: ricetta
+titolo: Avviare e fermare un'applicazione con Docker Compose
+sigla: docker compose
+comando: up -d · ps · logs · down
+frase: un comando per tutti i servizi
+fonte: lab_volumi_servizi.pdf (approfondimento B) · virtualizzazione_e_container.pdf
+parole: docker compose up down ps logs avviare fermare servizi
+quando: Quando hai un compose.yaml e vuoi gestire tutti i servizi insieme.
+fasi:
+- nome: Usa
+  righe:
+  - codice: docker compose up -d
+    commento: crea e avvia tutti i servizi in background
+  - codice: docker compose ps
+    commento: servizi e stato
+  - codice: docker compose logs
+    commento: i log dei servizi
+  - codice: docker compose down
+    commento: ferma e rimuove i container (e la rete creata da compose)
+    trappola: 'La cartella del bind mount resta sul PC: down rimuove i container, non i tuoi file.'
+segnaposto: {}
+varianti: []
+vicine:
+- compose-file
+- compose-tre-servizi

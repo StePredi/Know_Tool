@@ -1,0 +1,30 @@
+id: run-comando
+tipo: ricetta
+titolo: Eseguire un comando una volta e buttare il container
+sigla: docker run --rm
+comando: docker run --rm IMMAGINE comando
+frase: usa e getta
+fonte: lab_immagini_dockerfile.pdf (parte 3.4) · lab_volumi_servizi.pdf (parte 5.3)
+parole: rm usa e getta comando una volta sostituisce cmd ls container di servizio sh -c
+quando: Quando ti serve solo il risultato di un comando (un elenco, una copia, un controllo) e non un servizio acceso.
+fasi:
+- nome: Esegui e butta via
+  righe:
+  - codice: docker run --rm note:prova ls -a /app
+    commento: il container esegue ls al posto del CMD, stampa e termina
+    parti:
+    - voce: --rm
+      spiega: elimina il container appena termina
+    - voce: ls -a /app
+      spiega: sostituisce il CMD del Dockerfile
+    trappola: 'Senza --rm ogni prova lascia un container fermo: li vedi con docker ps -a.'
+- nome: Più comandi insieme
+  righe:
+  - codice: docker run --rm -v sito-vol:/data alpine sh -c 'echo "<h1>Sito nel volume</h1>" > /data/index.html'
+    commento: 'sh -c esegue una riga di shell intera: serve quando ci sono redirezioni (>) o più comandi'
+segnaposto: {}
+varianti: []
+vicine:
+- run-interattivo
+- volume-servizio
+- cmd-entrypoint

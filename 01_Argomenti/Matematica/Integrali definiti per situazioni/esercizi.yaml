@@ -1,0 +1,80 @@
+esercizi:
+- testo: ∫_0^2 (3x^2 + 1) dx
+  risultato: '10'
+  piano:
+  - scheda: teorema-fondamentale
+    nota: Primitiva `x^3 + x`.
+  - scheda: calcola-primitiva
+    nota: '`F(2) - F(0) = 10`.'
+- testo: ∫_0^1 2x*e^(x^2) dx
+  risultato: e - 1
+  piano:
+  - scheda: cambio-estremi
+    nota: '`t = x^2`, estremi `0` e `1`.'
+- testo: ∫_(-1)^1 (x^3 + x^2) dx
+  risultato: 2/3
+  piano:
+  - scheda: pari-dispari
+    nota: '`x^3` dispari dà `0`; `x^2` pari raddoppia.'
+- testo: Area sotto y = x^2 + 1 su [0, 2]
+  risultato: 14/3
+  piano:
+  - scheda: estremi-e-posizione
+    nota: Estremi `0` e `2`, curva sopra l'asse.
+  - scheda: area-sotto-curva
+    nota: '`∫_0^2 (x^2 + 1) dx`.'
+  - scheda: calcola-primitiva
+    nota: '`frac(8|3) + 2`.'
+- testo: Area fra y = x^3 - x e l'asse x su [-1, 1]
+  risultato: 1/2
+  piano:
+  - scheda: estremi-e-posizione
+    nota: Zeri `-1, 0, 1`.
+  - scheda: area-segno-cambia
+    nota: Due pezzi uguali, ciascuno `frac(1|4)`.
+- testo: Area racchiusa tra y = x^2 e y = 2x
+  risultato: 4/3
+  piano:
+  - scheda: area-intersezioni
+    nota: '`x = 0` e `x = 2`.'
+  - scheda: area-tra-curve
+    nota: '`∫_0^2 (2x - x^2) dx`.'
+- testo: Area racchiusa tra y = x + 2 e y = x^2
+  risultato: 9/2
+  piano:
+  - scheda: area-intersezioni
+    nota: '`x^2 - x - 2 = 0`: `-1` e `2`.'
+  - scheda: area-tra-curve
+    nota: '`∫_(-1)^2 (x + 2 - x^2) dx`.'
+- testo: Valore medio di sin x su [0, π]
+  risultato: 2/π
+  piano:
+  - scheda: valore-medio
+    nota: '`frac(1|π)*2`.'
+- testo: Volume del solido generato dalla rotazione di y = sqrt(x), 0 <= x <= 4, attorno all'asse x
+  risultato: 8π
+  piano:
+  - scheda: rotazione-asse-x
+    nota: '`π∫_0^4 x dx`.'
+- testo: Volume generato dalla rotazione attorno a x della regione tra y = x e y = x^2
+  risultato: 2π/15
+  piano:
+  - scheda: estremi-e-posizione
+    nota: Estremi `0` e `1`, sopra `x`.
+  - scheda: rotazione-corona
+    nota: '`π∫_0^1 (x^2 - x^4) dx`.'
+- testo: Volume generato dalla rotazione attorno a y della regione tra l'asse y, y = x^2 e y = 4
+  risultato: 8π
+  piano:
+  - scheda: rotazione-asse-y
+    nota: '`x = sqrt(y)`, `π∫_0^4 y dy`.'
+- testo: ∫_1^(inf) frac(1|x^2) dx e ∫_1^(inf) frac(1|x) dx
+  risultato: il primo converge a 1, il secondo diverge
+  piano:
+  - scheda: integrale-improprio-infinito
+    nota: Limiti per `b -> inf`.
+- testo: Derivata di F(x) = ∫_0^x e^(t^2) dt
+  risultato: e^(x^2)
+  piano:
+  - scheda: funzione-integrale
+    nota: '`F''(x)` è l''integrando in `x`.'

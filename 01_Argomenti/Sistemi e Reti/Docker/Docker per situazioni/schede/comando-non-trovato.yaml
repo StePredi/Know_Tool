@@ -1,0 +1,27 @@
+id: comando-non-trovato
+tipo: prima_dopo
+titolo: 'ping: command not found dentro il container'
+sigla: Comando non trovato
+comando: apt-get install
+frase: le immagini minimali non hanno gli strumenti
+fonte: lab_networking_container.pdf (parte 1.3)
+parole: command not found ping ip non trovato non esiste comando mancante debian installare
+prima: |-
+  docker exec -it c1 bash
+  ping -c 3 c2
+dopo: |-
+  docker exec -it c1 bash
+  ⟦apt-get update && apt-get install -y iputils-ping iproute2⟧
+  ping -c 3 c2
+uso: Usare strumenti di rete in un container nato da un'immagine minimale.
+riconoscila: 'La shell risponde «ping: command not found» (o «ip: command not found»).'
+parti:
+- voce: apt-get update
+  spiega: aggiorna l'elenco dei pacchetti
+- voce: iputils-ping iproute2
+  spiega: i pacchetti che contengono ping e ip
+trappola: 'Se elimini il container li perdi: per averli sempre, costruisci un''immagine con gli strumenti.'
+varianti: []
+vicine:
+- strumenti-rete
+- immagine-strumenti

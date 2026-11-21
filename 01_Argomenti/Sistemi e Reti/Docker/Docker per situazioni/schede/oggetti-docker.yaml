@@ -1,0 +1,66 @@
+id: oggetti-docker
+tipo: spiegazione
+titolo: Distinguere Dockerfile, immagine, container e registry
+sigla: Immagine e container
+comando: image · container · registry
+frase: l'immagine sta al container come la classe all'oggetto
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (sez. 02-03) · lab_immagini_dockerfile.pdf (domanda 28)
+parole: immagine image container registry hub repository dockerfile layer read-only immutabile effimero istanza classe oggetto volumes networks oggetti docker
+quando: Quando devi spiegare i concetti di base di Docker e come si passa da uno all'altro.
+blocchi:
+- titolo: Dal Dockerfile al container
+- disegno:
+    modello: flusso
+    nodi:
+    - nome: Dockerfile
+      sotto: 'la ricetta: un file di testo con le istruzioni'
+    - nome: Immagine
+      sotto: 'il risultato della build: un layer a sola lettura per ogni istruzione'
+      tono: colore
+    - nome: Container
+      sotto: 'l''istanza in esecuzione: i layer dell''immagine più uno scrivibile'
+      tono: oro
+    frecce:
+    - docker build
+    - docker run
+    nota: Ogni istruzione del Dockerfile corrisponde a un layer dell'immagine.
+- titolo: Immagine, container, registry
+- carte:
+  - titolo: Immagine
+    testo: Template **read-only** con applicazione e dipendenze.
+    punti:
+    - immutabile
+    - composta da layer
+    - esistono più versioni (tag)
+    - si può condividere
+  - titolo: Container
+    testo: L'**istanza in esecuzione** di un'immagine.
+    punti:
+    - mutabile durante l'esecuzione
+    - 'effimero: può essere distrutto'
+    - ha un ciclo di vita
+    - da una immagine ne nascono N
+  - titolo: Registry
+    testo: Il servizio che **memorizza e distribuisce** le immagini.
+    punti:
+    - scarica immagini già pronte
+    - conserva le tue immagini
+    - detto anche repository o hub (Docker Hub)
+- nota: 'Analogia: l''immagine sta al container come una **classe** sta agli **oggetti** che ne vengono istanziati.'
+- trappola: 'I dati scritti nel container spariscono quando lo elimini: per conservarli servono i volumi.'
+- titolo: Gli oggetti di Docker
+- carte:
+  - titolo: Images
+    testo: Template per creare i container.
+  - titolo: Containers
+    testo: Istanze in esecuzione delle immagini.
+  - titolo: Networks
+    testo: Reti virtuali per far comunicare i container.
+  - titolo: Volumes
+    testo: Storage che conserva i dati anche dopo la distruzione del container.
+varianti: []
+vicine:
+- architettura-docker
+- dockerfile-base
+- named-volume
+- rete-custom

@@ -1,0 +1,43 @@
+id: cpp-struttura
+tipo: ricetta
+titolo: Com'è fatto un programma C++
+sigla: Struttura
+comando: int main()
+frase: da dove parte il programma
+fonte: Documentazione C++ · cppreference.com · Tour of C++ · programma minimo
+parole: struttura programma main include iostream using namespace cout return scheletro primo programma
+quando: Quando scrivi il primo programma o non sai cosa serve in cima al file.
+fasi:
+- nome: Lo scheletro
+  righe:
+  - codice: '#include <iostream>'
+    commento: Porta nel programma gli strumenti per scrivere e leggere dal terminale.
+    parti:
+    - voce: iostream
+      spiega: qui vivono cout e cin
+  - codice: using namespace std;
+    commento: 'Evita di scrivere std:: davanti a cout, string, vector…'
+    trappola: Nei file piccoli va bene; nei file di intestazione (.h) si scrive std::cout per esteso.
+  - codice: int main() {
+    commento: Da qui parte il programma.
+    parti:
+    - voce: main
+      spiega: la funzione da cui parte l'esecuzione
+    - voce: int
+      spiega: 'restituisce un numero al sistema: 0 = tutto bene'
+  - codice: '    cout << "Ciao" << endl;'
+    commento: Una riga di codice che scrive Ciao.
+    trappola: 'Ogni istruzione finisce con il punto e virgola: se lo dimentichi l''errore di solito viene
+      segnalato alla riga dopo.'
+  - codice: '    return 0;'
+    commento: Fine del programma, tutto bene.
+    parti:
+    - voce: return 0;
+      spiega: 'in main si può anche omettere: il compilatore lo aggiunge'
+  - codice: '}'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-compilare
+- cpp-output-input
+- cpp-errori-comuni

@@ -1,0 +1,24 @@
+id: ellisse-da-dati
+tipo: regola
+titolo: Ellisse da dati
+sigla: Da dati
+comando: b^2 = a^2 - c^2
+vedo: Ti danno semiassi, un fuoco, o un punto.
+formula:
+- b^2 = a^2 - c^2
+adatto:
+- 'Semiasse maggiore e fuoco: ricavi `b^2 = a^2 - c^2`.'
+- Con un punto sull'ellisse sostituisci nell'equazione canonica.
+- 'Centro fuori dall''origine: sostituisci `x -> x - h`, `y -> y - k`.'
+esempi:
+- da: semiasse maggiore 5, fuoco (3, 0)
+  passi:
+  - '`c = 3`'
+  - '`b^2 = 25 - 9 = 16`'
+  ris: frac(x^2|25) + frac(y^2|16) = 1
+errore: Dimenticare di elevare al quadrato i semiassi nell'equazione.
+confondi:
+- scheda: ellisse-canonica
+  differenza: Lì leggi i dati; qui li usi per scrivere l'equazione.
+perche: Dalla relazione tra fuochi e semiassi `a^2 = b^2 + c^2`.
+parole: ellisse da dati fuoco semiasse

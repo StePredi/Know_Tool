@@ -1,0 +1,29 @@
+id: derivata-sinistra-destra
+tipo: regola
+titolo: Derivata sinistra e destra
+sigla: Sinistra e destra
+comando: f'_-(x_0) = lim_(h -> 0^-), f'_+(x_0) = lim_(h -> 0^+)
+vedo: Una funzione con valore assoluto o a tratti in un punto di raccordo.
+formula:
+- f'_-(x_0) = lim_(h -> 0^-) frac(f(x_0 + h) - f(x_0)|h)
+- f'_+(x_0) = lim_(h -> 0^+) frac(f(x_0 + h) - f(x_0)|h)
+adatto:
+- Calcola i due limiti con `h` negativa e `h` positiva.
+- '`f` è derivabile in `x_0` solo se i due limiti sono finiti e uguali.'
+- 'Con il valore assoluto: `abs(h) = -h` se `h < 0`, `abs(h) = h` se `h > 0`.'
+esempi:
+- da: f(x) = abs(x - 1) in x_0 = 1
+  passi:
+  - '`frac(abs(h)|h)`: per `h < 0` vale `-1`, per `h > 0` vale `1`'
+  ris: 'f''_- = -1, f''_+ = 1: non derivabile'
+- da: f(x) = x*abs(x) in x_0 = 0
+  passi:
+  - '`frac(h*abs(h)|h) = abs(h)`'
+  - tende a 0 da entrambi i lati
+  ris: f'(0) = 0
+errore: Calcolare solo il limite da destra.
+confondi:
+- scheda: punti-non-derivabili
+  differenza: Qui si calcolano i due limiti; lì si classifica il tipo di punto.
+perche: La derivata esiste solo se il rapporto incrementale tende allo stesso numero da entrambe le parti.
+parole: derivata destra sinistra valore assoluto

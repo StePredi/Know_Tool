@@ -1,0 +1,32 @@
+id: derivabilita-continuita
+tipo: regola
+titolo: Derivabilità e continuità
+sigla: Derivabile e continua
+comando: derivabile ⇒ continua
+vedo: Ti chiedono se una funzione derivabile è continua, o viceversa.
+formula:
+- derivabile -> continua
+adatto:
+- Se `f` è derivabile in `x_0`, allora è continua in `x_0`.
+- 'Non vale il contrario: `|x|` è continua in 0 ma non derivabile.'
+- Se non è continua, non può essere derivabile.
+esempi:
+- da: f(x) = x^2
+  passi:
+  - derivabile ovunque
+  ris: continua ovunque
+- da: f(x) = abs(x) in x = 0
+  passi:
+  - continua
+  - derivata sinistra `-1`, destra `1`
+  ris: continua ma non derivabile
+- da: f(x) = x per x < 0; f(x) = x + 1 per x >= 0
+  passi:
+  - salto in 0
+  ris: non continua, quindi non derivabile
+errore: Credere che continua implichi derivabile.
+confondi:
+- scheda: punti-non-derivabili
+  differenza: 'La continuità non basta: serve anche la tangente.'
+perche: Se `f` ha una tangente in `x_0`, il grafico non può avere salti lì.
+parole: derivabilità continuità implicazione

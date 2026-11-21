@@ -1,0 +1,82 @@
+esercizi:
+- testo: sin(5*pi/6) + cos(2*pi/3)
+  risultato: '0'
+  piano:
+  - scheda: angoli-associati
+    nota: '`150` e `120` gradi: riduco al primo quadrante.'
+  - scheda: angoli-notevoli
+    nota: '`frac(1|2) - frac(1|2)`.'
+- testo: 'sin(x) = 4/5, x nel secondo quadrante: cos(x) e tan(x)'
+  risultato: cos(x) = -3/5, tan(x) = -4/3
+  piano:
+  - scheda: valore-da-un-altro
+    nota: '`cos = -sqrt(1 - frac(16|25))`.'
+  - scheda: circonferenza-goniometrica
+    nota: 'Secondo quadrante: coseno negativo.'
+- testo: Semplifica (sin(x) + cos(x))^2 - sin(2x)
+  risultato: '1'
+  piano:
+  - scheda: semplifica-espressione
+    nota: Sviluppo il quadrato.
+  - scheda: duplicazione
+    nota: '`sin(2x) = 2*sin(x)*cos(x)`: i doppi prodotti si elidono.'
+  - scheda: identita-fondamentale
+    nota: '`sin^2 + cos^2 = 1`.'
+- testo: cos(5*pi/12)
+  risultato: (sqrt(6) - sqrt(2))/4
+  piano:
+  - scheda: addizione
+    nota: '`75 = 45 + 30`: `cos(45)cos(30) - sin(45)sin(30)`.'
+  - scheda: angoli-notevoli
+    nota: Sostituisco i valori esatti.
+- testo: sin(x) = -1/2
+  risultato: x = 7*pi/6 + 2k*pi, x = 11*pi/6 + 2k*pi
+  piano:
+  - scheda: eq-seno
+    nota: Angolo di riferimento `frac(pi|6)`, seno negativo.
+  - scheda: angoli-associati
+    nota: Terzo e quarto quadrante.
+- testo: 2*cos(x)^2 - cos(x) - 1 = 0
+  risultato: x = 2k*pi, x = +-2*pi/3 + 2k*pi
+  piano:
+  - scheda: eq-secondo-grado
+    nota: '`t = cos(x)`: `t = 1` o `t = -frac(1|2)`.'
+  - scheda: eq-coseno
+    nota: Risolvo i due casi.
+- testo: tan(2x) = 1
+  risultato: x = pi/8 + k*pi/2
+  piano:
+  - scheda: eq-tangente
+    nota: '`2x = frac(pi|4) + k*pi`, poi divido per 2.'
+- testo: sin(2x) = sin(x)
+  risultato: x = k*pi, x = +-pi/3 + 2k*pi
+  piano:
+  - scheda: duplicazione
+    nota: '`2*sin(x)*cos(x) = sin(x)`.'
+  - scheda: eq-scomponibile
+    nota: '`sin(x)*(2*cos(x) - 1) = 0`.'
+  - scheda: eq-seno
+    nota: '`sin(x) = 0`.'
+  - scheda: eq-coseno
+    nota: '`cos(x) = frac(1|2)`.'
+- testo: 'Triangolo rettangolo: ipotenusa 12, angolo B = 35 gradi, cateto b opposto a B'
+  risultato: b circa 6,88
+  piano:
+  - scheda: triangolo-rettangolo
+    nota: '`b = 12*sin(35)`.'
+  - scheda: controlla-goniometria
+    nota: Calcolatrice in gradi.
+- testo: 'Triangolo ABC: a = 8, b = 11, C = 50 gradi (compreso). Calcola c'
+  risultato: c circa 8,48
+  piano:
+  - scheda: scegli-teorema-triangolo
+    nota: Due lati e angolo compreso.
+  - scheda: teorema-coseno
+    nota: '`c^2 = 64 + 121 - 2*8*11*cos(50)`.'
+- testo: 'Triangolo: A = 45, B = 60 gradi, a = 10. Calcola b'
+  risultato: b circa 12,25
+  piano:
+  - scheda: scegli-teorema-triangolo
+    nota: Coppia lato–angolo opposto nota.
+  - scheda: teorema-seni
+    nota: '`b = frac(10*sin(60)|sin(45))`.'

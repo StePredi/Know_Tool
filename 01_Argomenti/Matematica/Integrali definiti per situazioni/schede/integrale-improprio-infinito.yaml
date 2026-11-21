@@ -1,0 +1,35 @@
+id: integrale-improprio-infinito
+tipo: regola
+titolo: Intervallo illimitato
+sigla: Improprio ∞
+comando: lim_(b -> inf) ∫_a^b f dx
+vedo: Uno degli estremi è `+inf` o `-inf`.
+formula:
+- ∫_a^(inf) f(x) dx = lim_(b -> inf) ∫_a^b f(x) dx
+adatto:
+- Sostituisci `inf` con una lettera `b`.
+- Calcola l'integrale e poi il limite per `b -> inf`.
+- 'Limite finito: l''integrale converge. Infinito o inesistente: diverge.'
+- '`frac(1|x^p)` converge su `[1, inf)` per `p > 1`.'
+esempi:
+- da: ∫_1^(inf) frac(1|x^2) dx
+  passi:
+  - '`[-frac(1|x)]_1^b = 1 - frac(1|b)`'
+  - 'per `b -> inf`: `1`'
+  ris: converge a 1
+- da: ∫_1^(inf) frac(1|x) dx
+  passi:
+  - '`[ln x]_1^b = ln b`'
+  - 'per `b -> inf`: `inf`'
+  ris: diverge
+- da: ∫_0^(inf) e^(-x) dx
+  passi:
+  - '`[-e^(-x)]_0^b = 1 - e^(-b)`'
+  - 'per `b -> inf`: `1`'
+  ris: converge a 1
+errore: Calcolare il limite senza prima integrare, o concludere «converge» perché la funzione va a zero.
+confondi:
+- scheda: integrale-improprio-illimitata
+  differenza: Qui l'intervallo è infinito; lì è la funzione a diventare infinita.
+perche: Un'area infinitamente estesa può essere finita se le strisce si assottigliano abbastanza in fretta.
+parole: integrale improprio infinito converge diverge limite

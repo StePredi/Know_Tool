@@ -1,0 +1,35 @@
+id: somma-differenza-cubi
+tipo: regola
+titolo: Somma e differenza di cubi
+sigla: Somma o differenza di cubi
+comando: "(a + b)(a^2 - ab + b^2)"
+vedo: "Due termini che sono cubi: `x^3 + 8`, `27x^3 - 1`."
+formula:
+  - a^3 + b^3 = (a + b)*(a^2 - a*b + b^2)
+  - a^3 - b^3 = (a - b)*(a^2 + a*b + b^2)
+adatto:
+  - "Verifica che siano cubi: 1, 8, 27, 64, 125… e lettere con esponente multiplo di 3."
+  - "Primo fattore: `a ± b` con lo stesso segno del testo."
+  - "Secondo fattore: `a^2`, poi `ab` con segno opposto a quello del testo, poi `b^2` sempre +. Non c'è il 2 davanti ad `ab`."
+  - "Il secondo fattore di solito non si scompone più."
+esempi:
+  - da: x^3 + 8
+    passi:
+      - "`a = x`, `b = 2`, segno più"
+      - "Primo fattore `x + 2`; secondo `x^2 - 2x + 4`"
+    ris: (x + 2)(x^2 - 2x + 4)
+    verifica: scomposizione
+  - da: 27x^3 - 1
+    passi:
+      - "`a = 3x`, `b = 1`, segno meno"
+      - "Primo fattore `3x - 1`; secondo `9x^2 + 3x + 1`"
+    ris: (3x - 1)(9x^2 + 3x + 1)
+    verifica: scomposizione
+errore: "Sbagliare i segni del secondo fattore, o scrivere `2ab` come nel quadrato di binomio."
+confondi:
+  - scheda: differenza-quadrati
+    differenza: "I quadrati hanno esponente pari e danno due fattori di primo grado; i cubi hanno esponente 3 e danno un secondo fattore di grado 2."
+  - scheda: cubo-di-binomio
+    differenza: "Il cubo di binomio ha 4 termini; qui ce ne sono 2."
+perche: "Moltiplicando, i termini misti si annullano a coppie e restano solo i due cubi."
+parole: cubi somma differenza cubo scomposizione

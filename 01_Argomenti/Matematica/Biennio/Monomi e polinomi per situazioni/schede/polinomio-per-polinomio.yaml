@@ -1,0 +1,35 @@
+id: polinomio-per-polinomio
+tipo: regola
+titolo: Polinomio per polinomio
+sigla: Polinomio per polinomio
+comando: ogni termine per ogni termine
+vedo: "Due parentesi che si moltiplicano: `(x + 3)*(x - 5)`."
+formula: (a + b)*(c + d) = a*c + a*d + b*c + b*d
+adatto:
+  - "Ogni termine della prima parentesi per ogni termine della seconda: con 2 e 3 termini hai 6 prodotti."
+  - "Poi riduci i termini simili."
+  - "Se le due parentesi hanno gli stessi termini, forse è un prodotto notevole: guarda «Quale prodotto notevole?»."
+  - "Con tre parentesi: prima moltiplica due, poi il risultato per la terza."
+esempi:
+  - da: (x + 3)*(x - 5)
+    passi:
+      - "`x*x = x^2`, `x*(-5) = -5x`"
+      - "`3*x = 3x`, `3*(-5) = -15`"
+      - "Riduco: `-5x + 3x = -2x`"
+    ris: x^2 - 2x - 15
+    verifica: scomposizione
+  - da: (2x - 1)*(x^2 + x - 3)
+    passi:
+      - "Con `2x`: `2x^3 + 2x^2 - 6x`"
+      - "Con `-1`: `-x^2 - x + 3`"
+      - "Riduco: `2x^2 - x^2 = x^2` e `-6x - x = -7x`"
+    ris: 2x^3 + x^2 - 7x + 3
+    verifica: scomposizione
+errore: "Fare solo `a*c + b*d` e dimenticare i prodotti incrociati."
+confondi:
+  - scheda: monomio-per-polinomio
+    differenza: "Con un solo termine fuori basta moltiplicarlo per ogni termine della parentesi."
+  - scheda: quadrato-binomio
+    differenza: "Se le due parentesi sono uguali è un quadrato di binomio: la scorciatoia evita di dimenticare il doppio prodotto."
+perche: "È la distributiva applicata due volte: prima la prima parentesi su `c`, poi su `d`."
+parole: prodotto polinomi parentesi sviluppo distributiva

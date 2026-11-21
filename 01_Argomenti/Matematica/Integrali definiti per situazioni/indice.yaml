@@ -1,0 +1,52 @@
+modello: per_situazioni
+titolo: Integrali definiti, aree e volumi, per situazioni
+centro: Integrali definiti
+sottotitolo: Calcolo, aree, volumi di rotazione, integrali impropri
+ingresso: Regione del piano, funzione tra due estremi
+guida: Prima gli estremi e quale curva sta sopra; poi scrivi l'integrale, calcolalo con la primitiva e controlla che sia positivo.
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - estremi-e-posizione
+    - imposta-integrale
+    - calcola-primitiva
+    - controlla-risultato
+- id: cal
+  nome: Calcolo dell'integrale
+  colore: green
+  voci:
+  - schede:
+    - teorema-fondamentale
+    - proprieta-integrale-definito
+    - cambio-estremi
+    - pari-dispari
+    - valore-medio
+    - funzione-integrale
+- id: are
+  nome: Aree
+  colore: orange
+  voci:
+  - schede:
+    - area-sotto-curva
+    - area-segno-cambia
+    - area-tra-curve
+    - area-intersezioni
+- id: vol
+  nome: Volumi di rotazione
+  colore: violet
+  voci:
+  - schede:
+    - rotazione-asse-x
+    - rotazione-corona
+    - rotazione-asse-y
+- id: imp
+  nome: Integrali impropri
+  colore: pink
+  voci:
+  - schede:
+    - integrale-improprio-infinito
+    - integrale-improprio-illimitata

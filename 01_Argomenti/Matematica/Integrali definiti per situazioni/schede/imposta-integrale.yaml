@@ -1,0 +1,33 @@
+id: imposta-integrale
+tipo: regola
+titolo: 2. Imposta l'integrale
+sigla: Imposta
+comando: scrivi l'integrale con sopra meno sotto
+vedo: Hai estremi e posizione e devi scrivere l'integrale.
+formula:
+- Area = ∫_a^b (f(x) - g(x)) dx
+- Volume = π∫_a^b f(x)^2 dx
+adatto:
+- 'Area: integra `sopra - sotto`, mai il contrario.'
+- 'Volume di rotazione attorno all''asse `x`: `π` per l''integrale del quadrato della funzione.'
+- 'Tra due curve: `π` per l''integrale di `(sopra)^2 - (sotto)^2`, non il quadrato della differenza.'
+- Se ci sono più pezzi, scrivi un integrale per ogni pezzo.
+esempi:
+- da: area tra y = x e y = x^2
+  passi:
+  - estremi 0 e 1, sopra `x`
+  ris: ∫_0^1 (x - x^2) dx
+- da: volume attorno a x di y = sqrt(x), 0 <= x <= 4
+  passi:
+  - 'quadrato: `(sqrt(x))^2 = x`'
+  ris: π∫_0^4 x dx
+- da: volume attorno a x tra y = x e y = x^2, 0 <= x <= 1
+  passi:
+  - quadrato sopra meno quadrato sotto
+  ris: π∫_0^1 (x^2 - x^4) dx
+errore: 'Scrivere `π∫ (f - g)^2 dx` per un solido forato: va sottratto il quadrato interno, non il quadrato della differenza.'
+confondi:
+- scheda: calcola-primitiva
+  differenza: Qui si scrive l'integrale; lì lo si calcola.
+perche: Ogni striscia ha altezza «sopra meno sotto»; nel volume ogni fetta è un cerchio (o corona) di area `π r^2`.
+parole: impostare integrale area volume formula

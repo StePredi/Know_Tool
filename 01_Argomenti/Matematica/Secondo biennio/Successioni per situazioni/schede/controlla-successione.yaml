@@ -1,0 +1,30 @@
+id: controlla-successione
+tipo: regola
+titolo: Controllo del risultato
+sigla: Controlla
+comando: sostituisci n = 1, 2, 3
+vedo: Hai trovato una formula, una somma o una ragione e vuoi controllarla.
+formula:
+- a_n = f(n)
+adatto:
+- Sostituisci `n = 1, 2, 3` nella formula e confronta con i primi termini.
+- 'Somme: controlla con pochi termini a mano (`n = 3` o `4`).'
+- 'Aritmetica: `a_n` deve crescere (o calare) di `d` ad ogni passo.'
+- 'Geometrica con `|q| < 1`: i termini diventano sempre più piccoli.'
+esempi:
+- da: a_n = 3n - 1 per la successione 2, 5, 8, ...
+  passi:
+  - '`n = 1`: 2'
+  - '`n = 2`: 5'
+  - '`n = 3`: 8'
+  ris: formula corretta
+- da: S_n = frac(n*(n + 1)|2) per 1 + 2 + 3 + 4
+  passi:
+  - '`n = 4`: `frac(4*5|2) = 10`'
+  ris: '1 + 2 + 3 + 4 = 10: giusto'
+errore: 'Fermarsi al primo termine: una formula sbagliata può coincidere solo con `a_1`.'
+confondi:
+- scheda: termine-generale
+  differenza: Qui si controlla la formula; lì la si cerca.
+perche: 'Una formula per `a_n` deve valere per ogni `n`: basta un termine che non torna per escluderla.'
+parole: controllo verifica successione sostituire primi termini

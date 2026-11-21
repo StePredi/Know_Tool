@@ -1,0 +1,62 @@
+modello: per_situazioni
+titolo: Integrali indefiniti, per situazioni
+centro: Integrali indefiniti
+sottotitolo: 'Primitive: immediati, composte, per parti, sostituzione, fratti'
+ingresso: Funzione da integrare
+guida: 'Riconosci la forma della funzione: la forma sceglie il metodo. Alla fine deriva il risultato per controllare.'
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - semplifica-prima
+    - riconosci-forma
+    - controlla-derivando
+- id: imm
+  nome: Integrali immediati
+  colore: green
+  voci:
+  - schede:
+    - integrale-potenza
+    - integrale-costante-somma
+    - integrale-uno-su-x
+    - integrale-esponenziale
+    - integrale-seno-coseno
+    - integrale-tangente
+    - integrale-arcotangente
+- id: com
+  nome: Funzione composta
+  colore: violet
+  voci:
+  - schede:
+    - composta-lineare
+    - f-primo-su-f
+    - potenza-di-g
+    - esp-di-g
+    - gonio-di-g
+- id: par
+  nome: Per parti
+  colore: orange
+  voci:
+  - schede:
+    - per-parti
+    - scelta-fattori
+    - per-parti-due-volte
+    - per-parti-ln-arctan
+- id: sos
+  nome: Sostituzione
+  colore: pink
+  voci:
+  - schede:
+    - sostituzione
+- id: fra
+  nome: Fratti semplici
+  colore: teal
+  voci:
+  - schede:
+    - fratti-grado-maggiore
+    - fratti-radici-distinte
+    - fratti-radice-doppia
+    - fratto-irriducibile

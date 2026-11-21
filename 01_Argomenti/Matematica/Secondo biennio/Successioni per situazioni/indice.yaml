@@ -1,0 +1,42 @@
+modello: per_situazioni
+titolo: Successioni, per situazioni
+centro: Successioni
+sottotitolo: Progressioni aritmetiche e geometriche, ricorsive
+ingresso: Elenco di numeri o formula per `a_n`
+guida: 'Prima guarda come cambiano i termini: stessa differenza (aritmetica), stesso rapporto (geometrica), oppure ogni termine dipende dal precedente (ricorsiva).'
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - riconosci-successione
+    - termine-generale
+    - controlla-successione
+- id: ari
+  nome: Progressione aritmetica
+  colore: orange
+  voci:
+  - schede:
+    - aritmetica-termine
+    - aritmetica-somma
+    - aritmetica-da-dati
+- id: geo
+  nome: Progressione geometrica
+  colore: violet
+  voci:
+  - schede:
+    - geometrica-termine
+    - geometrica-somma
+    - geometrica-da-dati
+    - serie-geometrica
+- id: gen
+  nome: Altre situazioni
+  colore: green
+  voci:
+  - schede:
+    - successione-ricorsiva
+    - monotonia
+    - limite-comportamento
+    - problema-testo-successione

@@ -1,0 +1,34 @@
+id: condizioni-esistenza-log
+tipo: regola
+titolo: Condizioni di esistenza dei logaritmi
+sigla: C.E.
+comando: 'log_a(f(x)): f(x) > 0'
+vedo: Un logaritmo con l'incognita nell'argomento (o nella base).
+formula:
+- f(x) > 0
+- a > 0
+- a != 1
+adatto:
+- L'argomento del logaritmo deve essere strettamente positivo.
+- La base deve essere positiva e diversa da 1.
+- Se ci sono più logaritmi, metti tutte le condizioni a sistema.
+- Se l'argomento è una frazione, studia il segno della frazione.
+esempi:
+- da: log_2(x - 3)
+  passi:
+  - '`x - 3 > 0`'
+  ris: x > 3
+- da: ln(x^2 - 4)
+  passi:
+  - '`x^2 - 4 > 0`: esterno alle radici'
+  ris: x < -2 oppure x > 2
+- da: log_3(frac(x|x - 1))
+  passi:
+  - '`frac(x|x - 1) > 0`: numeratore e denominatore con segno uguale'
+  ris: x < 0 oppure x > 1
+errore: Dimenticare le condizioni e accettare soluzioni che rendono negativo un argomento.
+confondi:
+- scheda: controlla-esp-log
+  differenza: Le condizioni si scrivono prima di risolvere; il controllo finale le verifica sulle soluzioni.
+perche: 'Il logaritmo è l''inverso dell''esponenziale, che dà sempre valori positivi: quindi si può fare il logaritmo solo di numeri positivi.'
+parole: condizioni esistenza logaritmo argomento positivo base

@@ -1,0 +1,45 @@
+id: dockerfile-base
+tipo: ricetta
+titolo: Scrivere un Dockerfile per impacchettare un programma
+sigla: Dockerfile
+comando: FROM WORKDIR RUN ENV EXPOSE COPY CMD
+frase: la ricetta dell'immagine
+fonte: lab_immagini_dockerfile.pdf (parti 2.1, 3.3) · container_mini_tutorial.md · virtualizzazione_e_container.pdf (istruzioni del Dockerfile)
+parole: dockerfile from workdir copy add run env expose cmd label istruzioni ricetta immagine base python slim
+quando: Quando vuoi che il tuo programma parta con un solo comando su qualsiasi PC con Docker.
+fasi:
+- nome: Base e cartella di lavoro
+  righe:
+  - codice: FROM python:3.12-slim
+    commento: 'l''immagine di partenza: va sempre per prima, un''immagine non nasce mai da zero'
+    trappola: 'Il file si chiama esattamente Dockerfile: D maiuscola, nessuna estensione.'
+  - codice: WORKDIR /app
+    commento: imposta (e crea) la cartella per le istruzioni successive e per l'avvio
+- nome: Prepara l'immagine
+  righe:
+  - codice: RUN mkdir -p /data && echo "Benvenuto nell'archivio note" > /data/benvenuto.txt
+    commento: esegue un comando durante la build e crea un nuovo layer
+  - codice: ENV NOTES_DIR=/data PORT=5000
+    commento: variabili d'ambiente lette dal programma all'avvio; si cambiano con -e
+  - codice: EXPOSE 5000
+    commento: documenta la porta del servizio
+    trappola: 'EXPOSE non pubblica niente: per raggiungere il servizio da fuori serve -p nel docker run.'
+- nome: Il programma e l'avvio
+  righe:
+  - codice: COPY app.py .
+    commento: copia il file dal PC (contesto di build) nell'immagine, nella WORKDIR
+  - codice: CMD ["python", "app.py"]
+    commento: il comando predefinito all'avvio del container; di solito è l'ultima riga
+    trappola: 'RUN lavora durante la build, CMD all''avvio del container: non scambiarli.'
+segnaposto: {}
+varianti:
+- codice: LABEL maintainer="tuonome@esempio.it"
+  spiega: aggiunge un'informazione (metadato) all'immagine
+- codice: ADD archivio.tar.gz /app/
+  spiega: 'come COPY, ma estrae archivi e scarica da URL: quando puoi, usa COPY'
+- codice: '# commento'
+  spiega: 'nel Dockerfile i commenti iniziano con #; istruzioni in MAIUSCOLO'
+vicine:
+- docker-build
+- cmd-entrypoint
+- cache-layer

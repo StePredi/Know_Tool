@@ -1,0 +1,33 @@
+id: rapporto-incrementale
+tipo: regola
+titolo: Rapporto incrementale
+sigla: Rapporto incrementale
+comando: frac(f(x_0 + h) - f(x_0)|h)
+vedo: Devi calcolare la derivata dalla definizione, o la pendenza media tra due punti.
+formula:
+- frac(f(x_0 + h) - f(x_0)|h)
+adatto:
+- È la pendenza della retta secante tra i punti `x_0` e `x_0 + h`.
+- Scrivi `f(x_0 + h)` sostituendo `x_0 + h` al posto di `x` nella funzione.
+- 'Scrivilo per esteso prima di semplificare: è il passo in cui si sbaglia di più.'
+- Si può scrivere anche come `frac(f(x) - f(x_0)|x - x_0)`.
+esempi:
+- da: f(x) = x^2 in x_0 = 2
+  passi:
+  - '`frac((2 + h)^2 - 4|h)`'
+  ris: frac((2 + h)^2 - 4|h)
+- da: frac((2 + x)^2 - 4|x)
+  passi:
+  - sviluppo e semplifico (qui `x` sta per `h`)
+  ris: 4 + x
+  verifica: scomposizione
+- da: f(x) = x^2, x_0 = 2, h = 0,1
+  passi:
+  - '`frac(2,1^2 - 4|0,1) = frac(0,41|0,1)`'
+  ris: 4,1
+errore: 'Sbagliare `f(x_0 + h)`: per `x^2` non è `x_0^2 + h`, ma `(x_0 + h)^2`.'
+confondi:
+- scheda: derivata-definizione
+  differenza: Il rapporto incrementale è il passo prima del limite.
+perche: Misura quanto cambia `f` rispetto al cambiamento di `x`, nell'intervallo scelto.
+parole: rapporto incrementale pendenza secante

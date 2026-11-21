@@ -1,0 +1,43 @@
+id: proprieta-potenze-esp
+tipo: regola
+titolo: Proprietà delle potenze con esponente variabile
+sigla: Potenze
+comando: a^m * a^n = a^(m + n)
+vedo: Potenze con la stessa base (o lo stesso esponente) da moltiplicare, dividere o elevare.
+formula:
+- a^m * a^n = a^(m + n)
+- frac(a^m|a^n) = a^(m - n)
+- (a^m)^n = a^(m*n)
+- a^(-n) = frac(1|a^n)
+- a^x * b^x = (a*b)^x
+adatto:
+- Le proprietà valgono anche se l'esponente contiene `x`.
+- '`a^0 = 1` per ogni `a` diverso da 0.'
+- '`a^(m + n)` non è `a^m + a^n`: la somma negli esponenti è un prodotto.'
+esempi:
+- da: 2^x * 2^3
+  passi:
+  - 'stessa base: sommo gli esponenti'
+  ris: 2^(x + 3)
+  verifica: scomposizione
+- da: frac(3^(x + 2)|3^x)
+  passi:
+  - 'sottraggo gli esponenti: `3^(x + 2 - x)`'
+  ris: '9'
+  verifica: scomposizione
+- da: (2^x)^3
+  passi:
+  - moltiplico gli esponenti
+  ris: 2^(3x)
+  verifica: scomposizione
+- da: 2^x * 4^x
+  passi:
+  - 'stesso esponente: moltiplico le basi'
+  ris: 8^x
+  verifica: scomposizione
+errore: Sommare gli esponenti quando le potenze si sommano invece che moltiplicarsi.
+confondi:
+- scheda: riduci-stessa-base
+  differenza: Qui usi le proprietà; lì prepari le basi per usarle.
+perche: 'Deriva dalla definizione di potenza: `a^m*a^n` è il prodotto di `m + n` fattori uguali ad `a`.'
+parole: proprietà potenze esponente variabile prodotto quoziente

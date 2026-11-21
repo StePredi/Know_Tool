@@ -1,0 +1,37 @@
+id: semplifica
+tipo: regola
+titolo: Semplificare una frazione algebrica
+sigla: Semplifica
+comando: cancello i fattori uguali sopra e sotto
+frase: "Passo 3: dopo la scomposizione, lo stesso fattore compare sopra e sotto."
+vedo: "Dopo la scomposizione, lo stesso fattore compare sopra e sotto: `frac((x - 2)(x + 2)|x(x + 2))`."
+formula: frac(a*c|b*c) = frac(a|b)
+adatto:
+  - "Semplifica solo fattori interi: una parentesi o un monomio che moltiplica tutto il numeratore e tutto il denominatore."
+  - "Mai i termini di una somma."
+  - "Barra il fattore sopra e sotto e riscrivi quello che resta. Se non resta niente, resta 1."
+  - "Fattori opposti, come `x - 3` e `3 - x`: guarda «Segni opposti»."
+  - "Fattori uguali con esponenti diversi: guarda «Semplifica le potenze»."
+  - "Il risultato vale solo dove valgono le condizioni di esistenza."
+esempi:
+  - da: frac(x^2 - 4|x^2 + 2x)
+    passi:
+      - "Scomposto: `frac((x - 2)(x + 2)|x(x + 2))`"
+      - "Semplifico `(x + 2)`"
+      - "Restano `x - 2` sopra e `x` sotto"
+    ris: frac(x - 2|x)
+    verifica: scomposizione
+  - da: frac(x^2 - 5x + 6|x^2 - 9)
+    passi:
+      - "Scomposto: `frac((x - 2)(x - 3)|(x - 3)(x + 3))`"
+      - "Semplifico `(x - 3)`"
+    ris: frac(x - 2|x + 3)
+    verifica: scomposizione
+errore: "Semplificare i termini invece dei fattori: `frac(x + 2|x + 3)` non diventa `frac(2|3)`."
+confondi:
+  - scheda: scomponi-prima
+    differenza: "Prima si scompone, poi si semplifica."
+  - scheda: condizioni-esistenza
+    differenza: "Le condizioni restano quelle della frazione di partenza."
+perche: "Semplificare è dividere sopra e sotto per lo stesso fattore: serve che sia un fattore di tutto il numeratore e di tutto il denominatore."
+parole: semplificare ridurre ai minimi termini cancellare fattori

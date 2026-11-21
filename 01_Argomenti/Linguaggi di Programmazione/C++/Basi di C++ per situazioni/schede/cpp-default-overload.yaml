@@ -1,0 +1,32 @@
+id: cpp-default-overload
+tipo: ricetta
+titolo: Parametri predefiniti e funzioni con lo stesso nome
+sigla: Default e overload
+comando: volte = 1  /  overload
+frase: una funzione, più modi di chiamarla
+fonte: Documentazione C++ · cppreference.com · Funzioni · argomenti predefiniti · overload
+parole: parametri predefiniti default overload sovraccarico stesso nome ambiguo funzione
+quando: Quando un parametro ha quasi sempre lo stesso valore, o la stessa operazione vale per tipi diversi.
+fasi:
+- nome: Valore predefinito
+  righe:
+  - codice: void stampa(string testo, int volte = 1) {
+    commento: Se non passi volte vale 1.
+  - codice: stampa("ciao");
+    commento: Una volta.
+  - codice: stampa("ciao", 3);
+    commento: Tre volte.
+    trappola: I parametri con valore predefinito vanno in fondo all'elenco.
+- nome: Stesso nome
+  righe:
+  - codice: int massimo(int a, int b)
+    commento: Versione per gli interi.
+  - codice: double massimo(double a, double b)
+    commento: 'Versione per i decimali: il compilatore sceglie in base ai tipi.'
+    trappola: 'massimo(3, 2.5) è ambiguo (un int e un double): errore "call of overloaded ... is ambiguous".
+      Rendi uguali i tipi.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-funzione
+- cpp-riferimento

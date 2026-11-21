@@ -1,0 +1,23 @@
+id: bind-sola-lettura
+tipo: ricetta
+titolo: Montare una cartella in sola lettura
+sigla: Sola lettura :ro
+comando: -v …:…:ro
+frase: il container legge ma non scrive
+fonte: lab_volumi_servizi.pdf (parte 3.4)
+parole: sola lettura read only ro bind mount sito statico sicurezza read-only file system
+quando: Quando il container deve solo leggere i file (sito statico, configurazione).
+fasi:
+- nome: Aggiungi :ro
+  righe:
+  - codice: docker run -d --name web -p 8080:80 -v $HOME/sito:/usr/share/nginx/html:ro nginx
+- nome: Prova a scrivere
+  righe:
+  - codice: docker exec web touch /usr/share/nginx/html/altro.txt
+    commento: 'errore: Read-only file system'
+    trappola: 'È voluto: se il servizio viene compromesso non può modificare il sito. Tu continui a modificarlo dal PC.'
+segnaposto: {}
+varianti: []
+vicine:
+- bind-mount
+- volume-condiviso

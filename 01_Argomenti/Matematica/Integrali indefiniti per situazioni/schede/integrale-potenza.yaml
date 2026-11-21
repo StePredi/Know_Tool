@@ -1,0 +1,36 @@
+id: integrale-potenza
+tipo: regola
+titolo: Potenza di x
+sigla: Potenza
+comando: aumenta l'esponente di 1 e dividi per il nuovo
+vedo: L'integrando è `x^n` (o una radice, o `1/x^n`).
+formula:
+- ∫ x^n dx = frac(x^(n + 1)|n + 1) + c
+- n != -1
+adatto:
+- Aggiungi `1` all'esponente e dividi per il nuovo esponente.
+- 'Radici e frazioni: prima scrivile come potenze.'
+- 'Vale per ogni `n` tranne `-1`: quel caso è il logaritmo.'
+- Aggiungi sempre `+ c` alla fine.
+esempi:
+- da: ∫ x^3 dx
+  passi:
+  - esponente `3 + 1 = 4`
+  - divido per `4`
+  ris: frac(x^4|4) + c
+- da: ∫ sqrt(x) dx
+  passi:
+  - '`sqrt(x) = x^(1/2)`'
+  - 'esponente `frac(3|2)`, divido: moltiplico per `frac(2|3)`'
+  ris: frac(2|3)*x*sqrt(x) + c
+- da: ∫ frac(1|x^2) dx
+  passi:
+  - '`x^(-2)`'
+  - esponente `-1`, divido per `-1`
+  ris: -frac(1|x) + c
+errore: 'Usare la regola con `n = -1`: `∫ frac(1|x) dx` non è `frac(x^0|0)`.'
+confondi:
+- scheda: integrale-uno-su-x
+  differenza: Il caso `n = -1` fa eccezione e dà il logaritmo.
+perche: 'Derivare `x^(n + 1)` dà `(n + 1)*x^n`: si divide per `n + 1` per compensare.'
+parole: integrale potenza esponente primitiva

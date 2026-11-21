@@ -1,0 +1,31 @@
+id: ruffini
+tipo: regola
+titolo: Regola di Ruffini
+sigla: Ruffini
+comando: divisione per x − a
+vedo: "Il divisore è di primo grado con coefficiente 1 davanti alla x: `(2x^3 - 3x + 1) : (x - 2)`."
+formula: P(x) = (x - a)*Q(x) + P(a)
+adatto:
+  - "Scrivi i coefficienti di P in ordine, con 0 per i gradi mancanti."
+  - "Il numero a è quello che annulla il divisore: per `x - 2` è +2, per `x + 3` è -3."
+  - "Abbassa il primo coefficiente; moltiplicalo per a e sommalo al coefficiente successivo; ripeti."
+  - "I numeri ottenuti, tranne l'ultimo, sono i coefficienti del quoziente (un grado in meno). L'ultimo è il resto."
+  - "Se davanti alla x c'è un numero diverso da 1 (`2x - 4`), raccogli prima: `2(x - 2)`."
+esempi:
+  - da: frac(2x^3 - 3x + 1|x - 2)
+    passi:
+      - "Coefficienti: `2, 0, -3, 1`; a = 2"
+      - "Abbasso 2. `2*2 = 4`, `0 + 4 = 4`"
+      - "`4*2 = 8`, `-3 + 8 = 5`"
+      - "`5*2 = 10`, `1 + 10 = 11`: è il resto"
+      - "Quoziente `2x^2 + 4x + 5`, resto 11"
+    ris: 2x^2 + 4x + 5 + frac(11|x - 2)
+    verifica: scomposizione
+errore: "Usare a con il segno sbagliato (per `x + 3` serve -3), o dimenticare lo 0 per un grado mancante."
+confondi:
+  - scheda: teorema-del-resto
+    differenza: "Il teorema del resto dà solo il resto; Ruffini dà anche il quoziente."
+  - scheda: divisione-polinomi
+    differenza: "La divisione completa vale per ogni divisore; Ruffini solo per `x - a`."
+perche: "È la divisione in colonna ridotta ai soli coefficienti, perché il divisore è `x - a`."
+parole: ruffini divisione x meno a resto quoziente coefficienti

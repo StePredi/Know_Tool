@@ -1,0 +1,35 @@
+id: per-parti-due-volte
+tipo: regola
+titolo: Due volte per parti
+sigla: Due volte
+comando: applica la formula due volte, o torna all'integrale di partenza
+vedo: Il polinomio è di grado 2 (o più) e l'altro fattore è `e^x`, `sin x` o `cos x`; oppure `e^x*sin x`.
+formula:
+- 'grado 2: due passaggi'
+- 'e^x*sin x: l''integrale riappare'
+adatto:
+- 'Polinomio di grado `n`: servono `n` passaggi, uno per ogni grado.'
+- '`e^x` per `sin x` o `cos x`: dopo due passaggi ricompare l''integrale di partenza.'
+- In quel caso chiama l'integrale `I`, scrivi un'equazione e risolvi per `I`.
+esempi:
+- da: ∫ x^2*e^x dx
+  passi:
+  - 'primo passaggio: `x^2 e^x - 2∫ x e^x dx`'
+  - 'secondo: `x e^x` già fatto sopra'
+  ris: (x^2 - 2x + 2)*e^x + c
+- da: ∫ x^2*sin x dx
+  passi:
+  - due passaggi sul polinomio
+  ris: -x^2 cos x + 2x sin x + 2 cos x + c
+- da: ∫ e^x*sin x dx
+  passi:
+  - dopo due volte ricompare `I`
+  - '`I = e^x(sin x - cos x) - I`'
+  - '`2I = ...`'
+  ris: frac(e^x(sin x - cos x)|2) + c
+errore: 'Nel caso ciclico scambiare i fattori al secondo passaggio: si torna al punto di partenza senza risolvere nulla.'
+confondi:
+- scheda: per-parti
+  differenza: Una volta basta con il polinomio di primo grado; qui servono più passaggi.
+perche: Ogni passaggio abbassa di uno il grado del polinomio finché non resta una costante.
+parole: due volte per parti polinomio grado ciclico

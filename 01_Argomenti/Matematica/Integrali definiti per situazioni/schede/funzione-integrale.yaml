@@ -1,0 +1,33 @@
+id: funzione-integrale
+tipo: regola
+titolo: Funzione integrale
+sigla: Funzione integrale
+comando: F(x) = ∫_a^x f(t) dt, F'(x) = f(x)
+vedo: Una funzione è definita da un integrale con estremo variabile.
+formula:
+- F(x) = ∫_a^x f(t) dt
+- F'(x) = f(x)
+adatto:
+- 'Per derivare non serve calcolare l''integrale: `F''(x)` è l''integrando calcolato in `x`.'
+- Se l'estremo è `g(x)` invece di `x`, moltiplica per `g'(x)`.
+- 'Variabile dell''integrando diversa da quella dell''estremo (`t` e `x`): non confonderle.'
+esempi:
+- da: F(x) = ∫_0^x t^2 dt
+  passi:
+  - '`F''(x) = x^2`'
+  ris: x^2
+- da: F(x) = ∫_0^x e^(t^2) dt
+  passi:
+  - '`F''(x) = e^(x^2)`'
+  - anche se la primitiva non si sa scrivere
+  ris: e^(x^2)
+- da: F(x) = ∫_1^(x^2) ln(t) dt, con x > 0
+  passi:
+  - '`F''(x) = ln(x^2)*2x`'
+  ris: 2x*ln(x^2)
+errore: Derivare l'estremo di integrazione con `g(x)` senza il fattore `g'(x)`.
+confondi:
+- scheda: teorema-fondamentale
+  differenza: Lì si calcola un numero; qui si deriva una funzione definita da un integrale.
+perche: Aggiungere un piccolo tratto all'estremo aggiunge una striscia alta `f(x)`.
+parole: funzione integrale derivata estremo variabile

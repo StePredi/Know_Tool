@@ -1,0 +1,30 @@
+id: cmd-entrypoint
+tipo: ricetta
+titolo: Scegliere tra CMD ed ENTRYPOINT per il comando di avvio
+sigla: CMD ed ENTRYPOINT
+comando: CMD · ENTRYPOINT
+frase: ENTRYPOINT dice cosa eseguire, CMD gli argomenti
+fonte: virtualizzazione_e_container.pdf (CMD e ENTRYPOINT) · container_mini_tutorial.md
+parole: cmd entrypoint comando avvio sovrascrivere argomenti docker run predefinito
+quando: Quando devi decidere se chi avvia il container può cambiare il comando o solo i suoi argomenti.
+fasi:
+- nome: 'Solo CMD: comando sostituibile'
+  righe:
+  - codice: CMD ["python", "app.py"]
+  - codice: '# docker run my-app            → python app.py'
+  - codice: '# docker run my-app echo ciao  → echo ciao'
+    commento: gli argomenti di docker run sostituiscono tutto il CMD
+- nome: 'ENTRYPOINT + CMD: comando fisso'
+  righe:
+  - codice: ENTRYPOINT ["python"]
+  - codice: CMD ["app.py"]
+    commento: CMD diventa l'argomento predefinito di ENTRYPOINT
+  - codice: '# docker run my-app            → python app.py'
+  - codice: '# docker run my-app altro.py   → python altro.py'
+    commento: gli argomenti vengono aggiunti in coda a ENTRYPOINT
+    trappola: 'Nota: il mini tutorial dice che ENTRYPOINT "non può essere sovrascritto": con l''opzione docker run --entrypoint in realtà si può.'
+segnaposto: {}
+varianti: []
+vicine:
+- dockerfile-base
+- run-comando

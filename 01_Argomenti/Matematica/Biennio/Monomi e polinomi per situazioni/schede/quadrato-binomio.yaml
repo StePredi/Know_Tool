@@ -1,0 +1,35 @@
+id: quadrato-binomio
+tipo: regola
+titolo: Quadrato di un binomio
+sigla: Quadrato di binomio
+comando: primo², doppio prodotto, secondo²
+vedo: "Un binomio elevato al quadrato: `(x+5)^2`, `(3a-2b)^2`."
+formula:
+  - (a + b)^2 = a^2 + 2*a*b + b^2
+  - (a - b)^2 = a^2 - 2*a*b + b^2
+adatto:
+  - "Quadrato del primo, doppio prodotto dei due, quadrato del secondo."
+  - "Il doppio prodotto prende il segno che c'è nella parentesi; il quadrato del secondo è sempre +."
+  - "I termini possono essere monomi: eleva al quadrato anche coefficienti ed esponenti, `(3x^2)^2 = 9x^4`."
+  - "Il risultato ha 3 termini."
+esempi:
+  - da: (x + 5)^2
+    passi:
+      - "`a^2 = x^2`, `2ab = 10x`, `b^2 = 25`"
+    ris: x^2 + 10x + 25
+    verifica: scomposizione
+  - da: (3x^2 - 2)^2
+    passi:
+      - "`a = 3x^2`, `b = 2`"
+      - "`a^2 = 9x^4`, `2ab = 12x^2`, `b^2 = 4`"
+      - "Doppio prodotto con segno meno"
+    ris: 9x^4 - 12x^2 + 4
+    verifica: scomposizione
+errore: "Scrivere `(a+b)^2 = a^2 + b^2`: manca il doppio prodotto."
+confondi:
+  - scheda: somma-per-differenza
+    differenza: "Il quadrato è una parentesi sola al quadrato e dà 3 termini; somma per differenza sono due parentesi e dà 2 termini."
+  - scheda: cubo-binomio
+    differenza: "Esponente 2: coefficienti 1, 2, 1. Esponente 3: coefficienti 1, 3, 3, 1."
+perche: "Area di un quadrato di lato a + b: un quadrato a², un quadrato b² e due rettangoli a·b."
+parole: quadrato binomio doppio prodotto notevole

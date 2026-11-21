@@ -1,0 +1,35 @@
+id: calcola-primitiva
+tipo: regola
+titolo: 3. Calcola con la primitiva
+sigla: Calcola
+comando: F(b) - F(a)
+vedo: Hai scritto l'integrale e devi calcolarlo.
+formula:
+- ∫_a^b f(x) dx = F(b) - F(a)
+adatto:
+- 'Trova una primitiva `F` (senza `+ c`: si semplifica).'
+- Scrivi `[F(x)]_a^b` e sostituisci prima `b`, poi `a`.
+- 'Fai la sottrazione con le parentesi: `F(b) - (F(a))`.'
+- Con il segno meno davanti all'integrale, tienilo fuori.
+esempi:
+- da: ∫_0^1 (x - x^2) dx
+  passi:
+  - 'primitiva: `frac(x^2|2) - frac(x^3|3)`'
+  - '`F(1) = frac(1|2) - frac(1|3) = frac(1|6)`, `F(0) = 0`'
+  ris: frac(1|6)
+- da: ∫_1^e frac(1|x) dx
+  passi:
+  - 'primitiva: `ln x`'
+  - '`ln e - ln 1 = 1`'
+  ris: '1'
+- da: ∫_0^(pi) sin x dx
+  passi:
+  - 'primitiva: `-cos x`'
+  - '`-cos(pi) - (-cos 0) = 1 + 1`'
+  ris: '2'
+errore: 'Sbagliare il segno quando `F(a)` è negativo: `F(b) - F(a)` con `F(a) = -2` dà `F(b) + 2`.'
+confondi:
+- scheda: teorema-fondamentale
+  differenza: Il teorema dice perché si può fare; qui lo si applica nei passaggi.
+perche: 'Il teorema fondamentale lega l''area alla primitiva: basta il suo valore ai due estremi.'
+parole: calcolare primitiva estremi sostituire F(b) F(a)

@@ -1,0 +1,33 @@
+id: requirements-ordine
+tipo: prima_dopo
+titolo: Installare le librerie prima di copiare il codice
+sigla: Prima le dipendenze
+comando: COPY requirements.txt · RUN pip install
+frase: pip install solo se cambia requirements.txt
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (Dockerfile completo) · lab_immagini_dockerfile.pdf (domanda 10)
+parole: requirements pip install dipendenze librerie ordine cache flask copy . .
+prima: |-
+  WORKDIR /app
+  ⟦COPY . .⟧
+  RUN pip install --no-cache-dir -r requirements.txt
+  CMD ["python", "app.py"]
+dopo: |-
+  WORKDIR /app
+  ⟦COPY requirements.txt .⟧
+  RUN pip install --no-cache-dir -r requirements.txt
+  ⟦COPY . .⟧
+  CMD ["python", "app.py"]
+uso: 'Applicazione con librerie esterne: requirements.txt cambia di rado, il codice spesso.'
+riconoscila: Ogni modifica al codice fa ripartire pip install da capo.
+parti:
+- voce: COPY requirements.txt .
+  spiega: 'copia solo l''elenco delle librerie: il layer di pip resta valido finché questo file non cambia'
+- voce: --no-cache-dir
+  spiega: 'pip non tiene i file scaricati: immagine più piccola'
+- voce: COPY . .
+  spiega: il codice, per ultimo
+trappola: 'Con COPY . . copi tutta la cartella: usa anche un .dockerignore.'
+varianti: []
+vicine:
+- cache-layer
+- dockerignore

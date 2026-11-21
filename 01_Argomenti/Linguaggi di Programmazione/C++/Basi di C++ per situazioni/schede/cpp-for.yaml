@@ -1,0 +1,39 @@
+id: cpp-for
+tipo: ricetta
+titolo: 'Ripetere: for e for su un contenitore'
+sigla: for
+comando: 'for (…;…;…)  for (x : v)'
+frase: un certo numero di volte, o per ogni elemento
+fonte: Documentazione C++ · cppreference.com · Istruzioni · for · range-for
+parole: for ciclo ripetere range-for auto riferimento contatore elementi vector scorrere
+quando: Quando devi ripetere qualcosa n volte o per ogni elemento di un vector.
+fasi:
+- nome: Un certo numero di volte
+  righe:
+  - codice: for (int i = 0; i < 5; i++) {
+    commento: Stampa 0 1 2 3 4.
+    parti:
+    - voce: int i = 0
+      spiega: partenza
+    - voce: i < 5
+      spiega: si continua finché è vera
+    - voce: i++
+      spiega: dopo ogni giro i aumenta di 1
+  - codice: '    cout << i;'
+  - codice: '}'
+    trappola: 'Il limite non è incluso: i < 5 si ferma a 4.'
+- nome: Per ogni elemento
+  righe:
+  - codice: 'for (int x : v) {'
+    commento: x è una copia di un elemento per giro.
+  - codice: '    cout << x;'
+  - codice: '}'
+  - codice: 'for (auto& x : v) { x *= 2; }'
+    commento: Con & lavori sull'elemento vero e lo modifichi.
+    trappola: 'Senza & (for (auto x : v)) x è una copia: le modifiche non arrivano al vector.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-while
+- cpp-break-continue
+- cpp-vector

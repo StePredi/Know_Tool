@@ -1,0 +1,125 @@
+id: vm-o-container
+tipo: spiegazione
+titolo: Scegliere tra macchina virtuale e container
+sigla: VM o container
+comando: container engine
+frase: il container virtualizza il SO, non l'hardware
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (sez. 02)
+parole: container vm confronto architettura container engine kernel condiviso leggerezza velocità portabilità efficienza isolamento scalabilità densità alpine microservizi legacy
+quando: Quando devi spiegare cos'è un container e quando conviene rispetto a una VM.
+blocchi:
+- testo: Un **container** è un'unità software standard che **impacchetta il codice** di un'applicazione insieme a **tutte le sue dipendenze**, così da poterla eseguire in modo rapido e affidabile su qualsiasi ambiente.
+- carte:
+  - titolo: Codice
+    testo: L'applicazione da eseguire.
+  - titolo: Dipendenze
+    testo: Librerie e runtime necessari.
+  - titolo: Configurazione
+    testo: Le impostazioni dell'ambiente.
+- titolo: 'Architettura: VM e container a confronto'
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Macchine virtuali
+      strati:
+      - - App
+        - App
+        - App
+      - - Librerie
+        - Librerie
+        - Librerie
+      - testo:
+        - SO guest
+        - SO guest
+        - SO guest
+        tono: oro
+      - testo: Hypervisor
+        tono: colore
+      - testo: Hardware
+        tono: scuro
+      nota: Un sistema operativo completo per ogni VM.
+    - titolo: Container
+      strati:
+      - - App
+        - App
+        - App
+      - - Librerie
+        - Librerie
+        - Librerie
+      - testo: Container engine
+        tono: colore
+      - testo: SO host (unico, condiviso)
+        tono: oro
+      - testo: Hardware
+        tono: scuro
+      nota: Il container engine virtualizza il SO, non l'hardware.
+- nota: 'Un container non contiene kernel, driver o servizi di sistema: usa il kernel dell''host.'
+- titolo: Leggeri, veloci, densi
+- carte:
+  - titolo: Dimensione
+    numeri:
+    - valore: ~2 GB
+      cosa: VM Ubuntu Server
+    - valore: ~50 MB
+      cosa: container Ubuntu
+    - valore: ~5 MB
+      cosa: container Alpine Linux
+  - titolo: Avvio
+    numeri:
+    - valore: 30–120 s
+      cosa: 'VM: boot dell''intero SO'
+    - valore: 1–2 s
+      cosa: 'container: parte solo il processo'
+  - titolo: Densità su 16 GB di RAM
+    numeri:
+    - valore: 5–10
+      cosa: macchine virtuali
+    - valore: 50–100+
+      cosa: container
+- carte:
+  - titolo: Portabilità
+    sotto: Build once, run anywhere
+    testo: Lo stesso container funziona allo stesso modo su laptop, server di test, produzione e cloud (AWS, Azure, Google Cloud).
+  - titolo: Isolamento
+    sotto: Processi, filesystem, rete, utenti
+    testo: Il kernel è condiviso, quindi l'isolamento è minore rispetto a una VM, ma basta per la maggior parte dei casi.
+  - titolo: Scalabilità
+    sotto: Creare e distruggere in fretta
+    testo: Avviare o eliminare un container è molto più semplice che farlo con una VM.
+- titolo: Riassunto
+- tabella:
+    colonne:
+    - Caratteristica
+    - Macchine virtuali
+    - Container
+    righe:
+    - - Sistema operativo
+      - Completo per ogni VM
+      - Condiviso con l'host
+    - - Dimensioni
+      - GB (2–20 GB)
+      - MB (5–500 MB)
+    - - Avvio
+      - 30–120 secondi
+      - 1–5 secondi
+    - - Isolamento
+      - Completo (livello HW)
+      - Di processo (livello OS)
+    - - Sicurezza
+      - Molto alta
+      - Alta, se ben configurato
+    - - Densità per host
+      - 5–20
+      - 50–100+
+    - - OS diversi
+      - Sì (Windows e Linux)
+      - No (stesso kernel)
+    - - Ideale per
+      - App legacy, isolamento massimo
+      - Microservizi, cloud-native
+- trappola: Con i container non puoi far girare un SO con un kernel diverso da quello dell'host.
+varianti: []
+vicine:
+- vm-cosa-sono
+- oggetti-docker
+- architettura-docker

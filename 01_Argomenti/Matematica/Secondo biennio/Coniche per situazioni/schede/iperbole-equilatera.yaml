@@ -1,0 +1,24 @@
+id: iperbole-equilatera
+tipo: regola
+titolo: Iperbole equilatera
+sigla: Equilatera
+comando: x*y = k
+vedo: Un'equazione `x*y = k` o `y = frac(k|x)`.
+formula:
+- x*y = k
+adatto:
+- '`k > 0`: rami nel primo e terzo quadrante; `k < 0`: nel secondo e quarto.'
+- Gli asintoti sono gli assi cartesiani.
+- Vertici in `(+-sqrt(k), +-sqrt(k))`, fuochi in `(+-sqrt(2*k), +-sqrt(2*k))`.
+esempi:
+- da: x*y = 4
+  passi:
+  - 'asintoti: gli assi'
+  - 'vertici: `(2, 2)` e `(-2, -2)`'
+  ris: fuochi (2*sqrt(2), 2*sqrt(2)) e (-2*sqrt(2), -2*sqrt(2))
+errore: 'Cercare i fuochi sugli assi: stanno sulla bisettrice.'
+confondi:
+- scheda: iperbole-canonica
+  differenza: Qui gli asintoti sono gli assi; lì sono le rette `y = +-frac(b|a)*x`.
+perche: È l'iperbole canonica con `a = b`, ruotata di 45 gradi.
+parole: iperbole equilatera xy asintoti assi

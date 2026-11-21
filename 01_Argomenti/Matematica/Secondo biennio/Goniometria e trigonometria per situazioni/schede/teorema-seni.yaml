@@ -1,0 +1,36 @@
+id: teorema-seni
+tipo: regola
+titolo: Teorema dei seni
+sigla: Seni
+comando: frac(a|sin(A)) = frac(b|sin(B)) = frac(c|sin(C)) = 2*R
+vedo: Triangolo qualsiasi con una coppia lato–angolo opposto nota (due angoli e un lato, oppure due lati e un angolo opposto a uno di essi).
+formula:
+- frac(a|sin(A)) = frac(b|sin(B)) = frac(c|sin(C)) = 2*R
+adatto:
+- '`R` è il raggio della circonferenza circoscritta.'
+- 'Due angoli e un lato: il terzo angolo è `180 - A - B`.'
+- 'Due lati e un angolo opposto a uno di essi: può avere 0, 1 o 2 soluzioni. Se `sin(B) > 1` non esiste; se il lato opposto all''angolo noto è il maggiore, la soluzione è una.'
+- Calcolatrice in gradi.
+esempi:
+- da: A = 40, B = 60, a = 10 (gradi)
+  passi:
+  - '`C = 180 - 40 - 60 = 80`'
+  - '`b = frac(10*sin(60)|sin(40))`, circa 13,47'
+  - '`c = frac(10*sin(80)|sin(40))`, circa 15,32'
+  ris: C = 80 gradi, b circa 13,47, c circa 15,32
+- da: a = 8, b = 6, A = 50 (gradi)
+  passi:
+  - '`sin(B) = frac(6*sin(50)|8)`'
+  - circa 0,57
+  - '`B` circa 35,07 gradi (l''altra soluzione supera 180 con `A`)'
+  ris: B circa 35,07 gradi
+- da: 'a = 6, A = 30 gradi: raggio circoscritto'
+  passi:
+  - '`2*R = frac(6|sin(30)) = 12`'
+  ris: R = 6
+errore: 'Usare il teorema dei seni quando non hai una coppia lato–angolo opposto: serve il teorema del coseno.'
+confondi:
+- scheda: teorema-coseno
+  differenza: Il coseno serve con due lati e l'angolo compreso, o con tre lati.
+perche: 'Dall''area scritta in tre modi: `frac(1|2)*b*c*sin(A) = frac(1|2)*a*c*sin(B) = ...`, si semplifica e si ottiene il rapporto costante.'
+parole: teorema dei seni triangolo qualsiasi lato angolo opposto raggio circoscritta

@@ -1,0 +1,65 @@
+esercizi:
+  - testo: 3x - 5 = x + 7
+    risultato: x = 6
+    piano:
+      - scheda: forma-normale
+        nota: "Termini con x a sinistra."
+      - scheda: equazione-primo-grado
+        nota: "`2x = 12`."
+  - testo: frac(x - 1|2) + frac(x|3) = 4
+    risultato: x = frac(27|5)
+    piano:
+      - scheda: denominatori-numerici
+        nota: "mcm 6."
+      - scheda: equazione-primo-grado
+        nota: "`5x = 27`."
+  - testo: (x + 1)(x - 2) = x + 2
+    risultato: x = 1 +- sqrt(5)
+    piano:
+      - scheda: forma-normale
+        nota: "Si arriva a `x^2 - 2x - 4 = 0`."
+      - scheda: equazione-completa
+        nota: "b è pari: formula ridotta."
+  - testo: 3x^2 - 12x = 0
+    risultato: x = 0, x = 4
+    piano:
+      - scheda: riconosci-tipo
+        nota: "Manca il termine noto."
+      - scheda: equazione-spuria
+        nota: "`3x(x - 4) = 0`."
+  - testo: 2x^2 - 8 = 0
+    risultato: x = 2, x = -2
+    piano:
+      - scheda: equazione-pura
+        nota: "`x^2 = 4`."
+  - testo: x^2 - 5x + 6 = 0
+    risultato: x = 2, x = 3
+    piano:
+      - scheda: somma-prodotto
+        nota: "Prodotto 6, somma 5."
+  - testo: 2x^2 - 5x + 2 = 0
+    risultato: x = 2, x = frac(1|2)
+    piano:
+      - scheda: equazione-completa
+        nota: "`D = 9`."
+  - testo: x^3 - 4x = 0
+    risultato: x = 0, x = 2, x = -2
+    piano:
+      - scheda: prodotto-nullo
+        nota: "Raccolgo `x`, poi differenza di quadrati."
+  - testo: frac(1|x) + frac(2|x - 1) = 1
+    risultato: x = 2 +- sqrt(3)
+    piano:
+      - scheda: equazione-fratta
+        nota: "Condizioni `x != 0` e `x != 1`."
+      - scheda: equazione-completa
+        nota: "Si arriva a `x^2 - 4x + 1 = 0`."
+      - scheda: controlla-soluzioni
+        nota: "Nessuna soluzione è esclusa."
+  - testo: frac(x|x - 3) = frac(3|x - 3)
+    risultato: impossibile
+    piano:
+      - scheda: equazione-fratta
+        nota: "Condizione `x != 3`."
+      - scheda: controlla-soluzioni
+        nota: "`x = 3` va scartata."

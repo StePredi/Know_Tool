@@ -1,0 +1,36 @@
+id: composta-lineare
+tipo: regola
+titolo: Argomento lineare
+sigla: Lineare
+comando: dividi per il coefficiente di x
+vedo: Dentro la funzione c'è `ax + b` invece di solo `x`.
+formula:
+- ∫ f(ax + b) dx = frac(1|a)*F(ax + b) + c
+adatto:
+- Integra come se ci fosse solo `x`.
+- Dividi per `a`, il coefficiente di `x`.
+- 'Controlla derivando: la derivata interna `a` si semplifica con la divisione.'
+esempi:
+- da: ∫ (2x + 1)^3 dx
+  passi:
+  - 'integro la potenza: `frac((2x + 1)^4|4)`'
+  - divido per `2`
+  ris: frac((2x + 1)^4|8) + c
+- da: ∫ cos(3x) dx
+  passi:
+  - '`sin(3x)`, divido per `3`'
+  ris: frac(sin(3x)|3) + c
+- da: ∫ e^(5x) dx
+  passi:
+  - '`e^(5x)`, divido per `5`'
+  ris: frac(e^(5x)|5) + c
+- da: ∫ frac(1|3x - 2) dx
+  passi:
+  - logaritmo, divido per `3`
+  ris: frac(1|3)*ln|3x - 2| + c
+errore: Dimenticare di dividere per il coefficiente di `x`.
+confondi:
+- scheda: f-primo-su-f
+  differenza: Qui la derivata interna è una costante; lì è una funzione di `x`.
+perche: 'Derivando `F(ax + b)` esce un fattore `a`: dividere per `a` lo compensa.'
+parole: composta lineare ax più b coefficiente

@@ -1,0 +1,109 @@
+id: vm-cosa-sono
+tipo: spiegazione
+titolo: Capire cos'è una macchina virtuale e a cosa serve
+sigla: Macchina virtuale
+comando: hypervisor + SO guest
+frase: un computer intero fatto in software
+fonte: virtualizzazione_e_container.pdf (sez. 01) · container_mini_tutorial.md
+parole: virtualizzazione macchina virtuale vm hypervisor vmm so guest consolidamento isolamento flessibilità snapshot backup limiti overhead
+quando: Quando devi spiegare la virtualizzazione tradizionale o confrontarla con i container.
+blocchi:
+- testo: La **virtualizzazione** crea versioni virtuali di risorse hardware e software, così che più sistemi operativi e applicazioni possano girare su un **unico sistema fisico**.
+- carte:
+  - titolo: Un solo host
+    testo: Più sistemi operativi e applicazioni condividono la stessa macchina fisica.
+  - titolo: Risorse virtuali
+    testo: CPU, memoria, disco e rete vengono presentati come risorse dedicate.
+  - titolo: Isolamento
+    testo: Ogni sistema lavora in modo indipendente dagli altri.
+- titolo: La macchina virtuale
+- disegno:
+    modello: pile
+    colonne:
+    - strati:
+      - - App
+        - App
+        - App
+      - - Librerie
+        - Librerie
+        - Librerie
+      - testo:
+        - SO guest
+        - SO guest
+        - SO guest
+        tono: oro
+      - testo: Hypervisor
+        tono: colore
+      - testo: Hardware fisico
+        tono: scuro
+    nota: 'Un''emulazione software di un computer completo: risorse virtuali dedicate, un proprio sistema operativo, completamente isolata dalle altre VM.'
+- titolo: L'hypervisor
+- testo: È il software che **crea ed esegue** le macchine virtuali sull'hardware fisico. Si chiama anche VMM, Virtual Machine Monitor.
+- punti:
+  - Esegue e gestisce le VM.
+  - Emula i dispositivi e controlla gli accessi.
+  - Esegue le operazioni privilegiate per conto del SO guest.
+  - Gestisce il ciclo di vita delle VM.
+- titolo: I vantaggi
+- carte:
+  - titolo: Consolidamento
+    testo: 'Più server virtuali su un solo server fisico: meno hardware e un uso più efficiente delle risorse.'
+  - titolo: Isolamento
+    testo: 'Un problema in una VM non si propaga alle altre: ogni ambiente è indipendente.'
+  - titolo: Flessibilità
+    testo: Sistemi operativi diversi sullo stesso host; VM facili da creare, clonare e spostare.
+  - titolo: Backup e ripristino
+    testo: Lo stato di una VM si può salvare (snapshot) e ripristinare quando serve.
+- titolo: I limiti
+- disegno:
+    modello: pile
+    colonne:
+    - cornice: Server fisico · 4 VM Ubuntu Server
+      strati:
+      - testo:
+        - |-
+          App
+          1 GB
+        - |-
+          App
+          1 GB
+        - |-
+          App
+          1 GB
+        - |-
+          App
+          1 GB
+        tono: chiaro
+      - testo:
+        - |-
+          SO
+          1 GB
+        - |-
+          SO
+          1 GB
+        - |-
+          SO
+          1 GB
+        - |-
+          SO
+          1 GB
+        tono: oro
+      nota: 'Totale: **8 GB**, di cui 4 GB solo per sistemi operativi duplicati.'
+- carte:
+  - titolo: Avvio
+    numeri:
+    - valore: 30–120 s
+      cosa: tempo di avvio tipico
+  - titolo: Dimensione
+    numeri:
+    - valore: Alcuni GB
+      cosa: dimensione tipica di una VM
+  - titolo: Overhead
+    numeri:
+    - valore: Un SO per VM
+      cosa: configurazione e isolamento a carico di un sistema operativo per ogni VM
+- nota: 'È proprio il problema che risolvono i container: un solo sistema operativo, condiviso.'
+varianti: []
+vicine:
+- hypervisor-tipi
+- vm-o-container

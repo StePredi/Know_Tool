@@ -1,0 +1,25 @@
+id: quoziente-frazioni
+tipo: regola
+titolo: Quoziente di frazioni algebriche
+sigla: Quoziente
+comando: moltiplico per la reciproca
+vedo: "Una frazione divisa per un'altra: `frac(x^2 - 4|x) : frac(x + 2|x^2)`."
+formula: frac(frac(a|b)|frac(c|d)) = frac(a|b)*frac(d|c)
+adatto:
+  - "Moltiplica la prima frazione per la reciproca della seconda (scambia sopra e sotto)."
+  - "Poi procedi come nel prodotto: scomponi e semplifica in croce."
+  - "Le condizioni di esistenza comprendono anche i valori che annullano il numeratore della frazione per cui dividi."
+esempi:
+  - da: frac(frac(x^2 - 4|x)|frac(x + 2|x^2))
+    passi:
+      - "Capovolgo la seconda: `frac(x^2 - 4|x)*frac(x^2|x + 2)`"
+      - "Scompongo: `frac((x - 2)(x + 2)|x)*frac(x^2|x + 2)`"
+      - "Semplifico `(x + 2)` e una `x`"
+    ris: x(x - 2)
+    verifica: scomposizione
+errore: "Capovolgere la prima frazione invece della seconda."
+confondi:
+  - scheda: prodotto-frazioni
+    differenza: "Il quoziente diventa un prodotto dopo aver capovolto la seconda frazione."
+perche: "Dividere per una frazione è moltiplicare per la sua reciproca."
+parole: quoziente divisione reciproca capovolgere

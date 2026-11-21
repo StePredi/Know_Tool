@@ -1,0 +1,35 @@
+id: controlla-conica
+tipo: regola
+titolo: Controllo del risultato
+sigla: Controlla
+comando: sostituisci un punto noto
+vedo: Hai trovato un'equazione o dei dati e vuoi controllarli.
+formula:
+- r^2 > 0
+- a > 0, b > 0
+- e = frac(c|a)
+adatto:
+- Sostituisci le coordinate di un punto che deve appartenere alla conica.
+- 'Circonferenza: `r^2` deve essere positivo.'
+- 'Ellisse: `0 < e < 1`. Iperbole: `e > 1`.'
+- 'Tangenza: il discriminante dell''equazione risolvente deve essere zero.'
+esempi:
+- da: (x - 1)^2 + (y - 2)^2 = 25 passante per (4, 6)
+  passi:
+  - '`9 + 16 = 25`'
+  ris: il punto appartiene
+- da: x^2 + y^2 + 2x - 2y + 5 = 0
+  passi:
+  - '`r^2 = 1 + 1 - 5 = -3`'
+  ris: nessuna circonferenza
+- da: x^2/25 + y^2/9 = 1, fuochi (+-4, 0)
+  passi:
+  - '`c^2 = 25 - 9 = 16`'
+  - '`e = frac(4|5)` minore di 1'
+  ris: coerente con un'ellisse
+errore: Non controllare che il raggio al quadrato sia positivo.
+confondi:
+- scheda: riconosci-conica
+  differenza: Il controllo verifica anche che la scelta della conica fosse giusta.
+perche: 'Ogni conica è l''insieme dei punti che soddisfano la sua equazione: sostituire un punto lo verifica.'
+parole: controllo verifica conica punto discriminante

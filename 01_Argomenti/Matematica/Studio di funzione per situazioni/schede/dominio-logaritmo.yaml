@@ -1,0 +1,32 @@
+id: dominio-logaritmo
+tipo: regola
+titolo: 'Logaritmo: argomento positivo'
+sigla: Argomento
+comando: f(x) > 0
+vedo: C'è un logaritmo con una `x` dentro.
+formula:
+- 'ln(f): f(x) > 0'
+adatto:
+- Pone l'argomento strettamente maggiore di zero e risolvi la disequazione.
+- Se c'è anche la base con `x`, deve essere positiva e diversa da `1`.
+- 'Il logaritmo non ha mai valori limite: il punto escluso è un asintoto verticale.'
+esempi:
+- da: ln(x - 1)
+  passi:
+  - '`x - 1 > 0`'
+  ris: x > 1
+- da: ln(x^2 - 4)
+  passi:
+  - '`x^2 - 4 > 0`'
+  ris: x < -2 oppure x > 2
+- da: frac(ln(x)|x)
+  passi:
+  - 'logaritmo: `x > 0`'
+  - 'frazione: `x != 0`, già compreso'
+  ris: x > 0
+errore: 'Scrivere `>= 0`: con l''uguale il logaritmo non è definito.'
+confondi:
+- scheda: dominio-radice
+  differenza: 'Radice: argomento `>= 0`; logaritmo: argomento `> 0`.'
+perche: Il logaritmo è definito solo per argomenti positivi.
+parole: dominio logaritmo argomento positivo

@@ -1,0 +1,30 @@
+id: semplifica-potenze
+tipo: regola
+titolo: Semplificare le potenze
+sigla: Semplifica le potenze
+comando: sottraggo gli esponenti
+frase: "Lo stesso fattore sopra e sotto con esponenti diversi."
+vedo: "Lo stesso fattore sopra e sotto con esponenti diversi: `frac(x^3*(x - 1)^2|x*(x - 1))`."
+formula: frac(a^m|a^n) = a^(m-n)
+adatto:
+  - "Per ogni fattore uguale sottrai l'esponente sotto a quello sopra."
+  - "Se l'esponente sotto è maggiore, il fattore resta sotto, con la differenza."
+  - "Tratta le parentesi come se fossero lettere: `(x - 1)^2` sopra e `(x - 1)` sotto lasciano `(x - 1)` sopra."
+esempi:
+  - da: frac(x^3*(x - 1)^2|x*(x - 1))
+    passi:
+      - "`x`: esponenti 3 e 1, resta `x^2`"
+      - "`(x - 1)`: esponenti 2 e 1, resta `(x - 1)`"
+    ris: x^2*(x - 1)
+    verifica: scomposizione
+  - da: frac(x*(x + 2)|x^3)
+    passi:
+      - "`x`: esponenti 1 e 3, restano 2 sotto"
+    ris: frac(x + 2|x^2)
+    verifica: scomposizione
+errore: "Semplificare una parentesi con una lettera, o sottrarre gli esponenti di fattori diversi."
+confondi:
+  - scheda: semplifica
+    differenza: "Qui lo stesso fattore compare con esponenti diversi."
+perche: "Semplificare è dividere sopra e sotto per lo stesso fattore: le potenze si dividono sottraendo gli esponenti."
+parole: potenze esponenti semplificare monomi

@@ -1,0 +1,37 @@
+id: cpp-ref-ptr
+tipo: ricetta
+titolo: Riferimento o puntatore?
+sigla: Riferimento o puntatore
+comando: int&  /  int*
+frase: due modi di indicare una variabile
+fonte: Documentazione C++ · cppreference.com · Riferimenti e puntatori
+parole: riferimento puntatore differenza reference pointer alias riassegnare nullptr
+quando: Quando non sai se un parametro o una variabile va dichiarato con & o con *.
+fasi:
+- nome: Riferimento
+  righe:
+  - codice: int& r = x;
+    commento: r è un altro nome di x.
+  - codice: r = 9;
+    commento: Cambia x.
+  - codice: r = y;
+    commento: 'Non fa puntare r a y: copia il valore di y dentro x.'
+    trappola: Un riferimento resta legato per sempre alla variabile con cui nasce e non può essere vuoto.
+- nome: Puntatore
+  righe:
+  - codice: int* p = &x;
+  - codice: p = &y;
+    commento: Ora p punta a y.
+  - codice: '*p = 5;'
+    commento: Cambia y.
+- nome: Quale scegliere
+  righe:
+  - codice: int& / const T&
+    commento: Quando l'oggetto deve esserci sempre (parametri di funzione).
+  - codice: int*
+    commento: Quando può mancare (nullptr) o deve cambiare oggetto.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-riferimento
+- cpp-puntatore

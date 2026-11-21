@@ -1,0 +1,35 @@
+id: controlla-risultato
+tipo: regola
+titolo: 4. Controlla
+sigla: Controlla
+comando: positivo? ragionevole?
+vedo: Hai un risultato e vuoi sapere se può essere giusto.
+formula:
+- area > 0
+- volume > 0
+adatto:
+- 'Un''area o un volume sono sempre positivi: se esce negativo, hai scambiato sopra e sotto.'
+- 'Confronta con il rettangolo che contiene la regione: l''area deve essere minore.'
+- Per il volume confronta con il cilindro che contiene il solido.
+- Un risultato in `π` va scritto con `π`, non approssimato, se non richiesto.
+esempi:
+- da: area tra y = x e y = x^2 risultata frac(1|6)
+  passi:
+  - 'rettangolo `[0, 1]` per altezza `1`: area `1`'
+  - '`frac(1|6) < 1` e positivo'
+  ris: plausibile
+- da: area di y = x^3 - x su [-1, 1] risultata 0
+  passi:
+  - 'integrale `0` ma area non può essere nulla: la curva è sopra e sotto l''asse'
+  ris: 'sbagliato: serve spezzare'
+- da: volume attorno a x di y = x, 0 <= x <= 2, risultato frac(8π|3)
+  passi:
+  - 'cilindro di raggio `2` e altezza `2`: `8π`'
+  - '`frac(8π|3)` è un terzo, come il cono'
+  ris: plausibile
+errore: Accettare un'area uguale a zero senza chiedersi se la curva attraversa l'asse.
+confondi:
+- scheda: estremi-e-posizione
+  differenza: Un segno sbagliato di solito nasce da lì.
+perche: 'Il risultato è una grandezza geometrica: deve rispettare i limiti dello spazio che occupa.'
+parole: controllo risultato segno positività

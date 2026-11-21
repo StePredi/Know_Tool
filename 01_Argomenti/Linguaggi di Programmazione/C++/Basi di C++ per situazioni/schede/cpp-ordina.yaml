@@ -1,0 +1,29 @@
+id: cpp-ordina
+tipo: ricetta
+titolo: Ordinare e cercare in un vector
+sigla: sort e find
+comando: sort(v.begin(), v.end())
+frase: algoritmi pronti
+fonte: Documentazione C++ · cppreference.com · <algorithm> · sort · find
+parole: sort ordinare find cercare max_element reverse algorithm begin end greater crescente decrescente
+quando: Quando devi mettere in ordine i valori o sapere se ce n'è uno.
+fasi:
+- nome: Ordinare
+  righe:
+  - codice: '#include <algorithm>'
+  - codice: sort(v.begin(), v.end());
+    commento: Dal più piccolo al più grande.
+    trappola: 'Servono due estremi: begin() è il primo elemento, end() è la posizione DOPO l''ultimo.'
+  - codice: sort(v.begin(), v.end(), greater<int>());
+    commento: 'Dal più grande al più piccolo (serve #include <functional>).'
+- nome: Cercare
+  righe:
+  - codice: '*max_element(v.begin(), v.end())'
+    commento: Il valore più grande (l'asterisco legge il valore trovato).
+  - codice: find(v.begin(), v.end(), 9) != v.end()
+    commento: true se il 9 c'è.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-vector
+- cpp-ordina-per-valore

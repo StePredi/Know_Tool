@@ -1,0 +1,30 @@
+id: aritmetica-da-dati
+tipo: regola
+titolo: Progressione aritmetica da dati
+sigla: Aritmetica da dati
+comando: d = frac(a_m - a_k|m - k)
+vedo: Ti danno due termini (non consecutivi), o tre numeri in progressione con somma e prodotto.
+formula:
+- d = frac(a_m - a_k|m - k)
+- a_1 = a_k - (k - 1)*d
+adatto:
+- 'Due termini: ricava `d` dalla differenza divisa per il numero di passi.'
+- Poi `a_1` risalendo, e infine la formula di `a_n`.
+- 'Tre numeri in progressione: chiamali `x - d`, `x`, `x + d`.'
+esempi:
+- da: a_3 = 7, a_8 = 22
+  passi:
+  - '`d = frac(22 - 7|8 - 3) = 3`'
+  - '`a_1 = 7 - 2*3 = 1`'
+  ris: a_n = 3n - 2
+- da: tre numeri in progressione aritmetica, somma 18, prodotto 120
+  passi:
+  - '`x - d, x, x + d`: somma `3x = 18`, `x = 6`'
+  - '`6*(36 - d^2) = 120`: `d^2 = 16`'
+  ris: 2, 6, 10
+errore: Dividere per la differenza degli indici sbagliata (`m + k`).
+confondi:
+- scheda: aritmetica-termine
+  differenza: Lì conosci `a_1` e `d`; qui li ricavi dai dati.
+perche: Tra `a_k` e `a_m` ci sono esattamente `m - k` passi, ciascuno di ampiezza `d`.
+parole: progressione aritmetica da dati ragione due termini

@@ -1,0 +1,36 @@
+id: ping-tra-container
+tipo: ricetta
+titolo: Provare la connettività sul bridge di default
+sigla: Ping sul bridge
+comando: ping -c 3
+frase: per IP sì, per nome no
+fonte: lab_networking_container.pdf (parti 1.1-1.4)
+parole: ping connettività bridge default nome ip gateway internet 8.8.8.8 google dns
+quando: Quando vuoi capire cosa raggiunge un container collegato alla rete di default.
+fasi:
+- nome: Due container sul bridge di default
+  righe:
+  - codice: docker run -dit --name c1 debian
+  - codice: docker run -dit --name c2 debian
+- nome: Prove da c1
+  righe:
+  - codice: ping -c 3 «IP_C2»
+    commento: 'funziona: stessa rete'
+  - codice: ping -c 3 c2
+    commento: non funziona
+    trappola: 'Sul bridge di default non c''è il DNS tra container: si raggiungono solo per IP.'
+  - codice: ping -c 3 172.17.0.1
+    commento: il gateway (docker0)
+  - codice: ping -c 3 8.8.8.8
+    commento: Internet, grazie al NAT dell'host
+  - codice: ping -c 3 google.com
+    commento: i nomi di Internet si risolvono
+segnaposto:
+  IP_C2:
+    esempio: 172.17.0.3
+    spiega: IP di c2, da docker inspect
+varianti: []
+vicine:
+- rete-custom
+- ping-nome
+- strumenti-rete

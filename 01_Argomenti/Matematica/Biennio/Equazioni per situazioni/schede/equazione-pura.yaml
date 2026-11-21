@@ -1,0 +1,31 @@
+id: equazione-pura
+tipo: regola
+titolo: Equazione pura
+sigla: Pura
+comando: "x² = numero"
+vedo: "Secondo grado senza termine di primo grado: `x^2 - 9 = 0`, `2x^2 + 8 = 0`."
+formula:
+  - a*x^2 + c = 0
+  - x^2 = -frac(c|a)
+adatto:
+  - "Isola `x^2`: `x^2 = -c/a`."
+  - "Se `-c/a` è positivo: due soluzioni opposte, la radice con il più e con il meno."
+  - "Se è zero: una sola soluzione, `x = 0`."
+  - "Se è negativo: nessuna soluzione reale."
+  - "Alternativa con la differenza di quadrati e il prodotto nullo."
+esempi:
+  - da: x^2 - 9 = 0
+    passi:
+      - "`x^2 = 9`"
+      - "Radice con il più e con il meno"
+    ris: x = 3, x = -3
+  - da: 2x^2 + 8 = 0
+    passi:
+      - "`x^2 = -4`: un quadrato non è mai negativo"
+    ris: "nessuna soluzione reale"
+errore: "Scrivere una sola soluzione: `x^2 = 9` ha x = 3 e x = -3."
+confondi:
+  - scheda: equazione-spuria
+    differenza: "La pura non ha il termine di primo grado; la spuria non ha il termine noto."
+perche: "Due numeri opposti hanno lo stesso quadrato."
+parole: pura secondo grado radice quadrata

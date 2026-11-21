@@ -1,0 +1,35 @@
+id: geometrica-somma
+tipo: regola
+titolo: 'Progressione geometrica: somma'
+sigla: Geometrica S_n
+comando: S_n = a_1*frac(q^n - 1|q - 1)
+vedo: Devi sommare i primi `n` termini di una progressione geometrica.
+formula:
+- S_n = a_1*frac(q^n - 1|q - 1)
+- S_n = n*a_1
+adatto:
+- La prima vale se `q != 1`; se `q = 1` tutti i termini sono uguali e la somma è `n*a_1`.
+- Con `|q| < 1` puoi usare anche `a_1*frac(1 - q^n|1 - q)`.
+- 'Conta bene `n`: `1 + 2 + ... + 2^9` ha 10 termini.'
+esempi:
+- da: 1 + 2 + 4 + ... + 2^9
+  passi:
+  - 10 termini, `a_1 = 1`, `q = 2`
+  - '`frac(2^10 - 1|2 - 1)`'
+  ris: '1023'
+- da: 3 + 6 + 12 + 24 + 48
+  passi:
+  - '`n = 5`, `a_1 = 3`, `q = 2`'
+  - '`3*frac(32 - 1|1)`'
+  ris: '93'
+- da: 81 + 27 + 9 + 3 + 1
+  passi:
+  - '`q = frac(1|3)`, `n = 5`'
+  - '`81*frac(1 - (frac(1|3))^5|1 - frac(1|3))`'
+  ris: '121'
+errore: 'Contare male i termini: `n` è la quantità, non l''esponente massimo.'
+confondi:
+- scheda: aritmetica-somma
+  differenza: Lì si usa la media di primo e ultimo; qui la potenza di `q`.
+perche: Moltiplicando la somma per `q` e sottraendo, quasi tutti i termini si cancellano.
+parole: somma progressione geometrica primi n termini

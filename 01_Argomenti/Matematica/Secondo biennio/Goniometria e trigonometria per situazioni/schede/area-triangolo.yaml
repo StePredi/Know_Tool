@@ -1,0 +1,31 @@
+id: area-triangolo
+tipo: regola
+titolo: Area di un triangolo
+sigla: Area
+comando: S = frac(1|2)*b*c*sin(A)
+vedo: Devi calcolare l'area e hai due lati e l'angolo compreso, oppure i tre lati.
+formula:
+- S = frac(1|2)*b*c*sin(A)
+- S = sqrt(p*(p - a)*(p - b)*(p - c))
+- p = frac(a + b + c|2)
+adatto:
+- 'Due lati e angolo compreso: prima formula (non serve l''altezza).'
+- 'Tre lati: formula di Erone, con `p` semiperimetro.'
+- 'Con base e altezza: `S = frac(1|2)*b*h`.'
+esempi:
+- da: b = 6, c = 8, A = 30 gradi
+  passi:
+  - '`S = frac(1|2)*6*8*sin(30)`'
+  - '`S = 24 * frac(1|2)`'
+  ris: '12'
+- da: lati 13, 14, 15
+  passi:
+  - '`p = frac(13 + 14 + 15|2) = 21`'
+  - '`S = sqrt(21*8*7*6) = sqrt(7056)`'
+  ris: '84'
+errore: Usare l'angolo non compreso tra i due lati.
+confondi:
+- scheda: teorema-coseno
+  differenza: Il coseno trova lati o angoli; qui si arriva direttamente all'area.
+perche: 'L''altezza relativa a `b` vale `c*sin(A)`: sostituita in `frac(1|2)*b*h` dà la prima formula.'
+parole: area triangolo erone seno lati angolo compreso

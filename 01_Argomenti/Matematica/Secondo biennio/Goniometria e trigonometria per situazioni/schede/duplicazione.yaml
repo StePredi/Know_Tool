@@ -1,0 +1,51 @@
+id: duplicazione
+tipo: regola
+titolo: Formule di duplicazione
+sigla: Duplicazione
+comando: sin(2x) = 2*sin(x)*cos(x)
+vedo: Un angolo doppio (`2x`), un prodotto `2*sin(x)*cos(x)`, una differenza `cos^2(x) - sin^2(x)`.
+formula:
+- sin(2x) = 2*sin(x)*cos(x)
+- cos(2x) = cos^2(x) - sin^2(x)
+- cos(2x) = 1 - 2*sin^2(x)
+- cos(2x) = 2*cos^2(x) - 1
+- tan(2x) = frac(2*tan(x)|1 - tan^2(x))
+adatto:
+- 'Del coseno scegli la forma comoda: solo seno → `1 - 2*sin^2`, solo coseno → `2*cos^2 - 1`.'
+- 'Per abbassare il grado: `sin^2(x) = frac(1 - cos(2x)|2)` e `cos^2(x) = frac(1 + cos(2x)|2)`.'
+- 'Vale per qualsiasi angolo: `sin(4x) = 2*sin(2x)*cos(2x)`.'
+esempi:
+- da: 2*sin(x)*cos(x)
+  passi:
+  - è lo sviluppo di `sin(2x)`
+  ris: sin(2x)
+  verifica: scomposizione
+- da: cos(x)^2 - sin(x)^2
+  passi:
+  - è `cos(2x)` nella prima forma
+  ris: cos(2x)
+  verifica: scomposizione
+- da: 1 - 2*sin(x)^2
+  passi:
+  - è `cos(2x)` nella forma con il solo seno
+  ris: cos(2x)
+  verifica: scomposizione
+- da: sin(frac(2*pi|3))
+  passi:
+  - '`2x` con `x = frac(pi|3)`'
+  - '`2*sin(frac(pi|3))*cos(frac(pi|3)) = 2*frac(sqrt(3)|2)*frac(1|2)`'
+  ris: frac(sqrt(3)|2)
+  verifica: scomposizione
+- da: sin(2x) con sin(x) = frac(3|5), x nel secondo quadrante
+  passi:
+  - '`cos(x) = -frac(4|5)`'
+  - '`2*frac(3|5)*(-frac(4|5))`'
+  ris: -frac(24|25)
+errore: 'Scrivere `sin(2x) = 2*sin(x)`: il 2 non esce così.'
+confondi:
+- scheda: addizione
+  differenza: Qui i due angoli sono uguali; con angoli diversi usa l'addizione.
+- scheda: bisezione
+  differenza: La bisezione parte dall'angolo intero e va alla metà.
+perche: Si ottengono dalle formule di addizione ponendo `a = b = x`; le forme del coseno nascono da `sin^2 + cos^2 = 1`.
+parole: duplicazione angolo doppio 2x seno coseno tangente abbassamento

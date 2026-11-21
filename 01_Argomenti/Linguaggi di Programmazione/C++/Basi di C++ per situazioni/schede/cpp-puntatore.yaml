@@ -1,0 +1,39 @@
+id: cpp-puntatore
+tipo: ricetta
+titolo: 'Puntatori: l''indirizzo di una variabile'
+sigla: Puntatori
+comando: int* p = &x;
+frase: un puntatore contiene un indirizzo
+fonte: Documentazione C++ · cppreference.com · Puntatori · nullptr
+parole: puntatore pointer indirizzo & * dereferenziare nullptr null memoria
+quando: Quando devi lavorare con l'indirizzo di una variabile invece che con il suo valore.
+fasi:
+- nome: Creare
+  righe:
+  - codice: int x = 5;
+  - codice: int* p = &x;
+    commento: p contiene l'indirizzo di x.
+    parti:
+    - voce: '&x'
+      spiega: indirizzo di x
+    - voce: int*
+      spiega: puntatore a int
+- nome: Usare
+  righe:
+  - codice: '*p = 7;'
+    commento: 'L''asterisco davanti segue l''indirizzo: ora x vale 7.'
+    parti:
+    - voce: '*p'
+      spiega: il valore a cui p punta
+- nome: Nessun indirizzo
+  righe:
+  - codice: int* q = nullptr;
+    commento: Puntatore che non punta a niente.
+  - codice: if (q != nullptr) { … }
+    commento: Controlla prima di usarlo.
+    trappola: Usare *q con nullptr (o con un puntatore non inizializzato) manda in crash il programma.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-ref-ptr
+- cpp-new-delete

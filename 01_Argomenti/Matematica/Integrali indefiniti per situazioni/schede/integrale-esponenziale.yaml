@@ -1,0 +1,32 @@
+id: integrale-esponenziale
+tipo: regola
+titolo: Esponenziale
+sigla: Esponenziale
+comando: ∫ e^x dx = e^x + c
+vedo: L'integrando è `e^x` o `a^x`.
+formula:
+- ∫ e^x dx = e^x + c
+- ∫ a^x dx = frac(a^x|ln(a)) + c
+adatto:
+- '`e^x` è uguale al suo integrale.'
+- Con base `a` diversa da `e` si divide per `ln(a)`.
+- Con `e^(kx)` vedi le composte lineari.
+esempi:
+- da: ∫ e^x dx
+  passi:
+  - '`(e^x)'' = e^x`'
+  ris: e^x + c
+- da: ∫ 3*e^x dx
+  passi:
+  - la costante esce
+  ris: 3*e^x + c
+- da: ∫ 2^x dx
+  passi:
+  - divido per `ln(2)`
+  ris: frac(2^x|ln(2)) + c
+errore: Dimenticare di dividere per `ln(a)` con basi diverse da `e`.
+confondi:
+- scheda: esp-di-g
+  differenza: Qui l'esponente è solo `x`; lì c'è dentro una funzione.
+perche: 'La derivata di `a^x` è `a^x*ln(a)`: serve dividere per `ln(a)`.'
+parole: integrale esponenziale e alla x

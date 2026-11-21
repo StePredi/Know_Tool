@@ -1,0 +1,24 @@
+id: mcm-denominatori
+tipo: regola
+titolo: Minimo comune multiplo dei denominatori
+sigla: mcm
+comando: tutti i fattori, esponente massimo
+vedo: "Devi sommare o sottrarre frazioni con denominatori diversi: `frac(1|x^2 - x) + frac(1|(x - 1)^2)`."
+formula: mcm(x(x - 1), (x - 1)^2) = x(x - 1)^2
+adatto:
+  - "Scomponi ogni denominatore."
+  - "Prendi tutti i fattori, comuni e non comuni, ciascuno con l'esponente più grande."
+  - "Per i numeri: mcm dei coefficienti."
+  - "Fattori opposti, `(a - b)` e `(b - a)`: riscrivine uno per averli uguali."
+esempi:
+  - da: x^2 - x   e   (x - 1)^2
+    passi:
+      - "Scompongo: `x^2 - x = x(x - 1)` e `(x - 1)^2`"
+      - "Fattori: `x` (esponente 1) e `(x - 1)` (esponente massimo 2)"
+    ris: x(x - 1)^2
+errore: "Moltiplicare tutti i denominatori invece di prendere l'mcm: funziona, ma i conti diventano enormi."
+confondi:
+  - scheda: somma-denominatori-diversi
+    differenza: "L'mcm è il primo passo di quella scheda."
+perche: "Il denominatore comune più piccolo possibile tiene corti i conti."
+parole: mcm minimo comune multiplo denominatore comune

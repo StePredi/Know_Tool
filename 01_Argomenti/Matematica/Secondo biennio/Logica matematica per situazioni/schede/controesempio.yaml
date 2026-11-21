@@ -1,0 +1,31 @@
+id: controesempio
+tipo: regola
+titolo: Controesempio
+sigla: Controesempio
+comando: un caso basta per smentire ∀
+vedo: Devi dimostrare che una frase «per ogni…» è falsa, o capire se un esempio basta.
+formula:
+- ∃x ¬P(x)
+adatto:
+- Per smentire «per ogni» basta un controesempio.
+- 'Per dimostrare «per ogni» non bastano mille esempi: serve una dimostrazione.'
+- Per dimostrare «esiste» basta un esempio.
+esempi:
+- da: '∀x ∈ R: x² > x'
+  passi:
+  - 'provo `x = 0`: `0 > 0` è falso'
+  ris: falsa, controesempio x = 0
+- da: «ogni numero primo è dispari»
+  passi:
+  - il 2 è primo e pari
+  ris: falsa, controesempio 2
+- da: '∃x ∈ N: x² = 16'
+  passi:
+  - '`x = 4`'
+  ris: vera, esempio x = 4
+errore: Credere che alcuni esempi che funzionano dimostrino una frase «per ogni».
+confondi:
+- scheda: quantificatori
+  differenza: Lì si legge il significato; qui lo si usa per smentire.
+perche: Una sola eccezione rende falso un «per ogni».
+parole: controesempio smentire dimostrare per ogni

@@ -1,0 +1,77 @@
+esercizi:
+- testo: lim x->3 di (x^2 + 1)/(x - 1)
+  risultato: '5'
+  piano:
+  - scheda: sostituisci-valore
+    nota: 'Denominatore diverso da 0: sostituisco.'
+  - scheda: limite-finito-punto
+    nota: '`frac(10|2)`.'
+- testo: lim x->2 di (x^2 - 4)/(x - 2)
+  risultato: '4'
+  piano:
+  - scheda: sostituisci-valore
+    nota: Esce `frac(0|0)`.
+  - scheda: forma-0-su-0
+    nota: Scomposizione e semplificazione.
+- testo: lim x->+inf di (3x^2 + 1)/(x^2 - x)
+  risultato: '3'
+  piano:
+  - scheda: riconosci-forma
+    nota: '`frac(inf|inf)`.'
+  - scheda: limite-fratta-infinito
+    nota: 'Gradi uguali: `frac(3|1)`.'
+- testo: lim x->+inf di (sqrt(x^2 + x) - x)
+  risultato: 1/2
+  piano:
+  - scheda: riconosci-forma
+    nota: '`inf - inf` con radice.'
+  - scheda: forma-inf-meno-inf
+    nota: Razionalizzo e divido per `x`.
+- testo: lim x->0 di sin(5x)/(2x)
+  risultato: 5/2
+  piano:
+  - scheda: forma-0-su-0
+    nota: Esce `frac(0|0)`.
+  - scheda: limiti-notevoli
+    nota: '`frac(5|2)*frac(sin(5x)|5x)`.'
+- testo: lim x->1+ e x->1- di 1/(x - 1)
+  risultato: +inf da destra, -inf da sinistra
+  piano:
+  - scheda: limite-infinito-da-numero
+    nota: Studio il segno del denominatore dai due lati.
+- testo: lim x->-inf di (x^3 - 5x)
+  risultato: -inf
+  piano:
+  - scheda: limite-all-infinito-polinomi
+    nota: Termine di grado 3, `x` negativo.
+- testo: Asintoti di f(x) = (2x^2 - x + 1)/(x - 1)
+  risultato: verticale x = 1, obliquo y = 2x + 1, nessun orizzontale
+  piano:
+  - scheda: asintoto-verticale
+    nota: Denominatore zero in `x = 1`.
+  - scheda: asintoto-orizzontale
+    nota: Il limite è infinito.
+  - scheda: asintoto-obliquo
+    nota: Divisione dei polinomi.
+- testo: lim x->0 di (sqrt(x + 1) - 1)/x
+  risultato: 1/2
+  piano:
+  - scheda: forma-0-su-0
+    nota: Coniugato.
+- testo: Trova a perché f(x) = x + 1 (x < 2), f(x) = a*x - 3 (x >= 2) sia continua
+  risultato: a = 3
+  piano:
+  - scheda: continuita
+    nota: Limite sinistro `3`, destro `2a - 3`.
+- testo: Classifica la discontinuità di f(x) = x/|x| in 0
+  risultato: prima specie, salto 2
+  piano:
+  - scheda: discontinuita-tipi
+    nota: Limiti `-1` e `1`.
+- testo: Mostra che x^3 - 2x - 5 = 0 ha una soluzione in [2, 3]
+  risultato: 'f(2) = -1, f(3) = 16: esiste una soluzione'
+  piano:
+  - scheda: teorema-zeri
+    nota: Segni opposti agli estremi.
+  - scheda: continuita
+    nota: I polinomi sono continui.

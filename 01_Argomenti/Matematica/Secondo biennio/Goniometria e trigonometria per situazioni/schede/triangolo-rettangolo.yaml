@@ -1,0 +1,41 @@
+id: triangolo-rettangolo
+tipo: regola
+titolo: Triangolo rettangolo
+sigla: Rettangolo
+comando: b = a*sin(B)
+vedo: Un triangolo con un angolo retto, un lato e un angolo (o due lati) noti.
+formula:
+- b = a*sin(B)
+- b = a*cos(C)
+- b = c*tan(B)
+- tan(B) = frac(b|c)
+adatto:
+- 'Notazione: `a` ipotenusa, `b` e `c` cateti, `B` opposto a `b`, `C` opposto a `c`.'
+- Cateto = ipotenusa · seno dell'angolo opposto, oppure ipotenusa · coseno dell'angolo adiacente.
+- Cateto = altro cateto · tangente dell'angolo opposto.
+- Per trovare un angolo usa la funzione inversa (`arcsin`, `arccos`, `arctan`).
+- 'Problemi reali (altezze, angoli di elevazione): disegna il triangolo rettangolo.'
+esempi:
+- da: a = 10, B = 30 gradi
+  passi:
+  - '`b = 10*sin(30) = 5`'
+  - '`c = 10*cos(30) = 5*sqrt(3)`, cioè circa 8,66'
+  ris: b = 5, c = 5*sqrt(3)
+- da: 'b = 3, c = 4: angolo B'
+  passi:
+  - '`tan(B) = frac(3|4)`'
+  - '`B = arctan(0,75)`, circa 36,87 gradi'
+  - '`a = sqrt(9 + 16) = 5`'
+  ris: B circa 36,87 gradi, a = 5
+- da: 'Torre vista da 30 m con angolo di elevazione 40 gradi: altezza'
+  passi:
+  - l'altezza è il cateto opposto, 30 m il cateto adiacente
+  - '`h = 30*tan(40)`'
+  - circa 25,17 m
+  ris: h circa 25,17 m
+errore: 'Scegliere il rapporto sbagliato: guarda quali due lati entrano in gioco (incognito e noto).'
+confondi:
+- scheda: teorema-seni
+  differenza: Qui l'angolo retto c'è già; senza angolo retto servono i teoremi dei seni o del coseno.
+perche: Per definizione, seno e coseno sono i rapporti tra cateti e ipotenusa nel triangolo rettangolo.
+parole: triangolo rettangolo cateto ipotenusa seno coseno tangente

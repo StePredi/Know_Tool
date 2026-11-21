@@ -1,0 +1,31 @@
+id: quoziente-monomi
+tipo: regola
+titolo: Quoziente di monomi
+sigla: Quoziente di monomi
+comando: coefficienti divisi, esponenti sottratti
+vedo: "Un monomio diviso un monomio: `(12x^5y^2) : (3x^2y)`."
+formula: frac(k*x^a|h*x^b) = frac(k|h)*x^(a-b)
+adatto:
+  - "Dividi i coefficienti."
+  - "Per ogni lettera sottrai l'esponente del divisore a quello del dividendo."
+  - "Se una lettera ha esponente 0 sparisce."
+  - "Se un esponente viene negativo, o una lettera del divisore manca nel dividendo, il risultato non è un monomio: resta una frazione."
+esempi:
+  - da: frac(12x^5|3x^2)
+    passi:
+      - "Coefficienti: `12 : 3 = 4`"
+      - "Esponente di x: `5 - 2 = 3`"
+    ris: 4x^3
+    verifica: scomposizione
+  - da: frac(-8x^3|2x^3)
+    passi:
+      - "Coefficienti: `-8 : 2 = -4`"
+      - "Esponente di x: `3 - 3 = 0`, la x sparisce"
+    ris: "-4"
+    verifica: scomposizione
+errore: "Dividere gli esponenti invece di sottrarli."
+confondi:
+  - scheda: prodotto-monomi
+    differenza: "Nel prodotto gli esponenti si sommano; nel quoziente si sottraggono."
+perche: "Semplifichi le x uguali sopra e sotto: ne restano tante quante la differenza."
+parole: quoziente divisione monomi esponenti sottrarre

@@ -1,0 +1,30 @@
+id: monomio
+tipo: regola
+titolo: Monomio, coefficiente e grado
+sigla: Monomio
+comando: k*x^a*y^b
+vedo: "Un solo termine fatto di un numero e di lettere moltiplicate: `5x^2y`, `-a`, `7`."
+formula:
+  - k*x^a*y^b
+  - "a + b"
+adatto:
+  - "Il coefficiente è il numero davanti. Se non si vede è 1; se c'è solo il meno è -1: `-ab` ha coefficiente -1."
+  - "La parte letterale sono le lettere con i loro esponenti: in `5x^2y` è `x^2y`."
+  - "Grado totale: somma di tutti gli esponenti. Una lettera senza esponente vale 1: `5x^2y` ha grado 3."
+  - "Grado rispetto a una lettera: guarda solo l'esponente di quella lettera. `5x^2y` ha grado 2 in x e 1 in y."
+  - "Un numero da solo è un monomio di grado 0."
+  - "Monomi simili: stessa parte letterale, coefficienti qualsiasi (`3x^2y` e `-5x^2y`). Opposti: stessa parte letterale e coefficienti opposti."
+esempi:
+  - da: -3*a^2*b^3
+    passi:
+      - "Coefficiente: `-3`"
+      - "Parte letterale: `a^2b^3`"
+      - "Grado totale: somma degli esponenti"
+      - "Grado in a: 2. Grado in b: 3."
+    ris: 2 + 3 = 5
+errore: "Contare solo l'esponente della prima lettera come grado del monomio, o dimenticare che una lettera senza esponente vale 1."
+confondi:
+  - scheda: polinomio
+    differenza: "Il monomio ha un solo termine; il polinomio ne ha almeno due dopo la riduzione."
+perche: "Il grado dice quante lettere vengono moltiplicate in tutto: `x^2y` è x per x per y, quindi tre lettere."
+parole: coefficiente parte letterale grado simili opposti

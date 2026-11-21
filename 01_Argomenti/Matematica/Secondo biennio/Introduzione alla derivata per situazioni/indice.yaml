@@ -1,0 +1,47 @@
+modello: per_situazioni
+titolo: Introduzione alla derivata, per situazioni
+centro: Introduzione alla derivata
+sottotitolo: Rapporto incrementale, tangente, derivabilità
+ingresso: Funzione in un punto, tangente, velocità o derivabilità
+guida: 'Parti dal rapporto incrementale: la derivata è il suo limite. Poi chiediti cosa serve: la pendenza della tangente, una velocità o se la funzione è derivabile.'
+rami:
+- id: ord
+  nome: Dalla definizione, in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - rapporto-incrementale
+    - semplifica-e-limite
+    - controlla-derivata
+- id: def
+  nome: Definizione
+  colore: orange
+  voci:
+  - schede:
+    - derivata-definizione
+    - derivate-da-definizione
+    - derivata-sinistra-destra
+- id: geo
+  nome: Tangente e pendenza
+  colore: violet
+  voci:
+  - schede:
+    - significato-geometrico
+    - retta-tangente
+    - retta-normale
+    - tangenti-con-pendenza
+- id: fis
+  nome: Significato fisico
+  colore: green
+  voci:
+  - schede:
+    - significato-fisico
+- id: der
+  nome: Derivabilità
+  colore: pink
+  voci:
+  - schede:
+    - derivabilita-continuita
+    - punti-non-derivabili
+    - parametri-derivabilita

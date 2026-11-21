@@ -1,0 +1,26 @@
+id: tag-immagine
+tipo: ricetta
+titolo: Dare nome e versione a un'immagine
+sigla: Tag
+comando: docker build -t · docker tag
+frase: repository:tag
+fonte: lab_immagini_dockerfile.pdf (parti 2.2, 3) · container_mini_tutorial.md
+parole: tag versione nome repository build -t docker tag 1.0 latest
+quando: Quando costruisci versioni diverse della stessa immagine e devi distinguerle.
+fasi:
+- nome: Nome al momento della build
+  righe:
+  - codice: docker build -t note:1.0 .
+    commento: repository note, tag 1.0
+  - codice: docker build -t note:1.1 .
+    commento: una nuova versione accanto alla prima
+- nome: Un altro nome per un'immagine esistente
+  righe:
+  - codice: docker tag myapp:latest myapp:1.0.0
+    commento: 'non copia nulla: aggiunge un nome alla stessa immagine'
+segnaposto: {}
+varianti: []
+vicine:
+- docker-build
+- pull-immagine
+- save-load

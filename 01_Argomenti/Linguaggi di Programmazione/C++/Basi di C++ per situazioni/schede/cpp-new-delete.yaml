@@ -1,0 +1,32 @@
+id: cpp-new-delete
+tipo: ricetta
+titolo: 'Memoria dinamica: new, delete e unique_ptr'
+sigla: new e delete
+comando: new  delete  make_unique
+frase: memoria che crei tu
+fonte: Documentazione C++ · cppreference.com · Gestione della memoria · new · smart pointer
+parole: new delete memoria dinamica heap unique_ptr make_unique leak perdita memoria array delete[]
+quando: Quando devi creare un oggetto che vive oltre la funzione in cui nasce.
+fasi:
+- nome: A mano
+  righe:
+  - codice: int* p = new int(5);
+    commento: Crea un int nella memoria dinamica.
+  - codice: delete p;
+    commento: Va liberato quando non serve più.
+  - codice: int* a = new int[3]{1, 2, 3};
+    commento: Array dinamico.
+  - codice: delete[] a;
+    commento: Per gli array si usa delete[].
+    trappola: 'Ogni new ha il suo delete: dimenticarlo causa una perdita di memoria; delete invece di
+      delete[] su un array è un errore.'
+- nome: Senza pensieri
+  righe:
+  - codice: auto u = make_unique<int>(8);
+    commento: 'Da #include <memory>: viene liberato da solo.'
+    trappola: Quando puoi, preferisci vector o unique_ptr a new/delete.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-puntatore
+- cpp-vector

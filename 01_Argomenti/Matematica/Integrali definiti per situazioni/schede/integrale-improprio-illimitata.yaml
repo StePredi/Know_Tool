@@ -1,0 +1,30 @@
+id: integrale-improprio-illimitata
+tipo: regola
+titolo: Funzione illimitata
+sigla: Improprio asintoto
+comando: lim_(a -> 0^+) ∫_a^1 f dx
+vedo: La funzione va all'infinito in un estremo dell'intervallo.
+formula:
+- ∫_0^1 f(x) dx = lim_(a -> 0^+) ∫_a^1 f(x) dx
+adatto:
+- 'Sposta l''estremo problematico: sostituiscilo con `a` e fai tendere `a` al valore proibito.'
+- Calcola l'integrale e poi il limite.
+- 'Limite finito: converge. Altrimenti: diverge.'
+- '`frac(1|x^p)` su `(0, 1]` converge per `p < 1`.'
+esempi:
+- da: ∫_0^1 frac(1|sqrt(x)) dx
+  passi:
+  - '`[2 sqrt(x)]_a^1 = 2 - 2 sqrt(a)`'
+  - 'per `a -> 0^+`: `2`'
+  ris: converge a 2
+- da: ∫_0^1 frac(1|x) dx
+  passi:
+  - '`[ln x]_a^1 = -ln a`'
+  - 'per `a -> 0^+`: `+inf`'
+  ris: diverge
+errore: 'Calcolare `F(1) - F(0)` con `F` non definita in `0`: l''integrale improprio richiede il limite.'
+confondi:
+- scheda: integrale-improprio-infinito
+  differenza: Lì l'intervallo è infinito; qui la funzione.
+perche: L'area può restare finita anche vicino a un asintoto, se la funzione cresce abbastanza lentamente.
+parole: integrale improprio funzione illimitata asintoto converge

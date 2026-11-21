@@ -1,0 +1,57 @@
+id: ciclo-vita
+tipo: spiegazione
+titolo: Fermare, riavviare, sospendere e rimuovere un container
+sigla: Ciclo di vita
+comando: stop · start · rm
+frase: da in esecuzione a rimosso
+fonte: virtualizzazione_e_container.pdf (ciclo di vita) · container_mini_tutorial.md · lab_volumi_servizi.pdf (parte 2.1)
+parole: ciclo di vita stop start restart pause unpause rm -f rimuovere fermare riavviare container prune
+quando: Quando devi gestire un container che esiste già.
+blocchi:
+- disegno:
+    modello: flusso
+    nodi:
+    - nome: Immagine
+    - nome: In esecuzione
+      tono: colore
+    - nome: Fermato
+      tono: oro
+    - nome: Rimosso
+    frecce:
+    - docker run
+    - docker stop
+    - docker rm
+    nota: 'docker run è un comando di comodo: equivale a docker create seguito da docker start.'
+- carte:
+  - titolo: docker start
+    testo: Riavvia un container fermato, con i suoi dati.
+  - titolo: docker pause / unpause
+    testo: Sospende e riprende i processi senza terminarli.
+  - titolo: docker rm -f
+    testo: Rimuove anche un container ancora in esecuzione.
+- trappola: Fermare e riavviare conserva le modifiche fatte nel container; rimuoverlo le cancella.
+- titolo: I comandi
+- comandi:
+  - codice: docker stop mio-nginx
+    spiega: in esecuzione → fermato
+  - codice: docker start mio-nginx
+    spiega: fermato → in esecuzione
+  - codice: docker restart mio-nginx
+    spiega: stop + start
+  - codice: docker pause mio-nginx
+    spiega: congela i processi
+  - codice: docker unpause mio-nginx
+    spiega: li riprende
+  - codice: docker rm mio-nginx
+    spiega: rimuove il container (se è fermato)
+  - codice: docker rm -f mio-nginx
+    spiega: rimuove anche se è in esecuzione
+  - codice: docker container prune
+    spiega: rimuove tutti i container fermati
+  - codice: docker stop $(docker ps -q)
+    spiega: ferma tutti i container in esecuzione
+varianti: []
+vicine:
+- run-background
+- dati-effimeri
+- pulizia-ambiente

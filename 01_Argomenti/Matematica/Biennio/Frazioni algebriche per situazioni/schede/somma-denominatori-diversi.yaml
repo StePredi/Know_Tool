@@ -1,0 +1,36 @@
+id: somma-denominatori-diversi
+tipo: regola
+titolo: Somma con denominatori diversi
+sigla: Denominatori diversi
+comando: mcm, poi sommo i numeratori
+vedo: "Somma o differenza di frazioni con denominatori diversi: `frac(1|x) + frac(2|x + 1)`."
+formula:
+  - frac(a|b) + frac(c|d) = frac(a*(m/b) + c*(m/d)|m)
+  - m = mcm(b, d)
+adatto:
+  - "1) Scomponi i denominatori. 2) Scrivi le condizioni di esistenza. 3) Trova l'mcm."
+  - "Per ogni frazione: dividi l'mcm per il suo denominatore e moltiplica il numeratore per il risultato."
+  - "Somma i numeratori (attenzione ai segni del meno), riduci, scomponi e semplifica."
+esempi:
+  - da: frac(1|x) + frac(2|x + 1)
+    passi:
+      - "mcm: `x(x + 1)`"
+      - "Primo numeratore: `1*(x + 1)`; secondo: `2*x`"
+      - "Somma: `x + 1 + 2x = 3x + 1`"
+    ris: frac(3x + 1|x(x + 1))
+    verifica: scomposizione
+  - da: frac(x|x^2 - 1) - frac(1|x - 1)
+    passi:
+      - "Scompongo `x^2 - 1 = (x - 1)(x + 1)`: l'mcm è `(x - 1)(x + 1)`"
+      - "Secondo numeratore: `1*(x + 1)`"
+      - "Differenza: `x - (x + 1) = -1`"
+    ris: frac(-1|x^2 - 1)
+    verifica: scomposizione
+errore: "Sommare numeratori e denominatori separatamente: `frac(1|a) + frac(1|b)` non è `frac(2|a + b)`."
+confondi:
+  - scheda: somma-stesso-denominatore
+    differenza: "Con lo stesso denominatore si sommano subito i numeratori."
+  - scheda: mcm-denominatori
+    differenza: "L'mcm è il passo 3 di questa scheda."
+perche: "Si possono sommare solo parti della stessa dimensione: il denominatore comune le rende uguali."
+parole: somma sottrazione denominatori diversi mcm

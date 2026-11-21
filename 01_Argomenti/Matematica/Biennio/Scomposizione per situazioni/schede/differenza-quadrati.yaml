@@ -1,0 +1,35 @@
+id: differenza-quadrati
+tipo: regola
+titolo: Differenza di quadrati
+sigla: Differenza di quadrati
+comando: (a + b)(a - b)
+vedo: "Due termini con il meno in mezzo, entrambi quadrati: `x^2 - 25`, `4x^2 - 9y^2`."
+formula: a^2 - b^2 = (a + b)*(a - b)
+adatto:
+  - "Controlla che entrambi siano quadrati: numero quadrato e lettere con esponente pari."
+  - "a e b sono le radici: `4x^2 = (2x)^2`."
+  - "La somma di quadrati `a^2 + b^2` non si scompone."
+  - "Con `a^4 - b^4` ripeti: `(a^2 - b^2)(a^2 + b^2)` e scomponi ancora il primo."
+esempi:
+  - da: x^2 - 25
+    passi:
+      - "`a = x`, `b = 5`"
+    ris: (x - 5)(x + 5)
+    verifica: scomposizione
+  - da: 9x^2 - 4
+    passi:
+      - "`a = 3x`, `b = 2`"
+    ris: (3x - 2)(3x + 2)
+    verifica: scomposizione
+  - da: x^4 - 1
+    passi:
+      - "`a = x^2`, `b = 1`: `(x^2 - 1)(x^2 + 1)`"
+      - "`x^2 - 1` si scompone ancora"
+    ris: (x - 1)(x + 1)(x^2 + 1)
+    verifica: scomposizione
+errore: "Provare a scomporre `x^2 + 25`: la somma di quadrati non si scompone."
+confondi:
+  - scheda: trinomio-quadrato
+    differenza: "Il quadrato di binomio ha 3 termini; la differenza di quadrati ne ha 2."
+perche: "È il prodotto notevole somma per differenza letto al contrario."
+parole: differenza quadrati notevole scomposizione

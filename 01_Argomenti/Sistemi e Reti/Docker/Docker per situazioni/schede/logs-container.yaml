@@ -1,0 +1,34 @@
+id: logs-container
+tipo: ricetta
+titolo: Leggere cosa stampa il programma nel container
+sigla: docker logs
+comando: docker logs -f
+frase: l'output del servizio
+fonte: lab_immagini_dockerfile.pdf (parti 4.1, 4.4) · lab_volumi_servizi.pdf (parte 4.2) · container_mini_tutorial.md
+parole: log logs output stampa follow -f tail tempo reale connessioni errori porta in ascolto
+quando: Quando un servizio gira in background e vuoi vedere cosa fa, chi si collega o perché non risponde.
+fasi:
+- nome: Leggi i log
+  righe:
+  - codice: docker logs «NOME»
+    commento: tutto quello che il programma ha stampato
+  - codice: docker logs -f «NOME»
+    commento: segue i log in tempo reale; Ctrl+C per uscire (il container continua)
+  - codice: docker logs --tail 100 «NOME»
+    commento: solo le ultime 100 righe
+- nome: Cosa cercarci
+  righe:
+  - codice: '# "in ascolto su 0.0.0.0:8080"'
+    commento: su quale indirizzo e porta il servizio ascolta davvero
+    trappola: Se la porta nei log non è quella a destra di -p, il servizio non è raggiungibile.
+  - codice: '# "connesso 192.168.1.23:51234"'
+    commento: l'indirizzo di chi si è collegato
+segnaposto:
+  NOME:
+    esempio: archivio
+    spiega: nome o ID del container
+varianti: []
+vicine:
+- inspect-container
+- client-non-collega
+- servizio-lan

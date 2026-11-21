@@ -1,0 +1,25 @@
+id: piu-servizi
+tipo: ricetta
+titolo: Avviare più servizi uguali sullo stesso PC
+sigla: Più servizi
+comando: -p 8080:80 · -p 8081:80
+frase: stessa porta dentro, porte diverse fuori
+fonte: lab_volumi_servizi.pdf (parte 4.4) · lab_immagini_dockerfile.pdf (parte 4.3)
+parole: più container stessa immagine porte diverse due siti 8081 port already allocated
+quando: Quando vuoi due siti o due servizi dalla stessa immagine, uno accanto all'altro.
+fasi:
+- nome: Due container, due porte dell'host
+  righe:
+  - codice: docker run -d --name web -p 8080:80 -v $HOME/sito:/usr/share/nginx/html:ro nginx
+  - codice: docker run -d --name web2 -p 8081:80 -v $HOME/sito2:/usr/share/nginx/html:ro nginx
+    commento: 'entrambi usano la porta 80 al loro interno: ogni container ha la sua rete'
+    trappola: Una porta dell'host può essere pubblicata da un solo container alla volta.
+- nome: Dati separati
+  righe:
+  - codice: docker run -d --name archivio-b -p 5001:5000 note:2.0
+    commento: 'stessa immagine, ma ogni container ha il suo layer scrivibile: archivi diversi'
+segnaposto: {}
+varianti: []
+vicine:
+- porta-occupata
+- pubblica-porta

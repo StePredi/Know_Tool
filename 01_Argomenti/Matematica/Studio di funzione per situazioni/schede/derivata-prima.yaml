@@ -1,0 +1,42 @@
+id: derivata-prima
+tipo: regola
+titolo: 5. Derivata prima
+sigla: f'
+comando: calcola f'(x) e studia il suo segno
+vedo: Vuoi sapere dove la funzione sale, dove scende e dove ha massimi e minimi.
+formula:
+- 'f''(x) > 0: crescente'
+- 'f''(x) < 0: decrescente'
+- 'f''(x) = 0: punto stazionario'
+adatto:
+- Deriva con le regole e semplifica, meglio se in forma fattorizzata.
+- Risolvi `f'(x) = 0` per trovare i punti stazionari.
+- Studia il segno di `f'` con il quadro dei segni nel dominio.
+- Dove `f'` passa da `+` a `-` c'è un massimo, da `-` a `+` un minimo.
+esempi:
+- da: x^3 - 3x
+  passi:
+  - '`f''(x) = 3x^2 - 3 = 3(x - 1)(x + 1)`'
+  - 'positiva per `x < -1` e `x > 1`: crescente'
+  - 'negativa per `-1 < x < 1`: decrescente'
+  ris: 3x^2 - 3
+  verifica: derivata
+- da: x^3 - 3x^2
+  passi:
+  - '`f''(x) = 3x(x - 2)`'
+  - stazionari `x = 0` e `x = 2`
+  ris: 3x^2 - 6x
+  verifica: derivata
+- da: frac(x^2|x - 1)
+  passi:
+  - '`f''(x) = frac(x^2 - 2x|(x - 1)^2)`'
+  - 'numeratore `x(x - 2)`: zeri in `0` e `2`'
+  - denominatore sempre positivo
+  ris: frac(x^2 - 2x|(x - 1)^2)
+  verifica: derivata
+errore: Studiare il segno di `f'` fuori dal dominio di `f`, o dimenticare che i punti esclusi spezzano gli intervalli.
+confondi:
+- scheda: derivata-seconda
+  differenza: La prima dice se sale o scende; la seconda se curva verso l'alto o verso il basso.
+perche: 'La derivata è la pendenza della tangente: positiva se il grafico sale, negativa se scende.'
+parole: derivata prima crescente decrescente stazionari massimo minimo

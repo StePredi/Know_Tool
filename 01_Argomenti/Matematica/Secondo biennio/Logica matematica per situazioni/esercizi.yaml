@@ -1,0 +1,76 @@
+esercizi:
+- testo: Tavola di verità di (p ∨ q) ∧ ¬p
+  risultato: F F V F (righe VV, VF, FV, FF)
+  piano:
+  - scheda: costruisci-tavola
+    nota: 4 righe, colonne intermedie `p ∨ q` e `¬p`.
+  - scheda: disgiunzione
+    nota: Colonna di `p ∨ q`.
+  - scheda: negazione
+    nota: Colonna di `¬p`.
+  - scheda: congiunzione
+    nota: Colonna finale.
+- testo: Dimostra con le tavole che ¬(p ∨ q) ≡ ¬p ∧ ¬q
+  risultato: 'le due colonne finali coincidono: F F F V'
+  piano:
+  - scheda: costruisci-tavola
+    nota: Due colonne finali.
+  - scheda: de-morgan
+    nota: La legge da verificare.
+  - scheda: leggi-risultato
+    nota: Confronto delle colonne.
+- testo: p ∨ ¬p è una tautologia?
+  risultato: sì
+  piano:
+  - scheda: costruisci-tavola
+    nota: 'Due righe: `V` e `F`.'
+  - scheda: leggi-risultato
+    nota: Colonna tutta `V`.
+- testo: 'Nega: x > 2 e x < 5'
+  risultato: x ≤ 2 oppure x ≥ 5
+  piano:
+  - scheda: de-morgan
+    nota: Nego e scambio.
+  - scheda: negazione
+    nota: '`¬(x > 2)` è `x ≤ 2`.'
+- testo: 'Nega: se piove allora esco'
+  risultato: piove e non esco
+  piano:
+  - scheda: negare-implicazione
+    nota: Ipotesi vera e tesi falsa.
+- testo: 'Contronominale di: se un numero è divisibile per 6 allora è pari'
+  risultato: se un numero non è pari allora non è divisibile per 6
+  piano:
+  - scheda: inversa-contraria
+    nota: Nego e scambio.
+  - scheda: equivalenze-implicazione
+    nota: È equivalente all'originale.
+- testo: 'Nega: tutti gli studenti della classe sono maggiorenni'
+  risultato: esiste almeno uno studente non maggiorenne
+  piano:
+  - scheda: negare-quantificatori
+    nota: Scambio `∀` con `∃`.
+- testo: '∀x ∈ R: x² > x è vera?'
+  risultato: falsa, controesempio x = 0
+  piano:
+  - scheda: quantificatori
+    nota: Frase con «per ogni».
+  - scheda: controesempio
+    nota: Provo `x = 0`.
+- testo: È vera «se 2 + 2 = 5 allora 3 è pari»?
+  risultato: vera (F -> F)
+  piano:
+  - scheda: implicazione
+    nota: 'Ipotesi falsa: l''implicazione è vera.'
+- testo: p -> q è equivalente a ¬p ∨ q?
+  risultato: sì
+  piano:
+  - scheda: equivalenze-implicazione
+    nota: Riscrittura.
+  - scheda: costruisci-tavola
+    nota: Colonne uguali.
+- testo: '«Se un quadrilatero è un quadrato allora è un rettangolo»: condizioni necessarie e sufficienti'
+  risultato: quadrato è sufficiente, rettangolo è necessaria
+  piano:
+  - scheda: condizione-necessaria-sufficiente
+    nota: '`p = quadrato`, `q = rettangolo`.'

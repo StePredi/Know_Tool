@@ -1,0 +1,35 @@
+id: dockerignore
+tipo: ricetta
+titolo: Escludere file dall'immagine con .dockerignore
+sigla: .dockerignore
+comando: .dockerignore
+frase: COPY . . non copia tutto
+fonte: lab_immagini_dockerfile.pdf (parte 3.4)
+parole: dockerignore escludere file copy . . password chiavi segreti note client dimensione contesto
+quando: Quando usi COPY . . e nella cartella ci sono file che non devono finire nell'immagine.
+fasi:
+- nome: Scrivi il file .dockerignore accanto al Dockerfile
+  righe:
+  - codice: notes/
+    commento: dati di prova creati prima
+  - codice: client.py
+    commento: il client gira sul PC, non nel container
+  - codice: Dockerfile*
+  - codice: .dockerignore
+  - codice: '*.md'
+    commento: documentazione
+    trappola: 'Non devono mai finire in un''immagine file con password o chiavi: chi ha l''immagine li può leggere.'
+- nome: Oppure crealo con un comando
+  righe:
+  - codice: printf 'notes/\nclient.py\nDockerfile*\n.dockerignore\n*.md\n' > .dockerignore
+- nome: Verifica cosa è entrato
+  righe:
+  - codice: docker build -f Dockerfile.prova -t note:prova .
+  - codice: docker run --rm note:prova ls -a /app
+    commento: l'elenco dei file copiati
+segnaposto: {}
+varianti: []
+vicine:
+- requirements-ordine
+- docker-build
+- run-comando

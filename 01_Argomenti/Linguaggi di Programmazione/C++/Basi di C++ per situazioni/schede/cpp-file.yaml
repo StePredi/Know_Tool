@@ -1,0 +1,34 @@
+id: cpp-file
+tipo: ricetta
+titolo: Leggere e scrivere su file
+sigla: File
+comando: ofstream  ifstream
+frase: dati che restano
+fonte: Documentazione C++ · cppreference.com · <fstream> · file di testo
+parole: file fstream ifstream ofstream getline aprire leggere scrivere testo txt riga
+quando: Quando i dati devono restare dopo la chiusura del programma.
+fasi:
+- nome: Scrivere
+  righe:
+  - codice: '#include <fstream>'
+  - codice: ofstream out("dati.txt");
+    commento: Crea (o svuota) il file.
+  - codice: out << "ciao\n" << "mondo\n";
+    commento: Si scrive come con cout.
+  - codice: out.close();
+- nome: Leggere
+  righe:
+  - codice: ifstream in("dati.txt");
+  - codice: if (!in) { cout << "non aperto"; return 1; }
+    commento: Controlla sempre che si sia aperto.
+  - codice: string riga;
+  - codice: while (getline(in, riga)) {
+    commento: Una riga per giro, finché ce ne sono.
+  - codice: '    cout << riga;'
+  - codice: '}'
+    trappola: Il file si cerca nella cartella da cui lanci il programma, non in quella del sorgente.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-output-input
+- cpp-eccezioni

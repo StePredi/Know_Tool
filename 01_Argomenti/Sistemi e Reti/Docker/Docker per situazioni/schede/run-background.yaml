@@ -1,0 +1,52 @@
+id: run-background
+tipo: ricetta
+titolo: Avviare un container in background con un nome
+sigla: docker run -d
+comando: docker run -d --name
+frase: avvia e restituisce il terminale
+fonte: lab_immagini_dockerfile.pdf (parte 4.1) · virtualizzazione_e_container.pdf (opzioni di docker run) · container_mini_tutorial.md
+parole: docker run avviare container background detached -d --name nome docker ps -a -q elenco container in esecuzione
+quando: Quando devi far partire un servizio da un'immagine e continuare a usare il terminale.
+fasi:
+- nome: Avvia
+  righe:
+  - codice: docker run -d --name «NOME» -p 5000:5000 «IMMAGINE»
+    commento: parte in background e stampa l'ID del container
+    parti:
+    - voce: -d
+      spiega: 'detached: in background'
+    - voce: --name
+      spiega: un nome da usare al posto dell'ID negli altri comandi
+    - voce: -p 5000:5000
+      spiega: 'pubblica la porta: host 5000 → container 5000'
+    trappola: 'docker run è un comando di comodo: equivale a docker create seguito da docker start. Ogni docker run crea un container NUOVO.'
+- nome: Controlla
+  righe:
+  - codice: docker ps
+    commento: container in esecuzione, con la colonna PORTS
+  - codice: docker ps -a
+    commento: tutti i container, anche quelli fermati
+  - codice: docker ps -q
+    commento: solo gli ID (utile dentro altri comandi)
+- nome: Le altre opzioni frequenti
+  righe:
+  - codice: '# -e VAR=valore   variabile d''ambiente'
+  - codice: '# -v              volume o bind mount'
+  - codice: '# --network       collega a una rete'
+  - codice: '# --rm            elimina il container quando termina'
+segnaposto:
+  NOME:
+    esempio: archivio
+    spiega: nome scelto da te, unico tra i container
+  IMMAGINE:
+    esempio: note:2.0
+    spiega: repository:tag dell'immagine da avviare
+varianti:
+- codice: docker run nginx
+  spiega: 'senza -d: il container occupa il terminale finché non lo fermi con Ctrl+C'
+- codice: docker run -d -p 8080:80 nginx
+  spiega: 'senza --name: Docker inventa un nome a caso'
+vicine:
+- run-interattivo
+- pubblica-porta
+- ciclo-vita

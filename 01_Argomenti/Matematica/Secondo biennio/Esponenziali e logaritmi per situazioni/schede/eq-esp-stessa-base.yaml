@@ -1,0 +1,35 @@
+id: eq-esp-stessa-base
+tipo: regola
+titolo: Equazione esponenziale con la stessa base
+sigla: Stessa base
+comando: a^f(x) = a^g(x) -> f(x) = g(x)
+vedo: L'incognita è all'esponente e le basi sono uguali (o riducibili ad una stessa).
+formula:
+- a^f(x) = a^g(x)
+- f(x) = g(x)
+adatto:
+- Riduci le due parti a una potenza con la stessa base.
+- 'Se la base è `1` l''equazione è diversa (`1^x = 1`): di solito `a != 1`.'
+- Poi risolvi l'equazione tra gli esponenti.
+esempi:
+- da: 2^(x + 1) = 8
+  passi:
+  - '`8 = 2^3`'
+  - '`x + 1 = 3`'
+  ris: x = 2
+- da: 4^x = 2^(x + 3)
+  passi:
+  - '`4^x = 2^(2x)`'
+  - '`2x = x + 3`'
+  ris: x = 3
+- da: (frac(1|3))^x = 9
+  passi:
+  - '`3^(-x) = 3^2`'
+  - '`-x = 2`'
+  ris: x = -2
+errore: Uguagliare le basi invece degli esponenti.
+confondi:
+- scheda: eq-esp-basi-diverse
+  differenza: Con basi non riducibili si usano i logaritmi.
+perche: 'La funzione esponenziale è iniettiva: a esponenti diversi corrispondono valori diversi.'
+parole: equazione esponenziale stessa base esponenti

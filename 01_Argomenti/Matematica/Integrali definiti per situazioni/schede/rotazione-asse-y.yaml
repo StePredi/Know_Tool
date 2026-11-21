@@ -1,0 +1,33 @@
+id: rotazione-asse-y
+tipo: regola
+titolo: Rotazione attorno all'asse y
+sigla: Rotazione y
+comando: π∫ x(y)^2 dy, oppure 2π∫ x*f(x) dx
+vedo: La regione ruota attorno all'asse `y`.
+formula:
+- V = π∫_c^d g(y)^2 dy
+- V = 2π∫_a^b x*f(x) dx
+adatto:
+- 'Primo metodo: scrivi `x` in funzione di `y` (`x = g(y)`) e integra in `y` tra `c` e `d`.'
+- 'Secondo metodo (gusci cilindrici): `2π` per l''integrale di `x*f(x)`, con `x` tra `a` e `b`.'
+- Scegli il metodo che dà l'integrale più semplice.
+esempi:
+- da: regione tra y-axis, y = x^2 e y = 4 attorno a y
+  passi:
+  - '`x = sqrt(y)`'
+  - '`π∫_0^4 y dy`'
+  ris: 8π
+- da: regione tra y-axis e x = y^2, 0 <= y <= 2, attorno a y
+  passi:
+  - '`π∫_0^2 y^4 dy`'
+  ris: frac(32π|5)
+- da: regione sotto y = x^2, 0 <= x <= 2, attorno a y
+  passi:
+  - 'gusci: `2π∫_0^2 x*x^2 dx`'
+  ris: 8π
+errore: 'Usare `π∫ f(x)^2 dx` con la rotazione attorno all''asse `y`: quella formula vale per l''asse `x`.'
+confondi:
+- scheda: rotazione-asse-x
+  differenza: 'Cambia l''asse: cambia la variabile di integrazione.'
+perche: 'Il raggio di ogni disco è la distanza dall''asse: qui è `x`, quindi si integra in `y`.'
+parole: rotazione asse y volume gusci cilindrici

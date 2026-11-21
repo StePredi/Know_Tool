@@ -1,0 +1,35 @@
+id: docker-build
+tipo: ricetta
+titolo: Costruire l'immagine dal Dockerfile
+sigla: docker build
+comando: docker build -t nome:tag .
+frase: il punto finale è il contesto
+fonte: lab_immagini_dockerfile.pdf (parti 2.2, 3.4) · container_mini_tutorial.md · virtualizzazione_e_container.pdf
+parole: build costruire immagine -t tag contesto punto -f dockerfile diverso passaggi
+quando: Quando hai scritto o modificato il Dockerfile (o il programma) e vuoi l'immagine aggiornata.
+fasi:
+- nome: Costruisci
+  righe:
+  - codice: docker build -t note:1.0 .
+    commento: ogni istruzione compare come un passaggio numerato
+    parti:
+    - voce: -t note:1.0
+      spiega: nome repository:tag
+    - voce: .
+      spiega: 'il contesto: la cartella i cui file COPY può vedere'
+    trappola: 'Se cambi app.py devi ricostruire: l''immagine contiene la copia fatta al momento della build.'
+- nome: Con un Dockerfile diverso
+  righe:
+  - codice: docker build -f Dockerfile.prova -t note:prova .
+    commento: -f sceglie il file con le istruzioni
+- nome: Controlla
+  righe:
+  - codice: docker images note
+  - codice: docker history note:1.0
+segnaposto: {}
+varianti: []
+vicine:
+- dockerfile-base
+- tag-immagine
+- cache-layer
+- dockerignore

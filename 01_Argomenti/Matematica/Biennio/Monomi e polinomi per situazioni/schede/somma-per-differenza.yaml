@@ -1,0 +1,34 @@
+id: somma-per-differenza
+tipo: regola
+titolo: Somma per differenza
+sigla: Somma per differenza
+comando: primo² − secondo²
+vedo: "Due parentesi con gli stessi termini, una con + e una con −: `(x+4)(x-4)`, `(2a-3b)(2a+3b)`."
+formula: (a + b)*(a - b) = a^2 - b^2
+adatto:
+  - "Il risultato ha due termini: quadrato del primo meno quadrato del secondo."
+  - "Il termine che ha segno opposto nelle due parentesi è quello che si sottrae."
+  - "Se i termini sono in ordine diverso, riscrivi prima: `(-x+3)(x+3)` = `(3-x)(3+x)` = `9 - x^2`."
+esempi:
+  - da: (x + 4)*(x - 4)
+    passi:
+      - "`a = x`, `b = 4`"
+    ris: x^2 - 16
+    verifica: scomposizione
+  - da: (2x - 3)*(2x + 3)
+    passi:
+      - "`a = 2x`, `b = 3`: `a^2 = 4x^2`, `b^2 = 9`"
+    ris: 4x^2 - 9
+    verifica: scomposizione
+  - da: (-x + 3)*(x + 3)
+    passi:
+      - "Riordino la prima: `(3 - x)`"
+      - "`a = 3`, `b = x`"
+    ris: 9 - x^2
+    verifica: scomposizione
+errore: "Scrivere `a^2 + b^2`, oppure dimenticare che `b^2` si sottrae."
+confondi:
+  - scheda: quadrato-binomio
+    differenza: "Qui le due parentesi hanno segni opposti; nel quadrato sono uguali."
+perche: "I due prodotti incrociati, `-ab` e `+ab`, si annullano. Letta al contrario è la differenza di quadrati della scomposizione."
+parole: somma differenza notevole differenza di quadrati

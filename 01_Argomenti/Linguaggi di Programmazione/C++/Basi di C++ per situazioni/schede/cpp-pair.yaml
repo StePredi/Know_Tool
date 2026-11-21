@@ -1,0 +1,39 @@
+id: cpp-pair
+tipo: ricetta
+titolo: 'Una coppia di valori: pair'
+sigla: pair
+comando: pair<A, B>  first  second
+frase: due valori che stanno insieme
+fonte: Documentazione C++ · cppreference.com · std::pair
+parole: pair coppia first second chiave valore due valori vector di coppie make_pair
+quando: Quando due informazioni vanno sempre insieme (un nome e un voto) e non vuoi creare una struct.
+fasi:
+- nome: Creare
+  righe:
+  - codice: pair<string, int> p = {"Anna", 17};
+    commento: Un nome e un'età.
+  - codice: pair<string, int> q("Bruno", 18);
+    commento: Altro modo di crearla.
+- nome: Leggere
+  righe:
+  - codice: p.first
+    commento: 'Il primo valore: Anna.'
+  - codice: p.second
+    commento: 'Il secondo valore: 17.'
+- nome: Confrontare
+  righe:
+  - codice: p < q
+    commento: 'Confronta prima first, poi second: qui è true perché "Anna" viene prima di "Bruno".'
+- nome: Una lista di coppie
+  righe:
+  - codice: vector<pair<string, int>> lista = {{"Anna", 17}, {"Bruno", 18}};
+    commento: Ogni elemento è una coppia.
+  - codice: 'for (auto& c : lista) cout << c.first << c.second;'
+    trappola: 'first e second sono i nomi fissi: non puoi chiamarli nome ed età. Se servono nomi chiari,
+      usa una struct.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-map
+- cpp-struct
+- cpp-ordina-per-valore

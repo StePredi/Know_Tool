@@ -1,0 +1,43 @@
+modello: per_situazioni
+titolo: Disequazioni, per situazioni
+centro: Disequazioni
+sottotitolo: "Primo e secondo grado, anche fratte"
+ingresso: Disequazione
+guida: "Porta tutto in forma normale, trova gli zeri e studia i segni su una linea. Se la x è al denominatore, non toglierlo mai."
+rami:
+  - id: ord
+    nome: Procedura in ordine
+    colore: blue
+    ordine: true
+    voci:
+      - schede:
+          - forma-normale-dis
+          - scomponi-zeri
+          - linea-dei-segni
+          - leggi-soluzione
+  - id: uno
+    nome: Primo grado
+    colore: green
+    voci:
+      - schede:
+          - disequazione-primo-grado
+  - id: due
+    nome: Secondo grado
+    colore: orange
+    voci:
+      - schede:
+          - secondo-grado-completa
+          - secondo-grado-incompleta
+  - id: alt
+    nome: Prodotti e frazioni
+    colore: pink
+    voci:
+      - schede:
+          - disequazione-prodotto
+          - disequazione-fratta
+  - id: sis
+    nome: Sistemi
+    colore: teal
+    voci:
+      - schede:
+          - sistema-disequazioni

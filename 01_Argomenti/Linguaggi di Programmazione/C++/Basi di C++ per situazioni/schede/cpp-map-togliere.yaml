@@ -1,0 +1,30 @@
+id: cpp-map-togliere
+tipo: ricetta
+titolo: Togliere, contare e svuotare una map
+sigla: erase e count
+comando: erase  count  clear
+frase: tenere in ordine la mappa
+fonte: Documentazione C++ · cppreference.com · std::map · erase · count · clear
+parole: map erase count clear empty size togliere eliminare chiave svuotare
+quando: Quando devi eliminare una chiave o sapere se la mappa è vuota.
+fasi:
+- nome: Togliere
+  righe:
+  - codice: voti.erase("Anna");
+    commento: Toglie la chiave e il suo valore.
+    trappola: 'erase con una chiave che non c''è non dà errore: restituisce 0 (quante coppie ha tolto).'
+  - codice: voti.clear();
+    commento: Svuota tutta la mappa.
+- nome: Controllare
+  righe:
+  - codice: voti.count("Bruno")
+    commento: 1 se la chiave c'è, 0 se manca.
+  - codice: voti.size()
+    commento: Quante coppie.
+  - codice: voti.empty()
+    commento: true se è vuota.
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-map
+- cpp-map-cerca

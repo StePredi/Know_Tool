@@ -1,0 +1,20 @@
+id: porta-occupata
+tipo: prima_dopo
+titolo: 'Errore all''avvio: la porta dell''host è già usata'
+sigla: Porta già usata
+comando: port is already allocated
+frase: una porta dell'host, un solo container
+fonte: lab_volumi_servizi.pdf (parte 4.4, domanda 13)
+parole: port is already allocated porta occupata già usata errore avvio bind failed
+prima: docker run -d --name web-dup -p ⟦8080⟧:80 nginx
+dopo: docker run -d --name web-dup -p ⟦8085⟧:80 nginx
+uso: Avviare un altro container quando la porta dell'host è già pubblicata da un altro.
+riconoscila: docker run fallisce con un messaggio che contiene «port is already allocated».
+parti:
+- voce: '8085'
+  spiega: una porta dell'host libera; la porta 80 interna può restare uguale
+trappola: 'Nota: il container viene creato lo stesso ma non parte: eliminalo con docker rm prima di riprovare con lo stesso nome.'
+varianti: []
+vicine:
+- piu-servizi
+- pubblica-porta

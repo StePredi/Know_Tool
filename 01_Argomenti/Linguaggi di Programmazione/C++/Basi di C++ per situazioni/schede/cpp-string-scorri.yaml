@@ -1,0 +1,32 @@
+id: cpp-string-scorri
+tipo: ricetta
+titolo: Scorrere una stringa carattere per carattere
+sigla: Scorrere una stringa
+comando: 'for (char c : s)'
+frase: un carattere alla volta
+fonte: Documentazione C++ · cppreference.com · std::basic_string · iterazione
+parole: stringa scorrere carattere for range toupper cctype indice size_t maiuscole
+quando: Quando devi guardare o cambiare ogni carattere di un testo.
+fasi:
+- nome: Per ogni carattere
+  righe:
+  - codice: 'for (char c : s) {'
+    commento: c è un carattere per giro.
+  - codice: '    cout << (char)toupper(c);'
+    commento: toupper (da <cctype>) fa maiuscola.
+    parti:
+    - voce: toupper
+      spiega: 'restituisce un int: il (char) lo riporta a lettera'
+  - codice: '}'
+- nome: Con l'indice
+  righe:
+  - codice: for (size_t i = 0; i < s.size(); i++) {
+    commento: Quando ti serve la posizione.
+    trappola: 's.size() è un numero senza segno: con int i il compilatore avvisa del confronto; usa size_t.'
+  - codice: '    cout << s[i] << i;'
+  - codice: '}'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-string-operazioni
+- cpp-for

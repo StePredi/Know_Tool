@@ -1,0 +1,41 @@
+id: rete-custom
+tipo: ricetta
+titolo: Creare una rete bridge e far parlare i container per nome
+sigla: Rete custom
+comando: docker network create
+frase: DNS automatico e isolamento
+fonte: lab_networking_container.pdf (parte 2) · container_mini_tutorial.md · virtualizzazione_e_container.pdf
+parole: rete custom network create --network dns nome isolamento mynet bridge personalizzata
+quando: Quando più container devono comunicare tra loro usando i nomi (web, api, database).
+fasi:
+- nome: Crea la rete e collega i container
+  righe:
+  - codice: docker network create mynet
+  - codice: docker run -dit --name c3 --network mynet debian
+  - codice: docker run -dit --name c4 --network mynet debian
+- nome: Prove da c3
+  righe:
+  - codice: ping -c 3 c4
+    commento: 'funziona per nome: DNS automatico della rete custom'
+    trappola: 'Nota: in /etc/resolv.conf il nameserver è 127.0.0.11, il DNS interno di Docker.'
+  - codice: ping -c 3 8.8.8.8
+    commento: Internet funziona
+  - codice: ping -c 3 «IP_C1»
+    commento: 'c1 sta sul bridge di default: non si raggiunge (isolamento tra reti)'
+- nome: Gestisci
+  righe:
+  - codice: docker network inspect mynet
+    commento: subnet, gateway e container collegati
+  - codice: docker network rm mynet
+    commento: solo dopo aver rimosso i container collegati
+segnaposto:
+  IP_C1:
+    esempio: 172.17.0.2
+    spiega: IP di c1 sulla rete bridge di default
+varianti:
+- codice: docker run -d --name web --network mia-rete nginx
+  spiega: '"web" raggiunge "api" con http://api:3000'
+vicine:
+- container-due-reti
+- ping-tra-container
+- app-tre-container

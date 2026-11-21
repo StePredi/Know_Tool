@@ -1,0 +1,40 @@
+id: studio-radice
+tipo: regola
+titolo: Funzione con radice
+sigla: Radice
+comando: dominio dal radicando, derivata che può non esistere
+vedo: La funzione contiene una radice, come `sqrt(x^2 - 4)` o `sqrt(4 - x^2)`.
+formula:
+- 'sqrt(f): f >= 0'
+- f' = frac(g'|2*sqrt(g))
+adatto:
+- 'Dominio: radicando `>= 0`.'
+- 'La derivata ha `sqrt` al denominatore: non esiste dove il radicando vale zero.'
+- Agli estremi del dominio controlla se la tangente è verticale.
+- Per `x -> +-inf` cerca gli asintoti obliqui.
+esempi:
+- da: f(x) = sqrt(x^2 - 4)
+  passi:
+  - dominio `x <= -2` o `x >= 2`; pari
+  - obliqui `y = +-x`
+  - '`f''(x) = frac(x|sqrt(x^2 - 4))`: decrescente per `x < -2`, crescente per `x > 2`'
+  - '`f'''' < 0`: concava; in `+-2` tangente verticale, minimi `(+-2, 0)`'
+  ris: minimi in (+-2, 0), tangente verticale, asintoti y = +-x
+- da: f(x) = sqrt(4 - x^2)
+  passi:
+  - dominio `[-2, 2]`; pari
+  - '`f''(x) = -frac(x|sqrt(4 - x^2))`'
+  - massimo `(0, 2)`, tangente verticale in `+-2`
+  - concava
+  ris: semicirconferenza di raggio 2
+- da: sqrt(x^2 + 1)
+  passi:
+  - derivata
+  ris: frac(x|sqrt(x^2 + 1))
+  verifica: derivata
+errore: Cercare `f' = 0` e dimenticare i punti dove `f'` non esiste (radice nulla).
+confondi:
+- scheda: punto-non-derivabile
+  differenza: Nei punti con radicando zero la derivata può non esistere.
+perche: 'La radice ha pendenza infinita dove il radicando si annulla: la tangente diventa verticale.'
+parole: radice irrazionale studio dominio tangente verticale

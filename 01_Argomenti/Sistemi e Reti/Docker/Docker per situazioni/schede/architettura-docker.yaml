@@ -1,0 +1,56 @@
+id: architettura-docker
+tipo: spiegazione
+titolo: Capire come lavorano client, daemon e registry
+sigla: Architettura Docker
+comando: docker CLI → dockerd → registry
+frase: il client chiede, il daemon fa
+fonte: container_mini_tutorial.md · virtualizzazione_e_container.pdf (sez. 03) · lab_immagini_dockerfile.pdf (preparazione)
+parole: architettura client server daemon dockerd api rest registry docker hub cli docker version standard de facto
+quando: Quando devi spiegare cosa succede quando scrivi un comando docker, o controllare che Docker funzioni.
+blocchi:
+- testo: 'Docker usa un''architettura **client-server**: tu scrivi i comandi nel client, il daemon li esegue.'
+- disegno:
+    modello: flusso
+    nodi:
+    - nome: Client
+      sotto: docker CLI
+      punti:
+      - docker run
+      - docker build
+      - docker pull
+    - nome: Docker daemon
+      sotto: dockerd, sul sistema host
+      punti:
+      - gestione dei container
+      - immagini e layer cache
+      - volumi
+      - reti
+      tono: scuro
+    - nome: Registry
+      sotto: Docker Hub e altri
+      punti:
+      - nginx:latest
+      - postgres:14
+      - node:18
+    frecce:
+    - API REST
+    - API REST
+    nota: Il client invia i comandi; il daemon li esegue e dialoga con il registry per scaricare o pubblicare le immagini.
+- titolo: Cos'è Docker
+- testo: 'La piattaforma di containerizzazione più diffusa, ormai lo **standard de facto** del settore. Docker non ha inventato i container: li ha resi'
+- carte:
+  - titolo: Facili da usare
+  - titolo: Portabili
+  - titolo: Standardizzati
+  - titolo: Accessibili a tutti
+- titolo: Controlla che Docker risponda
+- comandi:
+  - codice: docker version
+    spiega: 'Nota: mostra due parti, Client e Server; se manca Server il daemon non è avviato.'
+  - codice: docker pull python:3.12-slim
+    spiega: scarica prima l'immagine di base, così la prima build non aspetta
+varianti: []
+vicine:
+- oggetti-docker
+- pull-immagine
+- run-background

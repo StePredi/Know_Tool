@@ -1,0 +1,34 @@
+id: circonferenza-goniometrica
+tipo: regola
+titolo: Seno, coseno e tangente sulla circonferenza
+sigla: Circonferenza
+comando: P = (cos(x), sin(x))
+vedo: Un angolo di cui devi dire seno, coseno o tangente, o un punto sulla circonferenza di raggio 1.
+formula:
+- P = (cos(x), sin(x))
+- tan(x) = frac(sin(x)|cos(x))
+- cot(x) = frac(cos(x)|sin(x))
+adatto:
+- Il coseno è la coordinata orizzontale, il seno quella verticale.
+- 'Segni: I quadrante tutti positivi; II solo seno; III solo tangente; IV solo coseno.'
+- '`tan(x)` non esiste per `x = frac(pi|2) + k*pi` (coseno nullo).'
+- Si parte dal punto `(1, 0)` e si gira in senso antiorario.
+esempi:
+- da: angolo frac(pi|2)
+  passi:
+  - il punto è `(0, 1)`
+  ris: sin = 1, cos = 0, tan non esiste
+- da: angolo pi
+  passi:
+  - il punto è `(-1, 0)`
+  ris: sin = 0, cos = -1, tan = 0
+- da: segno di sin, cos, tan a 210 gradi
+  passi:
+  - 210 è nel terzo quadrante
+  ris: sin < 0, cos < 0, tan > 0
+errore: 'Scambiare seno e coseno: il coseno è la x, il seno la y.'
+confondi:
+- scheda: angoli-notevoli
+  differenza: Qui capisci cosa sono; lì trovi i valori da ricordare.
+perche: Per un punto sulla circonferenza unitaria, per definizione `cos(x)` è l'ascissa e `sin(x)` l'ordinata.
+parole: circonferenza goniometrica seno coseno tangente quadranti segni

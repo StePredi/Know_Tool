@@ -1,0 +1,36 @@
+id: implicazione
+tipo: regola
+titolo: Implicazione (se… allora)
+sigla: Se-allora
+comando: p -> q
+vedo: «Se… allora», «implica», «ogni… è…».
+formula:
+- p -> q
+adatto:
+- 'Tavola (righe in ordine: `VV, VF, FV, FF`): `V F V V`.'
+- Falsa solo se `p` è vera e `q` è falsa.
+- '`p` è l''ipotesi, `q` la tesi.'
+- Da un'ipotesi falsa l'implicazione è sempre vera (vacuamente).
+esempi:
+- da: se 6 è pari allora 6 è divisibile per 3
+  passi:
+  - V -> V
+  ris: vera
+- da: se 4 è multiplo di 6 allora 4 è pari
+  passi:
+  - F -> V
+  ris: vera
+- da: se 5 è dispari allora 5 è pari
+  passi:
+  - V -> F
+  ris: falsa
+- da: se 2 + 2 = 5 allora 3 è pari
+  passi:
+  - F -> F
+  ris: vera
+errore: Pensare che da ipotesi falsa l'implicazione sia falsa.
+confondi:
+- scheda: doppia-implicazione
+  differenza: L'implicazione va in un verso solo; la doppia in entrambi.
+perche: 'L''implicazione promette qualcosa solo quando l''ipotesi è vera: sull''ipotesi falsa non c''è nulla da smentire.'
+parole: implicazione se allora ipotesi tesi

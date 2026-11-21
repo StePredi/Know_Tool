@@ -1,0 +1,32 @@
+id: prodotto-frazioni
+tipo: regola
+titolo: Prodotto di frazioni algebriche
+sigla: Prodotto
+comando: scomponi, semplifica in croce, moltiplica
+vedo: "Due frazioni che si moltiplicano: `frac(x^2 - 1|x)*frac(x^2|x + 1)`."
+formula: frac(a|b)*frac(c|d) = frac(a*c|b*d)
+adatto:
+  - "Scomponi tutti i numeratori e i denominatori."
+  - "Semplifica in croce: un fattore di un numeratore con lo stesso fattore di un denominatore, anche di frazioni diverse."
+  - "Poi moltiplica ciò che resta sopra e ciò che resta sotto."
+  - "Scrivi le condizioni di esistenza di tutti i denominatori, non solo del risultato."
+esempi:
+  - da: frac(x^2 - 1|x)*frac(x^2|x + 1)
+    passi:
+      - "Scompongo: `frac((x - 1)(x + 1)|x)*frac(x^2|x + 1)`"
+      - "Semplifico `(x + 1)` e una `x`"
+      - "Restano `(x - 1)` e `x`"
+    ris: x(x - 1)
+    verifica: scomposizione
+  - da: frac(x + 2|x - 1)*frac(x^2 - 1|x^2 - 4)
+    passi:
+      - "Scompongo: `frac(x + 2|x - 1)*frac((x - 1)(x + 1)|(x - 2)(x + 2))`"
+      - "Semplifico `(x + 2)` e `(x - 1)`"
+    ris: frac(x + 1|x - 2)
+    verifica: scomposizione
+errore: "Dimenticare le condizioni di esistenza di tutti i denominatori e scriverle solo sul risultato."
+confondi:
+  - scheda: somma-denominatori-diversi
+    differenza: "Nel prodotto non serve il denominatore comune."
+perche: "È il prodotto di frazioni numeriche, con fattori al posto dei numeri."
+parole: prodotto moltiplicare frazioni semplificare in croce

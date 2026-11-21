@@ -1,0 +1,30 @@
+id: cpp-uguale
+tipo: prima_dopo
+titolo: 'Errore: = al posto di == nella condizione'
+sigla: = e ==
+comando: ==
+frase: confrontare non è assegnare
+fonte: Documentazione C++ · cppreference.com · Operatori · assegnazione e confronto
+parole: uguale assegnazione confronto if errore warning parentheses condizione sempre vera
+prima: |-
+  int x = 0;
+  if (⟦x = 5⟧) {
+      cout << "vero";
+  }
+dopo: |-
+  int x = 0;
+  if (⟦x == 5⟧) {
+      cout << "vero";
+  }
+uso: Controllare se una variabile vale un certo numero.
+riconoscila: La condizione è sempre vera e la variabile cambia valore da sola.
+parti:
+- voce: x = 5
+  spiega: 'assegna 5 a x e vale 5: per il if un valore diverso da 0 è vero'
+- voce: x == 5
+  spiega: 'confronta: vero solo se x vale già 5'
+trappola: 'Il programma compila lo stesso: con -Wall g++ avvisa "suggest parentheses around assignment
+  used as truth value". Non ignorare gli avvisi.'
+varianti: []
+vicine:
+- cpp-if

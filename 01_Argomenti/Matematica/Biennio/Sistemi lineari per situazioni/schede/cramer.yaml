@@ -1,0 +1,36 @@
+id: cramer
+tipo: regola
+titolo: Metodo di Cramer
+sigla: Cramer
+comando: "x = Dx/D, y = Dy/D"
+vedo: "Coefficienti scomodi e vuoi una procedura meccanica, oppure vuoi sapere subito se il sistema è determinato."
+formula:
+  - D = a_1*b_2 - a_2*b_1
+  - D_x = c_1*b_2 - c_2*b_1
+  - D_y = a_1*c_2 - a_2*c_1
+  - x = frac(D_x|D)
+  - y = frac(D_y|D)
+adatto:
+  - "Scrivi il sistema in forma normale `ax + by = c`."
+  - "D: prodotto in croce dei coefficienti delle incognite. Dx: sostituisci la colonna di x con i termini noti. Dy: sostituisci la colonna di y."
+  - "D diverso da 0: una sola soluzione. D = 0: il sistema è impossibile o indeterminato."
+  - "Attenzione ai segni dei coefficienti negativi."
+esempi:
+  - da: "2x + y = 3,   3x - y = 5"
+    passi:
+      - "`D = 2*(-1) - 3*1 = -5`"
+      - "`D_x = 3*(-1) - 5*1 = -8`"
+      - "`D_y = 2*5 - 3*3 = 1`"
+      - "`x = -8/-5 = 8/5`, `y = 1/-5 = -1/5`"
+    ris: "(frac(8|5), frac(-1|5))"
+  - da: "5x - 2y = 4,   3x + 4y = 18"
+    passi:
+      - "`D = 5*4 - 3*(-2) = 26`"
+      - "`D_x = 4*4 - 18*(-2) = 52`, `D_y = 5*18 - 3*4 = 78`"
+    ris: "(2, 3)"
+errore: "Sbagliare il segno di un coefficiente negativo nel prodotto in croce."
+confondi:
+  - scheda: riduzione
+    differenza: "Cramer applica sempre la stessa formula; la riduzione è spesso più corta se i coefficienti sono semplici."
+perche: "Si ottiene applicando la riduzione al sistema generale con lettere."
+parole: cramer determinante sistema

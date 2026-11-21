@@ -1,0 +1,33 @@
+id: sostituzione
+tipo: regola
+titolo: Metodo di sostituzione
+sigla: Sostituzione
+comando: "isolo un'incognita e la sostituisco"
+vedo: "Un'incognita con coefficiente 1 o -1, oppure già isolata: `x + 2y = 5` e `3x - y = 1`."
+formula:
+  - y = frac(c_1 - a_1*x|b_1)
+  - a_2*x + b_2*y = c_2
+adatto:
+  - "Ricava un'incognita da una equazione."
+  - "Sostituiscila nell'altra: viene un'equazione con una sola incognita."
+  - "Risolvi, poi metti il valore trovato nell'espressione ricavata per trovare l'altra incognita."
+  - "Quando sostituisci, metti l'espressione tra parentesi."
+esempi:
+  - da: "x + 2y = 5,   3x - y = 1"
+    passi:
+      - "Dalla seconda: `y = 3x - 1`"
+      - "Nella prima: `x + 2(3x - 1) = 5`, cioè `7x = 7`, quindi `x = 1`"
+      - "Allora `y = 3*1 - 1 = 2`"
+    ris: "(1, 2)"
+  - da: "y = 2x - 3,   4x - 3y = 1"
+    passi:
+      - "Nella seconda: `4x - 3(2x - 3) = 1`"
+      - "`4x - 6x + 9 = 1`, quindi `-2x = -8` e `x = 4`"
+      - "Allora `y = 2*4 - 3 = 5`"
+    ris: "(4, 5)"
+errore: "Sostituire nella stessa equazione da cui hai ricavato l'incognita: viene un'identità e non si arriva a niente."
+confondi:
+  - scheda: confronto
+    differenza: "Il confronto è il caso in cui la stessa incognita è già isolata in entrambe le equazioni."
+perche: "Si riduce il sistema a un'equazione in una sola incognita."
+parole: sostituzione isolare incognita sistema

@@ -1,0 +1,31 @@
+id: asintoto-obliquo
+tipo: regola
+titolo: Asintoto obliquo
+sigla: Obliquo
+comando: m = lim frac(f(x)|x), q = lim (f(x) - m*x)
+vedo: Funzione che cresce come una retta (limite infinito, e grado del numeratore uguale al denominatore più uno).
+formula:
+- y = m*x + q
+- m = lim_(x -> +-inf) frac(f(x)|x)
+- q = lim_(x -> +-inf) (f(x) - m*x)
+adatto:
+- Esiste solo se `f(x)` tende a infinito e `m` è finito e diverso da 0.
+- 'Per le funzioni razionali: grado del numeratore = grado del denominatore + 1; la divisione dei polinomi dà direttamente il quoziente `m*x + q`.'
+- Se `m = 0`, è un asintoto orizzontale.
+esempi:
+- da: f(x) = frac(x^2 + 1|x)
+  passi:
+  - '`m = 1`'
+  - '`q = lim (f(x) - x) = 0`'
+  ris: asintoto obliquo y = x
+- da: f(x) = frac(2x^2 - x + 1|x - 1)
+  passi:
+  - 'divisione: `2x^2 - x + 1 = (x - 1)(2x + 1) + 2`'
+  - quoziente `2x + 1`
+  ris: asintoto obliquo y = 2x + 1
+errore: Cercare l'obliquo quando c'è già un asintoto orizzontale dallo stesso lato.
+confondi:
+- scheda: asintoto-orizzontale
+  differenza: 'Orizzontale: limite finito. Obliquo: limite infinito che segue una retta.'
+perche: La funzione si comporta come la retta `m*x + q` quando `x` è grande.
+parole: asintoto obliquo coefficiente angolare divisione polinomi

@@ -1,0 +1,30 @@
+id: segno-derivata-prima
+tipo: regola
+titolo: Segno della derivata prima
+sigla: Segno f'
+comando: f' > 0 sale, f' < 0 scende
+vedo: Hai la derivata e vuoi sapere dove la funzione cresce e dove cala.
+formula:
+- 'f''(x) > 0: crescente'
+- 'f''(x) < 0: decrescente'
+adatto:
+- Metti il numeratore e il denominatore di `f'` in fattori.
+- Fai il quadro dei segni nel dominio, escludendo i punti dove `f` non esiste.
+- 'Le frecce su e giù descrivono il grafico: sale dove `f'' > 0`, scende dove `f'' < 0`.'
+esempi:
+- da: f'(x) = 3(x - 1)(x + 1)
+  passi:
+  - zeri `-1` e `1`
+  - positiva fuori dalle radici
+  ris: crescente per x < -1 e x > 1; decrescente tra -1 e 1
+- da: f'(x) = frac(x(x - 2)|(x - 1)^2)
+  passi:
+  - denominatore sempre positivo, `x = 1` escluso
+  - segno di `x(x - 2)`
+  ris: crescente per x < 0 e x > 2; decrescente per 0 < x < 2, x != 1
+errore: 'Dimenticare un punto escluso dal dominio nel mezzo di un intervallo: le frecce non continuano attraverso.'
+confondi:
+- scheda: intersezioni-segno
+  differenza: Qui il segno di `f'` (sale o scende); lì il segno di `f` (sopra o sotto l'asse).
+perche: La pendenza della tangente indica la direzione del grafico.
+parole: segno derivata prima crescente decrescente

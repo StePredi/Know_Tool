@@ -1,0 +1,32 @@
+id: inversa-contraria
+tipo: regola
+titolo: Inversa, contraria, contronominale
+sigla: Inversa
+comando: p -> q   q -> p   ¬p -> ¬q   ¬q -> ¬p
+vedo: Partendo da «se p allora q» ti chiedono inversa, contraria, contronominale.
+formula:
+- q -> p
+- ¬p -> ¬q
+- ¬q -> ¬p
+adatto:
+- 'Inversa: scambi ipotesi e tesi (`q -> p`).'
+- 'Contraria: neghi ipotesi e tesi (`¬p -> ¬q`).'
+- 'Contronominale: neghi e scambi (`¬q -> ¬p`); è equivalente all''originale.'
+- L'inversa e la contraria sono equivalenti tra loro, ma non all'originale.
+esempi:
+- da: se è un quadrato allora è un rettangolo
+  passi:
+  - 'originale: vera'
+  - 'inversa: «se è un rettangolo allora è un quadrato»: falsa'
+  ris: inversa falsa; contronominale vera
+- da: se un numero è divisibile per 4 allora è pari
+  passi:
+  - 'contronominale: «se non è pari allora non è divisibile per 4»'
+  - 'contraria: «se non è divisibile per 4 allora non è pari»: falsa (6)'
+  ris: contronominale vera; contraria falsa
+errore: Credere che l'inversa abbia lo stesso valore dell'originale.
+confondi:
+- scheda: equivalenze-implicazione
+  differenza: Lì la contronominale come riscrittura; qui il confronto con inversa e contraria.
+perche: L'inversa equivale alla contraria (sono contronominali una dell'altra), ma una implicazione vera può avere inversa falsa.
+parole: inversa contraria contronominale implicazione

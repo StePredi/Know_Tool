@@ -1,0 +1,35 @@
+id: cpp-output-input
+tipo: ricetta
+titolo: 'Scrivere e leggere: cout e cin'
+sigla: cout e cin
+comando: cout << …  cin >> …
+frase: dal terminale e verso il terminale
+fonte: Documentazione C++ · cppreference.com · Tour of C++ · input e output
+parole: cout cin getline endl leggere scrivere input output ignore riga parola
+quando: Quando il programma deve mostrare qualcosa o chiedere un valore all'utente.
+fasi:
+- nome: Scrivere
+  righe:
+  - codice: cout << "x = " << x << endl;
+    commento: << concatena i pezzi; endl va a capo.
+  - codice: cout << x << '\n';
+    commento: '''\n'' va a capo come endl.'
+- nome: Leggere
+  righe:
+  - codice: int n; cin >> n;
+    commento: Legge un numero.
+  - codice: string nome; cin >> nome;
+    commento: Legge una sola parola.
+    trappola: 'cin >> si ferma al primo spazio: "Mario Rossi" dà solo "Mario".'
+  - codice: getline(cin, riga);
+    commento: Legge tutta la riga, spazi compresi.
+  - codice: cin >> n; cin.ignore(); getline(cin, riga);
+    commento: Prima un numero, poi una riga.
+    trappola: 'Dopo cin >> n resta nel buffer l''a capo: senza cin.ignore() il getline leggerebbe una
+      riga vuota.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-struttura
+- cpp-string-operazioni
+- cpp-while

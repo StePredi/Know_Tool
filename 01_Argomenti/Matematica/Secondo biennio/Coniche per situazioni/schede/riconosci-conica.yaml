@@ -1,0 +1,42 @@
+id: riconosci-conica
+tipo: regola
+titolo: Quale conica è?
+sigla: Riconosci
+comando: A = B -> circonferenza
+vedo: Un'equazione di secondo grado in `x` e `y` senza il termine `x*y` (o con solo `x*y`).
+formula:
+- A*x^2 + B*y^2 + D*x + E*y + F = 0
+adatto:
+- Guarda i coefficienti di `x^2` e `y^2`.
+- '`A = B` (stesso segno): circonferenza.'
+- '`A` e `B` con lo stesso segno ma diversi: ellisse.'
+- '`A` e `B` con segni opposti: iperbole.'
+- 'Uno solo dei due è zero (c''è `x^2` oppure `y^2`): parabola.'
+- 'Solo il termine `x*y` (`x*y = k`): iperbole equilatera.'
+esempi:
+- da: x^2 + y^2 - 4x = 0
+  passi:
+  - '`A = B = 1`'
+  ris: circonferenza
+- da: 2x^2 + 3y^2 = 6
+  passi:
+  - stesso segno, coefficienti diversi
+  ris: ellisse
+- da: x^2 - y^2 = 4
+  passi:
+  - segni opposti
+  ris: iperbole
+- da: y = x^2 - 3x
+  passi:
+  - solo `x^2`
+  ris: parabola
+- da: x*y = 6
+  passi:
+  - solo il termine misto
+  ris: iperbole equilatera
+errore: 'Scambiare ellisse e circonferenza: serve `A = B`, non solo lo stesso segno.'
+confondi:
+- scheda: forma-canonica
+  differenza: Qui si riconosce la conica; poi si porta in forma canonica per leggere i dati.
+perche: 'I coefficienti dei termini quadratici decidono la forma della curva: gli altri la spostano.'
+parole: riconoscere conica coefficienti circonferenza ellisse iperbole parabola

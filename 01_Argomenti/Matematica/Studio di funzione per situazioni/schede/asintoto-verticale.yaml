@@ -1,0 +1,33 @@
+id: asintoto-verticale
+tipo: regola
+titolo: Asintoto verticale
+sigla: Verticale
+comando: x = c se lim f = +-inf
+vedo: Un punto escluso dal dominio dove il denominatore o il logaritmo si annulla.
+formula:
+- lim_(x -> c) f(x) = +-inf
+adatto:
+- Calcola il limite da sinistra e da destra in ogni punto escluso.
+- Se almeno uno è infinito, la retta `x = c` è asintoto verticale.
+- Il segno dei due limiti dice da che parte sale o scende il grafico.
+esempi:
+- da: f(x) = frac(x^2|x - 1)
+  passi:
+  - '`x -> 1^-`: numeratore `1`, denominatore `0^-`: `-inf`'
+  - '`x -> 1^+`: `+inf`'
+  ris: x = 1
+- da: f(x) = frac(ln(x)|x)
+  passi:
+  - '`x -> 0^+`: `ln(x) -> -inf`, `x -> 0^+`'
+  ris: x = 0
+- da: f(x) = frac(x^2 - 1|x - 1)
+  passi:
+  - '`frac(x^2 - 1|x - 1) = x + 1`'
+  - il limite in `1` è `2`
+  ris: nessun asintoto, solo un buco
+errore: Dichiarare asintoto ogni punto escluso, senza fare il limite.
+confondi:
+- scheda: asintoto-orizzontale
+  differenza: 'Orizzontale: `x` va all''infinito. Verticale: `x` va a un numero.'
+perche: Quando la funzione cresce senza limite vicino a `c`, il grafico si appoggia alla retta `x = c`.
+parole: asintoto verticale limite infinito punto escluso

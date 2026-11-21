@@ -1,0 +1,37 @@
+id: cambio-estremi
+tipo: regola
+titolo: Sostituzione con gli estremi
+sigla: Cambio estremi
+comando: cambia anche gli estremi
+vedo: Per calcolare un integrale definito usi una sostituzione `t = g(x)`.
+formula:
+- t = g(x)
+- 'estremi: t_a = g(a), t_b = g(b)'
+adatto:
+- Fai la sostituzione come negli integrali indefiniti.
+- 'Calcola i nuovi estremi: `g(a)` e `g(b)`.'
+- 'Integra in `t` tra i nuovi estremi: non serve tornare a `x`.'
+esempi:
+- da: ∫_0^1 2x*e^(x^2) dx
+  passi:
+  - '`t = x^2`, `dt = 2x dx`'
+  - 'estremi: `t = 0` e `t = 1`'
+  - '`∫_0^1 e^t dt = e - 1`'
+  ris: e - 1
+- da: ∫_0^(pi/2) sin x cos x dx
+  passi:
+  - '`t = sin x`'
+  - 'estremi: `0` e `1`'
+  - '`∫_0^1 t dt`'
+  ris: frac(1|2)
+- da: ∫_0^3 x*sqrt(x + 1) dx
+  passi:
+  - '`t = x + 1`, estremi `1` e `4`'
+  - '`∫_1^4 (t - 1) sqrt(t) dt`'
+  ris: frac(116|15)
+errore: Tornare a `x` dopo aver integrato in `t` e sostituire gli estremi originali nella variabile sbagliata.
+confondi:
+- scheda: calcola-primitiva
+  differenza: Senza sostituzione si usa la primitiva in `x`; con la sostituzione si lavora in `t`.
+perche: Cambiando variabile cambia anche l'intervallo su cui si somma.
+parole: sostituzione integrale definito cambio estremi

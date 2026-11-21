@@ -1,0 +1,31 @@
+id: dominio-radice
+tipo: regola
+titolo: 'Radice: radicando non negativo'
+sigla: Radicando
+comando: f(x) >= 0
+vedo: C'è una radice quadrata (o di indice pari).
+formula:
+- 'sqrt(f): f(x) >= 0'
+adatto:
+- Pone il radicando maggiore o uguale a zero e risolvi la disequazione.
+- 'Radice cubica (indice dispari): nessuna condizione.'
+- Se la radice sta anche al denominatore, il radicando deve essere strettamente positivo.
+esempi:
+- da: sqrt(x - 2)
+  passi:
+  - '`x - 2 >= 0`'
+  ris: x >= 2
+- da: sqrt(x^2 - 4)
+  passi:
+  - '`x^2 - 4 >= 0`'
+  ris: x <= -2 oppure x >= 2
+- da: frac(1|sqrt(x - 2))
+  passi:
+  - 'radice al denominatore: `x - 2 > 0`'
+  ris: x > 2
+errore: Usare `> 0` quando la radice non è al denominatore, perdendo l'estremo.
+confondi:
+- scheda: dominio-fratta
+  differenza: Con la frazione si chiede `!= 0`; con la radice `>= 0`.
+perche: La radice pari di un numero negativo non è un numero reale.
+parole: dominio radice radicando maggiore uguale zero

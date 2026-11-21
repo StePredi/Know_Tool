@@ -1,0 +1,35 @@
+id: significato-fisico
+tipo: regola
+titolo: Significato fisico
+sigla: Fisico
+comando: v = s'(t)
+vedo: Spazio, tempo, velocità, accelerazione, tassi di variazione.
+formula:
+- v_m = frac(s(t_2) - s(t_1)|t_2 - t_1)
+- v(t) = s'(t)
+- a(t) = v'(t)
+adatto:
+- Velocità media = rapporto incrementale.
+- Velocità istantanea = derivata della posizione rispetto al tempo.
+- Accelerazione = derivata della velocità.
+- In generale la derivata è il tasso di variazione istantaneo.
+esempi:
+- da: 's(t) = t^2 + 3t: velocità media tra t = 1 e t = 3'
+  passi:
+  - '`s(3) = 18`, `s(1) = 4`'
+  - '`frac(18 - 4|2)`'
+  ris: 7 m/s
+- da: 's(t) = t^2 + 3t: velocità in t = 2'
+  passi:
+  - '`s''(t) = 2t + 3`'
+  ris: 7 m/s
+- da: 's(t) = t^2 + 3t: accelerazione'
+  passi:
+  - '`v(t) = 2t + 3`, `v''(t)`'
+  ris: 2 m/s^2
+errore: Confondere velocità media e istantanea.
+confondi:
+- scheda: rapporto-incrementale
+  differenza: Il rapporto incrementale è la velocità media; la derivata quella istantanea.
+perche: La velocità istantanea è il limite della velocità media su intervalli sempre più piccoli.
+parole: velocità istantanea media derivata fisica accelerazione

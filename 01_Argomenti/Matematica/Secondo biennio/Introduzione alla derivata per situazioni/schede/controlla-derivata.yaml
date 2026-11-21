@@ -1,0 +1,28 @@
+id: controlla-derivata
+tipo: regola
+titolo: Controllo della derivata
+sigla: Controlla
+comando: confronta con le regole
+vedo: Hai calcolato una derivata o una tangente e vuoi controllarla.
+formula:
+- f'(x_0)
+adatto:
+- Confronta con le regole di derivazione (potenza, radice, ...).
+- 'Il segno deve rispettare la crescenza: `f'' > 0` dove la funzione sale.'
+- 'Sostituisci il punto nella retta tangente: deve restituire `f(x_0)`.'
+- 'Calcola il rapporto incrementale con `h` piccolo (`0,001`): deve avvicinarsi al valore.'
+esempi:
+- da: 'f(x) = x^2: trovato f''(2) = 4'
+  passi:
+  - 'rapporto con `h = 0,001`: `frac(2,001^2 - 4|0,001) = 4,001`'
+  ris: plausibile
+- da: tangente y = 2x - 1 a f(x) = x^2 in x_0 = 1
+  passi:
+  - 'punto di tangenza: `y(1) = 1 = f(1)`'
+  ris: coerente
+errore: Controllare solo il calcolo della derivata e non il punto della tangente.
+confondi:
+- scheda: derivata-definizione
+  differenza: Il controllo può usare la definizione con `h` piccolo.
+perche: 'La derivata è il limite del rapporto incrementale: il rapporto con `h` piccolo ne è una buona stima.'
+parole: controllo derivata tangente verifica

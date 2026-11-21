@@ -1,0 +1,31 @@
+id: equazione-primo-grado
+tipo: regola
+titolo: Equazione di primo grado
+sigla: Primo grado
+comando: "x = b/a"
+vedo: "L'incognita compare solo alla prima potenza: `3x - 5 = x + 7`."
+formula:
+  - a*x = b
+  - x = frac(b|a)
+adatto:
+  - "Termini con la x a sinistra, numeri a destra, cambiando segno quando passano dall'altra parte."
+  - "Dividi per il coefficiente di x."
+  - "Se dopo la riduzione resta `0x = b` con b diverso da 0: impossibile (nessuna soluzione)."
+  - "Se resta `0x = 0`: indeterminata (tutti i numeri)."
+esempi:
+  - da: 3x - 5 = x + 7
+    passi:
+      - "Termini con x a sinistra: `3x - x = 7 + 5`"
+      - "`2x = 12`"
+    ris: x = 6
+  - da: 2(x + 1) = 2x + 5
+    passi:
+      - "Sviluppo: `2x + 2 = 2x + 5`"
+      - "`2x - 2x = 5 - 2`, cioè `0x = 3`"
+    ris: "0x = 3: impossibile"
+errore: "Dividere per il coefficiente prima di aver portato tutti i termini con la x da un lato."
+confondi:
+  - scheda: denominatori-numerici
+    differenza: "Con frazioni numeriche prima si tolgono i denominatori."
+perche: "Ogni passaggio applica lo stesso numero a entrambi i lati: il principio di equivalenza."
+parole: primo grado lineare impossibile indeterminata

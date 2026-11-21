@@ -1,0 +1,35 @@
+id: trinomio-quadrato
+tipo: regola
+titolo: Quadrato di binomio (letto al contrario)
+sigla: Trinomio quadrato
+comando: "(a + b)^2"
+frase: "Tre termini: due quadrati e il doppio prodotto."
+vedo: "Tre termini, due dei quali sono quadrati e il terzo è il doppio prodotto delle radici: `x^2 + 6x + 9`, `4x^2 - 20x + 25`."
+formula:
+  - a^2 + 2*a*b + b^2 = (a + b)^2
+  - a^2 - 2*a*b + b^2 = (a - b)^2
+adatto:
+  - "Segna i due quadrati (con segno +) e prendi le loro radici a e b."
+  - "Controlla che il termine rimasto sia `2ab`: il suo segno dice se è `(a + b)` o `(a - b)`."
+  - "Se il doppio prodotto non torna, non è un quadrato: prova il trinomio `x^2 + sx + p`."
+esempi:
+  - da: x^2 + 6x + 9
+    passi:
+      - "Quadrati: `x^2` e `9`, radici `x` e `3`"
+      - "Doppio prodotto: `2*x*3 = 6x`, torna"
+    ris: (x + 3)^2
+    verifica: scomposizione
+  - da: 4x^2 - 20x + 25
+    passi:
+      - "Quadrati: `4x^2` e `25`, radici `2x` e `5`"
+      - "Doppio prodotto: `2*2x*5 = 20x`, con il meno"
+    ris: (2x - 5)^2
+    verifica: scomposizione
+errore: "Scrivere il quadrato senza controllare il doppio prodotto: `x^2 + 5x + 9` non è un quadrato."
+confondi:
+  - scheda: trinomio-notevole
+    differenza: "Il quadrato è il caso particolare in cui i due numeri m e n sono uguali."
+  - scheda: differenza-quadrati
+    differenza: "La differenza di quadrati ha 2 termini."
+perche: "È il quadrato di binomio sviluppato, letto da destra a sinistra."
+parole: trinomio quadrato perfetto binomio doppio prodotto

@@ -1,0 +1,28 @@
+id: controlla-risultato
+tipo: regola
+titolo: Scomponi ancora e controlla
+sigla: Controlla
+comando: ogni fattore è scomposto?
+frase: "Passo 3: guarda ogni fattore e verifica moltiplicando."
+vedo: "Hai ottenuto un prodotto: controlla se qualche fattore si scompone ancora."
+formula: A = F_1*F_2*F_3
+adatto:
+  - "Guarda ogni fattore: se ha più termini, riparti dal passo 1 su quel fattore."
+  - "I fattori di primo grado, come `x - 2` o `2x + 1`, non si scompongono più."
+  - "Una somma di quadrati come `x^2 + 4` non si scompone."
+  - "Fattori uguali si scrivono come potenza: `(x - 1)(x - 1) = (x - 1)^2`."
+  - "Verifica moltiplicando: devi ritrovare il polinomio di partenza."
+esempi:
+  - da: x^4 - 16
+    passi:
+      - "Due termini, quadrati con il meno: `(x^2 - 4)(x^2 + 4)`"
+      - "`x^2 - 4` si scompone ancora: `(x - 2)(x + 2)`"
+      - "`x^2 + 4` è una somma di quadrati: si ferma"
+    ris: (x - 2)(x + 2)(x^2 + 4)
+    verifica: scomposizione
+errore: "Fermarsi a `(x^2 - 4)(x^2 + 4)` senza vedere che `x^2 - 4` si scompone ancora."
+confondi:
+  - scheda: conta-termini
+    differenza: "Contare i termini è il passo 2 e si fa su ogni fattore; questo è il controllo finale."
+perche: "La scomposizione è completa quando nessun fattore si può più scomporre."
+parole: controllo verifica fattori scomporre ancora completa

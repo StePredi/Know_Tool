@@ -1,0 +1,25 @@
+id: controlla-soluzioni
+tipo: regola
+titolo: Controlla le soluzioni
+sigla: Controlla le soluzioni
+comando: sostituisco e controllo le condizioni
+frase: "Passo 3: verifica che le soluzioni siano accettabili e scrivi la risposta."
+vedo: "Hai trovato una o più soluzioni: controlla che valgano davvero."
+formula: P(x_0) = 0
+adatto:
+  - "Sostituisci la soluzione nell'equazione di partenza, non in quella semplificata, e controlla che i due lati siano uguali."
+  - "Nelle fratte scarta le soluzioni che annullano un denominatore."
+  - "Scrivi la risposta: le soluzioni elencate, oppure «impossibile» (nessuna soluzione), oppure «indeterminata» (tutti i numeri)."
+esempi:
+  - da: frac(x^2 - 4|x - 2) = 0
+    passi:
+      - "Condizione di esistenza: `x != 2`"
+      - "Numeratore a zero: `x^2 - 4 = 0`, quindi `x = 2` oppure `x = -2`"
+      - "`x = 2` annulla il denominatore: la scarto"
+    ris: x = -2
+errore: "Lasciare tra le soluzioni un valore escluso dalle condizioni di esistenza."
+confondi:
+  - scheda: equazione-fratta
+    differenza: "Il controllo finale vale per ogni equazione; nella fratta è obbligatorio."
+perche: "Le trasformazioni per risolvere possono introdurre soluzioni che non erano dell'equazione di partenza."
+parole: controllo verifica soluzioni accettabili sostituire

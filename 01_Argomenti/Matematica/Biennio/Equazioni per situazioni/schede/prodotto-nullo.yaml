@@ -1,0 +1,28 @@
+id: prodotto-nullo
+tipo: regola
+titolo: Prodotto uguale a zero
+sigla: Prodotto nullo
+comando: ogni fattore a zero
+vedo: "Un prodotto di fattori uguale a zero, oppure un'equazione che si scompone: `(x - 1)(x + 3) = 0`, `x^3 - 4x = 0`."
+formula: A*B = 0  ->  A = 0, B = 0
+adatto:
+  - "Un prodotto è zero se almeno un fattore è zero: poni ogni fattore uguale a zero."
+  - "Con grado 3 o più: porta in forma normale e scomponi (schede di Scomposizione)."
+  - "Non sviluppare un prodotto già scomposto uguale a zero."
+  - "Vale solo con il secondo membro uguale a zero."
+esempi:
+  - da: x^3 - 4x = 0
+    passi:
+      - "Raccolgo `x`: `x(x^2 - 4) = 0`"
+      - "Differenza di quadrati: `x(x - 2)(x + 2) = 0`"
+    ris: x = 0, x = 2, x = -2
+  - da: (x - 1)(x + 3) = 0
+    passi:
+      - "`x - 1 = 0` oppure `x + 3 = 0`"
+    ris: x = 1, x = -3
+errore: "Usarlo con il secondo membro diverso da zero: `(x - 1)(x + 3) = 5` non vuol dire `x - 1 = 5`."
+confondi:
+  - scheda: equazione-spuria
+    differenza: "La spuria è un caso particolare: si raccoglie x e si applica questa regola."
+perche: "Se due numeri hanno prodotto zero, almeno uno dei due è zero."
+parole: prodotto nullo annullamento prodotto scomposizione

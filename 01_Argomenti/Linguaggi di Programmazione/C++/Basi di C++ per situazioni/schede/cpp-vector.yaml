@@ -1,0 +1,44 @@
+id: cpp-vector
+tipo: ricetta
+titolo: 'vector: la lista che cresce'
+sigla: vector
+comando: vector<int>  push_back
+frase: una fila che cambia lunghezza
+fonte: Documentazione C++ · cppreference.com · std::vector
+parole: vector push_back pop_back size empty back lista dinamica array che cresce include
+quando: Quando non sai in anticipo quanti elementi avrai.
+fasi:
+- nome: Creare
+  righe:
+  - codice: '#include <vector>'
+  - codice: vector<int> v;
+    commento: Vuoto.
+  - codice: vector<int> w = {3, 1, 2};
+    commento: Con valori iniziali.
+- nome: Aggiungere e togliere
+  righe:
+  - codice: v.push_back(10);
+    commento: Aggiunge in fondo.
+  - codice: v.pop_back();
+    commento: Toglie l'ultimo.
+- nome: Leggere
+  righe:
+  - codice: v.size()
+    commento: Quanti elementi.
+  - codice: v[0]
+    commento: Primo elemento.
+  - codice: v.back()
+    commento: Ultimo elemento.
+  - codice: v.empty()
+    commento: true se è vuoto.
+- nome: Scorrere
+  righe:
+  - codice: 'for (int x : v) cout << x;'
+    trappola: 'v.back() o v[0] su un vector vuoto non danno errore ma sono sbagliati: controlla v.empty()
+      prima.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-vector-limiti
+- cpp-ordina
+- cpp-for

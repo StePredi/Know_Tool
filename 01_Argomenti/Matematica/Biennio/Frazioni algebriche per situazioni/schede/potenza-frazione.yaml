@@ -1,0 +1,29 @@
+id: potenza-frazione
+tipo: regola
+titolo: Potenza di una frazione algebrica
+sigla: Potenza
+comando: elevo sopra e sotto
+vedo: "Una frazione algebrica elevata a un esponente: `(frac(x - 1|x + 2))^3`."
+formula: (frac(a|b))^n = frac(a^n|b^n)
+adatto:
+  - "Eleva numeratore e denominatore all'esponente."
+  - "Meglio semplificare prima la frazione, poi elevare."
+  - "Esponente negativo: capovolgi la frazione e cambia il segno dell'esponente."
+esempi:
+  - da: (frac(x^2 - 1|x + 1))^2
+    passi:
+      - "Semplifico dentro: `frac(x^2 - 1|x + 1) = x - 1`"
+      - "Elevo"
+    ris: (x - 1)^2
+    verifica: scomposizione
+  - da: (frac(x|x + 1))^(-1)
+    passi:
+      - "Esponente negativo: capovolgo la frazione"
+    ris: frac(x + 1|x)
+    verifica: scomposizione
+errore: "Elevare solo il numeratore, oppure elevare i singoli termini invece dei fattori."
+confondi:
+  - scheda: prodotto-frazioni
+    differenza: "La potenza è un prodotto della stessa frazione per sé stessa, n volte."
+perche: "Elevare a n vuol dire moltiplicare la frazione per sé stessa n volte."
+parole: potenza elevare frazione esponente negativo

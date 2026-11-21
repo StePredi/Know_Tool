@@ -1,0 +1,99 @@
+id: bind-o-volume
+tipo: spiegazione
+titolo: Scegliere tra named volume e bind mount
+sigla: Volume o bind mount
+comando: -v nome:… · -v /percorso:…
+frase: nome = volume, percorso = bind mount
+fonte: lab_immagini_dockerfile.pdf (parte 5.4) · lab_volumi_servizi.pdf (parte 5.5) · virtualizzazione_e_container.pdf · container_mini_tutorial.md
+parole: named volume bind mount scegliere differenza confronto produzione sviluppo configurazione database portabilità persistenza
+quando: Quando devi decidere dove tenere i dati di un container.
+blocchi:
+- testo: 'I container sono **effimeri**: eliminandoli, i dati al loro interno vanno persi. Un volume collega una cartella del container allo storage dell''host, così i dati sopravvivono.'
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Named volume
+      cornice: Sistema host
+      strati:
+      - testo:
+        - |-
+          Container A
+          /app/data
+        - |-
+          Container B
+          /data
+        tono: colore
+      - testo: |-
+          Volume mio-volume
+          storage gestito da Docker
+        tono: oro
+      nota: Più container possono montare lo stesso volume.
+    - titolo: Bind mount
+      cornice: Sistema host
+      strati:
+      - testo: |-
+          Container
+          /usr/share/nginx/html
+        tono: colore
+      - |-
+        Cartella del PC
+        $HOME/sito
+      nota: Una cartella normale del PC, montata nel container.
+- nota: 'Come distinguerli: se prima dei due punti di -v c''è un **nome** è un named volume; se c''è un **percorso** è un bind mount.'
+- carte:
+  - titolo: Named volume
+    etichetta: Consigliato
+    punti:
+    - gestito interamente da Docker
+    - indipendente dal filesystem host
+    - backup semplice
+    - condivisibile tra container
+  - titolo: Bind mount
+    punti:
+    - una cartella dell'host montata nel container
+    - le modifiche sono subito visibili
+    - 'legato al filesystem host: poco portabile'
+    - modificabile anche da processi non-Docker
+- titolo: Che cosa hai visto in laboratorio
+- tabella:
+    colonne:
+    - ''
+    - Named volume
+    - Bind mount
+    righe:
+    - - Dove sono i dati
+      - In un'area gestita da Docker (/var/lib/docker/volumes)
+      - In una cartella scelta da te
+    - - Come li modifichi
+      - Con un container che monta il volume
+      - Dal PC, sono file normali
+    - - Contenuto iniziale
+      - Sì, alla prima volta prende quello dell'immagine
+      - 'No: la cartella nasconde quella dell''immagine'
+    - - Con nginx e cartella vuota
+      - Pagina di benvenuto
+      - Errore 403
+    - - Dipende dalle cartelle dell'host
+      - 'No'
+      - Sì
+    - - Comodo per
+      - Dati dell'applicazione da conservare
+      - File da leggere o modificare dal PC
+- titolo: Esempi di scelta
+- tabella:
+    colonne:
+    - Caso
+    - Scelta
+    righe:
+    - - Il database di un'applicazione in produzione
+      - Named volume
+    - - I sorgenti che stai modificando mentre sviluppi
+      - Bind mount
+    - - Un file di configurazione preparato a mano
+      - Bind mount, meglio in sola lettura (:ro)
+varianti: []
+vicine:
+- named-volume
+- bind-mount
+- bind-sola-lettura
+- dati-effimeri

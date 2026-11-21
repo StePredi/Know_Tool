@@ -1,0 +1,52 @@
+esercizi:
+  - testo: "x + 2y = 5,   3x - y = 1"
+    risultato: "(1, 2)"
+    piano:
+      - scheda: scegli-metodo
+        nota: "Coefficienti 1 e -1."
+      - scheda: sostituzione
+        nota: "Ricavo `y = 3x - 1`."
+  - testo: "3x + y = 7,   2x - y = 3"
+    risultato: "(2, 1)"
+    piano:
+      - scheda: riduzione
+        nota: "Coefficienti di `y` opposti: sommo."
+  - testo: "y = 2x + 1,   y = 5 - x"
+    risultato: "(frac(4|3), frac(11|3))"
+    piano:
+      - scheda: confronto
+        nota: "`y` già isolata in entrambe."
+  - testo: "2x + 3y = 12,   3x - 2y = 5"
+    risultato: "(3, 2)"
+    piano:
+      - scheda: riduzione
+        nota: "Moltiplico per 2 e per 3."
+  - testo: "5x - 2y = 4,   3x + 4y = 18"
+    risultato: "(2, 3)"
+    piano:
+      - scheda: cramer
+        nota: "`D = 26`."
+  - testo: "2(x + y) = 3 + y,   x - 1 = frac(y + 2|3)"
+    risultato: "(frac(8|5), frac(-1|5))"
+    piano:
+      - scheda: forma-normale-sistema
+        nota: "Si arriva a `2x + y = 3` e `3x - y = 5`."
+      - scheda: riduzione
+        nota: "Coefficienti di `y` opposti: sommo."
+      - scheda: controlla-sistema
+        nota: "Sostituisco nelle equazioni di partenza."
+  - testo: "x + 2y = 3,   2x + 4y = 5"
+    risultato: "impossibile"
+    piano:
+      - scheda: impossibile-indeterminato
+        nota: "Coefficienti di x e y proporzionali, termini noti no."
+  - testo: "x + y = 2,   3x + 3y = 6"
+    risultato: "indeterminato"
+    piano:
+      - scheda: impossibile-indeterminato
+        nota: "La seconda è tre volte la prima."
+  - testo: "x + y + z = 6,   x - y + 2z = 5,   2x + y - z = 1"
+    risultato: "(1, 2, 3)"
+    piano:
+      - scheda: sistema-tre-incognite
+        nota: "Elimino `z` due volte."

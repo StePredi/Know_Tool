@@ -1,0 +1,28 @@
+id: parabola-asse-orizzontale
+tipo: regola
+titolo: Parabola con asse orizzontale
+sigla: Asse orizzontale
+comando: V = (-frac(d|4*a), -frac(b|2*a))
+vedo: Un'equazione `x = a*y^2 + b*y + c`.
+formula:
+- x = a*y^2 + b*y + c
+- V = (-frac(d|4*a), -frac(b|2*a))
+- F = (frac(1 - d|4*a), -frac(b|2*a))
+- x = frac(-1 - d|4*a)
+- y = -frac(b|2*a)
+adatto:
+- Stesse formule della parabola con asse verticale, con `x` e `y` scambiati.
+- '`a > 0`: apertura verso destra; `a < 0`: verso sinistra.'
+esempi:
+- da: x = y^2 - 2y
+  passi:
+  - '`d = 4`'
+  - vertice `(-1, 1)`
+  - 'fuoco: `x = frac(1 - 4|4)`'
+  ris: V(-1, 1), F(-3/4, 1), direttrice x = -5/4
+errore: Applicare le formule dell'asse verticale senza scambiare le coordinate.
+confondi:
+- scheda: parabola-asse-verticale
+  differenza: Gli ruoli di `x` e `y` sono scambiati.
+perche: 'È la stessa parabola ruotata di 90 gradi: si scambiano `x` e `y`.'
+parole: parabola asse orizzontale vertice fuoco

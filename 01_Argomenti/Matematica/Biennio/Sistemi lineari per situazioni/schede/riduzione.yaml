@@ -1,0 +1,31 @@
+id: riduzione
+tipo: regola
+titolo: Metodo di riduzione
+sigla: Riduzione
+comando: "somma o sottrai per eliminare un'incognita"
+vedo: "Una incognita ha coefficienti uguali o opposti, o si possono rendere tali: `3x + y = 7` e `2x - y = 3`."
+formula: (a_1 + a_2)*x + (b_1 + b_2)*y = c_1 + c_2
+adatto:
+  - "Coefficienti opposti: somma le equazioni membro a membro, l'incognita sparisce."
+  - "Coefficienti uguali: sottrai."
+  - "Altrimenti moltiplica una o entrambe le equazioni (tutti i termini!) per numeri che rendano uguali o opposti i coefficienti: va bene l'mcm."
+  - "Trovata un'incognita, sostituisci in una equazione per l'altra, oppure ripeti la riduzione."
+esempi:
+  - da: "3x + y = 7,   2x - y = 3"
+    passi:
+      - "Coefficienti di `y` opposti: sommo"
+      - "`5x = 10`, quindi `x = 2`"
+      - "`y = 7 - 3*2 = 1`"
+    ris: "(2, 1)"
+  - da: "2x + 3y = 12,   3x - 2y = 5"
+    passi:
+      - "Moltiplico la prima per 2 e la seconda per 3: `4x + 6y = 24` e `9x - 6y = 15`"
+      - "Sommo: `13x = 39`, quindi `x = 3`"
+      - "`y = (12 - 6)/3 = 2`"
+    ris: "(3, 2)"
+errore: "Moltiplicare solo il primo membro di un'equazione, oppure sommare invece di sottrarre quando i coefficienti sono uguali."
+confondi:
+  - scheda: sostituzione
+    differenza: "La sostituzione conviene con un coefficiente 1 o -1; la riduzione con coefficienti uguali od opposti."
+perche: "Sommare o sottrarre due equazioni vere dà un'equazione vera."
+parole: riduzione addizione sottrazione sistema

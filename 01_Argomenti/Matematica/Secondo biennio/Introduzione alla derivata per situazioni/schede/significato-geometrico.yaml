@@ -1,0 +1,27 @@
+id: significato-geometrico
+tipo: regola
+titolo: Significato geometrico
+sigla: Significato
+comando: f'(x_0) = pendenza della tangente
+vedo: Ti chiedono cosa rappresenta la derivata, o la pendenza del grafico in un punto.
+formula:
+- f'(x_0) = m_t
+adatto:
+- '`f''(x_0) > 0`: grafico crescente in `x_0`; `< 0`: decrescente; `= 0`: tangente orizzontale.'
+- Più la tangente è ripida, più `|f'(x_0)|` è grande.
+- La tangente è il limite delle secanti per `h -> 0`.
+esempi:
+- da: f'(2) = 4 per f(x) = x^2
+  passi:
+  - pendenza 4 in `x = 2`
+  ris: la tangente sale con pendenza 4
+- da: f'(0) = 0 per f(x) = x^2
+  passi:
+  - pendenza nulla
+  ris: tangente orizzontale nel vertice
+errore: Confondere il valore della funzione `f(x_0)` con la pendenza `f'(x_0)`.
+confondi:
+- scheda: retta-tangente
+  differenza: Qui il significato; lì l'equazione completa della retta.
+perche: La pendenza di una retta è il rapporto incrementale; quella della tangente è il suo limite.
+parole: significato geometrico derivata pendenza tangente

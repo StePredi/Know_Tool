@@ -1,0 +1,41 @@
+id: run-interattivo
+tipo: ricetta
+titolo: Aprire una shell in un container nuovo
+sigla: docker run -it
+comando: docker run -it … sh
+frase: entri nel container e ti guardi intorno
+fonte: lab_immagini_dockerfile.pdf (parte 4.6) · lab_networking_container.pdf (parte 1.1) · container_mini_tutorial.md
+parole: shell interattivo -it terminale bash sh pwd env exit esplorare container dit debian ubuntu
+quando: Quando vuoi esplorare il contenuto di un'immagine o lavorare a mano dentro un container.
+fasi:
+- nome: Avvia una shell al posto del programma
+  righe:
+  - codice: docker run --rm -it note:2.0 sh
+    commento: il comando dopo il nome dell'immagine sostituisce il CMD
+    parti:
+    - voce: -it
+      spiega: tiene aperto lo STDIN e assegna un terminale
+    - voce: --rm
+      spiega: il container si elimina quando esci
+- nome: Guardati intorno
+  righe:
+  - codice: pwd
+    commento: parti dalla cartella impostata con WORKDIR
+  - codice: ls /app /data
+  - codice: env | grep -E "NOTES_DIR|PORT"
+    commento: le variabili impostate con ENV
+  - codice: exit
+    commento: 'esci: con --rm il container viene eliminato'
+- nome: Un container che resta acceso
+  righe:
+  - codice: docker run -dit --name c1 debian
+    commento: 'background (-d) con terminale (-it): debian resta vivo e ci entri dopo con docker exec'
+    trappola: Senza -it il container debian non ha nulla da fare e si ferma subito.
+segnaposto: {}
+varianti:
+- codice: docker run -it ubuntu bash
+  spiega: stessa cosa con bash, se l'immagine ce l'ha
+vicine:
+- exec-container
+- run-comando
+- container-si-ferma

@@ -1,0 +1,32 @@
+id: per-parti-ln-arctan
+tipo: regola
+titolo: ln x e arctan x
+sigla: ln e arctan
+comando: scrivi 1 come secondo fattore
+vedo: Devi integrare `ln x`, `arctan x`, o il loro prodotto con un polinomio.
+formula:
+- ∫ ln x dx = x ln x - x + c
+adatto:
+- Scrivi `ln x = 1 * ln x` e applica la formula derivando `ln x`.
+- Lo stesso per `arctan x`.
+- Con un polinomio come `x^2 ln x`, derivi il logaritmo e integri il polinomio.
+esempi:
+- da: ∫ ln x dx
+  passi:
+  - 'derivo `ln x`, integro `1`: `x ln x - ∫ frac(x|x) dx`'
+  ris: x ln x - x + c
+- da: ∫ arctan x dx
+  passi:
+  - '`x arctan x - ∫ frac(x|1 + x^2) dx`'
+  - 'secondo integrale: `frac(1|2) ln(1 + x^2)`'
+  ris: x arctan x - frac(1|2) ln(1 + x^2) + c
+- da: ∫ x^2*ln x dx
+  passi:
+  - derivo `ln x`, integro `x^2`
+  ris: frac(x^3|3) ln x - frac(x^3|9) + c
+errore: 'Cercare una primitiva immediata di `ln x`: non è nella tabella, si ottiene per parti.'
+confondi:
+- scheda: per-parti
+  differenza: La formula è la stessa; qui il secondo fattore è `1`.
+perche: Funziona perché la derivata di `ln x` e di `arctan x` è una funzione razionale, più semplice.
+parole: integrale logaritmo arcotangente per parti

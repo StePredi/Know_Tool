@@ -1,0 +1,56 @@
+modello: per_situazioni
+titolo: Monomi e polinomi, per situazioni
+centro: Monomi e polinomi
+sottotitolo: ""
+ingresso: Espressione
+guida: "Che operazione c'è tra i pezzi: somma, prodotto, potenza o divisione? Poi conta quanti termini hanno i pezzi."
+rami:
+  - id: ric
+    nome: Riconoscere il pezzo
+    colore: green
+    voci:
+      - schede:
+          - monomio
+          - polinomio
+  - id: som
+    nome: Somma e differenza
+    colore: blue
+    voci:
+      - schede:
+          - somma-monomi
+          - somma-polinomi
+  - id: pro
+    nome: Prodotto e potenza
+    colore: orange
+    voci:
+      - gruppo: Con i monomi
+        schede:
+          - prodotto-monomi
+          - potenza-monomio
+      - gruppo: Con i polinomi
+        schede:
+          - monomio-per-polinomio
+          - polinomio-per-polinomio
+  - id: not
+    nome: Prodotti notevoli
+    colore: pink
+    voci:
+      - schede:
+          - riconosci-notevole
+          - quadrato-binomio
+          - somma-per-differenza
+          - cubo-binomio
+          - quadrato-trinomio
+  - id: div
+    nome: Divisione
+    colore: teal
+    voci:
+      - gruppo: Per un monomio
+        schede:
+          - quoziente-monomi
+          - polinomio-diviso-monomio
+      - gruppo: Tra polinomi
+        schede:
+          - divisione-polinomi
+          - ruffini
+          - teorema-del-resto

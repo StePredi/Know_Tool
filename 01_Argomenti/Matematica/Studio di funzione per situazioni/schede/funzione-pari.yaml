@@ -1,0 +1,33 @@
+id: funzione-pari
+tipo: regola
+titolo: Funzione pari
+sigla: Pari
+comando: f(-x) = f(x)
+vedo: Il calcolo di `f(-x)` torna uguale a `f(x)`.
+formula:
+- f(-x) = f(x)
+adatto:
+- Il grafico è simmetrico rispetto all'asse `y`.
+- Vale per i polinomi con solo potenze pari, per `cos x`, per `abs(x)`.
+- Studia solo `x >= 0` e rifletti sull'asse `y`.
+- Gli estremi e i flessi sono a coppie `x` e `-x`.
+esempi:
+- da: f(x) = x^4 - 2x^2
+  passi:
+  - '`f(-x) = f(x)`'
+  - studio per `x >= 0`
+  ris: pari
+- da: f(x) = sqrt(x^2 - 4)
+  passi:
+  - '`f(-x) = sqrt((-x)^2 - 4) = sqrt(x^2 - 4)`'
+  ris: pari
+- da: f(x) = frac(x^2|x^2 + 1)
+  passi:
+  - '`f(-x) = f(x)`'
+  ris: pari
+errore: 'Dimenticare che il dominio deve essere simmetrico: se manca `-x`, non ha senso parlare di parità.'
+confondi:
+- scheda: funzione-dispari
+  differenza: 'Pari: asse `y`. Dispari: origine.'
+perche: I termini con esponente pari non cambiano segno quando si cambia `x` in `-x`.
+parole: pari simmetria asse y f(-x)

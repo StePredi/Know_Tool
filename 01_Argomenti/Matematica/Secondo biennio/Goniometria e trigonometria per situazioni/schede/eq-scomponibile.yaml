@@ -1,0 +1,32 @@
+id: eq-scomponibile
+tipo: regola
+titolo: Equazione da scomporre
+sigla: Scomponi
+comando: A(x)*B(x) = 0 -> A(x) = 0, B(x) = 0
+vedo: Un lato è zero e l'altro si può raccogliere, oppure c'è un angolo doppio da portare in seno e coseno.
+formula:
+- A(x)*B(x) = 0
+adatto:
+- Porta tutto a sinistra e raccogli.
+- 'Mai dividere per `sin(x)` o `cos(x)`: perdi soluzioni.'
+- Con `sin(2x)` usa `2*sin(x)*cos(x)` e poi raccogli.
+- Alla fine risolvi ogni fattore con l'equazione elementare.
+esempi:
+- da: sin(x)*cos(x) - sin(x) = 0
+  passi:
+  - 'raccolgo: `sin(x)*(cos(x) - 1) = 0`'
+  - '`sin(x) = 0` → `x = k*pi`'
+  - '`cos(x) = 1` → `x = 2k*pi` (già incluso)'
+  ris: x = k*pi
+- da: sin(2x) = cos(x)
+  passi:
+  - '`2*sin(x)*cos(x) - cos(x) = 0`'
+  - 'raccolgo: `cos(x)*(2*sin(x) - 1) = 0`'
+  - '`cos(x) = 0` oppure `sin(x) = frac(1|2)`'
+  ris: x = frac(pi|2) + k*pi, x = frac(pi|6) + 2k*pi, x = frac(5*pi|6) + 2k*pi
+errore: Dividere per `cos(x)` o `sin(x)` e perdere le soluzioni in cui si annulla.
+confondi:
+- scheda: eq-secondo-grado
+  differenza: Lì sostituisci con `t`; qui basta raccogliere un fattore comune.
+perche: Un prodotto è nullo se almeno uno dei fattori è nullo.
+parole: equazione scomporre raccoglimento prodotto nullo seno coseno duplicazione

@@ -1,0 +1,34 @@
+id: costruisci-tavola
+tipo: regola
+titolo: Costruire una tavola di verità
+sigla: Tavola
+comando: righe = 2^n
+vedo: Una frase composta con connettivi e ti chiedono il suo valore in tutti i casi, o se due frasi sono equivalenti.
+formula:
+- righe = 2^n
+adatto:
+- '1. Elenca le proposizioni semplici: con `n` proposizioni ci sono `2^n` righe.'
+- 'Colonne dei valori: l''ultima proposizione alterna `V, F, V, F...`, la penultima ogni due righe, e così via.'
+- 2. Scrivi una colonna per ogni sotto-espressione, dalle più interne.
+- 3. L'ultima colonna è il risultato.
+- 'Con 2 proposizioni: `VV, VF, FV, FF`. Con 3: `VVV, VVF, VFV, VFF, FVV, FVF, FFV, FFF`.'
+esempi:
+- da: (p ∨ q) ∧ ¬p
+  passi:
+  - 'righe in ordine: `VV, VF, FV, FF`'
+  - '`p ∨ q`: V V V F'
+  - '`¬p`: F F V V'
+  - 'colonna finale: F F V F'
+  ris: F F V F
+- da: (p ∧ q) -> r
+  passi:
+  - '3 proposizioni: 8 righe `VVV, VVF, VFV, VFF, FVV, FVF, FFV, FFF`'
+  - '`p ∧ q`: V V F F F F F F'
+  - 'colonna finale: V F V V V V V V'
+  ris: V F V V V V V V
+errore: 'Dimenticare qualche riga: con 3 proposizioni servono 8 righe, non 6.'
+confondi:
+- scheda: leggi-risultato
+  differenza: Qui si riempie la tavola; lì si interpreta l'ultima colonna.
+perche: Per ogni combinazione possibile di V e F dei dati, il valore del tutto si calcola passo per passo con le tavole dei connettivi.
+parole: tavola verità costruire righe colonne connettivi

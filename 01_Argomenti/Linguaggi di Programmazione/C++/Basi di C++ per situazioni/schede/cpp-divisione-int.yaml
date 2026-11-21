@@ -1,0 +1,31 @@
+id: cpp-divisione-int
+tipo: prima_dopo
+titolo: 'Errore: la divisione tra interi perde i decimali'
+sigla: Divisione tra int
+comando: static_cast<double>
+frase: 7 / 2 dà 3
+fonte: Documentazione C++ · cppreference.com · Operatori aritmetici · conversioni
+parole: divisione intera decimali static_cast double int resto modulo troncamento
+prima: |-
+  int a = 7, b = 2;
+  double r = ⟦a / b⟧;
+  cout << r;   // 3
+dopo: |-
+  int a = 7, b = 2;
+  double r = ⟦static_cast<double>(a)⟧ / b;
+  cout << r;   // 3.5
+uso: Dividere due numeri interi e ottenere anche i decimali.
+riconoscila: 'Il risultato di una divisione non ha decimali: 7 / 2 dà 3, anche se lo metti in un double.'
+parti:
+- voce: a / b
+  spiega: 'tra due int è una divisione intera: i decimali vengono scartati'
+- voce: static_cast<double>(a)
+  spiega: trasforma a in double prima della divisione
+trappola: 'Il taglio dei decimali avviene PRIMA di assegnare il risultato: scrivere double r = a / b non
+  basta. Per il resto della divisione si usa %: 7 % 2 dà 1.'
+varianti:
+- codice: a / 2.0
+  spiega: anche un solo numero decimale basta a far decimale la divisione
+vicine:
+- cpp-tipi
+- cpp-const-auto

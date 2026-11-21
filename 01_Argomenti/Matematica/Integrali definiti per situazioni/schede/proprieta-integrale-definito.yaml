@@ -1,0 +1,34 @@
+id: proprieta-integrale-definito
+tipo: regola
+titolo: Proprietà
+sigla: Proprietà
+comando: linearità, additività, scambio degli estremi
+vedo: L'integrale ha un intervallo da spezzare, estremi invertiti o somme di funzioni.
+formula:
+- ∫_a^b (f + g) dx = ∫_a^b f dx + ∫_a^b g dx
+- ∫_a^b f dx = ∫_a^c f dx + ∫_c^b f dx
+- ∫_b^a f dx = -∫_a^b f dx
+adatto:
+- Somme e costanti si trattano pezzo per pezzo, come negli integrali indefiniti.
+- 'Si può spezzare l''intervallo in un punto `c` qualsiasi: serve se la funzione cambia espressione.'
+- Scambiare gli estremi cambia il segno; estremi uguali danno `0`.
+esempi:
+- da: ∫_0^1 (3x^2 + 2x) dx
+  passi:
+  - '`[x^3 + x^2]_0^1 = 2`'
+  ris: '2'
+- da: ∫_2^0 x dx
+  passi:
+  - 'scambio gli estremi: `-∫_0^2 x dx = -2`'
+  ris: '-2'
+- da: ∫_0^2 |x - 1| dx
+  passi:
+  - 'spezzo in `x = 1`: `∫_0^1 (1 - x) dx + ∫_1^2 (x - 1) dx`'
+  - '`frac(1|2) + frac(1|2)`'
+  ris: '1'
+errore: Integrare `|f|` senza spezzare nei punti in cui `f` cambia segno.
+confondi:
+- scheda: area-segno-cambia
+  differenza: Lo spezzare l'intervallo è il caso dell'area con curva che attraversa l'asse.
+perche: 'L''integrale è una somma di strisce: spezzare l''intervallo spezza la somma.'
+parole: proprietà additività linearità scambio estremi

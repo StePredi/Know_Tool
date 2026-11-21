@@ -1,0 +1,27 @@
+id: pubblica-solo-locale
+tipo: ricetta
+titolo: Pubblicare un servizio solo per il proprio PC
+sigla: Solo in locale
+comando: -p 127.0.0.1:8080:80
+frase: gli altri PC non lo vedono
+fonte: lab_volumi_servizi.pdf (parte 4.3)
+parole: loopback 127.0.0.1 localhost solo locale pubblicare lan sicurezza ss
+quando: Quando un servizio serve solo a te (prove, pannelli di amministrazione) e non deve essere visibile in rete.
+fasi:
+- nome: Pubblica su loopback
+  righe:
+  - codice: docker run -d --name web -p 127.0.0.1:8080:80 -v $HOME/sito:/usr/share/nginx/html:ro nginx
+    commento: davanti alla porta dell'host c'è l'indirizzo su cui accettare
+  - codice: ss -ltn | grep 8080
+    commento: ora mostra 127.0.0.1:8080 invece di 0.0.0.0:8080
+- nome: Differenza
+  righe:
+  - codice: '# -p 8080:80            → tutte le interfacce del PC: anche la LAN'
+  - codice: '# -p 127.0.0.1:8080:80  → solo dal PC stesso'
+    trappola: 'Non confonderlo con BIND_ADDRESS=127.0.0.1 dentro il container: quello blocca anche le connessioni dal PC.'
+segnaposto: {}
+varianti: []
+vicine:
+- pubblica-porta
+- bind-address
+- servizio-lan

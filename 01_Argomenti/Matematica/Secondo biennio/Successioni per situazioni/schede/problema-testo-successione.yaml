@@ -1,0 +1,36 @@
+id: problema-testo-successione
+tipo: regola
+titolo: Problemi con le successioni
+sigla: Problemi
+comando: 'aumento fisso: aritmetica; percentuale: geometrica'
+vedo: 'Un problema di testo con crescite regolari: stipendi, rate, interessi, popolazioni.'
+formula:
+- a_n = a_1 + (n - 1)*d
+- a_n = a_1*q^(n - 1)
+- C_n = C*(1 + r)^n
+adatto:
+- 'Aumento della stessa quantità ogni periodo: aritmetica.'
+- 'Aumento in percentuale o raddoppio: geometrica con `q = 1 + r`.'
+- 'Interesse composto: `C*(1 + r)^n`; interesse semplice: `C*(1 + r*n)`.'
+- Attenzione a quanti periodi `n` ci sono.
+esempi:
+- da: 1000 euro al 2% annuo composto per 5 anni
+  passi:
+  - '`q = 1,02`'
+  - '`1000*1,02^5`'
+  ris: circa 1104,08 euro
+- da: 'stipendio 1200 euro, +50 euro al mese: totale del primo anno'
+  passi:
+  - '`a_12 = 1200 + 11*50 = 1750`'
+  - '`S_12 = frac(12*(1200 + 1750)|2)`'
+  ris: 17700 euro
+- da: '100 batteri che raddoppiano ogni ora: dopo 6 ore'
+  passi:
+  - '`q = 2`, `n = 6`'
+  ris: '6400'
+errore: Usare l'interesse semplice dove il testo chiede il composto.
+confondi:
+- scheda: geometrica-termine
+  differenza: Qui si traduce il testo; lì si usano le formule.
+perche: I modelli di crescita fissa e percentuale corrispondono rispettivamente a progressioni aritmetiche e geometriche.
+parole: problemi successioni interesse composto crescita percentuale

@@ -1,0 +1,43 @@
+id: named-volume
+tipo: ricetta
+titolo: Conservare i dati in un named volume
+sigla: Named volume
+comando: -v nome:/percorso
+frase: i dati sopravvivono al container
+fonte: lab_immagini_dockerfile.pdf (parte 5.2) · lab_volumi_servizi.pdf (parti 5.1, 5.2) · container_mini_tutorial.md
+parole: named volume volume create ls inspect rm prune mountpoint persistenza dati conservare var lib docker volumes
+quando: Quando i dati del servizio (note, database, file caricati) devono restare anche se elimini e ricrei il container.
+fasi:
+- nome: Crea e monta
+  righe:
+  - codice: docker volume create «VOLUME»
+    commento: 'facoltativo: se non esiste, docker run lo crea'
+  - codice: docker run -d --name archivio -p 5000:5000 -v «VOLUME»:/data note:2.0
+    commento: monta il volume sulla cartella dei dati
+    trappola: Un volume nuovo e vuoto, montato su una cartella che nell'immagine ha già dei file, viene riempito con quei file.
+- nome: Prova che i dati restano
+  righe:
+  - codice: docker rm -f archivio
+  - codice: docker run -d --name archivio -p 5000:5000 -v «VOLUME»:/data note:2.0
+  - codice: python3 client.py localhost 5000 LIST
+    commento: le note di prima ci sono ancora
+- nome: Gestisci i volumi
+  righe:
+  - codice: docker volume ls
+  - codice: docker volume inspect «VOLUME»
+    commento: 'Mountpoint: /var/lib/docker/volumes/«VOLUME»/_data'
+    trappola: 'È un''area protetta: con il tuo utente non la leggi. Per toccare i file usa un container.'
+  - codice: docker volume rm «VOLUME»
+    commento: 'solo quando nessun container lo usa: poi i dati sono persi davvero'
+  - codice: docker volume prune
+    commento: rimuove i volumi non usati
+segnaposto:
+  VOLUME:
+    esempio: notes-data
+    spiega: nome del volume scelto da te
+varianti: []
+vicine:
+- volume-servizio
+- volume-condiviso
+- backup-volume
+- bind-o-volume

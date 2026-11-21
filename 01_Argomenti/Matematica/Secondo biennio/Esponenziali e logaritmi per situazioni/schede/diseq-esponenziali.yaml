@@ -1,0 +1,37 @@
+id: diseq-esponenziali
+tipo: regola
+titolo: Disequazioni esponenziali
+sigla: Disequazioni
+comando: 'a > 1: stesso verso; 0 < a < 1: verso invertito'
+vedo: Una disequazione con l'incognita all'esponente.
+formula:
+- a^f(x) > a^g(x)
+adatto:
+- Riduci le due parti alla stessa base.
+- 'Base maggiore di 1: la funzione cresce, il verso resta uguale.'
+- 'Base tra 0 e 1: la funzione decresce, il verso si inverte.'
+- 'Un esponenziale è sempre positivo: `a^x > -1` è sempre vera, `a^x < -1` mai.'
+esempi:
+- da: 2^x > 8
+  passi:
+  - '`2^x > 2^3`, base maggiore di 1'
+  ris: x > 3
+- da: (frac(1|2))^x > 4
+  passi:
+  - '`2^(-x) > 2^2`'
+  - '`-x > 2`'
+  ris: x < -2
+- da: 3^(2x - 1) <= 27
+  passi:
+  - '`2x - 1 <= 3`'
+  ris: x <= 2
+- da: 2^x > -1
+  passi:
+  - un esponenziale è sempre positivo
+  ris: per ogni x
+errore: Non invertire il verso quando la base è tra 0 e 1.
+confondi:
+- scheda: diseq-log
+  differenza: Stessa regola della base, applicata ai logaritmi (con in più le condizioni di esistenza).
+perche: Una funzione crescente conserva l'ordine, una decrescente lo inverte.
+parole: disequazione esponenziale verso base

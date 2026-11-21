@@ -1,0 +1,41 @@
+id: angoli-notevoli
+tipo: regola
+titolo: Valori degli angoli notevoli
+sigla: Notevoli
+comando: sin(frac(pi|6)) = frac(1|2)
+vedo: Angoli di 30, 45, 60 gradi (o `frac(pi|6)`, `frac(pi|4)`, `frac(pi|3)`) dentro un calcolo.
+formula:
+- sin(frac(pi|6)) = frac(1|2)
+- cos(frac(pi|6)) = frac(sqrt(3)|2)
+- tan(frac(pi|6)) = frac(sqrt(3)|3)
+- sin(frac(pi|4)) = cos(frac(pi|4)) = frac(sqrt(2)|2)
+- tan(frac(pi|4)) = 1
+- sin(frac(pi|3)) = frac(sqrt(3)|2)
+- cos(frac(pi|3)) = frac(1|2)
+- tan(frac(pi|3)) = sqrt(3)
+adatto:
+- 'Trucco: i seni di 30, 45, 60 sono `frac(sqrt(1)|2)`, `frac(sqrt(2)|2)`, `frac(sqrt(3)|2)`; i coseni vanno al contrario.'
+- Gli altri angoli si riportano a questi con gli angoli associati.
+- 'A 0 e 90 gradi: `sin = 0, 1` e `cos = 1, 0`.'
+esempi:
+- da: sin(frac(pi|6)) + cos(frac(pi|3))
+  passi:
+  - '`frac(1|2) + frac(1|2)`'
+  ris: '1'
+  verifica: scomposizione
+- da: tan(frac(pi|4))*cos(frac(pi|3))
+  passi:
+  - '`1 * frac(1|2)`'
+  ris: frac(1|2)
+  verifica: scomposizione
+- da: 2*sin(frac(pi|4))*cos(frac(pi|4))
+  passi:
+  - '`2*frac(sqrt(2)|2)*frac(sqrt(2)|2) = 2*frac(2|4)`'
+  ris: '1'
+  verifica: scomposizione
+errore: Invertire seno e coseno a 30 e 60 gradi.
+confondi:
+- scheda: circonferenza-goniometrica
+  differenza: Lì leggi segni e definizioni; qui usi i valori esatti.
+perche: Derivano dal triangolo equilatero (30 e 60 gradi) e dal quadrato (45 gradi) con il teorema di Pitagora.
+parole: angoli notevoli 30 45 60 valori esatti tabella

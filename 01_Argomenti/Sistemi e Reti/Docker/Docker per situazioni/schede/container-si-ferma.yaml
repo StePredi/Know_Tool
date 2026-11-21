@@ -1,0 +1,20 @@
+id: container-si-ferma
+tipo: prima_dopo
+titolo: Il container debian si ferma appena avviato
+sigla: Container che si ferma
+comando: -dit
+frase: senza un processo che resta acceso, il container termina
+fonte: lab_networking_container.pdf (parte 1.1)
+parole: container si ferma subito exited debian -dit terminale stato exited non resta acceso
+prima: docker run -d --name c1 debian
+dopo: docker run -⟦dit⟧ --name c1 debian
+uso: Tenere acceso un container di un sistema "vuoto" (debian, ubuntu) per entrarci dopo con docker exec.
+riconoscila: docker ps non lo mostra; docker ps -a lo dà come Exited.
+parti:
+- voce: -it
+  spiega: 'gli assegna un terminale: la shell resta in attesa e il container non termina'
+trappola: Un container vive finché vive il suo processo principale. Per un'immagine tua puoi usare CMD ["sleep", "infinity"].
+varianti: []
+vicine:
+- run-interattivo
+- immagine-strumenti

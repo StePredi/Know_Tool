@@ -1,0 +1,40 @@
+id: riduci-stessa-base
+tipo: regola
+titolo: Ridurre alla stessa base
+sigla: Stessa base
+comando: 4 = 2^2, 8 = 2^3, frac(1|2) = 2^(-1)
+vedo: Esponenziali con basi diverse ma legate (2, 4, 8, frac(1|2)), o logaritmi con basi diverse.
+formula:
+- 4 = 2^2
+- 8 = 2^3
+- frac(1|2) = 2^(-1)
+- sqrt(2) = 2^(frac(1|2))
+- log_4(x) = frac(log_2(x)|2)
+adatto:
+- Riscrivi ogni base come potenza della stessa base.
+- Poi applica le proprietà delle potenze (o dei logaritmi).
+- Per i logaritmi in basi diverse usa il cambio di base.
+esempi:
+- da: 8^x * 2 = 4^(x + 1)
+  passi:
+  - '`2^(3x) * 2 = 2^(2x + 2)`'
+  - '`2^(3x + 1) = 2^(2x + 2)`'
+  - '`3x + 1 = 2x + 2`'
+  ris: x = 1
+- da: (frac(1|4))^x = 8
+  passi:
+  - '`2^(-2x) = 2^3`'
+  - '`-2x = 3`'
+  ris: x = -frac(3|2)
+- da: log_4(x) + log_2(x) = 3
+  passi:
+  - '`log_4(x) = frac(log_2(x)|2)`'
+  - '`frac(3|2)*log_2(x) = 3`'
+  - '`log_2(x) = 2`'
+  ris: x = 4
+errore: Cambiare solo una base e lasciare le altre diverse.
+confondi:
+- scheda: eq-esp-basi-diverse
+  differenza: Se le basi non sono riconducibili tra loro, si passa ai logaritmi.
+perche: Due potenze con la stessa base si confrontano direttamente sugli esponenti, perché la funzione esponenziale è iniettiva.
+parole: stessa base potenze 2 4 8 ridurre cambio riconducibili

@@ -1,0 +1,34 @@
+id: circonferenza-da-dati
+tipo: regola
+titolo: Circonferenza da dati
+sigla: Da dati
+comando: r = distanza centro-punto
+vedo: Ti danno centro e un punto, un diametro, una tangente.
+formula:
+- r^2 = (x_P - a)^2 + (y_P - b)^2
+- C = (frac(x_A + x_B|2), frac(y_A + y_B|2))
+adatto:
+- 'Centro e punto: il raggio è la distanza tra i due punti.'
+- 'Estremi di un diametro: il centro è il punto medio e il raggio la distanza dal centro a un estremo.'
+- 'Tangente a un asse: il raggio è il valore assoluto della coordinata del centro corrispondente.'
+- 'Altri casi: imposta un sistema con la forma generale.'
+esempi:
+- da: centro (1, 2), passa per (4, 6)
+  passi:
+  - '`r^2 = 9 + 16 = 25`'
+  ris: (x - 1)^2 + (y - 2)^2 = 25
+- da: diametro AB con A(-1, 2) e B(5, 6)
+  passi:
+  - 'centro: `(2, 4)`'
+  - '`r^2 = 9 + 4 = 13`'
+  ris: (x - 2)^2 + (y - 4)^2 = 13
+- da: centro (3, -2), tangente all'asse x
+  passi:
+  - 'distanza dall''asse x: `2`'
+  ris: (x - 3)^2 + (y + 2)^2 = 4
+errore: Usare il diametro al posto del raggio.
+confondi:
+- scheda: circonferenza-centro-raggio
+  differenza: Lì il raggio è già dato; qui si ricava dai dati.
+perche: Il raggio è la distanza costante dal centro a ogni punto della circonferenza.
+parole: circonferenza da dati diametro passante tangente

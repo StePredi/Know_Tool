@@ -1,0 +1,33 @@
+id: iperbole-canonica
+tipo: regola
+titolo: Iperbole in forma canonica
+sigla: Iperbole
+comando: frac(x^2|a^2) - frac(y^2|b^2) = 1
+vedo: Un'equazione `frac(x^2|a^2) - frac(y^2|b^2) = +-1`.
+formula:
+- frac(x^2|a^2) - frac(y^2|b^2) = 1
+- c^2 = a^2 + b^2
+- e = frac(c|a)
+- y = +-frac(b|a)*x
+adatto:
+- 'Con `= 1`: fuochi su `x`, vertici `(+-a, 0)`. Con `= -1`: fuochi su `y`, vertici `(0, +-b)`.'
+- Le formule con `y` sono gli asintoti.
+- L'eccentricità è maggiore di 1.
+- Gli asintoti sono sempre `y = +-frac(b|a)*x`.
+esempi:
+- da: frac(x^2|9) - frac(y^2|16) = 1
+  passi:
+  - '`a = 3`, `b = 4`'
+  - '`c^2 = 9 + 16 = 25`'
+  ris: F(+-5, 0), asintoti y = +-4/3 x, e = 5/3
+- da: frac(x^2|4) - frac(y^2|9) = -1
+  passi:
+  - 'segno meno a destra: fuochi sull''asse `y`'
+  - '`c^2 = 4 + 9 = 13`'
+  ris: vertici (0, +-3), F(0, +-sqrt(13)), asintoti y = +-3/2 x
+errore: 'Sbagliare quale asse contiene i fuochi: dipende dal segno a destra.'
+confondi:
+- scheda: ellisse-canonica
+  differenza: Ellisse con la somma; iperbole con la differenza e `c^2 = a^2 + b^2`.
+perche: È l'insieme dei punti la cui differenza delle distanze dai fuochi è costante, uguale a `2a`.
+parole: iperbole fuochi asintoti eccentricità forma canonica

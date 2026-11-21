@@ -1,0 +1,31 @@
+id: disequazione-primo-grado
+tipo: regola
+titolo: Disequazione di primo grado
+sigla: Primo grado
+comando: "ax > b: se a è negativo, inverto"
+vedo: "La x compare solo alla prima potenza: `5 - 2x > 1`."
+formula:
+  - a*x > b
+  - "x > frac(b|a)   se a > 0"
+  - "x < frac(b|a)   se a < 0"
+adatto:
+  - "Come per l'equazione: termini con la x a sinistra, numeri a destra."
+  - "Dividendo per un numero negativo il verso si inverte."
+  - "Se dopo la riduzione resta `0 > b` senza la x: è sempre vera (b negativo) oppure mai vera (b positivo)."
+esempi:
+  - da: "5 - 2x > 1"
+    passi:
+      - "`-2x > 1 - 5 = -4`"
+      - "Divido per -2: il verso si inverte, `x < 2`"
+    ris: "(-inf, 2)"
+  - da: "3(x - 1) <= x + 5"
+    passi:
+      - "`3x - 3 <= x + 5`, quindi `2x <= 8`"
+      - "Divido per 2 (positivo): `x <= 4`"
+    ris: "(-inf, 4]"
+errore: "Dividere per -2 e lasciare il verso com'era."
+confondi:
+  - scheda: secondo-grado-completa
+    differenza: "Qui basta isolare la x; dal secondo grado serve la linea dei segni."
+perche: "Moltiplicando per un numero negativo l'ordine tra i numeri si capovolge: da `1 < 2` a `-1 > -2`."
+parole: primo grado lineare disequazione verso

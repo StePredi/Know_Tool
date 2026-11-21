@@ -1,0 +1,45 @@
+modello: per_situazioni
+titolo: Frazioni algebriche, per situazioni
+centro: Frazioni algebriche
+sottotitolo: ""
+ingresso: Espressione
+guida: "Prima scomponi tutto, poi scrivi le condizioni di esistenza. Solo dopo scegli l'operazione: semplificare, moltiplicare, dividere, sommare."
+rami:
+  - id: ord
+    nome: Procedura in ordine
+    colore: blue
+    ordine: true
+    voci:
+      - schede:
+          - scomponi-prima
+          - condizioni-esistenza
+          - semplifica
+  - id: cas
+    nome: Casi da riconoscere
+    colore: green
+    voci:
+      - schede:
+          - segni-opposti
+          - semplifica-potenze
+  - id: mol
+    nome: Moltiplicare e dividere
+    colore: orange
+    voci:
+      - schede:
+          - prodotto-frazioni
+          - quoziente-frazioni
+          - potenza-frazione
+  - id: som
+    nome: Sommare e sottrarre
+    colore: teal
+    voci:
+      - schede:
+          - mcm-denominatori
+          - somma-stesso-denominatore
+          - somma-denominatori-diversi
+  - id: esp
+    nome: Più operazioni insieme
+    colore: pink
+    voci:
+      - schede:
+          - ordine-espressione

@@ -1,0 +1,28 @@
+id: rotazione-corona
+tipo: regola
+titolo: Solido forato
+sigla: Corona circolare
+comando: π∫_a^b (f^2 - g^2) dx
+vedo: 'La regione tra due curve ruota attorno all''asse `x`: il solido ha un buco.'
+formula:
+- V = π∫_a^b (f(x)^2 - g(x)^2) dx
+- f >= g >= 0
+adatto:
+- Ogni fetta è una corona circolare con raggio esterno `f` e raggio interno `g`.
+- 'Area della fetta: `π f^2 - π g^2`.'
+- 'Eleva a quadrato ciascuna funzione, poi sottrai: non il quadrato della differenza.'
+esempi:
+- da: y = x e y = x^2 su [0, 1]
+  passi:
+  - '`π∫_0^1 (x^2 - x^4) dx = π(frac(1|3) - frac(1|5))`'
+  ris: frac(2π|15)
+- da: y = 2x e y = x^2 su [0, 2]
+  passi:
+  - '`π∫_0^2 (4x^2 - x^4) dx = π(frac(32|3) - frac(32|5))`'
+  ris: frac(64π|15)
+errore: 'Calcolare `π∫ (f - g)^2 dx`: è un''altra cosa e dà un valore sbagliato.'
+confondi:
+- scheda: rotazione-asse-x
+  differenza: Con `g = 0` si torna al solido pieno.
+perche: Il solido forato è il solido grande meno quello che manca all'interno.
+parole: solido forato corona circolare volume due curve

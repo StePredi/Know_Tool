@@ -1,0 +1,29 @@
+id: teorema-zeri
+tipo: regola
+titolo: Teorema degli zeri
+sigla: Zeri
+comando: f continua, f(a)*f(b) < 0
+vedo: Devi dimostrare che un'equazione ha almeno una soluzione in un intervallo.
+formula:
+- f(a)*f(b) < 0
+adatto:
+- Se `f` è continua su `[a, b]` e `f(a)` e `f(b)` hanno segni opposti, esiste `c` in `(a, b)` con `f(c) = 0`.
+- Per equazioni come `f(x) = g(x)`, applica il teorema a `h(x) = f(x) - g(x)`.
+- 'Weierstrass: una funzione continua su un intervallo chiuso ha massimo e minimo.'
+- Non dice quante soluzioni ci sono.
+esempi:
+- da: x^3 - 2x - 5 = 0 in [2, 3]
+  passi:
+  - '`f(2) = -1`, `f(3) = 16`'
+  - segni opposti, `f` continua
+  ris: esiste almeno una soluzione
+- da: f(x) = frac(1|x) in [-1, 1]
+  passi:
+  - non continua in 0
+  ris: il teorema non si può applicare
+errore: Applicare il teorema senza controllare che la funzione sia continua sull'intervallo.
+confondi:
+- scheda: continuita
+  differenza: La continuità è un'ipotesi del teorema.
+perche: Una funzione continua non può passare da negativa a positiva senza toccare lo zero.
+parole: teorema degli zeri bolzano esistenza soluzione

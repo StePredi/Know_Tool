@@ -1,0 +1,35 @@
+id: individua-proposizione
+tipo: regola
+titolo: È una proposizione?
+sigla: Proposizione
+comando: p ∈ {V, F}
+vedo: Una frase e ti chiedono se è una proposizione, o quale valore di verità ha.
+formula:
+- p ∈ {V, F}
+adatto:
+- Una proposizione è una frase dichiarativa che è vera oppure falsa (mai entrambe, mai nessuna delle due).
+- 'Non sono proposizioni: domande, esclamazioni, comandi, opinioni ("questo film è bello").'
+- 'Una frase con una variabile (`x + 1 = 5`) è un predicato: diventa proposizione se dai un valore a `x` o usi un quantificatore.'
+esempi:
+- da: 7 è un numero primo
+  passi:
+  - dichiarativa, verificabile
+  ris: proposizione, vera
+- da: 3 è maggiore di 5
+  passi:
+  - dichiarativa, verificabile
+  ris: proposizione, falsa
+- da: Quanto fa 2 + 3?
+  passi:
+  - è una domanda
+  ris: non è una proposizione
+- da: x + 1 = 5
+  passi:
+  - dipende da `x`
+  ris: predicato, non proposizione
+errore: Considerare proposizione una frase che dipende da una variabile non fissata.
+confondi:
+- scheda: quantificatori
+  differenza: Il quantificatore trasforma un predicato in una proposizione.
+perche: La logica lavora con affermazioni di cui si può dire con certezza se sono vere o false.
+parole: proposizione logica valore verità predicato vera falsa

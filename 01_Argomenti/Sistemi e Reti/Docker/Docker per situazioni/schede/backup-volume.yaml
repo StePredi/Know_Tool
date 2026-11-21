@@ -1,0 +1,27 @@
+id: backup-volume
+tipo: ricetta
+titolo: Fare il backup di un volume e ripristinarlo
+sigla: Backup volume
+comando: tar czf · tar xzf
+frase: un container monta volume e cartella del PC
+fonte: lab_volumi_servizi.pdf (approfondimento A)
+parole: backup ripristino restore tar archivio volume copiare spostare altro computer
+quando: Quando vuoi salvare i dati di un volume o spostarli su un altro computer.
+fasi:
+- nome: Backup in un archivio sul PC
+  righe:
+  - codice: docker run --rm -v sito-vol:/data -v $(pwd):/backup alpine tar czf /backup/sito-vol.tar.gz -C /data .
+    commento: il container vede il volume in /data e la cartella corrente in /backup
+  - codice: ls -l sito-vol.tar.gz
+- nome: Ripristino in un volume nuovo
+  righe:
+  - codice: docker volume create sito-vol-copia
+  - codice: docker run --rm -v sito-vol-copia:/data -v $(pwd):/backup alpine tar xzf /backup/sito-vol.tar.gz -C /data
+  - codice: docker run -d --name web5 -p 8084:80 -v sito-vol-copia:/usr/share/nginx/html:ro nginx
+  - codice: curl http://localhost:8084
+    commento: stessa pagina del volume originale
+segnaposto: {}
+varianti: []
+vicine:
+- named-volume
+- volume-servizio

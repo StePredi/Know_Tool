@@ -1,0 +1,28 @@
+id: ping-nome
+tipo: prima_dopo
+titolo: Il ping per nome tra container non funziona
+sigla: Ping per nome fallisce
+comando: --network rete-custom
+frase: il DNS c'è solo sulle reti create da te
+fonte: lab_networking_container.pdf (parti 1.4, 2.4)
+parole: ping nome non funziona name resolution dns bad address bridge default rete custom
+prima: |-
+  docker run -dit --name c1 debian
+  docker run -dit --name c2 debian
+  # da c1: ping c2 → non risolve il nome
+dopo: |-
+  ⟦docker network create mynet⟧
+  docker run -dit --name c1 ⟦--network mynet⟧ debian
+  docker run -dit --name c2 ⟦--network mynet⟧ debian
+  # da c1: ping c2 → funziona
+uso: Far comunicare i container per nome.
+riconoscila: Il ping verso l'IP funziona, quello verso il nome no.
+parti:
+- voce: rete custom
+  spiega: ha un DNS automatico che risolve i nomi dei container
+trappola: Per un container già acceso basta docker network connect mynet c1.
+varianti: []
+vicine:
+- rete-custom
+- ping-tra-container
+- container-due-reti

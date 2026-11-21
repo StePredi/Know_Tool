@@ -1,0 +1,32 @@
+id: punti-non-derivabili
+tipo: regola
+titolo: Punti di non derivabilità
+sigla: Non derivabili
+comando: punto angoloso, cuspide, flesso verticale
+vedo: Un punto dove la funzione è continua ma la derivata non esiste.
+formula:
+- f'_-(x_0) != f'_+(x_0)
+- lim = +-inf
+adatto:
+- 'Punto angoloso: derivate sinistra e destra finite e diverse (`|x|` in 0).'
+- 'Cuspide: derivate infinite di segno opposto (`sqrt(|x|)` in 0).'
+- 'Flesso a tangente verticale: derivate infinite dello stesso segno (`x^(1/3)` in 0).'
+esempi:
+- da: f(x) = abs(x) in 0
+  passi:
+  - derivate `-1` e `1`
+  ris: punto angoloso
+- da: f(x) = sqrt(abs(x)) in 0
+  passi:
+  - da destra `+inf`, da sinistra `-inf`
+  ris: cuspide
+- da: f(x) = x^(1/3) in 0
+  passi:
+  - 'rapporto `h^(-2/3)`: tende a `+inf` da entrambe le parti'
+  ris: flesso a tangente verticale
+errore: Dire punto angoloso quando le derivate sono infinite.
+confondi:
+- scheda: derivata-sinistra-destra
+  differenza: Lì si calcolano i limiti; qui si interpreta il risultato.
+perche: Le tre situazioni corrispondono a modi diversi in cui la tangente non è unica o è verticale.
+parole: punto angoloso cuspide flesso tangente verticale

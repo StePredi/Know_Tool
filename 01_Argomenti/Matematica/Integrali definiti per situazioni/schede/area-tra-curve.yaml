@@ -1,0 +1,34 @@
+id: area-tra-curve
+tipo: regola
+titolo: Area tra due curve
+sigla: Tra due curve
+comando: ∫_a^b (sopra - sotto) dx
+vedo: La regione è delimitata da due curve, non dall'asse.
+formula:
+- A = ∫_a^b (f(x) - g(x)) dx
+- f(x) >= g(x)
+adatto:
+- Decidi quale curva sta sopra (`f`) e quale sotto (`g`).
+- Integra la differenza tra le due, estremi compresi.
+- Se le curve si scambiano, spezza nel punto di incrocio.
+esempi:
+- da: y = x e y = x^2 su [0, 1]
+  passi:
+  - '`∫_0^1 (x - x^2) dx`'
+  ris: frac(1|6)
+- da: y = x + 2 e y = x^2
+  passi:
+  - 'intersezioni: `x^2 = x + 2`: `x = -1, 2`'
+  - '`∫_(-1)^2 (x + 2 - x^2) dx`'
+  ris: frac(9|2)
+- da: y = cos x e y = sin x su [0, π/4]
+  passi:
+  - '`cos x >= sin x` nell''intervallo'
+  - '`[sin x + cos x]_0^(π/4) = sqrt(2) - 1`'
+  ris: sqrt(2) - 1
+errore: 'Scambiare sopra e sotto: l''area esce negativa e si cambia segno senza capire l''errore.'
+confondi:
+- scheda: area-intersezioni
+  differenza: Qui gli estremi sono noti; lì li devi trovare dalle intersezioni.
+perche: Ogni striscia ha altezza «curva alta meno curva bassa».
+parole: area tra due curve differenza sopra sotto

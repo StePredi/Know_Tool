@@ -1,0 +1,31 @@
+id: impossibile-indeterminato
+tipo: regola
+titolo: Sistema impossibile o indeterminato
+sigla: Impossibile o indeterminato
+comando: "coefficienti proporzionali"
+vedo: "Le due equazioni hanno coefficienti proporzionali: `x + 2y = 3` e `2x + 4y = 5`."
+formula:
+  - frac(a_1|a_2) = frac(b_1|b_2) != frac(c_1|c_2)
+  - frac(a_1|a_2) = frac(b_1|b_2) = frac(c_1|c_2)
+adatto:
+  - "Le equazioni sono due rette: incidenti (una soluzione), parallele (nessuna soluzione), coincidenti (infinite soluzioni)."
+  - "Coefficienti di x e y proporzionali (D = 0): se anche i termini noti sono nella stessa proporzione il sistema è indeterminato, altrimenti è impossibile."
+  - "Con sostituzione o riduzione te ne accorgi perché esce `0 = k` oppure `0 = 0`."
+  - "Nell'indeterminato scrivi le soluzioni con un parametro, per esempio `(t, 2 - t)`."
+esempi:
+  - da: "x + 2y = 3,   2x + 4y = 5"
+    passi:
+      - "Moltiplico la prima per 2: `2x + 4y = 6`"
+      - "Sottraggo la seconda: `0 = 1`"
+    ris: "0 = 1: impossibile"
+  - da: "x + y = 2,   3x + 3y = 6"
+    passi:
+      - "La seconda è la prima moltiplicata per 3"
+      - "Sottraggo: `0 = 0`; ricavo `y = 2 - x`"
+    ris: "0 = 0: infinite soluzioni (t, 2 - t)"
+errore: "Scambiare i due casi: `0 = 5` è impossibile, `0 = 0` è indeterminato."
+confondi:
+  - scheda: cramer
+    differenza: "D = 0 dice che non c'è una sola soluzione; per sapere quale caso serve guardare i termini noti."
+perche: "Due rette con la stessa pendenza o non si incontrano o coincidono."
+parole: impossibile indeterminato rette parallele coincidenti

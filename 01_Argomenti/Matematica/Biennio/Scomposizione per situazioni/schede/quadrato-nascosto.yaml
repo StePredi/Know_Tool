@@ -1,0 +1,30 @@
+id: quadrato-nascosto
+tipo: regola
+titolo: Un quadrato nascosto tra più termini
+sigla: Quadrato nascosto
+comando: "a^2 - (b + c)^2"
+frase: "Molti termini: tre formano un quadrato di binomio e il resto è un quadrato."
+vedo: "Quattro o più termini in cui tre formano un quadrato di binomio e il rimanente è un quadrato: `x^4 - x^2 + 2x - 1`."
+formula: a^2 - (b + c)^2 = (a + b + c)*(a - b - c)
+adatto:
+  - "Cerca tre termini che formano un quadrato di binomio `a^2 ± 2ab + b^2`."
+  - "Raccoglili con il segno giusto: se davanti ai tre termini c'è il meno, mettilo davanti alla parentesi."
+  - "Ora hai la differenza di due quadrati: applica `a^2 - b^2`."
+  - "Alla fine togli le parentesi dei fattori e riduci."
+esempi:
+  - da: x^4 - x^2 + 2x - 1
+    passi:
+      - "Raggruppo gli ultimi tre con il meno: `x^4 - (x^2 - 2x + 1)`"
+      - "Dentro c'è un quadrato: `x^4 - (x - 1)^2`"
+      - "Differenza di quadrati con `a = x^2`, `b = x - 1`: `(x^2 - (x - 1))(x^2 + (x - 1))`"
+      - "Tolgo le parentesi: `(x^2 - x + 1)(x^2 + x - 1)`"
+    ris: (x^2 - x + 1)(x^2 + x - 1)
+    verifica: scomposizione
+errore: "Dimenticare di cambiare i segni dentro la parentesi quando c'è il meno davanti: `-(x^2 - 2x + 1)` è `-x^2 + 2x - 1`."
+confondi:
+  - scheda: raccoglimento-parziale
+    differenza: "Se il raggruppamento a due a due dà la stessa parentesi, bastava il parziale; qui il raggruppamento giusto è a tre."
+  - scheda: differenza-quadrati
+    differenza: "Qui uno dei due quadrati va prima costruito raggruppando tre termini."
+perche: "Si riporta il polinomio a un caso noto: la differenza di quadrati."
+parole: quadrato nascosto raggruppare differenza di quadrati

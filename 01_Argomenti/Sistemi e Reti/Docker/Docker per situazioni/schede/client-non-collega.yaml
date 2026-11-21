@@ -1,0 +1,42 @@
+id: client-non-collega
+tipo: ricetta
+titolo: Il servizio gira nel container ma il client non si collega
+sigla: Client non si collega
+comando: ps · port · logs
+frase: controlla in quest'ordine
+fonte: lab_immagini_dockerfile.pdf (domanda 31, parti 4.4-4.5) · lab_volumi_servizi.pdf (parti 1, 4.3)
+parole: non si collega non risponde connessione rifiutata servizio irraggiungibile porta sbagliata problemi diagnosi
+quando: Quando il client dice «connessione non riuscita» o non riceve risposta.
+fasi:
+- nome: 1. Il container è acceso?
+  righe:
+  - codice: docker ps
+    commento: 'se non c''è, guarda docker ps -a e i log: il programma potrebbe essere terminato'
+- nome: 2. La porta è pubblicata?
+  righe:
+  - codice: docker port «NOME»
+    commento: vuoto = manca -p (EXPOSE da solo non basta)
+- nome: 3. Il servizio ascolta dove pensi?
+  righe:
+  - codice: docker logs «NOME»
+    commento: su quale indirizzo e porta ascolta davvero
+    trappola: La porta a destra di -p deve essere quella dei log; l'indirizzo deve essere 0.0.0.0, non 127.0.0.1.
+- nome: 4. Da un altro PC?
+  righe:
+  - codice: ss -ltn | grep «PORTA»
+    commento: 127.0.0.1:porta = pubblicato solo in locale
+  - codice: ip -4 -br addr
+    commento: usa l'IP della LAN, non quello del container
+segnaposto:
+  NOME:
+    esempio: archivio
+    spiega: nome del container
+  PORTA:
+    esempio: '5000'
+    spiega: porta pubblicata sull'host
+varianti: []
+vicine:
+- porta-sbagliata
+- bind-address
+- pubblica-solo-locale
+- logs-container

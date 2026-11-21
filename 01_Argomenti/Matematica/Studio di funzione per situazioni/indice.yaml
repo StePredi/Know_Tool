@@ -1,0 +1,68 @@
+modello: per_situazioni
+titolo: Studio di funzione, per situazioni
+centro: Studio di funzione
+sottotitolo: Dominio, asintoti, crescenza, concavità, grafico
+ingresso: Funzione y = f(x) da studiare
+guida: 'Segui le tappe nell''ordine: ogni tappa ti serve per la successiva. Le altre schede spiegano i casi che incontri strada facendo.'
+rami:
+- id: ord
+  nome: Procedura in ordine
+  colore: blue
+  ordine: true
+  voci:
+  - schede:
+    - dominio
+    - simmetrie
+    - intersezioni-segno
+    - limiti-asintoti
+    - derivata-prima
+    - derivata-seconda
+    - grafico
+- id: dom
+  nome: Dominio
+  colore: green
+  voci:
+  - schede:
+    - dominio-fratta
+    - dominio-radice
+    - dominio-logaritmo
+- id: sim
+  nome: Simmetrie
+  colore: teal
+  voci:
+  - schede:
+    - funzione-pari
+    - funzione-dispari
+- id: asi
+  nome: Asintoti
+  colore: orange
+  voci:
+  - schede:
+    - asintoto-verticale
+    - asintoto-orizzontale
+    - asintoto-obliquo
+- id: cre
+  nome: Crescenza, massimi e minimi
+  colore: violet
+  voci:
+  - schede:
+    - segno-derivata-prima
+    - punti-stazionari
+    - punto-non-derivabile
+    - massimo-minimo-assoluti
+- id: con
+  nome: Concavità e flessi
+  colore: pink
+  voci:
+  - schede:
+    - segno-derivata-seconda
+    - flesso
+- id: tip
+  nome: Per tipo di funzione
+  colore: indigo
+  voci:
+  - schede:
+    - studio-polinomio
+    - studio-fratta
+    - studio-radice
+    - studio-esp-log

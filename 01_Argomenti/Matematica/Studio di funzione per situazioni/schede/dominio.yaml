@@ -1,0 +1,41 @@
+id: dominio
+tipo: regola
+titolo: 1. Dominio
+sigla: Dominio
+comando: una condizione per ogni pezzo, poi a sistema
+vedo: Devi studiare una funzione e ti serve sapere per quali `x` esiste.
+formula:
+- 'frac(f|g): g != 0'
+- 'sqrt(f): f >= 0'
+- 'ln(f): f > 0'
+adatto:
+- 'Guarda ogni pezzo della funzione: frazione, radice di indice pari, logaritmo.'
+- Scrivi la condizione di ciascuno e mettile tutte a sistema.
+- 'Il dominio dice dove il grafico esiste: gli estremi esclusi saranno i punti dove cercare gli asintoti.'
+esempi:
+- da: frac(x|x^2 - 4)
+  passi:
+  - 'frazione: denominatore diverso da zero'
+  - '`x^2 - 4 != 0`'
+  ris: x != -2 e x != 2
+- da: ln(x - 1) + sqrt(4 - x)
+  passi:
+  - 'logaritmo: `x - 1 > 0`, cioè `x > 1`'
+  - 'radice: `4 - x >= 0`, cioè `x <= 4`'
+  - sistema
+  ris: 1 < x <= 4
+- da: frac(sqrt(x - 1)|x - 3)
+  passi:
+  - 'radice: `x >= 1`'
+  - 'denominatore: `x != 3`'
+  ris: x >= 1 e x != 3
+errore: 'Dimenticare una condizione quando i pezzi sono più d''uno: valgono tutte insieme, non una sola.'
+confondi:
+- scheda: dominio-fratta
+  differenza: Qui il metodo generale; lì il caso della sola frazione.
+- scheda: dominio-radice
+  differenza: Qui il metodo generale; lì il caso della sola radice.
+- scheda: dominio-logaritmo
+  differenza: Qui il metodo generale; lì il caso del solo logaritmo.
+perche: 'Una funzione non si può studiare dove non esiste: il dominio è il punto di partenza di ogni altra tappa.'
+parole: dominio campo di esistenza condizioni sistema

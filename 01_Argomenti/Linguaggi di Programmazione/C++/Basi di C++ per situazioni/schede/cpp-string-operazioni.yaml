@@ -1,0 +1,49 @@
+id: cpp-string-operazioni
+tipo: ricetta
+titolo: Lavorare con le stringhe
+sigla: Stringhe
+comando: string  length  substr  find
+frase: lunghezza, pezzi, ricerca
+fonte: Documentazione C++ · cppreference.com · std::basic_string
+parole: string stringa length size substr find concatenare confrontare carattere npos testo
+quando: Quando devi misurare, tagliare, cercare o confrontare del testo.
+fasi:
+- nome: Preparare
+  righe:
+  - codice: string s = "ciao mondo";
+- nome: Leggere
+  righe:
+  - codice: s.length()
+    commento: Numero di caratteri.
+    parti:
+    - voce: s.length()
+      spiega: '10'
+  - codice: s[0]
+    commento: Primo carattere (si parte da 0).
+    parti:
+    - voce: s[0]
+      spiega: c
+  - codice: s.substr(5, 5)
+    commento: Dalla posizione 5, 5 caratteri.
+    parti:
+    - voce: s.substr(5, 5)
+      spiega: mondo
+- nome: Unire e cercare
+  righe:
+  - codice: s + "!"
+    commento: 'Unisce due testi: ciao mondo!'
+  - codice: s.find("mondo")
+    commento: Posizione in cui inizia il testo cercato.
+    parti:
+    - voce: s.find("mondo")
+      spiega: '5'
+    trappola: 'Se non trova niente find restituisce string::npos, non -1: confronta con s.find("x") ==
+      string::npos.'
+  - codice: s == "ciao mondo"
+    commento: 'Confronta il contenuto: true o false.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-string-numeri
+- cpp-string-scorri
+- cpp-output-input

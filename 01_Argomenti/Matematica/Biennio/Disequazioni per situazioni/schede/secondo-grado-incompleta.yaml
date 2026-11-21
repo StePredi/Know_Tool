@@ -1,0 +1,31 @@
+id: secondo-grado-incompleta
+tipo: regola
+titolo: Secondo grado incompleto
+sigla: Incompleta
+comando: "scomponi e linea dei segni"
+vedo: "Secondo grado senza termine di primo grado o senza termine noto: `x^2 - 9 < 0`, `x^2 - 4x >= 0`."
+formula:
+  - a*x^2 + c > 0
+  - a*x^2 + b*x > 0
+adatto:
+  - "Pura (`ax^2 + c`): scomponi con la differenza di quadrati, oppure isola `x^2`: `x^2 < k` con k positivo ha valori interni, `x^2 > k` esterni."
+  - "Con k negativo: `x^2 < k` non è mai vera, `x^2 > k` è sempre vera."
+  - "Spuria (`ax^2 + bx`): raccogli x; gli zeri sono 0 e `-b/a`; poi linea dei segni."
+  - "È la stessa regola del secondo grado completo, con radici facili."
+esempi:
+  - da: "x^2 - 9 < 0"
+    passi:
+      - "`(x - 3)(x + 3) < 0`: zeri -3 e 3"
+      - "Minore di zero: valori interni"
+    ris: "(-3, 3)"
+  - da: "x^2 - 4x >= 0"
+    passi:
+      - "`x(x - 4) >= 0`: zeri 0 e 4"
+      - "Maggiore o uguale a zero: valori esterni, estremi inclusi"
+    ris: "(-inf, 0] ∪ [4, +inf)"
+errore: "Dividere per x: se x è negativo il verso cambia, e si perde uno zero."
+confondi:
+  - scheda: secondo-grado-completa
+    differenza: "La completa richiede D e la formula; qui bastano scomposizioni."
+perche: "Sono casi particolari del secondo grado completo con una radice facile o simmetrica."
+parole: incompleta pura spuria secondo grado

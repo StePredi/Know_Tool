@@ -1,0 +1,37 @@
+id: area-segno-cambia
+tipo: regola
+titolo: Curva che attraversa l'asse
+sigla: Cambia segno
+comando: spezza nei punti dove f si annulla
+vedo: La curva sta in parte sopra e in parte sotto l'asse `x`.
+formula:
+- A = ∫_a^c f dx - ∫_c^b f dx
+adatto:
+- Trova gli zeri di `f` dentro `[a, b]`.
+- Calcola un integrale per ogni pezzo.
+- Dove `f < 0` cambia il segno dell'integrale prima di sommare (o prendi il valore assoluto).
+- L'integrale totale è «area con segno»; l'area è la somma dei valori assoluti.
+esempi:
+- da: y = x^3 - x su [-1, 1]
+  passi:
+  - zeri `-1, 0, 1`
+  - '`∫_(-1)^0 = frac(1|4)`, `∫_0^1 = -frac(1|4)`'
+  - 'area: `frac(1|4) + frac(1|4)`'
+  ris: frac(1|2)
+- da: y = sin x su [0, 2π]
+  passi:
+  - '`∫_0^π = 2`, `∫_π^(2π) = -2`'
+  - 'area: `2 + 2`'
+  ris: '4'
+- da: y = x^2 - 4 su [0, 3]
+  passi:
+  - zero in `x = 2`
+  - '`∫_0^2 = -frac(16|3)`, `∫_2^3 = frac(7|3)`'
+  - 'area: `frac(16|3) + frac(7|3)`'
+  ris: frac(23|3)
+errore: 'Calcolare un solo integrale su tutto l''intervallo: in `sin x` su `[0, 2π]` esce `0` e l''area non è zero.'
+confondi:
+- scheda: area-sotto-curva
+  differenza: Lì `f >= 0`; qui devi dividere l'intervallo.
+perche: Le regioni sotto l'asse contano come area ma l'integrale le dà negative.
+parole: area segno cambia attraversa asse spezzare valore assoluto

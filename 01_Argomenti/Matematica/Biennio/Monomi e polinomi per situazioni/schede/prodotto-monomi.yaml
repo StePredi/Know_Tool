@@ -1,0 +1,32 @@
+id: prodotto-monomi
+tipo: regola
+titolo: Prodotto di monomi
+sigla: Prodotto di monomi
+comando: coefficienti per coefficienti, esponenti si sommano
+vedo: "Due monomi che si moltiplicano: `(3x^2y)*(-2xy^3)`."
+formula: (k*x^a)*(h*x^b) = k*h*x^(a+b)
+adatto:
+  - "Moltiplica i coefficienti tra loro, attento ai segni: − per − dà +."
+  - "Per ogni lettera presente in entrambi sommi gli esponenti (una lettera senza esponente ha 1)."
+  - "Le lettere che compaiono in un solo monomio passano uguali."
+esempi:
+  - da: (3x^2)*(-2x^4)
+    passi:
+      - "Coefficienti: `3 * (-2) = -6`"
+      - "Esponenti di x: `2 + 4 = 6`"
+    ris: -6x^6
+    verifica: scomposizione
+  - da: (3x^2y)*(-2xy^3)
+    passi:
+      - "Coefficienti: `3 * (-2) = -6`"
+      - "x: `2 + 1 = 3`"
+      - "y: `1 + 3 = 4`"
+    ris: -6x^3y^4
+errore: "Moltiplicare gli esponenti: `x^2 * x^4 = x^6`, non `x^8`."
+confondi:
+  - scheda: potenza-monomio
+    differenza: "Nel prodotto di due monomi gli esponenti si sommano; nella potenza di un monomio si moltiplicano."
+  - scheda: somma-monomi
+    differenza: "Nella somma gli esponenti restano uguali."
+perche: "`x^2 * x^4` è (x·x)(x·x·x·x): sei x in tutto."
+parole: prodotto moltiplicare monomi esponenti

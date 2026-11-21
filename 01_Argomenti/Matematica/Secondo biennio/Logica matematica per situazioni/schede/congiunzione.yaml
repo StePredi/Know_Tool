@@ -1,0 +1,32 @@
+id: congiunzione
+tipo: regola
+titolo: Congiunzione (e)
+sigla: E
+comando: p ∧ q
+vedo: 'Due condizioni che devono valere insieme: «e», «ma», «sia… sia».'
+formula:
+- p ∧ q
+adatto:
+- 'Tavola (righe in ordine: `VV, VF, FV, FF`): `V F F F`.'
+- Vera solo se entrambe sono vere.
+- 'Con gli insiemi: intersezione.'
+- 'Con le disuguaglianze: `x > 2 ∧ x < 5` è l''intervallo tra 2 e 5.'
+esempi:
+- da: 5 è dispari e 5 è primo
+  passi:
+  - V e V
+  ris: vera
+- da: 4 è primo e 4 è pari
+  passi:
+  - F e V
+  ris: falsa
+- da: x > 2 ∧ x < 5
+  passi:
+  - 'entrambe: tra 2 e 5'
+  ris: 2 < x < 5
+errore: Considerarla vera quando una sola delle due condizioni vale.
+confondi:
+- scheda: disgiunzione
+  differenza: E richiede entrambe; o ne richiede almeno una.
+perche: 'Corrisponde a «tutte e due»: basta una falsa per rendere falso il tutto.'
+parole: congiunzione e and intersezione

@@ -1,0 +1,33 @@
+id: cpp-const-auto
+tipo: ricetta
+titolo: 'Valori fissi e tipo automatico: const e auto'
+sigla: const e auto
+comando: const  auto
+frase: non si cambia / lo deduce il compilatore
+fonte: Documentazione C++ · cppreference.com · Dichiarazioni · const · auto
+parole: const costante auto deduzione tipo non modificabile read-only
+quando: Quando un valore non deve più cambiare, o non vuoi scrivere un tipo lungo.
+fasi:
+- nome: const
+  righe:
+  - codice: const double IVA = 0.22;
+    commento: Da ora in poi IVA non si può più modificare.
+    trappola: 'Scrivere IVA = 0.1; dà un errore di compilazione: assignment of read-only variable.'
+- nome: auto
+  righe:
+  - codice: auto n = 5;
+    commento: 'Il compilatore deduce il tipo: int.'
+  - codice: auto x = 2.5;
+    commento: double.
+  - codice: auto s = "ciao";
+    commento: 'Attenzione: non è una string.'
+    parti:
+    - voce: '"ciao"'
+      spiega: è un const char*, non una string
+    trappola: 'Con auto un testo tra virgolette resta un const char*: se vuoi una string scrivi string
+      s = "ciao";'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-tipi
+- cpp-divisione-int

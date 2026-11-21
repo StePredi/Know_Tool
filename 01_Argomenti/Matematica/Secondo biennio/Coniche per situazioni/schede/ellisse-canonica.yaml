@@ -1,0 +1,36 @@
+id: ellisse-canonica
+tipo: regola
+titolo: Ellisse in forma canonica
+sigla: Ellisse
+comando: frac(x^2|a^2) + frac(y^2|b^2) = 1
+vedo: Un'equazione `frac(x^2|a^2) + frac(y^2|b^2) = 1`, oppure `A*x^2 + B*y^2 = C` con `A`, `B`, `C` positivi.
+formula:
+- frac(x^2|a^2) + frac(y^2|b^2) = 1
+- c^2 = a^2 - b^2
+- e = frac(c|a)
+adatto:
+- 'Se `a > b` i fuochi sono su `x`: `F(+-c, 0)`; se `b > a` sono su `y`, e `c^2 = b^2 - a^2`.'
+- Il semiasse maggiore è sempre quello con il denominatore più grande.
+- L'eccentricità è tra 0 e 1.
+- Se l'equazione è `A*x^2 + B*y^2 = C`, dividi per `C`.
+esempi:
+- da: frac(x^2|25) + frac(y^2|9) = 1
+  passi:
+  - '`a = 5`, `b = 3`'
+  - '`c^2 = 25 - 9 = 16`'
+  ris: F(+-4, 0), e = 4/5
+- da: frac(x^2|4) + frac(y^2|16) = 1
+  passi:
+  - '`b = 4` maggiore di `a = 2`'
+  - '`c^2 = 16 - 4 = 12`'
+  ris: F(0, +-2*sqrt(3)), e = sqrt(3)/2
+- da: 9x^2 + 25y^2 = 225
+  passi:
+  - divido per 225
+  ris: frac(x^2|25) + frac(y^2|9) = 1
+errore: 'Prendere `c^2 = a^2 + b^2`: quella è dell''iperbole.'
+confondi:
+- scheda: iperbole-canonica
+  differenza: 'Ellisse: `c^2 = a^2 - b^2` con più. Iperbole: `c^2 = a^2 + b^2` con meno.'
+perche: È l'insieme dei punti la cui somma delle distanze dai fuochi è costante, uguale a `2a`.
+parole: ellisse fuochi semiassi eccentricità forma canonica

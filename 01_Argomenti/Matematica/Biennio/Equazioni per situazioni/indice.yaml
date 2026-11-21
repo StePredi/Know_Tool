@@ -1,0 +1,39 @@
+modello: per_situazioni
+titolo: Equazioni di primo e secondo grado, per situazioni
+centro: Equazioni
+sottotitolo: "Primo e secondo grado, anche fratte"
+ingresso: Equazione
+guida: "Porta tutto in forma normale (= 0), poi guarda il grado e se la x compare in un denominatore: il tipo decide il metodo più corto."
+rami:
+  - id: ord
+    nome: Procedura in ordine
+    colore: blue
+    ordine: true
+    voci:
+      - schede:
+          - forma-normale
+          - riconosci-tipo
+          - controlla-soluzioni
+  - id: uno
+    nome: Primo grado
+    colore: green
+    voci:
+      - schede:
+          - equazione-primo-grado
+          - denominatori-numerici
+  - id: due
+    nome: Secondo grado
+    colore: orange
+    voci:
+      - schede:
+          - equazione-pura
+          - equazione-spuria
+          - equazione-completa
+          - somma-prodotto
+  - id: alt
+    nome: Prodotti e frazioni
+    colore: pink
+    voci:
+      - schede:
+          - prodotto-nullo
+          - equazione-fratta

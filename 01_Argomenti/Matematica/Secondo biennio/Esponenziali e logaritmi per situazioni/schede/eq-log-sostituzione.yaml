@@ -1,0 +1,34 @@
+id: eq-log-sostituzione
+tipo: regola
+titolo: Logaritmica con sostituzione t = log x
+sigla: Sostituzione
+comando: t = log_a(x)
+vedo: Compaiono `log(x)` e `log(x)^2` (o `log(x^2)`), come in un'equazione di secondo grado.
+formula:
+- t = log_a(x)
+- a*t^2 + b*t + c = 0
+adatto:
+- 'Condizione di esistenza: `x > 0`.'
+- Usa `log(x^n) = n*log(x)` per portare tutto a `t`.
+- 'Per ogni `t` risolvi `log_a(x) = t`: `x = a^t`.'
+esempi:
+- da: log_2(x)^2 - 3*log_2(x) + 2 = 0
+  passi:
+  - 'condizione: `x > 0`'
+  - '`t^2 - 3t + 2 = 0`: `t = 1` oppure `t = 2`'
+  ris: x = 2, x = 4
+- da: ln(x)^2 - ln(x) - 2 = 0
+  passi:
+  - '`t = ln(x)`: `t = 2` oppure `t = -1`'
+  ris: x = e^2, x = e^(-1)
+- da: log_2(x^2) - 3*log_2(x) + 2 = 0
+  passi:
+  - 'condizione: `x > 0`'
+  - '`2t - 3t + 2 = 0`: `t = 2`'
+  ris: x = 4
+errore: Dimenticare di tornare a `x` dopo aver trovato `t`.
+confondi:
+- scheda: eq-esp-sostituzione
+  differenza: 'Stessa idea, ma con l''esponenziale: lì `t > 0`, qui `t` qualsiasi.'
+perche: È un'equazione algebrica nell'incognita ausiliaria `t`.
+parole: logaritmica sostituzione secondo grado t

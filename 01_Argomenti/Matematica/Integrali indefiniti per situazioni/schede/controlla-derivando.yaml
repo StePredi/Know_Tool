@@ -1,0 +1,32 @@
+id: controlla-derivando
+tipo: regola
+titolo: Controlla derivando
+sigla: Controlla
+comando: 'deriva il risultato: deve tornare l''integrando'
+vedo: Hai trovato un integrale e vuoi essere sicuro che sia giusto.
+formula:
+- frac(d|dx) F(x) = f(x)
+adatto:
+- Deriva il risultato che hai trovato (la costante `c` sparisce).
+- Se ottieni la funzione di partenza, è giusto.
+- Se ottieni un multiplo, hai dimenticato una costante o un fattore della composta.
+- Il controllo vale per ogni metodo.
+esempi:
+- da: F(x) = frac(x^4|4) + c
+  passi:
+  - 'derivo: `x^3`'
+  ris: torna `x^3`
+- da: F(x) = frac(sin(3x)|3) + c
+  passi:
+  - 'derivo: `frac(3 cos(3x)|3) = cos(3x)`'
+  ris: torna `cos(3x)`
+- da: F(x) = (x - 1)*e^x + c
+  passi:
+  - 'derivo: `e^x + (x - 1)*e^x = x*e^x`'
+  ris: torna `x*e^x`
+errore: Controllare solo che il risultato «sembri» giusto, senza derivarlo.
+confondi:
+- scheda: riconosci-forma
+  differenza: Il controllo si fa a fine lavoro; la forma si riconosce all'inizio.
+perche: 'L''integrale è l''operazione inversa della derivata: derivando il risultato si deve tornare alla funzione di partenza.'
+parole: controllare derivare verifica primitiva

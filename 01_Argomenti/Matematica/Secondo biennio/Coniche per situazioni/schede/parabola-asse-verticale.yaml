@@ -1,0 +1,37 @@
+id: parabola-asse-verticale
+tipo: regola
+titolo: Parabola con asse verticale
+sigla: Asse verticale
+comando: V = (-frac(b|2*a), -frac(d|4*a))
+vedo: Un'equazione `y = a*x^2 + b*x + c`.
+formula:
+- y = a*x^2 + b*x + c
+- V = (-frac(b|2*a), -frac(d|4*a))
+- F = (-frac(b|2*a), frac(1 - d|4*a))
+- y = frac(-1 - d|4*a)
+- x = -frac(b|2*a)
+- d = b^2 - 4*a*c
+adatto:
+- '`a > 0`: concavità verso l''alto; `a < 0`: verso il basso.'
+- '`d` è il discriminante `b^2 - 4*a*c`.'
+- La seconda formula con `y` è la direttrice, quella con `x` l'asse.
+- Il vertice è tra fuoco e direttrice, a distanza `frac(1|4*|a|)` da entrambi.
+esempi:
+- da: y = x^2 - 4x + 3
+  passi:
+  - '`d = 16 - 12 = 4`'
+  - vertice `(2, -1)`
+  - 'fuoco: `y = frac(1 - 4|4) = -frac(3|4)`'
+  ris: V(2, -1), F(2, -3/4), direttrice y = -5/4
+- da: y = -2x^2 + 4x
+  passi:
+  - '`d = 16`'
+  - vertice `(1, 2)`
+  - 'fuoco: `y = frac(1 - 16|-8) = frac(15|8)`'
+  ris: V(1, 2), F(1, 15/8), direttrice y = 17/8
+errore: Sbagliare il segno di `a` quando calcoli fuoco e direttrice.
+confondi:
+- scheda: parabola-asse-orizzontale
+  differenza: Qui `y` dipende da `x^2`; lì `x` dipende da `y^2`.
+perche: Il vertice è dove la derivata si annulla; il fuoco e la direttrice sono a distanza `frac(1|4*a)`.
+parole: parabola asse verticale vertice fuoco direttrice

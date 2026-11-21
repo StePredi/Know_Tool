@@ -1,0 +1,35 @@
+id: derivate-da-definizione
+tipo: regola
+titolo: Derivate delle funzioni base dalla definizione
+sigla: Base da definizione
+comando: (x^n)' = n*x^(n - 1)
+vedo: Vuoi ritrovare la derivata di `x^2`, `x^3`, `1/x`, `sqrt(x)` senza ricordare le regole.
+formula:
+- (x^2)' = 2x
+- (x^3)' = 3x^2
+- (1/x)' = -frac(1|x^2)
+- (sqrt(x))' = frac(1|2*sqrt(x))
+adatto:
+- '`x^3`: `(x + h)^3 = x^3 + 3x^2 h + 3x h^2 + h^3`.'
+- '`1/x`: denominatore comune: `frac(1|x + h) - frac(1|x) = frac(-h|x(x + h))`.'
+- '`sqrt(x)`: moltiplica per il coniugato `sqrt(x + h) + sqrt(x)`.'
+- Ritrovare le regole dalla definizione le fa ricordare meglio.
+esempi:
+- da: f(x) = x^3
+  passi:
+  - '`frac((x + h)^3 - x^3|h) = 3x^2 + 3xh + h^2`'
+  ris: f'(x) = 3x^2
+- da: f(x) = frac(1|x)
+  passi:
+  - '`frac(frac(1|x + h) - frac(1|x)|h) = -frac(1|x(x + h))`'
+  ris: f'(x) = -frac(1|x^2)
+- da: f(x) = sqrt(x)
+  passi:
+  - '`frac(sqrt(x + h) - sqrt(x)|h) = frac(1|sqrt(x + h) + sqrt(x))`'
+  ris: f'(x) = frac(1|2*sqrt(x))
+errore: 'Sviluppare male `(x + h)^3`: i termini sono quattro.'
+confondi:
+- scheda: derivata-definizione
+  differenza: Lì il metodo generale; qui i risultati per le funzioni di base.
+perche: Il passaggio chiave è sempre far comparire `h` al numeratore per poterlo semplificare.
+parole: derivata da definizione potenza radice 1/x

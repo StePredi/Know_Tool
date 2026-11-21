@@ -1,0 +1,33 @@
+id: leggi-soluzione
+tipo: regola
+titolo: Leggi la soluzione
+sigla: Leggi la soluzione
+comando: "scelgo gli intervalli giusti"
+frase: "Passo 4: scegli gli intervalli con il segno richiesto e scrivi gli estremi giusti."
+vedo: "Hai la linea dei segni: scrivi la soluzione."
+formula:
+  - (a, b)
+  - "[a, b]"
+adatto:
+  - "Con `>` prendi gli intervalli con il più; con `<` quelli con il meno."
+  - "Con `>` e `<` gli estremi sono esclusi (parentesi tonde, pallino vuoto)."
+  - "Con `>=` e `<=` gli zeri del numeratore sono inclusi (parentesi quadre, pallino pieno); gli zeri del denominatore restano sempre esclusi."
+  - "Uno zero isolato può essere soluzione di `<= 0` anche se non c'è un intervallo, per esempio con un fattore al quadrato."
+  - "Scrivi la soluzione come intervalli o come disuguaglianze."
+esempi:
+  - da: "(x + 3)(x - 2) > 0"
+    passi:
+      - "Cerco il più: prima di -3 e dopo 2"
+      - "Estremi esclusi"
+    ris: "(-inf, -3) ∪ (2, +inf)"
+  - da: "(x + 3)(x - 2) <= 0"
+    passi:
+      - "Cerco il meno: tra -3 e 2"
+      - "Estremi inclusi"
+    ris: "[-3, 2]"
+errore: "Includere gli estremi con `>` o `<`, oppure escluderli con `>=` e `<=`."
+confondi:
+  - scheda: linea-dei-segni
+    differenza: "La linea dei segni viene prima: da lì si legge la soluzione."
+perche: "Il verso della disequazione dice quale segno cercare; il simbolo dice se gli zeri contano."
+parole: soluzione intervalli estremi inclusi esclusi

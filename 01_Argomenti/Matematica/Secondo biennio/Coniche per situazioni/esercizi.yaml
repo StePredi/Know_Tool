@@ -1,0 +1,75 @@
+esercizi:
+- testo: 'x^2 + y^2 - 4x + 6y - 12 = 0: centro e raggio'
+  risultato: C(2, -3), r = 5
+  piano:
+  - scheda: riconosci-conica
+    nota: '`A = B`: circonferenza.'
+  - scheda: circonferenza-equazione-generale
+    nota: '`C = (2, -3)`, `r^2 = 25`.'
+- testo: Circonferenza con centro (1, 2) passante per (4, 6)
+  risultato: (x - 1)^2 + (y - 2)^2 = 25
+  piano:
+  - scheda: circonferenza-da-dati
+    nota: '`r^2 = 9 + 16`.'
+  - scheda: controlla-conica
+    nota: Il punto soddisfa l'equazione.
+- testo: 'y = x^2 - 4x + 3: vertice, fuoco, direttrice'
+  risultato: V(2, -1), F(2, -3/4), y = -5/4
+  piano:
+  - scheda: riconosci-conica
+    nota: 'Solo `x^2`: parabola.'
+  - scheda: parabola-asse-verticale
+    nota: '`d = 4`.'
+- testo: Parabola per (0, 1), (1, 0), (2, 1)
+  risultato: y = x^2 - 2x + 1
+  piano:
+  - scheda: parabola-da-dati
+    nota: Sistema in `a`, `b`, `c`.
+- testo: '9x^2 + 25y^2 = 225: semiassi, fuochi, eccentricità'
+  risultato: a = 5, b = 3, F(+-4, 0), e = 4/5
+  piano:
+  - scheda: riconosci-conica
+    nota: 'Coefficienti positivi e diversi: ellisse.'
+  - scheda: ellisse-canonica
+    nota: Divido per 225.
+- testo: 'x^2/9 - y^2/16 = 1: fuochi e asintoti'
+  risultato: F(+-5, 0), y = +-4/3 x
+  piano:
+  - scheda: iperbole-canonica
+    nota: '`c^2 = 9 + 16`.'
+- testo: '4x^2 + 4y^2 - 8x + 12y - 3 = 0: centro e raggio'
+  risultato: C(1, -3/2), r = 2
+  piano:
+  - scheda: riconosci-conica
+    nota: '`A = B = 4`: circonferenza.'
+  - scheda: forma-canonica
+    nota: Divido per 4 e completo i quadrati.
+  - scheda: circonferenza-equazione-generale
+    nota: '`r^2 = 1 + frac(9|4) + frac(3|4) = 4`.'
+- testo: Intersezioni di x^2 + y^2 = 25 con y = x + 1
+  risultato: (3, 4) e (-4, -3)
+  piano:
+  - scheda: retta-conica-posizione
+    nota: Sostituisco e risolvo `x^2 + x - 12 = 0`.
+- testo: Per quale k la retta y = x + k è tangente a x^2 + y^2 = 2?
+  risultato: k = 2 oppure k = -2
+  piano:
+  - scheda: retta-conica-posizione
+    nota: Impongo `d = 0`.
+- testo: Tangente a x^2 + y^2 = 25 in (3, 4)
+  risultato: 3x + 4y = 25
+  piano:
+  - scheda: tangente-punto
+    nota: Sdoppiamento.
+- testo: Tangente a y = x^2 in (1, 1)
+  risultato: y = 2x - 1
+  piano:
+  - scheda: tangente-punto
+    nota: '`frac(y + 1|2) = x`.'
+- testo: 'x*y = 4: asintoti, vertici, fuochi'
+  risultato: asintoti gli assi, vertici (2, 2) e (-2, -2), fuochi (2*sqrt(2), 2*sqrt(2)) e (-2*sqrt(2), -2*sqrt(2))
+  piano:
+  - scheda: riconosci-conica
+    nota: 'Solo `x*y`: iperbole equilatera.'
+  - scheda: iperbole-equilatera
+    nota: '`k = 4`.'

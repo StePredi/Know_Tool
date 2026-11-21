@@ -1,0 +1,30 @@
+id: somma-monomi
+tipo: regola
+titolo: Somma di monomi simili
+sigla: Somma di monomi
+comando: (a+b)x^n
+vedo: "Monomi con la stessa parte letterale uniti da + o −: `3x^2y + 5x^2y`."
+formula: a*x^n + b*x^n = (a+b)*x^n
+adatto:
+  - "Si sommano solo i coefficienti. La parte letterale resta uguale."
+  - "Se la parte letterale è diversa non si somma: `3x + 2y` resta così."
+  - "`x^2` e `x^3` non sono simili: gli esponenti devono essere uguali lettera per lettera."
+  - "Se i coefficienti sono opposti il risultato è 0."
+esempi:
+  - da: 3x^2 + 5x^2 - 9x^2
+    passi:
+      - "Parte letterale uguale: `x^2`"
+      - "Coefficienti: `3 + 5 - 9 = -1`"
+    ris: -x^2
+    verifica: scomposizione
+  - da: 4x - 7x + x
+    passi:
+      - "Coefficienti: `4 - 7 + 1 = -2`"
+    ris: -2x
+    verifica: scomposizione
+errore: "Sommare anche gli esponenti: `x^2 + x^2 = 2x^2`, non `x^4`."
+confondi:
+  - scheda: prodotto-monomi
+    differenza: "Nella somma gli esponenti restano uguali e si sommano i coefficienti; nel prodotto si sommano gli esponenti."
+perche: "`3x^2 + 5x^2` sono 3 pezzi di x^2 più 5 pezzi di x^2: 8 pezzi."
+parole: somma monomi simili termini simili coefficienti

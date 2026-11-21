@@ -1,0 +1,35 @@
+id: area-intersezioni
+tipo: regola
+titolo: Estremi dalle intersezioni
+sigla: Intersezioni
+comando: risolvi f(x) = g(x) per trovare a e b
+vedo: La regione è «racchiusa» da due curve e non ti danno gli estremi.
+formula:
+- f(x) = g(x)
+adatto:
+- 'Uguaglia le due funzioni e risolvi: le soluzioni sono gli estremi.'
+- 'Con più di due soluzioni ci sono più regioni: un integrale per ciascuna.'
+- Prova un punto in mezzo per scegliere quale è sopra.
+esempi:
+- da: y = x^2 e y = 2x
+  passi:
+  - '`x^2 = 2x`: `x = 0, 2`'
+  - sopra `2x`
+  ris: frac(4|3)
+- da: y = x^2 e y = 8 - x^2
+  passi:
+  - '`2x^2 = 8`: `x = -2, 2`'
+  - sopra `8 - x^2`
+  - 'simmetria: raddoppio'
+  ris: frac(64|3)
+- da: y = x^3 e y = x
+  passi:
+  - '`x^3 = x`: `x = -1, 0, 1`'
+  - 'si scambiano in `0`: due regioni uguali'
+  ris: frac(1|2)
+errore: Dimenticare un'intersezione e prendere un solo intervallo quando le curve si incrociano più volte.
+confondi:
+- scheda: area-tra-curve
+  differenza: Lì gli estremi sono dati; qui li calcoli.
+perche: La regione racchiusa comincia e finisce dove le due curve si incontrano.
+parole: intersezioni estremi area racchiusa risolvere

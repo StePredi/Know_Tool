@@ -1,0 +1,27 @@
+id: forma-normale-sistema
+tipo: regola
+titolo: Porta il sistema in forma normale
+sigla: Forma normale
+comando: "ax + by = c in ogni equazione"
+frase: "Passo 1: ordina ogni equazione con le incognite a sinistra e i numeri a destra."
+vedo: "Due equazioni con due incognite, scritte in modo disordinato: parentesi, frazioni, termini da entrambi i lati."
+formula:
+  - a_1*x + b_1*y = c_1
+  - a_2*x + b_2*y = c_2
+adatto:
+  - "Sviluppa le parentesi, togli i denominatori numerici moltiplicando tutto per l'mcm e riduci."
+  - "Porta le incognite a sinistra e i numeri a destra."
+  - "Scrivi le incognite nello stesso ordine in ogni equazione: prima x, poi y."
+  - "Se un'equazione si può dividere per un numero, semplificala."
+esempi:
+  - da: "2(x + y) = 3 + y,   x - 1 = frac(y + 2|3)"
+    passi:
+      - "Prima: `2x + 2y = 3 + y`, quindi `2x + y = 3`"
+      - "Seconda: moltiplico tutto per 3, `3x - 3 = y + 2`, quindi `3x - y = 5`"
+    ris: "2x + y = 3,   3x - y = 5"
+errore: "Moltiplicare per l'mcm solo i termini con la frazione, dimenticando quelli senza denominatore."
+confondi:
+  - scheda: scegli-metodo
+    differenza: "Prima la forma normale, poi si guardano i coefficienti per scegliere il metodo."
+perche: "In forma normale i coefficienti sono visibili e confrontabili."
+parole: forma normale sistema ordinare equazioni

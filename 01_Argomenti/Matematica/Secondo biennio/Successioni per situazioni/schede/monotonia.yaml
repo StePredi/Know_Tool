@@ -1,0 +1,35 @@
+id: monotonia
+tipo: regola
+titolo: Monotonia
+sigla: Monotonia
+comando: 'a_(n+1) - a_n > 0: crescente'
+vedo: Ti chiedono se la successione cresce, decresce o nessuno dei due.
+formula:
+- a_(n+1) - a_n > 0
+adatto:
+- '`a_(n+1) - a_n > 0` per ogni `n`: crescente; `< 0`: decrescente.'
+- Se i termini sono positivi puoi anche confrontare `frac(a_(n+1)|a_n)` con 1.
+- 'Se i segni alternano (`(-1)^n`): non monotona.'
+esempi:
+- da: a_n = 3n - 1
+  passi:
+  - '`a_(n+1) - a_n = 3`'
+  ris: crescente
+- da: a_n = frac(1|n)
+  passi:
+  - '`frac(1|n + 1) - frac(1|n) = -frac(1|n*(n + 1))`'
+  ris: decrescente
+- da: a_n = frac(n|n + 1)
+  passi:
+  - '`frac(n + 1|n + 2) - frac(n|n + 1) = frac(1|(n + 1)*(n + 2))`'
+  ris: crescente
+- da: a_n = (-1)^n
+  passi:
+  - '`-1, 1, -1, 1, ...`'
+  ris: non monotona
+errore: Controllare solo i primi termini e concludere che la tendenza continua.
+confondi:
+- scheda: limite-comportamento
+  differenza: 'Crescente non vuol dire illimitata: può avvicinarsi a un valore.'
+perche: 'Una successione crescente ha ogni termine maggiore del precedente: la differenza tra consecutivi è positiva.'
+parole: monotonia crescente decrescente successione differenza

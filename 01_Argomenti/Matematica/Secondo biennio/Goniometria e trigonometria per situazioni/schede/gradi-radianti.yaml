@@ -1,0 +1,35 @@
+id: gradi-radianti
+tipo: regola
+titolo: Gradi e radianti
+sigla: Gradi-rad
+comando: r = g*frac(pi|180)
+vedo: L'angolo è dato in gradi e la formula lo vuole in radianti (o il contrario).
+formula:
+- r = g*frac(pi|180)
+- g = r*frac(180|pi)
+adatto:
+- 'Angoli da sapere a memoria: 30 gradi = `frac(pi|6)`, 45 = `frac(pi|4)`, 60 = `frac(pi|3)`, 90 = `frac(pi|2)`, 180 = `pi`, 360 = `2*pi`.'
+- 'Il radiante non ha unità scritta: `frac(pi|3)` è già un angolo.'
+- Sulla calcolatrice controlla il modo (DEG per i gradi, RAD per i radianti) prima di calcolare.
+esempi:
+- da: 60 gradi
+  passi:
+  - '`r = 60*frac(pi|180)`'
+  - semplifico per 60
+  ris: frac(pi|3)
+- da: 225 gradi
+  passi:
+  - '`225*frac(pi|180) = frac(225*pi|180)`'
+  - 'divido per 45: `frac(5*pi|4)`'
+  ris: frac(5*pi|4)
+- da: frac(7*pi|6) radianti
+  passi:
+  - '`g = frac(7*pi|6)*frac(180|pi)`'
+  - 'il `pi` si semplifica: `frac(7*180|6) = 210`'
+  ris: 210 gradi
+errore: Usare 3,14 come se fossero gradi, o lasciare la calcolatrice nell'unità sbagliata.
+confondi:
+- scheda: controlla-goniometria
+  differenza: Il controllo finale verifica anche che l'unità usata sia quella giusta.
+perche: 'L''angolo giro misura 360 gradi, cioè `2*pi` radianti: ogni grado vale `frac(pi|180)` radianti.'
+parole: gradi radianti conversione pi greco unità angolo

@@ -1,0 +1,33 @@
+id: quantificatori
+tipo: regola
+titolo: Quantificatori ∀ e ∃
+sigla: Quantificatori
+comando: ∀x P(x),  ∃x P(x)
+vedo: «Per ogni», «tutti», «esiste», «almeno uno», «nessuno».
+formula:
+- ∀x P(x)
+- ∃x P(x)
+adatto:
+- '`∀` (per ogni): vera se `P(x)` vale per tutti gli elementi.'
+- '`∃` (esiste): vera se `P(x)` vale per almeno un elemento.'
+- '`∃!`: esiste uno e uno solo.'
+- Il valore dipende dall'insieme in cui varia `x`.
+esempi:
+- da: '∀x ∈ N: x ≥ 0'
+  passi:
+  - tutti i naturali sono non negativi
+  ris: vera
+- da: '∃x ∈ N: x² = 9'
+  passi:
+  - '`x = 3`'
+  ris: vera
+- da: '∀x ∈ R: x² > 0'
+  passi:
+  - con `x = 0` non vale
+  ris: falsa
+errore: Pensare che `∃` significhi «uno solo».
+confondi:
+- scheda: negare-quantificatori
+  differenza: Qui si legge la frase; lì si nega.
+perche: I quantificatori dicono su quanti elementi vale una proprietà.
+parole: quantificatori per ogni esiste tutti almeno uno

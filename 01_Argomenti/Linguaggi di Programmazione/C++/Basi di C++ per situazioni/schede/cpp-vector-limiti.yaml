@@ -1,0 +1,26 @@
+id: cpp-vector-limiti
+tipo: prima_dopo
+titolo: 'Errore: indice oltre l''ultimo elemento'
+sigla: at() al posto di []
+comando: v.at(i)
+frase: at controlla l'indice
+fonte: Documentazione C++ · cppreference.com · std::vector · at
+parole: vector at indice fuori limite out_of_range parentesi quadre errore crash
+prima: |-
+  vector<int> v = {1, 2, 3};
+  cout << v⟦[10]⟧;   // comportamento indefinito
+dopo: |-
+  vector<int> v = {1, 2, 3};
+  cout << v⟦.at(10)⟧;   // lancia out_of_range
+uso: Leggere un elemento di un vector quando non sei sicuro dell'indice.
+riconoscila: Valori strani o crash quando l'indice supera l'ultimo elemento.
+parti:
+- voce: v[10]
+  spiega: 'non controlla niente: legge fuori dal vector'
+- voce: v.at(10)
+  spiega: controlla e lancia l'eccezione out_of_range, che puoi gestire con try/catch
+trappola: Gli indici validi vanno da 0 a v.size() - 1.
+varianti: []
+vicine:
+- cpp-vector
+- cpp-eccezioni

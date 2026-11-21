@@ -1,0 +1,34 @@
+id: controlla-esp-log
+tipo: regola
+titolo: Controllo del risultato
+sigla: Controlla
+comando: a^x > 0, f(x) > 0
+vedo: Hai trovato delle soluzioni e vuoi sapere se sono accettabili.
+formula:
+- a^x > 0
+- f(x) > 0
+adatto:
+- 'Un esponenziale è sempre positivo: se risulta uguale a un numero negativo, nessuna soluzione.'
+- Con la sostituzione `t = a^x` scarta i `t <= 0`.
+- Con i logaritmi, controlla che ogni soluzione soddisfi le condizioni di esistenza.
+- Sostituisci nell'equazione di partenza.
+esempi:
+- da: 2^x = -4
+  passi:
+  - un esponenziale è sempre positivo
+  ris: nessuna soluzione
+- da: 'log_3(x) + log_3(x - 2) = 1: soluzioni x = 3 e x = -1'
+  passi:
+  - 'condizioni: `x > 2`'
+  - '`x = -1` non le soddisfa'
+  ris: solo x = 3
+- da: t = -1 dopo la sostituzione t = 2^x
+  passi:
+  - '`2^x` non può valere `-1`'
+  ris: t scartato
+errore: Tenere soluzioni che annullano o rendono negativo un argomento.
+confondi:
+- scheda: condizioni-esistenza-log
+  differenza: Le condizioni si scrivono prima; qui si verificano sui risultati.
+perche: 'Le funzioni esponenziale e logaritmica hanno dominio e immagine limitati: le soluzioni devono rispettarli.'
+parole: controllo verifica soluzioni scartare condizioni esponenziale logaritmo

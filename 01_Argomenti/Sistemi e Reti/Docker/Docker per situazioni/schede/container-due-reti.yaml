@@ -1,0 +1,74 @@
+id: container-due-reti
+tipo: spiegazione
+titolo: Collegare un container a due reti
+sigla: Container su due reti
+comando: docker network connect
+frase: due interfacce, ma non fa da ponte
+fonte: lab_networking_container.pdf (parte 3) · container_mini_tutorial.md
+parole: network connect disconnect due reti più reti interfacce eth1 ponte isolamento a caldo
+quando: Quando un container deve parlare con container di reti diverse.
+blocchi:
+- testo: 'Un container può stare su più reti: ha **un''interfaccia per ogni rete** e un IP diverso su ciascuna. Si collega a caldo, senza riavviarlo.'
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Rete bridge (default)
+      cornice: bridge
+      strati:
+      - testo: c1
+        tono: colore
+      - c2
+    - titolo: Rete mynet (custom)
+      cornice: mynet
+      strati:
+      - testo: c1
+        tono: colore
+      - c3
+      - c4
+    nota: 'c1 compare in tutte e due le reti: ha due interfacce.'
+- titolo: Chi raggiunge chi
+- tabella:
+    colonne:
+    - Da
+    - Verso
+    - Per nome
+    - Per IP
+    righe:
+    - - c1
+      - c2
+      - 'No'
+      - Sì
+    - - c1
+      - c3, c4
+      - Sì
+      - Sì
+    - - c2
+      - c1
+      - 'No'
+      - Sì
+    - - c3
+      - c1
+      - Sì
+      - Sì (IP di c1 su mynet)
+    - - c2
+      - c3
+      - 'No'
+      - 'No'
+    - - c3
+      - c2
+      - 'No'
+      - 'No'
+- nota: Per nome funziona solo dentro la rete custom (mynet), che ha il DNS automatico.
+- trappola: 'c1 non fa da ponte fra le due reti: c2 e c3 restano isolati. Controlla bene quali container metti su più reti.'
+- titolo: I comandi
+- comandi:
+  - codice: docker network connect mynet c1
+    spiega: collega c1 anche a mynet, senza riavviarlo
+  - codice: docker exec -it c1 ip addr
+    spiega: ora ci sono due interfacce, una per rete
+  - codice: docker network disconnect mynet c1
+    spiega: 'Nota: non è nelle fonti; scollega c1 da mynet'
+varianti: []
+vicine:
+- rete-custom
+- ping-tra-container

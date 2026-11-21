@@ -1,0 +1,38 @@
+id: equazione-completa
+tipo: regola
+titolo: Formula risolutiva
+sigla: Formula risolutiva
+comando: "x = (-b ± √D)/2a"
+vedo: "Secondo grado con tutti e tre i termini: `2x^2 - 5x + 2 = 0`."
+formula:
+  - a*x^2 + b*x + c = 0
+  - D = b^2 - 4*a*c
+  - x = frac(-b +- sqrt(D)|2*a)
+adatto:
+  - "Leggi a, b, c con il loro segno."
+  - "Calcola `D = b^2 - 4ac`."
+  - "D positivo: due soluzioni distinte. D uguale a zero: due soluzioni coincidenti, `x = -b/(2a)`. D negativo: nessuna soluzione reale."
+  - "Se b è pari puoi usare la formula ridotta: `x = frac(-b/2 +- sqrt((b/2)^2 - a*c)|a)`."
+  - "Se a = 1 e i numeri sono piccoli, prova prima somma e prodotto."
+esempi:
+  - da: 2x^2 - 5x + 2 = 0
+    passi:
+      - "`a = 2`, `b = -5`, `c = 2`"
+      - "`D = 25 - 16 = 9`"
+      - "`x = (5 +- 3) / 4`"
+    ris: x = 2, x = frac(1|2)
+  - da: x^2 - 2x - 4 = 0
+    passi:
+      - "b è pari: `b/2 = -1`"
+      - "`x = 1 +- sqrt(1 + 4)`"
+    ris: x = 1 +- sqrt(5)
+  - da: x^2 + x + 1 = 0
+    passi:
+      - "`D = 1 - 4 = -3`, negativo"
+    ris: "nessuna soluzione reale"
+errore: "Sbagliare il segno di b: in `-5x`, b vale -5, quindi `-b = 5`."
+confondi:
+  - scheda: somma-prodotto
+    differenza: "Somma e prodotto trovano le soluzioni a occhio; la formula funziona sempre."
+perche: "La formula si ottiene completando il quadrato: vale per ogni equazione di secondo grado."
+parole: formula risolutiva discriminante delta secondo grado

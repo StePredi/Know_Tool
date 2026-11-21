@@ -1,0 +1,30 @@
+id: rete-container
+tipo: ricetta
+titolo: Vedere a quale rete è collegato un container e che IP ha
+sigla: Rete e IP
+comando: docker network ls · inspect
+frase: rete, IP e gateway
+fonte: lab_networking_container.pdf (parti 1.2, 1.4)
+parole: rete network ls inspect ip indirizzo gateway bridge container collegati ip addr resolv.conf
+quando: Quando devi sapere come un container è collegato prima di provare la connettività.
+fasi:
+- nome: Dal PC
+  righe:
+  - codice: docker network ls
+    commento: 'le reti: bridge, host, none e quelle create da te'
+  - codice: docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{$k}} {{$v.IPAddress}} {{$v.Gateway}}{{end}}' c1
+    commento: rete, IP e gateway del container
+  - codice: docker network inspect bridge
+    commento: in Containers l'elenco dei container collegati
+- nome: Da dentro il container
+  righe:
+  - codice: ip addr
+    commento: l'interfaccia eth0 con lo stesso IP di docker inspect
+  - codice: cat /etc/resolv.conf
+    commento: il server DNS usato dal container
+segnaposto: {}
+varianti: []
+vicine:
+- docker0-host
+- strumenti-rete
+- inspect-container

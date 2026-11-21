@@ -1,0 +1,40 @@
+id: leggi-risultato
+tipo: regola
+titolo: Leggere l'ultima colonna
+sigla: Risultato
+comando: 'tutte V: tautologia'
+vedo: La tavola è completa e devi dire che tipo di frase è, o confrontare due frasi.
+formula:
+- p ≡ q
+adatto:
+- 'Tutte V nell''ultima colonna: tautologia (sempre vera).'
+- 'Tutte F: contraddizione (sempre falsa).'
+- 'Miste: contingente (dipende dai valori).'
+- Due frasi sono equivalenti (`≡`) se hanno la stessa ultima colonna.
+esempi:
+- da: p ∨ ¬p
+  passi:
+  - 'colonna finale (con `p` che vale `V, F`): V V'
+  ris: tautologia
+- da: p ∧ ¬p
+  passi:
+  - 'colonna finale: `F F`'
+  ris: contraddizione
+- da: (p -> q) ↔ (¬q -> ¬p)
+  passi:
+  - 'righe in ordine: `VV, VF, FV, FF`'
+  - '`p -> q`: V F V V'
+  - '`¬q -> ¬p`: V F V V'
+  - le due colonne coincidono
+  ris: tautologia, le due frasi sono equivalenti
+- da: p -> q e q -> p
+  passi:
+  - '`p -> q`: V F V V'
+  - '`q -> p`: V V F V'
+  ris: non equivalenti
+errore: Dichiarare equivalenti due frasi che coincidono solo in qualche riga.
+confondi:
+- scheda: costruisci-tavola
+  differenza: Lì si riempie la tavola; qui si legge.
+perche: Due frasi equivalenti hanno lo stesso valore in tutti i casi, quindi la stessa colonna.
+parole: tautologia contraddizione equivalenza logica contingente

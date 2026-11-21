@@ -1,0 +1,78 @@
+esercizi:
+  - testo: frac(x^2 - 9|x^2 - 3x)
+    risultato: frac(x + 3|x)
+    piano:
+      - scheda: scomponi-prima
+        nota: "Sopra differenza di quadrati, sotto raccoglimento `x(x - 3)`."
+      - scheda: condizioni-esistenza
+        nota: "`x != 0` e `x != 3`."
+      - scheda: semplifica
+        nota: "Semplifico `(x - 3)`."
+  - testo: frac(x^2 - 5x + 6|x^2 - 4)
+    risultato: frac(x - 3|x + 2)
+    piano:
+      - scheda: scomponi-prima
+        nota: "Sopra trinomio `(x - 2)(x - 3)`, sotto `(x - 2)(x + 2)`."
+      - scheda: condizioni-esistenza
+        nota: "`x != 2` e `x != -2`."
+      - scheda: semplifica
+        nota: "Semplifico `(x - 2)`."
+  - testo: frac(2 - x|x^2 - 4)
+    risultato: frac(-1|x + 2)
+    piano:
+      - scheda: scomponi-prima
+        nota: "Sotto `(x - 2)(x + 2)`."
+      - scheda: segni-opposti
+        nota: "`2 - x = -(x - 2)`."
+      - scheda: semplifica
+        nota: "Semplifico `(x - 2)`: resta `-1`."
+  - testo: frac(x^2 - 1|x^2 + 2x)*frac(x|x - 1)
+    risultato: frac(x + 1|x + 2)
+    piano:
+      - scheda: prodotto-frazioni
+        nota: "Due frazioni che si moltiplicano."
+      - scheda: scomponi-prima
+        nota: "`(x - 1)(x + 1)` e `x(x + 2)`."
+      - scheda: semplifica
+        nota: "Semplifico `(x - 1)` e `x` in croce."
+  - testo: frac(frac(x^2 - 1|x)|frac(x + 1|x^2))
+    risultato: x(x - 1)
+    piano:
+      - scheda: quoziente-frazioni
+        nota: "Moltiplico per la reciproca."
+      - scheda: semplifica
+        nota: "Semplifico `(x + 1)` e una `x`."
+  - testo: frac(1|x - 2) + frac(1|x + 2)
+    risultato: frac(2x|x^2 - 4)
+    piano:
+      - scheda: mcm-denominatori
+        nota: "Denominatori diversi, nessun fattore in comune: mcm `(x - 2)(x + 2)`."
+      - scheda: somma-denominatori-diversi
+        nota: "`(x + 2) + (x - 2) = 2x`."
+  - testo: frac(x|x - 1) - frac(1|x^2 - x)
+    risultato: frac(x + 1|x)
+    piano:
+      - scheda: scomponi-prima
+        nota: "`x^2 - x = x(x - 1)`."
+      - scheda: mcm-denominatori
+        nota: "mcm `x(x - 1)`."
+      - scheda: somma-denominatori-diversi
+        nota: "Numeratore `x^2 - 1`."
+      - scheda: semplifica
+        nota: "Semplifico `(x - 1)`."
+  - testo: frac(1|x) + frac(x|x + 1)*frac(1|x)
+    risultato: frac(2x + 1|x(x + 1))
+    piano:
+      - scheda: ordine-espressione
+        nota: "Prima il prodotto, poi la somma."
+      - scheda: somma-denominatori-diversi
+        nota: "Somma di `frac(1|x)` e `frac(1|x + 1)`."
+  - testo: frac(1|x^2 - 4x + 4) - frac(1|x^2 - 4)
+    risultato: frac(4|(x - 2)^2(x + 2))
+    piano:
+      - scheda: scomponi-prima
+        nota: "`(x - 2)^2` e `(x - 2)(x + 2)`."
+      - scheda: mcm-denominatori
+        nota: "mcm `(x - 2)^2(x + 2)`."
+      - scheda: somma-denominatori-diversi
+        nota: "Numeratore `(x + 2) - (x - 2) = 4`."

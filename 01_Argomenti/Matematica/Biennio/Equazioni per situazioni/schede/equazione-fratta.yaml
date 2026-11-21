@@ -1,0 +1,33 @@
+id: equazione-fratta
+tipo: regola
+titolo: Equazione fratta
+sigla: Fratta
+comando: condizioni, denominatore comune, scarto
+vedo: "La x compare in un denominatore: `frac(1|x) + frac(2|x - 1) = 1`."
+formula: frac(A|B) = 0  ->  A = 0, B != 0
+adatto:
+  - "1) Scomponi i denominatori. 2) Scrivi le condizioni di esistenza."
+  - "3) Porta tutto a sinistra e riduci a una sola frazione (schede di Frazioni algebriche), oppure moltiplica tutto per l'mcm."
+  - "4) Poni il numeratore uguale a zero e risolvi."
+  - "5) Scarta le soluzioni che annullano un denominatore."
+  - "Non semplificare togliendo fattori con la x senza dire che sono diversi da zero."
+esempi:
+  - da: frac(1|x) + frac(2|x - 1) = 1
+    passi:
+      - "Condizioni: `x != 0` e `x != 1`"
+      - "mcm `x(x - 1)`: `(x - 1) + 2x = x(x - 1)`"
+      - "`3x - 1 = x^2 - x`, cioè `x^2 - 4x + 1 = 0`"
+      - "`x = 2 +- sqrt(3)`: nessuna soluzione è 0 o 1, restano entrambe"
+    ris: x = 2 +- sqrt(3)
+  - da: frac(x|x - 3) = frac(3|x - 3)
+    passi:
+      - "Condizione: `x != 3`"
+      - "Elimino il denominatore: `x = 3`"
+      - "Ma 3 è escluso"
+    ris: "impossibile"
+errore: "Dimenticare le condizioni di esistenza e accettare una soluzione che annulla un denominatore."
+confondi:
+  - scheda: denominatori-numerici
+    differenza: "Con la x al denominatore servono le condizioni di esistenza e il controllo finale."
+perche: "Togliere i denominatori è moltiplicare per un'espressione con la x: può introdurre soluzioni che annullano quell'espressione."
+parole: fratta frazionaria denominatore condizioni esistenza

@@ -1,0 +1,31 @@
+id: equazione-spuria
+tipo: regola
+titolo: Equazione spuria
+sigla: Spuria
+comando: raccolgo x
+vedo: "Secondo grado senza termine noto: `3x^2 - 12x = 0`."
+formula:
+  - a*x^2 + b*x = 0
+  - x(a*x + b) = 0
+  - x = 0, x = -frac(b|a)
+adatto:
+  - "Raccogli x: `x(ax + b) = 0`."
+  - "Un prodotto è zero se un fattore è zero."
+  - "Una soluzione è sempre `x = 0`; l'altra viene da `ax + b = 0`."
+  - "Non dividere per x: perderesti la soluzione x = 0."
+esempi:
+  - da: 3x^2 - 12x = 0
+    passi:
+      - "Raccolgo: `3x(x - 4) = 0`"
+      - "`3x = 0` oppure `x - 4 = 0`"
+    ris: x = 0, x = 4
+  - da: x^2 + 5x = 0
+    passi:
+      - "Raccolgo: `x(x + 5) = 0`"
+    ris: x = 0, x = -5
+errore: "Dividere tutto per x: si perde la soluzione x = 0."
+confondi:
+  - scheda: equazione-pura
+    differenza: "La spuria ha il termine di primo grado e non ha il termine noto."
+perche: "È un prodotto uguale a zero: la legge di annullamento del prodotto."
+parole: spuria secondo grado raccoglimento

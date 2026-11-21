@@ -1,0 +1,38 @@
+id: cpp-string-numeri
+tipo: ricetta
+titolo: Da testo a numero e da numero a testo
+sigla: stoi e to_string
+comando: stoi  stod  to_string
+frase: conversioni
+fonte: Documentazione C++ · cppreference.com · std::stoi · std::to_string
+parole: stoi stod to_string conversione testo numero intero decimale invalid_argument eccezione
+quando: Quando un numero arriva come testo, o devi attaccare un numero a una scritta.
+fasi:
+- nome: Testo → numero
+  righe:
+  - codice: int n = stoi("42");
+    commento: Testo in int.
+  - codice: double d = stod("3.14");
+    commento: Testo in double.
+    parti:
+    - voce: stod("3.14")
+      spiega: '3.14'
+  - codice: stoi("12abc")
+    commento: Si ferma al primo carattere non numerico.
+    parti:
+    - voce: stoi("12abc")
+      spiega: '12'
+    trappola: 'stoi("abc") non ha cifre da leggere e lancia l''eccezione invalid_argument: se il testo
+      viene dall''utente proteggilo con try/catch.'
+- nome: Numero → testo
+  righe:
+  - codice: string t = to_string(7);
+    commento: Numero in string.
+    parti:
+    - voce: to_string(7)
+      spiega: '"7"'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-string-operazioni
+- cpp-eccezioni

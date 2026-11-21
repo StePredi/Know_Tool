@@ -1,0 +1,37 @@
+id: limite-infinito-da-numero
+tipo: regola
+titolo: 'Limite infinito: numero diviso zero'
+sigla: Numero / 0
+comando: frac(k|0^+) = +inf
+vedo: Sostituendo viene `frac(k|0)` con `k` diverso da zero.
+formula:
+- frac(k|0^+) = +inf
+- frac(k|0^-) = -inf
+adatto:
+- Studia il segno del denominatore avvicinandoti da destra (`x -> c^+`) e da sinistra (`x -> c^-`).
+- Se i due lati danno lo stesso infinito il limite esiste; altrimenti no.
+- 'Denominatore al quadrato: sempre positivo, quindi stesso segno su entrambi i lati.'
+esempi:
+- da: lim_(x -> 2^+) frac(1|x - 2)
+  passi:
+  - '`x - 2` è piccolo e positivo'
+  ris: +inf
+- da: lim_(x -> 2^-) frac(1|x - 2)
+  passi:
+  - '`x - 2` è piccolo e negativo'
+  ris: -inf
+- da: lim_(x -> 2) frac(1|(x - 2)^2)
+  passi:
+  - il quadrato è positivo da entrambi i lati
+  ris: +inf
+- da: lim_(x -> 1) frac(x + 3|x - 1)
+  passi:
+  - numeratore vicino a 4
+  - destra `+inf`, sinistra `-inf`
+  ris: non esiste
+errore: Dire `+inf` senza studiare entrambi i lati.
+confondi:
+- scheda: forma-0-su-0
+  differenza: Qui il numeratore non si annulla; lì sì.
+perche: Dividere per numeri sempre più piccoli fa crescere il valore in modulo, con il segno del denominatore.
+parole: limite infinito numero diviso zero destro sinistro

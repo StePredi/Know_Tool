@@ -1,0 +1,35 @@
+id: grafico-esponenziale
+tipo: regola
+titolo: Grafico dell'esponenziale
+sigla: Grafico
+comando: y = a^x
+vedo: Disegnare o leggere `y = a^x` e le sue trasformazioni.
+formula:
+- y = a^x
+- a > 0
+- a != 1
+adatto:
+- Passa sempre per `(0, 1)`; asintoto orizzontale `y = 0`.
+- '`a > 1`: crescente. `0 < a < 1`: decrescente.'
+- 'Dominio: tutti i reali. Immagine: `y > 0`.'
+- '`y = a^x + k` sposta l''asintoto a `y = k`. `y = a^(x - h)` sposta il grafico a destra di `h`.'
+esempi:
+- da: y = 2^x + 3
+  passi:
+  - 'asintoto: `y = 3`'
+  - 'intersezione con l''asse `y`: `2^0 + 3 = 4`'
+  ris: asintoto y = 3, passa per (0, 4)
+- da: y = 2^(x - 1)
+  passi:
+  - grafico di `2^x` spostato a destra di 1
+  ris: passa per (1, 1), asintoto y = 0
+- da: y = (frac(1|2))^x
+  passi:
+  - base tra 0 e 1
+  ris: decrescente, passa per (0, 1)
+errore: 'Pensare che il grafico tocchi l''asse `x`: l''asintoto non è mai raggiunto.'
+confondi:
+- scheda: grafico-log
+  differenza: Il logaritmo è il simmetrico rispetto alla bisettrice `y = x`.
+perche: 'Il grafico si costruisce a partire da pochi punti: `(0, 1)`, `(1, a)`, `(-1, frac(1|a))`.'
+parole: grafico esponenziale asintoto crescente decrescente

@@ -1,0 +1,40 @@
+id: studio-fratta
+tipo: regola
+titolo: Funzione razionale fratta
+sigla: Fratta
+comando: 'denominatore: dominio e asintoti'
+vedo: La funzione è una frazione di polinomi, come `frac(x^2|x - 1)`.
+formula:
+- frac(N(x)|D(x))
+- 'D(x) = 0: punti esclusi'
+adatto:
+- 'Dominio: denominatore diverso da zero.'
+- 'Segno: quadro dei segni di numeratore e denominatore.'
+- 'Limiti: in ogni punto escluso (verticali) e a `+-inf` (orizzontale o obliquo).'
+- 'Derivata: regola del quoziente, poi segno di numeratore; il denominatore è un quadrato, quindi positivo.'
+esempi:
+- da: f(x) = frac(x^2|x - 1)
+  passi:
+  - dominio `x != 1`; né pari né dispari
+  - verticale `x = 1`, obliquo `y = x + 1`
+  - '`f''(x) = frac(x^2 - 2x|(x - 1)^2)`: massimo `(0, 0)`, minimo `(2, 4)`'
+  - '`f''''(x) = frac(2|(x - 1)^3)`: nessun flesso, concava per `x < 1`'
+  ris: asintoti x = 1 e y = x + 1; massimo (0, 0), minimo (2, 4)
+- da: f(x) = frac(x|x^2 + 1)
+  passi:
+  - dominio `R`; dispari
+  - orizzontale `y = 0`
+  - '`f''(x) = frac(1 - x^2|(x^2 + 1)^2)`: massimo `(1, frac(1|2))`, minimo `(-1, -frac(1|2))`'
+  - flessi in `0` e `+-sqrt(3)`
+  ris: orizzontale y = 0; massimo (1, 1/2), minimo (-1, -1/2)
+- da: frac(x^2|x - 1)
+  passi:
+  - derivata
+  ris: frac(x^2 - 2x|(x - 1)^2)
+  verifica: derivata
+errore: 'Dimenticare che la derivata ha lo stesso dominio di `f`: in `x = 1` non si studia il segno.'
+confondi:
+- scheda: studio-polinomio
+  differenza: Il polinomio non ha punti esclusi né asintoti.
+perche: Il denominatore che si annulla produce asintoti verticali; i gradi di numeratore e denominatore decidono il comportamento a infinito.
+parole: fratta razionale studio asintoti denominatore

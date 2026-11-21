@@ -1,0 +1,27 @@
+id: fratti-grado-maggiore
+tipo: regola
+titolo: Numeratore di grado maggiore
+sigla: Grado maggiore
+comando: dividi i polinomi prima
+vedo: Il numeratore ha grado uguale o maggiore del denominatore.
+formula:
+- frac(N|D) = Q + frac(R|D)
+adatto:
+- 'Dividi il numeratore per il denominatore: quoziente `Q` e resto `R`.'
+- Integra `Q` come polinomio.
+- 'Il resto `R` ha grado minore: si tratta con i fratti o la derivata del denominatore.'
+esempi:
+- da: ∫ frac(x^2|x + 1) dx
+  passi:
+  - 'divisione: `x - 1 + frac(1|x + 1)`'
+  ris: frac(x^2|2) - x + ln|x + 1| + c
+- da: ∫ frac(x^2 + 1|x - 1) dx
+  passi:
+  - 'divisione: `x + 1 + frac(2|x - 1)`'
+  ris: frac(x^2|2) + x + 2 ln|x - 1| + c
+errore: 'Applicare i fratti semplici senza aver diviso: non è la forma giusta quando il grado è troppo alto.'
+confondi:
+- scheda: fratti-radici-distinte
+  differenza: 'Questa scheda viene prima: porta il resto a grado minore.'
+perche: Dividere separa la parte polinomiale, facile da integrare, dalla parte fratta.
+parole: divisione polinomi grado quoziente resto

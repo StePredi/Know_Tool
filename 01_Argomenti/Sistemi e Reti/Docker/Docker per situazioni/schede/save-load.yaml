@@ -1,0 +1,33 @@
+id: save-load
+tipo: ricetta
+titolo: Portare un'immagine su un altro PC senza ricostruirla
+sigla: docker save / load
+comando: docker save -o · docker load -i
+frase: l'immagine diventa un file .tar
+fonte: lab_immagini_dockerfile.pdf (parte 6.2) · container_mini_tutorial.md
+parole: save load esportare importare tar condividere immagine altro pc compagno chiavetta scp registry
+quando: Quando un compagno o un server deve usare la tua immagine e non vuoi ricostruirla da capo.
+fasi:
+- nome: Chi la manda
+  righe:
+  - codice: docker save -o note-2.0.tar note:2.0
+    commento: esporta l'immagine in un archivio
+  - codice: ls -lh note-2.0.tar
+    commento: controlla la dimensione
+    trappola: 'Il .tar contiene tutti i layer, compresi quelli dell''immagine di base con Python: per questo è molto più grande di app.py.'
+- nome: Chi la riceve
+  righe:
+  - codice: docker rmi note:2.0
+    commento: 'facoltativo: elimina la tua copia per provare davvero'
+  - codice: docker load -i note-2.0.tar
+    commento: importa l'immagine
+  - codice: docker images note
+segnaposto: {}
+varianti:
+- codice: docker save myapp:latest > myapp.tar
+  spiega: stessa cosa con la redirezione
+- codice: docker load < myapp.tar
+  spiega: importa con la redirezione
+vicine:
+- tag-immagine
+- servizio-lan

@@ -1,0 +1,35 @@
+id: pari-dispari
+tipo: regola
+titolo: Simmetria dell'intervallo
+sigla: Pari e dispari
+comando: 'estremi opposti: sfrutta la parità'
+vedo: Gli estremi sono opposti (`-a` e `a`) e la funzione ha una simmetria.
+formula:
+- 'f dispari: ∫_(-a)^a f dx = 0'
+- 'f pari: ∫_(-a)^a f dx = 2∫_0^a f dx'
+adatto:
+- Controlla se `f(-x) = f(x)` (pari) o `f(-x) = -f(x)` (dispari).
+- 'Dispari: l''integrale è `0`.'
+- 'Pari: raddoppia l''integrale su `[0, a]`.'
+- 'Funzione né pari né dispari: spezza in parte pari e dispari.'
+esempi:
+- da: ∫_(-1)^1 x^3 dx
+  passi:
+  - '`x^3` è dispari'
+  ris: '0'
+- da: ∫_(-2)^2 x^2 dx
+  passi:
+  - '`x^2` è pari'
+  - '`2∫_0^2 x^2 dx = 2*frac(8|3)`'
+  ris: frac(16|3)
+- da: ∫_(-1)^1 (x^3 + x^2) dx
+  passi:
+  - '`x^3` dà `0`'
+  - '`2∫_0^1 x^2 dx`'
+  ris: frac(2|3)
+errore: 'Dire «dispari quindi zero» per un''area: l''integrale è zero, ma l''area di una regione sopra e sotto l''asse non lo è.'
+confondi:
+- scheda: area-segno-cambia
+  differenza: L'integrale con segno si annulla; l'area si calcola spezzando.
+perche: In un intervallo simmetrico le strisce a sinistra e a destra si compensano (dispari) o si raddoppiano (pari).
+parole: pari dispari simmetria intervallo opposti

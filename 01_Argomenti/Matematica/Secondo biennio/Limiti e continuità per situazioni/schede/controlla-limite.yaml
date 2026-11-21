@@ -1,0 +1,29 @@
+id: controlla-limite
+tipo: regola
+titolo: Controllo del risultato
+sigla: Controlla
+comando: sostituisci valori vicini
+vedo: Hai calcolato un limite e vuoi sapere se è plausibile.
+formula:
+- f(x) ≈ L
+adatto:
+- Sostituisci valori molto vicini (per esempio `x = 2,001` e `x = 1,999`) o molto grandi e guarda a cosa si avvicina `f(x)`.
+- Per i limiti infiniti controlla il segno da destra e da sinistra.
+- Il limite esiste solo se destro e sinistro coincidono.
+- Confronta con il grafico, se lo hai.
+esempi:
+- da: lim_(x -> 2) frac(x^2 - 4|x - 2) = 4
+  passi:
+  - '`x = 2,001`: `frac(0,004001|0,001) = 4,001`'
+  - '`x = 1,999`: `3,999`'
+  ris: plausibile
+- da: lim_(x -> +inf) frac(3x^2 + 1|x^2 + x) = 3
+  passi:
+  - '`x = 1000`: circa `2,994`'
+  ris: plausibile
+errore: 'Fidarsi di un solo valore: prova da entrambe le parti.'
+confondi:
+- scheda: sostituisci-valore
+  differenza: Lì il risultato si trova; qui si verifica.
+perche: 'Il limite descrive dove vanno i valori vicino al punto: provare valori vicini lo conferma.'
+parole: controllo limite verifica valori vicini

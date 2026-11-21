@@ -1,0 +1,45 @@
+modello: per_situazioni
+titolo: Scomposizione, per situazioni
+centro: Scomposizione
+sottotitolo: ""
+ingresso: Espressione
+guida: "Prima raccogli quello che hanno in comune tutti i termini. Poi conta i termini che restano: il numero dice quali metodi provare."
+rami:
+  - id: ord
+    nome: Procedura in ordine
+    colore: blue
+    ordine: true
+    voci:
+      - schede:
+          - raccoglimento-totale
+          - conta-termini
+          - controlla-risultato
+  - id: due
+    nome: Due termini
+    colore: green
+    voci:
+      - schede:
+          - differenza-quadrati
+          - somma-differenza-cubi
+  - id: tre
+    nome: Tre termini
+    colore: orange
+    voci:
+      - schede:
+          - trinomio-quadrato
+          - trinomio-notevole
+          - trinomio-a-diverso-da-1
+  - id: qua
+    nome: Quattro termini o più
+    colore: pink
+    voci:
+      - schede:
+          - raccoglimento-parziale
+          - cubo-di-binomio
+          - quadrato-nascosto
+  - id: gra
+    nome: Grado alto
+    colore: violet
+    voci:
+      - schede:
+          - ruffini

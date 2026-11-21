@@ -1,0 +1,30 @@
+id: cpp-unordered-map
+tipo: ricetta
+titolo: 'unordered_map: più veloce, senza ordine'
+sigla: unordered_map
+comando: unordered_map<K, V>
+frase: stessa idea di map, senza ordine
+fonte: Documentazione C++ · cppreference.com · std::unordered_map
+parole: unordered_map hash tabella ordine veloce map differenza chiave valore pair
+quando: Quando non ti serve l'ordine delle chiavi e vuoi la ricerca più veloce.
+fasi:
+- nome: Come si usa
+  righe:
+  - codice: '#include <unordered_map>'
+  - codice: unordered_map<string, int> m;
+  - codice: m["Anna"] = 9;
+    commento: 'Stessi comandi di map: [], at, find, count, erase, size.'
+- nome: Cosa cambia
+  righe:
+  - codice: 'for (auto& [k, v] : m) cout << k << v;'
+    commento: Le coppie escono in un ordine non prevedibile.
+    trappola: 'Non contare sull''ordine: può essere diverso da un computer o da una versione all''altra.'
+  - codice: map<pair<int,int>, int> ok;
+    commento: Con map una coppia può fare da chiave.
+  - codice: unordered_map<pair<int,int>, int> no;
+    commento: 'Con unordered_map no: manca la funzione hash per pair e non compila.'
+segnaposto: {}
+varianti: []
+vicine:
+- cpp-map
+- cpp-pair
