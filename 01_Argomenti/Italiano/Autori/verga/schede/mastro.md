@@ -28,11 +28,11 @@ Anni: 1888-1889 nel testo (p. 82, 157) e nella sintesi di p. 159, 1889 nella lin
 ## Tabella
 Mastro-don Gesualdo (1888-1889): in sintesi (p. 159)
 
-| Aspetto | Cosa dice il libro |
+| Aspetto | In breve |
 |---|---|
-| Struttura | 21 capitoli, suddivisi in quattro parti corrispondenti a distinti momenti della vita del protagonista |
-| Contesto storico-geografico | Dalla Restaurazione (1815) ai moti rivoluzionari del 1848; tra Vizzini e Palermo |
-| Il protagonista | Gesualdo Motta, ex manovale («mastro») divenuto ricco proprietario terriero («don»). Contrapposizione tra la vittoria economica e la sconfitta degli affetti familiari |
-| Gli aspetti sociali | L'arrampicatore sociale: intraprendenza borghese, individualismo, materialismo e fine degli ideali. Rappresentazione della decadenza aristocratica |
-| Il pessimismo verghiano | Le azioni come frutto di meccanismi di potere, opportunismo e tornaconto personale. La «roba» e l'ascesa sociale come corsa verso l'alienazione e la solitudine senza speranza |
-| Lo stile | Monologo interiore, dialogo e discorso indiretto |
+| Struttura | 21 capitoli in 4 parti, una per ogni fase della vita del protagonista |
+| Contesto | Dalla Restaurazione (1815) ai moti del 1848; tra Vizzini e Palermo |
+| Protagonista | Gesualdo Motta: da manovale («mastro») a ricco proprietario («don») |
+| Aspetti sociali | Arrampicatore sociale: individualismo, materialismo, fine degli ideali; decadenza dei nobili |
+| Pessimismo | Potere, opportunismo e tornaconto: la roba porta alienazione e solitudine |
+| Stile | Monologo interiore, dialogo, discorso indiretto libero |

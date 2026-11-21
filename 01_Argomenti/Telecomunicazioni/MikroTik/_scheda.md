@@ -20,6 +20,6 @@
 ## Regole specifiche
 
 - Le fonti stanno solo in `Fonti/`: le schede le citano nel campo `fonte`, non le copiano.
-- Le cartelle `Appunti/`, `Pratica/` e `Schemi/` si creano solo quando c'è materiale da metterci (stessa struttura di MSP).
+- Le cartelle `Appunti/`, `Pratica/` e `Schemi/` si creano solo quando c'è materiale da metterci (stessa struttura di ESP).
 - I comandi vengono sempre dalle fonti. Se aggiungo qualcosa che nelle fonti non c'è, lo segno come «nota».
 - Nuove situazioni: una scheda per volta, nel ramo giusto di `indice.yaml`; un argomento nuovo = un nuovo ramo, inserito prima dei due rami trasversali. Un gruppo ha sempre almeno 2 schede.

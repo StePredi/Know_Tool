@@ -27,9 +27,10 @@ Il libro scrive «dazio sulla pece» (p. 121), non «sul pesce». La traduzione 
 ## Tabella
 I Malavoglia (1881): in sintesi (p. 124)
 
-| Aspetto | Cosa dice il libro |
+| Aspetto | In breve |
 |---|---|
-| Fonti | Inchiesta di Franchetti e Sonnino (*La Sicilia nel 1876*) e informazioni sugli usi, le tradizioni e i modi linguistici del popolo siciliano, provenienti da raccolte di proverbi e opere etnografiche |
-| Struttura | 15 capitoli suddivisi in tre parti (la prima e la seconda incentrate sulla figura di padron 'Ntoni e la terza con protagonista il giovane 'Ntoni) |
-| Contesto | Il paese siciliano di Aci Trezza, dal 1865 al 1877 |
-| Romanzo e studio sociale | Presentazione di Aci Trezza sia in una prospettiva mitica sia come ambiente storicamente determinato. Descrizione della famiglia patriarcale sia come mondo arcaico, mitico e felice, sia come luogo aperto alla forza distruttiva della modernità e del progresso |
+| Fonti | Inchiesta Franchetti-Sonnino (*La Sicilia nel 1876*), proverbi, opere etnografiche |
+| Struttura | 15 capitoli in tre parti: le prime due su padron 'Ntoni, la terza sul giovane 'Ntoni |
+| Contesto | Aci Trezza, dal 1865 al 1877 |
+| Doppia lettura | Romanzo e studio sociale: paese mitico e insieme ambiente storico |
+| Famiglia patriarcale | Mondo arcaico e felice, ma aperto alla forza distruttiva del progresso |

@@ -23,10 +23,11 @@ Nei Malavoglia il lettore è subito immerso in medias res, nel cuore della vicen
 ## Tabella
 Motivi narrativi e stilistici: in sintesi (p. 128)
 
-| Aspetto | Cosa dice il libro |
+| Aspetto | In breve |
 |---|---|
-| Principio generale | Principio dell'impersonalità, molteplici punti di vista, inizio in medias res, presentazione indiretta dei personaggi |
-| La rappresentazione dello spazio | Descrizione dei luoghi attraverso un richiamo o un accenno del narratore popolare; conflitto tra il paese (logica dell'utile) e la casa del nespolo (affetti e legami familiari); definizione degli spazi sociali in rapporto al ceto sociale e agli interessi economici e politici; contrapposizione tra il paese (laboriosità e protezione) e la città (corruzione e perdita di identità) |
-| La rappresentazione del tempo | Contrapposizione tra il tempo circolare dei fenomeni e il tempo storicamente determinato; richiamo al passato di un mondo rurale arcaico destinato a essere travolto dalla «fiumana del progresso» |
-| Il sistema dei personaggi | Opposizione tra i Malavoglia (simbolo di valori disinteressati) e la comunità di Aci Trezza (simbolo della logica dell'utile); opposizione di 'Ntoni ai valori sia di padron 'Ntoni (famiglia e «ideale dell'ostrica») sia del paese (fatalismo e immobilismo); opposizione dei registri linguistici: lirico-simbolico dei Malavoglia e realistico dei paesani |
-| Artifici | Applicazione degli artifici di regressione e straniamento |
+| Principio | Impersonalità, più punti di vista, inizio in medias res |
+| Spazio | Luoghi solo accennati; paese (utile) contro casa del nespolo (affetti); paese (lavoro) contro città (corruzione) |
+| Tempo | Tempo circolare dei fenomeni contro tempo lineare della storia; la «fiumana del progresso» |
+| Personaggi | Malavoglia (valori disinteressati) contro paesani (logica dell'utile); 'Ntoni contro nonno e paese |
+| Lingua | Registro lirico-simbolico dei Malavoglia contro registro realistico-caricaturale dei paesani |
+| Artifici | Regressione e straniamento |

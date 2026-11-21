@@ -19,12 +19,15 @@ Prima opera verista di Verga: raccolta di otto novelle pubblicata nel 1880 (già
 - **Novelle manifesto**: *L'amante di Gramigna* e *Fantasticheria* sintetizzano la poetica del Verismo (vedi le schede dedicate).
 - **I temi principali** (p. 97): l'**amore-passione**, spesso estremo e irrazionale; l'**interesse economico**; l'**esclusione sociale**.
 - **Domande del libro**: in che cosa consiste l'«ideale dell'ostrica»? Quali sono i temi principali? Quali fattori determinano le azioni dei protagonisti?
+- **L'amore-passione, esempi**: in *La Lupa* la protagonista sa che il genero, al quale è legata da un rapporto incestuoso, finirà per ucciderla, ma accetta la morte come conseguenza inevitabile. In *Cavalleria rusticana* Turiddu scopre che Lola si è promessa a compare Alfio; per farla ingelosire corteggia Santa e Lola diventa sua amante, ma Santa rivela tutto ad Alfio, che in duello uccide Turiddu. In *Jeli il pastore* Jeli scopre il tradimento della moglie e taglia la gola al suo amante.
+- **L'interesse economico, esempi**: in *Cavalleria rusticana* Lola sposa compare Alfio per interesse e Santa fa sfoggio della propria ricchezza per essere alla pari di Turiddu; in *Jeli il pastore* la moglie Mara accetta la corte del ricco padrone; in *La Lupa* Nanni sposa Maricchia anche perché ha una dote.
+- **Il personaggio escluso, esempi**: la Lupa è evitata da tutti; Jeli è «primitivo», a suo agio solo in campagna, un vinto per nascita che finirà in carcere; Rosso Malpelo ha lucida consapevolezza delle leggi crudeli della società (la lotta per la sopravvivenza dipende dalla capacità di apprenderne in fretta le regole), ma contro il più forte è inutile lottare e alla fine ne è sconfitto.
 
 ## Tabella
 I temi di Vita dei campi (p. 98)
 
-| Temi | Esempi |
-|---|---|
-| L'amore è vissuto come passione erotica, quasi animalesca, e perciò destinato a sfociare nella violenza | *La Lupa*: la protagonista sa che il genero, al quale è legata da un rapporto incestuoso, finirà per ucciderla, ma accetta la morte come conseguenza inevitabile della passione. *Cavalleria rusticana*: la trasgressione è punita con la morte: Turiddu, tornato dal servizio militare, scopre che Lola si è promessa a compare Alfio; per farla ingelosire corteggia Santa e Lola diventa sua amante, ma Santa rivela tutto ad Alfio, che in duello uccide Turiddu. *Jeli il pastore*: scopre il tradimento della moglie e taglia la gola al suo amante. |
-| L'elemento economico è il motore degli avvenimenti | *Cavalleria rusticana*: Lola sposa compare Alfio per interesse economico; anche Santa, per essere allo stesso livello di Turiddu, fa sfoggio della propria ricchezza. *Jeli il pastore*: la moglie Mara accetta la corte del ricco padrone e ne diventa l'amante. *La Lupa*: Nanni sposa Maricchia anche perché ha una dote. |
-| Fra i protagonisti ricorre la figura del personaggio solitario ed escluso dalla comunità | La protagonista della *Lupa* è evitata da tutti, maschi e femmine. Jeli è «primitivo» e si trova a suo agio solo in campagna: è un vinto per nascita e finirà in carcere. In *Rosso Malpelo* il giovane protagonista ha lucida consapevolezza delle leggi crudeli che governano la società: sa che la lotta per la sopravvivenza è legata alla capacità di apprenderne in fretta le regole, ma poiché contro il più forte è inutile lottare, alla fine ne è sconfitto. |
+| Tema | Novelle | In breve |
+|---|---|---|
+| Amore-passione | *La Lupa*, *Cavalleria rusticana*, *Jeli il pastore* | Passione erotica quasi animalesca: sfocia nella violenza |
+| Interesse economico | *Cavalleria rusticana*, *Jeli il pastore*, *La Lupa* | La roba è il motore degli avvenimenti |
+| Personaggio escluso | *La Lupa*, *Jeli il pastore*, *Rosso Malpelo* | Il solitario è evitato dalla comunità o ne è vinto |

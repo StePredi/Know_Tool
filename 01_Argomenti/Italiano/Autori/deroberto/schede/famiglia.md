@@ -19,13 +19,13 @@ Gli Uzeda cambiano posizione politica ed ecclesiastica per opportunismo: don Gas
 ## Tabella
 Chi è chi
 
-| Personaggio | Cosa fa |
-|---|---|
-| Teresa Uzeda di Francalanza (la principessa) | Donna ambiziosa e dispotica; dopo la sua morte la famiglia si dilania |
-| Giacomo | Primogenito, principe: tutte le virtù e i difetti degli Uzeda, cinica avarizia; sottrae la quota ereditaria a Raimondo |
-| Raimondo | Conte, dissoluto |
-| Don Gaspare | Duca d'Oragua, cognato della principessa: finge simpatie liberali dopo la spedizione garibaldina e nel 1860 è eletto senatore |
-| Consalvo | Figlio di Giacomo, ultimo degli Uzeda: intraprende l'attività politica aderendo per opportunismo a idee di sinistra |
-| Don Blasco | Cognato della principessa: costretto a diventare monaco per motivi economici; inizialmente antiunitario, festeggia la presa di Roma (1870) e si arricchisce comprando i beni della Chiesa |
-| Lodovico | Nipote di don Blasco: scala i gradini della gerarchia ecclesiastica fino a priore del convento dei benedettini |
-| Giulente | Borghese liberale, animato da sinceri ideali patriottici; è strumentalizzato e ingannato dagli Uzeda alle elezioni: l'unico sconfitto |
+| Personaggio | Chi è | Percorso |
+|---|---|---|
+| Teresa (la principessa) | Madre, matriarca ambiziosa e dispotica | Alla sua morte la famiglia si dilania |
+| Giacomo | Primogenito, principe | Cinico e avaro: sottrae a Raimondo la quota ereditaria |
+| Raimondo | Conte | Dissoluto |
+| Don Gaspare | Duca d'Oragua, cognato della principessa | Finge simpatie liberali dopo la spedizione garibaldina; senatore nel 1860 |
+| Consalvo | Figlio di Giacomo, ultimo degli Uzeda | Entra in politica e aderisce per opportunismo alla sinistra |
+| Don Blasco | Cognato della principessa | Monaco per motivi economici; antiunitario, poi festeggia Roma (1870) e si arricchisce con i beni della Chiesa |
+| Lodovico | Nipote di don Blasco | Sale fino a priore dei benedettini |
+| Giulente | Borghese liberale | Ideali patriottici sinceri, ingannato dagli Uzeda alle elezioni: l'unico sconfitto |

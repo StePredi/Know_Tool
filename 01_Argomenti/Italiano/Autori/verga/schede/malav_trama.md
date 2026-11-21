@@ -27,8 +27,8 @@ Il rimando a margine di T7 è poco leggibile nella foto (sembra p. 136): il test
 ## Tabella
 Le tre parti del romanzo (p. 122)
 
-| Capitoli | Sviluppo dell'azione | Tempo della storia e tempo del racconto |
+| Parte | Azione | Tempo |
 |---|---|---|
-| Prima parte (capitoli I-IV) | L'azione comincia nel 1865 con l'affare dei lupini, il naufragio della barca con il carico (la Provvidenza parte un sabato sera di settembre), la cerimonia funebre per la morte di Bastianazzo. | Una premessa riassume gli avvenimenti tra il dicembre 1863 ('Ntoni parte per la leva militare) e il settembre 1865. Il tempo della storia è breve (quattro giorni), mentre il tempo del racconto è dilatato: l'ambiente, i personaggi e le vicende sono rappresentati con un ritmo narrativo lento e graduale. |
-| Seconda parte (capitoli V-X) | Gli avvenimenti sono incentrati su padron 'Ntoni e sui suoi tentativi di superare le disgrazie che colpiscono la sua famiglia, compreso il secondo naufragio della Provvidenza, in cui lui stesso rischia la vita. | Il tempo della storia si dilata (dall'autunno del 1865 all'estate del 1867) e il tempo del racconto si condensa. Mancano precise indicazioni cronologiche, sostituite da allusioni a eventi pubblici, come per esempio la battaglia di Lissa del 1866, rievocata da due marinai reduci. |
-| Terza parte (capitoli XI-XV) | In primo piano c'è soprattutto la storia del giovane 'Ntoni. | Il tempo della storia copre circa dieci anni: dall'epidemia di colera del 1867, in cui muore Maruzza, all'inizio del 1877, quando torna il giovane 'Ntoni. Il tempo del racconto si condensa soprattutto negli ultimi due capitoli, che riassumono gli eventi di alcuni anni. |
+| I (cap. I-IV) | 1865: affare dei lupini, naufragio della Provvidenza, funerale di Bastianazzo | Storia di 4 giorni, racconto dilatato e lento; premessa dal 1863 (leva di 'Ntoni) |
+| II (cap. V-X) | Padron 'Ntoni lotta contro le disgrazie; secondo naufragio | Storia 1865-1867, racconto più rapido; date sostituite da eventi (Lissa, 1866) |
+| III (cap. XI-XV) | Storia del giovane 'Ntoni | Circa 10 anni (colera 1867, ritorno nel 1877); ultimi due capitoli molto riassuntivi |
