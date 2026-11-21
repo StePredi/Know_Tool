@@ -107,7 +107,7 @@ Tutto lo sviluppo recente è provato **solo nel browser e con i test** (97 test,
 4. Proposte di Claude con «Applica / Scarta» anche per i documenti «Per situazioni».
 5. Figure a moduli (disegno della scheda con i pin) e figure nelle schede di altri documenti.
 6. Modifica: importare o spostare file dall'app; nuovo autore (e quindi «Mappa cronologica» in galleria).
-7. Altri documenti «Per situazioni»: Git e Python (nello stesso formato di MikroTik e MSP).
+7. Altri documenti «Per situazioni»: Git e Python (nello stesso formato di MikroTik e ESP).
 8. Nuovi modelli in galleria, uno alla volta, progettati insieme (flashcard: non per ora).
 9. Home: ricerca nei contenuti, spostare con trascinamento.
 10. **A fine app**: importazione PDF e installer `.exe` (electron-builder). Restano per ultimi, per scelta dell'utente.
