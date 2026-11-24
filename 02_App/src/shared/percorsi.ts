@@ -1,9 +1,5 @@
 // Percorsi speciali di 01_Argomenti. I nomi delle cartelle hanno l'iniziale maiuscola (Italiano/Autori), ma si confrontano senza badare alle maiuscole.
 
-export const ITALIANO = 'Italiano'
-export const AUTORI = 'Italiano/Autori'
-
-export const èItaliano = (rel: string): boolean => /^italiano(\/|$)/i.test(rel)
 /** la cartella «Autori» stessa */
 export const èCartellaAutori = (rel: string): boolean => /^italiano\/autori$/i.test(rel)
 /** la cartella «Autori» o qualcosa al suo interno */

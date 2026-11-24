@@ -355,12 +355,3 @@ export const slug = (t: string): string =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_+|_+$/g, '') || 'testo'
-
-/** «v. 8», «vv. 4–6» per i versi; «§ 2» per la prosa. */
-export function etichettaPosizione(tk: Tokenizzato, span: Span | null, layout: Layout): string {
-  if (!span || !tk.token[span[0]] || !tk.token[span[1]]) return '—'
-  const a = tk.token[span[0]]!.blocco + 1
-  const b = tk.token[span[1]]!.blocco + 1
-  const sigla = layout === 'verso' ? (a === b ? 'v.' : 'vv.') : '§'
-  return a === b ? `${sigla} ${a}` : `${sigla} ${a}–${b}`
-}

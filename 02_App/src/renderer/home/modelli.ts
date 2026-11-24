@@ -118,8 +118,6 @@ export const STRUTTURA: Modello[] = [
   }
 ]
 
-export const TUTTI_I_MODELLI: Modello[] = [...MODELLI, ...STRUTTURA]
-
 export interface Contesto {
   /** il nodo dove si è (cartella, materia, autore) o null alla Home */
   tipo: string | null
