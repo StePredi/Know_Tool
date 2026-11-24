@@ -94,9 +94,9 @@ Una riga sola, concreta: cosa stavo facendo, cosa è successo, cosa mi aspettavo
 
 ## 6. Git
 
-- Committo **solo** `01_Argomenti/`, `00_Control/LOG.md` e `00_Control/segnalazioni_studio.md`.
-- Mai `git add .` o `git add -A`: potrei prendere file di `02_App/` a metà.
-- Messaggi di commit in italiano, su una riga (per esempio: `Git per situazioni: aggiunte le schede del ramo Annullare`).
+Regole complete su git e sessioni: **`sessioni_e_commit.md`** (vale quello, non questo file).
+
+In breve: committo solo `01_Argomenti/`, `LOG.md` e `segnalazioni_studio.md`, con prefisso `studio:`, un commit a ogni unità di lavoro finita. Mai `git add .`.
 
 ---
 
@@ -119,11 +119,8 @@ Specifica: `specifiche/modello_matematica.md`. Esempio completo da copiare: `01_
 
 ---
 
-## 8. Per non pestarci i piedi (2026-10-22)
+## 8. Per non pestarci i piedi
 
-- **Prima di iniziare**: `git status`. Se ci sono file modificati che non sono miei, li lascio stare e non li committo.
-- **Non sposto né rinomino cartelle** di `01_Argomenti/` senza che Ste l'abbia chiesto: tolgo i riferimenti agli altri e rompo i test (che leggono i percorsi). Se serve riorganizzare, lo segnalo in `segnalazioni_studio.md`.
-- **Commit solo dei miei percorsi**: `git add 01_Argomenti/<cartella> …` con i nomi espliciti, poi `git commit -- <stessi percorsi>`.
-- **File lock di git**: se compare `.git/HEAD.lock` o simili e non posso cancellarli, li rinomino (`mv .git/HEAD.lock .git/stale-HEAD-lock-<ora>`) senza forzare; non tocco quelli di un git in esecuzione.
-- **Test**: se ho scritto una scheda `regola`, controllo che i test dell'argomento passino (`npx vitest run tests/regola.test.ts` in `02_App`) oppure lo scrivo in LOG.md come «non verificato».
-- **Ramo facoltativo**: se Ste lo chiede, lavoro su un ramo `studio` e non su `main`; il merge lo fa lui o lo sviluppo.
+Regole complete su git e sessioni: **`sessioni_e_commit.md`** (vale quello, non questo file).
+
+Specifico per lo studio: non sposto né rinomino cartelle di `01_Argomenti/` senza richiesta di Ste (si rompono indici e test); se serve, lo segnalo in `segnalazioni_studio.md`. Se ho scritto una scheda `regola`, lancio `npx vitest run tests/regola.test.ts` in `02_App` oppure scrivo «non verificato» nel LOG.

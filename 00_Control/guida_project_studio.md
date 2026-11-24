@@ -60,9 +60,9 @@ Poi dico in una riga cosa sto per fare.
 
 ## 6. Git e log
 
-- Committo solo `01_Argomenti/`, `00_Control/LOG.md` e `00_Control/segnalazioni_studio.md`. Mai `git add .`.
-- Messaggi di commit in italiano, su una riga.
-- A fine lavoro aggiungo una riga a `LOG.md`.
+Regole complete su git e sessioni: **`sessioni_e_commit.md`** (vale quello, non questo file).
+
+A fine lavoro aggiungo una riga a `LOG.md`.
 
 ---
 

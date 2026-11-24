@@ -76,12 +76,12 @@ Regole di costruzione che sono già nel codice e vanno mantenute:
 - Per le cose grandi o ambigue **prima si progetta insieme** (specifica in `specifiche/`, decisioni dell'utente scritte lì), poi si costruisce. Per le cose piccole e chiare si va direttamente.
 - Prima di spostare o riscrivere dati dell'utente: elenco di cosa cambia, ok dell'utente, un solo commit, ritorno indietro possibile con `git revert`.
 - A ogni funzione finita aggiorno: `LOG.md` (una voce datata: cosa, file toccati, quanti test, cosa non provato), `STATO.md` (Fatto / Da fare), e la specifica se cambia il formato.
-- **Commit**: messaggio in italiano, una riga che dice cosa è cambiato, poi le righe di attribuzione richieste dall'ambiente.
+- **Commit**: vedi `sessioni_e_commit.md` (prefissi `app:`/`doc:`, solo i miei percorsi, un commit per unità di lavoro).
 - Non aggiungo funzioni non chieste. Se vedo un'idea utile la propongo in una riga.
 
 ### Note pratiche sul computer dell'utente
 
-- Se lavoro da una sessione con collegamento al computer, la cartella è `Know_Tool` (ramo `main`). Cancellare file lì richiede il permesso dell'utente: git lascia quindi dei `.lock` in `.git` dopo ogni comando che scrive. Si spostano con `mv .git/HEAD.lock .git/stale-<data>-HEAD.lock` (mai con `rm`, mai se git è in esecuzione).
+- Con il collegamento al computer la cartella è `Know_Tool` (ramo `main`). Cancellare lì richiede permesso: per i `.lock` di git vedi `sessioni_e_commit.md` §7.
 - Per portare codice: pacchetto `.tgz` con **nome nuovo** in `99_Archivio/`, estratto sul posto; i `.tgz` vecchi li cancella l'utente.
 - Se il collegamento cade ("Workspace still starting" o "not connected"): aspetto 45-60 secondi e riprovo una volta; se non torna, lo dico e lascio il pacchetto da copiare.
 

@@ -93,3 +93,9 @@ Se un file non ha una collocazione chiara, **chiedo prima di salvarlo**.
 ## 10. Prima di progettare un nuovo tipo di documento
 
 - Prima di disegnare o scrivere codice per un nuovo modello (per esempio Matematica), leggo e seguo `00_Control/procedura_nuovi_documenti.md`: prima il contenuto e i problemi reali dell'utente, poi il modello dei file, solo alla fine la schermata.
+
+---
+
+## 11. Sessioni e commit
+
+Chi tocca cosa, quando e come si committa, inizio/fine sessione, due PC: vedi **`sessioni_e_commit.md`**.
