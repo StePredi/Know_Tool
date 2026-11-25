@@ -61,7 +61,10 @@ function Testata({ ctx, id, tipo }: { ctx: Ctx; id: string; tipo: string }): Rea
   )
 }
 
-function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
+/** parte: «lato» = varianti e situazioni vicine (colonna a destra nelle ricette); «fondo» = precedente/successiva e «ripassata»; senza parte, tutto in fila. */
+function Piede({ ctx, id, parte }: { ctx: Ctx; id: string; parte?: 'lato' | 'fondo' }): ReactNode {
+  const lato = parte !== 'fondo'
+  const fondo = parte !== 'lato'
   const s = ctx.dati.schede[id]!
   const esempi = useSit((x) => (x.viste[ctx.rel] ?? VISTA0).esempi)
   const i = ctx.ordine.indexOf(id)
@@ -72,7 +75,7 @@ function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
   const slots = s.tipo === 'ricetta' ? s.segnaposto : undefined
   return (
     <>
-      {s.varianti.length > 0 && (
+      {lato && s.varianti.length > 0 && (
         <>
           <h2 className="s-sec">Varianti</h2>
           <ul className="s-vars">
@@ -80,11 +83,11 @@ function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
           </ul>
         </>
       )}
-      <div className="s-nav">
+      {fondo && <div className="s-nav">
         {pv ? <button type="button" onClick={() => apri(pv)}><small>← Precedente · livello {ctx.info[pv]!.bi + 1}</small><b>{ctx.dati.schede[pv]!.sigla}</b></button> : <span />}
         {nx ? <button type="button" className="nx" onClick={() => apri(nx)}><small>Successiva · livello {ctx.info[nx]!.bi + 1} →</small><b>{ctx.dati.schede[nx]!.sigla}</b></button> : <span />}
-      </div>
-      {s.vicine.length > 0 && (
+      </div>}
+      {lato && s.vicine.length > 0 && (
         <>
           <h2 className="s-sec">Situazioni vicine</h2>
           <div className="s-rels">
@@ -96,13 +99,13 @@ function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
           </div>
         </>
       )}
-      {(s.tipo === 'voce' || s.tipo === 'confronto') && s.da.length > 0 && (
+      {lato && (s.tipo === 'voce' || s.tipo === 'confronto') && s.da.length > 0 && (
         <p className="vc-da">
           Dal libro: {s.da.map((d, i) => <code key={i}>{`${d.l} cap. ${d.c}${d.p ? ` par. ${d.p}` : ''}${d.dove ? ` (${d.dove})` : ''}`}</code>)}
           {s.parole ? <span className="vc-pc">parole chiave: {s.parole}</span> : null}
         </p>
       )}
-      <div className="s-mark">
+      {fondo && <div className="s-mark">
         <button
           type="button"
           className="btn"
@@ -113,7 +116,7 @@ function Piede({ ctx, id }: { ctx: Ctx; id: string }): ReactNode {
         >
           {fatta ? '✓ Ripassata' : 'Segna come ripassata'}
         </button>
-      </div>
+      </div>}
     </>
   )
 }
@@ -163,12 +166,8 @@ function Ricetta({ ctx, s }: { ctx: Ctx; s: SchedaRicetta }): ReactNode {
           <button type="button" className="btn" onClick={() => copia(s.fasi.map((_, i) => testoFase(i)).join('\n'))}>Copia tutto</button>
         </div>
       </div>
-      {trappole.length > 0 && (
-        <div className="s-trapbox">
-          <h3>⚠ Trappole di questa scheda</h3>
-          <ul>{trappole.map((t) => <li key={t.n}><button type="button" onClick={() => vai(t.n)}><b>Riga {t.n}:</b> {t.t}</button></li>)}</ul>
-        </div>
-      )}
+      <div className="s-ric">
+      <div className="s-fasi">
       {fasi.map((f, pi) => {
         const note = f.righe.filter((x) => x.nota)
         return (
@@ -225,7 +224,18 @@ function Ricetta({ ctx, s }: { ctx: Ctx; s: SchedaRicetta }): ReactNode {
           </section>
         )
       })}
-      <Piede ctx={ctx} id={s.id} />
+      </div>
+      <aside className="s-lato">
+      {trappole.length > 0 && (
+        <div className="s-trapbox">
+          <h3>⚠ Trappole di questa scheda</h3>
+          <ul>{trappole.map((t) => <li key={t.n}><button type="button" onClick={() => vai(t.n)}><b>Riga {t.n}:</b> {t.t}</button></li>)}</ul>
+        </div>
+      )}
+        <Piede ctx={ctx} id={s.id} parte="lato" />
+      </aside>
+      </div>
+      <Piede ctx={ctx} id={s.id} parte="fondo" />
     </div>
   )
 }
