@@ -33,3 +33,18 @@ describe('extraAutore', () => {
     expect(n).toEqual({ id: 'trappole', titolo: 'Trappole', intro: 'Non sono errori.', voci: ['**A**: uno continua', 'B'] })
   })
 })
+
+describe('testi chiave e percorso', () => {
+  it('legge un testo chiave', async () => {
+    const { leggiTestoChiave } = await import('../src/shared/extraAutore')
+    const r = leggiTestoChiave('---\nid: inf\ntitolo: L\'infinito\nversi: [a, b]\nanalisi: [x]\n---\n')
+    expect(r.ok && r.dati.da_controllare).toBe(false)
+  })
+  it('il percorso rifiuta una tappa con un luogo inesistente', async () => {
+    const { leggiPercorso } = await import('../src/shared/extraAutore')
+    const base = '---\nluoghi:\n  - { id: a, nome: A, lat: 43, lon: 13 }\ntappe:\n  - { luogo: b, quando: "1798", titolo: T }\n---\n'
+    const r = leggiPercorso(base)
+    expect(r.ok).toBe(false)
+    expect(leggiPercorso(base.replace('luogo: b', 'luogo: a')).ok).toBe(true)
+  })
+})

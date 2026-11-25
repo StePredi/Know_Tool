@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
-import { leggiConfronto, leggiNota, leggiRipasso, type ExtraAutore } from '../shared/extraAutore'
+import { leggiConfronto, leggiNota, leggiPercorso, leggiRipasso, leggiTestoChiave, type ExtraAutore } from '../shared/extraAutore'
 
 async function file(dir: string, sotto: string): Promise<string[]> {
   try {
@@ -12,7 +12,7 @@ async function file(dir: string, sotto: string): Promise<string[]> {
 
 /** Legge confronti, ripasso e note della cartella di un autore. Cartelle assenti = elenchi vuoti. */
 export async function leggiExtra(dirAutore: string): Promise<ExtraAutore> {
-  const extra: ExtraAutore = { confronti: [], ripasso: [], note: [], errori: [] }
+  const extra: ExtraAutore = { confronti: [], ripasso: [], note: [], testiChiave: [], percorso: null, errori: [] }
   for (const f of await file(dirAutore, 'confronti')) {
     const r = leggiConfronto(await fs.readFile(join(dirAutore, 'confronti', f), 'utf8'))
     if (r.ok) extra.confronti.push(r.dati)
@@ -25,6 +25,18 @@ export async function leggiExtra(dirAutore: string): Promise<ExtraAutore> {
   }
   for (const f of await file(dirAutore, 'note')) {
     extra.note.push(leggiNota(f.replace(/\.md$/i, ''), await fs.readFile(join(dirAutore, 'note', f), 'utf8')))
+  }
+  for (const f of await file(dirAutore, 'testi_chiave')) {
+    const r = leggiTestoChiave(await fs.readFile(join(dirAutore, 'testi_chiave', f), 'utf8'))
+    if (r.ok) extra.testiChiave.push(r.dati)
+    else extra.errori.push(`testi_chiave/${f}: ${r.errore}`)
+  }
+  try {
+    const r = leggiPercorso(await fs.readFile(join(dirAutore, 'percorso.md'), 'utf8'))
+    if (r.ok) extra.percorso = r.dati
+    else extra.errori.push(`percorso.md: ${r.errore}`)
+  } catch {
+    // nessun percorso: la sezione resta vuota
   }
   return extra
 }

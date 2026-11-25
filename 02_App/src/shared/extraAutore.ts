@@ -26,7 +26,25 @@ const schemaRipasso = z.object({
   )
 })
 
+const schemaTesto = z.object({
+  id: z.string().min(1),
+  titolo: z.string().min(1),
+  scheda: z.string().optional(),
+  versi: z.array(z.string()).default([]),
+  metrica: z.string().optional(),
+  analisi: z.array(z.string()).default([]),
+  /** versi e metrica scritti da Claude, non dall'antologia: da confrontare */
+  da_controllare: z.boolean().default(false)
+})
+
+const schemaPercorso = z.object({
+  luoghi: z.array(z.object({ id: z.string(), nome: z.string(), lat: z.number(), lon: z.number(), lato: z.enum(['destra', 'sinistra']).default('destra'), dx: z.number().optional(), dy: z.number().optional() })),
+  tappe: z.array(z.object({ luogo: z.string(), quando: z.string(), titolo: z.string(), schede: z.array(z.string()).default([]) }))
+})
+
 export type Confronto = z.infer<typeof schemaConfronto>
+export type TestoChiave = z.infer<typeof schemaTesto>
+export type Percorso = z.infer<typeof schemaPercorso>
 export type Ripasso = z.infer<typeof schemaRipasso>
 export interface Nota {
   id: string
@@ -39,6 +57,8 @@ export interface ExtraAutore {
   confronti: Confronto[]
   ripasso: Ripasso[]
   note: Nota[]
+  testiChiave: TestoChiave[]
+  percorso: Percorso | null
   /** file che non si leggono: si mostrano, non fermano il resto */
   errori: string[]
 }
@@ -68,6 +88,14 @@ export const leggiConfronto = (src: string) => {
   const n = r.dati.colonne.length
   const storta = r.dati.righe.findIndex((x) => x.length !== n)
   return storta >= 0 ? { ok: false as const, errore: `riga ${storta + 1} della tabella: ${r.dati.righe[storta]!.length} celle invece di ${n}` } : r
+}
+export const leggiTestoChiave = (src: string) => leggiYaml(src, schemaTesto)
+export const leggiPercorso = (src: string) => {
+  const r = leggiYaml(src, schemaPercorso)
+  if (!r.ok) return r
+  const ids = new Set(r.dati.luoghi.map((l) => l.id))
+  const t = r.dati.tappe.find((x) => !ids.has(x.luogo))
+  return t ? { ok: false as const, errore: `la tappa «${t.titolo}» usa un luogo che non c'è: ${t.luogo}` } : r
 }
 export const leggiRipasso = (src: string) => leggiYaml(src, schemaRipasso)
 
