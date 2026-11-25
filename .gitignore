@@ -6,3 +6,11 @@ release/
 *.log
 .DS_Store
 Thumbs.db
+
+# file HTML (mappe, demo, schemi): restano sul disco, non in git
+*.html
+!02_App/src/renderer/index.html
+
+# demo e archivio: solo sul disco di ogni PC
+03_Demo/
+99_Archivio/
