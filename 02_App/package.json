@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "converti:leopardi": "node scripts/convert_leopardi.cjs",
-    "pack": "npm run build && electron-builder --win"
+    "pack": "npm run build && electron-builder --win nsis",
+    "pack:cartella": "npm run build && electron-builder --win --dir"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.3.0",
@@ -46,5 +47,37 @@
     "electron@44.7.0": true,
     "esbuild@0.25.12": true,
     "esbuild@0.28.2": true
+  },
+  "build": {
+    "appId": "it.knowtool.app",
+    "productName": "Know Tool",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Know Tool"
+    },
+    "artifactName": "Know-Tool-Setup-${version}.${ext}"
   }
 }
