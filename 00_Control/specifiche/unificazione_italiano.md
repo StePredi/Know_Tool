@@ -1,6 +1,6 @@
 # Unificare Italiano nel modello comune — proposta
 
-Stato: **bozza da approvare** (2026-11-25). Nessun codice scritto. Decisione di Ste: «unificalo e completalo».
+Stato: **ANNULLATA il 2026-11-25.** Ste: «Italiano ha il suo schema, quindi non bisogna andarla a modificare. Lo schema italiano e Storia sono già a posto così, bisogna semplicemente integrarli meglio nel programma.» Quindi **i formati dei dati di Italiano e Storia non cambiano** e il codice vecchio non si elimina. Resta solo il lavoro di integrazione nell'app e il completamento dei dati (vedi `STATO.md`). Il testo sotto è tenuto solo come storia di cosa era stato proposto.
 
 Procedura: `procedura_nuovi_documenti.md` (prima la proposta, poi i dati di prova, poi il codice).
 
