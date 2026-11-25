@@ -15,6 +15,7 @@ const api: Api = {
   scartaProposta: (id) => ipcRenderer.invoke('proposta:scarta', id),
   eliminaTema: (id) => ipcRenderer.invoke('tema:elimina', id),
   eliminaCorsia: (id, verso) => ipcRenderer.invoke('corsia:elimina', id, verso),
+  leggiExtra: () => ipcRenderer.invoke('autore:extra'),
   mostraCartella: () => ipcRenderer.invoke('cartella:mostra'),
   albero: () => ipcRenderer.invoke('albero:leggi'),
   leggiSituazioni: (rel) => ipcRenderer.invoke('situazioni:leggi', rel),

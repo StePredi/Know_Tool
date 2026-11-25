@@ -3,6 +3,7 @@ import { useStore } from './store'
 import { Header } from './componenti/Header'
 import { BarraInferiore, BarraLaterale } from './componenti/Barre'
 import { Mappa } from './componenti/Mappa'
+import { VistaExtra } from './extra/VistaExtra'
 import { Lista } from './componenti/Lista'
 import { Anteprima } from './componenti/Anteprima'
 import { SchedaCompleta } from './componenti/SchedaCompleta'
@@ -144,7 +145,7 @@ export function App() {
       <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
         <BarraLaterale />
         <main style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', position: 'relative' }}>
-          {st.vista === 'mappa' ? <Mappa /> : <Lista />}
+          {st.vista === 'mappa' ? <Mappa /> : st.vista === 'lista' ? <Lista /> : <VistaExtra sezione={st.vista} />}
           <BarraInferiore />
         </main>
         {st.selId && <Anteprima id={st.selId} />}

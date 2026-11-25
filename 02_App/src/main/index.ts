@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { archiviaNodo, creaAppunto, creaMatematica, creaNodo, creaSituazioni, leggiAlbero, rinominaNodo } from './esplora'
 import { archiviaFile, creaFile, leggiSorgente, salvaSorgente } from './modifica'
 import { fileApribile, leggiAppunto, trovaFonte } from './appunti'
+import { leggiExtra } from './extra'
 import { leggiMateriaStoria, leggiSituazioni, segnaRipassata } from './situazioni'
 import { Repository } from './repository'
 import type { StatoApp } from '../shared/types'
@@ -201,6 +202,7 @@ function registraIpc(): void {
     await archiviaNodo(senzaRadice(), rel)
     return { albero: await leggiAlbero(senzaRadice()) }
   })
+  ipcMain.handle('autore:extra', () => leggiExtra(serve().dir))
   ipcMain.handle('cartella:mostra', async () => {
     if (repo) await shell.openPath(repo.dir)
   })

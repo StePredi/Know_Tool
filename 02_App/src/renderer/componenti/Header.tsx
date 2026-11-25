@@ -74,6 +74,13 @@ export function Header() {
               </button>
             ))}
           </div>
+          <div role="group" aria-label="Studio" className="hd-seg">
+            {(['confronti', 'ripasso', 'note'] as const).map((v, i) => (
+              <button key={v} type="button" aria-pressed={st.vista === v} onClick={() => prefs({ vista: st.vista === v ? 'mappa' : v })} style={{ borderRight: i < 2 ? '1px solid var(--line)' : 0, background: st.vista === v ? 'var(--ink)' : 'var(--surface)', color: st.vista === v ? 'var(--surface)' : 'var(--ink)' }}>
+                <span style={{ padding: '0 4px', textTransform: 'capitalize' }}>{v}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* centro: cosa guardo (filtri e ricerca) */}

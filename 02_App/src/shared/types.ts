@@ -268,7 +268,10 @@ export interface NuovaScheda {
   titolo_breve?: string
 }
 
+import type { ExtraAutore } from './extraAutore'
+
 export interface Api {
+  leggiExtra(): Promise<ExtraAutore>
   stato(): Promise<StatoApp>
   scegliRadice(): Promise<StatoApp>
   scegliAutore(id: string): Promise<StatoApp>

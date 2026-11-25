@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { coloreCorsia, costruisciIndice, type Indice } from '@shared/derivati'
 import type { EventoModello, Modello, Scheda, SchedaPatch, StatoApp } from '@shared/types'
 
-export type Vista = 'mappa' | 'lista'
+export type Vista = 'mappa' | 'lista' | 'confronti' | 'ripasso' | 'note'
 export type Popover = 'periodi' | 'temi' | 'corsie' | 'lettura' | null
 
 interface Preferenze {
