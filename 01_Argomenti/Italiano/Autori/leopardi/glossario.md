@@ -96,4 +96,13 @@ voci:
   - termine: Conversione «dall'erudizione al bello» e «dal bello al vero»
     definizione: "Due svolte: 1816 dallo studio passivo alla poesia; 1819-1821 dalla poesia alla filosofia."
     schede: [ conv1, convfil ]
+  - termine: Restaurazione
+    definizione: "Periodo che segue il Congresso di Vienna (1815): tornano al potere i sovrani assoluti. Leopardi ne prende le distanze (conoscenza generale, non dalle tue pagine)."
+    schede: [ vienna, gior ]
+  - termine: Neoclassicismo
+    definizione: "Movimento di fine Settecento che difendeva gli antichi come modelli di razionalità e armonia da imitare. Leopardi non li difende così."
+    schede: [ neocl ]
+  - termine: Illuminismo
+    definizione: "Cultura del Settecento fondata sulla ragione. Leopardi ne riconosce il potere liberatorio ma nega che il dominio della ragione sulla natura sia progresso."
+    schede: [ illum, palin ]
 ---
