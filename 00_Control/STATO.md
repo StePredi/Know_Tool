@@ -8,6 +8,8 @@
 
 ## Fatto
 
+- Due PC e Git (2026-11-26): repository su GitHub, regole in `sessioni_e_commit.md`, prompt di avvio in `prompt_sessioni.md`. Installer Windows configurato (`npm run pack` in `02_App`, da provare). Ricette con fasi affiancate. Italiano: viste Confronti, Ripasso, Testi chiave, Percorso e Note per Leopardi (da provare su Windows; Verga e De Roberto non hanno ancora questi dati).
+
 - Linguaggi di Programmazione / C++ (2026-11-18): nuova materia con «Basi di C++ per situazioni» (10 rami, 39 schede, compreso il ramo «Chiavi e valori» con map/unordered_map). Esempi compilati con g++ 13; da aprire nell'app e da confrontare con il corso
 
 - TPSIT/ESP (2026-11-18): aggiunta la libreria personale `oled_utils.h` a «ESP per situazioni»: ramo «Libreria oled_utils» (11 schede) + «oled_utils: problemi comuni», collegato alle schede OLED. Ora 13 rami e 83 schede, da aprire nell'app. Fonte in `TPSIT/ESP/Fonti/oled_utils.md`

@@ -185,3 +185,12 @@ Registro cronologico delle azioni.
 ## 2026-11-24
 
 - Sistemi e Reti, nuovo argomento `MongoDB` (`01_Argomenti/Sistemi e Reti/MongoDB/`). Fonti in `Fonti/`: `mongodb_intro.ipynb` (notebook del corso) e `mongodb_cheat_sheet.pdf` (PyMongo e mongosh, in inglese). Nuovo `_scheda.md`. Creato `MongoDB per situazioni/`: 8 rami, 38 schede (Capire MongoDB con 4 schede «spiegazione» con disegni: database a documenti, database/collezioni/documenti, il cursore, PyMongo e mongosh; Collegarsi in ordine; Leggere; Filtri; Inserire; Modificare; Cancellare; Quando non funziona). Codice con i nomi italiani del notebook; equivalenti mongosh nelle varianti; risultati nei commenti presi dagli output del notebook. Aggiunte segnate come «Nota» (volume per i dati del container, try/except per InvalidId). Validato con lo schema attuale dell'app (`situazioni.ts` e `rete.ts` di oggi) nel cloud: 38 schede, avvisi []. Immagini delle 3 spiegazioni controllate. NON aperto nell'app. Non committato.
+
+## 2026-11-25 / 26 (sviluppo)
+
+- **Regole**: nuovo `sessioni_e_commit.md` (chi tocca cosa, quando e come si committa, inizio/fine sessione, due PC); gli altri documenti rimandano lì. `prompt_sessioni.md`: i messaggi di avvio per le sessioni di sviluppo sui due PC.
+- **Git**: repository su GitHub (`StePredi/Know_Tool`, privato). `03_Demo`, `99_Archivio` e i file `.html` non sono più tracciati (restano sul disco).
+- **Pulizia**: tolto codice non usato (`TUTTI_I_MODELLI`, `etichettaPosizione`, costanti di `percorsi.ts`). Dipendenze tutte usate. `shared/valuta.ts` lo usa solo un test: lasciato.
+- **Ricette**: fasi affiancate e colonna laterale con trappole, varianti e situazioni vicine (`Scheda.tsx`, `index.css`). Controllato solo in un browser con una scheda di prova.
+- **Installer**: configurazione electron-builder in `package.json` (`npm run pack` → `release/Know-Tool-Setup-<versione>.exe`). Non ancora provato.
+- **Italiano**: proposta di unificazione annullata (gli schemi di Italiano e Storia non cambiano). Nuove viste Confronti, Ripasso, Testi chiave, Percorso, Note (`src/main/extra.ts`, `shared/extraAutore.ts`, `renderer/extra/VistaExtra.tsx`, 7 test). Dati di Leopardi convertiti dall'HTML in `confronti/`, `ripasso/`, `note/`, `testi_chiave/`, `percorso.md` e 3 voci di glossario. Non provato in Electron.
