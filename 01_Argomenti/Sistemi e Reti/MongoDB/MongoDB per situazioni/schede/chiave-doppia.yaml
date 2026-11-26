@@ -1,0 +1,18 @@
+id: chiave-doppia
+tipo: prima_dopo
+titolo: Un intervallo che non filtra bene
+sigla: Chiave ripetuta
+comando: un dizionario, due operatori
+frase: in un dizionario la chiave ripetuta vince l'ultima
+fonte: mongodb_cheat_sheet.pdf
+parole: intervallo chiave doppia ripetuta dizionario ultima condizione gte lte
+prima: '{"eta": {"$gte": 18}, ⟦"eta"⟧: {"$lte": 20}}'
+dopo: '{"eta": {"$gte": 18, ⟦"$lte": 20⟧}}'
+uso: Cercare valori compresi tra due estremi.
+riconoscila: 'Il risultato contiene anche chi ha meno di 18 anni: viene applicata solo l''ultima condizione.'
+parti:
+- voce: stesso dizionario
+  spiega: i due operatori stanno dentro il valore dell'unica chiave "eta"
+varianti: []
+vicine:
+- filtro-confronto

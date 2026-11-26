@@ -1,0 +1,27 @@
+id: filtro-liste
+tipo: ricetta
+titolo: Cercare dentro un campo che è una lista
+sigla: Liste
+comando: '"corsi": "Python" · $all · $size'
+frase: il filtro guarda dentro la lista
+fonte: mongodb_intro.ipynb (sez. 5.4) · mongodb_cheat_sheet.pdf (Query operators)
+parole: lista array contiene all size elementi corsi
+quando: Quando un campo è una lista (i corsi di uno studente).
+fasi:
+- nome: Contiene un valore
+  righe:
+  - codice: 'studenti.find({"corsi": "Python"})'
+    commento: 'la lista corsi contiene Python: Giulia, Luca, Sara, Paolo'
+- nome: Contiene tutti i valori
+  righe:
+  - codice: 'studenti.find({"corsi": {"$all": ["Python", "Reti"]}})'
+    commento: Luca, Paolo
+- nome: Ha esattamente n elementi
+  righe:
+  - codice: 'studenti.find({"corsi": {"$size": 3}})'
+    commento: Sara, Paolo
+segnaposto: {}
+varianti: []
+vicine:
+- filtro-annidati
+- elem-match

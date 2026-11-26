@@ -1,0 +1,115 @@
+modello: per_situazioni
+titolo: MongoDB, per situazioni
+centro: MongoDB
+sottotitolo: Parti da quello che devi fare con i dati, non dal nome del metodo.
+esempiRicerca: cercare per id, chi ha almeno 8, aggiungere a una lista, cursore vuoto, await
+rami:
+- id: b1
+  nome: Capire MongoDB
+  colore: indigo
+  lato: T
+  voci:
+  - gruppo: Il modello
+    schede:
+    - nosql-documenti
+    - struttura-mongodb
+  - gruppo: Come lavora
+    schede:
+    - cursore-come-funziona
+    - pymongo-mongosh
+- id: b2
+  nome: Collegarsi
+  colore: blue
+  lato: R
+  ordine: true
+  voci:
+  - schede:
+    - avvia-server
+  - schede:
+    - connetti-pymongo
+  - schede:
+    - script-asyncio
+  - schede:
+    - elenca-db
+- id: b3
+  nome: Leggere
+  colore: teal
+  lato: L
+  voci:
+  - gruppo: Trovare
+    schede:
+    - find-one
+    - find-cursore
+    - to-list
+    - cerca-per-id
+  - gruppo: Dare forma ai risultati
+    schede:
+    - proiezione
+    - ordina-limita
+    - conta-distinct
+- id: b4
+  nome: Filtri
+  colore: green
+  lato: R
+  voci:
+  - gruppo: Valori
+    schede:
+    - filtro-confronto
+    - filtro-in
+    - filtro-regex
+  - gruppo: Più condizioni
+    schede:
+    - filtro-logici
+    - filtro-esiste
+  - gruppo: Liste e documenti annidati
+    schede:
+    - filtro-liste
+    - filtro-annidati
+    - elem-match
+- id: b5
+  nome: Inserire
+  colore: orange
+  lato: L
+  voci:
+  - gruppo: Nuovi documenti
+    schede:
+    - insert-one
+    - insert-many
+  - schede:
+    - upsert
+- id: b6
+  nome: Modificare
+  colore: violet
+  lato: R
+  voci:
+  - gruppo: Campi
+    schede:
+    - update-set
+    - update-many
+  - schede:
+    - update-liste
+- id: b7
+  nome: Cancellare
+  colore: pink
+  lato: L
+  voci:
+  - schede:
+    - delete
+  - schede:
+    - drop-collezione
+- id: b8
+  nome: Quando non funziona
+  colore: red
+  lato: B
+  voci:
+  - gruppo: Nessun effetto o niente trovato
+    schede:
+    - await-mancante
+    - id-stringa
+    - cursore-esaurito
+  - gruppo: Errori e risultati sbagliati
+    schede:
+    - update-senza-operatore
+    - id-non-valido
+    - chiave-doppia
+    - cancella-tutto

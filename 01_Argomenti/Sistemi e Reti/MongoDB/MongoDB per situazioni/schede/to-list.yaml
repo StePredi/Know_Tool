@@ -1,0 +1,24 @@
+id: to-list
+tipo: ricetta
+titolo: Avere tutti i risultati in una lista
+sigla: to_list
+comando: await cursore.to_list()
+frase: comodo, ma tutto in memoria
+fonte: mongodb_intro.ipynb (sez. 4.2) · mongodb_cheat_sheet.pdf (Read)
+parole: to_list lista risultati len memoria toarray
+quando: Quando i risultati sono pochi e ti serve una lista (contarli, rileggerli, rispedirli in JSON).
+fasi:
+- nome: Leggi tutto il cursore
+  righe:
+  - codice: 'lista = await studenti.find({"citta": "Parma"}).to_list()'
+    commento: legge l'intero cursore
+  - codice: print(len(lista), "studenti")
+    commento: 2 studenti
+    trappola: 'Carica tutto in memoria: va bene quando i risultati sono pochi.'
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.find({citta: "Parma"}).toArray()'
+  spiega: in mongosh
+vicine:
+- find-cursore
+- cursore-esaurito

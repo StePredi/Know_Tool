@@ -1,0 +1,29 @@
+id: insert-many
+tipo: ricetta
+titolo: Inserire più documenti, o ripartire da dati di prova
+sigla: insert_many
+comando: insert_many([...])
+frase: una lista di documenti
+fonte: mongodb_intro.ipynb (sez. 3, 6) · mongodb_cheat_sheet.pdf (Insert)
+parole: inserire più documenti insert_many inserted_ids dati di esempio drop ripartire
+quando: Quando inserisci più documenti insieme, per esempio i dati di prova di un esercizio.
+fasi:
+- nome: Inserisci una lista
+  righe:
+  - codice: 'r = await studenti.insert_many([{"nome": "Davide", "eta": 19}, {"nome": "Elena", "eta": 18, "citta": "Parma"}])'
+  - codice: print(r.inserted_ids)
+    commento: la lista degli _id
+- nome: Ripartire dai dati iniziali
+  righe:
+  - codice: await studenti.drop()
+    commento: cancella la collezione, se esiste
+  - codice: await studenti.insert_many([...])
+    commento: 'reinserisce i dati di esempio: si può rieseguire ogni volta'
+    trappola: 'I documenti possono avere campi diversi: in MongoDB non serve definire uno schema prima.'
+segnaposto: {}
+varianti:
+- codice: db.studenti.insertMany([{...}, {...}])
+  spiega: in mongosh
+vicine:
+- insert-one
+- drop-collezione

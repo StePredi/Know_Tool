@@ -1,0 +1,22 @@
+id: elem-match
+tipo: prima_dopo
+titolo: Le condizioni devono valere sullo stesso elemento della lista
+sigla: $elemMatch
+comando: '{"voti": {"$elemMatch": {...}}}'
+frase: tutte le condizioni sullo stesso elemento
+fonte: mongodb_intro.ipynb (sez. 5.5) · mongodb_cheat_sheet.pdf (Common mistakes)
+parole: elemmatch stesso elemento lista documenti condizioni voti materia voto almeno 8 in python
+prima: 'studenti.find({⟦"voti.materia": "Python", "voti.voto": {"$gte": 8}⟧})'
+dopo: 'studenti.find({⟦"voti": {"$elemMatch": {"materia": "Python", "voto": {"$gte": 8}}}⟧})'
+uso: Trovare chi ha almeno 8 in Python, cioè un voto che sia di Python e maggiore o uguale a 8.
+riconoscila: Nei risultati compaiono anche Luca e Paolo, che in Python hanno 5 e 6.
+parti:
+- voce: $elemMatch
+  spiega: cerca un elemento della lista che soddisfi tutte le condizioni insieme
+- voce: perché sbaglia il primo
+  spiega: 'Luca ha un voto di Python (5) e un altro voto ≥ 8 (il 9 in Reti): le due condizioni sono vere su elementi diversi'
+trappola: Con $elemMatch restano solo Giulia (9) e Sara (8).
+varianti: []
+vicine:
+- filtro-annidati
+- filtro-liste

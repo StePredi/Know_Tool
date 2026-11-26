@@ -1,0 +1,29 @@
+id: conta-distinct
+tipo: ricetta
+titolo: Contare i documenti e trovare i valori diversi
+sigla: Contare
+comando: count_documents · distinct
+frase: quanti sono e quali valori ci sono
+fonte: mongodb_intro.ipynb (sez. 4.5) · mongodb_cheat_sheet.pdf (Read)
+parole: contare count_documents quanti distinct valori diversi città
+quando: Quando ti serve un numero (quanti studenti di Parma) o l'elenco dei valori di un campo.
+fasi:
+- nome: Conta
+  righe:
+  - codice: await studenti.count_documents({})
+    commento: '6: tutti i documenti'
+  - codice: 'await studenti.count_documents({"citta": "Parma"})'
+    commento: '2'
+    trappola: È un metodo della collezione, non del cursore.
+- nome: Valori diversi
+  righe:
+  - codice: await studenti.distinct("citta")
+    commento: l'elenco delle città, ognuna una volta
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.countDocuments({citta: "Parma"})'
+  spiega: in mongosh
+- codice: db.studenti.distinct("citta")
+  spiega: in mongosh
+vicine:
+- find-cursore

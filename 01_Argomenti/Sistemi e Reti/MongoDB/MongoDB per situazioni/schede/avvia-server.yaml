@@ -1,0 +1,29 @@
+id: avvia-server
+tipo: ricetta
+titolo: Avviare un server MongoDB in locale
+sigla: Server in Docker
+comando: docker run … mongo
+frase: un container e sei pronto
+fonte: mongodb_intro.ipynb (sez. 3) · mongodb_cheat_sheet.pdf (Connection)
+parole: avviare server mongodb docker container 27017 porta mongosh shell locale
+quando: Quando ti serve un server MongoDB sul tuo PC per provare.
+fasi:
+- nome: Avvia il server
+  righe:
+  - codice: docker run -d --name mongo -p 27017:27017 mongo
+    commento: server MongoDB in background, raggiungibile sulla porta 27017
+    parti:
+    - voce: '27017'
+      spiega: la porta predefinita di MongoDB
+    trappola: 'Nota: senza un volume, i dati spariscono se elimini il container (vedi Docker, «Dati e volumi»).'
+- nome: Apri la shell (facoltativo)
+  righe:
+  - codice: docker exec -it mongo mongosh
+    commento: mongosh dentro il container, già collegato al server
+segnaposto: {}
+varianti:
+- codice: docker run -d --name mongo -p 27017:27017 -v mongo-data:/data/db mongo
+  spiega: 'Nota: con un named volume i dati restano anche ricreando il container'
+vicine:
+- connetti-pymongo
+- pymongo-mongosh

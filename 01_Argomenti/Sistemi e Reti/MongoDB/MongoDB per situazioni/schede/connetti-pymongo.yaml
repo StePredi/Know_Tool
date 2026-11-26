@@ -1,0 +1,38 @@
+id: connetti-pymongo
+tipo: ricetta
+titolo: Collegarsi a MongoDB da Python con PyMongo
+sigla: AsyncMongoClient
+comando: AsyncMongoClient(url)
+frase: client, database, collezione
+fonte: mongodb_intro.ipynb (sez. 3) · mongodb_cheat_sheet.pdf (Connection)
+parole: pymongo asyncmongoclient collegarsi connessione client database collezione ping pip install close
+quando: Quando un programma Python deve leggere o scrivere su MongoDB.
+fasi:
+- nome: Installa la libreria
+  righe:
+  - codice: pip install pymongo
+- nome: Collegati e scegli dove lavorare
+  righe:
+  - codice: from pymongo import AsyncMongoClient
+  - codice: client = AsyncMongoClient("«URL»")
+    commento: il collegamento al server
+  - codice: db = client["scuola"]
+    commento: il database
+  - codice: studenti = db["studenti"]
+    commento: la collezione
+    trappola: 'Queste righe non creano nulla sul server: database e collezione nascono quando inserisci il primo documento.'
+- nome: Controlla e chiudi
+  righe:
+  - codice: await client.admin.command("ping")
+    commento: 'se il server risponde: {''ok'': 1.0}'
+  - codice: await client.close()
+    commento: chiude il collegamento alla fine del programma
+segnaposto:
+  URL:
+    esempio: mongodb://localhost:27017
+    spiega: indirizzo del server MongoDB
+varianti: []
+vicine:
+- script-asyncio
+- avvia-server
+- struttura-mongodb

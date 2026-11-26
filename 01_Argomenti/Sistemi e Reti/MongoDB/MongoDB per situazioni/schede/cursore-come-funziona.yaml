@@ -1,0 +1,38 @@
+id: cursore-come-funziona
+tipo: spiegazione
+titolo: Capire come funziona un cursore
+sigla: Il cursore
+comando: find() → cursore
+frase: la query parte solo quando lo leggi
+fonte: mongodb_intro.ipynb (sez. 4.2) · mongodb_cheat_sheet.pdf
+parole: cursore find async for blocchi lazy esaurito una volta to_list memoria query
+quando: Quando devi spiegare perché find() si scrive senza await e perché un cursore si legge una volta sola.
+blocchi:
+- testo: '**find()** non restituisce i documenti ma un **cursore**: un oggetto che rappresenta il risultato della query e lo legge un documento alla volta, come un file riga per riga.'
+- disegno:
+    modello: flusso
+    nodi:
+    - nome: find(filtro)
+      sotto: 'crea il cursore: la query non è ancora partita'
+    - nome: Il server risponde a blocchi
+      sotto: il cursore riceve un gruppo di documenti e, finito quello, chiede il successivo
+      tono: colore
+    - nome: Cursore esaurito
+      sotto: 'letto fino in fondo: non restituisce più niente'
+      tono: oro
+    frecce:
+    - async for
+    - fine
+- carte:
+  - titolo: Perché senza await
+    testo: 'Creare il cursore non parla con il server: la query parte solo alla prima lettura.'
+  - titolo: Perché async for
+    testo: Ogni lettura può dover aspettare il server, quindi si scorre in modo asincrono.
+  - titolo: Perché a blocchi
+    testo: Si possono scorrere moltissimi documenti senza caricarli tutti in memoria.
+- trappola: 'Un cursore si legge **una volta sola**: per rileggere i dati serve un nuovo find(). Con to_list() li hai tutti in una lista, ma in memoria.'
+varianti: []
+vicine:
+- find-cursore
+- to-list
+- cursore-esaurito

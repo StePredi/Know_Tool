@@ -1,0 +1,28 @@
+id: script-asyncio
+tipo: ricetta
+titolo: Usare PyMongo in uno script .py
+sigla: Script con asyncio
+comando: async def main() · asyncio.run
+frase: fuori dal notebook await sta dentro una funzione
+fonte: mongodb_cheat_sheet.pdf
+parole: script py asyncio run main async def await notebook jupyter fuori
+quando: Quando passi dal notebook (dove await si scrive direttamente) a un file .py.
+fasi:
+- nome: La struttura dello script
+  righe:
+  - codice: import asyncio
+  - codice: from pymongo import AsyncMongoClient
+  - codice: 'async def main():'
+    commento: in un .py await funziona solo dentro una funzione async
+    trappola: Nel notebook Jupyter await si può scrivere fuori da una funzione; in uno script no.
+  - codice: '    client = AsyncMongoClient("mongodb://localhost:27017")'
+  - codice: '    studenti = client["scuola"]["studenti"]'
+  - codice: '    print(await studenti.count_documents({}))'
+  - codice: '    await client.close()'
+  - codice: asyncio.run(main())
+    commento: avvia la funzione main
+segnaposto: {}
+varianti: []
+vicine:
+- connetti-pymongo
+- await-mancante

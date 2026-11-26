@@ -71,4 +71,10 @@
 - Inglese e altre materie (un tool alla volta, quando servono)
 - **Matematica (2026-10-21).** Spec approvata, schema e vista scheda `regola`, Formulario, Derivate (22 schede, 10 esercizi, esempi controllati coi numeri). Il vecchio codice è in `99_Archivio/Obsoleti/2026-10-21/`. Prossimo: Limiti e gli altri argomenti dalla sessione di studio; figure per i grafici (aggiunta 3) e passi con motivazione per le dimostrazioni (aggiunta 4) quando servono.
 - Sistemi e Reti: argomento `Python` creato (fonti e `_scheda.md`), documenti da fare dopo la scelta dei moduli.
+- Sistemi e Reti (2026-11-24): argomento `MongoDB` con fonti, `_scheda.md` e «MongoDB per situazioni» (8 rami, 38 schede, di cui 4 spiegazioni), da aprire nell'app.
 - Sistemi e Reti (2026-11-13): argomento `Docker` con fonti, `_scheda.md` e «Docker per situazioni» (9 rami, 65 schede, di cui 11 «spiegazione»: nuovo tipo di scheda con testo e disegni), da aprire nell'app. Cosa provare e cosa resta da fare: `modifiche_app.md`, sezione 2026-11-13.
+
+
+- 2026-11-23: aggiunto `ESP/Schemi/mappa_verifica_esp32.html` (ripasso verifica ESP32, file singolo, apribile nel browser).
+
+- 2026-11-23: `mappa_verifica_esp32.html` tolto da ESP/Schemi (uso personale, archiviato in 99_Archivio/Obsoleti/2026-11-23/).

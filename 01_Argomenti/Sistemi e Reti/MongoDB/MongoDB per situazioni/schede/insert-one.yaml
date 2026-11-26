@@ -1,0 +1,22 @@
+id: insert-one
+tipo: ricetta
+titolo: Inserire un documento
+sigla: insert_one
+comando: insert_one(documento)
+frase: restituisce l'_id assegnato
+fonte: mongodb_intro.ipynb (sez. 6) · mongodb_cheat_sheet.pdf (Insert)
+parole: inserire documento insert_one inserted_id aggiungere nuovo
+quando: Quando aggiungi un nuovo documento a una collezione.
+fasi:
+- nome: Inserisci
+  righe:
+  - codice: 'r = await studenti.insert_one({"nome": "Chiara", "eta": 18, "corsi": ["Python"]})'
+  - codice: print(r.inserted_id)
+    commento: l'_id creato da MongoDB (un ObjectId)
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.insertOne({nome: "Chiara", eta: 18})'
+  spiega: in mongosh
+vicine:
+- insert-many
+- upsert

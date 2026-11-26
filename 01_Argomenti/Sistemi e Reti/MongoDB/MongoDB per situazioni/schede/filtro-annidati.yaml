@@ -1,0 +1,20 @@
+id: filtro-annidati
+tipo: ricetta
+titolo: Cercare un campo dentro un documento annidato
+sigla: Notazione con il punto
+comando: '"voti.voto"'
+frase: campo.sottocampo
+fonte: mongodb_intro.ipynb (sez. 5.4) · mongodb_cheat_sheet.pdf (Query operators)
+parole: annidato punto dot notation sottocampo voti voto documento dentro documento
+quando: Quando il dato che cerchi sta dentro un altro documento o dentro una lista di documenti.
+fasi:
+- nome: Usa il punto
+  righe:
+  - codice: 'studenti.find({"voti.voto": 10})'
+    commento: 'almeno un voto uguale a 10: Paolo'
+    trappola: 'Se metti due condizioni su campi della stessa lista (voti.materia e voti.voto), possono essere soddisfatte da elementi diversi: serve $elemMatch.'
+segnaposto: {}
+varianti: []
+vicine:
+- elem-match
+- filtro-liste

@@ -1,0 +1,31 @@
+id: update-liste
+tipo: ricetta
+titolo: Aggiungere e togliere elementi da una lista
+sigla: Modificare liste
+comando: $push · $addToSet · $pull · $pop
+frase: operatori per le liste
+fonte: mongodb_intro.ipynb (sez. 7) · mongodb_cheat_sheet.pdf (Update operators)
+parole: lista array push addtoset pull pop each aggiungere togliere elemento corsi
+quando: Quando un campo è una lista e devi aggiungere o togliere elementi.
+fasi:
+- nome: Aggiungere
+  righe:
+  - codice: 'await studenti.update_one({"nome": "Anna"}, {"$push": {"corsi": "Python"}})'
+    commento: 'aggiunge in fondo: [''Web'', ''Python'']'
+  - codice: 'await studenti.update_one({"nome": "Anna"}, {"$addToSet": {"corsi": "Python"}})'
+    commento: 'solo se non c''è già: qui non cambia nulla'
+  - codice: '{"$push": {"corsi": {"$each": ["Web", "DB"]}}}'
+    commento: più valori insieme
+- nome: Togliere
+  righe:
+  - codice: 'await studenti.update_one({"nome": "Anna"}, {"$pull": {"corsi": "Web"}})'
+    commento: 'toglie gli elementi uguali: [''Python'']'
+  - codice: '{"$pull": {"recensioni": {"voto": {"$lt": 3}}}}'
+    commento: toglie gli elementi che soddisfano una condizione
+  - codice: '{"$pop": {"corsi": 1}}'
+    commento: toglie l'ultimo (1) o il primo (-1)
+segnaposto: {}
+varianti: []
+vicine:
+- update-set
+- filtro-liste

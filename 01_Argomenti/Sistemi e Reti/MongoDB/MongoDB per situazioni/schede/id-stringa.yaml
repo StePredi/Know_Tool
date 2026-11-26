@@ -1,0 +1,20 @@
+id: id-stringa
+tipo: prima_dopo
+titolo: find_one per _id restituisce None
+sigla: _id come stringa
+comando: ObjectId(id_str)
+frase: l'_id va convertito
+fonte: mongodb_intro.ipynb (sez. 4.6) · mongodb_cheat_sheet.pdf (Common mistakes)
+parole: id stringa none objectid non trova api rest url
+prima: 'await studenti.find_one({"_id": ⟦id_stringa⟧})'
+dopo: 'await studenti.find_one({"_id": ⟦ObjectId(id_stringa)⟧})'
+uso: Cercare un documento con l'id arrivato da un URL o da un JSON.
+riconoscila: Il documento esiste, ma find_one restituisce None.
+parti:
+- voce: ObjectId(...)
+  spiega: converte la stringa nel tipo usato da MongoDB per gli _id
+trappola: Serve «from bson import ObjectId».
+varianti: []
+vicine:
+- cerca-per-id
+- id-non-valido

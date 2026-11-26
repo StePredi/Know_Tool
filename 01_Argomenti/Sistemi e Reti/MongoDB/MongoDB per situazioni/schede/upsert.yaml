@@ -1,0 +1,21 @@
+id: upsert
+tipo: ricetta
+titolo: Aggiornare un documento, o crearlo se non c'è
+sigla: upsert
+comando: update_one(filtro, modifica, upsert=True)
+frase: modifica o inserisce
+fonte: mongodb_cheat_sheet.pdf
+parole: upsert inserire se manca aggiornare o creare update_one
+quando: Quando non sai se il documento esiste già e vuoi lo stesso risultato in entrambi i casi.
+fasi:
+- nome: Aggiorna o inserisci
+  righe:
+  - codice: 'await studenti.update_one({"nome": "Chiara"}, {"$set": {"eta": 19}}, upsert=True)'
+    commento: se Chiara c'è, cambia l'età; se non c'è, crea il documento
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.updateOne(filtro, modifica, {upsert: true})'
+  spiega: in mongosh
+vicine:
+- update-set
+- insert-one

@@ -1,0 +1,42 @@
+id: ordina-limita
+tipo: ricetta
+titolo: Ordinare i risultati e dividerli in pagine
+sigla: sort, limit, skip
+comando: .sort() · .limit() · .skip()
+frase: si concatenano dopo find()
+fonte: mongodb_intro.ipynb (sez. 4.4) · mongodb_cheat_sheet.pdf (Read)
+parole: sort ordinare crescente decrescente limit skip paginazione pagina primi più grandi
+quando: Quando vuoi i primi N risultati in un certo ordine, o una pagina alla volta.
+fasi:
+- nome: Ordina e limita
+  righe:
+  - codice: 'studenti.find({}, {"_id": 0, "nome": 1, "eta": 1}).sort("eta", -1).limit(3)'
+    commento: 'i tre studenti più grandi: Marco, Paolo, Luca'
+    parti:
+    - voce: sort("eta", -1)
+      spiega: 1 crescente, -1 decrescente
+    - voce: limit(3)
+      spiega: al massimo 3 documenti
+- nome: Una pagina alla volta
+  righe:
+  - codice: 'studenti.find({}, {"_id": 0, "nome": 1}).sort("nome", 1).skip(3).limit(3)'
+    commento: 'la seconda pagina da tre: Marco, Paolo, Sara'
+  - codice: .sort(«CAMPO», 1).skip((«N» - 1) * «K»).limit(«K»)
+    commento: la pagina N con K documenti per pagina
+    trappola: Si scrivono dopo find(), prima di leggere il cursore.
+segnaposto:
+  CAMPO:
+    esempio: '"nome"'
+    spiega: il campo con cui ordinare
+  N:
+    esempio: '2'
+    spiega: numero della pagina, da 1
+  K:
+    esempio: '3'
+    spiega: documenti per pagina
+varianti:
+- codice: 'db.studenti.find().sort({eta: -1}).limit(5)'
+  spiega: in mongosh l'ordinamento si scrive come documento
+vicine:
+- proiezione
+- find-cursore

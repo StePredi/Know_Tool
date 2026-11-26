@@ -1,0 +1,29 @@
+id: filtro-logici
+tipo: ricetta
+titolo: Combinare condizioni con AND, OR, NOR
+sigla: AND e $or
+comando: $or · $nor · AND implicito
+frase: più campi = AND, $or = basta una
+fonte: mongodb_intro.ipynb (sez. 5.2) · mongodb_cheat_sheet.pdf (Query operators)
+parole: and or nor logici combinare condizioni oppure entrambe nessuna
+quando: Quando le condizioni sono più di una.
+fasi:
+- nome: 'AND: tutti i campi veri'
+  righe:
+  - codice: 'studenti.find({"eta": 18, "citta": "Parma"})'
+    commento: '18 anni e di Parma: Giulia, Sara'
+- nome: 'OR: basta una condizione'
+  righe:
+  - codice: 'studenti.find({"$or": [{"eta": {"$lt": 18}}, {"eta": {"$gt": 19}}]})'
+    commento: 'minorenni oppure più di 19: Marco, Anna'
+    parti:
+    - voce: $or
+      spiega: riceve una lista di condizioni
+- nome: 'NOR: nessuna condizione vera'
+  righe:
+  - codice: 'studenti.find({"$nor": [{"eta": 18}, {"citta": "Roma"}]})'
+segnaposto: {}
+varianti: []
+vicine:
+- filtro-confronto
+- filtro-esiste

@@ -1,0 +1,55 @@
+id: nosql-documenti
+tipo: spiegazione
+titolo: Capire cos'è un database a documenti
+sigla: Database a documenti
+comando: NoSQL · documenti JSON
+frase: un documento al posto di più tabelle
+fonte: mongodb_intro.ipynb (sez. 1)
+parole: nosql relazionale sql tabelle schema join documenti json mongodb api rest quando usarlo
+quando: Quando devi spiegare la differenza tra MongoDB e un database relazionale come MySQL.
+blocchi:
+- testo: 'Un database **relazionale** (MySQL, PostgreSQL…) organizza i dati in **tabelle**: prima di inserire qualsiasi dato bisogna definire lo **schema**, cioè le colonne e il loro tipo. I dati collegati stanno in tabelle diverse e si rimettono insieme con le **JOIN**.'
+- testo: 'MongoDB è un database **NoSQL a documenti**: invece delle righe di una tabella salva **documenti** simili a oggetti JSON, che possono contenere liste e altri oggetti.'
+- titolo: Lo stesso studente nei due modelli
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Relazionale
+      strati:
+      - testo: |-
+          studenti
+          id · nome · eta
+        tono: oro
+      - testo:
+        - |-
+          voti
+          id_studente · materia · voto
+        tono: oro
+      nota: Due tabelle collegate da un id, da rimettere insieme con una JOIN.
+    - titolo: MongoDB
+      strati:
+      - testo: |-
+          documento
+          nome: Mario · eta: 19
+        tono: colore
+      - testo:
+        - |-
+          voti[0]
+          Python · 8
+        - |-
+          voti[1]
+          Reti · 7
+        tono: chiaro
+      nota: 'Un solo documento: i voti sono una lista dentro lo studente.'
+- comandi:
+  - codice: '{"nome": "Mario", "eta": 19, "voti": [{"materia": "Python", "voto": 8}, {"materia": "Reti", "voto": 7}]}'
+    spiega: il documento completo
+- carte:
+  - titolo: Con le API REST
+    testo: I dati che un client manda in JSON si salvano quasi così come sono, e allo stesso modo si rispediscono indietro.
+  - titolo: Quando non usarlo
+    testo: Se i dati hanno moltissime relazioni tra loro (per esempio la contabilità di un'azienda), un database relazionale resta più adatto.
+varianti: []
+vicine:
+- struttura-mongodb
+- connetti-pymongo

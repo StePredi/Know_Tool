@@ -1,0 +1,26 @@
+id: cursore-esaurito
+tipo: prima_dopo
+titolo: Il secondo ciclo sul cursore non stampa niente
+sigla: Cursore esaurito
+comando: find() di nuovo
+frase: un cursore si legge una volta
+fonte: mongodb_intro.ipynb (sez. 4.2) · mongodb_cheat_sheet.pdf (Common mistakes)
+parole: cursore esaurito secondo ciclo non stampa niente rileggere
+prima: |-
+  cursore = studenti.find({"citta": "Parma"})
+  async for s in cursore: print(s["nome"])
+  async for s in ⟦cursore⟧: print(s["nome"])
+dopo: |-
+  cursore = studenti.find({"citta": "Parma"})
+  async for s in cursore: print(s["nome"])
+  async for s in ⟦studenti.find({"citta": "Parma"})⟧: print(s["nome"])
+uso: Leggere due volte gli stessi risultati.
+riconoscila: Il primo ciclo stampa Giulia e Sara, il secondo niente.
+parti:
+- voce: studenti.find(...)
+  spiega: un nuovo cursore, che riesegue la query
+trappola: In alternativa leggi una volta sola con to_list() e usa la lista quante volte vuoi.
+varianti: []
+vicine:
+- cursore-come-funziona
+- to-list

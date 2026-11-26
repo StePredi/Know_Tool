@@ -1,0 +1,31 @@
+id: find-cursore
+tipo: ricetta
+titolo: Leggere tutti i documenti che corrispondono a un filtro
+sigla: find e async for
+comando: find(filtro) · async for
+frase: find senza await, poi si scorre
+fonte: mongodb_intro.ipynb (sez. 4.2) · mongodb_cheat_sheet.pdf (Read)
+parole: find tutti i documenti cursore async for scorrere filtro vuoto
+quando: Quando i risultati possono essere più di uno.
+fasi:
+- nome: Crea il cursore
+  righe:
+  - codice: 'cursore = studenti.find({"citta": "Parma"})'
+    commento: 'senza await: la query non è ancora partita'
+  - codice: '# studenti.find({})'
+    commento: il filtro vuoto corrisponde a tutti i documenti
+- nome: Scorri i risultati
+  righe:
+  - codice: 'async for studente in cursore:'
+    commento: la query parte adesso
+  - codice: '    print(studente["nome"])'
+    commento: Giulia, Sara
+    trappola: 'Il cursore si legge una volta sola: un secondo async for sullo stesso cursore non stampa niente.'
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.find({citta: "Parma"})'
+  spiega: 'in mongosh: i risultati si stampano da soli'
+vicine:
+- cursore-come-funziona
+- to-list
+- find-one

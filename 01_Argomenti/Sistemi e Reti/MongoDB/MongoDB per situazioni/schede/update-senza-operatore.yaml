@@ -1,0 +1,18 @@
+id: update-senza-operatore
+tipo: prima_dopo
+titolo: 'ValueError: update only works with $ operators'
+sigla: Modifica senza $set
+comando: '{"$set": {...}}'
+frase: la modifica vuole sempre un operatore
+fonte: mongodb_intro.ipynb (sez. 7) · mongodb_cheat_sheet.pdf (Common mistakes)
+parole: valueerror update only works with operators set modifica errore
+prima: 'await studenti.update_one({"nome": "Luca"}, ⟦{"eta": 21}⟧)'
+dopo: 'await studenti.update_one({"nome": "Luca"}, ⟦{"$set": {"eta": 21}}⟧)'
+uso: Cambiare il valore di un campo.
+riconoscila: 'PyMongo dà «ValueError: update only works with $ operators».'
+parti:
+- voce: $set
+  spiega: 'dice cosa fare con il valore: assegnarlo al campo'
+varianti: []
+vicine:
+- update-set

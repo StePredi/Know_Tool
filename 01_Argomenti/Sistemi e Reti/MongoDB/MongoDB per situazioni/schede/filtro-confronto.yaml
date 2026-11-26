@@ -1,0 +1,32 @@
+id: filtro-confronto
+tipo: ricetta
+titolo: Cercare con maggiore, minore e intervalli
+sigla: Confronto
+comando: $gt $gte $lt $lte $ne
+frase: '{"campo": {"$operatore": valore}}'
+fonte: mongodb_intro.ipynb (sez. 5.1) · mongodb_cheat_sheet.pdf (Query operators)
+parole: operatori confronto maggiore minore uguale diverso gt gte lt lte eq ne intervallo età
+quando: Quando la condizione non è un'uguaglianza (più di 18 anni, tra 18 e 19…).
+fasi:
+- nome: Un operatore
+  righe:
+  - codice: 'studenti.find({"eta": {"$gt": 18}})'
+    commento: 'più di 18 anni: Luca, Marco, Paolo'
+    parti:
+    - voce: $gt / $gte
+      spiega: maggiore / maggiore o uguale
+    - voce: $lt / $lte
+      spiega: minore / minore o uguale
+    - voce: $ne / $eq
+      spiega: diverso / uguale
+- nome: Un intervallo
+  righe:
+  - codice: 'studenti.find({"eta": {"$gte": 18, "$lte": 19}})'
+    commento: 'tra 18 e 19 anni: due operatori sullo stesso campo'
+    trappola: 'Scrivili nello stesso dizionario: con la chiave "eta" ripetuta due volte resta solo l''ultima condizione.'
+segnaposto: {}
+varianti: []
+vicine:
+- filtro-in
+- filtro-logici
+- chiave-doppia

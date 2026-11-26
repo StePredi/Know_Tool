@@ -1,0 +1,21 @@
+id: filtro-in
+tipo: ricetta
+titolo: Cercare tra più valori possibili
+sigla: $in e $nin
+comando: '{"campo": {"$in": [...]}}'
+frase: uno dei valori della lista
+fonte: mongodb_intro.ipynb (sez. 5.1) · mongodb_cheat_sheet.pdf (Query operators)
+parole: in nin lista valori uno tra città più valori
+quando: Quando un campo può avere uno di più valori (di Parma o di Bologna).
+fasi:
+- nome: Uno dei valori
+  righe:
+  - codice: 'studenti.find({"citta": {"$in": ["Parma", "Bologna"]}})'
+    commento: Giulia, Sara, Marco
+  - codice: 'studenti.find({"citta": {"$nin": ["Parma", "Bologna"]}})'
+    commento: nessuno dei valori
+segnaposto: {}
+varianti: []
+vicine:
+- filtro-confronto
+- filtro-logici

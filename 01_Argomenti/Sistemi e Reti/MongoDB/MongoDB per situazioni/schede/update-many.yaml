@@ -1,0 +1,22 @@
+id: update-many
+tipo: ricetta
+titolo: Modificare tutti i documenti che corrispondono
+sigla: update_many
+comando: update_many(filtro, modifica)
+frase: stessa modifica a tutti
+fonte: mongodb_intro.ipynb (sez. 7) · mongodb_cheat_sheet.pdf
+parole: update_many modificare tutti più documenti modified_count regione
+quando: Quando la stessa modifica vale per più documenti (tutti gli studenti di Parma).
+fasi:
+- nome: Modifica tutti
+  righe:
+  - codice: 'r = await studenti.update_many({"citta": "Parma"}, {"$set": {"regione": "Emilia-Romagna"}})'
+  - codice: print(r.modified_count, "documenti modificati")
+    commento: 3 documenti modificati
+segnaposto: {}
+varianti:
+- codice: db.studenti.updateMany(filtro, modifica)
+  spiega: in mongosh
+vicine:
+- update-set
+- delete

@@ -1,0 +1,46 @@
+id: pymongo-mongosh
+tipo: spiegazione
+titolo: Passare da PyMongo a mongosh e viceversa
+sigla: PyMongo e mongosh
+comando: find_one · findOne
+frase: stessi filtri, nomi diversi
+fonte: mongodb_cheat_sheet.pdf
+parole: mongosh shell pymongo differenze camelcase await virgolette true false
+quando: Quando provi una query nella shell di MongoDB e poi la scrivi in Python, o il contrario.
+blocchi:
+- testo: '**PyMongo** è la libreria per usare MongoDB da Python; **mongosh** è la shell di MongoDB. I **filtri e gli operatori sono gli stessi**; cambiano i nomi dei metodi e qualche dettaglio.'
+- tabella:
+    colonne:
+    - ''
+    - PyMongo
+    - mongosh
+    righe:
+    - - Nomi dei metodi
+      - find_one, insert_many, count_documents
+      - findOne, insertMany, countDocuments
+    - - await
+      - su ogni chiamata al server, tranne find()
+      - mai
+    - - Chiavi del filtro
+      - '{"nome": "Luca"}'
+      - '{nome: "Luca"}'
+    - - Booleani
+      - True / False
+      - true / false
+    - - Cursore
+      - si legge con async for
+      - stampato da solo
+    - - ObjectId
+      - from bson import ObjectId
+      - già disponibile
+- comandi:
+  - codice: docker exec -it mongo mongosh
+    spiega: apre la shell dentro il container di MongoDB
+  - codice: use scuola
+    spiega: sceglie il database (in mongosh)
+  - codice: show collections
+    spiega: elenca le collezioni (in mongosh)
+varianti: []
+vicine:
+- avvia-server
+- elenca-db

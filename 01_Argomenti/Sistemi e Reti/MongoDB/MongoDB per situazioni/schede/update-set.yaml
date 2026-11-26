@@ -1,0 +1,38 @@
+id: update-set
+tipo: ricetta
+titolo: Modificare i campi di un documento
+sigla: update_one e $set
+comando: 'update_one(filtro, {"$set": {...}})'
+frase: filtro + operatore di modifica
+fonte: mongodb_intro.ipynb (sez. 7) · mongodb_cheat_sheet.pdf (Update operators)
+parole: modificare aggiornare update_one set unset inc campo matched_count modified_count
+quando: Quando cambi, aggiungi o togli un campo di un documento esistente.
+fasi:
+- nome: Assegna un valore
+  righe:
+  - codice: 'r = await studenti.update_one({"nome": "Luca"}, {"$set": {"email": "luca@example.it"}})'
+    commento: $set crea il campo se non c'è
+  - codice: print(r.matched_count, r.modified_count)
+    commento: 1 1
+    parti:
+    - voce: matched_count
+      spiega: quanti documenti corrispondevano al filtro
+    - voce: modified_count
+      spiega: quanti sono stati cambiati davvero
+    trappola: 'Rieseguendo la stessa modifica ottieni 1 0: il documento è stato trovato, ma l''email era già quella.'
+- nome: Più operatori insieme
+  righe:
+  - codice: 'await studenti.update_one({"nome": "Luca"}, {"$inc": {"eta": 1}, "$unset": {"citta": ""}})'
+    parti:
+    - voce: $inc
+      spiega: aggiunge al numero (con un valore negativo sottrae)
+    - voce: $unset
+      spiega: elimina il campo
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.updateOne(filtro, {$set: {eta: 20}})'
+  spiega: in mongosh
+vicine:
+- update-many
+- update-liste
+- update-senza-operatore

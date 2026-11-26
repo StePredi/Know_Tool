@@ -1,0 +1,33 @@
+id: cerca-per-id
+tipo: ricetta
+titolo: Trovare un documento dal suo _id
+sigla: Cercare per _id
+comando: ObjectId(id_stringa)
+frase: l'_id non è una stringa
+fonte: mongodb_intro.ipynb (sez. 4.6) · mongodb_cheat_sheet.pdf (ObjectId)
+parole: objectid _id id stringa api rest url convertire str bson trovare per id
+quando: Quando hai l'id di un documento, per esempio arrivato in un URL di una API REST (/studenti/6905da48…).
+fasi:
+- nome: Converti la stringa in ObjectId
+  righe:
+  - codice: from bson import ObjectId
+  - codice: 'doc = await studenti.find_one({"_id": ObjectId(«ID»)})'
+    commento: trovato
+    trappola: 'Con {"_id": id_stringa} la ricerca restituisce None: un ObjectId non è una stringa.'
+- nome: Per rimandarlo in JSON
+  righe:
+  - codice: id_stringa = str(doc["_id"])
+    commento: da ObjectId a stringa, per una risposta JSON
+segnaposto:
+  ID:
+    esempio: id_stringa
+    spiega: l'id come stringa, per esempio "6905da48c0be28b4c7e46871"
+varianti:
+- codice: 'db.studenti.findOne({_id: ObjectId("...")})'
+  spiega: in mongosh
+- codice: oid.toString()
+  spiega: da ObjectId a stringa, in mongosh
+vicine:
+- id-stringa
+- id-non-valido
+- struttura-mongodb

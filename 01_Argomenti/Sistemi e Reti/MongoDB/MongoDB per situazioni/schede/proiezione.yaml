@@ -1,0 +1,24 @@
+id: proiezione
+tipo: ricetta
+titolo: Scegliere quali campi restituire
+sigla: Proiezione
+comando: 'find(filtro, {"campo": 1})'
+frase: 1 = includi, 0 = escludi
+fonte: mongodb_intro.ipynb (sez. 4.3) · mongodb_cheat_sheet.pdf (Read)
+parole: proiezione campi includere escludere _id 0 1 secondo argomento
+quando: Quando ti servono solo alcuni campi (per esempio nome ed età).
+fasi:
+- nome: Includi i campi che ti servono
+  righe:
+  - codice: 'studenti.find({"citta": "Milano"}, {"nome": 1, "eta": 1})'
+    commento: restituisce _id, nome ed eta
+    trappola: _id viene sempre restituito, a meno di escluderlo esplicitamente.
+  - codice: 'studenti.find({"citta": "Milano"}, {"_id": 0, "nome": 1, "eta": 1})'
+    commento: solo nome ed eta
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.find({}, {_id: 0, nome: 1})'
+  spiega: in mongosh
+vicine:
+- find-cursore
+- ordina-limita

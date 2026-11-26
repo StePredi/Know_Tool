@@ -1,0 +1,25 @@
+id: id-non-valido
+tipo: ricetta
+titolo: L'id ricevuto non è un ObjectId valido
+sigla: InvalidId
+comando: bson.errors.InvalidId
+frase: una stringa sbagliata fa scattare un errore
+fonte: mongodb_cheat_sheet.pdf
+parole: invalidid id non valido errore stringa sbagliata objectid api rest 404
+quando: Quando l'id arriva da fuori (un URL) e potrebbe essere scritto male.
+fasi:
+- nome: Controlla prima di cercare
+  righe:
+  - codice: from bson.errors import InvalidId
+  - codice: 'try:'
+  - codice: '    oid = ObjectId(id_stringa)'
+    commento: se la stringa non è un ObjectId, qui scatta InvalidId
+  - codice: 'except InvalidId:'
+  - codice: '    print("id non valido")'
+    commento: in una API REST qui si risponde con un errore
+    trappola: 'Nota: solo il nome dell''errore viene dal cheat sheet; il try/except è aggiunto.'
+segnaposto: {}
+varianti: []
+vicine:
+- cerca-per-id
+- id-stringa

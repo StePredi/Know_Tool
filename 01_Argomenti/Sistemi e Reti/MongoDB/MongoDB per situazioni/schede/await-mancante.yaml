@@ -1,0 +1,21 @@
+id: await-mancante
+tipo: prima_dopo
+titolo: 'Non succede niente: manca await'
+sigla: await mancante
+comando: await …
+frase: ogni chiamata al server vuole await, tranne find()
+fonte: mongodb_cheat_sheet.pdf
+parole: await mancante coroutine never awaited runtimewarning non succede niente
+prima: 'studenti.update_one({"nome": "Luca"}, {"$set": {"eta": 21}})'
+dopo: '⟦await⟧ studenti.update_one({"nome": "Luca"}, {"$set": {"eta": 21}})'
+uso: Ogni chiamata a PyMongo che parla con il server.
+riconoscila: 'Il documento non cambia e compare «RuntimeWarning: coroutine … was never awaited».'
+parti:
+- voce: await
+  spiega: aspetta che il server abbia eseguito l'operazione
+- voce: find()
+  spiega: 'l''unica eccezione: crea il cursore senza parlare col server'
+varianti: []
+vicine:
+- script-asyncio
+- cursore-come-funziona

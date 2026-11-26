@@ -1,0 +1,49 @@
+id: struttura-mongodb
+tipo: spiegazione
+titolo: 'Capire come sono organizzati i dati: database, collezioni, documenti'
+sigla: Database e collezioni
+comando: server › database › collezione › documento
+frase: la collezione è la tabella, il documento è la riga
+fonte: mongodb_intro.ipynb (sez. 2)
+parole: documento collezione database server campo valore _id objectid schema sql confronto tabella riga colonna
+quando: Quando devi dire dove sta un dato e come si chiamano le parti di MongoDB.
+blocchi:
+- disegno:
+    modello: pile
+    colonne:
+    - titolo: Server MongoDB
+      cornice: database «scuola»
+      strati:
+      - testo:
+        - collezione «studenti»
+        - collezione «corsi»
+        tono: colore
+      - - |-
+          documento
+          documento
+        - documento
+      nota: Un server può ospitare più database; ogni database contiene più collezioni, ogni collezione i suoi documenti.
+- carte:
+  - titolo: Documento
+    testo: Un insieme di coppie **campo-valore**. I valori possono essere stringhe, numeri, booleani, liste o altri documenti.
+  - titolo: Collezione
+    testo: 'Raggruppa i documenti, come una tabella, ma **non impone uno schema**: documenti della stessa collezione possono avere campi diversi.'
+  - titolo: Database
+    testo: Contiene le collezioni. Database e collezione nascono da soli quando inserisci il primo documento.
+- nota: 'Ogni documento ha un campo **_id** che lo identifica: se non lo indichi tu, MongoDB lo crea (un ObjectId).'
+- tabella:
+    colonne:
+    - SQL
+    - MongoDB
+    righe:
+    - - tabella
+      - collezione
+    - - riga
+      - documento
+    - - colonna
+      - campo
+varianti: []
+vicine:
+- nosql-documenti
+- connetti-pymongo
+- cerca-per-id

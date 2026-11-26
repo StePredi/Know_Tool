@@ -1,0 +1,19 @@
+id: cancella-tutto
+tipo: prima_dopo
+titolo: Ho cancellato tutta la collezione
+sigla: Filtro vuoto
+comando: delete_many({})
+frase: il filtro vuoto corrisponde a tutto
+fonte: mongodb_intro.ipynb (sez. 8) · mongodb_cheat_sheet.pdf
+parole: cancellato tutto filtro vuoto delete_many attenzione
+prima: await studenti.delete_many(⟦{}⟧)
+dopo: 'await studenti.delete_many(⟦{"eta": {"$lt": 18}}⟧)'
+uso: Cancellare solo alcuni documenti.
+riconoscila: deleted_count è uguale al numero totale di documenti e count_documents({}) dà 0.
+parti:
+- voce: il filtro
+  spiega: 'decide quali documenti cancellare: {} vuol dire tutti'
+trappola: Prima di cancellare, prova lo stesso filtro con count_documents per vedere quanti documenti tocchi.
+varianti: []
+vicine:
+- delete

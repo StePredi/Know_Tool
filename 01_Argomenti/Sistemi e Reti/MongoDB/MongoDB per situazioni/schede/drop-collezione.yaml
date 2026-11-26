@@ -1,0 +1,21 @@
+id: drop-collezione
+tipo: ricetta
+titolo: Eliminare un'intera collezione
+sigla: drop
+comando: drop()
+frase: via documenti e collezione
+fonte: mongodb_intro.ipynb (sez. 3) · mongodb_cheat_sheet.pdf (Connection)
+parole: drop eliminare collezione svuotare
+quando: Quando vuoi eliminare la collezione intera, per esempio per ripartire da zero.
+fasi:
+- nome: Elimina
+  righe:
+  - codice: await studenti.drop()
+    commento: 'cancella la collezione, se esiste: non dà errore se non c''è'
+segnaposto: {}
+varianti:
+- codice: db.studenti.drop()
+  spiega: in mongosh
+vicine:
+- insert-many
+- delete

@@ -1,0 +1,28 @@
+id: filtro-esiste
+tipo: ricetta
+titolo: Cercare chi ha (o non ha) un campo, e il tipo di un campo
+sigla: $exists, $type, $not
+comando: $exists · $type · $not
+frase: documenti con campi diversi
+fonte: mongodb_intro.ipynb (sez. 5.3) · mongodb_cheat_sheet.pdf (Query operators)
+parole: exists campo mancante presente type tipo bson not negare email
+quando: Quando i documenti di una collezione non hanno tutti gli stessi campi.
+fasi:
+- nome: Campo presente o mancante
+  righe:
+  - codice: 'studenti.find({"email": {"$exists": False}})'
+    commento: 'senza email: Luca, Paolo'
+    trappola: In Python è False con la maiuscola; in mongosh false.
+- nome: Tipo del campo
+  righe:
+  - codice: 'studenti.find({"eta": {"$type": "string"}})'
+    commento: chi ha l'età scritta come stringa invece che come numero
+- nome: Negare un operatore
+  righe:
+  - codice: 'studenti.find({"eta": {"$not": {"$gt": 19}}})'
+    commento: chi NON ha più di 19 anni
+segnaposto: {}
+varianti: []
+vicine:
+- filtro-logici
+- filtro-regex

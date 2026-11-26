@@ -1,0 +1,31 @@
+id: delete
+tipo: ricetta
+titolo: Cancellare documenti
+sigla: delete_one / delete_many
+comando: delete_one · delete_many
+frase: deleted_count dice quanti
+fonte: mongodb_intro.ipynb (sez. 8) · mongodb_cheat_sheet.pdf (Delete)
+parole: cancellare eliminare delete_one delete_many deleted_count rimuovere
+quando: Quando devi eliminare uno o più documenti.
+fasi:
+- nome: Uno o tutti quelli che corrispondono
+  righe:
+  - codice: 'r = await studenti.delete_one({"nome": "Chiara"})'
+    commento: il primo che corrisponde
+  - codice: print(r.deleted_count)
+    commento: '1'
+  - codice: 'r = await studenti.delete_many({"eta": {"$lt": 18}})'
+    commento: tutti i minorenni
+    trappola: delete_many({}) con il filtro vuoto cancella tutti i documenti della collezione.
+- nome: Controlla
+  righe:
+  - codice: print(await studenti.count_documents({}), "documenti rimasti")
+segnaposto: {}
+varianti:
+- codice: db.studenti.deleteOne(filtro)
+  spiega: in mongosh
+- codice: db.studenti.deleteMany(filtro)
+  spiega: in mongosh
+vicine:
+- drop-collezione
+- cancella-tutto

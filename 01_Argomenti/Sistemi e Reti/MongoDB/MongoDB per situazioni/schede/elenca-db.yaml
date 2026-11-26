@@ -1,0 +1,27 @@
+id: elenca-db
+tipo: ricetta
+titolo: Vedere quali database e collezioni ci sono
+sigla: Elenchi
+comando: list_database_names · list_collection_names
+frase: cosa c'è sul server
+fonte: mongodb_cheat_sheet.pdf
+parole: elenco database collezioni list_database_names list_collection_names show dbs show collections use
+quando: Quando vuoi controllare cosa c'è sul server o se una collezione è stata creata.
+fasi:
+- nome: Elenca
+  righe:
+  - codice: await client.list_database_names()
+    commento: i nomi dei database
+  - codice: await db.list_collection_names()
+    commento: le collezioni del database scelto
+segnaposto: {}
+varianti:
+- codice: show dbs
+  spiega: in mongosh
+- codice: use scuola
+  spiega: sceglie il database, in mongosh
+- codice: show collections
+  spiega: in mongosh
+vicine:
+- connetti-pymongo
+- drop-collezione

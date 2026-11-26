@@ -1,0 +1,23 @@
+id: filtro-regex
+tipo: ricetta
+titolo: Cercare un testo che inizia, finisce o contiene qualcosa
+sigla: $regex
+comando: '{"$regex": "^ma", "$options": "i"}'
+frase: espressioni regolari
+fonte: mongodb_intro.ipynb (sez. 5.3) · mongodb_cheat_sheet.pdf (Query operators)
+parole: regex testo inizia contiene espressione regolare maiuscole minuscole options i
+quando: Quando cerchi un nome o un testo in modo non esatto.
+fasi:
+- nome: Cerca
+  righe:
+  - codice: 'studenti.find({"nome": {"$regex": "^ma", "$options": "i"}})'
+    commento: 'nome che inizia con «ma»: Marco'
+    parti:
+    - voce: ^ma
+      spiega: inizia con ma
+    - voce: '"i"'
+      spiega: ignora maiuscole e minuscole
+segnaposto: {}
+varianti: []
+vicine:
+- filtro-esiste

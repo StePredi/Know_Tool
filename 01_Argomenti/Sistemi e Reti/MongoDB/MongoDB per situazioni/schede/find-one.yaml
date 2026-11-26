@@ -1,0 +1,29 @@
+id: find-one
+tipo: ricetta
+titolo: Leggere un solo documento
+sigla: find_one
+comando: find_one(filtro)
+frase: il primo che corrisponde, o None
+fonte: mongodb_intro.ipynb (sez. 4.1) · mongodb_cheat_sheet.pdf (Read)
+parole: find_one leggere un documento filtro dizionario none primo risultato
+quando: Quando ti serve un documento (per esempio lo studente con un certo nome).
+fasi:
+- nome: Cerca
+  righe:
+  - codice: 'studente = await studenti.find_one({"citta": "Milano", "eta": 19})'
+    commento: 'più campi nel filtro: devono essere veri tutti'
+  - codice: print(studente)
+    commento: un normale dizionario Python
+- nome: Nessun risultato
+  righe:
+  - codice: 'print(await studenti.find_one({"citta": "Napoli"}))'
+    commento: stampa None
+    trappola: Controlla sempre se il risultato è None prima di usare studente["nome"].
+segnaposto: {}
+varianti:
+- codice: 'db.studenti.findOne({nome: "Luca"})'
+  spiega: in mongosh
+vicine:
+- find-cursore
+- proiezione
+- cerca-per-id
